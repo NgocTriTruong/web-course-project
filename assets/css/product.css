@@ -1,0 +1,148 @@
+html, body {
+    padding: 0;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 13px;
+    font-family: sans-serif, Tahoma;
+}
+
+header {
+    display: flex;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 80px;
+    background-color: gray;
+    justify-content: center;
+    border-top: 2px solid red;
+    -webkit-box-shadow: 0px 6px 5px 0px rgba(176,176,176,1);
+    -moz-box-shadow: 0px 6px 5px 0px rgba(176,176,176,1);
+    box-shadow: 0px 6px 5px 0px rgba(176,176,176,1);
+}
+
+.container {
+    width: 1200px;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+}
+
+.logo {
+    height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 20px;
+}
+
+.logo img {
+    height: 100%;
+}
+
+.search-bar {
+    border: 1px solid black;
+}
+
+#background-section {
+    position: relative;
+    background-image: url('../images/background/product-main-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 500px; /* Adjust height as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#background-section h1 {
+    font-size: 60px;
+    color: transparent;
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    font-weight: bold;
+    position: relative;
+    z-index: 1;
+}
+
+/* Add a transparent overlay effect */
+#background-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); /* Adjust transparency */
+    z-index: 0;
+}
+
+@supports(-webkit-text-stroke: 2px white) {
+    .outline {
+        color: transparent;
+        -webkit-text-stroke: 2px white; /* Increased stroke width */
+        text-shadow: none;
+        font-size: 80px; /* Increased font size */
+        font-weight: bold;
+        letter-spacing: 5px;
+    }
+}
+
+#production-text {
+    font-size: 18px;
+    text-align: center;
+}
+
+.heo-section, .ga-section {
+    background-color: #f5f5f5; /* Adjust to match desired background */
+}
+
+.heo-section {
+    background-color: #e3f2fd; /* Light blue background for the pig feed section */
+}
+
+.ga-section {
+    background-color: #fce4ec; /* Light pink background for the chicken feed section */
+}
+
+.heo-section h2, .ga-section h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+}
+
+.card {
+    min-height: 300px;
+    width: 18rem;
+    text-align: center;
+    border: none;
+    background-color: white;
+}
+
+.card img {
+    width: calc(100% - 70px);
+    height: auto;
+    max-height: 200px; /* Limit image height */
+    margin: 0 20px 0 50px;
+}
+
+.carousel-inner .card {
+    max-width: 300px; /* Set a fixed width for the cards */
+    height: 100%;
+}
+
+.carousel-item {
+    transition: transform 0.5s ease; /* Smooth transition for slides */
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    background-color: black; /* Color for the prev/next icons */
+    border-radius: 50%;
+}
+
+.card img {
+    height: 200px; /* Limit the height of the product images */
+    object-fit: contain;
+}
