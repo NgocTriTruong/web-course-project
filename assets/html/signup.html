@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="/assets/bootstrap/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/signup.css">
+
+    <link rel="stylesheet" href="/assets/fonts/themify-icons/themify-icons.css">
+</head>
+<body>
+    <div class ="signup open">
+        <div id="signup_container">
+            <div class="signup_close">
+                <img src="../images/logo/close.png" alt="">
+            </div>
+
+            <div class="signup_header">
+                <div class="signup_logo_shop">
+                    <img src="../images/logo/logo_shop.png" alt="Logo Shop">
+                </div>
+                <div class="signup_header_text">
+                    <h3 style="font-size: 24px;">Đăng ký tài khoản</h3>
+                </div>
+            </div>
+            <div class="signup_body">
+                <div class="form-floating mb-2 mt-2">
+                    <input type="text" class="form-control" id="name" placeholder="Nhập họ và tên" name="Name" required autocomplete="off"> 
+                    <label for="password">Nhập họ và tên<span class="req">*</span></label>
+                </div>
+
+                <div class="form-floating mb-2 mt-2">
+                    <input type="text" class="form-control" id="contact" placeholder="Nhập số điện thoại/email" name="Contact" required autocomplete="off"> 
+                    <label for="contact">Nhập số điện thoại/email<span class="req">*</span></label>
+                </div>
+
+                <div class="signup_infor">
+                    <select name="select city" id="chose_city">
+                        <option value="1">Chọn khu vực<span class="req">(*)</span></option>
+                        <option value="2">Miền Bắc</option>
+                        <option value="3">Miền Trung</option>
+                        <option value="4">Miền Nam</option>
+                    </select>
+                </div>
+
+                <div class="form-floating mb-2 mt-2">
+                    <input type="text" class="form-control" id="pwd" placeholder="Nhập mật khẩu" name="password" required autocomplete="off"> 
+                    <label for="password">Nhập mật khẩu<span class="req">*</span></label>
+                </div>
+              
+                <div class="form-floating mb-2 mt-2">
+                    <input type="text" class="form-control" id="pwd" placeholder="Nhập lại mật khẩu" name="password again" required autocomplete="off"> 
+                    <label for="password again">Nhập lại mật khẩu<span class="req">*</span></label>
+                </div>
+
+                <div class="signup_okay">
+                    <p>Bằng việc đăng ký này, bạn đã chấp nhận các chính sách của VTK</p>
+                </div>
+                <button type="submit" class="signup_button_submit">Đăng ký</button>
+                <div class="signup_split">
+                    <p>Hoặc</p>
+                </div>
+                <div class="signup_social">
+                    <a href="" class="social_btn signup_social_gg">
+                        <img src="../images/social/google.png" alt="">
+                        <p>Google</p>
+                    </a>
+                    <a href="" class="social_btn signup_social_zl">
+                        <img src="../images/social/zalo.png" alt="">
+                        <p>Zalo</p>
+                    </a>
+                </div>
+            </div>
+            <div class="signup_footer">
+                <p>Bạn chưa có tài khoản? <a href="../html/login.html">Đăng nhập ngay</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
