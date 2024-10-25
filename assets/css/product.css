@@ -15,7 +15,7 @@ header {
     height: 80px;
     background-color: gray;
     justify-content: center;
-    border-top: 2px solid red;
+    border-top: 2px solid green;
     -webkit-box-shadow: 0px 6px 5px 0px rgba(176,176,176,1);
     -moz-box-shadow: 0px 6px 5px 0px rgba(176,176,176,1);
     box-shadow: 0px 6px 5px 0px rgba(176,176,176,1);
@@ -48,7 +48,7 @@ header {
 
 #background-section {
     position: relative;
-    background-image: url('../images/background/product-main-bg.jpg');
+    background-image: url('../images/banner/banner1.png');
     background-size: cover;
     background-position: center;
     height: 500px; /* Adjust height as needed */
@@ -100,17 +100,27 @@ header {
 }
 
 .heo-section {
-    background-color: #e3f2fd; /* Light blue background for the pig feed section */
+    background-color: #e1f1e1; /* Light blue background for the pig feed section */
 }
 
 .ga-section {
-    background-color: #fce4ec; /* Light pink background for the chicken feed section */
+    background-color: #fafada; /* Light pink background for the chicken feed section */
 }
 
 .heo-section h2, .ga-section h2 {
-    font-size: 28px;
+    font-size: 34px;
     font-weight: bold;
     color: #333;
+}
+
+.custom-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 50px;
+    font-size: 20px !important;
+    padding: 5px 5px;
 }
 
 .card {
@@ -122,10 +132,10 @@ header {
 }
 
 .card img {
-    width: calc(100% - 70px);
+    width: calc(100% - 80px);
     height: auto;
     max-height: 200px; /* Limit image height */
-    margin: 0 20px 0 50px;
+    margin: 0 30px 0 50px;
 }
 
 .carousel-inner .card {
@@ -134,7 +144,7 @@ header {
 }
 
 .carousel-item {
-    transition: transform 0.5s ease; /* Smooth transition for slides */
+    transition: transform 5s ease; /* Smooth transition for slides */
 }
 
 .carousel-control-prev-icon, .carousel-control-next-icon {
