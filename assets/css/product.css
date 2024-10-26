@@ -95,19 +95,18 @@ header {
     text-align: center;
 }
 
-.heo-section, .ga-section {
-    background-color: #f5f5f5; /* Adjust to match desired background */
-}
-
-.heo-section {
+.heo-section, .vit-section, .tom-section, .de-section {
     background-color: #e1f1e1; /* Light blue background for the pig feed section */
 }
 
-.ga-section {
+.ga-section, .bo-section, .ca-section {
     background-color: #fafada; /* Light pink background for the chicken feed section */
 }
 
-.heo-section h2, .ga-section h2 {
+.heo-section h2, .ga-section h2,
+.vit-section h2, .bo-section h2,
+.tom-section h2, .ca-section h2,
+.de-section h2 {
     font-size: 34px;
     font-weight: bold;
     color: #333;
