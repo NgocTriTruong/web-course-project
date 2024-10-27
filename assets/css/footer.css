@@ -9,13 +9,33 @@ html {
     font-family: Helvetica, Arial, sans-serif; /*set font chữ cho cả website , chữ không có chân*/
 }
 
+.logo {
+    height: 200px;
+    width:  200px;
+    margin: 0 auto;
+}
+
+.social {
+    height: 50px;
+    width:  238px;
+    margin: 0 auto;
+}
+
+.social a {
+    margin-right : 6px
+}
+
 .line {
     width: 80%;
     margin: 30px auto;
     border: solid 1px #e0e0e0;
 }
 
-.imge {
+img {
     object-fit: cover;
     clip-path: circle(50% at 50% 50%);
+}
+
+.img-footer {
+    allin
 }
