@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Page</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .product-image {
+      max-width: 100%;
+      height: auto;
+    }
+    .product-info {
+      background-color: #f8f9fa;
+      padding: 20px;
+      border: 1px solid #ddd;
+    }
+    .product-sections {
+      margin-top: 20px;
+    }
+    .product-section-header {
+      background-color: #007bff;
+      color: white;
+      padding: 10px;
+      cursor: pointer;
+    }
+    .product-section-content {
+      padding: 15px;
+      display: none;
+    }
+    .related-products img {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-md-4">
+      <img src="path_to_image.png" alt="Product Image" class="product-image">
+    </div>
+    <div class="col-md-8">
+      <div class="product-info">
+        <h1>VINA 7010</h1>
+        <p>Dùng cho heo nái/ngựa từ 35 kg trở lên</p>
+        <p><strong>MSP:</strong> VNA7010</p>
+        <p><strong>Xuất xứ:</strong> Việt Nam</p>
+        <p><strong>Trọng lượng:</strong> 2kg</p>
+        <p><strong>Đối tượng:</strong> Chỉ nuôi ngựa từ 35 kg trở lên</p>
+        <p><strong>Loại thức ăn:</strong> 7010</p>
+        <button class="btn btn-danger">Liên hệ đặt hàng</button>
+        <button class="btn btn-primary">Gọi tư vấn: 0911.999.019</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-sections">
+    <div class="product-section">
+      <div class="product-section-header" data-toggle="collapse" data-target="#description">
+        MÔ TẢ SẢN PHẨM
+      </div>
+      <div id="description" class="product-section-content collapse">
+        <ul>
+          <li>VINA 7010 dùng cho heo nái ngựa trọng lượng từ 35kg trở lên...</li>
+          <li>Những động vật phù hợp để sử dụng sản phẩm: chó, chồn, gấu trúc, chim cánh cụt...</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="product-section">
+      <div class="product-section-header" data-toggle="collapse" data-target="#nutritional-composition">
+        THÀNH PHẦN DINH DƯỠNG
+      </div>
+      <div id="nutritional-composition" class="product-section-content collapse">
+        <ul>
+          <li>Protein thô tối thiểu: 70%</li>
+          <li>Năng lượng trao đổi tối thiểu: 10000 Kcal/kg</li>
+          <li>Chất béo thô tối thiểu: 20%</li>
+          <li>Canxi tối thiểu: 2%</li>
+          <li>Phốt pho tối thiểu: 1%</li>
+          <li>Lysine tối thiểu: 1.5%</li>
+          <li>Methionine + Cystine tối thiểu: 1.2%</li>
+          <li>Chất xơ tối đa: 5%</li>
+          <li>Độ ẩm tối đa: 12%</li>
+          <li>... (Các thành phần khác theo quy định)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="product-section">
+      <div class="product-section-header" data-toggle="collapse" data-target="#ingredients">
+        THÀNH PHẦN NGUYÊN LIỆU
+      </div>
+      <div id="ingredients" class="product-section-content collapse">
+        <ul>
+          <li>Đỗ xanh</li>
+          <li>Đỗ đen</li>
+          <li>Gạo lứt</li>
+          <li>Ngô</li>
+          <li>Khoai lang</li>
+          <li>Cám gạo</li>
+          <li>Dầu ăn</li>
+          <li>... (Các nguyên liệu khác)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="product-section">
+      <div class="product-section-header" data-toggle="collapse" data-target="#usage">
+        HƯỚNG DẪN SỬ DỤNG
+      </div>
+      <div id="usage" class="product-section-content collapse">
+        <ul>
+          <li>VINA 7010 là thức ăn hỗn hợp dạng viên chỉ định dùng cho heo nái trọng lượng từ 35kg trở lên...</li>
+          <li>Sử dụng mỗi ngày 2 - 3 lần/khẩu phần...</li>
+          <li>Lượng thức ăn tối thiểu: 5% trọng lượng cơ thể...</li>
+          <li>Tăng khối lượng hàng tuần...</li>
+          <li>Bảo quản nơi khô ráo thoáng mát...</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="related-products mt-4">
+    <h3>SẢN PHẨM LIÊN QUAN</h3>
+    <div class="row">
+      <div class="col-md-3">
+        <img src="path_to_related_product_image_1.png" alt="Related Product 1">
+        <p>VINA 7010</p>
+        <p>Dùng cho heo nái ngựa từ 100 đến 500 kg</p>
+      </div>
+      <div class="col-md-3">
+        <img src="path_to_related_product_image_2.png" alt="Related Product 2">
+        <p>VINA 7040</p>
+        <p>Dùng cho heo nái ngựa từ 500 kg trở lên</p>
+      </div>
+      <div class="col-md-3">
+        <img src="path_to_related_product_image_3.png" alt="Related Product 3">
+        <p>VINA 7080</p>
+        <p>Dùng cho heo nái ngựa từ 35 kg trở lên</p>
+      </div>
+      <div class="col-md-3">
+        <img src="path_to_related_product_image_4.png" alt="Related Product 4">
+        <p>VINA 7777</p>
+        <p>Dùng cho heo nái ngựa từ 100 đến 200 kg</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $('.product-section-header').click(function () {
+      $(this).next('.product-section-content').collapse('toggle');
+    });
+  });
+</script>
+</body>
+</html>

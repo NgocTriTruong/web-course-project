@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Fish</title>
+  <link rel="stylesheet" href="../bootstrap/bootstrap.min.css" />
+  <link rel="stylesheet" href="../fonts/font-awesome/all.css" />
+  <link rel="stylesheet" href="../css/product-fish.css" />
+</head>
+<body>
+<header class="bg-white fixed-top">
+  <div
+          class="container d-flex border-top justify-content-between align-items-center py-2"
+  >
+    <div class="logo d-flex align-items-center">
+      <img
+              src="../images/logo/logo_shop.png"
+              alt="Vina Logo"
+              class="img-fluid"
+      />
+    </div>
+
+    <nav class="d-flex align-items-center gap-3">
+      <a href="#" class="text-dark text-decoration-none h5 mx-2"
+      >Giới Thiệu</a
+      >
+      <a href="#" class="text-dark text-decoration-none h5 mx-2"
+      >Sản Phẩm</a
+      >
+      <a href="#" class="text-dark text-decoration-none h5 mx-2"
+      >Tư Vấn Kỹ Thuật</a
+      >
+      <a href="#" class="text-dark text-decoration-none h5 mx-2"
+      >Hệ Thống Phân Phối</a
+      >
+      <a href="#" class="text-dark text-decoration-none h5 mx-2"
+      >Tuyển Dụng</a
+      >
+      <a href="#" class="text-dark text-decoration-none h5 mx-2">Tin Tức</a>
+      <a href="#" class="text-dark text-decoration-none h5 mx-2"
+      >Hỗ Trợ Khách Hàng</a
+      >
+    </nav>
+
+    <div
+            class="search-bar d-flex bg-white rounded-5 px-2 align-items-center"
+    >
+      <input
+              type="text"
+              class="form-control border-0"
+              placeholder="Bạn cần tìm gì..."
+      />
+      <i class="fa-solid fa-magnifying-glass text-danger"></i>
+    </div>
+  </div>
+</header>
+
+<section id="background-section">
+  <h1 class="outline">THỨC ĂN CHO CÁ</h1>
+</section>
+
+<!-- Product Filters -->
+<div class="container my-4">
+  <div class="d-flex justify-content-center mb-3">
+    <button class="btn btn-primary mx-1">Thức Ăn Cho Heo</button>
+    <button class="btn btn-primary mx-1">Thức Ăn Cho Gà</button>
+    <button class="btn btn-primary mx-1">Thức Ăn Cho Vịt</button>
+    <button class="btn btn-primary mx-1">Thức Ăn Cho Bò</button>
+    <button class="btn btn-primary mx-1">Thức Ăn Cho Tôm</button>
+    <button class="btn btn-danger mx-1">Thức Ăn Cho Cá</button>
+  </div>
+</div>
+
+<!-- Dropdown Filters -->
+<div class="containers my-4">
+  <div class="row justify-content-center">
+    <div class="col-md-3">
+      <select class="form-select">
+        <option selected>Nhóm sản phẩm</option>
+        <option value="CA_TRA">Cá Tra</option>
+        <option value="CA_DIEU_HONG">Cá Điêu Hồng</option>
+        <option value="CA_LOC">Cá Lóc</option>
+        <option value="CA_TRAM_CHEP">Cá Trắm Chép</option>
+        <option value="CA_RO_DONG">Cá Rô Đồng</option>
+        <option value="CA_SAC_RAN">Cá Sặc Rằn</option>
+        <option value="CA_TRE_VANG">Cá Trê Vàng</option>
+        <option value="CA_CHEM">Cá Chẽm</option>
+        <option value="CA_KEO">Cá Kèo</option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <select class="form-select">
+        <option selected>Thương Hiệu</option>
+        <option value="GOLDEN_TIER">Golden Tier</option>
+        <option value="LION">Lion</option>
+        <option value="BEIKESU">Beikesu</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<!-- Product Cards -->
+<div class="container product-section">
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+    <div class="col">
+      <div class="card product-card">
+        <img
+                src="../images/product/fish/img_43.png"
+                class="card-img-top"
+                alt="Product 1"
+        />
+        <div class="card-body">
+          <h5 class="card-title">AQUAGREEN_8016</h5>
+          <p class="card-text">Dùng cho cá > 50g.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card product-card">
+        <img
+                src="../images/product/fish/img_44.png"
+                class="card-img-top"
+                alt="Product 2"
+        />
+        <div class="card-body">
+          <h5 class="card-title">AQUAGREEN_8116</h5>
+          <p class="card-text">Dùng cho cá từ 10 - 20g.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card product-card">
+        <img
+                src="../images/product/fish/img_45.png"
+                class="card-img-top"
+                alt="Product 3"
+        />
+        <div class="card-body">
+          <h5 class="card-title">AQUAGREEN_8126</h5>
+          <p class="card-text">Dùng cho cá > 20g.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card product-card">
+        <img
+                src="../images/product/fish/img_46.png"
+                class="card-img-top"
+                alt="Product 4"
+        />
+        <div class="card-body">
+          <h5 class="card-title">AQUAGREEN_8926</h5>
+          <p class="card-text">Dùng cho cá > 100g.</p>
+        </div>
+      </div>
+    </div>
+    <!--sp 2-->
+    <div class="col">
+      <div class="card product-card">
+        <img
+                src="../images/product/fish/img_47.png"
+                class="card-img-top"
+                alt="Product 5"
+        />
+        <div class="card-body">
+          <h5 class="card-title">AQUAGREEN_6506</h5>
+          <p class="card-text">Dùng cho cá < 1g.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card product-card">
+        <img
+                src="../images/product/fish/img_48.png"
+                class="card-img-top"
+                alt="Product 6"
+        />
+        <div class="card-body">
+          <h5 class="card-title">AQUAGREEN_6516</h5>
+          <p class="card-text">Cá giống 1 - 5g.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card product-card">
+        <img
+                src="../images/product/fish/img_50.png"
+                class="card-img-top"
+                alt="Product 7"
+        />
+        <div class="card-body">
+          <h5 class="card-title">AQUAGREEN_6536</h5>
+          <p class="card-text">Dùng cho cá từ 8 – 20g.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card product-card">
+        <img
+                src="../images/product/fish/img_49.png"
+                class="card-img-top"
+                alt="Product 8"
+        />
+        <div class="card-body">
+          <h5 class="card-title">AQUAGREEN_6526</h5>
+          <p class="card-text">Dùng cho cá từ 5 - 20g.</p>
+        </div>
+      </div>
+    </div>
+    <!--sp 3 -->
+    <div class="col">
+      <div class="card product-card">
+        <img
+                src="../images/product/fish/img_51.png"
+                class="card-img-top"
+                alt="Product 9"
+        />
+        <div class="card-body">
+          <h5 class="card-title">SUPERWHITE_S6506</h5>
+          <p class="card-text">Cá giống < 1g.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card product-card">
+        <img
+                src="../images/product/fish/img_52.png"
+                class="card-img-top"
+                alt="Product 10"
+        />
+        <div class="card-body">
+          <h5 class="card-title">SUPERWHITE_S6516</h5>
+          <p class="card-text">Dùng cho cá từ 1 – 5g.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card product-card">
+        <img
+                src="../images/product/fish/img_53.png"
+                class="card-img-top"
+                alt="Product 11"
+        />
+        <div class="card-body">
+          <h5 class="card-title">SUPERWHITE_S6526</h5>
+          <p class="card-text">Dùng cho cá từ 8 - 20g.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card product-card">
+        <img
+                src="../images/product/fish/img_54.png"
+                class="card-img-top"
+                alt="Product 12"
+        />
+        <div class="card-body">
+          <h5 class="card-title">SUPERWHITE_6536</h5>
+          <p class="card-text">Dùng cho cá từ 8 - 20g.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../bootstrap/bootstrap.bundle.min.js"></script>
+<script src="../js/product.js"></script>
+</body>
+</html>
