@@ -116,13 +116,33 @@ header {
 
 /* Product Filters */
 .form-select {
-    padding: 10px;
-    border-radius: 5px;
     font-size: 16px;
-    font-weight: 500;
-    text-transform: uppercase;
-    width: 200px;
+    padding: 8px;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+    color: #333;
+    border: 1px solid #ccc;
 }
+
+.form-select:hover {
+    background-color: #e6e6e6;
+}
+
+/* Tùy chỉnh các nút */
+.button {
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #fff;
+    margin: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.button:hover {
+    opacity: 0.9;
+}
+
 
 /* Product Card Styling */
 .product-card {
