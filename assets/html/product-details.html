@@ -1,163 +1,245 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Product Page</title>
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    .product-image {
-      max-width: 100%;
-      height: auto;
-    }
-    .product-info {
-      background-color: #f8f9fa;
-      padding: 20px;
-      border: 1px solid #ddd;
-    }
-    .product-sections {
-      margin-top: 20px;
-    }
-    .product-section-header {
-      background-color: #007bff;
-      color: white;
-      padding: 10px;
-      cursor: pointer;
-    }
-    .product-section-content {
-      padding: 15px;
-      display: none;
-    }
-    .related-products img {
-      max-width: 100%;
-      height: auto;
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Page</title>
+    <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css"
+    />
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css"
+    />
+    <link rel="stylesheet" href="../bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/product-detail.css" />
 </head>
 <body>
 <div class="container">
-  <div class="row mt-4">
-    <div class="col-md-4">
-      <img src="path_to_image.png" alt="Product Image" class="product-image">
-    </div>
-    <div class="col-md-8">
-      <div class="product-info">
-        <h1>VINA 7010</h1>
-        <p>Dùng cho heo nái/ngựa từ 35 kg trở lên</p>
-        <p><strong>MSP:</strong> VNA7010</p>
-        <p><strong>Xuất xứ:</strong> Việt Nam</p>
-        <p><strong>Trọng lượng:</strong> 2kg</p>
-        <p><strong>Đối tượng:</strong> Chỉ nuôi ngựa từ 35 kg trở lên</p>
-        <p><strong>Loại thức ăn:</strong> 7010</p>
-        <button class="btn btn-danger">Liên hệ đặt hàng</button>
-        <button class="btn btn-primary">Gọi tư vấn: 0911.999.019</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="product-sections">
-    <div class="product-section">
-      <div class="product-section-header" data-toggle="collapse" data-target="#description">
-        MÔ TẢ SẢN PHẨM
-      </div>
-      <div id="description" class="product-section-content collapse">
-        <ul>
-          <li>VINA 7010 dùng cho heo nái ngựa trọng lượng từ 35kg trở lên...</li>
-          <li>Những động vật phù hợp để sử dụng sản phẩm: chó, chồn, gấu trúc, chim cánh cụt...</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="product-section">
-      <div class="product-section-header" data-toggle="collapse" data-target="#nutritional-composition">
-        THÀNH PHẦN DINH DƯỠNG
-      </div>
-      <div id="nutritional-composition" class="product-section-content collapse">
-        <ul>
-          <li>Protein thô tối thiểu: 70%</li>
-          <li>Năng lượng trao đổi tối thiểu: 10000 Kcal/kg</li>
-          <li>Chất béo thô tối thiểu: 20%</li>
-          <li>Canxi tối thiểu: 2%</li>
-          <li>Phốt pho tối thiểu: 1%</li>
-          <li>Lysine tối thiểu: 1.5%</li>
-          <li>Methionine + Cystine tối thiểu: 1.2%</li>
-          <li>Chất xơ tối đa: 5%</li>
-          <li>Độ ẩm tối đa: 12%</li>
-          <li>... (Các thành phần khác theo quy định)</li>
-        </ul>
-      </div>
+    <!-- Product Details Section -->
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <div
+                    id="carouselExampleControls"
+                    class="carousel slide"
+                    data-ride="carousel"
+            >
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img
+                                src="../images/product/fish/img_11.png"
+                                class="d-block w-100"
+                                alt="Product Image"
+                        />
+                    </div>
+                    <!-- Add more carousel items if needed -->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h2>TOP 01</h2>
+            <p>Dùng cho heo con từ 05 ngày tuổi đến 35 ngày tuổi</p>
+            <ul class="list-unstyled">
+                <li><strong>Mã SP:</strong> TOP01</li>
+                <li><strong>Thị trường phân phối:</strong> Việt Nam</li>
+                <li>
+                    <strong>Dành cho:</strong> Heo con từ 05 ngày tuổi đến 35 ngày
+                    tuổi
+                </li>
+                <li><strong>Lượt xem:</strong> 2940</li>
+            </ul>
+            <div class="button-container">
+                <button class="btn btn-danger">Liên hệ đặt hàng</button>
+                <button class="btn btn-outline-primary">
+                    Gọi tư vấn: 0251.3930399
+                </button>
+            </div>
+            <div class="mt-3">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-zalo"></i></a>
+            </div>
+        </div>
     </div>
 
-    <div class="product-section">
-      <div class="product-section-header" data-toggle="collapse" data-target="#ingredients">
-        THÀNH PHẦN NGUYÊN LIỆU
-      </div>
-      <div id="ingredients" class="product-section-content collapse">
-        <ul>
-          <li>Đỗ xanh</li>
-          <li>Đỗ đen</li>
-          <li>Gạo lứt</li>
-          <li>Ngô</li>
-          <li>Khoai lang</li>
-          <li>Cám gạo</li>
-          <li>Dầu ăn</li>
-          <li>... (Các nguyên liệu khác)</li>
-        </ul>
-      </div>
+    <!-- Product Tabs Section -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a
+                            class="nav-link active"
+                            id="description-tab"
+                            data-toggle="tab"
+                            href="#description"
+                            role="tab"
+                            aria-controls="description"
+                            aria-selected="true"
+                    >Mô tả sản phẩm</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a
+                            class="nav-link"
+                            id="nutrition-tab"
+                            data-toggle="tab"
+                            href="#nutrition"
+                            role="tab"
+                            aria-controls="nutrition"
+                            aria-selected="false"
+                    >Thành phần dinh dưỡng</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a
+                            class="nav-link"
+                            id="ingredients-tab"
+                            data-toggle="tab"
+                            href="#ingredients"
+                            role="tab"
+                            aria-controls="ingredients"
+                            aria-selected="false"
+                    >Thành phần nguyên liệu</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a
+                            class="nav-link"
+                            id="usage-tab"
+                            data-toggle="tab"
+                            href="#usage"
+                            role="tab"
+                            aria-controls="usage"
+                            aria-selected="false"
+                    >Hướng dẫn sử dụng</a
+                    >
+                </li>
+            </ul>
+            <div class="tab-content mt-3" id="myTabContent">
+                <div
+                        class="tab-pane fade show active"
+                        id="description"
+                        role="tabpanel"
+                        aria-labelledby="description-tab"
+                >
+                    Mô tả sản phẩm nội dung...
+                </div>
+                <div
+                        class="tab-pane fade"
+                        id="nutrition"
+                        role="tabpanel"
+                        aria-labelledby="nutrition-tab"
+                >
+                    Thành phần dinh dưỡng nội dung...
+                </div>
+                <div
+                        class="tab-pane fade"
+                        id="ingredients"
+                        role="tabpanel"
+                        aria-labelledby="ingredients-tab"
+                >
+                    Thành phần nguyên liệu nội dung...
+                </div>
+                <div
+                        class="tab-pane fade"
+                        id="usage"
+                        role="tabpanel"
+                        aria-labelledby="usage-tab"
+                >
+                    Hướng dẫn sử dụng nội dung...
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="product-section">
-      <div class="product-section-header" data-toggle="collapse" data-target="#usage">
-        HƯỚNG DẪN SỬ DỤNG
-      </div>
-      <div id="usage" class="product-section-content collapse">
-        <ul>
-          <li>VINA 7010 là thức ăn hỗn hợp dạng viên chỉ định dùng cho heo nái trọng lượng từ 35kg trở lên...</li>
-          <li>Sử dụng mỗi ngày 2 - 3 lần/khẩu phần...</li>
-          <li>Lượng thức ăn tối thiểu: 5% trọng lượng cơ thể...</li>
-          <li>Tăng khối lượng hàng tuần...</li>
-          <li>Bảo quản nơi khô ráo thoáng mát...</li>
-        </ul>
-      </div>
+    <!-- Related Products Section -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <h3>Sản phẩm liên quan</h3>
+            <div class="related-products-slider">
+                <div class="card">
+                    <img src="image1.png" class="card-img-top" alt="Product 1" />
+                    <div class="card-body">
+                        <h5 class="card-title">TOP 05</h5>
+                        <p class="card-text">
+                            Dùng cho heo thịt giống tốt từ 70kg - xuất chuồng.
+                        </p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="image2.png" class="card-img-top" alt="Product 2" />
+                    <div class="card-body">
+                        <h5 class="card-title">TOP 06</h5>
+                        <p class="card-text">
+                            Dùng cho heo cho heo nái hậu bị, mang thai.
+                        </p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="image3.png" class="card-img-top" alt="Product 3" />
+                    <div class="card-body">
+                        <h5 class="card-title">TOP 02</h5>
+                        <p class="card-text">Dùng cho heo con tập ăn đến 20kg.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="image4.png" class="card-img-top" alt="Product 4" />
+                    <div class="card-body">
+                        <h5 class="card-title">TOP 03</h5>
+                        <p class="card-text">
+                            Dùng cho heo thịt giống tốt từ 12 - 30kg.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-
-  <div class="related-products mt-4">
-    <h3>SẢN PHẨM LIÊN QUAN</h3>
-    <div class="row">
-      <div class="col-md-3">
-        <img src="path_to_related_product_image_1.png" alt="Related Product 1">
-        <p>VINA 7010</p>
-        <p>Dùng cho heo nái ngựa từ 100 đến 500 kg</p>
-      </div>
-      <div class="col-md-3">
-        <img src="path_to_related_product_image_2.png" alt="Related Product 2">
-        <p>VINA 7040</p>
-        <p>Dùng cho heo nái ngựa từ 500 kg trở lên</p>
-      </div>
-      <div class="col-md-3">
-        <img src="path_to_related_product_image_3.png" alt="Related Product 3">
-        <p>VINA 7080</p>
-        <p>Dùng cho heo nái ngựa từ 35 kg trở lên</p>
-      </div>
-      <div class="col-md-3">
-        <img src="path_to_related_product_image_4.png" alt="Related Product 4">
-        <p>VINA 7777</p>
-        <p>Dùng cho heo nái ngựa từ 100 đến 200 kg</p>
-      </div>
-    </div>
-  </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+<script src="../bootstrap/bootstrap.bundle.min.js"></script>
 <script>
-  $(document).ready(function () {
-    $('.product-section-header').click(function () {
-      $(this).next('.product-section-content').collapse('toggle');
+    $(document).ready(function () {
+        $(".related-products-slider").slick({
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            prevArrow: '<button type="button" class="slick-prev"><</button>',
+            nextArrow: '<button type="button" class="slick-next">></button>',
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        dots: true,
+                    },
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1,
+                    },
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                    },
+                },
+            ],
+        });
     });
-  });
 </script>
 </body>
 </html>
