@@ -76,3 +76,20 @@ ul > li > strong{
     color: #fff;
     background-color: #0056b3;
 }
+.tab-content {
+    border: 1px solid #dee2e6;
+    border-top: none;
+    padding: 15px;
+}
+
+.card-deck .card {
+    min-width: 18rem;
+}
+
+.card-body h5 {
+    color: #0056b3;
+}
+
+.card-body p {
+    color: #6c757d;
+}
