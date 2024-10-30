@@ -1,0 +1,78 @@
+html,
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Product Title Styling */
+h2 {
+    font-size: 28px;
+    color: #0056b3;
+    font-weight: bold;
+}
+
+/* Product Description Styling */
+p {
+    font-size: 18px;
+    color: #333;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+ul > li > strong{
+    font-size: 18px;
+    color: #333;
+    margin-top: 10px;
+}
+/* List Styling for Product Details */
+.list-unstyled {
+    margin-top: 15px;
+}
+
+.list-unstyled li {
+    font-size: 15px;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+/* Bold styling for labels */
+.list-unstyled li strong {
+    font-weight: bold;
+}
+
+/* Views Counter */
+.list-unstyled li:last-child {
+    color: #555;
+}
+
+.carousel-inner,
+.carousel-item {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.center-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.related-products-slider .card img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.nav-tabs .nav-link {
+    color: #0056b3;
+}
+
+.nav-tabs .nav-link.active {
+    color: #fff;
+    background-color: #0056b3;
+}
