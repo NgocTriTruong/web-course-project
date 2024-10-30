@@ -93,3 +93,48 @@ ul > li > strong{
 .card-body p {
     color: #6c757d;
 }
+
+.carousel-item img {
+    max-width: fit-content;
+    align-content: center;
+    height: auto;
+    max-height: 600px; /* Adjust based on design */
+    object-fit: cover; /* Ensures the image covers the container */
+}
+
+.related-products-slider .card {
+    margin: 10px;
+}
+
+/* Button Container */
+.button-container {
+    display: flex;
+    gap: 10px; /* Space between buttons */
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* Specific Button Styles */
+.btn-danger {
+    background-color: #ff4a4a;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-outline-primary {
+    color: #0056b3;
+    border: 2px solid #0056b3;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-danger:hover,
+.btn-outline-primary:hover {
+    opacity: 0.9;
+}
