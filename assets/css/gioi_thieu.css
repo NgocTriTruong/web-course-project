@@ -66,6 +66,10 @@ html {
     border: 1px solid blue;
 }
 
+.line_gray {
+    border: 1px solid rgba(128, 128, 128, 0.2);
+}
+
 .quan_diem img {
     border-radius: 10px;
 }
