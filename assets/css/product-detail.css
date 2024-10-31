@@ -3,11 +3,16 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #f8f9fa;
 }
 
 .container {
     max-width: 1200px;
     margin: auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
 /* Product Title Styling */
@@ -15,6 +20,7 @@ h2 {
     font-size: 28px;
     color: #0056b3;
     font-weight: bold;
+    margin-bottom: 20px;
 }
 
 /* Product Description Styling */
@@ -25,12 +31,13 @@ p {
     font-weight: bold;
 }
 
-ul > li > strong{
+/* List Styling for Product Details */
+ul > li > strong {
     font-size: 18px;
     color: #333;
     margin-top: 10px;
 }
-/* List Styling for Product Details */
+
 .list-unstyled {
     margin-top: 15px;
 }
@@ -51,59 +58,72 @@ ul > li > strong{
     color: #555;
 }
 
+/* Carousel Styling */
 .carousel-inner,
 .carousel-item {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
 }
+
 .center-image {
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
+
+.carousel-item img {
+    max-width: 100%;
+    height: auto;
+    max-height: 600px; /* Adjust based on design */
+    object-fit: cover; /* Ensures the image covers the container */
+}
+
+/* Related Products Slider Styling */
+.related-products-slider {
+    margin-top: 20px;
+}
+
+.related-products-slider .card {
+    margin: 5px;
+    width: calc(25% - 10px); /* Adjust the width for smaller cards */
+}
+
 .related-products-slider .card img {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    border-radius: 8px;
+    width: 100%; /* Ensure images fit within the card */
+    height: auto;
 }
 
+.card-body h5 {
+    color: #0056b3;
+    font-size: 16px; /* Adjust font size for smaller cards */
+}
+
+.card-body p {
+    color: #6c757d;
+    font-size: 14px; /* Adjust font size for smaller cards */
+}
+
+/* Tabs Styling */
 .nav-tabs .nav-link {
     color: #0056b3;
+    font-weight: bold;
 }
 
 .nav-tabs .nav-link.active {
     color: #fff;
     background-color: #0056b3;
 }
+
 .tab-content {
     border: 1px solid #dee2e6;
     border-top: none;
     padding: 15px;
-}
-
-.card-deck .card {
-    min-width: 18rem;
-}
-
-.card-body h5 {
-    color: #0056b3;
-}
-
-.card-body p {
-    color: #6c757d;
-}
-
-.carousel-item img {
-    max-width: fit-content;
-    align-content: center;
-    height: auto;
-    max-height: 600px; /* Adjust based on design */
-    object-fit: cover; /* Ensures the image covers the container */
-}
-
-.related-products-slider .card {
-    margin: 10px;
+    border-radius: 0 0 8px 8px;
 }
 
 /* Button Container */
@@ -123,6 +143,8 @@ ul > li > strong{
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
 .btn-outline-primary {
@@ -132,9 +154,31 @@ ul > li > strong{
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .btn-danger:hover,
 .btn-outline-primary:hover {
     opacity: 0.9;
+}
+
+.btn-outline-primary:hover {
+    background-color: #0056b3;
+    color: #fff;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    .carousel-item img {
+        max-height: 400px;
+    }
+
+    .related-products-slider .card {
+        width: calc(50% - 10px); /* Adjust width for smaller screens */
+    }
+
+    .container {
+        padding: 10px;
+    }
 }
