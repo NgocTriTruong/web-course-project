@@ -1,320 +1,299 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Web Project</title>
-  <link rel="stylesheet" href="/assets/css/product-duck.css" />
-  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css" />
-  <link rel="stylesheet" href="/assets/fonts/font-awesome/all.css" />
-  <script src="/assets/scripts/jquery-3.7.1.min.js"></script>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Web Project</title>
+    <link rel="stylesheet" href="/assets/css/product-duck.css"/>
+    <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/assets/fonts/font-awesome/all.css"/>
+    <script src="/assets/scripts/jquery-3.7.1.min.js"></script>
 </head>
 <body>
 
-  <section id="background-section">
+<section id="background-section">
     <h1 class="outline">THỨC ĂN CHO VỊT</h1>
-  </section>
+</section>
 
-  <div class="container d-flex align-items-center justify-content-center my-4">
+<div class="container d-flex align-items-center justify-content-center my-4">
     <div class="d-flex justify-content-between gap-1 mb-3">
-      <button class="btn rounded-3 btn-primary mx-1">
-        <img src="/assets/images/represent-images/icon-pig.png" alt="pig-icon" class="icon-image" />
-        Thức Ăn Cho Heo
-      </button>
-      <button class="btn rounded-3 btn-primary mx-1">
-        <img src="/assets/images/represent-images/icon-chicken.png" alt="chicken-icon" class="icon-image" />
-        Thức Ăn Cho Gà
-      </button>
-      <button class="btn rounded-3 btn-primary mx-1">
-        <img src="/assets/images/represent-images/icon-duck.png" alt="duck-icon" class="icon-image" />
-        Thức Ăn Cho Vịt
-      </button>
-      <button class="btn rounded-3 btn-primary mx-1">
-        <img src="/assets/images/represent-images/icon-cow.png" alt="cow-icon" class="icon-image" />
-        Thức Ăn Cho Bò
-      </button>
-      <button class="btn rounded-3 btn-primary ps-0 mx-1">
-        <img src="/assets/images/represent-images/icon-shrimp.png" alt="shrimp-icon" class="icon-image" />
-        Thức Ăn Cho Tôm
-      </button>
-      <button class="btn rounded-3 btn-primary mx-1">
-        <img src="/assets/images/represent-images/icon-fish.png" alt="fish-icon" class="icon-image" />
-        Thức Ăn Cho Cá
-      </button>
-      <button class="btn rounded-3 btn-primary mx-1">
-        <img src="/assets/images/represent-images/icon-goat.png" alt="goat-icon" class="icon-image" />
-        Thức Ăn Cho Dê
-      </button>
+        <button class="btn rounded-3 btn-primary mx-1">
+            <img src="/assets/images/represent-images/icon-pig.png" alt="pig-icon" class="icon-image"/>
+            Thức Ăn Cho Heo
+        </button>
+        <button class="btn rounded-3 btn-primary mx-1">
+            <img src="/assets/images/represent-images/icon-chicken.png" alt="chicken-icon" class="icon-image"/>
+            Thức Ăn Cho Gà
+        </button>
+        <button class="btn rounded-3 btn-primary mx-1">
+            <img src="/assets/images/represent-images/icon-duck.png" alt="duck-icon" class="icon-image"/>
+            Thức Ăn Cho Vịt
+        </button>
+        <button class="btn rounded-3 btn-primary mx-1">
+            <img src="/assets/images/represent-images/icon-cow.png" alt="cow-icon" class="icon-image"/>
+            Thức Ăn Cho Bò
+        </button>
+        <button class="btn rounded-3 btn-primary ps-0 mx-1">
+            <img src="/assets/images/represent-images/icon-shrimp.png" alt="shrimp-icon" class="icon-image"/>
+            Thức Ăn Cho Tôm
+        </button>
+        <button class="btn rounded-3 btn-primary mx-1">
+            <img src="/assets/images/represent-images/icon-fish.png" alt="fish-icon" class="icon-image"/>
+            Thức Ăn Cho Cá
+        </button>
+        <button class="btn rounded-3 btn-primary mx-1">
+            <img src="/assets/images/represent-images/icon-goat.png" alt="goat-icon" class="icon-image"/>
+            Thức Ăn Cho Dê
+        </button>
     </div>
-  </div>
+</div>
 
-  <div class="containers my-4">
+<div class="containers my-4">
     <div class="row justify-content-center">
-      <div class="col-md-3 mb-3">
-        <select class="form-select">
-          <option selected>Nhóm sản phẩm</option>
-          <option value="1">Vịt thịt</option>
-          <option value="2">Vịt trứng</option>
-        </select>
-      </div>
-      <div class="col-md-3">
-        <select class="form-select">
-          <option selected>Thương Hiệu</option>
-          <option value="1">Vina</option>
-          <option value="2">Happy</option>
-        </select>
-      </div>
+        <div class="col-md-3 mb-3">
+            <select class="form-select">
+                <option selected>Nhóm sản phẩm</option>
+                <option value="1">Vịt thịt</option>
+                <option value="2">Vịt trứng</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <select class="form-select">
+                <option selected>Thương Hiệu</option>
+                <option value="1">Vina</option>
+                <option value="2">Happy</option>
+            </select>
+        </div>
     </div>
-  </div>
+</div>
 
-  <!-- Product Cards -->
-  <div class="container product-section mb-5">
+<!-- Product Cards -->
+<div class="container product-section mb-5">
     <!-- Page 1: Products 1-16 -->
     <div class="product-page" id="page1">
-      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4  mb-5">
-        <div class="col">
-          <div class="card d-flex align-items-center h-100 product-card">
-            <img src="/assets/images/product/duck/320.png" class="card-img-top w-100 mt-5" alt="Product 1">
-            <div class="card-body text-center">
-              <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
-              <p class="card-text">Dùng cho vịt siêu thịt từ 01 đến 21 ngày tuổi.</p>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4  mb-5">
+            <div class="col">
+                <div class="card d-flex align-items-center h-100 product-card">
+                    <img src="/assets/images/product/duck/320.png" class="card-img-top w-100 mt-5" alt="Product 1">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
+                        <p class="card-text">Dùng cho vịt siêu thịt từ 01 đến 21 ngày tuổi.</p>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card d-flex align-items-center h-100 product-card">
-            <img src="/assets/images/product/duck/355.png" class="card-img-top w-100 mt-5" alt="Product 1">
-            <div class="card-body text-center">
-              <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
-              <p class="card-text">Dùng cho vịt/ngan siêu thịt từ 01 đến 21 ngày tuổi.</p>
+            <div class="col">
+                <div class="card d-flex align-items-center h-100 product-card">
+                    <img src="/assets/images/product/duck/355.png" class="card-img-top w-100 mt-5" alt="Product 1">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
+                        <p class="card-text">Dùng cho vịt/ngan siêu thịt từ 01 đến 21 ngày tuổi.</p>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card d-flex align-items-center h-100 product-card">
-            <img src="/assets/images/product/duck/356.png" class="card-img-top w-100 mt-5" alt="Product 1">
-            <div class="card-body text-center">
-              <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
-              <p class="card-text">Dùng cho vịt thịt từ 22 ngày tuổi đến xuất bán.</p>
+            <div class="col">
+                <div class="card d-flex align-items-center h-100 product-card">
+                    <img src="/assets/images/product/duck/356.png" class="card-img-top w-100 mt-5" alt="Product 1">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
+                        <p class="card-text">Dùng cho vịt thịt từ 22 ngày tuổi đến xuất bán.</p>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card d-flex align-items-center h-100 product-card">
-            <img src="/assets/images/product/duck/357.png" class="card-img-top w-100 mt-5" alt="Product 1">
-            <div class="card-body text-center">
-              <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
-              <p class="card-text">Dùng cho vịt vỗ béo.</p>
+            <div class="col">
+                <div class="card d-flex align-items-center h-100 product-card">
+                    <img src="/assets/images/product/duck/357.png" class="card-img-top w-100 mt-5" alt="Product 1">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
+                        <p class="card-text">Dùng cho vịt vỗ béo.</p>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-5">
-        <div class="col">
-          <div class="card d-flex align-items-center h-100 product-card">
-            <img src="/assets/images/product/duck/320.png" class="card-img-top w-100 mt-5" alt="Product 1">
-            <div class="card-body text-center">
-              <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
-              <p class="card-text">Dùng cho vịt siêu thịt từ 01 đến 21 ngày tuổi.</p>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-5">
+            <div class="col">
+                <div class="card d-flex align-items-center h-100 product-card">
+                    <img src="/assets/images/product/duck/320.png" class="card-img-top w-100 mt-5" alt="Product 1">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
+                        <p class="card-text">Dùng cho vịt siêu thịt từ 01 đến 21 ngày tuổi.</p>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card d-flex align-items-center h-100 product-card">
-            <img src="/assets/images/product/duck/355.png" class="card-img-top w-100 mt-5" alt="Product 1">
-            <div class="card-body text-center">
-              <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
-              <p class="card-text">Dùng cho vịt/ngan siêu thịt từ 01 đến 21 ngày tuổi.</p>
+            <div class="col">
+                <div class="card d-flex align-items-center h-100 product-card">
+                    <img src="/assets/images/product/duck/355.png" class="card-img-top w-100 mt-5" alt="Product 1">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
+                        <p class="card-text">Dùng cho vịt/ngan siêu thịt từ 01 đến 21 ngày tuổi.</p>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card d-flex align-items-center h-100 product-card">
-            <img src="/assets/images/product/duck/356.png" class="card-img-top w-100 mt-5" alt="Product 1">
-            <div class="card-body text-center">
-              <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
-              <p class="card-text">Dùng cho vịt thịt từ 22 ngày tuổi đến xuất bán.</p>
+            <div class="col">
+                <div class="card d-flex align-items-center h-100 product-card">
+                    <img src="/assets/images/product/duck/356.png" class="card-img-top w-100 mt-5" alt="Product 1">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
+                        <p class="card-text">Dùng cho vịt thịt từ 22 ngày tuổi đến xuất bán.</p>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card d-flex align-items-center h-100 product-card">
-            <img src="/assets/images/product/duck/357.png" class="card-img-top w-100 mt-5" alt="Product 1">
-            <div class="card-body text-center">
-              <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
-              <p class="card-text">Dùng cho vịt vỗ béo.</p>
+            <div class="col">
+                <div class="card d-flex align-items-center h-100 product-card">
+                    <img src="/assets/images/product/duck/357.png" class="card-img-top w-100 mt-5" alt="Product 1">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
+                        <p class="card-text">Dùng cho vịt vỗ béo.</p>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-5">
-        <div class="col">
-          <div class="card d-flex align-items-center h-100 product-card">
-            <img src="/assets/images/product/duck/320.png" class="card-img-top w-100 mt-5" alt="Product 1">
-            <div class="card-body text-center">
-              <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
-              <p class="card-text">Dùng cho vịt siêu thịt từ 01 đến 21 ngày tuổi.</p>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-5">
+            <div class="col">
+                <div class="card d-flex align-items-center h-100 product-card">
+                    <img src="/assets/images/product/duck/320.png" class="card-img-top w-100 mt-5" alt="Product 1">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
+                        <p class="card-text">Dùng cho vịt siêu thịt từ 01 đến 21 ngày tuổi.</p>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card d-flex align-items-center h-100 product-card">
-            <img src="/assets/images/product/duck/355.png" class="card-img-top w-100 mt-5" alt="Product 1">
-            <div class="card-body text-center">
-              <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
-              <p class="card-text">Dùng cho vịt/ngan siêu thịt từ 01 đến 21 ngày tuổi.</p>
+            <div class="col">
+                <div class="card d-flex align-items-center h-100 product-card">
+                    <img src="/assets/images/product/duck/355.png" class="card-img-top w-100 mt-5" alt="Product 1">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
+                        <p class="card-text">Dùng cho vịt/ngan siêu thịt từ 01 đến 21 ngày tuổi.</p>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card d-flex align-items-center h-100 product-card">
-            <img src="/assets/images/product/duck/356.png" class="card-img-top w-100 mt-5" alt="Product 1">
-            <div class="card-body text-center">
-              <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
-              <p class="card-text">Dùng cho vịt thịt từ 22 ngày tuổi đến xuất bán.</p>
+            <div class="col">
+                <div class="card d-flex align-items-center h-100 product-card">
+                    <img src="/assets/images/product/duck/356.png" class="card-img-top w-100 mt-5" alt="Product 1">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
+                        <p class="card-text">Dùng cho vịt thịt từ 22 ngày tuổi đến xuất bán.</p>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card d-flex align-items-center h-100 product-card">
-            <img src="/assets/images/product/duck/357.png" class="card-img-top w-100 mt-5" alt="Product 1">
-            <div class="card-body text-center">
-              <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
-              <p class="card-text">Dùng cho vịt vỗ béo.</p>
+            <div class="col">
+                <div class="card d-flex align-items-center h-100 product-card">
+                    <img src="/assets/images/product/duck/357.png" class="card-img-top w-100 mt-5" alt="Product 1">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
+                        <p class="card-text">Dùng cho vịt vỗ béo.</p>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-5">
-        <div class="col">
-          <div class="card d-flex align-items-center h-100 product-card">
-            <img src="/assets/images/product/duck/320.png" class="card-img-top w-100 mt-5" alt="Product 1">
-            <div class="card-body text-center">
-              <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
-              <p class="card-text">Dùng cho vịt siêu thịt từ 01 đến 21 ngày tuổi.</p>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-5">
+            <div class="col">
+                <div class="card d-flex align-items-center h-100 product-card">
+                    <img src="/assets/images/product/duck/320.png" class="card-img-top w-100 mt-5" alt="Product 1">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
+                        <p class="card-text">Dùng cho vịt siêu thịt từ 01 đến 21 ngày tuổi.</p>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card d-flex align-items-center h-100 product-card">
-            <img src="/assets/images/product/duck/355.png" class="card-img-top w-100 mt-5" alt="Product 1">
-            <div class="card-body text-center">
-              <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
-              <p class="card-text">Dùng cho vịt/ngan siêu thịt từ 01 đến 21 ngày tuổi.</p>
+            <div class="col">
+                <div class="card d-flex align-items-center h-100 product-card">
+                    <img src="/assets/images/product/duck/355.png" class="card-img-top w-100 mt-5" alt="Product 1">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
+                        <p class="card-text">Dùng cho vịt/ngan siêu thịt từ 01 đến 21 ngày tuổi.</p>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card d-flex align-items-center h-100 product-card">
-            <img src="/assets/images/product/duck/356.png" class="card-img-top w-100 mt-5" alt="Product 1">
-            <div class="card-body text-center">
-              <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
-              <p class="card-text">Dùng cho vịt thịt từ 22 ngày tuổi đến xuất bán.</p>
+            <div class="col">
+                <div class="card d-flex align-items-center h-100 product-card">
+                    <img src="/assets/images/product/duck/356.png" class="card-img-top w-100 mt-5" alt="Product 1">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
+                        <p class="card-text">Dùng cho vịt thịt từ 22 ngày tuổi đến xuất bán.</p>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card d-flex align-items-center h-100 product-card">
-            <img src="/assets/images/product/duck/357.png" class="card-img-top w-100 mt-5" alt="Product 1">
-            <div class="card-body text-center">
-              <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
-              <p class="card-text">Dùng cho vịt vỗ béo.</p>
+            <div class="col">
+                <div class="card d-flex align-items-center h-100 product-card">
+                    <img src="/assets/images/product/duck/357.png" class="card-img-top w-100 mt-5" alt="Product 1">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
+                        <p class="card-text">Dùng cho vịt vỗ béo.</p>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
 
     <!-- Page 2: Products 17-32 -->
     <div class="product-page mb-5" id="page2">
-      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-        <div class="col">
-          <div class="card d-flex align-items-center h-100 product-card">
-            <img src="/assets/images/product/duck/358.png" class="card-img-top w-100 mt-5" alt="Product 1">
-            <div class="card-body text-center">
-              <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
-              <p class="card-text">Dùng cho vịt từ 01 ngày tuổi đến xuất bán.</p>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+            <div class="col">
+                <div class="card d-flex align-items-center h-100 product-card">
+                    <img src="/assets/images/product/duck/358.png" class="card-img-top w-100 mt-5" alt="Product 1">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
+                        <p class="card-text">Dùng cho vịt từ 01 ngày tuổi đến xuất bán.</p>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card d-flex align-items-center h-100 product-card">
-            <img src="/assets/images/product/duck/370.png" class="card-img-top w-100 mt-5" alt="Product 1">
-            <div class="card-body text-center">
-              <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
-              <p class="card-text">Dùng cho đẻ siêu trứng.</p>
+            <div class="col">
+                <div class="card d-flex align-items-center h-100 product-card">
+                    <img src="/assets/images/product/duck/370.png" class="card-img-top w-100 mt-5" alt="Product 1">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
+                        <p class="card-text">Dùng cho đẻ siêu trứng.</p>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card d-flex align-items-center h-100 product-card">
-            <img src="/assets/images/product/duck/380.png" class="card-img-top w-100 mt-5" alt="Product 1">
-            <div class="card-body text-center">
-              <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
-              <p class="card-text">Dùng cho vịt đẻ thuơng phẩm.</p>
+            <div class="col">
+                <div class="card d-flex align-items-center h-100 product-card">
+                    <img src="/assets/images/product/duck/380.png" class="card-img-top w-100 mt-5" alt="Product 1">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
+                        <p class="card-text">Dùng cho vịt đẻ thuơng phẩm.</p>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card d-flex align-items-center h-100 product-card">
-            <img src="/assets/images/product/duck/357.png" class="card-img-top w-100 mt-5" alt="Product 1">
-            <div class="card-body text-center">
-              <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
-              <p class="card-text">Dùng cho vịt vỗ béo.</p>
+            <div class="col">
+                <div class="card d-flex align-items-center h-100 product-card">
+                    <img src="/assets/images/product/duck/357.png" class="card-img-top w-100 mt-5" alt="Product 1">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
+                        <p class="card-text">Dùng cho vịt vỗ béo.</p>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
 
     <!-- Page 3: Products 33-48 -->
     <div class="product-page" id="page3">
-      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-        <!-- Repeat similar blocks for Products 33-48 -->
-      </div>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+            <!-- Repeat similar blocks for Products 33-48 -->
+        </div>
     </div>
 
     <!-- Page 4: Products 49-64 -->
     <div class="product-page" id="page4">
-      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-        <!-- Repeat similar blocks for Products 49-64 -->
-      </div>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+            <!-- Repeat similar blocks for Products 49-64 -->
+        </div>
     </div>
-  </div>
+</div>
 
-  <!-- Pagination Controls -->
-  <div class="pagination">
+<!-- Pagination Controls -->
+<div class="pagination">
     <button class="page-button active" data-page="1">1</button>
     <button class="page-button" data-page="2">2</button>
     <button class="page-button" data-page="3">3</button>
     <button class="page-button" data-page="4">4</button>
-  </div>
+</div>
 
 <!-- Optional JavaScript -->
 <!-- Bootstrap Bundle with Popper -->
 <script src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
-<script>
-  $(document).ready(function() {
-    // Function to show the specified page and hide others
-    function showPage(pageNumber) {
-      // Hide all pages and remove 'active' class from pagination buttons
-      $('.product-page').hide();
-      $('.page-button').removeClass('active');
+<script src="../scripts/pagination.js"></script>
 
-      // Show the selected page and add 'active' class to the corresponding button
-      $(`#page${pageNumber}`).show();
-      $(`.page-button[data-page=${pageNumber}]`).addClass('active');
-    }
-
-    // Event listener for pagination buttons
-    $('.page-button').click(function() {
-      const pageNumber = $(this).data('page');
-      showPage(pageNumber);
-    });
-
-    // Initial setup: show the first page by default
-    showPage(1);
-  });
-</script>
 </body>
 </html>
