@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Page</title>
+    <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css"
+    />
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css"
+    />
+    <link rel="stylesheet" href="../bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../css/product-detail.css" />
+    <style>
+        .slick-prev:before,
+        .slick-next:before {
+            color: black;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Product Details Section -->
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <div
+                    id="carouselExampleControls"
+                    class="carousel slide"
+                    data-ride="carousel"
+            >
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img
+                                src="../../images/product/fish/img_11.png"
+                                class="d-block w-100"
+                                alt="Product Image"
+                        />
+                    </div>
+                    <!-- Add more carousel items if needed -->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h2>AQUAGREEN_6306</h2>
+            <p>Dùng cho cá giống < 1g</p>
+            <ul class="list-unstyled">
+                <li><strong>Mã SP:</strong> AQUAGREEN</li>
+                <li><strong>Thị trường phân phối:</strong> Việt Nam</li>
+                <li>
+                    <strong>Dành cho:</strong> Cá giống
+                </li>
+                <li><strong>Lượt xem:</strong> 3000</li>
+            </ul>
+            <div class="button-container">
+                <button class="btn btn-danger">Liên hệ đặt hàng</button>
+                <button class="btn btn-outline-primary">
+                    Gọi tư vấn: 077734787
+                </button>
+            </div>
+            <!-- <div class="mt-3">
+              <a href="#"><i class="fab fa-facebook"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-zalo"></i></a>
+            </div> -->
+        </div>
+    </div>
+
+    <!-- Product Tabs Section -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a
+                            class="nav-link active"
+                            id="description-tab"
+                            data-toggle="tab"
+                            href="#description"
+                            role="tab"
+                            aria-controls="description"
+                            aria-selected="true"
+                    >Mô tả sản phẩm - Lợi ích</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a
+                            class="nav-link"
+                            id="nutrition-tab"
+                            data-toggle="tab"
+                            href="#nutrition"
+                            role="tab"
+                            aria-controls="nutrition"
+                            aria-selected="false"
+                    >Thành phần dinh dưỡng</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a
+                            class="nav-link"
+                            id="ingredients-tab"
+                            data-toggle="tab"
+                            href="#ingredients"
+                            role="tab"
+                            aria-controls="ingredients"
+                            aria-selected="false"
+                    >Thành phần nguyên liệu</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a
+                            class="nav-link"
+                            id="usage-tab"
+                            data-toggle="tab"
+                            href="#usage"
+                            role="tab"
+                            aria-controls="usage"
+                            aria-selected="false"
+                    >Hướng dẫn sử dụng</a
+                    >
+                </li>
+            </ul>
+            <div class="tab-content mt-3" id="myTabContent">
+                <div
+                        class="tab-pane fade show active"
+                        id="description"
+                        role="tabpanel"
+                        aria-labelledby="description-tab"
+                >
+                    <ul>
+                        <li>Cá khỏe, sinh trưởng đồng đều, tỉ lệ sống cao.</li>
+                        <li>Cá lớn nhanh, ít bệnh, FCR thấp</li>
+                        <li>Giảm chi phí nuôi, tăng lợi nhuận và sự hài lòng cho khách hàng</li>
+                    </ul>
+                </div>
+                <div
+                        class="tab-pane fade"
+                        id="nutrition"
+                        role="tabpanel"
+                        aria-labelledby="nutrition-tab"
+                >
+                    <ul>
+                        <li>Kích cỡ (mm): <strong>Bột - 1.5</strong></li>
+                        <li>Protein thô tối thiểu (%): <strong>40</strong></li>
+                        <li>Béo thô tối thiểu (%): <strong>6</strong></li>
+                        <li>Lysine tổng tối thiểu (%): <strong>2</strong></li>
+                        <li>P tổng tối thiểu (%):<strong>1</strong></li>
+                        <li>Độ ẩm tối đa (%): <strong>11</strong></li>
+                        <li>Xơ thô tối đa (%): <strong>6</strong></li>
+                        <li>Ca tối thiểu (%): <strong>1</strong></li>
+                        <li>Ethoxyquin tối đa (ppm): <strong>150</strong></li>
+                        <li>Tro tổng số tối đa (%): <strong>16</strong></li>
+                        <li>Methionine + Cystine tổng số tối thiểu (%): <strong>0.9</strong></li>
+                        <li>Kháng sinh, hóa dược:<strong> Không có</strong></li>
+                    </ul>
+                </div>
+                <div
+                        class="tab-pane fade"
+                        id="ingredients"
+                        role="tabpanel"
+                        aria-labelledby="ingredients-tab"
+                >
+                    Thành phần nguyên liệu nội dung...
+                </div>
+                <div
+                        class="tab-pane fade"
+                        id="usage"
+                        role="tabpanel"
+                        aria-labelledby="usage-tab"
+                >
+                    <ul>
+                        <li>Kích cỡ cá (g/con): <strong> <1 </strong></li>
+                        <li>Cở viên (mm): <strong>0.6 - 1.5</strong></li>
+                        <li>Protein (%): <strong>40</strong></li>
+                        <li>Khẩu phần (%BW): <strong>7 - 15</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Related Products Section -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <h3>Sản phẩm liên quan</h3>
+            <div class="related-products-slider">
+                <div class="card">
+                    <img src="../../images/product/fish/img_12.png" class="card-img-top" alt="Product 1" />
+                    <div class="card-body">
+                        <h5 class="card-title">TOP 05</h5>
+                        <p class="card-text">
+                            Dùng cho cá từ 1 – 5g.
+                        </p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="../../images/product/fish/img_13.png" class="card-img-top" alt="Product 2" />
+                    <div class="card-body">
+                        <h5 class="card-title">TOP 06</h5>
+                        <p class="card-text">
+                            Dùng cho cá từ 5 – 20g.
+                        </p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="../../images/product/fish/img_14.png" class="card-img-top" alt="Product 3" />
+                    <div class="card-body">
+                        <h5 class="card-title">TOP 02</h5>
+                        <p class="card-text">Cá giống < 1g.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="../../images/product/fish/img_15.png" class="card-img-top" alt="Product 4" />
+                    <div class="card-body">
+                        <h5 class="card-title">TOP 03</h5>
+                        <p class="card-text">
+                            Cá giống 1 - 5g.
+                        </p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="../../images/product/fish/img_16.png" class="card-img-top" alt="Product 5" />
+                    <div class="card-body">
+                        <h5 class="card-title">TOP 04</h5>
+                        <p class="card-text">
+                            Cá giống 5 - 20g.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.5.4/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.related-products-slider').slick({
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            arrows: true,  // Enable navigation arrows
+            autoplay: true,
+            autoplaySpeed: 2000,
+            prevArrow: '<button type="button" class="slick-prev">Previous</button>',
+            nextArrow: '<button type="button" class="slick-next">Next</button>',
+            responsive: [
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        dots: true
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
+        });
+    });
+</script>
+</body>
+</html>
