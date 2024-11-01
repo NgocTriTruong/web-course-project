@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /*cuộn mượt mà */
+    font-family: Helvetica, Arial, sans-serif; /*set font chữ cho cả website , chữ không có chân*/
+}
+
+.row {
+    width: 1220px;
+    margin: 0 auto;
+}
+
+.col {
+    width: 272px;
+}
+
+.col .product-img {
+    transition: transform 0.8s ease; /* Điều chỉnh thời gian và hiệu ứng chuyển đổi */
+}
+
+.col .product-img:hover {
+    transform: scale(1.2);
+}
+
+.col .text-h {
+    color: #198754;
+}
+.col:hover .text-h {
+    color: red;
+}
+
+.col .text-p {
+    margin: 0 5px;
+}
