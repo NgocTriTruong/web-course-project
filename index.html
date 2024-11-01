@@ -1,44 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Web Project</title>
-    <link rel="stylesheet" href="assets/css/styles.css" />
-    <link rel="stylesheet" href="assets/bootstrap/bootstrap.min.css" />
-    <link rel="stylesheet" href="assets/fonts/font-awesome/all.css" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Web Project</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/bootstrap/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/fonts/font-awesome/all.css" />
 </head>
 
-  <body>
-  <header class="bg-white fixed-top">
-    <div class="container d-flex border-top justify-content-between align-items-center py-2">
-      <div class="logo d-flex align-items-center">
-        <img src="assets/images/logo/logo_shop.png" alt="Vina Logo" class="img-fluid" />
-      </div>
+<body>
+<div id="header" class="position-fixed"></div>
+<div id="body"></div>
+<!--  <div id="footer"></div>-->
 
-      <nav class="d-flex align-items-center gap-3">
-        <a href="#" class="text-dark text-decoration-none h5 mx-2">Giới Thiệu</a>
-        <a href="#" class="text-dark text-decoration-none h5 mx-2">Sản Phẩm</a>
-        <a href="#" class="text-dark text-decoration-none h5 mx-2">Tư Vấn Kỹ Thuật</a>
-        <a href="#" class="text-dark text-decoration-none h5 mx-2">Hệ Thống Phân Phối</a>
-        <a href="#" class="text-dark text-decoration-none h5 mx-2">Tuyển Dụng</a>
-        <a href="#" class="text-dark text-decoration-none h5 mx-2">Tin Tức</a>
-        <a href="#" class="text-dark text-decoration-none h5 mx-2">Hỗ Trợ Khách Hàng</a>
-      </nav>
+<script>
+  async function loadHTML(file, elementId) {
+    try {
+      const response = await fetch(file);
+      if (!response.ok) {
+        console.error(`Failed to load ${file}: ${response.status}`);
+        return;
+      }
+      const content = await response.text();
+      const element = document.getElementById(elementId);
+      if (element) {
+        element.innerHTML = content;
+      } else {
+        console.error(`Element with ID "${elementId}" not found.`);
+      }
+    } catch (error) {
+      console.error(`Error loading file "${file}": ${error}`);
+    }
+  }
 
-      <div class="search-bar d-flex bg-white rounded-5 px-2 align-items-center">
-        <input
-                type="text"
-                class="form-control border-0"
-                placeholder="Bạn cần tìm gì..."
-        />
-        <i class="fa-solid fa-magnifying-glass text-danger"></i>
-      </div>
-    </div>
-  </header>
+  document.addEventListener("DOMContentLoaded", () => {
+    loadHTML('/assets/html/header.html', 'header');
+    loadHTML('/assets/html/product-duck.html', 'body');
+  });
+  // loadHTML('assets/html/footer.html', 'footer');
+</script>
 
-    <!-- Optional JavaScript -->
-    <!-- Bootstrap Bundle with Popper -->
-    <script src="assets/bootstrap/bootstrap.bundle.min.js"></script>
-  </body>
+<!--<script src="assets/bootstrap/bootstrap.bundle.min.js"></script>-->
+</body>
 </html>
