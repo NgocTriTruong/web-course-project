@@ -49,19 +49,20 @@
 </div>
 
 <div class="containers my-4">
-    <div class="row justify-content-center">
-        <div class="col-md-3 mb-3">
-            <select class="form-select">
-                <option selected>Nhóm sản phẩm</option>
-                <option value="1">Vịt thịt</option>
-                <option value="2">Vịt trứng</option>
+    <div class="row justify-content-center mb-3">
+        <div class="col-md-3">
+            <select id="group" class="form-select">
+                <option value="" selected>Nhóm sản phẩm</option>
+                <option value="Vịt thịt">Vịt thịt</option>
+                <option value="Vịt trứng">Vịt trứng</option>
+                <option value="Tổng hợp">Tổng hợp</option>
             </select>
         </div>
         <div class="col-md-3">
-            <select class="form-select">
-                <option selected>Thương Hiệu</option>
-                <option value="1">Vina</option>
-                <option value="2">Happy</option>
+            <select id="brand" class="form-select">
+                <option value="" selected>Thương Hiệu</option>
+                <option value="Vina">Vina</option>
+                <option value="Happy">Happy</option>
             </select>
         </div>
     </div>
@@ -73,7 +74,7 @@
     <div class="product-page" id="page1">
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4  mb-5">
             <div class="col">
-                <div class="card d-flex align-items-center h-100 product-card">
+                <div class="card d-flex align-items-center h-100 product-card" data-group="Vịt thịt" data-brand="Vina">
                     <img src="/assets/images/product/duck/320.png" class="card-img-top w-100 mt-5" alt="Product 1">
                     <div class="card-body text-center">
                         <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
@@ -82,7 +83,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card d-flex align-items-center h-100 product-card">
+                <div class="card d-flex align-items-center h-100 product-card" data-group="Vịt thịt" data-brand="Vina">
                     <img src="/assets/images/product/duck/355.png" class="card-img-top w-100 mt-5" alt="Product 1">
                     <div class="card-body text-center">
                         <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
@@ -91,7 +92,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card d-flex align-items-center h-100 product-card">
+                <div class="card d-flex align-items-center h-100 product-card" data-group="Vịt thịt" data-brand="Vina">
                     <img src="/assets/images/product/duck/356.png" class="card-img-top w-100 mt-5" alt="Product 1">
                     <div class="card-body text-center">
                         <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
@@ -100,7 +101,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card d-flex align-items-center h-100 product-card">
+                <div class="card d-flex align-items-center h-100 product-card" data-group="Tổng hợp" data-brand="Vina">
                     <img src="/assets/images/product/duck/357.png" class="card-img-top w-100 mt-5" alt="Product 1">
                     <div class="card-body text-center">
                         <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
@@ -111,83 +112,83 @@
         </div>
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-5">
             <div class="col">
-                <div class="card d-flex align-items-center h-100 product-card">
-                    <img src="/assets/images/product/duck/320.png" class="card-img-top w-100 mt-5" alt="Product 1">
+                <div class="card d-flex align-items-center h-100 product-card" data-group="Tổng hợp" data-brand="Vina">
+                    <img src="/assets/images/product/duck/385.png" class="card-img-top w-100 mt-5" alt="Product 1">
                     <div class="card-body text-center">
                         <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
+                        <p class="card-text">Dùng cho vịt/ngan từ 01 đến 21 ngày tuổi.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card d-flex align-items-center h-100 product-card" data-group="Tổng hợp" data-brand="Vina">
+                    <img src="/assets/images/product/duck/386.png" class="card-img-top w-100 mt-5" alt="Product 1">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
+                        <p class="card-text">Dùng cho vịt/ngan từ 22 ngày tuổi đến xuất bán.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card d-flex align-items-center h-100 product-card" data-group="Vịt thịt" data-brand="Happy">
+                    <img src="/assets/images/product/duck/441.png" class="card-img-top w-100 mt-5" alt="Product 1">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">HAPPY - THỨC ĂN HỖN HỢP</h5>
                         <p class="card-text">Dùng cho vịt siêu thịt từ 01 đến 21 ngày tuổi.</p>
                     </div>
                 </div>
             </div>
             <div class="col">
-                <div class="card d-flex align-items-center h-100 product-card">
-                    <img src="/assets/images/product/duck/355.png" class="card-img-top w-100 mt-5" alt="Product 1">
+                <div class="card d-flex align-items-center h-100 product-card" data-group="Vịt thịt" data-brand="Happy">
+                    <img src="/assets/images/product/duck/442.png" class="card-img-top w-100 mt-5" alt="Product 1">
                     <div class="card-body text-center">
-                        <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
-                        <p class="card-text">Dùng cho vịt/ngan siêu thịt từ 01 đến 21 ngày tuổi.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card d-flex align-items-center h-100 product-card">
-                    <img src="/assets/images/product/duck/356.png" class="card-img-top w-100 mt-5" alt="Product 1">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
+                        <h5 class="card-title">HAPPY - THỨC ĂN HỖN HỢP</h5>
                         <p class="card-text">Dùng cho vịt thịt từ 22 ngày tuổi đến xuất bán.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card d-flex align-items-center h-100 product-card">
-                    <img src="/assets/images/product/duck/357.png" class="card-img-top w-100 mt-5" alt="Product 1">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
-                        <p class="card-text">Dùng cho vịt vỗ béo.</p>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-5">
             <div class="col">
-                <div class="card d-flex align-items-center h-100 product-card">
-                    <img src="/assets/images/product/duck/320.png" class="card-img-top w-100 mt-5" alt="Product 1">
+                <div class="card d-flex align-items-center h-100 product-card" data-group="Tổng hợp" data-brand="Happy">
+                    <img src="/assets/images/product/duck/443.png" class="card-img-top w-100 mt-5" alt="Product 1">
                     <div class="card-body text-center">
-                        <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
-                        <p class="card-text">Dùng cho vịt siêu thịt từ 01 đến 21 ngày tuổi.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card d-flex align-items-center h-100 product-card">
-                    <img src="/assets/images/product/duck/355.png" class="card-img-top w-100 mt-5" alt="Product 1">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
-                        <p class="card-text">Dùng cho vịt/ngan siêu thịt từ 01 đến 21 ngày tuổi.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card d-flex align-items-center h-100 product-card">
-                    <img src="/assets/images/product/duck/356.png" class="card-img-top w-100 mt-5" alt="Product 1">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
-                        <p class="card-text">Dùng cho vịt thịt từ 22 ngày tuổi đến xuất bán.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card d-flex align-items-center h-100 product-card">
-                    <img src="/assets/images/product/duck/357.png" class="card-img-top w-100 mt-5" alt="Product 1">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
+                        <h5 class="card-title">HAPPY - THỨC ĂN HỖN HỢP</h5>
                         <p class="card-text">Dùng cho vịt vỗ béo.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card d-flex align-items-center h-100 product-card" data-group="Vịt trứng" data-brand="Happy">
+                    <img src="/assets/images/product/duck/444.png" class="card-img-top w-100 mt-5" alt="Product 1">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">HAPPY - THỨC ĂN HỖN HỢP</h5>
+                        <p class="card-text">Dùng cho vịt đẻ siêu trứng.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card d-flex align-items-center h-100 product-card" data-group="Vịt thỉt" data-brand="Happy">
+                    <img src="/assets/images/product/duck/447.png" class="card-img-top w-100 mt-5" alt="Product 1">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">HAPPY - THỨC ĂN HỖN HỢP</h5>
+                        <p class="card-text">Dùng cho vịt thịt từ 01 ngày tuổi đến xuất bán.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card d-flex align-items-center h-100 product-card" data-group="Vịt trứng" data-brand="Happy">
+                    <img src="/assets/images/product/duck/445_Font.png" class="card-img-top w-100 mt-5" alt="Product 1">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">HAPPY - THỨC ĂN HỖN HỢP</h5>
+                        <p class="card-text">Dùng cho vịt đẻ thuơng phẩm.</p>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-5">
             <div class="col">
-                <div class="card d-flex align-items-center h-100 product-card">
+                <div class="card d-flex align-items-center h-100 product-card" data-group="Vịt thịt" data-brand="Vina">
                     <img src="/assets/images/product/duck/320.png" class="card-img-top w-100 mt-5" alt="Product 1">
                     <div class="card-body text-center">
                         <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
@@ -196,7 +197,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card d-flex align-items-center h-100 product-card">
+                <div class="card d-flex align-items-center h-100 product-card" data-group="Vịt thịt" data-brand="Vina">
                     <img src="/assets/images/product/duck/355.png" class="card-img-top w-100 mt-5" alt="Product 1">
                     <div class="card-body text-center">
                         <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
@@ -205,7 +206,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card d-flex align-items-center h-100 product-card">
+                <div class="card d-flex align-items-center h-100 product-card" data-group="Vịt thịt" data-brand="Vina">
                     <img src="/assets/images/product/duck/356.png" class="card-img-top w-100 mt-5" alt="Product 1">
                     <div class="card-body text-center">
                         <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
@@ -214,7 +215,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card d-flex align-items-center h-100 product-card">
+                <div class="card d-flex align-items-center h-100 product-card" data-group="Tổng hợp" data-brand="Vina">
                     <img src="/assets/images/product/duck/357.png" class="card-img-top w-100 mt-5" alt="Product 1">
                     <div class="card-body text-center">
                         <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
@@ -229,7 +230,7 @@
     <div class="product-page mb-5" id="page2">
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
             <div class="col">
-                <div class="card d-flex align-items-center h-100 product-card">
+                <div class="card d-flex align-items-center h-100 product-card" data-type="Tổng hợp" data-brand="Vina">
                     <img src="/assets/images/product/duck/358.png" class="card-img-top w-100 mt-5" alt="Product 1">
                     <div class="card-body text-center">
                         <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
@@ -238,7 +239,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card d-flex align-items-center h-100 product-card">
+                <div class="card d-flex align-items-center h-100 product-card" data-group="Vịt trứng" data-brand="Vina">
                     <img src="/assets/images/product/duck/370.png" class="card-img-top w-100 mt-5" alt="Product 1">
                     <div class="card-body text-center">
                         <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
@@ -247,20 +248,20 @@
                 </div>
             </div>
             <div class="col">
-                <div class="card d-flex align-items-center h-100 product-card">
+                <div class="card d-flex align-items-center h-100 product-card" data-group="Vịt trứng" data-brand="Vina">
                     <img src="/assets/images/product/duck/380.png" class="card-img-top w-100 mt-5" alt="Product 1">
                     <div class="card-body text-center">
                         <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
-                        <p class="card-text">Dùng cho vịt đẻ thuơng phẩm.</p>
+                        <p class="card-text">Dùng cho vịt đẻ thuơng phẩm (Miền Nam).</p>
                     </div>
                 </div>
             </div>
             <div class="col">
-                <div class="card d-flex align-items-center h-100 product-card">
-                    <img src="/assets/images/product/duck/357.png" class="card-img-top w-100 mt-5" alt="Product 1">
+                <div class="card d-flex align-items-center h-100 product-card" data-group="Vịt trứng" data-brand="Vina">
+                    <img src="/assets/images/product/duck/380_Font.png" class="card-img-top w-100 mt-5" alt="Product 1">
                     <div class="card-body text-center">
                         <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
-                        <p class="card-text">Dùng cho vịt vỗ béo.</p>
+                        <p class="card-text">Dùng cho vịt đẻ thương phẩm (Miền Bắc).</p>
                     </div>
                 </div>
             </div>
@@ -286,14 +287,13 @@
 <div class="pagination">
     <button class="page-button active" data-page="1">1</button>
     <button class="page-button" data-page="2">2</button>
-    <button class="page-button" data-page="3">3</button>
-    <button class="page-button" data-page="4">4</button>
 </div>
 
 <!-- Optional JavaScript -->
 <!-- Bootstrap Bundle with Popper -->
 <script src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 <script src="../scripts/pagination.js"></script>
+<script src="../scripts/filter.js"></script>
 
 </body>
 </html>

@@ -93,6 +93,20 @@ html, body {
    max-width: 30px;
 }
 
+.form-select {
+    font-size: 18px !important;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.col {
+    flex: 1 0 calc(25% - 20px); /* Each card takes up roughly 1/4th of the row width */
+    display: flex;
+}
+
 .product-card {
     min-height: 460px;
 }
