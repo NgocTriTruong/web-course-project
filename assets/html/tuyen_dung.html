@@ -7,94 +7,97 @@
   <link rel="stylesheet" href="../css/tuyendung.css">
 </head>
 <body>
-<!-- Banner Section -->
-<section class="banner">
-  <div class="banner-overlay">
-    <h1>TUYỂN DỤNG</h1>
-  </div>
-</section>
+<div class="container">
+  <!-- Banner Section -->
+  <section class="banner">
+    <div class="banner-overlay">
+      <h1>TUYỂN DỤNG</h1>
+    </div>
+  </section>
 
-<!-- Header Section -->
-<header class="header">
-  <nav class="navbar">
-    <a href="#">Chính Sách - Phúc Lợi</a>
-    <a href="#">Vị trí tuyển dụng</a>
-  </nav>
-</header>
+  <!-- Header Section -->
+  <header class="header">
+    <nav class="navbar">
+      <a href="#">Chính Sách - Phúc Lợi</a>
+      <a href="#">Vị trí tuyển dụng</a>
+    </nav>
+  </header>
 
-<!-- Benefits Section -->
-<section class="benefits">
-  <div class="benefit-card">
-    <img src="../images/icons_tuyendung/baohiem.png" alt="Bảo hiểm" class="benefit-icon">
-    <h3>Bảo hiểm, trợ cấp</h3>
-    <p>Tại VINAFEED, sức khỏe của bạn là điều chúng tôi quan tâm hàng đầu. Với các chế độ bảo hiểm được cung cấp, bạn có thể yên tâm khi hầu hết các bệnh sẽ được hỗ trợ.</p>
-  </div>
-  <div class="benefit-card">
-    <img src="../images/icons_tuyendung/luongthuong.png" alt="Lương thưởng" class="benefit-icon">
-    <h3>Lương, thưởng</h3>
-    <p>Người lao động được hưởng chế độ lương, thưởng theo quy chế rõ ràng. Người lao động có thể nhận phụ cấp, trợ cấp và các đãi ngộ theo tiêu chuẩn và địa điểm công việc.</p>
-  </div>
-  <div class="benefit-card">
-    <img src="../images/icons_tuyendung/phattrien.png" alt="Đào tạo" class="benefit-icon">
-    <h3>Đào tạo và phát triển</h3>
-    <p>Đào tạo và phát triển nguồn nhân lực là ưu tiên hàng đầu của ban lãnh đạo. Công ty hỗ trợ các khóa học nâng cao chuyên môn nghiệp vụ, quản lý, lãnh đạo cấp quốc tế.</p>
-  </div>
-</section>
+  <!-- "Chính Sách - Phúc Lợi" Header -->
+  <h2>Chính Sách - Phúc Lợi</h2>
 
-<!-- Job Listings Section -->
-<section class="job-listings">
-  <h2>Vị trí ứng tuyển</h2>
-  <p>Để đáp ứng nhân sự cho nhà máy thức ăn chăn nuôi Vina, hiện nay chúng tôi đang có nhu cầu tuyển dụng nhân sự cho vị trí:</p>
+  <!-- Benefits Section -->
+  <section class="benefits">
+    <div class="benefit-card">
+      <h3>Bảo hiểm, trợ cấp</h3>
+      <p>Tại VINAFEED, sức khỏe của bạn là điều chúng tôi quan tâm hàng đầu. Với các chế độ bảo hiểm được cung cấp, bạn có thể yên tâm khi hầu hết các bệnh sẽ được hỗ trợ.</p>
+    </div>
+    <div class="benefit-card">
+      <h3>Lương, thưởng</h3>
+      <p>Người lao động được hưởng chế độ lương, thưởng theo quy chế rõ ràng. Người lao động có thể nhận phụ cấp, trợ cấp và các đãi ngộ theo tiêu chuẩn và địa điểm công việc.</p>
+    </div>
+    <div class="benefit-card">
+      <h3>Đào tạo và phát triển</h3>
+      <p>Đào tạo và phát triển nguồn nhân lực là ưu tiên hàng đầu của ban lãnh đạo. Công ty hỗ trợ các khóa học nâng cao chuyên môn nghiệp vụ, quản lý, lãnh đạo cấp quốc tế.</p>
+    </div>
+  </section>
 
-  <div class="search-bar">
-    <input type="text" id="searchInput" placeholder="Từ khóa tìm kiếm">
-    <select id="locationFilter">
-      <option value="">Chọn địa điểm làm việc</option>
-      <option value="Tỉnh Tây Ninh">Tỉnh Tây Ninh</option>
-      <option value="Tỉnh Đồng Nai">Tỉnh Đồng Nai</option>
-      <option value="Tỉnh Hà Nam">Tỉnh Hà Nam</option>
-    </select>
-    <button onclick="searchJobs()">Tìm nhanh</button>
-  </div>
+  <!-- "Vị Trí Ứng Tuyển" Header -->
+  <h2>Vị Trí Ứng Tuyển</h2>
 
-  <table class="job-table">
-    <thead>
-    <tr>
-      <th>Vị trí</th>
-      <th>Nơi làm việc</th>
-      <th></th>
-    </tr>
-    </thead>
-    <tbody id="jobList">
-    <tr>
-      <td>THÔNG BÁO TUYỂN DỤNG - VINAFARM</td>
-      <td>Tỉnh Tây Ninh</td>
-      <td><button class="detail-button">Xem chi tiết</button></td>
-    </tr>
-    <tr>
-      <td>Tuyển Dụng Nhân Viên Vận Hành Máy, Công Nhân Sản Xuất</td>
-      <td>Tỉnh Đồng Nai</td>
-      <td><button class="detail-button">Xem chi tiết</button></td>
-    </tr>
-    <tr>
-      <td>TUYỂN DỤNG NHÂN VIÊN PHÒNG KINH DOANH</td>
-      <td>Tỉnh Hà Nam</td>
-      <td><button class="detail-button">Xem chi tiết</button></td>
-    </tr>
-    <tr>
-      <td>External Relations 2</td>
-      <td>Tỉnh Đồng Nai</td>
-      <td><button class="detail-button">Xem chi tiết</button></td>
-    </tr>
-    <tr>
-      <td>Assistant Brand Manager 2</td>
-      <td>Tỉnh Đồng Nai</td>
-      <td><button class="detail-button">Xem chi tiết</button></td>
-    </tr>
-    </tbody>
-  </table>
-</section>
+  <!-- Elevated Job Listings Section -->
+  <section class="job-listings">
+    <p>Để đáp ứng nhân sự cho nhà máy thức ăn chăn nuôi Vina, hiện nay chúng tôi đang có nhu cầu tuyển dụng nhân sự cho vị trí:</p>
 
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Từ khóa tìm kiếm">
+      <select id="locationFilter">
+        <option value="">Chọn địa điểm làm việc</option>
+        <option value="Tỉnh Tây Ninh">Tỉnh Tây Ninh</option>
+        <option value="Tỉnh Đồng Nai">Tỉnh Đồng Nai</option>
+        <option value="Tỉnh Hà Nam">Tỉnh Hà Nam</option>
+      </select>
+      <button onclick="searchJobs()">Tìm nhanh</button>
+    </div>
+
+    <table class="job-table">
+      <thead>
+      <tr>
+        <th>Vị trí</th>
+        <th>Nơi làm việc</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody id="jobList">
+      <tr>
+        <td>THÔNG BÁO TUYỂN DỤNG - VINAFARM</td>
+        <td>Tỉnh Tây Ninh</td>
+        <td><button class="detail-button">Xem chi tiết</button></td>
+      </tr>
+      <tr>
+        <td>Tuyển Dụng Nhân Viên Vận Hành Máy, Công Nhân Sản Xuất</td>
+        <td>Tỉnh Đồng Nai</td>
+        <td><button class="detail-button">Xem chi tiết</button></td>
+      </tr>
+      <tr>
+        <td>TUYỂN DỤNG NHÂN VIÊN PHÒNG KINH DOANH</td>
+        <td>Tỉnh Hà Nam</td>
+        <td><button class="detail-button">Xem chi tiết</button></td>
+      </tr>
+      <tr>
+        <td>External Relations 2</td>
+        <td>Tỉnh Đồng Nai</td>
+        <td><button class="detail-button">Xem chi tiết</button></td>
+      </tr>
+      <tr>
+        <td>Assistant Brand Manager 2</td>
+        <td>Tỉnh Đồng Nai</td>
+        <td><button class="detail-button">Xem chi tiết</button></td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+</div>
 <script src="../js/tuyendung.js"></script>
 </body>
 </html>
