@@ -1,3 +1,4 @@
+/* Reset */
 html, body {
     margin: 0;
     padding: 0;
@@ -6,6 +7,11 @@ html, body {
 
 body {
     font-family: Arial, sans-serif;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth; /* Native smooth scrolling */
 }
 
 /* Main Container with max-width */
@@ -72,7 +78,7 @@ h2 {
 .benefits {
     display: flex;
     justify-content: center;
-    gap: 30px;
+    gap: 50px;
     padding: 20px;
     background-color: #f9f9f9;
 }
@@ -106,6 +112,15 @@ h2 {
     margin-bottom: 20px;
 }
 
+.job-listings p{
+    text-align: center;
+    font-size: 16px;
+    line-height: 20px;
+    animation-delay: 0.2s;
+    margin-bottom: 35px;
+    margin-block: inherit;
+}
+
 .search-bar {
     display: flex;
     justify-content: center;
@@ -127,14 +142,6 @@ h2 {
     border: none;
     cursor: pointer;
 }
-.job-listings p{
-    text-align: center;
-    font-size: 16px;
-    line-height: 20px;
-    animation-delay: 0.2s;
-    margin-bottom: 35px;
-    margin-block: inherit;
-}
 
 .job-table {
     width: 100%;
@@ -153,4 +160,25 @@ h2 {
     color: white;
     border: none;
     cursor: pointer;
+}
+
+/* Pagination Styles */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination button {
+    padding: 8px 12px;
+    margin: 0 5px;
+    background-color: #0073e6;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.pagination button.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
 }
