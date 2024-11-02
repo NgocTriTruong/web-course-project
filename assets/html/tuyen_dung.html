@@ -18,32 +18,35 @@
   <!-- Header Section -->
   <header class="header">
     <nav class="navbar">
-      <a href="#">Chính Sách - Phúc Lợi</a>
-      <a href="#">Vị trí tuyển dụng</a>
+      <a href="#policies">Chính Sách - Phúc Lợi</a>
+      <a href="#job-listings">Vị trí tuyển dụng</a>
     </nav>
   </header>
 
   <!-- "Chính Sách - Phúc Lợi" Header -->
-  <h2>Chính Sách - Phúc Lợi</h2>
+  <h2 id="policies">Chính Sách - Phúc Lợi</h2>
 
   <!-- Benefits Section -->
   <section class="benefits">
     <div class="benefit-card">
+      <img src="../images/icons_tuyendung/baohiem.png" alt="Bảo hiểm" class="benefit-icon">
       <h3>Bảo hiểm, trợ cấp</h3>
       <p>Tại VINAFEED, sức khỏe của bạn là điều chúng tôi quan tâm hàng đầu. Với các chế độ bảo hiểm được cung cấp, bạn có thể yên tâm khi hầu hết các bệnh sẽ được hỗ trợ.</p>
     </div>
     <div class="benefit-card">
+      <img src="../images/icons_tuyendung/luongthuong.png" alt="Bảo hiểm" class="benefit-icon">
       <h3>Lương, thưởng</h3>
       <p>Người lao động được hưởng chế độ lương, thưởng theo quy chế rõ ràng. Người lao động có thể nhận phụ cấp, trợ cấp và các đãi ngộ theo tiêu chuẩn và địa điểm công việc.</p>
     </div>
     <div class="benefit-card">
+      <img src="../images/icons_tuyendung/phattrien.png" alt="Bảo hiểm" class="benefit-icon">
       <h3>Đào tạo và phát triển</h3>
       <p>Đào tạo và phát triển nguồn nhân lực là ưu tiên hàng đầu của ban lãnh đạo. Công ty hỗ trợ các khóa học nâng cao chuyên môn nghiệp vụ, quản lý, lãnh đạo cấp quốc tế.</p>
     </div>
   </section>
 
   <!-- "Vị Trí Ứng Tuyển" Header -->
-  <h2>Vị Trí Ứng Tuyển</h2>
+  <h2 id="job-listings">Vị Trí Ứng Tuyển</h2>
 
   <!-- Elevated Job Listings Section -->
   <section class="job-listings">
@@ -60,7 +63,7 @@
       <button onclick="searchJobs()">Tìm nhanh</button>
     </div>
 
-    <table class="job-table">
+    <table class="job-table" id="jobTable">
       <thead>
       <tr>
         <th>Vị trí</th>
@@ -69,33 +72,11 @@
       </tr>
       </thead>
       <tbody id="jobList">
-      <tr>
-        <td>THÔNG BÁO TUYỂN DỤNG - VINAFARM</td>
-        <td>Tỉnh Tây Ninh</td>
-        <td><button class="detail-button">Xem chi tiết</button></td>
-      </tr>
-      <tr>
-        <td>Tuyển Dụng Nhân Viên Vận Hành Máy, Công Nhân Sản Xuất</td>
-        <td>Tỉnh Đồng Nai</td>
-        <td><button class="detail-button">Xem chi tiết</button></td>
-      </tr>
-      <tr>
-        <td>TUYỂN DỤNG NHÂN VIÊN PHÒNG KINH DOANH</td>
-        <td>Tỉnh Hà Nam</td>
-        <td><button class="detail-button">Xem chi tiết</button></td>
-      </tr>
-      <tr>
-        <td>External Relations 2</td>
-        <td>Tỉnh Đồng Nai</td>
-        <td><button class="detail-button">Xem chi tiết</button></td>
-      </tr>
-      <tr>
-        <td>Assistant Brand Manager 2</td>
-        <td>Tỉnh Đồng Nai</td>
-        <td><button class="detail-button">Xem chi tiết</button></td>
-      </tr>
+      <!-- Job listings will be dynamically added here -->
       </tbody>
     </table>
+
+    <div class="pagination" id="pagination"></div>
   </section>
 </div>
 <script src="../js/tuyendung.js"></script>
