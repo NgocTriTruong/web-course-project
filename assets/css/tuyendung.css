@@ -127,6 +127,14 @@ h2 {
     border: none;
     cursor: pointer;
 }
+.job-listings p{
+    text-align: center;
+    font-size: 16px;
+    line-height: 20px;
+    animation-delay: 0.2s;
+    margin-bottom: 35px;
+    margin-block: inherit;
+}
 
 .job-table {
     width: 100%;
