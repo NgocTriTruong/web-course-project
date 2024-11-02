@@ -7,28 +7,6 @@ html, body {
     font-family: sans-serif, Tahoma;
 }
 
-.container {
-    width: 1200px;
-    padding: 10px 0;
-    color: white;
-}
-
-.logo {
-    height: 80%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-left: 20px;
-}
-
-.logo img {
-    height: 100%;
-}
-
-.search-bar {
-    border: 1px solid black;
-}
-
 #background-section {
     position: relative;
     background-image: url("/Project_Web_2024/assets/images/banner/banner1.png");
