@@ -1,0 +1,128 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.header {
+    background-color: #0073e6;
+    padding: 10px;
+    /* justify-content: center; */
+    justify-items: center;
+    align-items: center;
+}
+
+/* Banner Section */
+.banner {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    background-image: url('../images/icons_tuyendung/banner.png'); /* Replace with the path to your banner image */
+    background-size: cover;
+    background-position: center;
+}
+
+.banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Dark overlay for text readability */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner-overlay h1 {
+    color: white;
+    font-size: 48px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+
+.navbar a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.benefits {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.benefit-card {
+    width: 30%;
+    background-color: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.benefit-card h3 {
+    color: #e74c3c;
+    margin-bottom: 10px;
+}
+
+.benefit-card p {
+    font-size: 14px;
+    color: #333;
+}
+
+.job-listings {
+    padding: 20px;
+    text-align: center;
+}
+
+.search-bar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.search-bar input,
+.search-bar select {
+    padding: 8px;
+    margin: 0 5px;
+    font-size: 14px;
+}
+
+.search-bar button {
+    padding: 8px 15px;
+    font-size: 14px;
+    background-color: #0073e6;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.job-table {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+.job-table th, .job-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.detail-button {
+    padding: 5px 10px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
