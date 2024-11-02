@@ -1,0 +1,70 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /*cuộn mượt mà */
+    font-family: Helvetica, Arial, sans-serif; /*set font chữ cho cả website , chữ không có chân*/
+}
+
+.content {
+    height: 100%;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.p_bold {
+    width: 200px;
+}
+
+.order {
+    height: 50px;
+    width: 250px;
+    border-radius: 10px;
+    background-color: red;
+    margin-right: 10px;
+    line-height: 50px;
+}
+
+i {
+    font-size: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+    margin-right: 15px;
+}
+
+.button .btn_h:hover {
+    background-color: blue;
+}
+
+.order .text_order, 
+.call .text_call {
+    line-height: 50px;
+    margin-left: 10px;
+}
+
+.call {
+    height: 50px;
+    width: 300px;
+    border-radius: 10px;
+    border: 1px solid blue;
+    margin-left: 10px;
+    line-height: 50px;
+}
+
+.line_white {
+    width: 25px;
+    height: 7px;
+    background-color: black;
+    margin: auto 0;
+    right: 0;
+}
+
+.between {
+    justify-content: space-between;
+}

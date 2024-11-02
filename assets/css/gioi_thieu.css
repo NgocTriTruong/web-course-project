@@ -1,0 +1,93 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /*cuộn mượt mà */
+    font-family: Helvetica, Arial, sans-serif; /*set font chữ cho cả website , chữ không có chân*/
+}
+
+.content {
+    height: 100%;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.content .img_cty img {
+    border-radius: 20px;
+}
+
+.p {
+    text-align: justify;
+}
+
+.content .muc_tieu .text_p {
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+.content .muc_tieu span {
+    text-align: left;
+}
+
+.container-fluid {
+    background-color: #e1f1e1;
+}
+
+.formed .year_number {
+    height: 80px;
+    width: 100%;
+    margin: 10px;
+}
+
+.formed .year_number_bg {
+    width: 100%;
+    margin: 10px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px 20px;
+}
+
+.formed .lich_su_img {
+    margin-bottom: -50px;
+}
+
+.chien_luoc img {
+    border-radius: 10px;
+}
+
+.line_red {
+    border: 1px solid red;
+}
+
+.line_blue {
+    border: 1px solid blue;
+}
+
+.line_gray {
+    border: 1px solid rgba(128, 128, 128, 0.2);
+}
+
+.quan_diem img {
+    border-radius: 10px;
+}
+
+.quan_diem i {
+    font-size: 25px;
+}
+
+.quan_diem .line_white {
+    border: 1px solid rgb(173, 172, 172);
+    margin: 20px 0;
+}
+
+.san_xuat img {
+    border-radius: 15px;
+}
+
+.san_xuat .number_sx {
+    height: 350px;
+    background-color: #e1f1e1;
+}
