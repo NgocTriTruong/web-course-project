@@ -40,7 +40,7 @@ img {
 
 #header .content {
     height: 100%;
-    width: 95%;
+    width: 100%;
     margin: 0 auto;
 }
 
@@ -107,7 +107,43 @@ img {
     float: left;
 }
 
+#header .content .i_right_number {
+    font-size: 20px;
+}
+
 #header .content .user {
-    background-color: rgba(128, 128, 128, 0.1);
+    height: 50px;
+    width: 50px;
+    margin-top: -14px;
+    background-color: #5a191cec;
     border-radius: 50%;
+    cursor: pointer;
+}
+
+#header .content .user_hover {
+    display: none;
+}
+
+#header .content .user:hover .user_hover {
+    display: block;
+    width: 140px;
+    font-size: 14px;
+    background-color: #fff;
+    color: #333;
+    margin-top: 20px;
+    margin-left: -30px;
+    text-align: center;
+    border-bottom: 1px solid #eeeeee;
+
+}
+
+#header .content .cart {
+    width: 120px;
+    margin-left: -25px;
+    background-color: #5a191cec;
+    justify-content: center;
+    text-align: center;
+    margin-top: -14px;
+    border-radius: 30px;
+    cursor: pointer;
 }
