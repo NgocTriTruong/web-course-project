@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Web Project</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/bootstrap/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/fonts/font-awesome/all.css" />
+</head>
+
+<body>
+<div id="header" class="position-fixed"></div>
+<div id="body"></div>
+<!--  <div id="footer"></div>-->
+
+<script>
+  async function loadHTML(file, elementId) {
+    try {
+      const response = await fetch(file);
+      if (!response.ok) {
+        console.error(`Failed to load ${file}: ${response.status}`);
+        return;
+      }
+      const content = await response.text();
+      const element = document.getElementById(elementId);
+      if (element) {
+        element.innerHTML = content;
+      } else {
+        console.error(`Element with ID "${elementId}" not found.`);
+      }
+    } catch (error) {
+      console.error(`Error loading file "${file}": ${error}`);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    loadHTML('/assets/html/header.html', 'header');
+    loadHTML('/assets/html/product-duck.html', 'body');
+  });
+  // loadHTML('assets/html/footer.html', 'footer');
+</script>
+
+<!--<script src="assets/bootstrap/bootstrap.bundle.min.js"></script>-->
+</body>
+</html>

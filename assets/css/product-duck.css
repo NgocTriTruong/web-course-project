@@ -1,0 +1,150 @@
+html, body {
+    padding: 0;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 13px;
+    font-family: sans-serif, Tahoma;
+}
+
+.container {
+    width: 1200px;
+    padding: 10px 0;
+    color: white;
+}
+
+.logo {
+    height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 20px;
+}
+
+.logo img {
+    height: 100%;
+}
+
+.search-bar {
+    border: 1px solid black;
+}
+
+#background-section {
+    position: relative;
+    background-image: url("/Project_Web_2024/assets/images/banner/banner1.png");
+    background-position: center;
+    height: 500px; /* Adjust height as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#background-section h1 {
+    font-size: 60px;
+    color: transparent;
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    font-weight: bold;
+    position: relative;
+    z-index: 1;
+}
+
+/* Add a transparent overlay effect */
+#background-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); /* Adjust transparency */
+    z-index: 0;
+}
+
+@supports(-webkit-text-stroke: 2px white) {
+    .outline {
+        color: transparent;
+        -webkit-text-stroke: 2px white; /* Increased stroke width */
+        text-shadow: none;
+        font-size: 80px; /* Increased font size */
+        font-weight: bold;
+        letter-spacing: 5px;
+    }
+}
+
+.btn {
+    width: 180px;
+    height: 60px;
+    font-size: 14px !important;
+    text-transform: uppercase;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+/*.btn-danger {*/
+/*    background-color: #dc3545;*/
+/*    border-color: #dc3545;*/
+/*}*/
+
+.icon-image {
+   max-width: 30px;
+}
+
+.form-select {
+    font-size: 18px !important;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.col {
+    flex: 1 0 calc(25% - 20px); /* Each card takes up roughly 1/4th of the row width */
+    display: flex;
+}
+
+.product-card {
+    min-height: 460px;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 310px;    /* Set a fixed height */
+    object-fit: cover;
+}
+
+.card-text {
+    font-size: 16px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.page-button {
+    border: none;
+    background-color: transparent;
+    color: #333;
+    font-size: 16px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.page-button:hover {
+    background-color: #e0e0e0; /* Light gray background on hover */
+}
+
+.page-button.active {
+    background-color: #3a87ff; /* Blue background for the active page */
+    color: #fff; /* White text for active page */
+}
