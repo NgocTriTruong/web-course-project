@@ -91,3 +91,16 @@ html {
     height: 350px;
     background-color: #e1f1e1;
 }
+
+.thanh_tich_slider {
+    width: 1170px;
+    overflow: hidden;
+}
+
+.thanh_tich_slider .thanh_tich_number {
+    width: 350px;
+    height: 350px;
+    justify-content: center;
+    border: 1px solid #e1f1e1;
+    border-radius: 10px;
+}
