@@ -71,8 +71,8 @@ html, body {
 }
 
 .btn-primary.active {
-    background-color: #f4f49d !important;
-    border-color: #f4f49d !important;
+    background-color: #fcae18 !important;
+    border-color: #fcae18 !important;
 }
 
 .icon-image {
@@ -127,7 +127,7 @@ html, body {
 }
 
 .page-button:hover {
-    background-color: #e0e0e0; /* Light gray background on hover */
+    background-color: #fcae18; /* Light gray background on hover */
 }
 
 .page-button.active {
