@@ -85,4 +85,11 @@ html, body {
 .news-detail-btn {
     width: 15%;
     font-weight: bold !important;
+    background-color: #9dea9d !important;
+    border-color: #9dea9d !important;
+    color: black !important;
+}
+
+.news-detail-btn:hover {
+    background-color: #c1f1bf !important;
 }
