@@ -42,8 +42,8 @@ h2 {
 .banner {
     position: relative;
     width: 100%;
-    height: 300px;
-    background-image: url('../images/icons_tuyendung/banner.png');
+    height: 300px; /* Adjust the height as needed */
+    background-image: url('../images/icons_tuyendung/banner.png'); /* Add the path to your background image */
     background-size: cover;
     background-position: center;
 }
@@ -54,19 +54,23 @@ h2 {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.banner-overlay h1 {
-    color: white;
-    font-size: 48px;
+/* Outlined Text Style */
+.outlined-text {
+    font-size: 60px; /* Adjust the size as needed */
     font-weight: bold;
+    color: transparent;
+    -webkit-text-stroke: 2px white; /* White outline around text */
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 10px; /* Adjust spacing between letters */
 }
+
+
 
 .navbar a {
     color: white;
