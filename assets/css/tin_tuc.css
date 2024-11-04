@@ -93,3 +93,31 @@ html, body {
 .news-detail-btn:hover {
     background-color: #c1f1bf !important;
 }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.page-button {
+    border: none;
+    background-color: transparent;
+    color: #333;
+    font-size: 16px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.page-button:hover {
+    background-color: #e0e0e0; /* Light gray background on hover */
+}
+
+.page-button.active {
+    background-color: #9dea9d; /* Blue background for the active page */
+    color: black; /* White text for active page */
+}
