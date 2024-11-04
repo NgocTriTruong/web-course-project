@@ -47,7 +47,7 @@ img {
 #header .content ul {
     margin: 0;
     padding: 0;
-    margin-left: 90px;
+    margin-left: 70px;
 }
 
 #header .content ul li {
@@ -145,5 +145,9 @@ img {
     text-align: center;
     margin-top: -14px;
     border-radius: 30px;
+    cursor: pointer;
+}
+
+.pointer {
     cursor: pointer;
 }
