@@ -4,12 +4,14 @@ $(document).ready(function () {
     const currentCategory = match ? match[1] : null;
     const currentPage = match && match[2] ? parseInt(match[2], 10) : 1; // Defaults to page 1 if no number
 
+    console.log('Matched URL parts:', match);
+    console.log('Current Category:', currentCategory);
+    console.log('Current Page:', currentPage);
+
     // Highlight the active page button based on the current category and page
     $('.page-button').each(function () {
         const page = $(this).data('page');
         const category = $(this).data('category');
-
-        console.log('Checking button with category:', category, 'and page:', page);
 
         if (category === currentCategory && page === currentPage) {
             $(this).addClass('active');

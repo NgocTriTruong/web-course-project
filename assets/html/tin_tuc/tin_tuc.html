@@ -4,9 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tin tức</title>
-    <link rel="stylesheet" href="../css/tin_tuc.css" />
-    <link rel="stylesheet" href="../bootstrap/bootstrap.min.css" />
-    <link rel="stylesheet" href="../fonts/font-awesome/all.css" />
+    <link rel="stylesheet" href="../../css/tin_tuc.css" />
+    <link rel="stylesheet" href="../../bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../fonts/font-awesome/all.css" />
+    <script src="/assets/scripts/jquery-3.7.1.min.js"></script>
 </head>
 <body>
 <main class="d-block">
@@ -15,7 +16,7 @@
     </section>
 
     <div class="container my-5">
-        <div class="row">
+        <div class="trending-news row">
             <div class="col-md-8 mb-4">
                 <div class="card news-card">
                     <img src="/assets/images/news/news1.jpg" class="card-img-top" alt="News Image">
@@ -86,13 +87,18 @@
                 </div>
             </div>
         </div>
+    </div>
 
+    <div class="pagination">
+        <button class="page-button" data-page="1" data-category="tin_tuc">1</button>
+        <button class="page-button" data-page="2" data-category="tin_tuc">2</button>
     </div>
 
 </main>
 
 <!-- Optional JavaScript -->
 <!-- Bootstrap Bundle with Popper -->
-<script src="../bootstrap/bootstrap.bundle.min.js"></script>
+<script src="../../bootstrap/bootstrap.bundle.min.js"></script>
+<script src="../../scripts/pagination.js"></script>
 </body>
 </html>
