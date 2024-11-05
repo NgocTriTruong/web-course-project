@@ -15,7 +15,7 @@ html {
 }
 
 /* Main Container with max-width */
-.container {
+.tuyendung {
     max-width: 1200px; /* Set max width for entire webpage */
     margin: 0 auto; /* Center the container */
     padding: 0 20px; /* Add padding for smaller screens */
@@ -30,8 +30,8 @@ h2 {
     margin: 20px 0;
 }
 
-.header {
-    background-color: #0be855;
+.header-tuyendung {
+    background-color: #94b83d;
     padding: 10px;
     display: flex;
     justify-content: center;
@@ -39,7 +39,7 @@ h2 {
 }
 
 /* Banner Section */
-.banner {
+.banner_tuyendung {
     position: relative;
     width: 100%;
     height: 300px; /* Adjust the height as needed */
@@ -48,7 +48,7 @@ h2 {
     background-position: center;
 }
 
-.banner-overlay {
+.banner-overlay-tuyendung {
     position: absolute;
     top: 0;
     left: 0;
@@ -61,8 +61,8 @@ h2 {
 }
 
 /* Outlined Text Style */
-.outlined-text {
-    font-size: 60px; /* Adjust the size as needed */
+.outlined-text-tuyendung {
+    font-size: 100px; /* Adjust the size as needed */
     font-weight: bold;
     color: transparent;
     -webkit-text-stroke: 2px white; /* White outline around text */
@@ -72,7 +72,7 @@ h2 {
 
 
 
-.navbar a {
+.navbar-tuyendung a {
     color: white;
     margin: 0 15px;
     text-decoration: none;
