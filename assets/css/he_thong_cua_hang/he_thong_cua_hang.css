@@ -14,11 +14,11 @@ html {
 }
 
 .cua_hang .cua_hang_left {
-
+    border-radius: 10px;
 }
 
 .cua_hang .cua_hang_right {
-
+    border-radius: 10px;
 }
 
 .cua_hang .cua_hang_right .cua_hang_right_80 {
