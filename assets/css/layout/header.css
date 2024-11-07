@@ -13,7 +13,6 @@ li {
     list-style-type: none; /*loại bỏ dấu chấm tròn*/
     font-weight: bold;
     display: flex;
-
 }
 
 a {
@@ -21,10 +20,6 @@ a {
     color: black; /*màu chữ*/
     width: 100%;
     height: 100%;
-}
-
-img {
-    margin-top: 9px;
 }
 
 #header {
@@ -89,7 +84,11 @@ img {
     background-color: rgba(128, 128, 128, 0.1);
 }
 
-.icon {
+#header .content .san-pham img{
+    margin-top: 9px;
+}
+
+#header .content .san-pham .icon {
     display: inline-block;
     height: 40px;
     width: 40px;
@@ -103,7 +102,7 @@ img {
     margin-top: 3px;
 }
 
-.text_line_2 {
+#header .text_line_2 {
     float: left;
 }
 
