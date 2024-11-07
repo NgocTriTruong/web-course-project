@@ -35,7 +35,7 @@ h2 {
 
 /* Product Description Styling */
 p {
-    font-size: 16px;
+    font-size: 18px;
     color: #333;
     margin-top: 10px;
     font-weight: bold;
@@ -78,6 +78,8 @@ p {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    width: 100%;
+    padding: 15px 0 0 0;
 }
 
 .nav-tabs .nav-link {
@@ -209,6 +211,7 @@ p {
     background-color: #007bff;
     color: white;
     font-size: 16px;
+    font-weight: bold;
     padding: 10px 20px;
 }
 
@@ -230,4 +233,35 @@ p {
     line-height: 37px;
     font-weight: bold;
     color: #0056b3;
+}
+
+.row{
+    background-color: #f7f3f3;
+}
+
+.contact-info {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+{
+    margin: 0;
+    .contact-info p
+}
+
+.social-icons {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    gap: 10px;
+}
+
+.social-icons a {
+    color: #333;
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+.social-icons a:hover {
+    color: #007bff;
 }
