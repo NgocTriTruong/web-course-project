@@ -1,0 +1,188 @@
+/* Reset */
+html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth; /* Native smooth scrolling */
+}
+
+/* Main Container with max-width */
+.tuyendung {
+    max-width: 1200px; /* Set max width for entire webpage */
+    margin: 0 auto; /* Center the container */
+    padding: 0 20px; /* Add padding for smaller screens */
+}
+
+/* Centered H2 Headers */
+h2 {
+    font-size: 40px;
+    line-height: 60px;
+    font-weight: bold;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.header-tuyendung {
+    background-color: #94b83d;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Banner Section */
+.banner_tuyendung {
+    position: relative;
+    width: 100%;
+    height: 300px; /* Adjust the height as needed */
+    background-image: url('../images/icons_tuyendung/banner.png'); /* Add the path to your background image */
+    background-size: cover;
+    background-position: center;
+}
+
+.banner-overlay-tuyendung {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Outlined Text Style */
+.outlined-text-tuyendung {
+    font-size: 100px; /* Adjust the size as needed */
+    font-weight: bold;
+    color: transparent;
+    -webkit-text-stroke: 2px white; /* White outline around text */
+    text-transform: uppercase;
+    letter-spacing: 10px; /* Adjust spacing between letters */
+}
+
+
+
+.navbar-tuyendung a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.benefits {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.benefit-card {
+    width: 250px;
+    background-color: white;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+.benefit-card h3 {
+    color: #e74c3c;
+    margin-bottom: 10px;
+}
+
+.benefit-card p {
+    font-size: 15px;
+    line-height: 23px;
+    color: #333;
+}
+
+/* Elevated Vị Trí Ứng Tuyển Section */
+.job-listings {
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Elevated shadow effect for entire section */
+    margin-bottom: 20px;
+}
+
+.job-listings p{
+    text-align: center;
+    font-size: 16px;
+    line-height: 20px;
+    animation-delay: 0.2s;
+    margin-bottom: 35px;
+    margin-block: inherit;
+}
+
+.search-bar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.search-bar input,
+.search-bar select {
+    padding: 8px;
+    margin: 0 5px;
+    font-size: 14px;
+}
+
+.search-bar button {
+    padding: 8px 15px;
+    font-size: 14px;
+    background-color: #0073e6;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.job-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.job-table th, .job-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.detail-button {
+    padding: 5px 10px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+/* Pagination Styles */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination button {
+    padding: 8px 12px;
+    margin: 0 5px;
+    background-color: #0073e6;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.pagination button.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
