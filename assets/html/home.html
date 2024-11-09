@@ -12,32 +12,30 @@
     <link rel="stylesheet" href="/assets/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
 
     <style>
-        .image {
-            background-size: 100% 100%;
-            box-shadow: 20px 20px 10px gray;
-            animation: slider 5s linear infinite;
+        .slide-show {
+            /* position: relative; */
+            width: 100%;
+            height: 650px;
+            overflow: hidden;
         }
 
-        @keyframes slider {
-            0% {
-                background-image: url('/assets/images/banner/Home_video_con_heo_1920x1000.mp4');
-            }
-            30% {
-                background-image: url('/assets/images/banner/banner1.png');
-            }
-            60% {
-                background-image: url('/assets/images/banner/Home_Banner_Web.jpg');
-            }
-            100% {
-                background-image: url('/assets/images/banner/Home_banner_web_2.jpg');
-            }
+        .list-image {
+            display: flex;
+            width: 1512px;
+            height: 100%;
+            /* animation: slide 7s infinite; */
         }
-
     </style>
 </head>
 <body>
-    <div class="div" style="width: 100%; height: 650px;">
-        <div class="image"></div>
+    <div class="slide-show">
+        <div class="list-image">
+            <video controls autoplay>
+                <source src="/assets/images/banner/Home_video_con_heo_1920x1000.mp4" type="video/mp4">
+            </video>
+            <img src="/assets/images/banner/Home_Banner_Web.jpg" alt="banner1">
+            <img src="/assets/images/banner/Home_banner_web_2.jpg" alt="banner2">
+        </div>
     </div>
     <main>
         <div class="container">
