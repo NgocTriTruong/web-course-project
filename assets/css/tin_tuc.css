@@ -9,7 +9,8 @@ html, body {
 
 #background-section {
     position: relative;
-    background-image: url("/Project_Web_2024/assets/images/banner/banner1.png");
+    background-image: url('../images/banner/banner_tin_tuc.jpg');
+    background-size: cover;
     background-position: center;
     height: 500px; /* Adjust height as needed */
     display: flex;
@@ -50,61 +51,47 @@ html, body {
     }
 }
 
-.btn {
-    width: 190px;
-    height: 60px;
-    font-size: 14px !important;
-    font-weight: bold !important;
-    text-transform: uppercase;
-    color: white !important;
+.main-news-title {
+    padding: 0;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 0.5) 20%);
 }
 
-.btn-primary {
-    background-color: #94b83d !important;
-    border-color: #94b83d !important;
+.main-card-title {
+    font-size: 24px;
 }
 
-.btn-primary:hover {
-    background-color: #fcae18 !important;
-    border-color: #fcae18 !important;
-    color: white !important;
+.post-date {
+    font-size: 16px;
 }
 
-.btn-primary.active {
-    background-color: #fcae18 !important;
-    border-color: #fcae18 !important;
-}
-
-.icon-image {
-   max-width: 30px;
-}
-
-.form-select {
-    font-size: 18px !important;
-}
-
-.row {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.col {
-    flex: 1 0 calc(25% - 20px); /* Each card takes up roughly 1/4th of the row width */
-    display: flex;
-}
-
-.product-card {
-    min-height: 460px;
-}
-
-.card-img-top {
-    width: 100%;
-    height: 310px;    /* Set a fixed height */
-    object-fit: cover;
+.card-title {
+    font-size: 24px;
 }
 
 .card-text {
-    font-size: 16px;
+    font-size: 18px;
+    color: gray;
+}
+
+.sub-news-image {
+    width: 35% !important;
+}
+
+.sub-card-body {
+    width: 65%;
+    border-top: solid 1px gray;
+}
+
+.news-detail-btn {
+    width: 15%;
+    font-weight: bold !important;
+    background-color: #9dea9d !important;
+    border-color: #9dea9d !important;
+    color: black !important;
+}
+
+.news-detail-btn:hover {
+    background-color: #c1f1bf !important;
 }
 
 .pagination {
@@ -127,7 +114,7 @@ html, body {
 }
 
 .page-button:hover {
-    background-color: #fcae18; /* Light gray background on hover */
+    background-color: #e0e0e0; /* Light gray background on hover */
 }
 
 .page-button.active {

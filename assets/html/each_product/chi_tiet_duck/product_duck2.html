@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Web Project</title>
+  <link rel="stylesheet" href="/assets/css/product-duck.css"/>
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css"/>
+  <link rel="stylesheet" href="/assets/fonts/font-awesome/all.css"/>
+  <script src="/assets/scripts/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+
+<section id="background-section">
+  <h1 class="outline">THỨC ĂN CHO VỊT</h1>
+</section>
+
+<div class="container d-flex align-items-center justify-content-center my-4">
+  <div class="d-flex justify-content-between gap-1 mb-3">
+    <button class="btn rounded-3 btn-primary mx-1">
+      <img src="/assets/images/represent-images/icon-pig.png" alt="pig-icon" class="icon-image"/>
+      Thức Ăn Cho Heo
+    </button>
+    <button class="btn rounded-3 btn-primary mx-1">
+      <img src="/assets/images/represent-images/icon-chicken.png" alt="chicken-icon" class="icon-image"/>
+      Thức Ăn Cho Gà
+    </button>
+    <button class="btn rounded-3 btn-primary mx-1">
+      <img src="/assets/images/represent-images/icon-duck.png" alt="duck-icon" class="icon-image"/>
+      Thức Ăn Cho Vịt
+    </button>
+    <button class="btn rounded-3 btn-primary mx-1">
+      <img src="/assets/images/represent-images/icon-cow.png" alt="cow-icon" class="icon-image"/>
+      Thức Ăn Cho Bò
+    </button>
+    <button class="btn rounded-3 btn-primary ps-0 mx-1">
+      <img src="/assets/images/represent-images/icon-shrimp.png" alt="shrimp-icon" class="icon-image"/>
+      Thức Ăn Cho Tôm
+    </button>
+    <button class="btn rounded-3 btn-primary mx-1">
+      <img src="/assets/images/represent-images/icon-fish.png" alt="fish-icon" class="icon-image"/>
+      Thức Ăn Cho Cá
+    </button>
+    <button class="btn rounded-3 btn-primary mx-1">
+      <img src="/assets/images/represent-images/icon-goat.png" alt="goat-icon" class="icon-image"/>
+      Thức Ăn Cho Dê
+    </button>
+  </div>
+</div>
+
+<div class="containers my-4">
+  <div class="row justify-content-center mb-3">
+    <div class="col-md-3">
+      <select id="group" class="form-select">
+        <option value="" selected>Nhóm sản phẩm</option>
+        <option value="Vịt thịt">Vịt thịt</option>
+        <option value="Vịt trứng">Vịt trứng</option>
+        <option value="Tổng hợp">Tổng hợp</option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <select id="brand" class="form-select">
+        <option value="" selected>Thương Hiệu</option>
+        <option value="Vina">Vina</option>
+        <option value="Happy">Happy</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<!-- Product Cards -->
+<div class="container product-section mb-5">
+  <!-- Page 2: Products 17-32 -->
+  <div class="product-page mb-5" id="page2">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+      <div class="col">
+        <div class="card d-flex align-items-center h-100 product-card" data-type="Tổng hợp" data-brand="Vina">
+          <img src="/assets/images/product/duck/358.png" class="card-img-top w-100 mt-5" alt="Product 1">
+          <div class="card-body text-center">
+            <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
+            <p class="card-text">Dùng cho vịt từ 01 ngày tuổi đến xuất bán.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card d-flex align-items-center h-100 product-card" data-group="Vịt trứng" data-brand="Vina">
+          <img src="/assets/images/product/duck/370.png" class="card-img-top w-100 mt-5" alt="Product 1">
+          <div class="card-body text-center">
+            <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
+            <p class="card-text">Dùng cho đẻ siêu trứng.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card d-flex align-items-center h-100 product-card" data-group="Vịt trứng" data-brand="Vina">
+          <img src="/assets/images/product/duck/380.png" class="card-img-top w-100 mt-5" alt="Product 1">
+          <div class="card-body text-center">
+            <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
+            <p class="card-text">Dùng cho vịt đẻ thuơng phẩm (Miền Nam).</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card d-flex align-items-center h-100 product-card" data-group="Vịt trứng" data-brand="Vina">
+          <img src="/assets/images/product/duck/380_Font.png" class="card-img-top w-100 mt-5" alt="Product 1">
+          <div class="card-body text-center">
+            <h5 class="card-title">VINA - THỨC ĂN HỖN HỢP</h5>
+            <p class="card-text">Dùng cho vịt đẻ thương phẩm (Miền Bắc).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Pagination Controls -->
+<div class="pagination">
+  <button class="page-button" data-page="1" data-category="product_duck">1</button>
+  <button class="page-button" data-page="2" data-category="product_duck">2</button>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- Bootstrap Bundle with Popper -->
+<script src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="../../../scripts/pagination.js"></script>
+<script src="../../../scripts/filter.js"></script>
+
+</body>
+</html>
