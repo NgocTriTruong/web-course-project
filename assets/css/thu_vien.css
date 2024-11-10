@@ -1,0 +1,152 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-video-section {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.video-thumbnail {
+    position: relative;
+    width: 60%;
+}
+
+.video-thumbnail video {
+    width: 100%;
+    border-radius: 8px;
+}
+
+/*.play-button {*/
+/*    position: absolute;*/
+/*    top: 50%;*/
+/*    left: 50%;*/
+/*    transform: translate(-50%, -50%);*/
+/*    font-size: 48px;*/
+/*    color: white;*/
+/*    opacity: 0.8;*/
+/*    pointer-events: none;*/
+/*}*/
+
+
+.video-info, .image-info {
+        padding-left: 50px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        position: relative;
+}
+
+.video-info::before, .image-info::before {
+        content: "";
+        position: absolute;
+        top: 50%; /* Aligns with the middle of the badge */
+        left: -40px; /* Positioning relative to the container */
+        width: 30px; /* Length of the red line */
+        height: 2px; /* Thickness of the line */
+        background-color: red; /* Red color for the line */
+        transform: translateY(-50%);
+}
+
+.video-badge, .image-badge {
+        background-color: #007bff; /* Blue background */
+        color: white;
+        border-radius: 50%; /* Makes it circular */
+        padding: 20px 15px; /* Adjust padding for a balanced circle */
+        font-size: 14px;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 3px solid white; /* White outer border */
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+        transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+        margin-bottom: 10px;
+}
+
+.video-badge:hover, .image-badge:hover {
+        background-color: #ff0000; /* Changes to red on hover */
+}
+
+
+.video-info h2 {
+    font-size: 24px;
+    color: #333;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.sub-video-section {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 25px;
+}
+
+.sub-video {
+    width: 30%;
+    position: relative;
+    text-align: center;
+    background-color: white;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.sub-video:hover {
+    transform: translateY(-5px);
+}
+
+.sub-video video {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.sub-video .play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    color: white;
+    opacity: 0.8;
+}
+
+.sub-video p {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #333;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+/* Hover effect for play button */
+.play-button:hover {
+    color: #ffcc00;
+    opacity: 1;
+    transition: color 0.2s ease, opacity 0.2s ease;
+}
