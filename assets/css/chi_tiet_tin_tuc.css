@@ -44,5 +44,33 @@ a {
     text-decoration: none;
 }
 
+.carousel-item {
+    padding: 0 15px;
+}
+.news-card {
+    height: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: white;
+}
+.news-card img {
+    width: 100%;
+    height: auto;
+}
+
+.news-card .card-body {
+    padding: 15px;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5); /* Dark background for better visibility */
+    border-radius: 50%; /* Optional: make them round */
+    width: 30px;
+    height: 30px;
+    background-size: 30px 30px;
+}
+
 
 
