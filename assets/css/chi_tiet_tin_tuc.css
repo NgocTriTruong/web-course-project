@@ -7,59 +7,42 @@ html, body {
     font-family: sans-serif, Tahoma;
 }
 
-.vhpadding-lg {
-    padding-top: 30px;
-    padding-bottom: 30px;
-}
-.vhpadding-sm {
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
-.vnttitledt h1 {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-}
-.vhdateline span {
-    color: red;
-    font-size: 0.9rem;
-}
-.the-content p {
-    font-size: 1rem;
-    line-height: 1.6;
-    margin-bottom: 1rem;
-}
-.ck_desc_img {
-    display: block;
-    font-size: 0.9rem;
-    color: #555;
-    margin-top: 0.5rem;
-}
-.img-fluid {
-    max-width: 100%;
-    height: auto;
-}
-.text-center {
-    text-align: center;
-}
-.my-4 {
-    margin-top: 1.5rem !important;
-    margin-bottom: 1.5rem !important;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
 }
 
-.hpsharepg .txt {
-    font-size: 1rem;
-    font-weight: bold;
+.tin_tuc {
+    max-width: 1000px !important;
 }
 
-.hpsharepg ul li a {
-    font-size: 1.2rem;
+h1 {
+    font-size: 2.5rem  !important;
+    font-weight: bold !important;
     color: #333;
-    transition: color 0.3s ease;
 }
 
-.hpsharepg ul li a:hover {
-    color: #0056b3;
+.container p:not(.img-label) {
+    font-size: 18px !important;
+    color: #555;
 }
+
+.text-center img {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.img-label {
+    background-color: #eae7e7;
+    padding: 5px 0;
+    font-size: 14px !important;
+    font-style: italic;
+}
+
+a {
+    text-decoration: none;
+}
+
 
 
