@@ -102,5 +102,23 @@ html {
     background-color: #94b83d;
     border-radius: 10px;
     line-height: 40px;
+    cursor: pointer;
+}   
+
+/* order of me */
+.od_me_all {
+    border-radius: 10px;
 }
 
+.od_me_all .od_me {
+    width: 25%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.od_me_all .od_me:hover {
+    border-bottom: 2px solid #fcae18;
+    color: #fcae18;
+}
