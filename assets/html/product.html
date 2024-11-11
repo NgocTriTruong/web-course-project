@@ -7,481 +7,486 @@
   <link rel="stylesheet" href="../css/product.css" />
   <link rel="stylesheet" href="../bootstrap/bootstrap.min.css" />
   <link rel="stylesheet" href="../fonts/font-awesome/all.css" />
+
+  <script src="/assets/scripts/add_layout/add_layout.js" defer></script>
 </head>
 <body>
-<main class="d-block">
-  <section id="background-section">
-    <h1 class="outline">SẢN PHẨM</h1>
-  </section>
+  <div id="header-placeholder"></div>
+  <main class="d-block">
+    <section id="background-section">
+      <h1 class="outline">SẢN PHẨM</h1>
+    </section>
 
-  <section class="w-75 d-flex justify-content-center align-items-center me-auto ms-auto mt-4 mb-4 p-3" id="introduction-section">
-    <span class="align-content-center" id="production-text">
-      Chúng tôi luôn lấy chất lượng sản phẩm làm giá trị cốt lõi cho sự phát triển của mình, cam kết đưa ra thị trường những sản phẩm có chất lượng cao và đảm bảo an toàn cho vật nuôi và an toàn cho cộng đồng.
-    </span>
-  </section>
+    <section class="w-75 d-flex justify-content-center align-items-center me-auto ms-auto mt-4 mb-4 p-3" id="introduction-section">
+      <span class="align-content-center" id="production-text">
+        Chúng tôi luôn lấy chất lượng sản phẩm làm giá trị cốt lõi cho sự phát triển của mình, cam kết đưa ra thị trường những sản phẩm có chất lượng cao và đảm bảo an toàn cho vật nuôi và an toàn cho cộng đồng.
+      </span>
+    </section>
 
-<!--  Heo Section-->
-  <section class="w-100 d-flex justify-content-between align-items-center heo-section py-4 px-5">
-    <div class="w-50 d-flex justify-content-start">
-      <img src="../images/represent-images/pig.jpg" class="img-fluid rounded" alt="Pig Image">
-    </div>
-    <div class="w-50 d-flex flex-column align-items-start">
-      <h2 class="text-dark">THỨC ĂN CHO HEO</h2>
-      <a href="#" class="btn btn-danger custom-btn">Xem tất cả</a>
-    </div>
-    <div class="d-flex w-100 justify-content-around mt-4">
-      <div id="productPigCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          <!-- First slide with two products -->
-          <div class="carousel-item active">
-            <div class="d-flex justify-content-around gap-5">
-              <div class="card">
-                <img src="../images/product/pig/48A.png" class="card-img-top" alt="Feed Bag 1">
-                <div class="card-body">
-                  <h5 class="card-title">TOP 01</h5>
-                  <p class="card-text">Dùng cho heo từ 5kg đến khi xuất chuồng</p>
-                </div>
-              </div>
-              <div class="card">
-                <img src="../images/product/pig/100S_Font.png" class="card-img-top" alt="Feed Bag 2">
-                <div class="card-body">
-                  <h5 class="card-title">TOP 02</h5>
-                  <p class="card-text">Dùng cho heo sữa từ 5 ngày tuổi đến 8kg</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Second slide with other products -->
-          <div class="carousel-item">
-            <div class="d-flex justify-content-around gap-5">
-              <div class="card">
-                <img src="../images/product/pig/101S_Font.png" class="card-img-top" alt="Feed Bag 3">
-                <div class="card-body">
-                  <h5 class="card-title">ViNa 101S</h5>
-                  <p class="card-text">Dùng cho heo con từ tập ăn đến 20kg </p>
-                </div>
-              </div>
-              <div class="card">
-                <img src="../images/product/pig/102S___mien_bac.png" class="card-img-top" alt="Feed Bag 4">
-                <div class="card-body">
-                  <h5 class="card-title">ViNa 102S</h5>
-                  <p class="card-text">Dùng cho lợn siêu nạc từ 12kg đến 25kg</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Carousel Controls -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#productPigCarousel" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#productPigCarousel" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
+  <!--  Heo Section-->
+    <section class="w-100 d-flex justify-content-between align-items-center heo-section py-4 px-5">
+      <div class="w-50 d-flex justify-content-start">
+        <img src="../images/represent-images/pig.jpg" class="img-fluid rounded" alt="Pig Image">
       </div>
-    </div>
-  </section>
-
-<!--  Ga Section-->
-  <section class="w-100 d-flex justify-content-between align-items-center ga-section py-4 px-5">
-    <div class="d-flex w-100 justify-content-around mt-4">
-      <div id="productChickenCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          <!-- First slide with two products -->
-          <div class="carousel-item active">
-            <div class="d-flex justify-content-around gap-5">
-              <div class="card">
-                <img src="../images/product/chicken/200.png" class="card-img-top" alt="Feed Bag 1">
-                <div class="card-body">
-                  <h5 class="card-title">TOP 01</h5>
-                  <p class="card-text">Dùng cho gà thịt từ 1 ngày tuổi đến xuất bán</p>
-                </div>
-              </div>
-              <div class="card">
-                <img src="../images/product/chicken/220_mien_nam.png" class="card-img-top" alt="Feed Bag 2">
-                <div class="card-body">
-                  <h5 class="card-title">TOP 02</h5>
-                  <p class="card-text">Dùng cho gà siêu thịt từ 1 đến 21 ngày tuổi</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Second slide with other products -->
-          <div class="carousel-item">
-            <div class="d-flex justify-content-around gap-5">
-              <div class="card">
-                <img src="../images/product/chicken/221_mien_nam.png" class="card-img-top" alt="Feed Bag 3">
-                <div class="card-body">
-                  <h5 class="card-title">ViNa HH221</h5>
-                  <p class="card-text">Dùng cho gà siêu thịt từ 22 đến 42 ngày tuổi</p>
-                </div>
-              </div>
-              <div class="card">
-                <img src="../images/product/chicken/230_Font_mienNam.png" class="card-img-top" alt="Feed Bag 4">
-                <div class="card-body">
-                  <h5 class="card-title">ViNa HH220</h5>
-                  <p class="card-text">Dùng cho gà siêu thịt từ 1 đến 21 ngày tuổi</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Carousel Controls -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#productChickenCarousel" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#productChickenCarousel" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
+      <div class="w-50 d-flex flex-column align-items-start">
+        <h2 class="text-dark">THỨC ĂN CHO HEO</h2>
+        <a href="#" class="btn btn-danger custom-btn">Xem tất cả</a>
       </div>
-    </div>
-
-    <div class="w-50 d-flex flex-column align-items-end">
-      <h2 class="text-dark">THỨC ĂN CHO GÀ</h2>
-      <a href="#" class="btn btn-danger custom-btn">Xem tất cả</a>
-    </div>
-    <div class="w-50 d-flex justify-content-end">
-      <img src="../images/represent-images/chicken.jpg" class="img-fluid rounded" alt="Chicken Image">
-    </div>
-
-  </section>
-
-<!--  Vịt section-->
-  <section class="w-100 d-flex justify-content-between align-items-center vit-section py-4 px-5">
-    <div class="w-50 d-flex justify-content-start">
-      <img src="../images/represent-images/duck.jpg" class="img-fluid rounded" alt="Pig Image">
-    </div>
-    <div class="w-50 d-flex flex-column align-items-start">
-      <h2 class="text-dark">THỨC ĂN CHO VỊT</h2>
-      <a href="#" class="btn btn-danger custom-btn">Xem tất cả</a>
-    </div>
-    <div class="d-flex w-100 justify-content-around mt-4">
-      <div id="productDuckCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          <!-- First slide with two products -->
-          <div class="carousel-item active">
-            <div class="d-flex justify-content-around gap-5">
-              <div class="card">
-                <img src="../images/product/duck/320.png" class="card-img-top" alt="Feed Bag 1">
-                <div class="card-body">
-                  <h5 class="card-title">TOP 01</h5>
-                  <p class="card-text">Dùng cho vịt siêu thịt từ 1 đến 21 ngày tuổi</p>
+      <div class="d-flex w-100 justify-content-around mt-4">
+        <div id="productPigCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <!-- First slide with two products -->
+            <div class="carousel-item active">
+              <div class="d-flex justify-content-around gap-5">
+                <div class="card">
+                  <img src="../images/product/pig/48A.png" class="card-img-top" alt="Feed Bag 1">
+                  <div class="card-body">
+                    <h5 class="card-title">TOP 01</h5>
+                    <p class="card-text">Dùng cho heo từ 5kg đến khi xuất chuồng</p>
+                  </div>
+                </div>
+                <div class="card">
+                  <img src="../images/product/pig/100S_Font.png" class="card-img-top" alt="Feed Bag 2">
+                  <div class="card-body">
+                    <h5 class="card-title">TOP 02</h5>
+                    <p class="card-text">Dùng cho heo sữa từ 5 ngày tuổi đến 8kg</p>
+                  </div>
                 </div>
               </div>
-              <div class="card">
-                <img src="../images/product/duck/355.png" class="card-img-top" alt="Feed Bag 2">
-                <div class="card-body">
-                  <h5 class="card-title">TOP 02</h5>
-                  <p class="card-text">Dùng cho vịt, ngan siêu thịt từ 1 đến 21 ngày tuổi</p>
+            </div>
+
+            <!-- Second slide with other products -->
+            <div class="carousel-item">
+              <div class="d-flex justify-content-around gap-5">
+                <div class="card">
+                  <img src="../images/product/pig/101S_Font.png" class="card-img-top" alt="Feed Bag 3">
+                  <div class="card-body">
+                    <h5 class="card-title">ViNa 101S</h5>
+                    <p class="card-text">Dùng cho heo con từ tập ăn đến 20kg </p>
+                  </div>
+                </div>
+                <div class="card">
+                  <img src="../images/product/pig/102S___mien_bac.png" class="card-img-top" alt="Feed Bag 4">
+                  <div class="card-body">
+                    <h5 class="card-title">ViNa 102S</h5>
+                    <p class="card-text">Dùng cho lợn siêu nạc từ 12kg đến 25kg</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-
-          <!-- Second slide with other products -->
-          <div class="carousel-item">
-            <div class="d-flex justify-content-around gap-5">
-              <div class="card">
-                <img src="../images/product/duck/356.png" class="card-img-top" alt="Feed Bag 3">
-                <div class="card-body">
-                  <h5 class="card-title">ViNa 356</h5>
-                  <p class="card-text">Dùng cho vịt thịt từ 22 ngày tuổi đến xuất bán </p>
-                </div>
-              </div>
-              <div class="card">
-                <img src="../images/product/duck/357.png" class="card-img-top" alt="Feed Bag 4">
-                <div class="card-body">
-                  <h5 class="card-title">ViNa 357</h5>
-                  <p class="card-text">Dùng cho vịt vỗ béo</p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <!-- Carousel Controls -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#productPigCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#productPigCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
         </div>
-        <!-- Carousel Controls -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#productDuckCarousel" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#productDuckCarousel" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!--  Bò Section-->
-  <section class="w-100 d-flex justify-content-between align-items-center bo-section py-4 px-5">
-    <div class="d-flex w-100 justify-content-around mt-4">
-      <div id="productCowCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          <!-- First slide with two products -->
-          <div class="carousel-item active">
-            <div class="d-flex justify-content-around gap-5">
-              <div class="card">
-                <img src="../images/product/cow/222_1.png" class="card-img-top" alt="Feed Bag 1">
-                <div class="card-body">
-                  <h5 class="card-title">TOP 01</h5>
-                  <p class="card-text">Dùng chung cho bò sữa</p>
+  <!--  Ga Section-->
+    <section class="w-100 d-flex justify-content-between align-items-center ga-section py-4 px-5">
+      <div class="d-flex w-100 justify-content-around mt-4">
+        <div id="productChickenCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <!-- First slide with two products -->
+            <div class="carousel-item active">
+              <div class="d-flex justify-content-around gap-5">
+                <div class="card">
+                  <img src="../images/product/chicken/200.png" class="card-img-top" alt="Feed Bag 1">
+                  <div class="card-body">
+                    <h5 class="card-title">TOP 01</h5>
+                    <p class="card-text">Dùng cho gà thịt từ 1 ngày tuổi đến xuất bán</p>
+                  </div>
+                </div>
+                <div class="card">
+                  <img src="../images/product/chicken/220_mien_nam.png" class="card-img-top" alt="Feed Bag 2">
+                  <div class="card-body">
+                    <h5 class="card-title">TOP 02</h5>
+                    <p class="card-text">Dùng cho gà siêu thịt từ 1 đến 21 ngày tuổi</p>
+                  </div>
                 </div>
               </div>
-              <div class="card">
-                <img src="../images/product/cow/223_Font.png" class="card-img-top" alt="Feed Bag 2">
-                <div class="card-body">
-                  <h5 class="card-title">TOP 02</h5>
-                  <p class="card-text">Dùng cho bò thịt vỗ béo, bê con</p>
+            </div>
+
+            <!-- Second slide with other products -->
+            <div class="carousel-item">
+              <div class="d-flex justify-content-around gap-5">
+                <div class="card">
+                  <img src="../images/product/chicken/221_mien_nam.png" class="card-img-top" alt="Feed Bag 3">
+                  <div class="card-body">
+                    <h5 class="card-title">ViNa HH221</h5>
+                    <p class="card-text">Dùng cho gà siêu thịt từ 22 đến 42 ngày tuổi</p>
+                  </div>
+                </div>
+                <div class="card">
+                  <img src="../images/product/chicken/230_Font_mienNam.png" class="card-img-top" alt="Feed Bag 4">
+                  <div class="card-body">
+                    <h5 class="card-title">ViNa HH220</h5>
+                    <p class="card-text">Dùng cho gà siêu thịt từ 1 đến 21 ngày tuổi</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-
-          <!-- Second slide with other products -->
-          <div class="carousel-item">
-            <div class="d-flex justify-content-around gap-5">
-              <div class="card">
-                <img src="../images/product/cow/901_Font.png" class="card-img-top" alt="Feed Bag 3">
-                <div class="card-body">
-                  <h5 class="card-title">ViNa 901</h5>
-                  <p class="card-text">Dùng chung cho bò sữa (ViNa)</p>
-                </div>
-              </div>
-              <div class="card">
-                <img src="../images/product/cow/910_Font.png" class="card-img-top" alt="Feed Bag 4">
-                <div class="card-body">
-                  <h5 class="card-title">ViNa 910</h5>
-                  <p class="card-text">Dùng cho bò thịt vỗ béo, bê con (ViNa)</p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <!-- Carousel Controls -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#productChickenCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#productChickenCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
         </div>
-        <!-- Carousel Controls -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#productCowCarousel" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#productCowCarousel" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
       </div>
-    </div>
 
-    <div class="w-50 d-flex flex-column align-items-end">
-      <h2 class="text-dark">THỨC ĂN CHO BÒ</h2>
-      <a href="#" class="btn btn-danger custom-btn">Xem tất cả</a>
-    </div>
-    <div class="w-50 d-flex justify-content-end">
-      <img src="../images/represent-images/cow.jpg" class="img-fluid rounded" alt="Chicken Image">
-    </div>
+      <div class="w-50 d-flex flex-column align-items-end">
+        <h2 class="text-dark">THỨC ĂN CHO GÀ</h2>
+        <a href="#" class="btn btn-danger custom-btn">Xem tất cả</a>
+      </div>
+      <div class="w-50 d-flex justify-content-end">
+        <img src="../images/represent-images/chicken.jpg" class="img-fluid rounded" alt="Chicken Image">
+      </div>
 
-  </section>
+    </section>
 
-<!--  Tôm Section-->
-  <section class="w-100 d-flex justify-content-between align-items-center tom-section py-4 px-5">
-    <div class="w-50 d-flex justify-content-start">
-      <img src="../images/represent-images/shrimp.png" class="img-fluid rounded" alt="Pig Image">
-    </div>
-    <div class="w-50 d-flex flex-column ms-4 align-items-start">
-      <h2 class="text-dark">THỨC ĂN CHO TÔM</h2>
-      <a href="#" class="btn btn-danger custom-btn">Xem tất cả</a>
-    </div>
-    <div class="d-flex w-100 justify-content-around mt-4">
-      <div id="productShrimpCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          <!-- First slide with two products -->
-          <div class="carousel-item active">
-            <div class="d-flex justify-content-around gap-5">
-              <div class="card">
-                <img src="../images/product/shrimp/img1.png" class="card-img-top" alt="Feed Bag 1">
-                <div class="card-body">
-                  <h5 class="card-title">TOP 01</h5>
-                  <p class="card-text">Dùng trong giai đoạn nuôi gièo</p>
+  <!--  Vịt section-->
+    <section class="w-100 d-flex justify-content-between align-items-center vit-section py-4 px-5">
+      <div class="w-50 d-flex justify-content-start">
+        <img src="../images/represent-images/duck.jpg" class="img-fluid rounded" alt="Pig Image">
+      </div>
+      <div class="w-50 d-flex flex-column align-items-start">
+        <h2 class="text-dark">THỨC ĂN CHO VỊT</h2>
+        <a href="#" class="btn btn-danger custom-btn">Xem tất cả</a>
+      </div>
+      <div class="d-flex w-100 justify-content-around mt-4">
+        <div id="productDuckCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <!-- First slide with two products -->
+            <div class="carousel-item active">
+              <div class="d-flex justify-content-around gap-5">
+                <div class="card">
+                  <img src="../images/product/duck/320.png" class="card-img-top" alt="Feed Bag 1">
+                  <div class="card-body">
+                    <h5 class="card-title">TOP 01</h5>
+                    <p class="card-text">Dùng cho vịt siêu thịt từ 1 đến 21 ngày tuổi</p>
+                  </div>
+                </div>
+                <div class="card">
+                  <img src="../images/product/duck/355.png" class="card-img-top" alt="Feed Bag 2">
+                  <div class="card-body">
+                    <h5 class="card-title">TOP 02</h5>
+                    <p class="card-text">Dùng cho vịt, ngan siêu thịt từ 1 đến 21 ngày tuổi</p>
+                  </div>
                 </div>
               </div>
-              <div class="card">
-                <img src="../images/product/shrimp/img2.png" class="card-img-top" alt="Feed Bag 2">
-                <div class="card-body">
-                  <h5 class="card-title">TOP 02</h5>
-                  <p class="card-text">Dùng cho tôm thẻ</p>
+            </div>
+
+            <!-- Second slide with other products -->
+            <div class="carousel-item">
+              <div class="d-flex justify-content-around gap-5">
+                <div class="card">
+                  <img src="../images/product/duck/356.png" class="card-img-top" alt="Feed Bag 3">
+                  <div class="card-body">
+                    <h5 class="card-title">ViNa 356</h5>
+                    <p class="card-text">Dùng cho vịt thịt từ 22 ngày tuổi đến xuất bán </p>
+                  </div>
+                </div>
+                <div class="card">
+                  <img src="../images/product/duck/357.png" class="card-img-top" alt="Feed Bag 4">
+                  <div class="card-body">
+                    <h5 class="card-title">ViNa 357</h5>
+                    <p class="card-text">Dùng cho vịt vỗ béo</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-
-          <!-- Second slide with other products -->
-          <div class="carousel-item">
-            <div class="d-flex justify-content-around gap-5">
-              <div class="card">
-                <img src="../images/product/shrimp/img3.png" class="card-img-top" alt="Feed Bag 3">
-                <div class="card-body">
-                  <h5 class="card-title">GT 104</h5>
-                  <p class="card-text">Dùng cho tôm sú</p>
-                </div>
-              </div>
-              <div class="card">
-                <img src="../images/product/shrimp/img4.png" class="card-img-top" alt="Feed Bag 4">
-                <div class="card-body">
-                  <h5 class="card-title">GL 554</h5>
-                  <p class="card-text">Dùng cho tôm sú</p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <!-- Carousel Controls -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#productDuckCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#productDuckCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
         </div>
-        <!-- Carousel Controls -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#productShrimpCarousel" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#productShrimpCarousel" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Cá Section-->
-  <section class="w-100 d-flex justify-content-between align-items-center ca-section py-4 px-5">
-    <div class="d-flex w-100 justify-content-around mt-4">
-      <div id="productFishCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          <!-- First slide with two products -->
-          <div class="carousel-item active">
-            <div class="d-flex justify-content-around gap-5">
-              <div class="card">
-                <img src="../images/product/chicken/200.png" class="card-img-top" alt="Feed Bag 1">
-                <div class="card-body">
-                  <h5 class="card-title">TOP 01</h5>
-                  <p class="card-text">Dùng cho gà thịt từ 1 ngày tuổi đến xuất bán</p>
+    <!--  Bò Section-->
+    <section class="w-100 d-flex justify-content-between align-items-center bo-section py-4 px-5">
+      <div class="d-flex w-100 justify-content-around mt-4">
+        <div id="productCowCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <!-- First slide with two products -->
+            <div class="carousel-item active">
+              <div class="d-flex justify-content-around gap-5">
+                <div class="card">
+                  <img src="../images/product/cow/222_1.png" class="card-img-top" alt="Feed Bag 1">
+                  <div class="card-body">
+                    <h5 class="card-title">TOP 01</h5>
+                    <p class="card-text">Dùng chung cho bò sữa</p>
+                  </div>
+                </div>
+                <div class="card">
+                  <img src="../images/product/cow/223_Font.png" class="card-img-top" alt="Feed Bag 2">
+                  <div class="card-body">
+                    <h5 class="card-title">TOP 02</h5>
+                    <p class="card-text">Dùng cho bò thịt vỗ béo, bê con</p>
+                  </div>
                 </div>
               </div>
-              <div class="card">
-                <img src="../images/product/chicken/220_mien_nam.png" class="card-img-top" alt="Feed Bag 2">
-                <div class="card-body">
-                  <h5 class="card-title">TOP 02</h5>
-                  <p class="card-text">Dùng cho gà siêu thịt từ 1 đến 21 ngày tuổi</p>
+            </div>
+
+            <!-- Second slide with other products -->
+            <div class="carousel-item">
+              <div class="d-flex justify-content-around gap-5">
+                <div class="card">
+                  <img src="../images/product/cow/901_Font.png" class="card-img-top" alt="Feed Bag 3">
+                  <div class="card-body">
+                    <h5 class="card-title">ViNa 901</h5>
+                    <p class="card-text">Dùng chung cho bò sữa (ViNa)</p>
+                  </div>
+                </div>
+                <div class="card">
+                  <img src="../images/product/cow/910_Font.png" class="card-img-top" alt="Feed Bag 4">
+                  <div class="card-body">
+                    <h5 class="card-title">ViNa 910</h5>
+                    <p class="card-text">Dùng cho bò thịt vỗ béo, bê con (ViNa)</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-
-          <!-- Second slide with other products -->
-          <div class="carousel-item">
-            <div class="d-flex justify-content-around gap-5">
-              <div class="card">
-                <img src="../images/product/chicken/221_mien_nam.png" class="card-img-top" alt="Feed Bag 3">
-                <div class="card-body">
-                  <h5 class="card-title">ViNa HH221</h5>
-                  <p class="card-text">Dùng cho gà siêu thịt từ 22 đến 42 ngày tuổi</p>
-                </div>
-              </div>
-              <div class="card">
-                <img src="../images/product/chicken/230_Font_mienNam.png" class="card-img-top" alt="Feed Bag 4">
-                <div class="card-body">
-                  <h5 class="card-title">ViNa HH220</h5>
-                  <p class="card-text">Dùng cho gà siêu thịt từ 1 đến 21 ngày tuổi</p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <!-- Carousel Controls -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#productCowCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#productCowCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
         </div>
-        <!-- Carousel Controls -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#productFishCarousel" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#productFishCarousel" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
       </div>
-    </div>
 
-    <div class="w-50 d-flex flex-column me-4 align-items-end">
-      <h2 class="text-dark">THỨC ĂN CHO CÁ</h2>
-      <a href="#" class="btn btn-danger custom-btn">Xem tất cả</a>
-    </div>
-    <div class="w-50 d-flex justify-content-end">
-      <img src="../images/represent-images/fish.jpg" class="img-fluid rounded" alt="Chicken Image">
-    </div>
+      <div class="w-50 d-flex flex-column align-items-end">
+        <h2 class="text-dark">THỨC ĂN CHO BÒ</h2>
+        <a href="#" class="btn btn-danger custom-btn">Xem tất cả</a>
+      </div>
+      <div class="w-50 d-flex justify-content-end">
+        <img src="../images/represent-images/cow.jpg" class="img-fluid rounded" alt="Chicken Image">
+      </div>
 
-  </section>
+    </section>
 
-  <!-- Dê section-->
-  <section class="w-100 d-flex justify-content-between align-items-center de-section py-4 px-5">
-    <div class="w-50 d-flex justify-content-start">
-      <img src="../images/represent-images/goat.png" class="img-fluid rounded" alt="Pig Image">
-    </div>
-    <div class="w-50 d-flex flex-column ms-4 align-items-start">
-      <h2 class="text-dark">THỨC ĂN CHO DÊ</h2>
-      <a href="#" class="btn btn-danger custom-btn">Xem tất cả</a>
-    </div>
-    <div class="d-flex w-100 justify-content-around mt-4">
-      <div id="productGoatCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          <!-- First slide with two products -->
-          <div class="carousel-item active">
-            <div class="d-flex justify-content-around gap-5">
-              <div class="card">
-                <img src="../images/product/pig/48A.png" class="card-img-top" alt="Feed Bag 1">
-                <div class="card-body">
-                  <h5 class="card-title">TOP 01</h5>
-                  <p class="card-text">Dùng cho heo từ 5kg đến khi xuất chuồng</p>
+  <!--  Tôm Section-->
+    <section class="w-100 d-flex justify-content-between align-items-center tom-section py-4 px-5">
+      <div class="w-50 d-flex justify-content-start">
+        <img src="../images/represent-images/shrimp.png" class="img-fluid rounded" alt="Pig Image">
+      </div>
+      <div class="w-50 d-flex flex-column ms-4 align-items-start">
+        <h2 class="text-dark">THỨC ĂN CHO TÔM</h2>
+        <a href="#" class="btn btn-danger custom-btn">Xem tất cả</a>
+      </div>
+      <div class="d-flex w-100 justify-content-around mt-4">
+        <div id="productShrimpCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <!-- First slide with two products -->
+            <div class="carousel-item active">
+              <div class="d-flex justify-content-around gap-5">
+                <div class="card">
+                  <img src="../images/product/shrimp/img1.png" class="card-img-top" alt="Feed Bag 1">
+                  <div class="card-body">
+                    <h5 class="card-title">TOP 01</h5>
+                    <p class="card-text">Dùng trong giai đoạn nuôi gièo</p>
+                  </div>
+                </div>
+                <div class="card">
+                  <img src="../images/product/shrimp/img2.png" class="card-img-top" alt="Feed Bag 2">
+                  <div class="card-body">
+                    <h5 class="card-title">TOP 02</h5>
+                    <p class="card-text">Dùng cho tôm thẻ</p>
+                  </div>
                 </div>
               </div>
-              <div class="card">
-                <img src="../images/product/pig/100S_Font.png" class="card-img-top" alt="Feed Bag 2">
-                <div class="card-body">
-                  <h5 class="card-title">TOP 02</h5>
-                  <p class="card-text">Dùng cho heo sữa từ 5 ngày tuổi đến 8kg</p>
+            </div>
+
+            <!-- Second slide with other products -->
+            <div class="carousel-item">
+              <div class="d-flex justify-content-around gap-5">
+                <div class="card">
+                  <img src="../images/product/shrimp/img3.png" class="card-img-top" alt="Feed Bag 3">
+                  <div class="card-body">
+                    <h5 class="card-title">GT 104</h5>
+                    <p class="card-text">Dùng cho tôm sú</p>
+                  </div>
+                </div>
+                <div class="card">
+                  <img src="../images/product/shrimp/img4.png" class="card-img-top" alt="Feed Bag 4">
+                  <div class="card-body">
+                    <h5 class="card-title">GL 554</h5>
+                    <p class="card-text">Dùng cho tôm sú</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-
-          <!-- Second slide with other products -->
-          <div class="carousel-item">
-            <div class="d-flex justify-content-around gap-5">
-              <div class="card">
-                <img src="../images/product/pig/101S_Font.png" class="card-img-top" alt="Feed Bag 3">
-                <div class="card-body">
-                  <h5 class="card-title">ViNa 101S</h5>
-                  <p class="card-text">Dùng cho heo con từ tập ăn đến 20kg </p>
-                </div>
-              </div>
-              <div class="card">
-                <img src="../images/product/pig/102S___mien_bac.png" class="card-img-top" alt="Feed Bag 4">
-                <div class="card-body">
-                  <h5 class="card-title">ViNa 102S</h5>
-                  <p class="card-text">Dùng cho lợn siêu nạc từ 12kg đến 25kg</p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <!-- Carousel Controls -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#productShrimpCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#productShrimpCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
         </div>
-        <!-- Carousel Controls -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#productGoatCarousel" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#productGoatCarousel" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
       </div>
-    </div>
-  </section>
+    </section>
 
-</main>
+    <!-- Cá Section-->
+    <section class="w-100 d-flex justify-content-between align-items-center ca-section py-4 px-5">
+      <div class="d-flex w-100 justify-content-around mt-4">
+        <div id="productFishCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <!-- First slide with two products -->
+            <div class="carousel-item active">
+              <div class="d-flex justify-content-around gap-5">
+                <div class="card">
+                  <img src="../images/product/chicken/200.png" class="card-img-top" alt="Feed Bag 1">
+                  <div class="card-body">
+                    <h5 class="card-title">TOP 01</h5>
+                    <p class="card-text">Dùng cho gà thịt từ 1 ngày tuổi đến xuất bán</p>
+                  </div>
+                </div>
+                <div class="card">
+                  <img src="../images/product/chicken/220_mien_nam.png" class="card-img-top" alt="Feed Bag 2">
+                  <div class="card-body">
+                    <h5 class="card-title">TOP 02</h5>
+                    <p class="card-text">Dùng cho gà siêu thịt từ 1 đến 21 ngày tuổi</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Second slide with other products -->
+            <div class="carousel-item">
+              <div class="d-flex justify-content-around gap-5">
+                <div class="card">
+                  <img src="../images/product/chicken/221_mien_nam.png" class="card-img-top" alt="Feed Bag 3">
+                  <div class="card-body">
+                    <h5 class="card-title">ViNa HH221</h5>
+                    <p class="card-text">Dùng cho gà siêu thịt từ 22 đến 42 ngày tuổi</p>
+                  </div>
+                </div>
+                <div class="card">
+                  <img src="../images/product/chicken/230_Font_mienNam.png" class="card-img-top" alt="Feed Bag 4">
+                  <div class="card-body">
+                    <h5 class="card-title">ViNa HH220</h5>
+                    <p class="card-text">Dùng cho gà siêu thịt từ 1 đến 21 ngày tuổi</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Carousel Controls -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#productFishCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#productFishCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="w-50 d-flex flex-column me-4 align-items-end">
+        <h2 class="text-dark">THỨC ĂN CHO CÁ</h2>
+        <a href="#" class="btn btn-danger custom-btn">Xem tất cả</a>
+      </div>
+      <div class="w-50 d-flex justify-content-end">
+        <img src="../images/represent-images/fish.jpg" class="img-fluid rounded" alt="Chicken Image">
+      </div>
+
+    </section>
+
+    <!-- Dê section-->
+    <section class="w-100 d-flex justify-content-between align-items-center de-section py-4 px-5">
+      <div class="w-50 d-flex justify-content-start">
+        <img src="../images/represent-images/goat.png" class="img-fluid rounded" alt="Pig Image">
+      </div>
+      <div class="w-50 d-flex flex-column ms-4 align-items-start">
+        <h2 class="text-dark">THỨC ĂN CHO DÊ</h2>
+        <a href="#" class="btn btn-danger custom-btn">Xem tất cả</a>
+      </div>
+      <div class="d-flex w-100 justify-content-around mt-4">
+        <div id="productGoatCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <!-- First slide with two products -->
+            <div class="carousel-item active">
+              <div class="d-flex justify-content-around gap-5">
+                <div class="card">
+                  <img src="../images/product/pig/48A.png" class="card-img-top" alt="Feed Bag 1">
+                  <div class="card-body">
+                    <h5 class="card-title">TOP 01</h5>
+                    <p class="card-text">Dùng cho heo từ 5kg đến khi xuất chuồng</p>
+                  </div>
+                </div>
+                <div class="card">
+                  <img src="../images/product/pig/100S_Font.png" class="card-img-top" alt="Feed Bag 2">
+                  <div class="card-body">
+                    <h5 class="card-title">TOP 02</h5>
+                    <p class="card-text">Dùng cho heo sữa từ 5 ngày tuổi đến 8kg</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Second slide with other products -->
+            <div class="carousel-item">
+              <div class="d-flex justify-content-around gap-5">
+                <div class="card">
+                  <img src="../images/product/pig/101S_Font.png" class="card-img-top" alt="Feed Bag 3">
+                  <div class="card-body">
+                    <h5 class="card-title">ViNa 101S</h5>
+                    <p class="card-text">Dùng cho heo con từ tập ăn đến 20kg </p>
+                  </div>
+                </div>
+                <div class="card">
+                  <img src="../images/product/pig/102S___mien_bac.png" class="card-img-top" alt="Feed Bag 4">
+                  <div class="card-body">
+                    <h5 class="card-title">ViNa 102S</h5>
+                    <p class="card-text">Dùng cho lợn siêu nạc từ 12kg đến 25kg</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Carousel Controls -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#productGoatCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#productGoatCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <div id="near-footer-placeholder"></div>
+  <div id="footer-placeholder"></div>
 
 <!-- Optional JavaScript -->
 <!-- Bootstrap Bundle with Popper -->
