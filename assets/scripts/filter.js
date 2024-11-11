@@ -1,29 +1,24 @@
-// JavaScript for Filtering and Rearrangement
 $(document).ready(function() {
-    $('#group, #brand').on('change', function() {
+    // Function to apply filters based on selected group and brand
+    function applyFilters() {
         const selectedGroup = $('#group').val();
         const selectedBrand = $('#brand').val();
 
-        // Loop through each product card to determine visibility
         $('.product-card').each(function() {
             const cardGroup = $(this).data('group');
             const cardBrand = $(this).data('brand');
             const groupMatch = selectedGroup === "" || cardGroup === selectedGroup;
             const brandMatch = selectedBrand === "" || cardBrand === selectedBrand;
 
-            // Show or hide based on combined group and brand conditions
-            if (groupMatch && brandMatch) {
-                $(this).closest('.col').css('display', 'flex'); // Show matched cards
-            } else {
-                $(this).closest('.col').css('display', 'none'); // Hide unmatched cards
-            }
+            // Show or hide product cards based on filters
+            $(this).closest('.col').css('display', groupMatch && brandMatch ? 'flex' : 'none');
         });
-    });
+    }
 
-    // Reset filters to show all items when clearing selections
-    $('#group, #brand').on('change', function() {
-        if ($('#group').val() === "" && $('#brand').val() === "") {
-            $('.product-card').closest('.col').css('display', 'flex'); // Show all cards when no filter is selected
-        }
-    });
+    // Apply filters whenever the group or brand selection changes
+    $('#group, #brand').on('change', applyFilters);
+
+    // Initial call to show all products on page load
+    applyFilters();
 });
+

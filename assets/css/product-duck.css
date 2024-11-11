@@ -7,28 +7,6 @@ html, body {
     font-family: sans-serif, Tahoma;
 }
 
-.container {
-    width: 1200px;
-    padding: 10px 0;
-    color: white;
-}
-
-.logo {
-    height: 80%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-left: 20px;
-}
-
-.logo img {
-    height: 100%;
-}
-
-.search-bar {
-    border: 1px solid black;
-}
-
 #background-section {
     position: relative;
     background-image: url("/Project_Web_2024/assets/images/banner/banner1.png");
@@ -73,21 +51,29 @@ html, body {
 }
 
 .btn {
-    width: 180px;
+    width: 190px;
     height: 60px;
     font-size: 14px !important;
+    font-weight: bold !important;
     text-transform: uppercase;
+    color: white !important;
 }
 
 .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
+    background-color: #94b83d !important;
+    border-color: #94b83d !important;
 }
 
-/*.btn-danger {*/
-/*    background-color: #dc3545;*/
-/*    border-color: #dc3545;*/
-/*}*/
+.btn-primary:hover {
+    background-color: #fcae18 !important;
+    border-color: #fcae18 !important;
+    color: white !important;
+}
+
+.btn-primary.active {
+    background-color: #fcae18 !important;
+    border-color: #fcae18 !important;
+}
 
 .icon-image {
    max-width: 30px;
@@ -141,10 +127,10 @@ html, body {
 }
 
 .page-button:hover {
-    background-color: #e0e0e0; /* Light gray background on hover */
+    background-color: #fcae18; /* Light gray background on hover */
 }
 
 .page-button.active {
-    background-color: #3a87ff; /* Blue background for the active page */
-    color: #fff; /* White text for active page */
+    background-color: #9dea9d; /* Blue background for the active page */
+    color: black; /* White text for active page */
 }

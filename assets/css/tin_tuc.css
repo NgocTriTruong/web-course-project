@@ -1,0 +1,123 @@
+html, body {
+    padding: 0;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 13px;
+    font-family: sans-serif, Tahoma;
+}
+
+#background-section {
+    position: relative;
+    background-image: url('../images/banner/banner_tin_tuc.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 500px; /* Adjust height as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#background-section h1 {
+    font-size: 60px;
+    color: transparent;
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    font-weight: bold;
+    position: relative;
+    z-index: 1;
+}
+
+/* Add a transparent overlay effect */
+#background-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); /* Adjust transparency */
+    z-index: 0;
+}
+
+@supports(-webkit-text-stroke: 2px white) {
+    .outline {
+        color: transparent;
+        -webkit-text-stroke: 2px white; /* Increased stroke width */
+        text-shadow: none;
+        font-size: 80px; /* Increased font size */
+        font-weight: bold;
+        letter-spacing: 5px;
+    }
+}
+
+.main-news-title {
+    padding: 0;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 0.5) 20%);
+}
+
+.main-card-title {
+    font-size: 24px;
+}
+
+.post-date {
+    font-size: 16px;
+}
+
+.card-title {
+    font-size: 24px;
+}
+
+.card-text {
+    font-size: 18px;
+    color: gray;
+}
+
+.sub-news-image {
+    width: 35% !important;
+}
+
+.sub-card-body {
+    width: 65%;
+    border-top: solid 1px gray;
+}
+
+.news-detail-btn {
+    width: 15%;
+    font-weight: bold !important;
+    background-color: #9dea9d !important;
+    border-color: #9dea9d !important;
+    color: black !important;
+}
+
+.news-detail-btn:hover {
+    background-color: #c1f1bf !important;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.page-button {
+    border: none;
+    background-color: transparent;
+    color: #333;
+    font-size: 16px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.page-button:hover {
+    background-color: #e0e0e0; /* Light gray background on hover */
+}
+
+.page-button.active {
+    background-color: #9dea9d; /* Blue background for the active page */
+    color: black; /* White text for active page */
+}
