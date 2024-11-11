@@ -1,64 +1,66 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+/* RESET CSS */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-#header-banner {
+body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background-color: #f8f8f8;
+    color: #333;
+}
+
+#thu-vien-banner {
     color: white;
     text-align: center;
     background-image: url('../images/thu_vien/img_1.png');
-    background-color: rgba(150, 150, 150, 0.5) !important;
     background-size: cover;
     background-position: center;
-    height: 400px; /* Adjust height as needed */
+    height: 400px;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Thêm hiệu ứng đổ bóng cho chữ */
 }
 
-.banner-content {
-    font-size: 60px;
-    color: transparent;
-    text-transform: uppercase;
-    letter-spacing: 10px;
-    font-weight: bold;
-    position: relative;
-    z-index: 1;
-}
-
-.header-banner:hover{
-    content: '';
+.overlay {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.3); /* Adjust transparency */
-    z-index: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3); /* Làm nền mờ hơn */
+    z-index: 1;
+}
+
+.thu-vien-content {
+    font-size: 70px;
+    color: transparent;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-weight: bold;
+    position: relative;
+    z-index: 2;
 }
 
 @supports(-webkit-text-stroke: 2px white) {
-    .banner-content {
-        color: transparent;
-        -webkit-text-stroke: 2px white; /* Increased stroke width */
+    .thu-vien-content {
+        -webkit-text-stroke: 2px white;
         text-shadow: none;
-        font-size: 80px; /* Increased font size */
-        font-weight: bold;
-        letter-spacing: 5px;
+        font-size: 80px;
     }
 }
 
 .templates-library {
-    /*background: linear-gradient(to right, #6a11cb, #2575fc);*/
-    color: #000000;
-    padding: 50px 0;
+    background-color: #fff;
+    color: #333;
+    padding: 60px 20px;
     text-align: center;
 }
 
-.container {
+.thu-vien-2 {
     max-width: 1200px;
     margin: auto;
     padding: 0 20px;
@@ -67,24 +69,25 @@ body {
 .features {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 30px;
+    justify-content: space-evenly;
+    margin-top: 40px;
 }
 
 .feature-card {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
     margin: 20px;
     padding: 20px;
     flex: 1 1 calc(33% - 40px);
     max-width: calc(33% - 40px);
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     perspective: 1000px;
 }
 
 .feature-card:hover {
-    transform: rotateY(10deg) rotateX(10deg);
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
 }
 
 .feature-card img {
@@ -92,6 +95,19 @@ body {
     height: auto;
     border-radius: 10px;
     margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.feature-card img:hover {
+    transform: scale(1.05); /* Tăng nhẹ kích thước ảnh khi hover */
+}
+
+.feature-card h3 {
+    font-size: 18px;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #444;
 }
 
 @media (max-width: 768px) {
@@ -106,18 +122,50 @@ body {
         flex: 1 1 100%;
         max-width: 100%;
     }
+
+    .thu-vien-content {
+        font-size: 50px; /* Giảm kích thước chữ trên các màn hình nhỏ */
+        letter-spacing: 2px;
+    }
 }
 
 .videos {
-    margin-top: 50px;
+    margin-top: 60px;
+}
+
+.videos h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
 }
 
 .video-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 15px;
 }
 
 .video-container iframe {
-    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.video-container iframe:hover {
+    transform: scale(1.05); /* Tăng nhẹ kích thước iframe khi hover */
+}
+
+/* Thêm hiệu ứng động cho các video */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.video-container iframe {
+    animation: fadeIn 1s ease-in-out;
 }
