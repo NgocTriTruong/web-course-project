@@ -3,43 +3,65 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Video Layout</title>
-  <link rel="stylesheet" href="/assets/css/thu_vien.css">
-
+  <title>Templates Library</title>
+  <link rel="stylesheet" href="../bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/thu_vien.css">
 </head>
 <body>
-<div class="container">
-  <div class="main-video-section">
-    <div class="video-thumbnail">
-      <!-- Using a video tag with a poster image as the thumbnail -->
-      <video src="../video/video1.mp4" poster="../images/main-video-thumbnail.jpg" controls></video>
-<!--      <div class="play-button">&#9658;</div>-->
-    </div>
-    <div class="video-info">
-      <div class="video-badge">VIDEO CLIP</div>
-      <h2>Phòng Và Điều Trị Bệnh Viêm Phổi Cho Heo</h2>
+<section id="header-banner">
+  <h1 class="banner-content">Thư Viện</h1>
+</section>
+
+<section class="templates-library bg-light" >
+  <div class="container">
+    <h2>Hãy cùng nhau khám ph thư viện của chúng toi </h2>
+<!--    <p>Offering a variety of professionally designed templates for economic studies and business analysis.</p>-->
+    <div class="features">
+      <div class="feature-card">
+        <img src="../images/thu_vien/img.png" alt="Modern Designs" class="feature-image">
+        <h3>Tham quan Vina đại lý của Nguyễn Minh Thái</h3>
+      </div>
+      <div class="feature-card">
+        <img src="../images/thu_vien/img.png" alt="Easy Customization" class="feature-image">
+        <h3>Khóa tập huấn luyện "Quản lý nhà máy thức ăn chăn nuôi" tại Thái <Lan></Lan> </h3>
+      </div>
+      <div class="feature-card">
+        <img src="../images/thu_vien/img.png" alt="High-Quality Graphics" class="feature-image">
+    <h3>Chuyến tham quan Vina của đại lý Bạch Thị Thu Hương</h3>
+  </div>
+  <div class="feature-card">
+    <img src="../images/thu_vien/img.png" alt="Multiple Formats" class="feature-image">
+    <h3>Chuyến tham quan Vina của đại lý Khu vực Hậu Giang</h3>
+  </div>
+  <div class="feature-card">
+    <img src="../images/thu_vien/img.png" alt="Industry-Specific" class="feature-image">
+    <h3>Chuyến tham quan Vina của đại lý Hoàng Thị Kim Anh</h3>
+  </div>
+  <div class="feature-card">
+    <img src="../images/thu_vien/img.png" alt="Responsive Layouts" class="feature-image">
+    <h3>Tham quan Vina đại lý của NguyễnThi Hoa</h3>
+  </div>
+  </div>
+    <div class="videos">
+      <h2>Featured Videos</h2>
+      <div class="video-container">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/example1" title="YouTube video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
     </div>
   </div>
+</section>
 
-  <div class="sub-video-section">
-    <div class="sub-video">
-      <video src="../video/video1.mp4" poster="../images/main-video-thumbnail.jpg" controls></video>
-<!--      <div class="play-button">&#9658;</div>-->
-      <p>Phòng Và Điều Trị Bệnh Viêm Phổi Cho Heo</p>
-    </div>
-    <div class="sub-video">
-      <video src="../video/video1.mp4" poster="../images/main-video-thumbnail.jpg" controls></video>
-<!--      <div class="play-button">&#9658;</div>-->
-      <p>Phòng trị bệnh tiêu chảy cấp ở Lợn</p>
-    </div>
-    <div class="sub-video">
-      <video src="../video/video1.mp4" poster="../images/main-video-thumbnail.jpg" controls></video>
-<!--      <div class="play-button">&#9658;</div>-->
-      <p>Hải Dương: mô hình chăn nuôi lợn theo quy mô trang trại</p>
-    </div>
-  </div>
-</div>
+<script>
+  document.querySelectorAll('.feature-card').forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      card.style.transform = 'rotateY(10deg) rotateX(10deg)';
+    });
 
-<script src="script.js"></script>
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'rotateY(0deg) rotateX(0deg)';
+    });
+  });
+</script>
+<script src="../bootstrap/bootstrap.bundle.min.js"></script>
 </body>
 </html>
