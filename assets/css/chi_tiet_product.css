@@ -29,7 +29,7 @@ html {
 }
 
 i {
-    font-size: 20px;
+    font-size: 24px;
 }
 
 a {
@@ -39,20 +39,26 @@ a {
 }
 
 .button .btn_h:hover {
-    background-color: blue;
+    background-color: #94b83d;
+    color: black;
+}
+
+.order {
+    color: white;
 }
 
 .order .text_order, 
 .call .text_call {
     line-height: 50px;
     margin-left: 10px;
+    cursor: pointer;
 }
 
 .call {
     height: 50px;
-    width: 300px;
+    width: 200px;
     border-radius: 10px;
-    border: 1px solid blue;
+    border: 1px solid #94b83d;
     margin-left: 10px;
     line-height: 50px;
 }
@@ -67,4 +73,14 @@ a {
 
 .between {
     justify-content: space-between;
+}
+
+#toggle-button {
+    line-height: 40px;
+    height: 40px;
+    font-size: 40px;
+    background: none;
+    border: none;
+    margin-right: 50px;
+    cursor: pointer;
 }

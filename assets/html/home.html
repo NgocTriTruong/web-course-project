@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="/assets/fonts/themify-icons/themify-icons.css">
     <link rel="stylesheet" href="/assets/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
 
+    <!-- <script src="/assets/scripts/slider.js"></script> -->
+
     <style>
         .slide-show {
             /* position: relative; */
@@ -29,55 +31,70 @@
 </head>
 <body>
     <div class="slide-show">
-        <div class="list-image">
-            <video controls autoplay>
-                <source src="/assets/images/banner/Home_video_con_heo_1920x1000.mp4" type="video/mp4">
-            </video>
-            <img src="/assets/images/banner/Home_Banner_Web.jpg" alt="banner1">
-            <img src="/assets/images/banner/Home_banner_web_2.jpg" alt="banner2">
+        <div class="list-images">
+            <div>
+                <video controls autoplay>
+                    <source src="/assets/images/banner/Home_video_con_heo_1920x1000.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div>
+                <img src="/assets/images/banner/Home_Banner_Web.jpg" alt="banner1">
+            </div>
+            <div>
+                <img src="/assets/images/banner/Home_banner_web_2.jpg" alt="banner2">
+            </div>
         </div>
     </div>
     <main>
-        <div class="container">
+        <div class="container trang_chu">
             <div class="home-number mt-4 pb-4">
-                <div class="p">Chúng tôi là</div>
-                <div class="h1 mt-3">TVK - NIỀM TIN CHĂN NUÔI VIỆT</div>
+                <div class="p fw-bold">CHÚNG TÔI LÀ</div>
+                <div class="h1 fw-bold">VINA - NIỀM TIN CHĂN NUÔI VIỆT</div>
                 <div class="row">
-                    <div class="col-md-8"></div>
-                    <div class="col-md-3">
+                    <div class="col-md-8">
+                        <div class="slide_show">
+                            <div class="list_images d-flex">
+                                <img src="/assets/images/he_thong_cua_hang/nha_phan_phoi1.jpg" alt="" width="750px" height="550px">
+                                <img src="/assets/images/he_thong_cua_hang/nha_phan_phoi2.jpg" alt="" width="750px" height="550px">
+                                <img src="/assets/images/he_thong_cua_hang/nha_phan_phoi3.jpg" alt="" width="750px" height="550px">
+                                <img src="/assets/images/he_thong_cua_hang/nha_phan_phoi4.jpg" alt="" width="750px" height="550px">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 align-content-center">
                         <div class="p">
                             Tập đoàn ViNa của chúng tôi chủ yếu hoạt động trong lĩnh vực sản xuất thức ăn chăn nuôi, cung cấp cho thị trường 2 thương hiệu chính là Vina, Happy. 
                             Với tổng công suất hàng năm của 3 nhà máy là 1.000.000 tấn, cung ứng cho hơn 1.200 đại lý trên toàn Quốc
                         </div>
-                        <a href="">Tìm hiểu thêm</a>
+                        <a href=""><p class="text-dark fw-bold">Tìm hiểu thêm</p></a>
                     </div>
-                    <div>
-                        <div>
-                            <div class="p">Tổng công suất 3 nhà máy</div>
-                            <div class="p">1.000.000</div>
-                            <div class="p">tấn mỗi năm</div>
+                    <div class="d-flex flex-row-reverse mb-4">
+                        <div class="khung_near_slide2 text-start text-white fw-bold">
+                            <div class="p" style="font-size: 20px;">Cung ứng cho hơn</div>
+                            <div class="h1">1.200</div>
+                            <div class="p" style="font-size: 20px;">đại lý trên toàn quốc</div>
                         </div>
-                        <div>
-                            <div class="p">Cung ứng cho hơn</div>
-                            <div class="p">1.200</div>
-                            <div class="p">đại lý trên toàn quốc</div>
+                        <div class="khung_near_slide1 text-start text-white  fw-bold">
+                            <div class="p" style="font-size: 20px;">Tổng công suất 3 nhà máy</div>
+                            <div class="h1">1.000.000</div>
+                            <div class="p" style="font-size: 20px;">tấn mỗi năm</div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="home-number">
                 <div class="home-img">
-                    <img src="/assets/images/banner/banner1.png" alt="">
+                    <img src="/assets/images/banner/banner1.png" alt="" width="100%" height="100%">
                 </div>
                 <div class="home-text">
                     <div class="h2">SẢN PHẨM</div>
                     <div class="p">Chúng tôi luôn lấy chất lượng sản phẩm làm giá trị cốt lõi cho sự phát triển của mình, cam kết đưa ra thị trường những sản phẩm có chất lượng cao và đảm bảo an toàn cho vật nuôi và an toàn cho cộng đồng.</div>
                 </div>
-                <ul>
+                <ul class="d-flex">
                     <li>
                         <a href="">
-                            <div class="home-icon">
-                                <img src="/assets/images/represent-images/icon-pig.png" alt="Thức ăn cho heo">
+                            <div class="home_sp_icon">
+                                <img src="/assets/images/represent-images/icon-pig.png" alt="Thức ăn cho heo" width="70px" height="70px">
                             </div>
                             <div class="P">
                                 THỨC ĂN CHO HEO
@@ -86,8 +103,8 @@
                     </li>
                     <li>
                         <a href="">
-                            <div class="home-icon">
-                                <img src="/assets/images/represent-images/icon-chicken.png" alt="Thức ăn cho gà">
+                            <div class="home_sp_icon">
+                                <img src="/assets/images/represent-images/icon-chicken.png" alt="Thức ăn cho gà" width="70px" height="70px">
                             </div>
                             <div class="P">
                                 THỨC ĂN CHO GÀ
@@ -96,8 +113,8 @@
                     </li>
                     <li>
                         <a href="">
-                            <div class="home-icon">
-                                <img src="/assets/images/represent-images/icon-duck.png" alt="Thức ăn cho vịt">
+                            <div class="home_sp_icon">
+                                <img src="/assets/images/represent-images/icon-duck.png" alt="Thức ăn cho vịt" width="70px" height="70px">
                             </div>
                             <div class="P">
                                 THỨC ĂN CHO VỊT
@@ -106,8 +123,8 @@
                     </li>
                     <li>
                         <a href="">
-                            <div class="home-icon">
-                                <img src="/assets/images/represent-images/icon-cow.png" alt="Thức ăn cho bò">
+                            <div class="home_sp_icon">
+                                <img src="/assets/images/represent-images/icon-cow.png" alt="Thức ăn cho bò" width="70px" height="70px">
                             </div>
                             <div class="P">
                                 THỨC ĂN CHO BÒ
@@ -116,8 +133,8 @@
                     </li>
                     <li>
                         <a href="">
-                            <div class="home-icon">
-                                <img src="/assets/images/represent-images/icon-shrimp.png" alt="Thức ăn cho tôm">
+                            <div class="home_sp_icon">
+                                <img src="/assets/images/represent-images/icon-shrimp.png" alt="Thức ăn cho tôm" width="70px" height="70px">
                             </div>
                             <div class="P">
                                 THỨC ĂN CHO TÔM
@@ -126,8 +143,8 @@
                     </li>
                     <li>
                         <a href="">
-                            <div class="home-icon">
-                                <img src="/assets/images/represent-images/icon-fish.png" alt="Thức ăn cho cá">
+                            <div class="home_sp_icon">
+                                <img src="/assets/images/represent-images/icon-fish.png" alt="Thức ăn cho cá" width="70px" height="70px">
                             </div>
                             <div class="P">
                                 THỨC ĂN CHO CÁ
@@ -136,8 +153,8 @@
                     </li>
                     <li>
                         <a href="">
-                            <div class="home-icon">
-                                <img src="/assets/images/represent-images/icon-goat.png" alt="Thức ăn cho dê">
+                            <div class="home_sp_icon">
+                                <img src="/assets/images/represent-images/icon-goat.png" alt="Thức ăn cho dê" width="70px" height="70px">
                             </div>
                             <div class="P">
                                 THỨC ĂN CHO DÊ
@@ -206,5 +223,27 @@
             </div>
         </div>
     </main> 
+
+    <script>
+        const listImage = document.querySelector('.list_images');
+        const imgs = document.querySelectorAll('.list_images img'); // Sử dụng querySelectorAll để lấy tất cả các ảnh
+        let i = 0;
+    
+        // Xác định độ rộng của mỗi ảnh (giả sử tất cả các ảnh có chiều rộng giống nhau)
+        const imgWidth = imgs[0].offsetWidth;
+    
+        setInterval(() => {
+            if (i === imgs.length - 1) {
+                // Khi đã đến ảnh cuối cùng, quay lại ảnh đầu tiên
+                i = 0;
+                listImage.style.transform = `translateX(0)`; // Quay lại ảnh đầu tiên
+            } else {
+                // Chuyển sang ảnh tiếp theo
+                i++;
+                listImage.style.transform = `translateX(-${imgWidth * i}px)`; // Dịch chuyển ảnh sang trái
+            }
+        }, 4000); // Thay đổi ảnh mỗi 4 giây
+    </script>
+    
 </body>
 </html>

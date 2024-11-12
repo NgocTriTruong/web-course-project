@@ -8,3 +8,54 @@ html {
     scroll-behavior: smooth; /*cuộn mượt mà */
     font-family: Helvetica, Arial, sans-serif; /*set font chữ cho cả website , chữ không có chân*/
 }
+
+img {
+    image-rendering: pixelated;
+    object-fit: cover;
+}
+
+.trang_chu .slide_show {
+    width: 750px;
+}
+
+.trang_chu .list_images {
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid #ccc;
+}
+
+.trang_chu .khung_near_slide1,
+.trang_chu .khung_near_slide2 {
+    width: 280px;
+    height: 150px;
+    border-radius: 10px;
+    margin-right: 20px;
+    margin-top: -30px;
+    align-content: center;
+    padding-left: 20px;
+}
+
+.trang_chu .khung_near_slide1{
+    background-color: #fcae18;
+}
+
+.trang_chu .khung_near_slide2{
+    background-color: #94b83d;
+}
+
+.trang_chu .home_sp_icon {
+    width: 105px;
+    height: 105px;
+    border-radius: 50%;
+    background-color: #94b83d;
+    border: 3px solid gray;
+}
+
+li {
+    list-style-type: none;
+    width: calc(100% / 7);
+}
+
+li a {
+    text-decoration: none;
+}

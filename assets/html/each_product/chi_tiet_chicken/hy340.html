@@ -12,19 +12,24 @@
     <link rel="stylesheet" href="/assets/css/chi_tiet_product.css">
 
     <link rel="stylesheet" href="/assets/fonts/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="/assets/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
 </head>
 <body>
     <div class="container">
         <div class="content text-center pb-5">
             <div class="row">
                 <div class="col-md-4">
-                    <img src="/assets/images/product/chicken/340_Font.png" alt="" width="350px" height="100%">
+                    <img src="/assets/images/product/chicken/340_Font.png" alt="" width="350px" height="100%" style="object-fit: cover;">
                 </div>
                 <div class="col-md-1"></div>
                 <div class="col-md-6 text-start">
-                    <div class="h1 text-primary mt-5 mb-3">HAPPY 340</div>
+                    <div class="h1 mt-5 mb-3" style="color:#94b83d;">HAPPY 340</div>
+                    <div class="h5 mt-3 mb-3">Dùng cho gà siêu thịt từ 01 đến 21 ngày tuổi</div>
                     <div class="line_red"></div>
-                    <div class="p mt-3 mb-3">Dùng cho gà siêu thịt từ 01 đến 21 ngày tuổi</div>
+                    <div class="d-flex mt-3 mb-3">
+                        <div class="h5 fw-bold p_bold text-start">Giá: </div>
+                        <div class="h4 text-danger">450.000 vnđ</div>
+                    </div>
                     <div class="line_gray"></div>
                     <div class="d-flex mt-2">
                         <div class="p fw-bold p_bold">Mã SP:</div>
@@ -44,26 +49,24 @@
                             Gà siêu thịt từ 01 đến 21 ngày tuổi</div>
                     </div>
                     <div class="d-flex mt-2">
-                        <div class="p fw-bold p_bold">Lượt xem:</div>
-                        <div class="p">2341</div>
+                        <div class="p fw-bold p_bold">Lượt mua (bao):</div>
+                        <div class="p">2.341</div>
                     </div>
-                    <div class="button d-flex mt-3">
-                        <div class="btn_h order d-flex justify-content-center text-white">
+                    <div class="button d-flex mt-3 ms-5">
+                        <div class="btn_h order d-flex justify-content-center">
                             <div style="padding-top: 3px;">
-                                <i class="ti-email"></i>
+                                <i class="fa-solid fa-cart-plus"></i>
                             </div>
-                            <div class="h5 text_order">Liên hệ đặt hàng</div>
+                            <div class="h5 text_order">Thêm vào giỏ hàng</div>
                         </div>
                         <div class="btn_h call d-flex justify-content-center">
-                            <div style="padding-top: 3px;">
-                                <i class="ti-mobile"></i>
-                            </div>
-                            <div class="h5 text_call">Gọi tư vấn: <span style="color: red;">0123456789</span></div>
+                            <div class="h5 text_call">Mua ngay</div>
                         </div>
                     </div>
                     <div class="share d-flex mt-4">
-                        <div class="p text-start me-4">Chia sẻ:</div>
+                        <div class="p text-start me-4">Liên hệ:</div>
                         <div class="d-flex ms-2">
+                            <div class="h5 me-3">012.3456789</div>
                             <a href="#"><i class="ti-facebook"></i></a>
                             <a href="#"><i class="ti-twitter"></i></a>
                             <a href="#"><i class="ti-instagram"></i></a>
@@ -74,17 +77,22 @@
         </div>
     </div>
 
+
+
+
+
+
     <div class="container-fluid">
         <div class="container">
             <div class="content d-flex between mt-4">
-                <div class="h3">Mô tả sản phẩm</div>
-                <div class="line_white"></div>
+                <div class="h3" style="padding-top: 6px;">Mô tả sản phẩm</div>
+                <button id="toggle-button" onclick="toggleDescription()">+</button>
             </div>
         </div>
     </div>
     
     <div class="container">
-        <div class="content mt-3">
+        <div id="description-content" style="display: none;" class="content mt-3">
             <div class="p text-start mb-2">
                 + HAPPY 340 dùng cho gà siêu thịt từ 01 đến 21 ngày tuổi.
             </div>
@@ -269,5 +277,27 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function toggleDescription() {
+    var content = document.getElementById("description-content");
+    var button = document.getElementById("toggle-button");
+
+    if (content.style.display === "none") {
+        content.style.display = "block";
+        button.textContent = "-";
+        button.style.fontSize = "70px";
+        button.style.height = "33px";
+        button.style.lineHeight = "33px";
+    } else {
+        content.style.display = "none";
+        button.textContent = "+";
+        button.style.fontSize = "40px";
+        button.style.height = "40px";
+        button.style.lineHeight = "40px";
+    }
+}
+
+    </script>
 </body>
 </html>
