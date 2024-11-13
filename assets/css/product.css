@@ -16,7 +16,6 @@
     letter-spacing: 10px;
     font-weight: bold;
     position: relative;
-    z-index: 1;
 }
 
 /* Add a transparent overlay effect */
@@ -40,21 +39,44 @@
         font-weight: bold;
         letter-spacing: 5px;
     }
-}
 
 #production-text {
     font-size: 18px;
     text-align: center;
 }
 
-.heo-section, .vit-section, .tom-section, .de-section {
-    background-color: #e1f1e1; /* Light blue background for the pig feed section */
-    width: 100%;
+.ga-section {
+    background-color: #fafada; /* Light pink background for the chicken feed section */
+    width: 900px;
+    height: 420px;
+    align-content: center;
+    border-radius: 10px;
 }
 
-.ga-section, .bo-section, .ca-section {
-    background-color: #fafada; /* Light pink background for the chicken feed section */
+.ga-section .slide {
+    margin-top: 30px;
+    margin-left: 170px;
 }
+
+.heo-section {
+    background-color: #e1f1e1; /* Light blue background for the pig feed section */
+    width: 900px;
+    height: 420px;
+    align-content: center;
+    border-radius: 10px;
+}
+
+.heo-section .slide {
+    margin-top: 30px;
+    margin-right: 170px;
+}
+
+.image_dv_number {
+    position: absolute;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
 
 .heo-section h2, .ga-section h2,
 .vit-section h2, .bo-section h2,
@@ -96,11 +118,11 @@
 }
 
 .carousel-item {
-    transition: transform 5s ease; /* Smooth transition for slides */
+    transition: transform 3s ease; /* Smooth transition for slides */
 }
 
 .carousel-control-prev-icon, .carousel-control-next-icon {
-    background-color: black; /* Color for the prev/next icons */
+    background-color: rgba(0, 0, 0, 0.7); /* Color for the prev/next icons */
     border-radius: 50%;
 }
 
