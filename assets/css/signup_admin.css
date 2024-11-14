@@ -54,8 +54,8 @@ label {
 }
 
 input.form-control {
-    background-color: rgba(255, 255, 255, 0.07);
-    color: #fff;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: black;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 8px;
     font-size: 14px;
@@ -91,7 +91,7 @@ button.btn:focus {
 
 /* Optional hover effect on input fields */
 input.form-control:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.9);
 }
 
 /* Link to Login page */
