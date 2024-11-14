@@ -1,0 +1,105 @@
+/* General reset and box-sizing */
+*, *:before, *:after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Body background and font */
+body {
+    background-color: #080710;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Center the signup form in the middle of the page */
+.d-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Styling the signup form container */
+.signup-admin {
+    width: 400px;
+    padding: 40px;
+    background-color: rgba(255, 255, 255, 0.13);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Form styling */
+form {
+    position: relative;
+}
+
+/* Heading */
+h3 {
+    font-size: 32px;
+    font-weight: 500;
+    text-align: center;
+    color: #fff;
+    margin-bottom: 30px;
+}
+
+/* Label and input styling */
+label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 8px;
+}
+
+input.form-control {
+    background-color: rgba(255, 255, 255, 0.07);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    font-size: 14px;
+    padding: 12px;
+    margin-bottom: 20px;
+}
+
+input.form-control:focus {
+    border-color: #23a2f6;
+    box-shadow: 0 0 5px rgba(35, 162, 246, 0.6);
+}
+
+/* Button styling */
+button.btn {
+    background-color: #fff;
+    color: #080710;
+    padding: 15px 0;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button.btn:hover {
+    background-color: #23a2f6;
+    color: #fff;
+}
+
+button.btn:focus {
+    outline: none;
+}
+
+/* Optional hover effect on input fields */
+input.form-control:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Link to Login page */
+a.text-primary {
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+a.text-primary:hover {
+    color: #1845ad;
+}
