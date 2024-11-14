@@ -1,30 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-  <link rel="stylesheet" href="/Project_Web_2024/assets/css/login_admin.css">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login</title>
+  <!-- Bootstrap CSS -->
+  <link href="../../bootstrap/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/login_admin.css">
 </head>
-<body>
-<div class="login-admin">
-  <div class="login-admin-1">
-    <div class="shape"></div>
-    <div class="shape"></div>
+<body class="bg-dark">
+
+<div class="d-flex justify-content-center align-items-center min-vh-100">
+  <div class="login-admin rounded-3 p-4 position-relative" style="width: 400px; background-color: rgba(255, 255, 255, 0.13); backdrop-filter: blur(10px); box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);">
+    <h3 class="text-center text-white mb-4">Login</h3>
+
+    <form id="login-form">
+      <div class="mb-3">
+        <label for="username" class="form-label text-white">Username</label>
+        <input type="text" class="form-control" id="username" placeholder="Enter Username" required>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label text-white">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="Enter Password" required>
+      </div>
+      <button type="submit" class="btn btn-light w-100">Login</button>
+    </form>
+
+    <!-- Registration Link -->
+    <div class="text-center mt-3">
+      <p class="text-white">Don't have an account? <a href="../../html/admin/signUp_admin.html" class="text-decoration-none text-primary">Sign Up</a></p>
+    </div>
   </div>
-  <form id="login-form">
-    <h3>Login</h3>
-
-    <label for="username">Username</label>
-    <input type="text" name="username" id="username" placeholder="Enter Username">
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password" placeholder="Enter Password">
-
-    <button type="submit">Login</button>
-  </form>
 </div>
-<script src="/Project_Web_2024/assets/scripts/admin/login-admin.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="../../bootstrap/bootstrap.bundle.min.js"></script>
+<script src="../../scripts/admin/login-admin.js"></script>
 </body>
 </html>
