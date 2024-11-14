@@ -1,0 +1,110 @@
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8f9fa;
+}
+
+.sidebar-title h4 {
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.nav-link {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+.nav-link:hover {
+    background-color: #495057;
+    border-radius: 5px;
+}
+
+.nav-link i {
+    margin-right: 10px;
+}
+
+.main-content {
+    padding: 20px;
+}
+
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: none;
+    border-radius: 10px;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.table {
+    margin-top: 20px;
+}
+
+.table th, .table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.btn-primary, .btn-warning, .btn-danger {
+    margin-right: 10px;
+    border-radius: 20px;
+}
+
+#logout-btn {
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+/* Sidebar */
+#sidebar {
+    background-color: #343a40;
+    padding: 20px;
+}
+
+#sidebar ul {
+    padding-left: 0;
+}
+
+#sidebar li {
+    list-style: none;
+}
+
+#sidebar li a {
+    color: #ffffff;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#sidebar li a:hover {
+    background-color: #495057;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    #sidebar {
+        padding: 10px;
+    }
+    .sidebar-title h4 {
+        font-size: 18px;
+    }
+    .nav-link {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 576px) {
+    .main-content {
+        padding: 10px;
+    }
+    .card-title {
+        font-size: 16px;
+    }
+    .table {
+        font-size: 14px;
+    }
+}
+

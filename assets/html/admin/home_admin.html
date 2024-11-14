@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="../../bootstrap/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../../css/admin_home.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body class="bg-light">
+
+<div class="container-fluid">
+  <div class="row">
+    <!-- Sidebar -->
+    <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-dark text-white">
+      <div class="sidebar-title text-center mt-4 mb-4">
+        <h4>Admin Dashboard</h4>
+      </div>
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link text-white" href="javascript:void(0);" id="product-management-link">
+            <i class="fas fa-cogs"></i> Quản lý Sản phẩm
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="javascript:void(0);" id="user-management-link">
+            <i class="fas fa-users"></i> Quản lý Người dùng
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#">
+            <i class="fas fa-chart-line"></i> Thống kê Hàng đã bán
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#">
+            <i class="fas fa-chart-pie"></i> Thống kê Người dùng
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#">
+            <i class="fas fa-box"></i> Thống kê Tổng Sản phẩm
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-4 main-content">
+      <div class="d-flex justify-content-between align-items-center">
+        <h2 class="mt-4">Dashboard</h2>
+        <button id="logout-btn" class="btn btn-danger">Logout</button>
+      </div>
+
+      <!-- Product Management Section -->
+      <div class="row mt-4" id="product-management" style="display:none;">
+        <div class="col-md-12">
+          <h3>Quản lý Sản phẩm</h3>
+          <button id="add-product-btn" class="btn btn-primary">Thêm Sản phẩm</button>
+          <button id="edit-product-btn" class="btn btn-warning">Sửa Sản phẩm</button>
+          <button id="delete-product-btn" class="btn btn-danger">Xóa Sản phẩm</button>
+          <table id="product-table" class="table table-striped mt-3">
+            <thead>
+            <tr>
+              <th>ID</th>
+              <th>Tên Sản phẩm</th>
+              <th>Giá</th>
+              <th>Hành động</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Các sản phẩm sẽ được thêm ở đây -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- User Management Section -->
+      <div class="row mt-4" id="user-management" style="display:none;">
+        <div class="col-md-12">
+          <h3>Quản lý Người dùng</h3>
+          <button id="add-user-btn" class="btn btn-primary">Thêm Người dùng</button>
+          <button id="edit-user-btn" class="btn btn-warning">Sửa Người dùng</button>
+          <button id="delete-user-btn" class="btn btn-danger">Xóa Người dùng</button>
+          <table id="user-table" class="table table-striped mt-3">
+            <thead>
+            <tr>
+              <th>ID</th>
+              <th>Tên Người dùng</th>
+              <th>Email</th>
+              <th>Hành động</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Các người dùng sẽ được thêm ở đây -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Statistics Section -->
+      <div class="row mt-4">
+        <!-- Sales Statistics -->
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Thống kê Hàng đã bán</h5>
+              <canvas id="salesChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- User Statistics -->
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Thống kê Người dùng</h5>
+              <canvas id="userChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Total Product Statistics -->
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Thống kê Tổng Sản phẩm</h5>
+              <canvas id="productChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="../../bootstrap/bootstrap.bundle.min.js"></script>
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Custom JS -->
+<script src="../../scripts/admin_home.js"></script>
+</body>
+</html>
