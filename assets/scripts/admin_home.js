@@ -193,9 +193,21 @@ document.getElementById('user-management-link').addEventListener('click', functi
     toggleSection('user-management');
 });
 
+document.getElementById('sales-statistics-link').addEventListener('click', function() {
+    toggleSection('sales-statistics');
+});
+
+document.getElementById('user-statistics-link').addEventListener('click', function() {
+    toggleSection('user-statistics');
+});
+
+document.getElementById('product-statistics-link').addEventListener('click', function() {
+    toggleSection('product-statistics');
+});
+
 // Function to toggle visibility of a section
 function toggleSection(sectionId) {
-    const sections = ['product-management', 'user-management'];
+    const sections = ['product-management', 'user-management', 'sales-statistics', 'user-statistics', 'product-statistics'];
     sections.forEach(id => {
         const section = document.getElementById(id);
         if (id === sectionId) {
