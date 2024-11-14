@@ -11,61 +11,10 @@
     <link rel="stylesheet" href="/assets/fonts/themify-icons/themify-icons.css">
     <link rel="stylesheet" href="/assets/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
 
-     <script src="/assets/scripts/slider.js"></script>
-
-    <style>
-        /*.slide-show {*/
-        /*    width: 100%;*/
-        /*    height: 650px;*/
-        /*    overflow: hidden;*/
-        /*}*/
-
-        /*.list-images {*/
-        /*    position: relative;*/
-        /*    height: 100%;*/
-        /*}*/
-
-        /*.list-images div {*/
-        /*    position: absolute;*/
-        /*    width: 100%;*/
-        /*    height: 100%; !* Ensure all slides take the full height *!*/
-        /*    opacity: 0;*/
-        /*    transition: opacity 1s ease;*/
-        /*    overflow: hidden; !* Hide any overflow *!*/
-        /*}*/
-
-        /*.list-images div.active {*/
-        /*    opacity: 1;*/
-        /*    position: relative;*/
-        /*}*/
-
-        /*!* Position buttons *!*/
-        /*.slide-show .prev, .slide-show .next {*/
-        /*    cursor: pointer;*/
-        /*    position: absolute;*/
-        /*    top: 50%;*/
-        /*    width: auto;*/
-        /*    padding: 16px;*/
-        /*    border-radius: 50px;*/
-        /*    color: black;*/
-        /*    font-weight: bold;*/
-        /*    font-size: 18px;*/
-        /*    transition: 0.3s;*/
-        /*    border: none;*/
-        /*    background-color: rgba(255, 255, 255, 1);*/
-        /*}*/
-
-        /*.slide-show .prev {*/
-        /*    left: 10px;*/
-        /*}*/
-
-        /*.slide-show .next {*/
-        /*    right: 10px;*/
-        /*}*/
-    </style>
+    <script src="/assets/scripts/slider.js"></script>
 </head>
 <body>
-    <div class="slide-show">
+    <div class="slide-show-1">
         <div class="list-images">
             <div>
                 <video class="w-100" controls autoplay>
@@ -73,6 +22,7 @@
                 </video>
             </div>
             <div>
+                <p class="slide_in_para fw-bold text-start">Tập đoàn thức ăn chăn nuôi hàng đầu Việt Nam với chất lượng quốc tế</p>
                 <img class="w-100" src="/assets/images/banner/Home_Banner_Web.jpg" alt="banner1">
             </div>
             <div>
@@ -80,8 +30,8 @@
             </div>
         </div>
 
-        <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
-        <button class="next" onclick="changeSlide(1)">&#10095;</button>
+        <button class="prev" onclick="changeSlideFirst(-1)">&#10094;</button>
+        <button class="next" onclick="changeSlideFirst(1)">&#10095;</button>
     </div>
     <main>
         <div class="container trang_chu">
@@ -202,6 +152,29 @@
                 </ul>
             </div>
 
+            <div class="slide-show-2">
+                <div class="list-products">
+                    <div class="active">
+                        <img src="/assets/images/product/pig/48A.png" alt="pig-product-1" width="20%" height="30%">
+                        <h5>48A</h5>
+                        <p>Dùng cho lợn từ 5kg đến xuất chuồng</p>
+                    </div>
+                    <div>
+                        <img src="/assets/images/product/pig/100S_Font.png" alt="pig-product-1" width="20%" height="30%">
+                        <h5>100S</h5>
+                        <p>Dùng cho lợn sữa từ 5 ngày tuổi đến 8kg</p>
+                    </div>
+                    <div>
+                        <img src="/assets/images/product/pig/101S_Font.png" alt="pig-product-1" width="20%" height="30%">
+                        <h5>101S</h5>
+                        <p>Dùng cho lợn con từ tập ăn đến 20kg</p>
+                    </div>
+                </div>
+
+                <button class="prev" onclick="changeSlideSecond(-1)">&#10094;</button>
+                <button class="next" onclick="changeSlideSecond(1)">&#10095;</button>
+            </div>
+
             <div class="home-tu-van">
                 <div class="h1">TƯ VẤN KỸ THUẬT</div>
                 <div class="row">
@@ -260,69 +233,6 @@
                 <img src="/assets/images/gioi_thieu/vuong_quoc_te.jpg" alt="">
             </div>
         </div>
-    </main> 
-
-    <script>
-        // const listImage = document.querySelector('.list_images');
-        // const imgs = document.querySelectorAll('.list_images img'); // Sử dụng querySelectorAll để lấy tất cả các ảnh
-        // let i = 0;
-        //
-        // // Xác định độ rộng của mỗi ảnh (giả sử tất cả các ảnh có chiều rộng giống nhau)
-        // const imgWidth = imgs[0].offsetWidth;
-        //
-        // setInterval(() => {
-        //     if (i === imgs.length - 1) {
-        //         // Khi đã đến ảnh cuối cùng, quay lại ảnh đầu tiên
-        //         i = 0;
-        //         listImage.style.transform = `translateX(0)`; // Quay lại ảnh đầu tiên
-        //     } else {
-        //         // Chuyển sang ảnh tiếp theo
-        //         i++;
-        //         listImage.style.transform = `translateX(-${imgWidth * i}px)`; // Dịch chuyển ảnh sang trái
-        //     }
-        // }, 4000); // Thay đổi ảnh mỗi 4 giây
-
-
-
-        // document.addEventListener("DOMContentLoaded", function () {
-        //     let slides = document.querySelectorAll(".list-images div");
-        //     let currentIndex = 0;
-        //     let slideInterval;
-        //
-        //     function showSlide(index) {
-        //         slides.forEach((slide, i) => {
-        //             slide.classList.remove("active");  // Hide all slides
-        //         });
-        //         slides[index].classList.add("active");  // Show the current slide
-        //     }
-        //
-        //     function nextSlide() {
-        //         currentIndex = (currentIndex + 1) % slides.length;
-        //         showSlide(currentIndex);
-        //     }
-        //
-        //     function changeSlide(direction) {
-        //         // Clear the interval to pause automatic sliding when a button is clicked
-        //         clearInterval(slideInterval);
-        //
-        //         // Update the slide index
-        //         currentIndex = (currentIndex + direction + slides.length) % slides.length;
-        //         showSlide(currentIndex);
-        //
-        //         // Restart the interval for automatic sliding after a short delay
-        //         slideInterval = setInterval(nextSlide, 5000);
-        //     }
-        //
-        //     // Initial slide display
-        //     showSlide(currentIndex);
-        //
-        //     // Set the interval for automatic sliding
-        //     slideInterval = setInterval(nextSlide, 5000);
-        //
-        //     // Attach button events
-        //     window.changeSlide = changeSlide;  // Expose the function to the global scope
-        // });
-    </script>
-    
+    </main>
 </body>
 </html>
