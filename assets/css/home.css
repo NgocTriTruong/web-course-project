@@ -238,3 +238,34 @@ img {
 .slide-show-2 .next {
     right: -40px;
 }
+
+/* Home tu van */
+.home-tu-van .tu_van_text {
+    width: 600px;
+    margin: 0 auto;
+}
+
+.home-tu-van img {
+    border-radius: 20px;
+    max-width: 100%;
+    transition: transform 1s ease;
+    border-radius: 20px;
+}
+
+.home-tu-van .tu-van-number {
+    max-width: 290px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 20px;
+}
+
+.home-tu-van .tu-van-number:hover img {
+    transform: scale(1.2);
+}
+
+/*  */
+.quoc_te_text {
+    width: 80%;
+    margin: 0 auto;
+    font-size: 18px;
+}
