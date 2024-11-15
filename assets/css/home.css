@@ -180,9 +180,13 @@ img {
     justify-content: space-around;
     width: 100%;
     padding: 40px;
+    position: relative;
+}
+
+.slide-show-2 img {
+    width: 60%;
     border-radius: 50%;
     border: 5px solid red;
-    position: relative;
 }
 
 /* Individual product styling */
