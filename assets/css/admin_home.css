@@ -2,6 +2,7 @@
 body {
     font-family: 'Roboto', sans-serif;
     background-color: #f8f9fa;
+    color: #212529;
 }
 
 .sidebar-title h4 {
@@ -12,11 +13,13 @@ body {
 .nav-link {
     font-size: 16px;
     margin: 5px 0;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
 .nav-link:hover {
     background-color: #495057;
-    border-radius: 5px;
 }
 
 .nav-link i {
@@ -31,6 +34,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border: none;
     border-radius: 10px;
+    margin-bottom: 20px;
 }
 
 .card-title {
@@ -40,16 +44,18 @@ body {
 
 .table {
     margin-top: 20px;
+    text-align: center;
 }
 
 .table th, .table td {
-    text-align: center;
     vertical-align: middle;
 }
 
 .btn-primary, .btn-warning, .btn-danger {
     margin-right: 10px;
     border-radius: 20px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
 }
 
 #logout-btn {
@@ -75,8 +81,6 @@ body {
     color: #ffffff;
     text-decoration: none;
     display: block;
-    padding: 10px;
-    border-radius: 5px;
 }
 
 #sidebar li a:hover {
@@ -106,6 +110,13 @@ body {
     .table {
         font-size: 14px;
     }
+}
+
+.card-body {
+    position: relative;
+    width: 400px; /* Adjust width as needed */
+    height: 200px; /* Adjust height as needed */
+    margin: 0 auto; /* Center align */
 }
 
 

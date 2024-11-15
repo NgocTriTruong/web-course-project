@@ -13,6 +13,7 @@ var salesChart = new Chart(ctxSales, {
     },
     options: {
         responsive: true,
+        maintainAspectRatio: false,
         scales: {
             x: {
                 beginAtZero: true
@@ -34,7 +35,8 @@ var userChart = new Chart(ctxUser, {
         }]
     },
     options: {
-        responsive: true
+        responsive: true,
+        maintainAspectRatio: false
     }
 });
 
@@ -51,9 +53,11 @@ var productChart = new Chart(ctxProduct, {
         }]
     },
     options: {
-        responsive: true
+        responsive: true,
+        maintainAspectRatio: false
     }
 });
+
 
 document.addEventListener("DOMContentLoaded", function () {
     // Mock data for products and users
