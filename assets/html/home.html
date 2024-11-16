@@ -24,7 +24,7 @@
     <div class="slide-show-1">
         <div class="list-images">
             <div>
-                <video class="w-100" controls autoplay>
+                <video class="w-100" controls autoplay muted>
                     <source src="/assets/images/banner/Home_video_con_heo_1920x1000.mp4" type="video/mp4">
                 </video>
             </div>
@@ -55,14 +55,19 @@
                 <div class="home-number mt-4 pb-4">
                     <div class="p fw-bold">CHÚNG TÔI LÀ</div>
                     <div class="h2 fw-bold mb-3">VINA - NIỀM TIN CHĂN NUÔI VIỆT</div>
-                    <div class="row">
+                    <div class="row mt-4">
                         <div class="col-md-8">
-                            <div class="slide_show">
-                                <div class="list_images d-flex">
-                                    <img src="/assets/images/he_thong_cua_hang/nha_phan_phoi1.jpg" alt="" width="750px" height="550px">
-                                    <img src="/assets/images/he_thong_cua_hang/nha_phan_phoi2.jpg" alt="" width="750px" height="550px">
-                                    <img src="/assets/images/he_thong_cua_hang/nha_phan_phoi3.jpg" alt="" width="750px" height="550px">
-                                    <img src="/assets/images/he_thong_cua_hang/nha_phan_phoi4.jpg" alt="" width="750px" height="550px">
+                            <div id="imageSlider" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img src="/assets/images/he_thong_cua_hang/nha_phan_phoi1.jpg" class="d-block w-100" alt="Slide 1" style="height: 550px;">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="/assets/images/he_thong_cua_hang/nha_phan_phoi2.jpg" class="d-block w-100" alt="Slide 2" style="height: 550px;">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="/assets/images/he_thong_cua_hang/nha_phan_phoi3.jpg" class="d-block w-100" alt="Slide 3" style="height: 550px;">
+                                    </div>
                                 </div>
                             </div>
                         </div>
