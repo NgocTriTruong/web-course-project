@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard</title>
+  <title>Dashboard</title>
 
   <!-- Bootstrap CSS -->
   <link href="../../bootstrap/bootstrap.min.css" rel="stylesheet">
@@ -19,7 +19,7 @@
     <!-- Sidebar -->
     <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-dark text-white vh-100">
       <div class="sidebar-title text-center mt-4 mb-4">
-        <h4>Admin Dashboard</h4>
+        <h4>Dashboard</h4>
       </div>
       <ul class="nav flex-column">
         <li class="nav-item">
@@ -33,17 +33,17 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" href="#">
+          <a class="nav-link text-white" href="javascript:void(0);" id="sales-statistics-link">
             <i class="fas fa-chart-line"></i> Thống kê Hàng đã bán
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" href="#">
+          <a class="nav-link text-white" href="javascript:void(0);" id="user-statistics-link">
             <i class="fas fa-chart-pie"></i> Thống kê Người dùng
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" href="#">
+          <a class="nav-link text-white" href="javascript:void(0);" id="product-statistics-link">
             <i class="fas fa-box"></i> Thống kê Tổng Sản phẩm
           </a>
         </li>
@@ -103,38 +103,42 @@
         </div>
       </div>
 
-      <!-- Statistics Section -->
-      <div class="row mt-4">
-        <!-- Sales Statistics -->
-        <div class="col-md-4">
+      <!-- Sales Statistics Section -->
+      <div class="row mt-4" id="sales-statistics" style="display:none;">
+        <div class="col-md-12">
+          <h3>Thống kê Hàng đã bán</h3>
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Thống kê Hàng đã bán</h5>
-              <canvas id="salesChart"></canvas>
-            </div>
-          </div>
-        </div>
-
-        <!-- User Statistics -->
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Thống kê Người dùng</h5>
-              <canvas id="userChart"></canvas>
-            </div>
-          </div>
-        </div>
-
-        <!-- Total Product Statistics -->
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Thống kê Tổng Sản phẩm</h5>
-              <canvas id="productChart"></canvas>
+              <canvas id="salesChart" width="400" height="200"></canvas>
             </div>
           </div>
         </div>
       </div>
+
+      <!-- User Statistics Section -->
+      <div class="row mt-4" id="user-statistics" style="display:none;">
+        <div class="col-md-12">
+          <h3>Thống kê Người dùng</h3>
+          <div class="card">
+            <div class="card-body">
+              <canvas id="userChart" width="400" height="200"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Statistics Section -->
+      <div class="row mt-4" id="product-statistics" style="display:none;">
+        <div class="col-md-12">
+          <h3>Thống kê Tổng Sản phẩm</h3>
+          <div class="card">
+            <div class="card-body">
+              <canvas id="productChart" width="400" height="200"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </main>
   </div>
 </div>
@@ -145,5 +149,10 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <!-- Custom JS -->
 <script src="../../scripts/admin_home.js"></script>
+
+<script>
+
+</script>
+
 </body>
 </html>

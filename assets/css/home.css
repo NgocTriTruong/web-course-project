@@ -55,7 +55,7 @@ html {
     color: #2E4EA1;
     opacity: 0;
     position: absolute;
-    top: 40%;
+    top: 20%;
     left: 5%;
     transform: translateX(50%);
     width: 40%;
@@ -86,11 +86,15 @@ html {
 
 .slide-show-1 .prev {
     left: 10px;
+    top: 300px;
 }
 
 .slide-show-1 .next {
     right: 10px;
+    top: 300px;
 }
+
+/* HOME */
 
 .trang_chu .slide_show-1 {
     width: 750px;
@@ -121,21 +125,43 @@ html {
     background-color: #94b83d;
 }
 
+.trang_chu .home-sp {
+    position: relative;
+}
+
+.trang_chu .home-sp .home-text {
+    position: absolute;
+    top: 200px;
+    margin-left: 250px;
+}
+
+.trang_chu .home_icon {
+    position: absolute;
+    bottom: -81px;
+    right: 35px;
+}
+
 .trang_chu .home_sp_icon {
-    width: 105px;
-    height: 105px;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
     border-radius: 50%;
     background-color: #94b83d;
-    border: 3px solid gray;
+    border: 5px solid white;
 }
 
-li {
+.trang_chu li {
     list-style-type: none;
-    width: calc(100% / 7);
+    padding: 0 10px;
 }
 
-li a {
+.trang_chu li a {
     text-decoration: none;
+} 
+
+.trang_chu li a img {
+    margin-left: 20px;
+    margin-top: 17px;
 }
 
 .slide-show-2 {
@@ -251,4 +277,35 @@ li a {
 
 .slide-2-controls .next {
     margin-right: 1rem;
+}
+
+/* Home tu van */
+.home-tu-van .tu_van_text {
+    width: 600px;
+    margin: 0 auto;
+}
+
+.home-tu-van img {
+    border-radius: 20px;
+    max-width: 100%;
+    transition: transform 1s ease;
+    border-radius: 20px;
+}
+
+.home-tu-van .tu-van-number {
+    max-width: 290px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 20px;
+}
+
+.home-tu-van .tu-van-number:hover img {
+    transform: scale(1.2);
+}
+
+/*  */
+.quoc_te_text {
+    width: 80%;
+    margin: 0 auto;
+    font-size: 18px;
 }
