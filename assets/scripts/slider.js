@@ -38,44 +38,43 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-    let slides = document.querySelectorAll(".slide-show-2 .list-products div");
-    let currentIndex = 0;
-    let slideInterval;
+    let slidesSecond = document.querySelectorAll(".slide-show-2 .list-products .item");
+    let currentIndexSecond = 0;
+    let slideIntervalSecond;
 
-    function showSlide(index) {
-        slides.forEach((slide, i) => {
-            slide.classList.remove("active");  // Hide all slides
-            if (i === index) {
-                slide.classList.add("active");  // Show the current slide
-            }
+    function showSlideSecond(index) {
+        slidesSecond.forEach((slide, i) => {
+            slide.classList.remove("active"); // Hide all slides
         });
+        slidesSecond[index].classList.add("active"); // Show the current slide
     }
 
-    function nextSlide() {
-        currentIndex = (currentIndex + 1) % slides.length;
-        showSlide(currentIndex);
+    function nextSlideSecond() {
+        currentIndexSecond = (currentIndexSecond + 1) % slidesSecond.length;
+        showSlideSecond(currentIndexSecond);
     }
 
-    function changeSlide(direction) {
+    function changeSlideSecond(direction) {
         // Clear the interval to pause automatic sliding when a button is clicked
-        clearInterval(slideInterval);
+        clearInterval(slideIntervalSecond);
 
         // Update the slide index
-        currentIndex = (currentIndex + direction + slides.length) % slides.length;
-        showSlide(currentIndex);
+        currentIndexSecond = (currentIndexSecond + direction + slidesSecond.length) % slidesSecond.length;
+        showSlideSecond(currentIndexSecond);
 
         // Restart the interval for automatic sliding after a short delay
-        slideInterval = setInterval(nextSlide, 5000);
+        slideIntervalSecond = setInterval(nextSlideSecond, 5000);
     }
 
     // Initial slide display
-    showSlide(currentIndex);
+    showSlideSecond(currentIndexSecond);
 
     // Set the interval for automatic sliding
-    slideInterval = setInterval(nextSlide, 5000);
+    slideIntervalSecond = setInterval(nextSlideSecond, 5000);
 
     // Attach button events
-    window.changeSlideSecond = changeSlide;  // Expose the function to the global scope
+    window.changeSlideSecond = changeSlideSecond; // Expose the function to the global scope
 });
+
 
 

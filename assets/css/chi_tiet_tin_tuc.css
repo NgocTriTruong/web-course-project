@@ -3,7 +3,7 @@ html, body {
     height: 100%;
     margin-left: auto;
     margin-right: auto;
-    font-size: 13px;
+    /* font-size: 13px; */
     font-family: sans-serif, Tahoma;
 }
 
@@ -12,59 +12,59 @@ body {
     background-color: #f9f9f9;
 }
 
-.tin_tuc {
-    max-width: 1000px !important;
+.main .tin_tuc {
+    max-width: 1000px;
 }
 
-h1 {
-    font-size: 2.5rem  !important;
-    font-weight: bold !important;
+.main h1 {
+    font-size: 2.5rem ;
+    font-weight: bold;
     color: #333;
 }
 
-.container p:not(.img-label) {
-    font-size: 18px !important;
+.main .container p:not(.img-label) {
+    font-size: 18px;
     color: #555;
 }
 
-.text-center img {
+.main .text-center img {
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.img-label {
+.main .img-label {
     background-color: #eae7e7;
     padding: 5px 0;
-    font-size: 14px !important;
+    font-size: 14px;
     font-style: italic;
 }
 
-a {
+.main  a {
     text-decoration: none;
 }
 
-.carousel-item {
+.main .carousel-item {
     padding: 0 15px;
 }
-.news-card {
+.main .news-card {
     height: 100%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     overflow: hidden;
     background-color: white;
 }
-.news-card img {
+.main .news-card img {
     width: 100%;
     height: auto;
 }
 
-.news-card .card-body {
+.main .news-card .card-body {
     padding: 15px;
 }
 
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
+.main .carousel-control-prev-icon,
+.main .carousel-control-next-icon {
     background-color: rgba(0, 0, 0, 0.5); /* Dark background for better visibility */
     border-radius: 50%; /* Optional: make them round */
     width: 30px;

@@ -7,11 +7,18 @@
     <link rel="stylesheet" href="/assets/bootstrap/bootstrap.bundle.min.js">
     <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/home.css">
-
+    
     <link rel="stylesheet" href="/assets/fonts/themify-icons/themify-icons.css">
     <link rel="stylesheet" href="/assets/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
-
+    
     <script src="/assets/scripts/slider.js"></script>
+    <script src="/assets/scripts/add_layout/add_layout.js" defer></script>
+    
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+    
+    <link rel="stylesheet" href="/assets/css/layout/header_only_home.css">
+    <link rel="stylesheet" href="/assets/css/layout/footer.css">
 </head>
 <body>
     <div class="slide-show-1">
@@ -33,206 +40,356 @@
         <button class="prev" onclick="changeSlideFirst(-1)">&#10094;</button>
         <button class="next" onclick="changeSlideFirst(1)">&#10095;</button>
     </div>
-    <main>
-        <div class="container trang_chu">
-            <div class="home-number mt-4 pb-4">
-                <div class="p fw-bold">CHÚNG TÔI LÀ</div>
-                <div class="h1 fw-bold">VINA - NIỀM TIN CHĂN NUÔI VIỆT</div>
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="slide_show">
-                            <div class="list_images d-flex">
-                                <img src="/assets/images/he_thong_cua_hang/nha_phan_phoi1.jpg" alt="" width="750px" height="550px">
-                                <img src="/assets/images/he_thong_cua_hang/nha_phan_phoi2.jpg" alt="" width="750px" height="550px">
-                                <img src="/assets/images/he_thong_cua_hang/nha_phan_phoi3.jpg" alt="" width="750px" height="550px">
-                                <img src="/assets/images/he_thong_cua_hang/nha_phan_phoi4.jpg" alt="" width="750px" height="550px">
+    <div id="header-placeholder"></div>
+    <div class="container-fuild bg-light text-center" style="height: 90px;">
+        <marquee behavior="scroll" direction="left" scrollamount="10">
+            <h3 class="text-center pt-3" style="color: #94b83d;">
+                VINAFEED xin chào đón quý khách -
+                Cùng đồng hành và kiến tạo thành công cho chăn nuôi VIỆT!
+            </h3>
+        </marquee>
+    </div>
+    <main style="margin-top: 75px;">
+        <div class="container-fuild trang_chu">
+            <div class="container">
+                <div class="home-number mt-4 pb-4">
+                    <div class="p fw-bold">CHÚNG TÔI LÀ</div>
+                    <div class="h2 fw-bold mb-3">VINA - NIỀM TIN CHĂN NUÔI VIỆT</div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="slide_show">
+                                <div class="list_images d-flex">
+                                    <img src="/assets/images/he_thong_cua_hang/nha_phan_phoi1.jpg" alt="" width="750px" height="550px">
+                                    <img src="/assets/images/he_thong_cua_hang/nha_phan_phoi2.jpg" alt="" width="750px" height="550px">
+                                    <img src="/assets/images/he_thong_cua_hang/nha_phan_phoi3.jpg" alt="" width="750px" height="550px">
+                                    <img src="/assets/images/he_thong_cua_hang/nha_phan_phoi4.jpg" alt="" width="750px" height="550px">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-3 align-content-center">
-                        <div class="p">
-                            Tập đoàn ViNa của chúng tôi chủ yếu hoạt động trong lĩnh vực sản xuất thức ăn chăn nuôi, cung cấp cho thị trường 2 thương hiệu chính là Vina, Happy. 
-                            Với tổng công suất hàng năm của 3 nhà máy là 1.000.000 tấn, cung ứng cho hơn 1.200 đại lý trên toàn Quốc
+                        <div class="col-md-4 align-content-center">
+                            <div class="p">
+                                Tập đoàn ViNa của chúng tôi chủ yếu hoạt động trong lĩnh vực sản xuất thức ăn chăn nuôi, cung cấp cho thị trường 2 thương hiệu chính là Vina, Happy. 
+                                Với tổng công suất hàng năm của 3 nhà máy là 1.000.000 tấn, cung ứng cho hơn 1.200 đại lý trên toàn Quốc
+                            </div>
+                            <a href=""><p class="text-dark fw-bold">Tìm hiểu thêm</p></a>
                         </div>
-                        <a href=""><p class="text-dark fw-bold">Tìm hiểu thêm</p></a>
-                    </div>
-                    <div class="d-flex flex-row-reverse mb-4">
-                        <div class="khung_near_slide2 text-start text-white fw-bold">
-                            <div class="p" style="font-size: 20px;">Cung ứng cho hơn</div>
-                            <div class="h1">1.200</div>
-                            <div class="p" style="font-size: 20px;">đại lý trên toàn quốc</div>
-                        </div>
-                        <div class="khung_near_slide1 text-start text-white  fw-bold">
-                            <div class="p" style="font-size: 20px;">Tổng công suất 3 nhà máy</div>
-                            <div class="h1">1.000.000</div>
-                            <div class="p" style="font-size: 20px;">tấn mỗi năm</div>
+                        <div class="d-flex flex-row-reverse mb-4">
+                            <div class="khung_near_slide2 text-start text-white fw-bold">
+                                <div class="p" style="font-size: 20px;">Cung ứng cho hơn</div>
+                                <div class="h1">1.200</div>
+                                <div class="p" style="font-size: 20px;">đại lý trên toàn quốc</div>
+                            </div>
+                            <div class="khung_near_slide1 text-start text-white  fw-bold">
+                                <div class="p" style="font-size: 20px;">Tổng công suất 3 nhà máy</div>
+                                <div class="h1">1.000.000</div>
+                                <div class="p" style="font-size: 20px;">tấn mỗi năm</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="home-number">
+            <div class="home-sp">
                 <div class="home-img">
-                    <img src="/assets/images/banner/banner1.png" alt="" width="100%" height="100%">
+                    <img src="/assets/images/banner/banner1.png" alt="" width="100%" height="100%" style="filter: brightness(70%) blur(1px); object-fit: cover;">
                 </div>
-                <div class="home-text">
-                    <div class="h2">SẢN PHẨM</div>
-                    <div class="p">Chúng tôi luôn lấy chất lượng sản phẩm làm giá trị cốt lõi cho sự phát triển của mình, cam kết đưa ra thị trường những sản phẩm có chất lượng cao và đảm bảo an toàn cho vật nuôi và an toàn cho cộng đồng.</div>
+                <div class="home-text text-center align-content-center">
+                    <div class="h1 fw-bold text-white">SẢN PHẨM</div>
+                    <div class="p fw-bold text-white">Chúng tôi luôn lấy chất lượng sản phẩm làm giá trị cốt lõi cho sự phát triển của mình, cam kết đưa ra thị trường những sản phẩm có chất<br> lượng cao và đảm bảo an toàn cho vật nuôi và an toàn cho cộng đồng.</div>
                 </div>
-                <ul class="d-flex">
-                    <li>
-                        <a href="">
-                            <div class="home_sp_icon">
-                                <img src="/assets/images/represent-images/icon-pig.png" alt="Thức ăn cho heo" width="70px" height="70px">
-                            </div>
-                            <div class="P">
-                                THỨC ĂN CHO HEO
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <div class="home_sp_icon">
-                                <img src="/assets/images/represent-images/icon-chicken.png" alt="Thức ăn cho gà" width="70px" height="70px">
-                            </div>
-                            <div class="P">
-                                THỨC ĂN CHO GÀ
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <div class="home_sp_icon">
-                                <img src="/assets/images/represent-images/icon-duck.png" alt="Thức ăn cho vịt" width="70px" height="70px">
-                            </div>
-                            <div class="P">
-                                THỨC ĂN CHO VỊT
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <div class="home_sp_icon">
-                                <img src="/assets/images/represent-images/icon-cow.png" alt="Thức ăn cho bò" width="70px" height="70px">
-                            </div>
-                            <div class="P">
-                                THỨC ĂN CHO BÒ
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <div class="home_sp_icon">
-                                <img src="/assets/images/represent-images/icon-shrimp.png" alt="Thức ăn cho tôm" width="70px" height="70px">
-                            </div>
-                            <div class="P">
-                                THỨC ĂN CHO TÔM
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <div class="home_sp_icon">
-                                <img src="/assets/images/represent-images/icon-fish.png" alt="Thức ăn cho cá" width="70px" height="70px">
-                            </div>
-                            <div class="P">
-                                THỨC ĂN CHO CÁ
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <div class="home_sp_icon">
-                                <img src="/assets/images/represent-images/icon-goat.png" alt="Thức ăn cho dê" width="70px" height="70px">
-                            </div>
-                            <div class="P">
-                                THỨC ĂN CHO DÊ
-                            </div>
-                        </a>
-                    </li>
-                </ul>
+                <div class="container home_icon">
+                    <ul class="d-flex">
+                        <li>
+                            <a href="">
+                                <div class="home_sp_icon">
+                                    <img src="/assets/images/represent-images/icon-pig.png" alt="Thức ăn cho heo" width="70px" height="70px">
+                                </div>
+                                <div class="p">
+                                    THỨC ĂN CHO HEO
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <div class="home_sp_icon">
+                                    <img src="/assets/images/represent-images/icon-chicken.png" alt="Thức ăn cho gà" width="70px" height="70px">
+                                </div>
+                                <div class="p">
+                                    THỨC ĂN CHO GÀ
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <div class="home_sp_icon">
+                                    <img src="/assets/images/represent-images/icon-duck.png" alt="Thức ăn cho vịt" width="70px" height="70px">
+                                </div>
+                                <div class="p">
+                                    THỨC ĂN CHO VỊT
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <div class="home_sp_icon">
+                                    <img src="/assets/images/represent-images/icon-cow.png" alt="Thức ăn cho bò" width="70px" height="70px">
+                                </div>
+                                <div class="p">
+                                    THỨC ĂN CHO BÒ
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <div class="home_sp_icon">
+                                    <img src="/assets/images/represent-images/icon-shrimp.png" alt="Thức ăn cho tôm" width="70px" height="70px">
+                                </div>
+                                <div class="p">
+                                    THỨC ĂN CHO TÔM
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <div class="home_sp_icon">
+                                    <img src="/assets/images/represent-images/icon-fish.png" alt="Thức ăn cho cá" width="70px" height="70px">
+                                </div>
+                                <div class="p">
+                                    THỨC ĂN CHO CÁ
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <div class="home_sp_icon">
+                                    <img src="/assets/images/represent-images/icon-goat.png" alt="Thức ăn cho dê" width="70px" height="70px">
+                                </div>
+                                <div class="p">
+                                    THỨC ĂN CHO DÊ
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
 
             <div class="slide-show-2">
-                <div class="list-products">
-                    <div class="active">
-                        <img src="/assets/images/product/pig/48A.png" alt="pig-product-1" width="20%" height="30%">
-                        <h5>48A</h5>
-                        <p>Dùng cho lợn từ 5kg đến xuất chuồng</p>
-                    </div>
-                    <div>
-                        <img src="/assets/images/product/pig/100S_Font.png" alt="pig-product-1" width="20%" height="30%">
-                        <h5>100S</h5>
-                        <p>Dùng cho lợn sữa từ 5 ngày tuổi đến 8kg</p>
-                    </div>
-                    <div>
-                        <img src="/assets/images/product/pig/101S_Font.png" alt="pig-product-1" width="20%" height="30%">
-                        <h5>101S</h5>
-                        <p>Dùng cho lợn con từ tập ăn đến 20kg</p>
-                    </div>
-                </div>
-
-                <button class="prev" onclick="changeSlideSecond(-1)">&#10094;</button>
-                <button class="next" onclick="changeSlideSecond(1)">&#10095;</button>
-            </div>
-
-            <div class="home-tu-van">
-                <div class="h1">TƯ VẤN KỸ THUẬT</div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="tu-van-number">
-                            <img src="/assets/images/represent-images/chicken.jpg" alt="">
-                            <div class="p">Chuyên đề gà</div>
+                <div class="container">
+                    <div class="list-products">
+                        <div class="item">
+                            <div class="image-section">
+                                <img src="/assets/images/product/pig/48A.png" alt="Product">
+                            </div>
+                            <div class="info-section">
+                                <div class="info">
+                                    <h2>TOP 01</h2>
+                                    <p>Dùng cho heo con từ 05 ngày tuổi đến 35 ngày tuổi</p>
+                                    <button>XEM CHI TIẾT</button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="tu-van-number">
-                            <img src="/assets/images/represent-images/duck.jpg" alt="">
-                            <div class="p">Chuyên đề vịt</div>
-                        </div>
-                        <div class="tu-van-number">
-                            <img src="/assets/images/represent-images/cow.jpg" alt="">
-                            <div class="p">Chuyên đề bò</div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div>
-                            <img src="/assets/images/represent-images/pig.jpg" alt="">
-                            <div class="p">Chuyên đề heo</div>
-                            <div class="p">Dưới đây là một số câu hỏi thường gặp và giải đáp. Nếu bạn vẫn chưa tìm được câu trả lời, hãy liên hệ với VTKFEED.</div>
-                            <div class="button">
-                                <p>Xem tất cả</p>
+                        <div class="item">
+                            <div class="image-section">
+                                <img src="/assets/images/product/pig/100S_Font.png" alt="Product">
+                            </div>
+                            <div class="info-section">
+                                <div class="info">
+                                    <h2>TOP 02</h2>
+                                    <p>Dùng cho heo con từ 05 ngày tuổi đến 8kg</p>
+                                    <button>XEM CHI TIẾT</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="tu-van-number">
-                            <img src="/assets/images/represent-images/shrimp.png" alt="">
-                            <div class="p">Chuyên đề tôm</div>
+                    <div class="slide-2-controls">
+                        <button class="prev" onclick="changeSlideSecond(-1)">&#10094;</button>
+                        <button class="next" onclick="changeSlideSecond(1)">&#10095;</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="home-tu-van text-center mt-5 align-content-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="mb-5">
+                                <div class="tu-van-number">
+                                    <img src="/assets/images/represent-images/chicken.jpg" alt="" height="250px" width="100%">
+                                </div>
+                                <div class="h5 mt-2 text-center">Chuyên đề gà</div>
+                            </div>
+                             <div class="mb-5">
+                                 <div class="tu-van-number">
+                                     <img src="/assets/images/represent-images/duck.jpg" alt="" height="250px" width="100%">
+                                </div>
+                                <div class="h5 mt-2 text-center">Chuyên đề vịt</div>
+                             </div>
+                             <div class="mb-5">
+                                 <div class="tu-van-number">
+                                     <img src="/assets/images/represent-images/cow.jpg" alt="" height="250px" width="100%">
+                                </div>
+                                <div class="h5 mt-2 text-center">Chuyên đề bò</div>
+                             </div>
                         </div>
-                        <div class="tu-van-number">
-                            <img src="/assets/images/represent-images/fish.jpg" alt="">
-                            <div class="p">Chuyên đề cá</div>
+                        <div class="col-md-6"> 
+                            <div class="h1 mt-4 tu_van_text pt-4 fw-bold">TƯ VẤN KỸ THUẬT</div>
+                            <div style="margin-top: 120px;">
+                                <div style="max-width: 636px;
+                                overflow: hidden;
+                                position: relative;
+                                border-radius: 20px;" class="tu-van-number">
+                                    <img src="/assets/images/represent-images/pig.jpg" alt="" height="500px" width="100%">
+                                </div>
+                                <div class="h4 mt-2 text-center ">Chuyên đề heo</div>
+                                <div class="h5 mt-4 text-center pt-4">Dưới đây là một số câu hỏi thường gặp và giải đáp. Nếu bạn vẫn chưa tìm được câu trả lời, hãy liên hệ với VINAFEED.</div>
+                                <button class="btn btn-danger fw-bold rounded-pill px-5 py-2 mt-2">
+                                    Xem tất cả
+                                </button>
+                            </div>
                         </div>
-                        <div class="tu-van-number">
-                            <img src="/assets/images/represent-images/goat.png" alt="">
-                            <div class="p">Chuyên đề dê</div>
+                        <div class="col-md-3">
+                             <div class="mb-5">
+                                 <div class="tu-van-number">
+                                     <img src="/assets/images/represent-images/shrimp.png" alt="" height="250px" width="100%">
+                                </div>
+                                <div class="h5 mt-2 text-center">Chuyên đề tôm</div>
+                             </div>
+                             <div class="mb-5">
+                                 <div class="tu-van-number">
+                                     <img src="/assets/images/represent-images/fish.jpg" alt="" height="250px" width="100%">
+                                </div>
+                                <div class="h5 mt-2 text-center">Chuyên đề cá</div>
+                             </div>
+                             <div class="mb-5">
+                                 <div class="tu-van-number">
+                                     <img src="/assets/images/represent-images/goat.png" alt="" height="250px" width="100%">
+                                </div>
+                                <div class="h5 mt-2 text-center">Chuyên đề dê</div>
+                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="home-hoat-dong">
-                <div class="h2">HOẠT ĐỘNG CỦA TVK</div>
-                
-            </div>
+            <div class="home-hoat-dong pb-5 pt-5" style="background-color: rgba(148, 184, 61, 0.5);">
+                <div class="h1 text-center mb-5 fw-bold">HOẠT ĐỘNG CỦA VINA</div>
+                <div class="container">
+                    <div id="groupCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2500">
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner">
+                               <!-- Group 1 -->
+                            <div class="carousel-item active">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <img src="/assets/images/news/news2.jpg" class="card-img-top" alt="Image 1" width="412px" height="276px">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Vinafeed Group Khẳng Định Vị Thế Trong Nghành Nông Nghiệp Công Nghệ Cao Năm 2024</h5>
+                                                <p class="card-text">Ngày 02/08 vừa qua, tại Hà Nội, Công ty cổ phần Báo cáo Đánh giá Việt Nam (Vietnam Report) phối hợp cùng Báo VietNamNet, chính thức tổ chức Lễ công bố "TOP 10 Công Ty Uy Tín Nghành Nông Nghiệp Công...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <img src="/assets/images/news/news1.jpg" class="card-img-top" alt="Image 2" width="412px" height="276px">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Vinafeed Group Được Vinh Danh Tại Giải Thưởng Doanh Nghiệp Xuất Sắc Châu Á - APEA 2024</h5>
+                                                <p class="card-text">Tối ngày 3/10 vừa qua, tại Lễ trao giải The Asia Pacific Enterprise Awards (APEA) 2024 do Hiệp hội Doanh nghiệp Châu Á - Enterprise Asia tổ chức tại TP.HCM, Vinafeed Group vinh dự được trao tặng giải thưởng...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <img src="/assets/images/news/news3.jpg" class="card-img-top" alt="Image 3" width="412px" height="276px">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Vinafeed Group Tổ Chức Lễ Tuyên Dương Khen Thưởng Cho Con Em CBCNV Đạt Thành Tích "Học Giỏi Sống Tốt" Năm Học 2023 - 2024</h5>
+                                                <p class="card-text">Sáng ngày 10/08/2024 vừa qua, tại Đồng Nai (Vinafeed miền Nam). Công đoàn cơ sở đã phối hợp cùng Ban lãnh đạo Vinafeed Group tổ chức lễ tuyên...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          
+                              <!-- Group 2 -->
+                            <div class="carousel-item">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <img src="/assets/images/news/new7.jpg" class="card-img-top" alt="Image 4" width="412px" height="276px">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Vinafeed Group Được Vinh Danh Top 500 Doanh Nghiệp Lớn Nhất Việt Nam Năm 2023</h5>
+                                                <p class="card-text">Vừa qua, tại GEM Center, TP.HCM, Công ty cổ phần Báo cáo Đánh giá Việt Nam (Vietnam Report) phối hợp cùng Báo VietNamNet, chính thức tổ chức Lễ công bố Bảng xếp hạng VNR500 – Top 500 Doanh...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <img src="/assets/images/news/news1.jpg" class="card-img-top" alt="Image 2" width="412px" height="276px">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Vinafeed Group Được Vinh Danh Tại Giải Thưởng Doanh Nghiệp Xuất Sắc Châu Á - APEA 2024</h5>
+                                                <p class="card-text">Tối ngày 3/10 vừa qua, tại Lễ trao giải The Asia Pacific Enterprise Awards (APEA) 2024 do Hiệp hội Doanh nghiệp Châu Á - Enterprise Asia tổ chức tại TP.HCM, Vinafeed Group vinh dự được trao tặng giải thưởng...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <img src="/assets/images/news/news3.jpg" class="card-img-top" alt="Image 3" width="412px" height="276px">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Vinafeed Group Tổ Chức Lễ Tuyên Dương Khen Thưởng Cho Con Em CBCNV Đạt Thành Tích "Học Giỏi Sống Tốt" Năm Học 2023 - 2024</h5>
+                                                <p class="card-text">Sáng ngày 10/08/2024 vừa qua, tại Đồng Nai (Vinafeed miền Nam). Công đoàn cơ sở đã phối hợp cùng Ban lãnh đạo Vinafeed Group tổ chức lễ tuyên...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-            <div class="h2 m-5">VƯƠN TẦM QUỐC TẾ</div>
-            <div class="p">
-                Cung cấp những sản phẩm tối ưu và ổn định. Phát triển hệ thống phân phối khắp cả nước và vươn ra Quốc tế. Mục tiêu đạt đạt sản lượng 500.000 tấn vào năm 2025. 
-                Chiếm 5% thị phần thức ăn chăn nuôi năm 2030 <==> 1.000.000 tấn
+                        <!-- Controls -->
+                        <button class="carousel-control-prev" type="button" data-bs-target="#groupCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#groupCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+                <button class="btn btn-danger fw-bold rounded-pill px-5 py-2 mt-5" style="margin-left: 44%;">
+                    Xem tất cả
+                </button>
             </div>
-            <div class="align-content-center">
-                <img src="/assets/images/gioi_thieu/vuong_quoc_te.jpg" alt="">
+            <div class="container-fuild pb-5 mb-5">
+                <div class="container text-center">
+                    <div class="h2 m-4 fw-bold">VƯƠN TẦM QUỐC TẾ</div>
+                    <div class="p mb-5 quoc_te_text">
+                        Cung cấp những sản phẩm tối ưu và ổn định. Phát triển hệ thống phân phối khắp cả nước và vươn ra Quốc tế. Mục tiêu đạt đạt sản lượng 500.000 tấn vào năm 2025. 
+                        Chiếm 5% thị phần thức ăn chăn nuôi năm 2030 <==> 1.000.000 tấn
+                    </div>
+                    <div class="align-content-center">
+                        <img src="/assets/images/gioi_thieu/vuong_quoc_te.jpg" alt="" class="bg-light">
+                    </div>
+                </div>
             </div>
         </div>
     </main>
+    <div id="footer-placeholder"></div>
+
+    <!-- di chuyen header dinh top -->
+    <script>
+        window.onscroll = function() { addStickyClass() };
+ 
+        var header = document.getElementById("header-placeholder"); // lấy phần tử header theo ID
+        var sticky = header.offsetTop; // lấy vị trí của header
+        
+        function addStickyClass() {
+            if (window.pageYOffset > sticky) {
+                header.classList.add("sticky"); // thêm lớp sticky khi cuộn quá vị trí của header
+            } else {
+                header.classList.remove("sticky"); // loại bỏ lớp sticky khi cuộn lên trên
+            }
+        }
+     </script>
+     <script src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
+     
 </body>
 </html>
