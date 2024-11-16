@@ -30,7 +30,7 @@ html {
     width: 100%;
     height: 100%;
     opacity: 0;
-    transition: opacity 1s ease;
+    transition: opacity 5s ease;
     overflow: hidden;
 }
 
@@ -98,6 +98,10 @@ html {
 
 .trang_chu .slide_show-1 {
     width: 750px;
+}
+
+.trang_chu .carousel-inner img {
+    border: 1px solid #ccc;
 }
 
 .trang_chu .list_images {
