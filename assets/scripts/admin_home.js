@@ -301,7 +301,7 @@ function addShipper() {
     }
 }
 
-// lay ra tat ca shipper
+// lay ra het shipper
 function displayShippers() {
     const shipperList = document.getElementById('shipper-list');
     shipperList.innerHTML = ''; // Clear current list

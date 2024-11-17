@@ -108,7 +108,18 @@
         <input type="text" id="shipper-name" placeholder="Tên shipper">
         <button onclick="addShipper()">Thêm Shipper</button>
       </div>
-      <ul id="shipper-list"></ul>
+      <table id="shipper-table">
+        <thead>
+        <tr>
+          <th>Tên shipper</th>
+          <th>Thao tác</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Dữ liệu đơn hàng sẽ được thêm vào đây -->
+        </tbody>
+      </table>
+
       </section>
 
     <!-- Quản lý Tin tức -->
@@ -121,7 +132,6 @@
       </div>
       <ul id="news-list"></ul>
     </section>
-
 
   </main>
 </div>
