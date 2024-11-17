@@ -191,3 +191,102 @@ function renderUserList() {
         `;
     });
 }
+
+//Quan li don hang
+function showSection(sectionId) {
+    const sections = document.querySelectorAll('.section');
+    sections.forEach(section => section.classList.remove('active'));
+
+    const activeSection = document.getElementById(sectionId);
+    if (activeSection) {
+        activeSection.classList.add('active');
+    }
+}
+
+// Mảng giả lập lưu trữ đơn hàng
+let orders = [];
+
+// Chức năng: Thêm Đơn hàng
+function addOrder() {
+    const orderId = document.getElementById('order-id').value;
+    const customerName = document.getElementById('customer-name').value;
+    const orderStatus = document.getElementById('order-status').value;
+
+    if (!orderId || !customerName || !orderStatus) {
+        alert("Vui lòng nhập đầy đủ thông tin đơn hàng.");
+        return;
+    }
+
+    // Thêm đơn hàng vào mảng
+    orders.push({ id: orderId, customer: customerName, status: orderStatus });
+
+    // Xóa dữ liệu input
+    document.getElementById('order-id').value = '';
+    document.getElementById('customer-name').value = '';
+    document.getElementById('order-status').value = '';
+
+    // Hiển thị danh sách đơn hàng
+    renderOrderList();
+}
+
+// Chức năng: Lấy danh sách đơn hàng
+function fetchOrders() {
+    if (orders.length === 0) {
+        alert("Hiện chưa có đơn hàng nào.");
+    } else {
+        renderOrderList();
+    }
+}
+
+// Chức năng: Cập nhật trạng thái đơn hàng
+function updateOrderStatus(index) {
+    const newStatus = prompt(
+        "Nhập trạng thái mới (1: Đang chuẩn bị hàng, 2: Đang vận chuyển, 3: Hoàn tất giao hàng):"
+    );
+
+    if (newStatus === "1") {
+        orders[index].status = "Đang chuẩn bị hàng";
+    } else if (newStatus === "2") {
+        orders[index].status = "Đang vận chuyển";
+    } else if (newStatus === "3") {
+        orders[index].status = "Hoàn tất giao hàng";
+    } else {
+        alert("Trạng thái không hợp lệ.");
+        return;
+    }
+
+    renderOrderList();
+}
+
+// Chức năng: Hiển thị danh sách đơn hàng
+function renderOrderList() {
+    const tableBody = document.querySelector('#order-table tbody');
+    tableBody.innerHTML = ''; // Xóa nội dung cũ
+
+    orders.forEach((order, index) => {
+        let statusClass = '';
+        if (order.status === 'Đang chuẩn bị hàng') statusClass = 'status-preparing';
+        if (order.status === 'Đang vận chuyển') statusClass = 'status-shipping';
+        if (order.status === 'Hoàn tất giao hàng') statusClass = 'status-completed';
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${order.id}</td>
+            <td>${order.customer}</td>
+            <td class="${statusClass}">${order.status}</td>
+            <td>
+                <button onclick="updateOrderStatus(${index})">Cập nhật</button>
+                <button onclick="deleteOrder(${index})" style="background-color: #dc3545;">Xóa</button>
+            </td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
+
+// Chức năng: Xóa đơn hàng
+function deleteOrder(index) {
+    orders.splice(index, 1);
+    renderOrderList();
+}
+
+
