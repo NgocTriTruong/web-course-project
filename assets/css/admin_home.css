@@ -251,3 +251,92 @@ ul li img {
         width: 200px;
     }
 }
+
+/* Quản lý đơn hàng */
+#order-management .controls input {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    width: 200px;
+}
+
+#order-management .controls button {
+    padding: 8px 12px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+#order-management .controls button:hover {
+    background-color: #0056b3;
+}
+
+/* Bảng Quản lý Đơn hàng */
+#order-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+#order-table thead {
+    background-color: #007bff;
+    color: white;
+}
+
+#order-table th, #order-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#order-table tr:hover {
+    background-color: #f1f1f1;
+    transition: background-color 0.3s ease;
+}
+
+#order-table th {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#order-table td button {
+    padding: 6px 10px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+#order-table td button:hover {
+    background-color: #b02a37;
+}
+
+/* Thêm màu sắc trạng thái */
+.status-preparing {
+    color: #ffc107; /* Màu vàng */
+    font-weight: bold;
+}
+
+.status-shipping {
+    color: #007bff; /* Màu xanh lam */
+    font-weight: bold;
+}
+
+.status-completed {
+    color: #28a745; /* Màu xanh lá */
+    font-weight: bold;
+}
+
