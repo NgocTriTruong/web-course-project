@@ -16,12 +16,21 @@
 
 <div class="container-fluid">
   <div class="row">
+    <!-- Sidebar Toggle -->
+    <div class="hamburger" onclick="toggleMenu()">☰</div>
+    <div class="back-arrow" onclick="toggleMenu()">←</div>
+
     <!-- Sidebar -->
     <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-dark text-white vh-100">
       <div class="sidebar-title text-center mt-4 mb-4">
-        <h4>Dashboard</h4>
+        <h4>Admin</h4>
       </div>
       <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link text-white" href="javascript:void(0);" id="home-management-link">
+            <i class="fas fa-home"></i> Trang chủ
+          </a>
+        </li>
         <li class="nav-item">
           <a class="nav-link text-white" href="javascript:void(0);" id="product-management-link">
             <i class="fas fa-cogs"></i> Quản lý Sản phẩm
@@ -47,15 +56,22 @@
             <i class="fas fa-box"></i> Thống kê Tổng Sản phẩm
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="javascript:void(0);" id="logout-link">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </a>
+        </li>
       </ul>
     </nav>
 
     <!-- Main Content -->
     <main class="col-md-9 ms-sm-auto col-lg-10 px-4 main-content">
-      <div class="d-flex justify-content-between align-items-center">
+      <div class="main-header">
         <h2 class="mt-4">Dashboard</h2>
-        <button id="logout-btn" class="btn btn-danger">Logout</button>
-      </div>
+        <div class="nav-profile">
+          <img src="../../images/404.png" alt="Avatar" class="avatar">
+          <span class="text-dark">Admin</span>
+        </div>
 
       <!-- Product Management Section -->
       <div class="row mt-4" id="product-management" style="display:none;">
@@ -149,10 +165,5 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <!-- Custom JS -->
 <script src="../../scripts/admin_home.js"></script>
-
-<script>
-
-</script>
-
 </body>
 </html>

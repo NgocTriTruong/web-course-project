@@ -1,8 +1,40 @@
-/* General Styles */
-body {
+
+html, body {
     font-family: 'Roboto', sans-serif;
     background-color: #f8f9fa;
     color: #212529;
+}
+
+.hamburger {
+    font-size: 30px;
+    cursor: pointer;
+    background-color: darkgray;
+}
+.back-arrow {
+    display: none;
+    font-size: 30px;
+    cursor: pointer;
+}
+.menu.active .back-arrow {
+    display: block;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.nav-profile {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .sidebar-title h4 {
@@ -114,9 +146,9 @@ body {
 
 .card-body {
     position: relative;
-    width: 400px; /* Adjust width as needed */
-    height: 200px; /* Adjust height as needed */
-    margin: 0 auto; /* Center align */
+    width: 400px;
+    height: 200px;
+    margin: 0 auto;
 }
 
 
