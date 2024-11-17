@@ -155,6 +155,10 @@ html {
     border: 5px solid white;
 }
 
+.trang_chu .home_sp_icon:hover {
+    background-color: #fcae18;
+}
+
 .trang_chu li {
     list-style-type: none;
     padding: 0 10px;
@@ -184,6 +188,7 @@ html {
     position: relative;
     width: 100%;
     height: 100%;
+    z-index: 2;
 }
 
 .slide-show-2 .list-products {
@@ -220,8 +225,10 @@ html {
     align-items: center;
     justify-content: center;
     width: 60%;
-    border: 8px solid red;
+    border: solid #fcae18;
+    border-width: 30px 12px 6px 12px;
     border-radius: 50%;
+    background-color: white;
 }
 
 .slide-show-2 .image-section img {
@@ -250,7 +257,7 @@ html {
 .slide-show-2 .info-section button {
     padding: 0.5rem 1rem;
     border: none;
-    background-color: #1e5ea8;
+    background-color: #94b83d;
     color: white;
     border-radius: 5px;
     cursor: pointer;
@@ -259,7 +266,7 @@ html {
 }
 
 .slide-show-2 .info-section button:hover {
-    background-color: #164a85;
+    background-color: #688528;
 }
 
 .slide-2-controls {
@@ -279,7 +286,7 @@ html {
     height: 40px;
     border: none;
     border-radius: 50%;
-    background-color: #1e5ea8;
+    background-color: #94b83d;
     color: white;
     font-size: 1.5rem;
     cursor: pointer;
@@ -287,7 +294,7 @@ html {
 }
 
 .slide-2-controls button:hover {
-    background-color: #164a85;
+    background-color: #688528;
 }
 
 .slide-2-controls .prev {
@@ -309,7 +316,6 @@ html {
     border-radius: 20px;
     max-width: 100%;
     transition: transform 1s ease;
-    border-radius: 20px;
 }
 
 .home-tu-van .tu-van-number {
@@ -328,4 +334,10 @@ html {
     width: 80%;
     margin: 0 auto;
     font-size: 18px;
+}
+
+#wave {
+    width: 100%;
+    position: absolute;
+    z-index: -1;
 }
