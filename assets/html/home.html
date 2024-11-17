@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/assets/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
     
     <script src="/assets/scripts/slider.js"></script>
+    <script src="/assets/scripts/home_product_nav_handle.js"></script>
     <script src="/assets/scripts/add_layout/add_layout.js" defer></script>
     
     <!-- Bootstrap -->
@@ -60,13 +61,13 @@
                             <div id="imageSlider" class="carousel slide" data-bs-ride="carousel">
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
-                                        <img src="/assets/images/he_thong_cua_hang/nha_phan_phoi1.jpg" class="d-block w-100" alt="Slide 1" style="height: 550px;">
+                                        <img src="/assets/images/he_thong_cua_hang/nha_phan_phoi_1.jpg" class="d-block w-100" alt="Slide 1" style="height: 550px;">
                                     </div>
                                     <div class="carousel-item">
-                                        <img src="/assets/images/he_thong_cua_hang/nha_phan_phoi2.jpg" class="d-block w-100" alt="Slide 2" style="height: 550px;">
+                                        <img src="/assets/images/he_thong_cua_hang/nha_phan_phoi_2.jpg" class="d-block w-100" alt="Slide 2" style="height: 550px;">
                                     </div>
                                     <div class="carousel-item">
-                                        <img src="/assets/images/he_thong_cua_hang/nha_phan_phoi3.jpg" class="d-block w-100" alt="Slide 3" style="height: 550px;">
+                                        <img src="/assets/images/he_thong_cua_hang/nha_phan_phoi_3.jpg" class="d-block w-100" alt="Slide 3" style="height: 550px;">
                                     </div>
                                 </div>
                             </div>
@@ -104,7 +105,7 @@
                 <div class="container home_icon">
                     <ul class="d-flex">
                         <li>
-                            <a href="">
+                            <a href="#slide-product-pig">
                                 <div class="home_sp_icon">
                                     <img src="/assets/images/represent-images/icon-pig.png" alt="Thức ăn cho heo" width="70px" height="70px">
                                 </div>
@@ -114,7 +115,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="">
+                            <a href="#slide-product-chicken">
                                 <div class="home_sp_icon">
                                     <img src="/assets/images/represent-images/icon-chicken.png" alt="Thức ăn cho gà" width="70px" height="70px">
                                 </div>
@@ -179,7 +180,7 @@
 
             <div class="slide-show-2">
                 <div class="container">
-                    <div class="list-products">
+                    <div id="slide-product-pig" class="list-products active">
                         <div class="item">
                             <div class="image-section">
                                 <img src="/assets/images/product/pig/48A.png" alt="Product">
@@ -204,11 +205,61 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="item">
+                            <div class="image-section">
+                                <img src="/assets/images/product/pig/101S_Font.png" alt="Product">
+                            </div>
+                            <div class="info-section">
+                                <div class="info">
+                                    <h2>TOP 03</h2>
+                                    <p>Dùng cho heo con từ tập ăn đến 20kg</p>
+                                    <button>XEM CHI TIẾT</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="slide-2-controls">
-                        <button class="prev" onclick="changeSlideSecond(-1)">&#10094;</button>
-                        <button class="next" onclick="changeSlideSecond(1)">&#10095;</button>
+                    <div id="slide-product-chicken"class="list-products">
+                        <div class="item">
+                            <div class="image-section">
+                                <img src="/assets/images/product/chicken/200.png" alt="Product">
+                            </div>
+                            <div class="info-section">
+                                <div class="info">
+                                    <h2>TOP 01</h2>
+                                    <p>Dùng cho gà thịt từ 1 ngày tuổi đến xuất bán</p>
+                                    <button>XEM CHI TIẾT</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="image-section">
+                                <img src="/assets/images/product/chicken/220_mien_nam.png" alt="Product">
+                            </div>
+                            <div class="info-section">
+                                <div class="info">
+                                    <h2>TOP 02</h2>
+                                    <p>Dùng cho gà siêu thịt từ 1 đến 21 ngày tuổi</p>
+                                    <button>XEM CHI TIẾT</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="image-section">
+                                <img src="/assets/images/product/chicken/221_mien_nam.png" alt="Product">
+                            </div>
+                            <div class="info-section">
+                                <div class="info">
+                                    <h2>TOP 03</h2>
+                                    <p>Dùng cho gà siêu thịt từ 22 đến 42 ngày tuổi</p>
+                                    <button>XEM CHI TIẾT</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                </div>
+                <div class="slide-2-controls">
+                    <button class="prev" onclick="changeSlideSecond(-1)">&#10094;</button>
+                    <button class="next" onclick="changeSlideSecond(1)">&#10095;</button>
                 </div>
             </div>
 
