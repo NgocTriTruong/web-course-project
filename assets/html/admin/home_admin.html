@@ -3,167 +3,71 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard</title>
-
-  <!-- Bootstrap CSS -->
-  <link href="../../bootstrap/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom CSS -->
+  <title>Admin Dashboard</title>
   <link rel="stylesheet" href="../../css/admin_home.css">
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
-<body class="bg-light">
-
-<div class="container-fluid">
-  <div class="row">
-    <!-- Sidebar Toggle -->
-    <div class="hamburger" onclick="toggleMenu()">☰</div>
-    <div class="back-arrow" onclick="toggleMenu()">←</div>
-
-    <!-- Sidebar -->
-    <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-dark text-white vh-100">
-      <div class="sidebar-title text-center mt-4 mb-4">
-        <h4>Admin</h4>
+<body>
+<div class="container">
+  <aside class="sidebar">
+    <h2>Admin</h2>
+    <ul class="menu">
+      <li onclick="showSection('home')"><i class="fas fa-home"></i> Trang chủ</li>
+      <li onclick="showSection('product-management')"><i class="fas fa-cogs"></i> Quản lý Sản phẩm</li>
+      <li onclick="showSection('user-management')"><i class="fas fa-users"></i> Quản lý Người dùng</li>
+    </ul>
+  </aside>
+  <main class="dashboard">
+    <header class="dashboard-header">
+      <p>Dashboard</p>
+      <div class="user-info">
+        <i class="far fa-frown"></i>
+        <span>Admin</span>
       </div>
-      <ul class="nav flex-column">
-        <li class="nav-item">
-          <a class="nav-link text-white" href="javascript:void(0);" id="home-management-link">
-            <i class="fas fa-home"></i> Trang chủ
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="javascript:void(0);" id="product-management-link">
-            <i class="fas fa-cogs"></i> Quản lý Sản phẩm
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="javascript:void(0);" id="user-management-link">
-            <i class="fas fa-users"></i> Quản lý Người dùng
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="javascript:void(0);" id="sales-statistics-link">
-            <i class="fas fa-chart-line"></i> Thống kê Hàng đã bán
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="javascript:void(0);" id="user-statistics-link">
-            <i class="fas fa-chart-pie"></i> Thống kê Người dùng
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="javascript:void(0);" id="product-statistics-link">
-            <i class="fas fa-box"></i> Thống kê Tổng Sản phẩm
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="javascript:void(0);" id="logout-link">
-            <i class="fas fa-sign-out-alt"></i> Logout
-          </a>
-        </li>
-      </ul>
-    </nav>
+    </header>
 
-    <!-- Main Content -->
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-4 main-content">
-      <div class="main-header">
-        <h2 class="mt-4">Dashboard</h2>
-        <div class="nav-profile">
-          <img src="../../images/404.png" alt="Avatar" class="avatar">
-          <span class="text-dark">Admin</span>
-        </div>
+    <!-- Trang chủ -->
+    <section id="home" class="section active">
+      <h3>Chào mừng đến với trang Admin!</h3>
+      <p>Chọn một mục từ menu để quản lý hệ thống.</p>
+    </section>
 
-      <!-- Product Management Section -->
-      <div class="row mt-4" id="product-management" style="display:none;">
-        <div class="col-md-12">
-          <h3>Quản lý Sản phẩm</h3>
-          <button id="add-product-btn" class="btn btn-primary">Thêm Sản phẩm</button>
-          <button id="edit-product-btn" class="btn btn-warning">Sửa Sản phẩm</button>
-          <button id="delete-product-btn" class="btn btn-danger">Xóa Sản phẩm</button>
-          <table id="product-table" class="table table-striped mt-3">
-            <thead>
-            <tr>
-              <th>ID</th>
-              <th>Tên Sản phẩm</th>
-              <th>Giá</th>
-              <th>Hành động</th>
-            </tr>
-            </thead>
-            <tbody>
-            <!-- Các sản phẩm sẽ được thêm ở đây -->
-            </tbody>
-          </table>
-        </div>
+    <!-- Quản lý Sản phẩm -->
+    <section id="product-management" class="section">
+      <h3>Quản lý Sản phẩm</h3>
+      <div class="controls">
+        <input type="text" id="product-name" placeholder="Tên sản phẩm">
+        <input type="number" id="product-price" placeholder="Giá tiền">
+        <textarea id="product-desc" placeholder="Mô tả sản phẩm"></textarea>
+        <select id="product-type">
+          <option value="">Chọn loại sản phẩm</option>
+          <option value="Loại A">Loại A</option>
+          <option value="Loại B">Loại B</option>
+          <option value="Loại C">Loại C</option>
+        </select>
+        <select id="sale-type">
+          <option value="">Chọn loại giảm giá</option>
+          <option value="Loại A">Không giảm</option>
+          <option value="Loại B">Giảm 20%</option>
+        </select>
+        <input type="date" id="product-date">
+        <input type="file" id="product-image" accept="image/*">
+        <button onclick="addProduct()">Thêm Sản phẩm</button>
       </div>
+      <ul id="product-list"></ul>
+    </section>
 
-      <!-- User Management Section -->
-      <div class="row mt-4" id="user-management" style="display:none;">
-        <div class="col-md-12">
-          <h3>Quản lý Người dùng</h3>
-          <button id="add-user-btn" class="btn btn-primary">Thêm Người dùng</button>
-          <button id="edit-user-btn" class="btn btn-warning">Sửa Người dùng</button>
-          <button id="delete-user-btn" class="btn btn-danger">Xóa Người dùng</button>
-          <table id="user-table" class="table table-striped mt-3">
-            <thead>
-            <tr>
-              <th>ID</th>
-              <th>Tên Người dùng</th>
-              <th>Email</th>
-              <th>Hành động</th>
-            </tr>
-            </thead>
-            <tbody>
-            <!-- Các người dùng sẽ được thêm ở đây -->
-            </tbody>
-          </table>
-        </div>
+    <!-- Quản lý Người dùng -->
+    <section id="user-management" class="section">
+      <h3>Quản lý Người dùng</h3>
+      <div class="controls">
+        <input type="text" id="user-name" placeholder="Tên người dùng">
+        <button onclick="addUser()">Thêm Người dùng</button>
       </div>
-
-      <!-- Sales Statistics Section -->
-      <div class="row mt-4" id="sales-statistics" style="display:none;">
-        <div class="col-md-12">
-          <h3>Thống kê Hàng đã bán</h3>
-          <div class="card">
-            <div class="card-body">
-              <canvas id="salesChart" width="400" height="200"></canvas>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- User Statistics Section -->
-      <div class="row mt-4" id="user-statistics" style="display:none;">
-        <div class="col-md-12">
-          <h3>Thống kê Người dùng</h3>
-          <div class="card">
-            <div class="card-body">
-              <canvas id="userChart" width="400" height="200"></canvas>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Product Statistics Section -->
-      <div class="row mt-4" id="product-statistics" style="display:none;">
-        <div class="col-md-12">
-          <h3>Thống kê Tổng Sản phẩm</h3>
-          <div class="card">
-            <div class="card-body">
-              <canvas id="productChart" width="400" height="200"></canvas>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </main>
-  </div>
+      <ul id="user-list"></ul>
+    </section>
+  </main>
 </div>
-
-<!-- Bootstrap JS -->
-<script src="../../bootstrap/bootstrap.bundle.min.js"></script>
-<!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<!-- Custom JS -->
 <script src="../../scripts/admin_home.js"></script>
 </body>
 </html>
