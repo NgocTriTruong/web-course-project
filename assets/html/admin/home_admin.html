@@ -16,6 +16,9 @@
       <li onclick="showSection('product-management')"><i class="fas fa-cogs"></i> Quản lý Sản phẩm</li>
       <li onclick="showSection('user-management')"><i class="fas fa-users"></i> Quản lý Người dùng</li>
       <li onclick="showSection('order-management')"><i class="fas fa-shopping-cart"></i> Quản lý Đơn hàng</li>
+      <li onclick="showSection('shipper-management')"><i class="fas fa-truck"></i> Quản lý Shipper</li>
+      <li onclick="showSection('news-management')"><i class="fas fa-newspaper"></i> Quản lý Tin tức</li>
+      <li onclick="logout()"><i class="fas fa-sign-out-alt"></i> Đăng xuất</li>
 
     </ul>
   </aside>
@@ -98,7 +101,26 @@
       </table>
     </section>
 
+    <!-- Quản lý Shipper -->
+    <section id="shipper-management" class="section">
+      <h3>Quản lý Shipper</h3>
+      <div class="controls">
+        <input type="text" id="shipper-name" placeholder="Tên shipper">
+        <button onclick="addShipper()">Thêm Shipper</button>
+      </div>
+      <ul id="shipper-list"></ul>
+      </section>
 
+    <!-- Quản lý Tin tức -->
+    <section id="news-management" class="section">
+      <h3>Quản lý Tin tức</h3>
+      <div class="controls">
+        <input type="text" id="news-title" placeholder="Tiêu đề tin tức">
+        <textarea id="news-content" placeholder="Nội dung tin tức"></textarea>
+        <button onclick="addNews()">Thêm Tin tức</button>
+      </div>
+      <ul id="news-list"></ul>
+    </section>
 
 
   </main>

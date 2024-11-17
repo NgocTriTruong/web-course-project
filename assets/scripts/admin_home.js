@@ -289,4 +289,76 @@ function deleteOrder(index) {
     renderOrderList();
 }
 
+let shippers = [];
 
+// them shipper moi
+function addShipper() {
+    const shipperName = document.getElementById('shipper-name').value;
+    if (shipperName) {
+        shippers.push(shipperName);
+        document.getElementById('shipper-name').value = ''; // Clear input
+        displayShippers();
+    }
+}
+
+// lay ra tat ca shipper
+function displayShippers() {
+    const shipperList = document.getElementById('shipper-list');
+    shipperList.innerHTML = ''; // Clear current list
+    shippers.forEach((shipper, index) => {
+        const li = document.createElement('li');
+        li.textContent = shipper;
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Xóa';
+        deleteButton.onclick = () => deleteShipper(index);
+        li.appendChild(deleteButton);
+        shipperList.appendChild(li);
+    });
+}
+
+// xoa shipper
+function deleteShipper(index) {
+    shippers.splice(index, 1);
+    displayShippers();
+}
+
+//trang tin tuc
+let newsArticles = [];
+
+// them trang tin tuc mới
+function addNews() {
+    const title = document.getElementById('news-title').value;
+    const content = document.getElementById('news-content').value;
+    if (title && content) {
+        newsArticles.push({ title, content });
+        document.getElementById('news-title').value = ''; // Clear input
+        document.getElementById('news-content').value = ''; // Clear input
+        displayNews();
+    }
+}
+
+// lay ra tat ca tin tuc
+function displayNews() {
+    const newsList = document.getElementById('news-list');
+    newsList.innerHTML = ''; // Clear current list
+    newsArticles.forEach((article, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `<strong>${article.title}</strong><p>${article.content}</p>`;
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Xóa';
+        deleteButton.onclick = () => deleteNews(index);
+        li.appendChild(deleteButton);
+        newsList.appendChild(li);
+    });
+}
+
+// xoa tin tuc
+function deleteNews(index) {
+    newsArticles.splice(index, 1);
+    displayNews();
+}
+
+//logout
+function logout() {
+    window.location.href = "../home.html"; // Thay đổi đường dẫn đến trang đăng nhập của bạn
+}

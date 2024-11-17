@@ -188,10 +188,10 @@ ul {
 ul li {
     padding: 15px;
     margin-bottom: 10px;
-    background-color: #f8f9fa;
+    /*background-color: #f8f9fa;*/
     border: 1px solid #ced4da;
     display: flex;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
     align-items: center;
     border-radius: 6px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
