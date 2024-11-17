@@ -225,5 +225,22 @@ function toggleSection(sectionId) {
 // Logout functionality
 document.getElementById('logout-btn').addEventListener('click', function() {
     // Redirect to the login page when the logout button is clicked
-    window.location.href = 'login_admin.html';
+    window.location.href = 'html/home.html';
 });
+
+function toggleMenu() {
+    var sidebar = document.getElementById("sidebar");
+    sidebar.classList.toggle("d-md-block");
+    sidebar.classList.toggle("d-none");
+
+    var hamburger = document.querySelector(".hamburger");
+    var backArrow = document.querySelector(".back-arrow");
+
+    if (sidebar.classList.contains("d-md-block")) {
+        hamburger.style.display = "none";
+        backArrow.style.display = "block";
+    } else {
+        hamburger.style.display = "block";
+        backArrow.style.display = "none";
+    }
+}
