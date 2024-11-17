@@ -11,7 +11,8 @@ html {
 
 .tu_van .background-section {
     position: relative;
-    background-image: url('assets/images/banner/banner_faq.jpg');
+    margin-top: 80px;
+    background-image: url('../images/banner/banner_faq.jpg');
     background-size: cover;
     background-position: center;
     height: 500px; /* Adjust height as needed */
@@ -49,4 +50,53 @@ html {
         font-weight: bold;
         letter-spacing: 5px;
     }
+}
+
+.tu_van .container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.tu_van .topic {
+    display: flex;
+    align-items: center;
+    margin: 40px 70px;
+    gap: 20px;
+}
+
+.tu_van .topic.reverse {
+    flex-direction: row-reverse;
+}
+
+.tu_van .image img {
+    width: 800px;
+    aspect-ratio: 2 / 1;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.tu_van .content {
+    text-align: center;
+}
+
+.tu_van .content h2 {
+    font-size: 30px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.tu_van .content button {
+    padding: 10px 20px;
+    background-color: #fcae18;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.tu_van .content button:hover {
+    background-color: #94b83d;
 }
