@@ -245,12 +245,13 @@ html {
 }
 
 .slide-show-2 .info-section h2 {
-    font-size: 2rem;
+    font-size: 40px;
+    font-weight: bold;
     margin-bottom: 1rem;
 }
 
 .slide-show-2 .info-section p {
-    font-size: 1rem;
+    font-size: 18px;
     margin-bottom: 1rem;
 }
 
@@ -263,10 +264,6 @@ html {
     cursor: pointer;
     font-size: 1rem;
     transition: background-color 0.3s ease;
-}
-
-.slide-show-2 .info-section button:hover {
-    background-color: #688528;
 }
 
 .slide-2-controls {
