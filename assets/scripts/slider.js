@@ -38,22 +38,33 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-    let slidesSecond = document.querySelectorAll(".slide-show-2 .list-products .item");
+    // Select all menu links and product sections
+    const menuLinks = document.querySelectorAll(".home_icon a");
+    const productSections = document.querySelectorAll(".list-products");
+
+    // Slider state variables
+    let slidesSecond = [];
     let currentIndexSecond = 0;
     let slideIntervalSecond;
 
+    // Function to show a specific slide
     function showSlideSecond(index) {
         slidesSecond.forEach((slide, i) => {
             slide.classList.remove("active"); // Hide all slides
         });
-        slidesSecond[index].classList.add("active"); // Show the current slide
+        if (slidesSecond[index]) {
+            slidesSecond[index].classList.add("active"); // Show the current slide
+        }
     }
 
+    // Function to go to the next slide
     function nextSlideSecond() {
+        if (slidesSecond.length === 0) return;
         currentIndexSecond = (currentIndexSecond + 1) % slidesSecond.length;
         showSlideSecond(currentIndexSecond);
     }
 
+    // Function to change slide manually
     function changeSlideSecond(direction) {
         // Clear the interval to pause automatic sliding when a button is clicked
         clearInterval(slideIntervalSecond);
@@ -66,15 +77,56 @@ document.addEventListener("DOMContentLoaded", function () {
         slideIntervalSecond = setInterval(nextSlideSecond, 5000);
     }
 
-    // Initial slide display
-    showSlideSecond(currentIndexSecond);
+    // Expose the changeSlideSecond function to the global scope for button onclick
+    window.changeSlideSecond = changeSlideSecond;
 
-    // Set the interval for automatic sliding
-    slideIntervalSecond = setInterval(nextSlideSecond, 5000);
+    // Function to initialize the slider for a given section
+    function initializeSlider(activeSection) {
+        // Clear any existing interval
+        clearInterval(slideIntervalSecond);
 
-    // Attach button events
-    window.changeSlideSecond = changeSlideSecond; // Expose the function to the global scope
+        // Get slides from the active section
+        slidesSecond = activeSection.querySelectorAll(".item");
+        currentIndexSecond = 0;
+
+        // Show the first slide
+        showSlideSecond(currentIndexSecond);
+
+        // Start the interval for automatic sliding
+        slideIntervalSecond = setInterval(nextSlideSecond, 5000);
+    }
+
+    // Initialize the slider for the initially active section
+    const initialActive = document.querySelector(".list-products.active");
+    if (initialActive) {
+        initializeSlider(initialActive);
+    } else if (productSections.length > 0) {
+        // If no section is active by default, activate the first one
+        productSections[0].classList.add("active");
+        initializeSlider(productSections[0]);
+    }
+
+    // Handle menu link clicks
+    menuLinks.forEach((link) => {
+        link.addEventListener("click", (event) => {
+            event.preventDefault(); // Prevent default anchor behavior
+            const targetId = link.getAttribute("href").substring(1); // Get the target ID without the '#'
+            const targetSection = document.getElementById(targetId);
+
+            if (targetSection) {
+                // Remove 'active' class from all sections
+                productSections.forEach(section => section.classList.remove("active"));
+
+                // Add 'active' class to the target section
+                targetSection.classList.add("active");
+
+                // Initialize the slider for the active section
+                initializeSlider(targetSection);
+            }
+        });
+    });
 });
+
 
 
 
