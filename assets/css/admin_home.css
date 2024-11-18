@@ -1,145 +1,413 @@
-/* General Styles */
 body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f8f9fa;
-    color: #212529;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    height: 100vh;
+    background-color: #f1f1f1;
+    color: #343a40;
 }
 
-.hamburger {
-    font-size: 30px;
+.container {
+    display: flex;
+    width: 100%;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #212529;
+    color: #fff;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar h2 {
+    margin: 0 0 20px 0;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 2px solid #495057;
+    padding-bottom: 10px;
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu li {
+    margin: 15px 0;
+    font-size: 16px;
     cursor: pointer;
-}
-.back-arrow {
-    display: none;
-    font-size: 30px;
-    cursor: pointer;
-}
-.menu.active .back-arrow {
-    display: block;
-}
-.avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
-}
-.nav-profile {
     display: flex;
     align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
 }
 
-.sidebar-title h4 {
-    font-weight: 700;
-    color: #ffffff;
-}
-
-.nav-link {
-    font-size: 16px;
-    margin: 5px 0;
-    padding: 10px 15px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-.nav-link:hover {
+.menu li:hover {
     background-color: #495057;
+    transform: scale(1.05);
 }
 
-.nav-link i {
-    margin-right: 10px;
-}
-
-.main-content {
+.dashboard {
+    flex: 1;
+    background-color: #ffffff;
     padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.card {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border: none;
-    border-radius: 10px;
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #212529;
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 10px;
     margin-bottom: 20px;
 }
 
-.card-title {
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     font-size: 18px;
-    font-weight: 600;
+    color: #495057;
 }
 
-.table {
+.user-info i {
+    font-size: 24px;
+    color: #007bff;
+}
+
+/* Các phần hiển thị chính */
+.section {
+    display: none;
     margin-top: 20px;
-    text-align: center;
 }
 
-.table th, .table td {
-    vertical-align: middle;
-}
-
-.btn-primary, .btn-warning, .btn-danger {
-    margin-right: 10px;
-    border-radius: 20px;
-    font-weight: 600;
-    transition: background-color 0.3s ease;
-}
-
-#logout-btn {
-    border-radius: 20px;
-    font-weight: 600;
-}
-
-/* Sidebar */
-#sidebar {
-    background-color: #343a40;
-    padding: 20px;
-}
-
-#sidebar ul {
-    padding-left: 0;
-}
-
-#sidebar li {
-    list-style: none;
-}
-
-#sidebar li a {
-    color: #ffffff;
-    text-decoration: none;
+.section.active {
     display: block;
 }
 
-#sidebar li a:hover {
-    background-color: #495057;
+.controls {
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
-/* Media Queries */
+/* Áp dụng cho các trường nhập liệu và chọn */
+.controls input,
+.controls select {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    width: 200px; /* Đặt chiều rộng cố định */
+    margin-right: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+/* Áp dụng riêng cho textarea (khung mô tả) */
+.controls textarea {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    width: 66.66%; /* Rộng hơn chỉ áp dụng cho textarea */
+    height: 100px;
+    resize: vertical; /* Cho phép mở rộng chiều dọc */
+    box-sizing: border-box;
+}
+
+.controls textarea:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Chỉnh lại nút button nhỏ gọn hơn */
+.controls button,
+ul li div button {
+    padding: 5px 8px; /* Giảm padding */
+    font-size: 14px; /* Kích thước chữ nhỏ hơn */
+    height: auto; /* Tự động điều chỉnh chiều cao */
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hiệu ứng hover */
+.controls button:hover,
+ul li div button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+/* Nút "Khóa/Mở khóa" */
+ul li div button.lock-btn {
+    background-color: #ffc107;
+    color: #000;
+}
+
+ul li div button.lock-btn:hover {
+    background-color: #e0a800;
+}
+
+/* Nút Xóa */
+ul li button {
+    background-color: #dc3545;
+}
+
+ul li button:hover {
+    background-color: #b02a37;
+}
+
+
+.controls button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul li {
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ced4da;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 6px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+ul li:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+ul li div {
+    display: flex;
+    gap: 10px;
+}
+
+ul li button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+ul li button:hover {
+    background-color: #b02a37;
+    transform: translateY(-2px);
+}
+
+ul li div button.lock-btn {
+    background-color: #ffc107;
+    color: #000;
+    font-size: 14px;
+}
+
+ul li div button.lock-btn:hover {
+    background-color: #e0a800;
+}
+
+ul li img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-right: 15px;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-    #sidebar {
-        padding: 10px;
+    .controls input, .controls select {
+        width: 100%;
     }
-    .sidebar-title h4 {
-        font-size: 18px;
-    }
-    .nav-link {
-        font-size: 14px;
+
+    .sidebar {
+        width: 200px;
     }
 }
 
-@media (max-width: 576px) {
-    .main-content {
-        padding: 10px;
-    }
-    .card-title {
-        font-size: 16px;
-    }
-    .table {
-        font-size: 14px;
-    }
+/* Quản lý đơn hàng */
+#order-management .controls input {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    width: 200px;
 }
 
-.card-body {
-    position: relative;
-    width: 400px; /* Adjust width as needed */
-    height: 200px; /* Adjust height as needed */
-    margin: 0 auto; /* Center align */
+#order-management .controls button {
+    padding: 8px 12px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
 }
 
+#order-management .controls button:hover {
+    background-color: #0056b3;
+}
+
+/* Bảng Quản lý Đơn hàng */
+#order-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+#order-table thead {
+    background-color: #007bff;
+    color: white;
+}
+
+#order-table th, #order-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#order-table tr:hover {
+    background-color: #f1f1f1;
+    transition: background-color 0.3s ease;
+}
+
+#order-table th {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#order-table td button {
+    padding: 6px 10px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+#order-table td button:hover {
+    background-color: #b02a37;
+}
+
+
+/* Bảng Quản lý shipper */
+
+#shipper-management .controls input {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    width: 200px;
+}
+
+#shipper-management .controls button {
+    padding: 8px 12px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+#shipper-management .controls button:hover {
+    background-color: #0056b3;
+}
+#shipper-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+#shipper-table thead {
+    background-color: #007bff;
+    color: white;
+}
+
+#shipper-table th, #shipper-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#shipper-table tr:hover {
+    background-color: #f1f1f1;
+    transition: background-color 0.3s ease;
+}
+
+#shipper-table th {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#shipper-table td button {
+    padding: 6px 10px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+#shipper-table td button:hover {
+    background-color: #b02a37;
+}
+
+/* Thêm màu sắc trạng thái */
+.status-preparing {
+    color: #ffc107; /* Màu vàng */
+    font-weight: bold;
+}
+
+.status-shipping {
+    color: #007bff; /* Màu xanh lam */
+    font-weight: bold;
+}
+
+.status-completed {
+    color: #28a745; /* Màu xanh lá */
+    font-weight: bold;
+}
 

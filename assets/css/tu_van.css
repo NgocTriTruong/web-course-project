@@ -1,0 +1,102 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /*cuộn mượt mà */
+    font-family: Helvetica, Arial, sans-serif; /*set font chữ cho cả website , chữ không có chân*/
+}
+
+.tu_van .background-section {
+    position: relative;
+    margin-top: 80px;
+    background-image: url('../images/banner/banner_faq.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 500px; /* Adjust height as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tu_van .background-section h1 {
+    color: transparent;
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    font-weight: bold;
+    position: relative;
+}
+
+/* Add a transparent overlay effect */
+.tu_van .background-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); /* Adjust transparency */
+    z-index: 0;
+}
+
+@supports(-webkit-text-stroke: 2px white) {
+    .outline {
+        color: transparent;
+        -webkit-text-stroke: 2px white; /* Increased stroke width */
+        text-shadow: none;
+        font-size: 80px; /* Increased font size */
+        font-weight: bold;
+        letter-spacing: 5px;
+    }
+}
+
+.tu_van .container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.tu_van .topic {
+    display: flex;
+    align-items: center;
+    margin: 40px 70px;
+    gap: 20px;
+}
+
+.tu_van .topic.reverse {
+    flex-direction: row-reverse;
+}
+
+.tu_van .image img {
+    width: 800px;
+    aspect-ratio: 2 / 1;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.tu_van .content {
+    text-align: center;
+}
+
+.tu_van .content h2 {
+    font-size: 30px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.tu_van .content button {
+    padding: 10px 20px;
+    background-color: #fcae18;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.tu_van .content button:hover {
+    background-color: #94b83d;
+}
