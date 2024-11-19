@@ -89,7 +89,7 @@ img {
     height: 0;
     border-left: 60px solid transparent; /* Tạo cạnh tam giác bên trái */
     border-right: 60px solid transparent; /* Tạo cạnh tam giác bên phải */
-    border-bottom: 60px solid #ff4c4c; /* Màu tam giác */
+    border-bottom: 60px solid #fcae18; /* Màu tam giác */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -106,6 +106,14 @@ img {
     font-weight: bold;
 }
 
+.product .new_badge {
+    position: absolute;
+    top: 23px; /* Căn chỉnh vị trí text */
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+}
+
 .product_sale_new {
     height: 80px;
 }
@@ -116,6 +124,11 @@ img {
     line-height: 39px;
     cursor: pointer;
     justify-content: center;
+}
+
+.product_sale_new .active-tab {
+    border-bottom: 3px solid #fcae18;
+    color: #fcae18;
 }
 
 .product_sale_new .product_new{
@@ -134,4 +147,28 @@ img {
 
 .product .line {
      border: 1px solid rgba(128, 128, 128, 0.2);
+}
+
+/*  */
+.product .product-tab {
+    width: 140px;
+    margin: 0 auto;
+}
+
+.product .product-tab .tab {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    align-content: center;
+    margin: 0  2px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.product .product-tab .product-active {
+    background-color: #fcae18;
+}
+
+.product .product-tab .tab:hover {
+    background-color: #fcae18;
 }
