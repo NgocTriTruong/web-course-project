@@ -1,85 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chính Sách - Phúc Lợi</title>
-  <link rel="stylesheet" href="../css/tuyendung.css">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chính Sách - Phúc Lợi</title>
+    <link rel="stylesheet" href="/assets/bootstrap/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/tuyendung.css">
+    <link rel="stylesheet" href="/assets/css/layout/header.css">
+    <link rel="stylesheet" href="/assets/css/layout/footer.css">
+    
+    <link rel="stylesheet" href="/assets/fonts/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="/assets/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
+    
+    <script src="/assets/scripts/add_layout/add_layout.js" defer></script>
 </head>
 <body>
-<div class="tuyendung">
-  <!-- Banner Section -->
-  <section class="banner_tuyendung">
-    <div class="banner-overlay-tuyendung">
-      <h1 class="outlined-text-tuyendung">TUYỂN DỤNG</h1>
+  <div id="header-placeholder"></div>
+  <main style="margin-top: 100px;">
+    <div class="tuyendung">
+      <!-- Banner Section -->
+      <section class="banner_tuyendung">
+        <div class="banner-overlay-tuyendung">
+          <h1 class="outlined-text-tuyendung">TUYỂN DỤNG</h1>
+        </div>
+      </section>
+  
+  
+      <!-- Header Section -->
+      <header class="header-tuyendung">
+        <nav class="navbar-tuyendung">
+          <a href="#policies">Chính Sách - Phúc Lợi</a>
+          <a href="#job-listings">Vị trí tuyển dụng</a>
+        </nav>
+      </header>
+  
+      <!-- "Chính Sách - Phúc Lợi" Header -->
+      <h2 id="policies">Chính Sách - Phúc Lợi</h2>
+  
+      <!-- Benefits Section -->
+      <section class="benefits">
+        <div class="benefit-card">
+          <img src="../images/icons_tuyendung/baohiem.png" alt="Bảo hiểm" class="benefit-icon">
+          <h3>Bảo hiểm, trợ cấp</h3>
+          <p>Tại VINAFEED, sức khỏe của bạn là điều chúng tôi quan tâm hàng đầu. Với các chế độ bảo hiểm được cung cấp, bạn có thể yên tâm khi hầu hết các bệnh sẽ được hỗ trợ.</p>
+        </div>
+        <div class="benefit-card">
+          <img src="../images/icons_tuyendung/luongthuong.png" alt="Bảo hiểm" class="benefit-icon">
+          <h3>Lương, thưởng</h3>
+          <p>Người lao động được hưởng chế độ lương, thưởng theo quy chế rõ ràng. Người lao động có thể nhận phụ cấp, trợ cấp và các đãi ngộ theo tiêu chuẩn và địa điểm công việc.</p>
+        </div>
+        <div class="benefit-card">
+          <img src="../images/icons_tuyendung/phattrien.png" alt="Bảo hiểm" class="benefit-icon">
+          <h3>Đào tạo và phát triển</h3>
+          <p>Đào tạo và phát triển nguồn nhân lực là ưu tiên hàng đầu của ban lãnh đạo. Công ty hỗ trợ các khóa học nâng cao chuyên môn nghiệp vụ, quản lý, lãnh đạo cấp quốc tế.</p>
+        </div>
+      </section>
+  
+      <!-- "Vị Trí Ứng Tuyển" Header -->
+      <h2 id="job-listings">Vị Trí Ứng Tuyển</h2>
+  
+      <!-- Elevated Job Listings Section -->
+      <section class="job-listings">
+        <p>Để đáp ứng nhân sự cho nhà máy thức ăn chăn nuôi Vina, hiện nay chúng tôi đang có nhu cầu tuyển dụng nhân sự cho vị trí:</p>
+  
+        <div class="search-bar">
+          <input type="text" id="searchInput" placeholder="Từ khóa tìm kiếm">
+          <select id="locationFilter">
+            <option value="">Chọn địa điểm làm việc</option>
+            <option value="Tỉnh Tây Ninh">Tỉnh Tây Ninh</option>
+            <option value="Tỉnh Đồng Nai">Tỉnh Đồng Nai</option>
+            <option value="Tỉnh Hà Nam">Tỉnh Hà Nam</option>
+          </select>
+          <button onclick="searchJobs()">Tìm nhanh</button>
+        </div>
+  
+        <table class="job-table" id="jobTable">
+          <thead>
+          <tr>
+            <th>Vị trí</th>
+            <th>Nơi làm việc</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody id="jobList">
+          <!-- Job listings will be dynamically added here -->
+          </tbody>
+        </table>
+  
+        <div class="pagination" id="pagination"></div>
+      </section>
     </div>
-  </section>
+  </main>
+  <div id="footer-placeholder"></div>
 
-
-  <!-- Header Section -->
-  <header class="header-tuyendung">
-    <nav class="navbar-tuyendung">
-      <a href="#policies">Chính Sách - Phúc Lợi</a>
-      <a href="#job-listings">Vị trí tuyển dụng</a>
-    </nav>
-  </header>
-
-  <!-- "Chính Sách - Phúc Lợi" Header -->
-  <h2 id="policies">Chính Sách - Phúc Lợi</h2>
-
-  <!-- Benefits Section -->
-  <section class="benefits">
-    <div class="benefit-card">
-      <img src="../images/icons_tuyendung/baohiem.png" alt="Bảo hiểm" class="benefit-icon">
-      <h3>Bảo hiểm, trợ cấp</h3>
-      <p>Tại VINAFEED, sức khỏe của bạn là điều chúng tôi quan tâm hàng đầu. Với các chế độ bảo hiểm được cung cấp, bạn có thể yên tâm khi hầu hết các bệnh sẽ được hỗ trợ.</p>
-    </div>
-    <div class="benefit-card">
-      <img src="../images/icons_tuyendung/luongthuong.png" alt="Bảo hiểm" class="benefit-icon">
-      <h3>Lương, thưởng</h3>
-      <p>Người lao động được hưởng chế độ lương, thưởng theo quy chế rõ ràng. Người lao động có thể nhận phụ cấp, trợ cấp và các đãi ngộ theo tiêu chuẩn và địa điểm công việc.</p>
-    </div>
-    <div class="benefit-card">
-      <img src="../images/icons_tuyendung/phattrien.png" alt="Bảo hiểm" class="benefit-icon">
-      <h3>Đào tạo và phát triển</h3>
-      <p>Đào tạo và phát triển nguồn nhân lực là ưu tiên hàng đầu của ban lãnh đạo. Công ty hỗ trợ các khóa học nâng cao chuyên môn nghiệp vụ, quản lý, lãnh đạo cấp quốc tế.</p>
-    </div>
-  </section>
-
-  <!-- "Vị Trí Ứng Tuyển" Header -->
-  <h2 id="job-listings">Vị Trí Ứng Tuyển</h2>
-
-  <!-- Elevated Job Listings Section -->
-  <section class="job-listings">
-    <p>Để đáp ứng nhân sự cho nhà máy thức ăn chăn nuôi Vina, hiện nay chúng tôi đang có nhu cầu tuyển dụng nhân sự cho vị trí:</p>
-
-    <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="Từ khóa tìm kiếm">
-      <select id="locationFilter">
-        <option value="">Chọn địa điểm làm việc</option>
-        <option value="Tỉnh Tây Ninh">Tỉnh Tây Ninh</option>
-        <option value="Tỉnh Đồng Nai">Tỉnh Đồng Nai</option>
-        <option value="Tỉnh Hà Nam">Tỉnh Hà Nam</option>
-      </select>
-      <button onclick="searchJobs()">Tìm nhanh</button>
-    </div>
-
-    <table class="job-table" id="jobTable">
-      <thead>
-      <tr>
-        <th>Vị trí</th>
-        <th>Nơi làm việc</th>
-        <th></th>
-      </tr>
-      </thead>
-      <tbody id="jobList">
-      <!-- Job listings will be dynamically added here -->
-      </tbody>
-    </table>
-
-    <div class="pagination" id="pagination"></div>
-  </section>
-</div>
-<script src="../scripts/tuyendung.js"></script>
+  <script src="../scripts/tuyendung.js"></script>
 </body>
 </html>
