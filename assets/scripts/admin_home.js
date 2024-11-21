@@ -1,229 +1,364 @@
-// Sales Chart
-var ctxSales = document.getElementById('salesChart').getContext('2d');
-var salesChart = new Chart(ctxSales, {
-    type: 'line',
-    data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-        datasets: [{
-            label: 'Hàng đã bán',
-            data: [100, 120, 130, 140, 160, 180, 200],
-            borderColor: 'rgba(54, 162, 235, 1)',
-            fill: false
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-            x: {
-                beginAtZero: true
+// Hiển thị các mục khi click menu
+function showSection(sectionId) {
+    const sections = document.querySelectorAll('.section');
+    sections.forEach(section => {
+        section.classList.remove('active');
+    });
+    document.getElementById(sectionId).classList.add('active');
+}
+
+// Quản lý sản phẩm
+let productList = [];
+
+function addProduct() {
+    const name = document.getElementById("product-name").value;
+    const price = document.getElementById("product-price").value;
+    const desc = document.getElementById("product-desc").value;
+    const type = document.getElementById("product-type").value;
+    const saleType = document.getElementById("sale-type").value;
+    const date = document.getElementById("product-date").value;
+    const imageInput = document.getElementById("product-image");
+    const image = imageInput.files[0];
+
+    if (name && price && desc && type && saleType && date && image) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            productList.push({
+                name,
+                price,
+                desc,
+                type,
+                saleType,
+                date,
+                image: e.target.result,
+            });
+            clearProductInputs();
+            renderProductList();
+        };
+        reader.readAsDataURL(image);
+    } else {
+        alert("Vui lòng điền đầy đủ thông tin sản phẩm và chọn ảnh!");
+    }
+}
+
+function clearProductInputs() {
+    document.getElementById("product-name").value = "";
+    document.getElementById("product-price").value = "";
+    document.getElementById("product-desc").value = "";
+    document.getElementById("product-type").value = "";
+    document.getElementById("sale-type").value = "";
+    document.getElementById("product-date").value = "";
+    document.getElementById("product-image").value = "";
+}
+
+function editProduct(index) {
+    const product = productList[index];
+    const newName = prompt("Tên sản phẩm:", product.name);
+    const newPrice = prompt("Giá tiền:", product.price);
+    const newDesc = prompt("Mô tả:", product.desc);
+    const newType = prompt("Loại sản phẩm:", product.type);
+    const newSaleType = prompt("Loại giảm giá:", product.saleType);
+    const newDate = prompt("Ngày tạo:", product.date);
+
+    // Yêu cầu tải lên ảnh mới
+    const newImageInput = document.createElement("input");
+    newImageInput.type = "file";
+    newImageInput.accept = "image/*";
+
+    // Khi người dùng chọn ảnh mới
+    newImageInput.onchange = function () {
+        const file = newImageInput.files[0];
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const newImage = e.target.result;
+            if (newName && newPrice && newDesc && newType && newSaleType && newDate) {
+                productList[index] = {
+                    name: newName,
+                    price: newPrice,
+                    desc: newDesc,
+                    type: newType,
+                    saleType: newSaleType,
+                    date: newDate,
+                    image: newImage || product.image, // Giữ ảnh cũ nếu không chọn mới
+                };
+                renderProductList();
+            } else {
+                alert("Vui lòng điền đầy đủ thông tin!");
             }
-        }
-    }
-});
-
-// User Statistics Chart
-var ctxUser = document.getElementById('userChart').getContext('2d');
-var userChart = new Chart(ctxUser, {
-    type: 'bar',
-    data: {
-        labels: ['Active Users', 'Inactive Users'],
-        datasets: [{
-            label: 'Thống kê Người dùng',
-            data: [350, 50],
-            backgroundColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)']
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false
-    }
-});
-
-// Product Statistics Chart
-var ctxProduct = document.getElementById('productChart').getContext('2d');
-var productChart = new Chart(ctxProduct, {
-    type: 'pie',
-    data: {
-        labels: ['Product A', 'Product B', 'Product C'],
-        datasets: [{
-            label: 'Thống kê Tổng Sản phẩm',
-            data: [30, 40, 30],
-            backgroundColor: ['rgba(255, 159, 64, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 99, 132, 1)']
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false
-    }
-});
-
-
-document.addEventListener("DOMContentLoaded", function () {
-    // Mock data for products and users
-    let products = [
-        { id: 1, name: "Sản phẩm 1", price: "100,000 VND" },
-        { id: 2, name: "Sản phẩm 2", price: "200,000 VND" },
-    ];
-    let users = [
-        { id: 1, name: "Người dùng 1", email: "user1@example.com" },
-        { id: 2, name: "Người dùng 2", email: "user2@example.com" },
-    ];
-
-    // Function to render products table
-    function renderProducts() {
-        const productTableBody = document.querySelector("#product-table tbody");
-        productTableBody.innerHTML = "";
-        products.forEach((product) => {
-            const row = document.createElement("tr");
-            row.innerHTML = `
-        <td>${product.id}</td>
-        <td>${product.name}</td>
-        <td>${product.price}</td>
-        <td>
-          <button class="btn btn-warning btn-sm" onclick="editProduct(${product.id})">Sửa</button>
-          <button class="btn btn-danger btn-sm" onclick="deleteProduct(${product.id})">Xóa</button>
-        </td>
-      `;
-            productTableBody.appendChild(row);
-        });
-    }
-
-    // Function to render users table
-    function renderUsers() {
-        const userTableBody = document.querySelector("#user-table tbody");
-        userTableBody.innerHTML = "";
-        users.forEach((user) => {
-            const row = document.createElement("tr");
-            row.innerHTML = `
-        <td>${user.id}</td>
-        <td>${user.name}</td>
-        <td>${user.email}</td>
-        <td>
-          <button class="btn btn-warning btn-sm" onclick="editUser(${user.id})">Sửa</button>
-          <button class="btn btn-danger btn-sm" onclick="deleteUser(${user.id})">Xóa</button>
-        </td>
-      `;
-            userTableBody.appendChild(row);
-        });
-    }
-
-    // Function to add product
-    document.getElementById("add-product-btn").addEventListener("click", function () {
-        const productName = prompt("Nhập tên sản phẩm:");
-        const productPrice = prompt("Nhập giá sản phẩm:");
-        const newProduct = {
-            id: products.length + 1,
-            name: productName,
-            price: productPrice,
         };
-        products.push(newProduct);
-        renderProducts();
-    });
-
-    // Function to delete product
-    window.deleteProduct = function (id) {
-        products = products.filter((product) => product.id !== id);
-        renderProducts();
+        reader.readAsDataURL(file);
     };
 
-    // Function to edit product
-    window.editProduct = function (id) {
-        const product = products.find((product) => product.id === id);
-        const newName = prompt("Sửa tên sản phẩm:", product.name);
-        const newPrice = prompt("Sửa giá sản phẩm:", product.price);
-        product.name = newName;
-        product.price = newPrice;
-        renderProducts();
-    };
-
-    // Function to add user
-    document.getElementById("add-user-btn").addEventListener("click", function () {
-        const userName = prompt("Nhập tên người dùng:");
-        const userEmail = prompt("Nhập email người dùng:");
-        const newUser = {
-            id: users.length + 1,
-            name: userName,
-            email: userEmail,
-        };
-        users.push(newUser);
-        renderUsers();
-    });
-
-    // Function to delete user
-    window.deleteUser = function (id) {
-        users = users.filter((user) => user.id !== id);
-        renderUsers();
-    };
-
-    // Function to edit user
-    window.editUser = function (id) {
-        const user = users.find((user) => user.id === id);
-        const newName = prompt("Sửa tên người dùng:", user.name);
-        const newEmail = prompt("Sửa email người dùng:", user.email);
-        user.name = newName;
-        user.email = newEmail;
-        renderUsers();
-    };
-
-    // Function to handle menu item click
-    document.getElementById("product-link").addEventListener("click", function () {
-        showSection("product-management");
-    });
-    document.getElementById("user-link").addEventListener("click", function () {
-        showSection("user-management");
-    });
-
-    // Show the selected section and hide the others
-    function showSection(sectionId) {
-        const sections = document.querySelectorAll(".content-section");
-        sections.forEach((section) => {
-            section.classList.remove("active");
-        });
-        document.getElementById(sectionId).classList.add("active");
-    }
-
-    // Initial rendering
-    renderProducts();
-    renderUsers();
-});
-
-// Function to show and hide sections based on menu click
-document.getElementById('product-management-link').addEventListener('click', function() {
-    toggleSection('product-management');
-});
-
-document.getElementById('user-management-link').addEventListener('click', function() {
-    toggleSection('user-management');
-});
-
-document.getElementById('sales-statistics-link').addEventListener('click', function() {
-    toggleSection('sales-statistics');
-});
-
-document.getElementById('user-statistics-link').addEventListener('click', function() {
-    toggleSection('user-statistics');
-});
-
-document.getElementById('product-statistics-link').addEventListener('click', function() {
-    toggleSection('product-statistics');
-});
-
-// Function to toggle visibility of a section
-function toggleSection(sectionId) {
-    const sections = ['product-management', 'user-management', 'sales-statistics', 'user-statistics', 'product-statistics'];
-    sections.forEach(id => {
-        const section = document.getElementById(id);
-        if (id === sectionId) {
-            section.style.display = 'block';
+    // Nếu người dùng muốn sửa ảnh, hiện file chọn
+    if (confirm("Bạn có muốn thay đổi ảnh?")) {
+        newImageInput.click();
+    } else {
+        // Giữ nguyên ảnh cũ
+        if (newName && newPrice && newDesc && newType && newSaleType && newDate) {
+            productList[index] = {
+                name: newName,
+                price: newPrice,
+                desc: newDesc,
+                type: newType,
+                saleType: newSaleType,
+                date: newDate,
+                image: product.image,
+            };
+            renderProductList();
         } else {
-            section.style.display = 'none';
+            alert("Vui lòng điền đầy đủ thông tin!");
         }
+    }
+}
+
+
+function renderProductList() {
+    const list = document.getElementById("product-list");
+    list.innerHTML = "";
+    productList.forEach((product, index) => {
+        list.innerHTML += `
+      <li>
+        <img src="${product.image}" alt="Product Image" style="width: 100px; height: 100px; object-fit: cover;">
+        <span><strong>Tên:</strong> ${product.name}</span>
+        <span><strong>Giá:</strong> ${product.price} VNĐ</span>
+        <span><strong>Mô tả:</strong> ${product.desc}</span>
+        <span><strong>Loại:</strong> ${product.type}</span>
+        <span><strong>Giảm giá:</strong> ${product.saleType}</span>
+        <span><strong>Ngày tạo:</strong> ${product.date}</span>
+        <div>
+          <button onclick="editProduct(${index})">Sửa</button>
+          <button onclick="deleteProduct(${index})">Xóa</button>
+        </div>
+      </li>
+    `;
     });
 }
 
-// Logout functionality
-document.getElementById('logout-btn').addEventListener('click', function() {
-    // Redirect to the login page when the logout button is clicked
-    window.location.href = 'login_admin.html';
-});
+function deleteProduct(index) {
+    productList.splice(index, 1);
+    renderProductList();
+}
+
+// Quản lý người dùng
+let userList = [];
+
+function addUser() {
+    const userName = document.getElementById("user-name").value;
+    if (userName) {
+        userList.push({ name: userName, locked: false });
+        document.getElementById("user-name").value = "";
+        renderUserList();
+    } else {
+        alert("Vui lòng nhập tên người dùng!");
+    }
+}
+
+function editUser(index) {
+    const newName = prompt("Nhập tên người dùng mới:", userList[index].name);
+    if (newName) {
+        userList[index].name = newName;
+        renderUserList();
+    }
+}
+
+function lockUser(index) {
+    userList[index].locked = !userList[index].locked;
+    renderUserList();
+}
+
+function deleteUser(index) {
+    userList.splice(index, 1);
+    renderUserList();
+}
+
+function renderUserList() {
+    const list = document.getElementById("user-list");
+    list.innerHTML = "";
+    userList.forEach((user, index) => {
+        list.innerHTML += `
+            <li>
+                <span style="${user.locked ? 'color: red; font-weight: bold;' : ''}">
+                    ${user.name} ${user.locked ? '(Bị khóa)' : ''}
+                </span>
+                <div>
+                    <button onclick="editUser(${index})">Sửa</button>
+                    <button class="lock-btn" onclick="lockUser(${index})">
+                        ${user.locked ? 'Mở khóa' : 'Khóa'}
+                    </button>
+                    <button onclick="deleteUser(${index})">Xóa</button>
+                </div>
+            </li>
+        `;
+    });
+}
+
+//Quan li don hang
+function showSection(sectionId) {
+    const sections = document.querySelectorAll('.section');
+    sections.forEach(section => section.classList.remove('active'));
+
+    const activeSection = document.getElementById(sectionId);
+    if (activeSection) {
+        activeSection.classList.add('active');
+    }
+}
+
+// Mảng giả lập lưu trữ đơn hàng
+let orders = [];
+
+// Chức năng: Thêm Đơn hàng
+function addOrder() {
+    const orderId = document.getElementById('order-id').value;
+    const customerName = document.getElementById('customer-name').value;
+    const orderStatus = document.getElementById('order-status').value;
+
+    if (!orderId || !customerName || !orderStatus) {
+        alert("Vui lòng nhập đầy đủ thông tin đơn hàng.");
+        return;
+    }
+
+    // Thêm đơn hàng vào mảng
+    orders.push({ id: orderId, customer: customerName, status: orderStatus });
+
+    // Xóa dữ liệu input
+    document.getElementById('order-id').value = '';
+    document.getElementById('customer-name').value = '';
+    document.getElementById('order-status').value = '';
+
+    // Hiển thị danh sách đơn hàng
+    renderOrderList();
+}
+
+// Chức năng: Lấy danh sách đơn hàng
+function fetchOrders() {
+    if (orders.length === 0) {
+        alert("Hiện chưa có đơn hàng nào.");
+    } else {
+        renderOrderList();
+    }
+}
+
+// Chức năng: Cập nhật trạng thái đơn hàng
+function updateOrderStatus(index) {
+    const newStatus = prompt(
+        "Nhập trạng thái mới (1: Đang chuẩn bị hàng, 2: Đang vận chuyển, 3: Hoàn tất giao hàng):"
+    );
+
+    if (newStatus === "1") {
+        orders[index].status = "Đang chuẩn bị hàng";
+    } else if (newStatus === "2") {
+        orders[index].status = "Đang vận chuyển";
+    } else if (newStatus === "3") {
+        orders[index].status = "Hoàn tất giao hàng";
+    } else {
+        alert("Trạng thái không hợp lệ.");
+        return;
+    }
+
+    renderOrderList();
+}
+
+// Chức năng: Hiển thị danh sách đơn hàng
+function renderOrderList() {
+    const tableBody = document.querySelector('#order-table tbody');
+    tableBody.innerHTML = ''; // Xóa nội dung cũ
+
+    orders.forEach((order, index) => {
+        let statusClass = '';
+        if (order.status === 'Đang chuẩn bị hàng') statusClass = 'status-preparing';
+        if (order.status === 'Đang vận chuyển') statusClass = 'status-shipping';
+        if (order.status === 'Hoàn tất giao hàng') statusClass = 'status-completed';
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${order.id}</td>
+            <td>${order.customer}</td>
+            <td class="${statusClass}">${order.status}</td>
+            <td>
+                <button onclick="updateOrderStatus(${index})">Cập nhật</button>
+                <button onclick="deleteOrder(${index})" style="background-color: #dc3545;">Xóa</button>
+            </td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
+
+// Chức năng: Xóa đơn hàng
+function deleteOrder(index) {
+    orders.splice(index, 1);
+    renderOrderList();
+}
+
+let shippers = [];
+
+// them shipper moi
+function addShipper() {
+    const shipperName = document.getElementById('shipper-name').value;
+    if (shipperName) {
+        shippers.push(shipperName);
+        document.getElementById('shipper-name').value = ''; // Clear input
+        displayShippers();
+    }
+}
+
+// lay ra het shipper
+function displayShippers() {
+    const shipperList = document.getElementById('shipper-list');
+    shipperList.innerHTML = ''; // Clear current list
+    shippers.forEach((shipper, index) => {
+        const li = document.createElement('li');
+        li.textContent = shipper;
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Xóa';
+        deleteButton.onclick = () => deleteShipper(index);
+        li.appendChild(deleteButton);
+        shipperList.appendChild(li);
+    });
+}
+
+// xoa shipper
+function deleteShipper(index) {
+    shippers.splice(index, 1);
+    displayShippers();
+}
+
+//trang tin tuc
+let newsArticles = [];
+
+// them trang tin tuc mới
+function addNews() {
+    const title = document.getElementById('news-title').value;
+    const content = document.getElementById('news-content').value;
+    if (title && content) {
+        newsArticles.push({ title, content });
+        document.getElementById('news-title').value = ''; // Clear input
+        document.getElementById('news-content').value = ''; // Clear input
+        displayNews();
+    }
+}
+
+// lay ra tat ca tin tuc
+function displayNews() {
+    const newsList = document.getElementById('news-list');
+    newsList.innerHTML = ''; // Clear current list
+    newsArticles.forEach((article, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `<strong>${article.title}</strong><p>${article.content}</p>`;
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Xóa';
+        deleteButton.onclick = () => deleteNews(index);
+        li.appendChild(deleteButton);
+        newsList.appendChild(li);
+    });
+}
+
+// xoa tin tuc
+function deleteNews(index) {
+    newsArticles.splice(index, 1);
+    displayNews();
+}
+
+//logout
+function logout() {
+    window.location.href = "../home.html"; // Thay đổi đường dẫn đến trang đăng nhập của bạn
+}
