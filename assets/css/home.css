@@ -155,6 +155,10 @@ html {
     border: 5px solid white;
 }
 
+.trang_chu .home_sp_icon_active {
+    background-color: #fcae18;
+}
+
 .trang_chu .home_sp_icon:hover {
     background-color: #fcae18;
 }

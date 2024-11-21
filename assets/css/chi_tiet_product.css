@@ -9,52 +9,52 @@ html {
     font-family: Helvetica, Arial, sans-serif; /*set font chữ cho cả website , chữ không có chân*/
 }
 
-.content {
+.chi_tiet_product .content {
     height: 100%;
     width: 80%;
     margin: 0 auto;
 }
 
-.p_bold {
+.chi_tiet_product  .p_bold {
     width: 200px;
 }
 
-.order {
+.chi_tiet_product  .order {
     height: 50px;
     width: 250px;
     border-radius: 10px;
-    background-color: red;
+    background-color: #fcae18;
     margin-right: 10px;
     line-height: 50px;
 }
 
-i {
+.chi_tiet_product  i {
     font-size: 24px;
 }
 
-a {
+.chi_tiet_product  a {
     text-decoration: none;
     color: #333;
     margin-right: 15px;
 }
 
-.button .btn_h:hover {
+.chi_tiet_product  .button .btn_h:hover {
     background-color: #94b83d;
     color: black;
 }
 
-.order {
+.chi_tiet_product  .order {
     color: white;
 }
 
-.order .text_order, 
-.call .text_call {
+.chi_tiet_product  .order .text_order, 
+.chi_tiet_product  .call .text_call {
     line-height: 50px;
     margin-left: 10px;
     cursor: pointer;
 }
 
-.call {
+.chi_tiet_product  .call {
     height: 50px;
     width: 200px;
     border-radius: 10px;
@@ -63,7 +63,7 @@ a {
     line-height: 50px;
 }
 
-.line_white {
+.chi_tiet_product  .line_white {
     width: 25px;
     height: 7px;
     background-color: black;
@@ -71,11 +71,14 @@ a {
     right: 0;
 }
 
-.between {
+.chi_tiet_product  .between {
     justify-content: space-between;
 }
 
-#toggle-button {
+.chi_tiet_product  #toggle-button1,
+.chi_tiet_product  #toggle-button2,
+.chi_tiet_product  #toggle-button3,
+.chi_tiet_product  #toggle-button4 {
     line-height: 40px;
     height: 40px;
     font-size: 40px;
