@@ -10,19 +10,29 @@
     <link rel="stylesheet" href="/assets/css/gioi_thieu.css">
     <link rel="stylesheet" href="/assets/css/chi_tiet_product.css">
     <link rel="stylesheet" href="/assets/css/ho_tro.css">
+    <link rel="stylesheet" href="/assets/css/layout/header.css">
+    <link rel="stylesheet" href="/assets/css/layout/footer.css">
+
 
     <link rel="stylesheet" href="/assets/fonts/themify-icons/themify-icons.css">
     <link rel="stylesheet" href="/assets/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
+    <script src="/assets/scripts/add_layout/add_layout.js" defer></script>
+
 </head>
 <body>
-    <div class="container text-center">
+<div id="header-placeholder"></div>
+<main style="margin: 90px auto;">
+    <div class="text-center ho_tro">
+        <div class="background-section">
+            <h1 class="outline">THÔNG TIN LIÊN HỆ</h1>
+        </div>
         <div class="h1 mt-4">CÔNG TY TNHH TVK</div>
-        <div class="p mt-3 text-center">
-            Sau đây là tất cả các thông tin liên lạc cần thiết và bản đồ đi đến TVK GROUP. 
+        <div class="p mt-3 text-center w-75 m-auto">
+            Sau đây là tất cả các thông tin liên lạc cần thiết và bản đồ đi đến TVK GROUP.
             Nếu bạn có thắc mắc, hãy liên hệ nhanh với chúng tôi qua form bên dưới hoặc liên hệ nhanh qua điện thoại, chúng tôi luôn sẵn sàng hỗ trợ bạn.
         </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 m-auto">
                 <div class="content_bg bg-light">
                     <div class="content d-flex between mt-4">
                         <div class="h3">TVK MIỀN BẮC</div>
@@ -125,38 +135,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-1"></div>
-            <div class="col-md-5">
-                <div class="container bg-light mt-4">
-                    <div class="content">
-                        <div class="h1 pt-4">Gửi tin nhắn</div>
-                        <div class="form-floating mb-3 mt-3">
-                            <input type="text" class="form-control" id="uname" placeholder="Họ Tên" name="uname" required autocomplete="off"> 
-                            <label for="uname">Họ tên<span class="req">*</span></label>
-                        </div>
-                        <div class="form-floating mb-3 mt-3">
-                            <input type="text" class="form-control" id="uname" placeholder="Điện thoại" name="uname" required autocomplete="off"> 
-                            <label for="uname">Điện thoại<span class="req">*</span></label>
-                        </div>
-                        <div class="form-floating mb-3 mt-3">
-                            <input type="text" class="form-control" id="uname" placeholder="Họ Tên" name="uname" required autocomplete="off"> 
-                            <label for="uname">Email</label>
-                        </div>
-                        <div class="form-floating mb-3 mt-3">
-                            <input type="text" class="form-control" id="uname" placeholder="Họ Tên" name="uname" required autocomplete="off"> 
-                            <label for="uname">Địa chỉ</label>
-                        </div>
-                        <div class="form-floating mb-3 mt-3">
-                            <textarea name="noidung" id="noidung" class="form-control" placeholder="Họ Tên" style="height: 150px;"></textarea>
-                            <label for="uname">Nội dung<span class="req">*</span></label>
-                        </div>
-
-                        <button type="submit" class="login_button_submit bg-danger">Gửi</button>
-                        <div class="login_split">
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
+</main>
+<div id="footer-placeholder"></div>
 </body>
 </html>
