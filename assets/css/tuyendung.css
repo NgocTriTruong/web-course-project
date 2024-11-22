@@ -1,18 +1,18 @@
 /* Reset */
-html, body {
+/* html, body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
+} */
 
-body {
+/* body {
     font-family: Arial, sans-serif;
-}
+} */
 
 /* Smooth scrolling */
-html {
-    scroll-behavior: smooth; /* Native smooth scrolling */
-}
+/* html {
+    scroll-behavior: smooth; Native smooth scrolling
+} */
 
 /* Main Container with max-width */
 .tuyendung {
@@ -22,7 +22,7 @@ html {
 }
 
 /* Centered H2 Headers */
-h2 {
+.tuyendung h2 {
     font-size: 40px;
     line-height: 60px;
     font-weight: bold;
@@ -30,7 +30,7 @@ h2 {
     margin: 20px 0;
 }
 
-.header-tuyendung {
+.tuyendung .header-tuyendung {
     background-color: #94b83d;
     padding: 10px;
     display: flex;
@@ -39,16 +39,16 @@ h2 {
 }
 
 /* Banner Section */
-.banner_tuyendung {
+.tuyendung .banner_tuyendung {
     position: relative;
     width: 100%;
-    height: 300px; /* Adjust the height as needed */
+    height: 350px; /* Adjust the height as needed */
     background-image: url('../images/icons_tuyendung/banner.png'); /* Add the path to your background image */
     background-size: cover;
     background-position: center;
 }
 
-.banner-overlay-tuyendung {
+.tuyendung .banner-overlay-tuyendung {
     position: absolute;
     top: 0;
     left: 0;
@@ -61,7 +61,7 @@ h2 {
 }
 
 /* Outlined Text Style */
-.outlined-text-tuyendung {
+.tuyendung .outlined-text-tuyendung {
     font-size: 100px; /* Adjust the size as needed */
     font-weight: bold;
     color: transparent;
@@ -72,14 +72,14 @@ h2 {
 
 
 
-.navbar-tuyendung a {
+.tuyendung .navbar-tuyendung a {
     color: white;
     margin: 0 15px;
     text-decoration: none;
     font-weight: bold;
 }
 
-.benefits {
+.tuyendung .benefits {
     display: flex;
     justify-content: center;
     gap: 50px;
@@ -87,7 +87,7 @@ h2 {
     background-color: #f9f9f9;
 }
 
-.benefit-card {
+.tuyendung .benefit-card {
     width: 250px;
     background-color: white;
     padding: 15px;
@@ -96,19 +96,19 @@ h2 {
     text-align: center;
 }
 
-.benefit-card h3 {
+.tuyendung .benefit-card h3 {
     color: #e74c3c;
     margin-bottom: 10px;
 }
 
-.benefit-card p {
+.tuyendung .benefit-card p {
     font-size: 15px;
     line-height: 23px;
     color: #333;
 }
 
 /* Elevated Vị Trí Ứng Tuyển Section */
-.job-listings {
+.tuyendung .job-listings {
     padding: 20px;
     background-color: white;
     border-radius: 8px;
@@ -116,7 +116,7 @@ h2 {
     margin-bottom: 20px;
 }
 
-.job-listings p{
+.tuyendung .job-listings p{
     text-align: center;
     font-size: 16px;
     line-height: 20px;
@@ -125,20 +125,20 @@ h2 {
     margin-block: inherit;
 }
 
-.search-bar {
+.tuyendung .search-bar {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
 }
 
-.search-bar input,
-.search-bar select {
+.tuyendung .search-bar input,
+.tuyendung .search-bar select {
     padding: 8px;
     margin: 0 5px;
     font-size: 14px;
 }
 
-.search-bar button {
+.tuyendung .search-bar button {
     padding: 8px 15px;
     font-size: 14px;
     background-color: #0073e6;
@@ -147,18 +147,18 @@ h2 {
     cursor: pointer;
 }
 
-.job-table {
+.tuyendung .job-table {
     width: 100%;
     border-collapse: collapse;
 }
 
-.job-table th, .job-table td {
+.tuyendung .job-table th, .job-table td {
     padding: 10px;
     border: 1px solid #ddd;
     text-align: center;
 }
 
-.detail-button {
+.tuyendung .detail-button {
     padding: 5px 10px;
     background-color: #e74c3c;
     color: white;
@@ -167,13 +167,13 @@ h2 {
 }
 
 /* Pagination Styles */
-.pagination {
+.tuyendung .pagination {
     display: flex;
     justify-content: center;
     margin-top: 20px;
 }
 
-.pagination button {
+.tuyendung .pagination button {
     padding: 8px 12px;
     margin: 0 5px;
     background-color: #0073e6;
@@ -182,7 +182,7 @@ h2 {
     cursor: pointer;
 }
 
-.pagination button.disabled {
+.tuyendung .pagination button.disabled {
     background-color: #ccc;
     cursor: not-allowed;
 }
