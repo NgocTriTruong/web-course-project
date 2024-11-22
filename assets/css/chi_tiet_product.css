@@ -87,3 +87,49 @@ html {
     margin-right: 50px;
     cursor: pointer;
 }
+
+.chi_tiet_product .list-products {
+    column-gap: 20px;
+}
+
+.chi_tiet_product .slide-show-1 .product-card {
+    width: 20%;
+    padding: 10px;
+    background-color: white;
+}
+
+.chi_tiet_product .list-products .product-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chi_tiet_product .slide-show-1 .list-products .product-card .h5,
+.chi_tiet_product .slide-show-1 .list-products .product-card .p {
+    text-align: center;
+}
+
+.chi_tiet_product .slide-show-1 .prev,
+.chi_tiet_product .slide-show-1 .next {
+    cursor: pointer;
+    position: absolute;
+    top: 40%;
+    width: auto;
+    padding: 16px;
+    border-radius: 50px;
+    color: black;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.3s;
+    border: none;
+    background-color: rgb(255, 255, 255);
+}
+
+.slide-show-1 .prev {
+    left: 150px;
+}
+
+.slide-show-1 .next {
+    right: 150px;
+}
+
