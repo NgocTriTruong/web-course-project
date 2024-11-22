@@ -1,20 +1,4 @@
-/* Reset */
-/* html, body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-} */
 
-/* body {
-    font-family: Arial, sans-serif;
-} */
-
-/* Smooth scrolling */
-/* html {
-    scroll-behavior: smooth; Native smooth scrolling
-} */
-
-/* Main Container with max-width */
 .tuyendung {
     margin: 0 auto; /* Center the container */
 }
