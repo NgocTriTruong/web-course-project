@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
     // Select all menu links and product sections
     const menuLinks = document.querySelectorAll(".home_icon a");
-    const productSections = document.querySelectorAll(".list-products");
+    const productSections = document.querySelectorAll(".slide_show_2 .list-products");
 
     // Slider state variables
     let slidesSecond = [];
