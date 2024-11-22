@@ -36,8 +36,8 @@ body {
 }
 
 .menu li {
-    margin: 15px 0;
-    font-size: 16px;
+    margin: 25px 0;
+    font-size: 20px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -111,7 +111,6 @@ body {
     border-radius: 6px;
     width: 200px; /* Đặt chiều rộng cố định */
     margin-right: 10px;
-    margin-bottom: 10px;
     box-sizing: border-box;
 }
 
@@ -121,10 +120,11 @@ body {
     font-size: 16px;
     border: 1px solid #ced4da;
     border-radius: 6px;
-    width: 66.66%; /* Rộng hơn chỉ áp dụng cho textarea */
+    width: 100%; /* Rộng hơn chỉ áp dụng cho textarea */
     height: 100px;
     resize: vertical; /* Cho phép mở rộng chiều dọc */
     box-sizing: border-box;
+    align-content: center;
 }
 
 .controls textarea:focus {
@@ -251,6 +251,319 @@ ul li img {
     }
 }
 
+/* Product Management Section Styles */
+#product-management {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+}
+
+#product-management h3 {
+    color: #2c3e50;
+    font-size: 24px;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e9ecef;
+}
+
+/* Controls Container */
+#product-management .controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+/* Input Fields Styling */
+#product-management .controls input,
+#product-management .controls select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background-color: #fff;
+}
+
+#product-management .controls input:focus,
+#product-management .controls select:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+    outline: none;
+}
+
+/* Textarea Specific Styling */
+#product-management .controls textarea {
+    grid-column: span 2;
+    width: 100%;
+    height: 120px;
+    padding: 12px 15px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    font-size: 14px;
+    resize: vertical;
+    transition: all 0.3s ease;
+    background-color: #fff;
+}
+
+#product-management .controls textarea:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+    outline: none;
+}
+
+/* File Input Styling */
+#product-management .controls input[type="file"] {
+    padding: 8px;
+    border: 2px dashed #ced4da;
+    background-color: #f8f9fa;
+    cursor: pointer;
+}
+
+#product-management .controls input[type="file"]:hover {
+    border-color: #4a90e2;
+    background-color: #e9ecef;
+}
+
+/* Add Product Button */
+#product-management .controls button {
+    grid-column: span 2;
+    padding: 12px 24px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#product-management .controls button:hover {
+    background-color: #357abd;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Quản lí sản phẩm */
+/* Product Management Section Styles */
+#product-management {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+}
+
+#product-management h3 {
+    color: #2c3e50;
+    font-size: 24px;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e9ecef;
+}
+
+/* Controls Container */
+#product-management .controls {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 30px;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+/* Input Group Container */
+.input-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+    width: 100%;
+}
+
+/* Input Fields Styling */
+#product-management .controls input,
+#product-management .controls select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background-color: #fff;
+}
+
+#product-management .controls input:focus,
+#product-management .controls select:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+    outline: none;
+}
+
+/* Textarea Specific Styling */
+#product-management .controls textarea {
+    width: 100%;
+    height: 120px;
+    padding: 12px 15px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    font-size: 14px;
+    resize: vertical;
+    transition: all 0.3s ease;
+    background-color: #fff;
+    margin: 15px 0;
+}
+
+#product-management .controls textarea:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+    outline: none;
+}
+
+/* File Input Styling */
+#product-management .controls input[type="file"] {
+    padding: 8px;
+    border: 2px dashed #ced4da;
+    background-color: #f8f9fa;
+    cursor: pointer;
+}
+
+#product-management .controls input[type="file"]:hover {
+    border-color: #4a90e2;
+    background-color: #e9ecef;
+}
+
+/* Add Product Button */
+#product-management .controls button {
+    width: 100%;
+    max-width: 200px;
+    padding: 12px 24px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    align-self: flex-end;
+}
+
+#product-management .controls button:hover {
+    background-color: #357abd;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Product List Styling */
+#product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 0;
+}
+
+#product-list li {
+    background-color: #fff;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+#product-list li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+#product-list li img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+#product-list li span {
+    font-size: 14px;
+    color: #495057;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #f1f3f5;
+    padding-bottom: 8px;
+}
+
+#product-list li span strong {
+    color: #2c3e50;
+    min-width: 120px;
+}
+
+/* Action Buttons */
+#product-list li div {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+#product-list li div button {
+    flex: 1;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#product-list li div button:first-child {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+}
+
+#product-list li div button:last-child {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+}
+
+#product-list li div button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .input-group {
+        grid-template-columns: 1fr;
+    }
+
+    #product-management .controls textarea {
+        height: 100px;
+    }
+
+    #product-list {
+        grid-template-columns: 1fr;
+    }
+}
+
 /* Quản lý đơn hàng */
 #order-management .controls input {
     padding: 8px;
@@ -258,7 +571,6 @@ ul li img {
     border: 1px solid #ced4da;
     border-radius: 6px;
     margin-right: 10px;
-    margin-bottom: 10px;
     width: 200px;
 }
 
