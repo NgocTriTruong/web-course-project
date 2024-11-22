@@ -131,7 +131,8 @@ img {
     color: #fcae18;
 }
 
-.product_sale_new .product_new{
+.product_sale_new .product_new, 
+.product_sale_new .product_best {
     width: 250px;
     line-height: 39px;
     cursor: pointer;
@@ -140,7 +141,8 @@ img {
 }
 
 .product_sale_new .product_new:hover,
-.product_sale_new .product_sale:hover {
+.product_sale_new .product_sale:hover,
+.product_sale_new .product_best:hover {
     border-bottom: 3px solid #fcae18;
     color: #fcae18;
 }
