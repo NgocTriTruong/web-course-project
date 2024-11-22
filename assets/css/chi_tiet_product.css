@@ -88,12 +88,23 @@ html {
     cursor: pointer;
 }
 
+.chi_tiet_product .slide-show-1 {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: auto;
+}
+
 .chi_tiet_product .list-products {
-    column-gap: 20px;
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s ease; /* Smooth transition effect */
+    width: 100%;
 }
 
 .chi_tiet_product .slide-show-1 .product-card {
-    width: 20%;
+    width: 20%; /* Adjust as needed */
+    flex-shrink: 0; /* Prevent shrinking of product cards */
     padding: 10px;
     background-color: white;
 }
@@ -123,6 +134,7 @@ html {
     transition: 0.3s;
     border: none;
     background-color: rgb(255, 255, 255);
+    z-index: 10;
 }
 
 .slide-show-1 .prev {
@@ -133,3 +145,10 @@ html {
     right: 150px;
 }
 
+.slide-show-1 .list-products {
+    display: none;
+}
+
+.slide-show-1 .list-products.active {
+    display: flex;
+}

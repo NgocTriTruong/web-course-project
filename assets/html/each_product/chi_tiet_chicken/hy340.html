@@ -326,44 +326,44 @@
     </script>
 
     <script>
-        let currentIndex = 0; // Track the current slide index
-        const slideLists = document.querySelectorAll(".slide-show-1 .list-products");
-        const totalSlides = slideLists.length;
+        document.addEventListener("DOMContentLoaded", function () {
+            let slides = document.querySelectorAll(".slide-show-1 .list-products");
+            let currentIndex = 0;
+            let slideInterval;
 
-        // Function to change slides
-        function changeSlideProducts(step) {
-            // Hide the current slide
-            slideLists[currentIndex].style.display = "none";
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.remove("active");  // Hide all slides
+                });
+                slides[index].classList.add("active");  // Show the current slide
+            }
 
-            // Update the current index
-            currentIndex = (currentIndex + step + totalSlides) % totalSlides;
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % slides.length;
+                showSlide(currentIndex);
+            }
 
-            // Show the new slide
-            slideLists[currentIndex].style.display = "flex";
-        }
+            function changeSlide(direction) {
+                // Clear the interval to pause automatic sliding when a button is clicked
+                clearInterval(slideInterval);
 
-        // Function to set up automatic sliding
-        function startAutoSlide() {
-            setInterval(() => {
-                changeSlideProducts(1); // Move to the next slide
-            }, 3000); // Change every 3 seconds
-        }
+                // Update the slide index
+                currentIndex = (currentIndex + direction + slides.length) % slides.length;
+                showSlide(currentIndex);
 
-        // Initialize the slider
-        function initSlider() {
-            slideLists.forEach((slide, index) => {
-                slide.style.display = index === 0 ? "flex" : "none"; // Only show the first slide initially
-            });
+                // Restart the interval for automatic sliding after a short delay
+                slideInterval = setInterval(nextSlide, 5000);
+            }
 
-            startAutoSlide(); // Start the automatic slider
-        }
+            // Initial slide display
+            showSlide(currentIndex);
 
-        // Event listeners for buttons
-        document.querySelector(".slide-show-1 .prev").addEventListener("click", () => changeSlideProducts(-1));
-        document.querySelector(".slide-show-1 .next").addEventListener("click", () => changeSlideProducts(1));
+            // Set the interval for automatic sliding
+            slideInterval = setInterval(nextSlide, 5000);
 
-        // Start the slider on page load
-        window.onload = initSlider;
+            // Attach button events
+            window.changeSlideProducts = changeSlide;  // Expose the function to the global scope
+        });
     </script>
 
 </body>
