@@ -29,3 +29,7 @@ html {
 .cua_hang .cua_hang_right .cua_hang_right_80 .cua_hang_right_number {
     width: 290px;
 }
+
+.cua_hang .line_red {
+    border: 1px solid #94b83d;
+}

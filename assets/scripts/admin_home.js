@@ -8,29 +8,56 @@ function showSection(sectionId) {
 }
 
 // Quản lý sản phẩm
-let productList = [];
+let productList = [
+    {
+        product_id: "P001",
+        category_id: "CAT001",
+        name: "Thức ăn cho tôm",
+        price: 200000,
+        desc: "Hàng chính hãng Việt Nam",
+        quantity: 50,
+        status: "active",
+        type: "Loại A",
+        saleType: "no_sale",
+        date: "2024-03-20",
+        image: "https://via.placeholder.com/100x100",
+        brand_name: "BEIKESU ",
+        // sale_id: ""
+    },
+];
 
 function addProduct() {
+    const product_id = document.getElementById("product-id").value;
+    const category_id = document.getElementById("category-id").value;
     const name = document.getElementById("product-name").value;
     const price = document.getElementById("product-price").value;
     const desc = document.getElementById("product-desc").value;
+    const quantity = document.getElementById("product-quantity").value;
+    const status = document.getElementById("product-status").value;
     const type = document.getElementById("product-type").value;
     const saleType = document.getElementById("sale-type").value;
+    const brand_name = document.getElementById("brand-name").value;
+    // const sale_id = document.getElementById("sale-id").value;
     const date = document.getElementById("product-date").value;
     const imageInput = document.getElementById("product-image");
     const image = imageInput.files[0];
 
-    if (name && price && desc && type && saleType && date && image) {
+    if (product_id && category_id && name && price && desc && quantity && status && type && saleType && date && image && brand_name) {
         const reader = new FileReader();
         reader.onload = function (e) {
             productList.push({
+                product_id,
+                category_id,
                 name,
                 price,
                 desc,
+                quantity,
+                status,
                 type,
                 saleType,
                 date,
                 image: e.target.result,
+                brand_name
             });
             clearProductInputs();
             renderProductList();
@@ -42,44 +69,60 @@ function addProduct() {
 }
 
 function clearProductInputs() {
+    document.getElementById("product-id").value = "";
+    document.getElementById("category-id").value = "";
     document.getElementById("product-name").value = "";
     document.getElementById("product-price").value = "";
     document.getElementById("product-desc").value = "";
+    document.getElementById("product-quantity").value = "";
+    document.getElementById("product-status").value = "";
     document.getElementById("product-type").value = "";
     document.getElementById("sale-type").value = "";
+    document.getElementById("brand-name").value = "";
+    // document.getElementById("sale-id").value = "";
     document.getElementById("product-date").value = "";
     document.getElementById("product-image").value = "";
 }
 
 function editProduct(index) {
     const product = productList[index];
+    const newProductId = prompt("Mã sản phẩm:", product.product_id);
+    const newCategoryId = prompt("Mã danh mục:", product.category_id);
     const newName = prompt("Tên sản phẩm:", product.name);
     const newPrice = prompt("Giá tiền:", product.price);
     const newDesc = prompt("Mô tả:", product.desc);
+    const newQuantity = prompt("Số lượng:", product.quantity);
+    const newStatus = prompt("Trạng thái:", product.status);
     const newType = prompt("Loại sản phẩm:", product.type);
     const newSaleType = prompt("Loại giảm giá:", product.saleType);
+    const newBrandName = prompt("Tên thương hiệu:", product.brand_name);
+    // const newSaleId = prompt("Mã giảm giá:", product.sale_id);
     const newDate = prompt("Ngày tạo:", product.date);
 
-    // Yêu cầu tải lên ảnh mới
     const newImageInput = document.createElement("input");
     newImageInput.type = "file";
     newImageInput.accept = "image/*";
 
-    // Khi người dùng chọn ảnh mới
     newImageInput.onchange = function () {
         const file = newImageInput.files[0];
         const reader = new FileReader();
         reader.onload = function (e) {
             const newImage = e.target.result;
-            if (newName && newPrice && newDesc && newType && newSaleType && newDate) {
+            if (newProductId && newCategoryId && newName && newPrice && newDesc && newQuantity && newStatus && newType && newSaleType && newDate && newBrandName) {
                 productList[index] = {
+                    product_id: newProductId,
+                    category_id: newCategoryId,
                     name: newName,
                     price: newPrice,
                     desc: newDesc,
+                    quantity: newQuantity,
+                    status: newStatus,
                     type: newType,
                     saleType: newSaleType,
                     date: newDate,
-                    image: newImage || product.image, // Giữ ảnh cũ nếu không chọn mới
+                    brand_name: newBrandName,
+                    // sale_id: newSaleId,
+                    image: newImage || product.image
                 };
                 renderProductList();
             } else {
@@ -89,20 +132,24 @@ function editProduct(index) {
         reader.readAsDataURL(file);
     };
 
-    // Nếu người dùng muốn sửa ảnh, hiện file chọn
     if (confirm("Bạn có muốn thay đổi ảnh?")) {
         newImageInput.click();
     } else {
-        // Giữ nguyên ảnh cũ
-        if (newName && newPrice && newDesc && newType && newSaleType && newDate) {
+        if (newProductId && newCategoryId && newName && newPrice && newDesc && newQuantity && newStatus && newType && newSaleType && newDate && newBrandName) {
             productList[index] = {
+                product_id: newProductId,
+                category_id: newCategoryId,
                 name: newName,
                 price: newPrice,
                 desc: newDesc,
+                quantity: newQuantity,
+                status: newStatus,
                 type: newType,
                 saleType: newSaleType,
                 date: newDate,
-                image: product.image,
+                brand_name: newBrandName,
+                // sale_id: newSaleId,
+                image: product.image
             };
             renderProductList();
         } else {
@@ -111,7 +158,6 @@ function editProduct(index) {
     }
 }
 
-
 function renderProductList() {
     const list = document.getElementById("product-list");
     list.innerHTML = "";
@@ -119,11 +165,16 @@ function renderProductList() {
         list.innerHTML += `
       <li>
         <img src="${product.image}" alt="Product Image" style="width: 100px; height: 100px; object-fit: cover;">
+        <span><strong>Mã SP:</strong> ${product.product_id}</span>
+        <span><strong>Mã danh mục:</strong> ${product.category_id}</span>
         <span><strong>Tên:</strong> ${product.name}</span>
-        <span><strong>Giá:</strong> ${product.price} VNĐ</span>
+        <span><strong>Giá:</strong> ${product.price.toLocaleString()} VNĐ</span>
         <span><strong>Mô tả:</strong> ${product.desc}</span>
+        <span><strong>Số lượng:</strong> ${product.quantity}</span>
+        <span><strong>Trạng thái:</strong> ${product.status}</span>
         <span><strong>Loại:</strong> ${product.type}</span>
         <span><strong>Giảm giá:</strong> ${product.saleType}</span>
+        <span><strong>Thương hiệu:</strong> ${product.brand_name}</span>
         <span><strong>Ngày tạo:</strong> ${product.date}</span>
         <div>
           <button onclick="editProduct(${index})">Sửa</button>
@@ -138,6 +189,30 @@ function deleteProduct(index) {
     productList.splice(index, 1);
     renderProductList();
 }
+
+// Mock Data for charts
+const topSellingData = {
+    labels: ['Sản phẩm A', 'Sản phẩm B', 'Sản phẩm C'],
+    datasets: [{
+        label: 'Sản phẩm bán chạy',
+        data: [100, 150, 80],
+        backgroundColor: ['#4CAF50', '#FF9800', '#F44336'],
+        borderColor: ['#388E3C', '#F57C00', '#D32F2F'],
+        borderWidth: 1
+    }]
+};
+
+const newProductsData = {
+    labels: ['Sản phẩm X', 'Sản phẩm Y', 'Sản phẩm Z'],
+    datasets: [{
+        label: 'Sản phẩm mới',
+        data: [50, 70, 30],
+        backgroundColor: ['#2196F3', '#9C27B0', '#FF5722'],
+        borderColor: ['#1976D2', '#7B1FA2', '#F4511E'],
+        borderWidth: 1
+    }]
+};
+
 
 // Quản lý người dùng
 let userList = [];
@@ -241,7 +316,7 @@ function fetchOrders() {
 // Chức năng: Cập nhật trạng thái đơn hàng
 function updateOrderStatus(index) {
     const newStatus = prompt(
-        "Nhập trạng thái mới (1: Đang chuẩn bị hàng, 2: Đang vận chuyển, 3: Hoàn tất giao hàng):"
+        "Nhập trạng thái mới (1: Đang chuẩn bị hàng, 2: Đang vận chuyển, 3: Hoàn tất giao hàng, 4: Đã hủy):"
     );
 
     if (newStatus === "1") {
@@ -250,6 +325,8 @@ function updateOrderStatus(index) {
         orders[index].status = "Đang vận chuyển";
     } else if (newStatus === "3") {
         orders[index].status = "Hoàn tất giao hàng";
+    } else if (newStatus === "4") {
+        orders[index].status = "Đã hủy";
     } else {
         alert("Trạng thái không hợp lệ.");
         return;
@@ -268,6 +345,7 @@ function renderOrderList() {
         if (order.status === 'Đang chuẩn bị hàng') statusClass = 'status-preparing';
         if (order.status === 'Đang vận chuyển') statusClass = 'status-shipping';
         if (order.status === 'Hoàn tất giao hàng') statusClass = 'status-completed';
+        if (order.status === 'Đã hủy') statusClass = 'status-cancelled';
 
         const row = document.createElement('tr');
         row.innerHTML = `
