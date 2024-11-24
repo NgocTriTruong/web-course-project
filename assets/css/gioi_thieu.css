@@ -9,6 +9,23 @@ html {
     font-family: Helvetica, Arial, sans-serif; /*set font chữ cho cả website , chữ không có chân*/
 }
 
+.gioi_thieu .overlay-text {
+    width: 1000px;
+    position: absolute;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    color: transparent;
+    font-size: 9rem; 
+    font-weight: bold;
+    text-transform: uppercase;
+    -webkit-text-stroke: 1.5px white;
+} 
+
+img {
+    object-fit: cover;
+}
+
 .content {
     height: 100%;
     width: 90%;

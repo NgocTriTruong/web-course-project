@@ -174,3 +174,32 @@ img {
 .product .product-tab .tab:hover {
     background-color: #fcae18;
 }
+
+/* more sale product */
+.product .more_product_sale {
+    display: none;
+    transition: height 0.3s ease-in-out;
+}
+
+/* more text */
+.product .more_text_product {
+    display: none;
+    transition: height 0.3s ease-in-out;
+}
+
+.product .toggle-button-text,
+.product .toggle-button-sale {
+    display: block;
+    font-size: 20px;
+    background-color: rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    width: 160px;
+    margin: 0 auto;
+    border-radius: 20px;
+}
+
+.product .toggle-button-text:hover,
+.product .toggle-button-sale:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
