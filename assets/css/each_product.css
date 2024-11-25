@@ -203,3 +203,20 @@ img {
 .product .toggle-button-sale:hover {
     background-color: rgba(0, 0, 0, 0.1);
 }
+
+/*  */
+  /* Tạo hiệu ứng zoom khi hover */
+  .card-img-container {
+    overflow: hidden; /* Đảm bảo ảnh không bị tràn ra ngoài */
+}
+
+.card-img-top {
+    transition: transform 0.3s ease-in-out; /* Hiệu ứng mượt */
+}
+
+.card-img-container:hover .card-img-top {
+    transform: scale(1.1); /* Phóng to ảnh khi hover */
+}
+.card:hover .card-body {
+    background-color: #94b83d;
+}
