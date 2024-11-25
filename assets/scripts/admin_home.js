@@ -438,5 +438,5 @@ function deleteNews(index) {
 
 //logout
 function logout() {
-    window.location.href = "../home.html"; // Thay đổi đường dẫn đến trang đăng nhập của bạn
+    window.location.href = "/index.html"; // Thay đổi đường dẫn đến trang đăng nhập của bạn
 }
