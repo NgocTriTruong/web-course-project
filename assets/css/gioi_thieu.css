@@ -22,7 +22,7 @@ html {
     -webkit-text-stroke: 1.5px white;
 } 
 
-img {
+.gioi_thieu img {
     object-fit: cover;
 }
 
