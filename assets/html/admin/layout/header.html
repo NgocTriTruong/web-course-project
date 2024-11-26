@@ -1,0 +1,145 @@
+
+<header>
+  <!-- Sidenav -->
+  <nav id="main-sidenav" class="sidenav sidenav-md shadow-1" data-mdb-mode="side"
+       data-mdb-hidden="false" style="width: 270px;  background-color: black">
+    <a class="ripple d-flex justify-content-center pt-4 pb-2" href="#!" data-mdb-ripple-color="primary">
+      <img id="MDB-logo" src="/assets/images/logo/logo_shop.png" style="width: 100px" height="70px"
+           alt="MDB Logo" draggable="false"/>
+    </a>
+
+    <hr class="hr">
+
+    <ul class="sidenav-menu text-white">
+      <li class="sidenav-item">
+        <a class="sidenav-link text-danger" href="/admin/home.html">
+          <i class="fas fa-tachometer-alt fa-fw me-3 "></i><span class="h5 text">Trang chủ</span></a>
+      </li>
+      <li class="sidenav-item pt-3">
+        <span class="sidenav-subheading text-muted text-uppercase fw-bold" style="font-size: 15px; padding-bottom: 10px;">Quản lý</span>
+      </li>
+      <li class="sidenav-item mt-2">
+        <a class="sidenav-link " href="/admin/userManagement.html">
+          <i class="fas fa-users fa-fw me-2"></i><span class="h5 text">Quản lý người dùng</span></a>
+        <ul class="sidenav-collapse">
+          <li class="sidenav-item">
+            <a class="sidenav-link" href="/admin/userAddition.html">Thêm người dùng</a>
+          </li>
+          <li class="sidenav-item">
+            <a class="sidenav-link" href="/admin/userManagement.html">Danh sách người dùng</a>
+          </li>
+        </ul>
+      </li>
+      <li class="sidenav-item">
+        <a class="sidenav-link " href="/admin/productManagement.html">
+          <i class="fas fa-mug-saucer fa-fw me-2"></i><span class="h5 text">Quản lý món</span></a>
+        <ul class="sidenav-collapse ">
+          <li class="sidenav-item">
+            <a class="sidenav-link" href="/admin/productAddition.html">Thêm món</a>
+          </li>
+          <li class="sidenav-item">
+            <a class="sidenav-link" href="/admin/productManagement.html">Danh sách món</a>
+          </li>
+          <li class="sidenav-item">
+            <a class="sidenav-link" href="/admin/reviewManagement.html">Danh sách đánh giá</a>
+          </li>
+        </ul>
+      </li>
+      <li class="sidenav-item">
+        <a class="sidenav-link " href="/admin/categoryManagement.html">
+          <i class="fas fa-bars fa-fw me-2 "></i><span  class="h5 text">Quản lý danh mục</span></a>
+        <ul class="sidenav-collapse ">
+          <li class="sidenav-item">
+            <a class="sidenav-link" href="/admin/categoryAddition.html">Thêm danh mục</a>
+          </li>
+          <li class="sidenav-item">
+            <a class="sidenav-link" href="/admin/categoryManagement.html">Danh sách danh mục</a>
+          </li>
+        </ul>
+      </li>
+      <li class="sidenav-item">
+        <a class="sidenav-link " href="/admin/tableManagement.html">
+          <i class="fas fa-table fa-fw me-2 "></i><span  class="h5 text">Quản lý bàn</span></a>
+        <ul class="sidenav-collapse ">
+          <li class="sidenav-item">
+            <a class="sidenav-link" href="/admin/tableAddition.html">Thêm bàn</a>
+          </li>
+          <li class="sidenav-item">
+            <a class="sidenav-link" href="/admin/tableManagement.html">Danh sách bàn</a>
+          </li>
+        </ul>
+      </li>
+      <li class="sidenav-item">
+        <a class="sidenav-link" href="/admin/reservationManagement.html">
+          <i class="fas fa-clipboard-list fa-fw me-2 "></i><span class="h5 text">Quản lý đơn đặt bàn</span></a>
+        <ul class="sidenav-collapse ">
+          <li class="sidenav-item">
+            <a class="sidenav-link" href="/admin/reservationAddition.html">Thêm đơn đặt bàn</a>
+          </li>
+          <li class="sidenav-item">
+            <a class="sidenav-link" href="/admin/reservationManagement.html">Danh sách đơn đặt bàn</a>
+          </li>
+        </ul>
+      </li>
+      <li class="sidenav-item">
+        <a class="sidenav-link" href="/admin/contactManagemet.html">
+          <i class="fas fa-message fa-fw me-2 "></i><span class="h5 text">Quản lý trang liên hệ</span></a>
+        <ul class="sidenav-collapse ">
+          <li class="sidenav-item">
+            <a class="sidenav-link" href="/admin/contactManagemet.html">Danh sách liên hệ</a>
+          </li>
+        </ul>
+      </li>
+      <li class="sidenav-item">
+        <a class="sidenav-link" href="/admin/postManagement.html">
+          <i class="fas fa-blog fa-fw me-2 "></i><span class="h5 text">Quản lý trang tin tức</span></a>
+        <ul class="sidenav-collapse ">
+          <li class="sidenav-item">
+            <a class="sidenav-link" href="/admin/postAddition.html">Thêm bài viết</a>
+          </li>
+          <li class="sidenav-item">
+            <a class="sidenav-link" href="/admin/postManagement.html">Danh sách bài viết</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+  <!-- Sidenav -->
+
+  <!-- Navbar -->
+  <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-1 ms-4">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+      <!-- Toggler -->
+      <button data-mdb-toggle="sidenav" data-mdb-target="#main-sidenav"
+              class="btn shadow-0 p-0 me-3 d-block " aria-controls="#main-sidenav" aria-haspopup="true">
+        <i class="fas fa-bars fa-lg"></i>
+      </button>
+
+      <!-- Search form -->
+      <form class="d-none d-md-flex input-group w-auto my-auto">
+        <input id="search-focus" autocomplete="off" type="search" class="form-control rounded"
+               placeholder='Search (ctrl + alt to focus)' style="min-width: 225px"/>
+        <span class="input-group-text border-0"><i class="fas fa-search text-secondary"></i></span>
+      </form>
+
+      <!-- Right links -->
+      <ul class="navbar-nav ms-auto d-flex flex-row">
+        <!-- Avatar -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="#"
+             id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+             Admin
+            <img src="https://mdbootstrap.com/img/new/avatars/2.jpg" class="rounded-circle ms-2 me-4" height="40px" width="40px"
+                 alt="Avatar"
+                 loading="lazy"/>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="/admin/profile.html">My profile</a></li>
+            <li><a class="dropdown-item" href="#">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
