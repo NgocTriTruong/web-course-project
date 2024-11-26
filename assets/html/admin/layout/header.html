@@ -2,7 +2,7 @@
 <header>
   <!-- Sidenav -->
   <nav id="main-sidenav" class="sidenav sidenav-md shadow-1" data-mdb-mode="side"
-       data-mdb-hidden="false" style="width: 270px;  background-color: black">
+       data-mdb-hidden="false" style="width: 280px; background-color: black">
     <a class="ripple d-flex justify-content-center pt-4 pb-2" href="#!" data-mdb-ripple-color="primary">
       <img id="MDB-logo" src="/assets/images/logo/logo_shop.png" style="width: 100px" height="70px"
            alt="MDB Logo" draggable="false"/>
@@ -10,44 +10,41 @@
 
     <hr class="hr">
 
-    <ul class="sidenav-menu text-white">
+    <ul class="sidenav-menu text-white mb-5">
       <li class="sidenav-item">
-        <a class="sidenav-link text-danger" href="/admin/home.html">
+        <a class="sidenav-link text-white" href="/assets/html/admin/home.html">
           <i class="fas fa-tachometer-alt fa-fw me-3 "></i><span class="h5 text">Trang chủ</span></a>
       </li>
       <li class="sidenav-item pt-3">
         <span class="sidenav-subheading text-muted text-uppercase fw-bold" style="font-size: 15px; padding-bottom: 10px;">Quản lý</span>
       </li>
       <li class="sidenav-item mt-2">
-        <a class="sidenav-link " href="/admin/userManagement.html">
-          <i class="fas fa-users fa-fw me-2"></i><span class="h5 text">Quản lý người dùng</span></a>
+        <a class="sidenav-link " href="/assets/html/admin/userManagement.html">
+          <i class="fas fa-users fa-fw me-2"></i><span class="h5 text">Quản lý người dùng</span><i class="fas fa-chevron-down ms-3"></i></a>
         <ul class="sidenav-collapse">
           <li class="sidenav-item">
-            <a class="sidenav-link" href="/admin/userAddition.html">Thêm người dùng</a>
+            <a class="sidenav-link h6" href="/admin/userAddition.html" style="font-size: 16px;">Thêm người dùng</a>
           </li>
           <li class="sidenav-item">
-            <a class="sidenav-link" href="/admin/userManagement.html">Danh sách người dùng</a>
+            <a class="sidenav-link" href="/admin/userManagement.html" style="font-size: 16px;">Danh sách người dùng</a>
           </li>
         </ul>
       </li>
       <li class="sidenav-item">
         <a class="sidenav-link " href="/admin/productManagement.html">
-          <i class="fas fa-mug-saucer fa-fw me-2"></i><span class="h5 text">Quản lý món</span></a>
+          <i class="fas fa-gift fa-fw me-2"></i><span class="h5 text">Quản lý sản phẩm</span> <i class="fas fa-chevron-down" style="margin-left: 35px;"></i></a>
         <ul class="sidenav-collapse ">
           <li class="sidenav-item">
-            <a class="sidenav-link" href="/admin/productAddition.html">Thêm món</a>
+            <a class="sidenav-link" href="/admin/productAddition.html">Thêm sản phẩm</a>
           </li>
-          <li class="sidenav-item">
-            <a class="sidenav-link" href="/admin/productManagement.html">Danh sách món</a>
-          </li>
-          <li class="sidenav-item">
-            <a class="sidenav-link" href="/admin/reviewManagement.html">Danh sách đánh giá</a>
+          <li class="sidenav-item"> 
+            <a class="sidenav-link" href="/admin/productManagement.html">Danh sách sản phẩm</a>
           </li>
         </ul>
       </li>
       <li class="sidenav-item">
         <a class="sidenav-link " href="/admin/categoryManagement.html">
-          <i class="fas fa-bars fa-fw me-2 "></i><span  class="h5 text">Quản lý danh mục</span></a>
+          <i class="fas fa-bars fa-fw me-2 "></i><span  class="h5 text">Quản lý danh mục</span><i class="fas fa-chevron-down" style="margin-left: 35px;"></i></a>
         <ul class="sidenav-collapse ">
           <li class="sidenav-item">
             <a class="sidenav-link" href="/admin/categoryAddition.html">Thêm danh mục</a>
@@ -58,32 +55,20 @@
         </ul>
       </li>
       <li class="sidenav-item">
-        <a class="sidenav-link " href="/admin/tableManagement.html">
-          <i class="fas fa-table fa-fw me-2 "></i><span  class="h5 text">Quản lý bàn</span></a>
-        <ul class="sidenav-collapse ">
-          <li class="sidenav-item">
-            <a class="sidenav-link" href="/admin/tableAddition.html">Thêm bàn</a>
-          </li>
-          <li class="sidenav-item">
-            <a class="sidenav-link" href="/admin/tableManagement.html">Danh sách bàn</a>
-          </li>
-        </ul>
-      </li>
-      <li class="sidenav-item">
         <a class="sidenav-link" href="/admin/reservationManagement.html">
-          <i class="fas fa-clipboard-list fa-fw me-2 "></i><span class="h5 text">Quản lý đơn đặt bàn</span></a>
+          <i class="fas fa-cart-shopping fa-fw me-2 "></i><span class="h5 text">Quản lý đơn đặt hàng</span><i class="fas fa-chevron-down ms-1"></i></a>
         <ul class="sidenav-collapse ">
           <li class="sidenav-item">
-            <a class="sidenav-link" href="/admin/reservationAddition.html">Thêm đơn đặt bàn</a>
+            <a class="sidenav-link" href="/admin/reservationAddition.html">Thêm đơn đặt hàng</a>
           </li>
           <li class="sidenav-item">
-            <a class="sidenav-link" href="/admin/reservationManagement.html">Danh sách đơn đặt bàn</a>
+            <a class="sidenav-link" href="/admin/reservationManagement.html">Danh sách đơn đặt hàng</a>
           </li>
         </ul>
       </li>
       <li class="sidenav-item">
         <a class="sidenav-link" href="/admin/contactManagemet.html">
-          <i class="fas fa-message fa-fw me-2 "></i><span class="h5 text">Quản lý trang liên hệ</span></a>
+          <i class="fas fa-message fa-fw me-2 "></i><span class="h5 text">Quản lý trang liên hệ</span><i class="fas fa-chevron-down ms-2"></i></a>
         <ul class="sidenav-collapse ">
           <li class="sidenav-item">
             <a class="sidenav-link" href="/admin/contactManagemet.html">Danh sách liên hệ</a>
@@ -92,7 +77,7 @@
       </li>
       <li class="sidenav-item">
         <a class="sidenav-link" href="/admin/postManagement.html">
-          <i class="fas fa-blog fa-fw me-2 "></i><span class="h5 text">Quản lý trang tin tức</span></a>
+          <i class="fas fa-blog fa-fw me-2 "></i><span class="h5 text">Quản lý trang tin tức</span><i class="fas fa-chevron-down ms-2"></i></a>
         <ul class="sidenav-collapse ">
           <li class="sidenav-item">
             <a class="sidenav-link" href="/admin/postAddition.html">Thêm bài viết</a>
@@ -112,8 +97,8 @@
     <div class="container-fluid">
       <!-- Toggler -->
       <button data-mdb-toggle="sidenav" data-mdb-target="#main-sidenav"
-              class="btn shadow-0 p-0 me-3 d-block " aria-controls="#main-sidenav" aria-haspopup="true">
-        <i class="fas fa-bars fa-lg"></i>
+              class="btn shadow-1 p-0 me-3 d-block " aria-controls="#main-sidenav" aria-haspopup="true">
+        <i class="fas fa-bars"></i>
       </button>
 
       <!-- Search form -->
@@ -135,8 +120,8 @@
                  loading="lazy"/>
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="/admin/profile.html">My profile</a></li>
-            <li><a class="dropdown-item" href="#">Logout</a></li>
+            <li><a class="dropdown-item" href="/admin/profile.html">Hồ sơ của tôi</a></li>
+            <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
           </ul>
         </li>
       </ul>

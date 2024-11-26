@@ -5,7 +5,7 @@ body {
     main,
     header,
     #main-navbar {
-        padding-left: 270px;
+        padding-left: 280px;
     }
 }
 .border-left-primary{
@@ -55,4 +55,15 @@ body {
 
 .border-left-warning{
     border-left:  0.25rem solid #f6c23e!important;
+}
+
+.btn:hover {
+    background-color: inherit !important;
+    color: inherit !important; 
+}
+
+#advanced-search-input:focus {
+    border-color: #94b83d; /* Đặt màu viền bạn muốn */
+    box-shadow: 0 0 0 0.25rem rgba(148, 184, 61, 0.5); /* Tạo hiệu ứng viền sáng nhẹ */
+    outline: none; /* Loại bỏ đường viền mặc định */
 }

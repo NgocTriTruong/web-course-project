@@ -20,3 +20,18 @@ header i {
 header .text{
     margin-top: 8px;
 }
+
+#main-sidenav {
+    width: 280px !important; /* Giữ width cố định */
+  }
+#main-sidenav.sidenav-collapsed {
+    width: 280px !important; /* Khi thu gọn cũng giữ nguyên width */
+  }
+
+.text_green {
+    color: #94b83d;
+}
+
+.bg_green {
+    background-color: #94b83d;
+}
