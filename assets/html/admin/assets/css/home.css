@@ -1,0 +1,58 @@
+body {
+    background-color: hsl(0, 0%, 97%);
+}
+@media (min-width: 1400px) {
+    main,
+    header,
+    #main-navbar {
+        padding-left: 270px;
+    }
+}
+.border-left-primary{
+    border-left: .25rem solid #4e73df!important;
+}
+
+
+
+.border-left-primary .card-body{
+    position: absolute;
+}
+
+.border-left-success .card-body{
+    position: absolute;
+}
+.border-left-warning .card-body{
+    position: absolute;
+}
+/*.border-left-info .card-body{*/
+/*    position: absolute;*/
+/*}*/
+
+.border-left-primary:hover .hover_container{
+    height: 100%;
+    width: 100%;
+}
+.border-left-success:hover .hover_container{
+    height: 100%;
+    width: 100%;
+}
+.border-left-info:hover .hover_container{
+    height: 100%;
+    width: 100%;
+}
+.border-left-warning:hover .hover_container{
+    height: 100%;
+    width: 100%;
+}
+
+.border-left-success{
+    border-left:  0.25rem solid #1cc88a!important;
+}
+
+.border-left-info{
+    border-left: 0.25rem solid #36b9cc!important;
+}
+
+.border-left-warning{
+    border-left:  0.25rem solid #f6c23e!important;
+}
