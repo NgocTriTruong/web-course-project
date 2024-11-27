@@ -43,3 +43,7 @@ header .text{
 .style_18 {
     font-size: 18px;
 }
+
+header:hover {
+    background-color: rgba(0, 0, 0, 0.4) !important;
+}
