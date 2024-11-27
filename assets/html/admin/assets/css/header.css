@@ -10,7 +10,7 @@ html {
 }
 
 header {
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: gray;
 }
 
 header i {
@@ -19,6 +19,19 @@ header i {
 
 header .text{
     margin-top: 8px;
+}
+
+.sidenav-item:hover .sidenav-collapse {
+    display: block;
+    transform: all 0.5s ease;
+}
+
+.sidenav-item:hover a {
+    transform: all 0.5s ease;
+}
+
+.sidenav-link:hover {
+    background-color: #fcae18 !important;
 }
 
 #main-sidenav {
@@ -45,5 +58,5 @@ header .text{
 }
 
 header:hover {
-    background-color: rgba(0, 0, 0, 0.4) !important;
+    background-color: #94b83d !important;
 }

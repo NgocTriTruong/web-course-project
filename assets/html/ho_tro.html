@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="/assets/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
     <script src="/assets/scripts/add_layout/add_layout.js" defer></script>
 
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 </head>
 <body>
 <div id="header-placeholder"></div>
@@ -26,16 +28,16 @@
         <div class="background-section">
             <h1 class="outline">THÔNG TIN LIÊN HỆ</h1>
         </div>
-        <div class="h1 mt-4">CÔNG TY TNHH TVK</div>
+        <div class="h1 mt-4">CÔNG TY TNHH VINA</div>
         <div class="p mt-3 text-center w-75 m-auto">
-            Sau đây là tất cả các thông tin liên lạc cần thiết và bản đồ đi đến TVK GROUP.
+            Sau đây là tất cả các thông tin liên lạc cần thiết và bản đồ đi đến VINA GROUP.
             Nếu bạn có thắc mắc, hãy liên hệ nhanh với chúng tôi qua form bên dưới hoặc liên hệ nhanh qua điện thoại, chúng tôi luôn sẵn sàng hỗ trợ bạn.
         </div>
         <div class="row">
-            <div class="col-md-6 m-auto">
+            <div class="col-md-6" style="margin: 0 auto;">
                 <div class="content_bg bg-light">
                     <div class="content d-flex between mt-4">
-                        <div class="h3">TVK MIỀN BẮC</div>
+                        <div class="h3" style="color: #94b83d;">VINA MIỀN BẮC</div>
                         <div class="line_white"></div>
                     </div>
                     <div class="line_gray ms-4 me-4"></div>
@@ -69,7 +71,7 @@
 
                 <div class="content_bg bg-light mt-4">
                     <div class="content d-flex between mt-4">
-                        <div class="h3">TVK MIỀN TRUNG</div>
+                        <div class="h3" style="color: #fcae18;">VINA MIỀN TRUNG</div>
                         <div class="line_white"></div>
                     </div>
                     <div class="line_gray ms-4 me-4"></div>
@@ -103,7 +105,7 @@
 
                 <div class="content_bg bg-light mt-4">
                     <div class="content d-flex between mt-4">
-                        <div class="h3">TVK MIỀN NAM</div>
+                        <div class="h3" style="color: #b83d3d;">VINA MIỀN NAM</div>
                         <div class="line_white"></div>
                     </div>
                     <div class="line_gray ms-4 me-4"></div>
@@ -132,6 +134,47 @@
                             <i class="fa-solid fa-map ms-3" style="line-height: 45px;"></i>
                             <div class="p ms-3"><span class="fw-bold">Bản đồ </span></div>
                         </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5" style="margin: 0 auto;">
+                <div class="container mt-5">
+                    <div class="row justify-content-center">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <h2 class="text-center mb-4">Gửi tin nhắn</h2>
+                                <form>
+                                    <!-- Họ tên -->
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control" id="name" placeholder="Nhập họ tên *">
+                                    </div>
+                                    <!-- Điện thoại -->
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control" id="phone" placeholder="Nhập số điện thoại *">
+                                    </div>
+                                    <!-- Email -->
+                                    <div class="mb-3">
+                                        <input type="email" class="form-control" id="email" placeholder="Nhập email">
+                                    </div>
+                                    <!-- Địa chỉ -->
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control" id="address" placeholder="Nhập địa chỉ">
+                                    </div>
+                                    <!-- Nội dung -->
+                                    <div class="mb-3">
+                                        <textarea class="form-control" id="message" rows="4" placeholder="Nhập nội dung *"></textarea>
+                                    </div>
+                                    <!-- reCAPTCHA -->
+                                    <div class="mb-3">
+                                        <div class="g-recaptcha" data-sitekey="your-site-key"></div>
+                                    </div>
+                                    <!-- Gửi -->
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-danger px-5">Gửi</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
