@@ -35,3 +35,11 @@ header .text{
 .bg_green {
     background-color: #94b83d;
 }
+
+.bg_yellow {
+    background-color: #fcae18;
+}
+
+.style_18 {
+    font-size: 18px;
+}
