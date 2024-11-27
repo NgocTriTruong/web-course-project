@@ -8,11 +8,6 @@ body {
         padding-left: 280px;
     }
 }
-.border-left-primary{
-    border-left: .25rem solid #4e73df!important;
-}
-
-
 
 .border-left-primary .card-body{
     position: absolute;
@@ -45,16 +40,20 @@ body {
     width: 100%;
 }
 
+.border-left-primary{
+    border-left: 5px solid #df4e4e!important;
+}
+
 .border-left-success{
-    border-left:  0.25rem solid #1cc88a!important;
+    border-left:  5px solid #1cc88a!important;
 }
 
 .border-left-info{
-    border-left: 0.25rem solid #36b9cc!important;
+    border-left: 5px solid #36b9cc!important;
 }
 
 .border-left-warning{
-    border-left:  0.25rem solid #f6c23e!important;
+    border-left:  5px solid #f6c23e!important;
 }
 
 .btn:hover {
