@@ -14,6 +14,47 @@
     <link rel="stylesheet" href="/assets/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
 
     <script src="/assets/scripts/add_layout/add_layout.js" defer></script>
+
+    <style>
+        .address-form {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+    
+        .address-form-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+    
+        .form-header {
+            border-bottom: 1px solid #e9ecef;
+        }   
+    
+        .form-item label {
+            margin-bottom: 0.5rem;
+        }
+    
+        .form-details textarea {
+            margin-top: 1rem;
+        }
+    
+        .form-footer {
+            border-top: 1px solid #e9ecef;
+        }
+    </style>
 </head>
 <body>
     <div id="header-placeholder"></div>
@@ -90,9 +131,49 @@
                                     <label class="form-check-label" for="storePickup">Nhận tại cửa hàng</label>
                                 </div>
                             </div>
-                            <div class="form-group m-3">
-                                <input type="text" class="form-control chose_location" placeholder="Tỉnh/Thành Phố, Quận/Huyện, Phường/Xã" disabled>
-                                <i class="fas fa-chevron-right chose_location_right float-end"></i>
+                            <div class="form-group m-3 position-relative">
+                                <input type="text" class="form-control chose_location" placeholder="Tỉnh/Thành Phố, Quận/Huyện, Phường/Xã" readonly onclick="openAddressForm()">
+                                <i class="fas fa-chevron-right chose_location_right float-end" onclick="openAddressForm()"></i>
+                                
+                                <div class="address-form" id="addressFormModal">
+                                    <div class="address-form-content bg-white">
+                                        <div class="form-header d-flex justify-content-between align-items-center p-3">
+                                            <h5 class="m-0">Thêm địa chỉ nhận hàng</h5>
+                                            <button class="btn-close" onclick="closeAddressForm()">&times;</button>
+                                        </div>
+                                        
+                                        <div class="form-container p-3">
+                                            <div class="form-item mb-3">
+                                                <label for="province" class="form-label">Chọn Tỉnh:</label>
+                                                <select id="province" class="form-select" onchange="loadDistricts()">
+                                                    <option value="">--Chọn Tỉnh--</option>
+                                                </select>
+                                            </div>
+                                            
+                                            <div class="form-item mb-3">
+                                                <label for="district" class="form-label">Chọn Huyện:</label>
+                                                <select id="district" class="form-select" onchange="loadWards()">
+                                                    <option value="">--Chọn Huyện--</option>
+                                                </select>
+                                            </div>
+                                            
+                                            <div class="form-item mb-3">
+                                                <label for="ward" class="form-label">Chọn Xã:</label>
+                                                <select id="ward" class="form-select">
+                                                    <option value="">--Chọn Xã--</option>
+                                                </select>
+                                            </div>
+                                            
+                                            <div class="form-details">
+                                                <textarea class="form-control" id="addressDetails" placeholder="Nhập địa chỉ cụ thể (vd: Số nhà, đường)" rows="3"></textarea>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-footer p-3">
+                                            <button class="btn btn-primary w-100" onclick="saveAddress()">Lưu địa chỉ</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group m-3 pb-3">
                                 <textarea type="noidung" class="form-control" placeholder="Ghi chú (VD: Hãy gọi tôi khi chuẩn bị hàng xong)" style="height: 100px;"></textarea>
@@ -152,42 +233,6 @@
     </main>
     <div id="footer-placeholder"></div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<!-- <script>
-    document.getElementById("select-all").addEventListener("change", function() {
-        let checkboxes = document.querySelectorAll(".item-checkbox");
-        checkboxes.forEach(cb => cb.checked = this.checked);
-        updateTotalPrice();
-    });
-
-    document.querySelectorAll(".item-checkbox, .option-checkbox").forEach(item => {
-        item.addEventListener("change", updateTotalPrice);
-    });
-
-    function updateQuantity(button, change) {
-        let quantityInput = button.parentNode.querySelector(".quantity-input");
-        let newValue = parseInt(quantityInput.value) + change;
-        if (newValue >= 1) {
-            quantityInput.value = newValue;
-            updateTotalPrice();
-        }
-    }
-
-    function updateTotalPrice() {
-        let total = 0;
-        document.querySelectorAll(".cart-item").forEach(item => {
-            if (item.querySelector(".item-checkbox").checked) {
-                let quantity = parseInt(item.querySelector(".quantity-input").value);
-                let basePrice = parseInt(item.querySelector(".price").textContent.replace(/[^0-9]/g, ""));
-                total += basePrice * quantity;
-                item.querySelectorAll(".option-checkbox:checked").forEach(option => {
-                    total += parseInt(option.getAttribute("data-price")) * quantity;
-                });
-            }
-        });
-        document.getElementById("total-price").textContent = total.toLocaleString("vi-VN") + " đ";
-        document.getElementById("final-price").textContent = total.toLocaleString("vi-VN") + " đ";
-    }
-</script> -->
+    <script src="/assets/scripts/call-api-address.js"></script>
 </body>
 </html>

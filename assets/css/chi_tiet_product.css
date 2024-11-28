@@ -1,0 +1,129 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /*cuộn mượt mà */
+    font-family: Helvetica, Arial, sans-serif; /*set font chữ cho cả website , chữ không có chân*/
+}
+
+.chi_tiet_product .content {
+    height: 100%;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.chi_tiet_product  .p_bold {
+    width: 200px;
+}
+
+.chi_tiet_product  .order {
+    height: 50px;
+    width: 250px;
+    border-radius: 10px;
+    background-color: #fcae18;
+    margin-right: 10px;
+    line-height: 50px;
+}
+
+.chi_tiet_product  i {
+    font-size: 24px;
+}
+
+.chi_tiet_product  a {
+    text-decoration: none;
+    color: #333;
+    margin-right: 15px;
+}
+
+.chi_tiet_product  .button .btn_h:hover {
+    background-color: #94b83d;
+    color: black;
+}
+
+.chi_tiet_product  .order {
+    color: white;
+}
+
+.chi_tiet_product  .order .text_order, 
+.chi_tiet_product  .call .text_call {
+    line-height: 50px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.chi_tiet_product  .call {
+    height: 50px;
+    width: 200px;
+    border-radius: 10px;
+    border: 1px solid #94b83d;
+    margin-left: 10px;
+    line-height: 50px;
+}
+
+.chi_tiet_product  .line_white {
+    width: 25px;
+    height: 7px;
+    background-color: black;
+    margin: auto 0;
+    right: 0;
+}
+
+.chi_tiet_product  .between {
+    justify-content: space-between;
+}
+
+.chi_tiet_product  #toggle-button1,
+.chi_tiet_product  #toggle-button2,
+.chi_tiet_product  #toggle-button3,
+.chi_tiet_product  #toggle-button4 {
+    line-height: 40px;
+    height: 40px;
+    font-size: 40px;
+    background: none;
+    border: none;
+    margin-right: 50px;
+    cursor: pointer;
+}
+
+.chi_tiet_product .list-products .product-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chi_tiet_product .list-products .product-card {
+    width: 20%;
+    background-color: white;
+    padding: 10px;
+    margin: 0 10px;
+}
+
+.chi_tiet_product .list-products .product-card .h5,
+.chi_tiet_product .list-products .product-card .p {
+    text-align: center;
+}
+
+.chi_tiet_product .carousel-control-prev,
+.chi_tiet_product .carousel-control-next {
+    position: absolute;
+    top: 40%;
+    width: 50px;
+    height: 50px;
+    color: black;
+    font-size: 18px;
+    background: #94b83d;
+    border-radius: 50%;
+    z-index: 10;
+}
+
+.chi_tiet_product .carousel-control-prev {
+    left: 150px;
+}
+
+.chi_tiet_product .carousel-control-next {
+    right: 150px;
+}
+
