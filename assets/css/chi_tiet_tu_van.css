@@ -1,0 +1,92 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /*cuộn mượt mà */
+    font-family: Helvetica, Arial, sans-serif; /*set font chữ cho cả website , chữ không có chân*/
+}
+
+.chi_tiet_tu_van .background-section {
+    position: relative;
+    margin-top: 80px;
+    background: linear-gradient(to bottom, rgba(148, 184, 61, 1) 40%, rgba(255, 255, 255, 1) 40%);
+    background-size: cover;
+    height: 300px; /* Adjust height as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chi_tiet_tu_van .background-section img {
+    height: 90%;
+    aspect-ratio: 2 / 1;
+    border-radius: 5px;
+    position: relative;
+}
+
+.chi_tiet_tu_van .background-section desc {
+    color: white;
+    position: relative;
+}
+
+.chi_tiet_tu_van .background-section .detailed_desc {
+    width: 100%;
+}
+
+.chi_tiet_tu_van .background-section .detailed_desc button {
+    width: 200px;
+    aspect-ratio: 5/1;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 10px;
+    border: none;
+    background-color: #fcae18;
+}
+
+.chi_tiet_tu_van .background-section .detailed_desc button:hover {
+    cursor: pointer;
+    background-color: #da9612;
+}
+
+@supports(-webkit-text-stroke: 2px white) {
+    .outline {
+        color: transparent;
+        -webkit-text-stroke: 2px white; /* Increased stroke width */
+        text-shadow: none;
+        font-size: 80px; /* Increased font size */
+        font-weight: bold;
+        letter-spacing: 5px;
+    }
+}
+
+.chi_tiet_tu_van .faq-section {
+    width: 80%;
+    max-width: 1200px;
+}
+.chi_tiet_tu_van .faq-section .container-fluid {
+    margin: 0 auto;
+}
+
+.chi_tiet_tu_van .content button {
+    padding: 10px 20px;
+    background-color: #fcae18;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.chi_tiet_tu_van .content button:hover {
+    background-color: #94b83d;
+}
+
+.chi_tiet_tu_van .faq-section .line {
+    margin-top: 20px;
+    height: 1px;
+    background-color: gray;
+}
