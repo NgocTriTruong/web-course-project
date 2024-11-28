@@ -19,6 +19,7 @@ html {
     align-items: center;
     justify-content: center;
     display: none; 
+    z-index: 99999;
 }
 
 .signup.open {
@@ -51,7 +52,7 @@ html {
 
 .signup .signup_header .signup_logo_shop img{
     width: 110px;
-    margin-left: 15px;
+    margin-left: 10px;
 }
 
 .signup .signup_header .signup_header_text {
