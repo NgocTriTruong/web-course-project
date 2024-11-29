@@ -55,7 +55,7 @@
       </section>
 
     <!-- Container for demo purpose -->
-    <div class="container  px-4 mb-5">
+    <div class="container px-4 mb-5">
         <div class="datatable">
             <table class="table align-middle mb-0 bg-white">
                 <thead class="bg-light">
@@ -102,6 +102,46 @@
                 </tbody>
             </table>
         </div>
+    </div>
+
+    <div class="container px-4" style="margin-bottom: 150px">
+        <div class="mb-3 bg_green p-2 w-50">
+            <span class=" fw-bold h4">Trả lời tin nhắn</span>
+        </div>
+        <form class="border p-2 w-50">
+            <div class="row">
+                <div class="col-md-11">
+                    <div class="mb-3">
+                        <label for="name" class="form-label"><b>Gmail</b></label>
+                        <input type="text" class="form-control" id="name" name="name"
+                               placeholder="Nhập gmail..." required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-11">
+                    <div class="mb-3">
+                        <label for="topic" class="form-label"><b>Chủ đề</b></label>
+                        <input type="text" class="form-control" id="topic" name="topic"
+                               placeholder="Nhập chủ đề..." required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-11">
+                    <div class="mb-3">
+                        <label class="form-label"><b>Nội dung</b></label>
+                        <textarea class="form-control" id="description" name="description" rows="7"
+                                  placeholder="Nội dung..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Repeat the pattern for other form elements -->
+
+            <button type="submit" class="btn bg_green fw-bold h5">Trả lời</button>
+        </form>
+
     </div>
 
     <!-- Container for demo purpose -->

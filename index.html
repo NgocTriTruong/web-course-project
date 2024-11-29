@@ -22,7 +22,11 @@
   <link rel="stylesheet" href="/assets/css/login.css">
   <link rel="stylesheet" href="/assets/css/signup.css">
 
-  <!-- <script src="/assets/scripts/login_signup.js" defer></script> -->
+  <!-- scrollToTopBtn -->
+   <link rel="stylesheet" href="/assets/css/layout/scrollToTopBtn.css">
+<script src="/assets/scripts/add_layout/scrollToTopBtn.js" defer></script>
+
+
 </head>
 <body>
 <div class="slide-show-1">
@@ -302,7 +306,7 @@
               </div>
               <div class="h4 mt-2 text-center ">Chuyên đề heo</div>
               <div class="h5 mt-4 text-center pt-4">Dưới đây là một số câu hỏi thường gặp và giải đáp. Nếu bạn vẫn chưa tìm được câu trả lời, hãy liên hệ với VINAFEED.</div>
-              <button class="btn btn-danger fw-bold rounded-pill px-5 py-2 mt-2">
+              <button class="btn fw-bold rounded-pill px-5 py-2 mt-2" style="background-color: #fcae18; font-size: 17px; border-radius: 30px;">
                 Xem tất cả
               </button>
             </div>
@@ -415,7 +419,7 @@
           </button>
         </div>
       </div>
-      <button class="btn btn-danger fw-bold rounded-pill px-5 py-2 mt-5" style="margin-left: 44%;">
+      <button class="btn fw-bold rounded-pill px-5 py-2 mt-5" style="margin-left: 44%; background-color: #fcae18; font-size: 17px; border-radius: 30px;">
         Xem tất cả
       </button>
     </div>
@@ -541,9 +545,12 @@
   </div>
 </div>
 
+<!-- scrollToTopBtn -->
+<button id="scrollToTopBtn"><i class="fa-solid fa-chevron-up"></i></button>
+
 <!-- di chuyen header dinh top -->
 <script>
-  window.onscroll = function() { addStickyClass() };
+  window.addEventListener("scroll", addStickyClass);
 
   var header = document.getElementById("header-placeholder"); // lấy phần tử header theo ID
   var sticky = header.offsetTop; // lấy vị trí của header
