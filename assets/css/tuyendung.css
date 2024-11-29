@@ -1,4 +1,3 @@
-
 .tuyendung {
     margin: 0 auto; /* Center the container */
 }
@@ -10,6 +9,7 @@
     font-weight: bold;
     text-align: center;
     margin: 20px 0;
+    color: #94b83d;
 }
 
 .tuyendung .header-tuyendung {
@@ -73,8 +73,6 @@
     letter-spacing: 10px; /* Adjust spacing between letters */
 }
 
-
-
 .tuyendung .navbar-tuyendung a {
     color: white;
     margin: 0 15px;
@@ -91,17 +89,17 @@
 }
 
 .tuyendung .benefit-card {
-    width: 250px;
+    width: 320px;
     background-color: white;
     padding: 15px;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    text-align: center;
+    text-align: center; 
 }
 
 .tuyendung .benefit-card h3 {
     color: #e74c3c;
-    margin-bottom: 10px;
+    margin: 10px;
 }
 
 .tuyendung .benefit-card p {
@@ -110,7 +108,7 @@
     color: #333;
 }
 
-/* Elevated Vị Trí Ứng Tuyển Section */
+/* Vị Trí Ứng Tuyển Section */
 .tuyendung .job-listings {
     padding: 20px;
     background-color: white;
@@ -119,8 +117,9 @@
     margin-bottom: 20px;
 }
 
-.tuyendung .job-listings p{
+.tuyendung .job-listings p {
     text-align: center;
+    padding: 10px 20px;
     font-size: 16px;
     line-height: 20px;
     animation-delay: 0.2s;
@@ -150,12 +149,18 @@
     cursor: pointer;
 }
 
+.tuyendung .job-table-container {
+    overflow-x: auto; /* Ensure the table is scrollable on smaller screens */
+    width: 90%; /* Reduce the overall width */
+    margin: 0 auto; /* Center the container */
+}
+
 .tuyendung .job-table {
     width: 100%;
     border-collapse: collapse;
 }
 
-.tuyendung .job-table th, .job-table td {
+.tuyendung .job-table th, .tuyendung .job-table td {
     padding: 10px;
     border: 1px solid #ddd;
     text-align: center;
@@ -188,4 +193,8 @@
 .tuyendung .pagination button.disabled {
     background-color: #ccc;
     cursor: not-allowed;
+}
+
+#footer-placeholder{
+    padding-top: 25px;
 }
