@@ -39,7 +39,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", function () {
     // Select all menu links and product sections
-    const menuLinks = document.querySelectorAll(".home_icon a");
     const productSections = document.querySelectorAll(".slide_show_2 .list-products");
 
     // Slider state variables
@@ -105,26 +104,6 @@ document.addEventListener("DOMContentLoaded", function () {
         productSections[0].classList.add("active");
         initializeSlider(productSections[0]);
     }
-
-    // Handle menu link clicks
-    menuLinks.forEach((link) => {
-        link.addEventListener("click", (event) => {
-            event.preventDefault(); // Prevent default anchor behavior
-            const targetId = link.getAttribute("href").substring(1); // Get the target ID without the '#'
-            const targetSection = document.getElementById(targetId);
-
-            if (targetSection) {
-                // Remove 'active' class from all sections
-                productSections.forEach(section => section.classList.remove("active"));
-
-                // Add 'active' class to the target section
-                targetSection.classList.add("active");
-
-                // Initialize the slider for the active section
-                initializeSlider(targetSection);
-            }
-        });
-    });
 });
 
 
