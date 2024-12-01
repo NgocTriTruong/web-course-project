@@ -1,3 +1,7 @@
+*{
+    margin: 0 auto;
+    padding: 0;
+}
 .tuyendung {
     margin: 0 auto; /* Center the container */
 }
@@ -198,3 +202,108 @@
 #footer-placeholder{
     padding-top: 25px;
 }
+
+@media (max-width: 768px) {
+    /* Centered Header */
+    .tuyendung h2 {
+        font-size: 28px;
+        line-height: 40px;
+        margin: 15px 0;
+    }
+
+    /* Adjust Banner Section */
+    .tuyendung .background-section {
+        height: 300px; /* Reduce height for smaller screens */
+    }
+
+    .tuyendung .background-section h1 {
+        font-size: 24px;
+        letter-spacing: 5px;
+    }
+
+    /* Adjust Outlined Text */
+    .tuyendung .outlined-text-tuyendung {
+        font-size: 60px; /* Smaller font size */
+        letter-spacing: 5px;
+    }
+
+    /* Navbar links */
+    .tuyendung .navbar-tuyendung a {
+        margin: 0 10px;
+        font-size: 14px; /* Smaller font size for mobile */
+    }
+
+    /* Benefits Section */
+    .tuyendung .benefits {
+        flex-direction: column; /* Stack the benefit cards vertically */
+        gap: 20px;
+        padding: 15px;
+    }
+
+    .tuyendung .benefit-card {
+        width: 100%; /* Full width for small screens */
+        box-shadow: none; /* Remove shadow for mobile */
+        padding: 10px;
+    }
+
+    .tuyendung .job-listings {
+        padding: 15px;
+    }
+
+    .tuyendung .search-bar input,
+    .tuyendung .search-bar select,
+    .tuyendung .search-bar button {
+        font-size: 12px; /* Smaller font size for input fields */
+        padding: 6px; /* Smaller padding */
+    }
+
+    /* Job Table Container */
+    .tuyendung .job-table-container {
+        width: 100%; /* Full width for smaller screens */
+        padding: 0 15px; /* Add padding to avoid touching the edges */
+    }
+
+    .tuyendung .job-table th, .tuyendung .job-table td {
+        font-size: 12px; /* Smaller text inside table */
+    }
+
+    /* Pagination Styles */
+    .tuyendung .pagination button {
+        font-size: 12px; /* Smaller buttons */
+        padding: 6px 10px;
+    }
+
+    #footer-placeholder {
+        padding-top: 15px;
+    }
+}
+
+/* Additional mobile-specific tweaks */
+@media (max-width: 480px) {
+    /* Adjust font sizes for very small screens */
+    .tuyendung h2 {
+        font-size: 22px;
+        line-height: 30px;
+    }
+
+    .tuyendung .outlined-text-tuyendung {
+        font-size: 45px; /* Further reduce the font size */
+    }
+
+    .tuyendung .navbar-tuyendung a {
+        font-size: 12px; /* Make navbar items smaller */
+        margin: 0 8px;
+    }
+
+    /* Benefit cards */
+    .tuyendung .benefit-card {
+        width: 100%; /* Full width for small screens */
+    }
+
+    /* Pagination buttons */
+    .tuyendung .pagination button {
+        font-size: 10px; /* Even smaller font for mobile pagination */
+        padding: 5px 8px;
+    }
+}
+
