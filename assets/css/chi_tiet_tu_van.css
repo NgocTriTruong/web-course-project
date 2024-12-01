@@ -27,8 +27,10 @@ html {
     position: relative;
 }
 
-.chi_tiet_tu_van .background-section desc {
-    color: white;
+.chi_tiet_tu_van .background-section .desc {
+    width: 25%;
+    margin-left: 20px;
+    color: black;
     position: relative;
 }
 
@@ -90,3 +92,65 @@ html {
     height: 1px;
     background-color: gray;
 }
+
+@media (max-width: 768px) {
+    html {
+        font-size: 14px; /* Scale font size down */
+    }
+
+    .chi_tiet_tu_van .background-section {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto; /* Allow dynamic height */
+        padding: 20px;
+    }
+
+    .chi_tiet_tu_van .background-section img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+    }
+
+    .chi_tiet_tu_van .background-section .desc {
+        width: 100%;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .chi_tiet_tu_van .background-section .detailed_desc {
+        width: 100%; /* Full width */
+        text-align: center;
+        display: block;
+    }
+
+    .chi_tiet_tu_van .background-section .detailed_desc button {
+        width: 100%; /* Stretch button */
+        aspect-ratio: unset; /* Remove fixed aspect ratio */
+        font-size: 16px; /* Adjust font size */
+    }
+
+    .chi_tiet_tu_van .faq-section {
+        width: 100%; /* Use full screen width */
+        padding: 10px; /* Add padding for spacing */
+    }
+
+    .chi_tiet_tu_van .content {
+        flex-direction: column; /* Stack FAQ items vertically */
+        align-items: flex-start;
+    }
+
+    .chi_tiet_tu_van .content .h3 {
+        font-size: 16px; /* Adjust font size for smaller screens */
+    }
+
+    .chi_tiet_tu_van .content button {
+        margin-top: 10px; /* Add spacing between elements */
+        padding: 8px 16px; /* Adjust padding */
+        font-size: 14px; /* Reduce button font size */
+    }
+
+    .chi_tiet_tu_van .faq-section .line {
+        margin-top: 10px; /* Adjust line spacing */
+    }
+}
+

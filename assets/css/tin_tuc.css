@@ -114,3 +114,60 @@
     background-color: #9dea9d; /* Blue background for the active page */
     color: black; /* White text for active page */
 }
+
+@media (max-width: 768px) {
+    /* Adjust the background section */
+    .tin_tuc #background-section {
+        height: 300px; /* Reduce height for mobile */
+    }
+
+    .tin_tuc #background-section h1 {
+        font-size: 50px; /* Smaller text size */
+        letter-spacing: 3px; /* Reduce spacing */
+    }
+
+    /* Adjust the news cards layout */
+    .trending-news .col-md-8,
+    .trending-news .col-md-4 {
+        width: 100%; /* Full width for mobile */
+        margin-bottom: 20px; /* Add spacing between cards */
+    }
+
+    .trending-news .main-news-title .main-card-title {
+        font-size: 16px;
+    }
+
+    .news-container .w-100 {
+        width: 100%; /* Full width */
+        margin-bottom: 20px;
+    }
+
+    .tin_tuc .news-card {
+        flex-direction: column; /* Stack content vertically */
+    }
+
+    .tin_tuc .sub-news-image {
+        display: none;
+    }
+
+    .tin_tuc .sub-card-body {
+        width: 100%; /* Full width for content */
+        padding: 10px; /* Reduce padding */
+    }
+
+    .tin_tuc .news-detail-btn {
+        width: 100%; /* Full width button */
+        font-size: 14px; /* Adjust font size */
+    }
+
+    /* Pagination */
+    .tin_tuc .pagination {
+        gap: 5px; /* Reduce spacing between buttons */
+    }
+
+    .tin_tuc .page-button {
+        width: 28px; /* Smaller button size */
+        height: 28px;
+        font-size: 14px; /* Smaller font size */
+    }
+}

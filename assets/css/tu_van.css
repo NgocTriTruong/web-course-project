@@ -100,3 +100,45 @@ html {
 .tu_van .content button:hover {
     background-color: #94b83d;
 }
+
+/* General Mobile Styles */
+@media (max-width: 768px) {
+    /* Reduce the size of the banner */
+    .tu_van .background-section {
+        height: 250px; /* Adjust to fit mobile screen */
+    }
+
+    .tu_van .background-section h1 {
+        font-size: 40px; /* Adjust the title size */
+        text-align: center; /* Center the title */
+        -webkit-text-stroke: 1px white; /* Reduce stroke size for clarity */
+    }
+
+    /* Adjust the main container width */
+    .tu_van .container {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    /* Stack the image and content vertically */
+    .tu_van .topic {
+        display: block;
+        margin: 20px auto; /* Reduce margin for mobile screens */
+    }
+
+    .tu_van .image img {
+        width: 100%; /* Make the image responsive */
+        border-radius: 5px; /* Slightly reduce the border-radius */
+    }
+
+    .tu_van .content h2 {
+        font-size: 20px; /* Smaller headings for mobile */
+        margin-bottom: 5px;
+        margin-top: 5px;
+    }
+
+    .tu_van .content button {
+        font-size: 14px; /* Adjust button size */
+        padding: 8px 16px;
+    }
+}
