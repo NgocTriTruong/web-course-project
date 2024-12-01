@@ -141,7 +141,7 @@
                 <a href="/assets/html/thu_vien.html">
                   <li class="d-flex p-2 li_hover">
                     <span class="text_line_2">Thư viện</span>
-                    <i class="mt-1 ti-angle-right ti_number ms-5"></i>
+                    <i class="mt-1 ti-angle-right ti_number" style="margin-left: 50px;"></i>
                   </li>
                 </a>
                 <a href="/assets/html/doi_tac.html">
@@ -161,11 +161,46 @@
               </div>
             </li>
   
-            <li class="p-4">
+            <!-- chưa đăng nhập -->
+            <li id="not-logged-in" class="p-4">
               <div id="user-icon" class="user add_login">
                 <i class="fa-solid fa-user i_right_number mt-3 ms-3 text-white"></i>
                 <span class="user_hover">Đăng nhập/đăng kí</span>
               </div>
+            </li>
+            <!-- đã đăng nhập -->
+            <li id="logged-in" class="p-4" style="display: none;">
+              <a href="/assets/html/chi_tiet_ca_nhan/thong_tin_ca_nhan.html">
+                <div id="user-icon" class="user add_login">
+                  <i class="fa-solid fa-user i_right_number mt-3 ms-3 text-white"></i>
+                  <ul class="header_line_2 me-2" style="min-width: 150px; margin-top: 25px;">
+                    <a href="/assets/html/chi_tiet_ca_nhan/thong_tin_ca_nhan.html">
+                      <li class="d-flex p-2 li_hover">
+                        <i class="mt-1 fa-solid fa-user ms-2 me-2"></i>
+                        <span class="text_line_2">Thông tin cá nhân</span>
+                      </li>
+                    </a>
+                    <a href="/assets/html/chi_tiet_ca_nhan/don_hang_cua_toi.html">
+                      <li class="d-flex p-2 li_hover">
+                        <i class="mt-1 fa-solid fa-box ms-2 me-2"></i>
+                        <span class="text_line_2">Đơn hàng của tôi</span>
+                      </li>
+                    </a>
+                    <a href="../chi_tiet_ca_nhan/so_dia_chi.html">
+                      <li class="d-flex p-2 li_hover">
+                        <i class="mt-1 fa-solid fa-location-dot ms-2 me-2"></i>
+                        <span class="text_line_2">Sổ địa chỉ nhận hàng</span>
+                      </li>
+                    </a>
+                    <a href="">
+                      <li class="d-flex p-2 li_hover" id="logout">
+                        <i class="mt-1 fa-solid fa-right-from-bracket ms-2 me-2"></i>
+                        <span class="text_line_2">Đăng xuất</span>
+                      </li>
+                    </a>
+                  </ul>
+                </div>
+              </a>
             </li>
   
             <li class="p-4">
