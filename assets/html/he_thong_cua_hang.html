@@ -14,6 +14,50 @@
     <link rel="stylesheet" href="/assets/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
     <script src="/assets/scripts/add_layout/add_layout.js" defer></script>
 
+     <script src="../scripts/confirm_login.js"></script>
+
+     <style>
+        .address-form {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+    
+        .address-form-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+    
+        .form-header {
+            border-bottom: 1px solid #e9ecef;
+        }   
+    
+        .form-item label {
+            margin-bottom: 0.5rem;
+        }
+    
+        .form-details textarea {
+            margin-top: 1rem;
+        }
+    
+        .form-footer {
+            border-top: 1px solid #e9ecef;
+        }
+    </style>
+
+
 </head>
 <body>
     <div id="header-placeholder"></div>
@@ -32,6 +76,57 @@
                             </span>
                             <input type="text" name="q" placeholder="Tìm kiếm tên đường và tỉnh thành" class="form-control rounded"
                                 aria-label="Search" aria-describedby="search-addon" />
+                        </div>
+
+                        <div class="mt-4" style="border: 1px solid #888;"></div>
+
+                        <div class="form-group m-3 position-relative">
+                            <input type="text" class="form-control chose_location" placeholder="Tỉnh/Thành Phố" readonly onclick="openAddressForm()">
+                            <i class="" onclick="openAddressForm()"></i>
+                            
+                            <div class="address-form" id="addressFormModal">
+                                <div class="address-form-content bg-white">
+                                    <div class="form-header d-flex justify-content-between align-items-center p-3">
+                                        <h5 class="m-0">Địa chỉ cửa hàng</h5>
+                                        <button class="btn-close" onclick="closeAddressForm()">&times;</button>
+                                    </div>
+                                    
+                                    <div class="form-container p-3">
+                                        <div class="form-item mb-3">
+                                            <label for="province" class="form-label">Chọn Tỉnh:</label>
+                                            <select id="province" class="form-select" onchange="loadDistricts()">
+                                                <option value="">--Chọn Tỉnh--</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="form-item mb-3">
+                                            <label for="district" class="form-label">Chọn Huyện:</label>
+                                            <select id="district" class="form-select" onchange="loadWards()">
+                                                <option value="">--Chọn Huyện--</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="form-item mb-3">
+                                            <label for="ward" class="form-label">Chọn Xã:</label>
+                                            <select id="ward" class="form-select">
+                                                <option value="">--Chọn Xã--</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-footer p-3">
+                                        <button class="btn w-100" onclick="saveAddress()" style="background-color: #fcae18;">Lưu địa chỉ</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="h6">Cửa hàng gợi ý</div>
+                        <div class="container" style="border: 1px solid #333; cursor: pointer;">
+                            <div class="p mt-3 pb-3" style="border-bottom: 1px solid #333;">261 Khánh Hội, P.2, Q.4, TP.Hồ Chí Minh</div>
+                            <div class="p mt-3 pb-3" style="border-bottom: 1px solid #333;">261 Khánh Hội, P.2, Q.4, TP.Hồ Chí Minh</div>
+                            <div class="p mt-3 pb-3" style="border-bottom: 1px solid #333;">261 Khánh Hội, P.2, Q.4, TP.Hồ Chí Minh</div>
+                            <div class="p mt-3 pb-3" >261 Khánh Hội, P.2, Q.4, TP.Hồ Chí Minh</div>
                         </div>
                         
                     </div>
@@ -100,5 +195,7 @@
         </div>
     </main>
     <div id="footer-placeholder"></div>
+
+    <script src="/assets/scripts/call-api-address.js"></script>
 </body>
 </html>

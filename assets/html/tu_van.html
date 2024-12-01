@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TVKFEED</title>
+    <title>Tư vấn</title>
     <link rel="stylesheet" href="/assets/bootstrap/bootstrap.bundle.min.js">
     <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/tu_van.css">
@@ -26,6 +26,8 @@
     <!-- scrollToTopBtn -->
     <link rel="stylesheet" href="/assets/css/layout/scrollToTopBtn.css">
     <script src="/assets/scripts/add_layout/scrollToTopBtn.js" defer></script>
+
+    <script src="/assets/scripts/confirm_login.js" defer></script>
 </head>
 <body>
 
@@ -139,7 +141,7 @@
                 </div>
                 <p class="login_forgot"><a href="#">Quên mật khẩu?</a></p>
       
-                <button type="submit" class="login_button_submit">Đăng nhập</button>
+                <button type="submit" id="login-submit" class="login_button_submit">Đăng nhập</button>
                 <div class="login_split">
                     <p>Hoặc</p>
                 </div>
@@ -158,7 +160,7 @@
                 <p>Bạn chưa có tài khoản? <a href="#" id="go-to-signup">Đăng ký ngay</a></p>
             </div>
         </div>
-      </div>
+    </div>
       
       <!-- sign up -->
       <div id="signup" class ="signup">
