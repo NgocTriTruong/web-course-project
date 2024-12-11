@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +7,7 @@
     <title>Tư vấn</title>
     <link rel="stylesheet" href="/assets/bootstrap/bootstrap.bundle.min.js">
     <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/tu_van.css">
+    <link rel="stylesheet" href="../template/assets/css/tu_van.css">
 
     <link rel="stylesheet" href="/assets/fonts/themify-icons/themify-icons.css">
     <link rel="stylesheet" href="/assets/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
