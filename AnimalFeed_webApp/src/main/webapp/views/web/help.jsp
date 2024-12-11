@@ -25,7 +25,9 @@
 
 </head>
 <body>
+
 <%@ include file="layout/header.jsp" %>
+
 <main style="margin: 90px auto;">
     <div class="text-center ho_tro">
         <div class="background-section">
@@ -184,6 +186,7 @@
         </div>
     </div>
 </main>
+
 <%@ include file="layout/footer.jsp" %>
 </body>
 </html>
