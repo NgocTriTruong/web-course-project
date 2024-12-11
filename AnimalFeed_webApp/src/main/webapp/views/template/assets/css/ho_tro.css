@@ -11,7 +11,7 @@ html {
 
 .ho_tro .background-section {
     position: relative;
-    background-image: url('/assets/images/banner/banner_hotro.jpg');
+    background-image: url('/views/template/assets/images/banner/banner_hotro.jpg');
     background-size: cover;
     background-position: center;
     height: 500px; /* Adjust height as needed */

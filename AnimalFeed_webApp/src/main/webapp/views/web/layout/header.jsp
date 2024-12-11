@@ -1,11 +1,12 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
-<header>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+  <header>
+
     <div id="header" class="bg-light">
       <div class="content d-flex justify-content-center">
         <div class="logo_shop">
           <a href="/index.html">
-            <img src="/assets/images/header/logo_vina.png" alt="Logo Vina" height="75px" width="90px" style=" margin: 9px 0 0 22px;">
+            <img src="${pageContext.request.contextPath}/views/template/assets/images/header/logo_vina.png" alt="Logo Vina" height="75px" width="90px" style=" margin: 9px 0 0 22px;">
           </a>
         </div>
         <ul class="d-flex justify-content-center">
@@ -14,7 +15,7 @@
               <ul class="header_line_2">
                 <li class="p-3 li_hover">
                   <a href="/assets/html/gioi_thieu.html#gioi_thieu_chung">
-                    <span class="text_line_2" class="text_line_2">Giới thiệu chung</span>
+                    <span class="text_line_2">Giới thiệu chung</span>
                     <i class="ti-angle-right ti_number"></i>
                   </a>
                 </li>
@@ -74,49 +75,49 @@
               <ul class="header_line_2">
                 <li class="p-2 li_hover">
                   <a href="/assets/html/each_product/product_pig.html">
-                    <span class="icon"><img src="/assets/images/represent-images/icon-pig.png" alt="" width="28px" height="25px"></span>
+                    <span class="icon"><img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-pig.png" alt="" width="28px" height="25px"></span>
                     <span class="ms-2">Thức ăn cho Heo</span>
                     <i class="ti-angle-right ti_number mt-2"></i>
                   </a>
                 </li>
                 <li class="p-2 li_hover">
                   <a href="/assets/html/each_product/product_chicken.html">
-                    <span class="icon"><img src="/assets/images/represent-images/icon-chicken.png" alt="" width="28px" height="20px"></span>
+                    <span class="icon"><img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-chicken.png" alt="" width="28px" height="20px"></span>
                     <span class="ms-2">Thức ăn cho Gà</span>
                     <i class="ti-angle-right ti_number mt-2"></i>
                   </a>
                 </li>
                 <li class="p-2 li_hover">
                   <a href="/assets/html/each_product/product_duck.html">
-                    <span class="icon"><img src="/assets/images/represent-images/icon-duck.png" alt="" width="28px" height="20px"></span>
+                    <span class="icon"><img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-duck.png" alt="" width="28px" height="20px"></span>
                     <span class="ms-2">Thức ăn cho Vịt</span>
                     <i class="ti-angle-right ti_number mt-2"></i>
                   </a>
                 </li>
                 <li class="p-2 li_hover">
                   <a href="/assets/html/each_product/product_cow.html">
-                    <span class="icon"><img src="/assets/images/represent-images/icon-cow.png" alt="" width="28px" height="20px"></span>
+                    <span class="icon"><img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-cow.png" alt="" width="28px" height="20px"></span>
                     <span class="ms-2">Thức ăn cho Bò</span>
                     <i class="ti-angle-right ti_number mt-2"></i>
                   </a>
                 </li>
                 <li class="p-2 li_hover">
                   <a href="/assets/html/each_product/product_shirmp.html">
-                    <span class="icon"><img src="/assets/images/represent-images/icon-shrimp.png" alt="" width="28px" height="20px"></span>
+                    <span class="icon"><img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-shrimp.png" alt="" width="28px" height="20px"></span>
                     <span class="ms-2">Thức ăn cho Tôm</span>
                     <i class="ti-angle-right ti_number mt-2"></i>
                   </a>
                 </li>
                 <li class="p-2 li_hover">
                   <a href="/assets/html/each_product/product_fish.html">
-                    <span class="icon"><img src="/assets/images/represent-images/icon-fish.png" alt="" width="28px" height="20px"></span>
+                    <span class="icon"><img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-fish.png" alt="" width="28px" height="20px"></span>
                     <span class="ms-2">Thức ăn cho Cá</span>
                     <i class="ti-angle-right ti_number mt-2"></i>
                   </a>
                 </li>
                 <li class="p-2 li_hover">
                   <a href="/assets/html/each_product/product_goat.html">
-                    <span class="icon"><img src="/assets/images/represent-images/icon-goat.png" alt="" width="28px" height="20px"></span>
+                    <span class="icon"><img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-goat.png" alt="" width="28px" height="20px"></span>
                     <span class="ms-2">Thức ăn cho Dê</span>
                     <i class="ti-angle-right ti_number mt-2"></i>
                   </a>
