@@ -1,22 +1,24 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>chinh-sach-bao-mat</title>
-    <link rel="stylesheet" href="/assets/bootstrap/bootstrap.bundle.min.js">
-    <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/chinh_sach_bao_mat.css">
-    <link rel="stylesheet" href="/assets/css/layout/header.css">
-    <link rel="stylesheet" href="/assets/css/layout/footer.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/chinh_sach_bao_mat.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/header.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/footer.css">
 
-    <link rel="stylesheet" href="/assets/fonts/themify-icons/themify-icons.css">
-    <link rel="stylesheet" href="/assets/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
 
-    <script src="../scripts/confirm_login.js"></script>
+    <script src="${pageContext.request.contextPath}/views/template/scripts/confirm_login.js"></script>
 </head>
 <body>
-    <div id="header-placeholder"></div>
+<%@ include file="layout/header.jsp" %>
+
     <main style="margin-top: 98px;">
         <div class="container">
             <div class="content">
@@ -47,25 +49,8 @@
             </div>
         </div>
     </main>
-    <div id="footer-placeholder"></div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            fetch("/assets/html/layout/header.html")
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById("header-placeholder").innerHTML = data;
-                })
-                .catch(error => console.error("Error loading header:", error));
-        });
-        document.addEventListener("DOMContentLoaded", function() {
-            fetch("/assets/html/layout/footer.html")
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById("footer-placeholder").innerHTML = data;
-                })
-                .catch(error => console.error("Error loading header:", error));
-        });
-    </script>
+<%@ include file="layout/footer.jsp" %>
+
 </body>
 </html>
