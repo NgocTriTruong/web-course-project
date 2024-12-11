@@ -1,4 +1,5 @@
-    <footer>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<footer>
         <div id="footer" class="container-fluid bg-dark">
             <div class="container d-flex content_top">
                 <div class="text_left mt-4">
@@ -19,10 +20,10 @@
                     <div class="col-md-3 text-left">
                         <div class="h4 text-light mb-3">KẾT NỐI VỚI VINA GROUP</div>
                         <div class="social">
-                            <a href=""><img src="/assets/images/social/fb.png" alt="" height="40px" width="40px" class="img_social"></a>
-                            <a href=""><img src="/assets/images/social/zalo.png" alt="" height="40px" width="40px" class="img_social"></a>
-                            <a href=""><img src="/assets/images/social/youtube.png" alt="" height="40px" width="40px" class="img_social"></a>
-                            <a href=""><img src="/assets/images/social/tiktok.png" alt="" height="40px" width="40px" class="img_social"></a>
+                            <a href=""><img src="${pageContext.request.contextPath}/views/template/assets/images/social/fb.png" alt="" height="40px" width="40px" class="img_social"></a>
+                            <a href=""><img src="${pageContext.request.contextPath}/views/template/assets/images/social/zalo.png" alt="" height="40px" width="40px" class="img_social"></a>
+                            <a href=""><img src="${pageContext.request.contextPath}/views/template/assets/images/social/youtube.png" alt="" height="40px" width="40px" class="img_social"></a>
+                            <a href=""><img src="${pageContext.request.contextPath}/views/template/assets/images/social/tiktok.png" alt="" height="40px" width="40px" class="img_social"></a>
                         </div>
                         <div class="p text-light mt-3">TỔNG ĐÀI MIỄN PHÍ</div>
                         <div class="p text-light mt-2">Tư vấn mua hàng (Miễn phí)</div>
@@ -111,43 +112,43 @@
                         <div class="text-light fw-bold mb-3" style="font-size: 18px;">HỖ TRỢ THANH TOÁN</div>
                         <div class="payment">
                             <div class="row mt-2">
-                                <div class="col-md-3"><img src="/assets/images/payment/visa.jpg" alt="" width="47px" height="30px" class="img_paynumber"></div>
-                                <div class="col-md-3"><img src="/assets/images/payment/bidv.jpg" alt="" width="47px" height="30px" class="img_paynumber"></div>
-                                <div class="col-md-3"><img src="/assets/images/payment/dongABank.jpg" alt="" width="47px" height="30px" class="img_paynumber"></div>
-                                <div class="col-md-3"><img src="/assets/images/payment/mbbank.jpg" alt="" width="47px" height="30px" class="img_paynumber"></div>
+                                <div class="col-md-3"><img src="${pageContext.request.contextPath}/views/template/assets/images/payment/visa.jpg" alt="" width="47px" height="30px" class="img_paynumber"></div>
+                                <div class="col-md-3"><img src="${pageContext.request.contextPath}/views/template/assets/images/payment/bidv.jpg" alt="" width="47px" height="30px" class="img_paynumber"></div>
+                                <div class="col-md-3"><img src="${pageContext.request.contextPath}/views/template/assets/images/payment/dongABank.jpg" alt="" width="47px" height="30px" class="img_paynumber"></div>
+                                <div class="col-md-3"><img src="${pageContext.request.contextPath}/views/template/assets/images/payment/mbbank.jpg" alt="" width="47px" height="30px" class="img_paynumber"></div>
                             </div>
                             <div class="row mt-2">
-                                <div class="col-md-3"><img src="/assets/images/payment/momo.jpg" alt="" width="47px" height="30px" class="img_paynumber"></div>
-                                <div class="col-md-3"><img src="/assets/images/payment/techcombank.jpg" alt="" width="47px" height="30px" class="img_paynumber"></div>
-                                <div class="col-md-3"><img src="/assets/images/payment/tpbank.jpg" alt="" width="47px" height="30px" class="img_paynumber"></div>
-                                <div class="col-md-3"><img src="/assets/images/payment/viettinbank.jpg" alt="" width="47px" height="30px" class="img_paynumber"></div>
+                                <div class="col-md-3"><img src="${pageContext.request.contextPath}/views/template/assets/images/payment/momo.jpg" alt="" width="47px" height="30px" class="img_paynumber"></div>
+                                <div class="col-md-3"><img src="${pageContext.request.contextPath}/views/template/assets/images/payment/techcombank.jpg" alt="" width="47px" height="30px" class="img_paynumber"></div>
+                                <div class="col-md-3"><img src="${pageContext.request.contextPath}/views/template/assets/images/payment/tpbank.jpg" alt="" width="47px" height="30px" class="img_paynumber"></div>
+                                <div class="col-md-3"><img src="${pageContext.request.contextPath}/views/template/assets/images/payment/viettinbank.jpg" alt="" width="47px" height="30px" class="img_paynumber"></div>
                             </div>
                             <div class="row mt-2">
-                                <div class="col-md-3"><img src="/assets/images/payment/zaloPay.jpg" alt="" width="47px" height="30px" class="img_paynumber"></div>
-                                <div class="col-md-3"><img src="/assets/images/payment/vnpay.jpg" alt="" width="47px" height="30px" class="img_paynumber"></div>
-                                <div class="col-md-3"><img src="/assets/images/payment/vietcombank.jpg" alt="" width="47px" height="30px" class="img_paynumber"></div>
-                                <div class="col-md-3"><img src="/assets/images/payment/vibbank.jpg" alt="" width="47px" height="30px" class="img_paynumber"></div>
+                                <div class="col-md-3"><img src="${pageContext.request.contextPath}/views/template/assets/images/payment/zaloPay.jpg" alt="" width="47px" height="30px" class="img_paynumber"></div>
+                                <div class="col-md-3"><img src="${pageContext.request.contextPath}/views/template/assets/images/payment/vnpay.jpg" alt="" width="47px" height="30px" class="img_paynumber"></div>
+                                <div class="col-md-3"><img src="${pageContext.request.contextPath}/views/template/assets/images/payment/vietcombank.jpg" alt="" width="47px" height="30px" class="img_paynumber"></div>
+                                <div class="col-md-3"><img src="${pageContext.request.contextPath}/views/template/assets/images/payment/vibbank.jpg" alt="" width="47px" height="30px" class="img_paynumber"></div>
                             </div>
                         </div>
                         <div class="h6 text-light mt-4 fw-bold">Chứng nhận & Thành tích</div>
                         <div class="row mt-3">
-                            <div class="col-md-4"><img src="/assets/images/gioi_thieu/thanh_tich1.jpg" alt="" width="65px" height="60px" class="img_paynumber"></div>
-                            <div class="col-md-4"><img src="/assets/images/gioi_thieu/thanh_tich2.jpg" alt="" width="65px" height="60px" class="img_paynumber"></div>
-                            <div class="col-md-4"><img src="/assets/images/gioi_thieu/thanh_tich3.jpg" alt="" width="65px" height="60px" class="img_paynumber"></div>
+                            <div class="col-md-4"><img src="${pageContext.request.contextPath}/views/template/assets/images/gioi_thieu/thanh_tich1.jpg" alt="" width="65px" height="60px" class="img_paynumber"></div>
+                            <div class="col-md-4"><img src="${pageContext.request.contextPath}/views/template/assets/images/gioi_thieu/thanh_tich2.jpg" alt="" width="65px" height="60px" class="img_paynumber"></div>
+                            <div class="col-md-4"><img src="${pageContext.request.contextPath}/views/template/assets/images/gioi_thieu/thanh_tich3.jpg" alt="" width="65px" height="60px" class="img_paynumber"></div>
                         </div>
                         <div class="row mt-3">
-                            <div class="col-md-4"><img src="/assets/images/gioi_thieu/thanh_tich4.jpg" alt="" width="65px" height="60px" class="img_paynumber"></div>
-                            <div class="col-md-4 ms-3"><img src="/assets/images/gioi_thieu/chung_nhan.png" alt="" width="100px" height="50px" class="img_paynumber"></div>
+                            <div class="col-md-4"><img src="${pageContext.request.contextPath}/views/template/assets/images/gioi_thieu/thanh_tich4.jpg" alt="" width="65px" height="60px" class="img_paynumber"></div>
+                            <div class="col-md-4 ms-3"><img src="${pageContext.request.contextPath}/views/template/assets/images/gioi_thieu/chung_nhan.png" alt="" width="100px" height="50px" class="img_paynumber"></div>
                         </div>
                     </div>
                 </div>
                 <div class="img-footer text-center mt-4">
-                    <img src="/assets/images/footer/ca.png" alt="" class="me-4">
-                    <img src="/assets/images/footer/cut.png" alt="" class="me-4">
-                    <img src="/assets/images/footer/vit.png" alt="" class="me-4">
-                    <img src="/assets/images/footer/ga.png" alt="" class="me-4">
-                    <img src="/assets/images/footer/heo.png" alt="" class="me-4">
-                    <img src="/assets/images/footer/bo.png" alt="" class="me-4">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/footer/ca.png" alt="" class="me-4">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/footer/cut.png" alt="" class="me-4">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/footer/vit.png" alt="" class="me-4">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/footer/ga.png" alt="" class="me-4">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/footer/heo.png" alt="" class="me-4">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/footer/bo.png" alt="" class="me-4">
                 </div>
             </div>
             <div class="line_footer_bottom"></div>
