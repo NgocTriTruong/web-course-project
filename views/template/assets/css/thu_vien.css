@@ -1,0 +1,185 @@
+/* RESET CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background-color: #f8f8f8;
+    color: #333;
+}
+
+#thu-vien-banner {
+    color: white;
+    text-align: center;
+    background-image: url('../images/thu_vien/img_1.png');
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Thêm hiệu ứng đổ bóng cho chữ */
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3); /* Làm nền mờ hơn */
+    z-index: 1;
+}
+
+.thu-vien-content {
+    font-size: 70px;
+    color: transparent;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-weight: bold;
+    position: relative;
+    z-index: 2;
+}
+
+@supports(-webkit-text-stroke: 2px white) {
+    .thu-vien-content {
+        -webkit-text-stroke: 2px white;
+        text-shadow: none;
+        font-size: 80px;
+    }
+}
+
+.templates-library {
+    background-color: #fff;
+    color: #333;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.thu-vien-2 {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 20px;
+}
+
+.features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-top: 40px;
+}
+
+.feature-card {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    padding: 20px;
+    flex: 1 1 calc(33% - 40px);
+    max-width: calc(33% - 40px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    perspective: 1000px;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+.feature-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.feature-card img:hover {
+    transform: scale(1.05); /* Tăng nhẹ kích thước ảnh khi hover */
+}
+
+.feature-card h3 {
+    font-size: 18px;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #444;
+}
+
+/* Responsive Layout Adjustments */
+@media (max-width: 768px) {
+    #thu-vien-banner {
+        height: 300px; /* Reduce banner height */
+    }
+
+    .thu-vien-content {
+        font-size: 60px; /* Smaller text for mobile */
+        letter-spacing: 3px;
+    }
+
+    .feature-card {
+        flex: 1 1 calc(50% - 40px); /* Two items per row on medium screens */
+        max-width: calc(50% - 40px);
+    }
+
+    .templates-library {
+        padding: 40px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    #thu-vien-banner {
+        height: 250px; /* Further reduce banner height on small screens */
+    }
+
+    .thu-vien-content {
+        font-size: 50px; /* Even smaller text */
+        letter-spacing: 2px;
+    }
+
+    .feature-card {
+        flex: 1 1 100%; /* Stack feature cards vertically */
+        max-width: 100%;
+        margin: 10px 0; /* Adjust margins for mobile */
+    }
+
+    .feature-card h3 {
+        font-size: 16px; /* Smaller heading text */
+    }
+
+    .templates-library {
+        padding: 20px 10px;
+    }
+
+    .videos h2 {
+        font-size: 22px; /* Smaller video section title */
+    }
+
+    .video-container iframe {
+        width: 100%; /* Make video iframe full-width */
+        height: auto;
+    }
+
+    .video-container {
+        flex-direction: column;
+        gap: 10px; /* Stack videos vertically */
+    }
+}
+
+/* Thêm hiệu ứng động cho các video */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.video-container iframe {
+    animation: fadeIn 1s ease-in-out;
+}

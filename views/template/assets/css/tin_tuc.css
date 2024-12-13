@@ -1,0 +1,173 @@
+
+.tin_tuc #background-section {
+    position: relative;
+    background-image: url('../images/banner/banner_tin_tuc.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 500px; /* Adjust height as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tin_tuc #background-section h1 {
+    font-size: 130px;
+    margin-bottom: 50px;
+    color: transparent;
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    font-weight: bold;
+    position: relative;
+    z-index: 1;
+}
+
+/* Add a transparent overlay effect */
+.tin_tuc #background-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); /* Adjust transparency */
+    z-index: 0;
+}
+
+@supports(-webkit-text-stroke: 2px white) {
+    .tin_tuc .outline {
+        color: transparent;
+        -webkit-text-stroke: 2px white; /* Increased stroke width */
+        text-shadow: none;
+        font-size: 80px; /* Increased font size */
+        font-weight: bold;
+        letter-spacing: 5px;
+    }
+}
+
+.tin_tuc .main-news-title {
+    padding: 0;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 0.5) 20%);
+}
+
+.tin_tuc .main-card-title {
+    font-size: 24px;
+}
+
+.tin_tuc .post-date {
+    font-size: 16px;
+}
+
+.tin_tuc .card-title {
+    font-size: 24px;
+}
+
+.tin_tuc .card-text {
+    font-size: 18px;
+    color: gray;
+}
+
+.tin_tuc .sub-news-image {
+    width: 35% !important;
+}
+
+.tin_tuc .sub-card-body {
+    width: 65%;
+    border-top: solid 1px gray;
+}
+
+.tin_tuc .news-detail-btn {
+    width: 15%;
+    font-weight: bold !important;
+    background-color: #9dea9d !important;
+    border-color: #9dea9d !important;
+    color: black !important;
+}
+
+.tin_tuc .news-detail-btn:hover {
+    background-color: #c1f1bf !important;
+}
+
+.tin_tuc .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.tin_tuc .page-button {
+    border: none;
+    background-color: transparent;
+    color: #333;
+    font-size: 16px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.tin_tuc .page-button:hover {
+    background-color: #e0e0e0; /* Light gray background on hover */
+}
+
+.tin_tuc .page-button.active {
+    background-color: #9dea9d; /* Blue background for the active page */
+    color: black; /* White text for active page */
+}
+
+@media (max-width: 768px) {
+    /* Adjust the background section */
+    .tin_tuc #background-section {
+        height: 300px; /* Reduce height for mobile */
+    }
+
+    .tin_tuc #background-section h1 {
+        font-size: 50px; /* Smaller text size */
+        letter-spacing: 3px; /* Reduce spacing */
+    }
+
+    /* Adjust the news cards layout */
+    .trending-news .col-md-8,
+    .trending-news .col-md-4 {
+        width: 100%; /* Full width for mobile */
+        margin-bottom: 20px; /* Add spacing between cards */
+    }
+
+    .trending-news .main-news-title .main-card-title {
+        font-size: 16px;
+    }
+
+    .news-container .w-100 {
+        width: 100%; /* Full width */
+        margin-bottom: 20px;
+    }
+
+    .tin_tuc .news-card {
+        flex-direction: column; /* Stack content vertically */
+    }
+
+    .tin_tuc .sub-news-image {
+        display: none;
+    }
+
+    .tin_tuc .sub-card-body {
+        width: 100%; /* Full width for content */
+        padding: 10px; /* Reduce padding */
+    }
+
+    .tin_tuc .news-detail-btn {
+        width: 100%; /* Full width button */
+        font-size: 14px; /* Adjust font size */
+    }
+
+    /* Pagination */
+    .tin_tuc .pagination {
+        gap: 5px; /* Reduce spacing between buttons */
+    }
+
+    .tin_tuc .page-button {
+        width: 28px; /* Smaller button size */
+        height: 28px;
+        font-size: 14px; /* Smaller font size */
+    }
+}
