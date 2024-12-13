@@ -1,0 +1,156 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /*cuộn mượt mà */
+    font-family: Helvetica, Arial, sans-serif; /*set font chữ cho cả website , chữ không có chân*/
+}
+
+.chi_tiet_tu_van .background-section {
+    position: relative;
+    margin-top: 80px;
+    background: linear-gradient(to bottom, rgba(148, 184, 61, 1) 40%, rgba(255, 255, 255, 1) 40%);
+    background-size: cover;
+    height: 300px; /* Adjust height as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chi_tiet_tu_van .background-section img {
+    height: 90%;
+    aspect-ratio: 2 / 1;
+    border-radius: 5px;
+    position: relative;
+}
+
+.chi_tiet_tu_van .background-section .desc {
+    width: 25%;
+    margin-left: 20px;
+    color: black;
+    position: relative;
+}
+
+.chi_tiet_tu_van .background-section .detailed_desc {
+    width: 100%;
+}
+
+.chi_tiet_tu_van .background-section .detailed_desc button {
+    width: 200px;
+    aspect-ratio: 5/1;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 10px;
+    border: none;
+    background-color: #fcae18;
+}
+
+.chi_tiet_tu_van .background-section .detailed_desc button:hover {
+    cursor: pointer;
+    background-color: #da9612;
+}
+
+@supports(-webkit-text-stroke: 2px white) {
+    .outline {
+        color: transparent;
+        -webkit-text-stroke: 2px white; /* Increased stroke width */
+        text-shadow: none;
+        font-size: 80px; /* Increased font size */
+        font-weight: bold;
+        letter-spacing: 5px;
+    }
+}
+
+.chi_tiet_tu_van .faq-section {
+    width: 80%;
+    max-width: 1200px;
+}
+.chi_tiet_tu_van .faq-section .container-fluid {
+    margin: 0 auto;
+}
+
+.chi_tiet_tu_van .content button {
+    padding: 10px 20px;
+    background-color: #fcae18;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.chi_tiet_tu_van .content button:hover {
+    background-color: #94b83d;
+}
+
+.chi_tiet_tu_van .faq-section .line {
+    margin-top: 20px;
+    height: 1px;
+    background-color: gray;
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 14px; /* Scale font size down */
+    }
+
+    .chi_tiet_tu_van .background-section {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto; /* Allow dynamic height */
+        padding: 20px;
+    }
+
+    .chi_tiet_tu_van .background-section img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+    }
+
+    .chi_tiet_tu_van .background-section .desc {
+        width: 100%;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .chi_tiet_tu_van .background-section .detailed_desc {
+        width: 100%; /* Full width */
+        text-align: center;
+        display: block;
+    }
+
+    .chi_tiet_tu_van .background-section .detailed_desc button {
+        width: 100%; /* Stretch button */
+        aspect-ratio: unset; /* Remove fixed aspect ratio */
+        font-size: 16px; /* Adjust font size */
+    }
+
+    .chi_tiet_tu_van .faq-section {
+        width: 100%; /* Use full screen width */
+        padding: 10px; /* Add padding for spacing */
+    }
+
+    .chi_tiet_tu_van .content {
+        flex-direction: column; /* Stack FAQ items vertically */
+        align-items: flex-start;
+    }
+
+    .chi_tiet_tu_van .content .h3 {
+        font-size: 16px; /* Adjust font size for smaller screens */
+    }
+
+    .chi_tiet_tu_van .content button {
+        margin-top: 10px; /* Add spacing between elements */
+        padding: 8px 16px; /* Adjust padding */
+        font-size: 14px; /* Reduce button font size */
+    }
+
+    .chi_tiet_tu_van .faq-section .line {
+        margin-top: 10px; /* Adjust line spacing */
+    }
+}
+

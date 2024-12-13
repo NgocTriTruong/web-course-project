@@ -1,0 +1,73 @@
+body {
+    background-color: hsl(0, 0%, 97%);
+}
+@media (min-width: 1400px) {
+    main,
+    header,
+    #main-navbar {
+        padding-left: 280px;
+    }
+}
+
+.border-left-primary .card-body{
+    position: absolute;
+}
+
+.border-left-success .card-body{
+    position: absolute;
+}
+.border-left-warning .card-body{
+    position: absolute;
+}
+/*.border-left-info .card-body{*/
+/*    position: absolute;*/
+/*}*/
+
+.border-left-primary:hover .hover_container{
+    height: 100%;
+    width: 100%;
+}
+.border-left-success:hover .hover_container{
+    height: 100%;
+    width: 100%;
+}
+.border-left-info:hover .hover_container{
+    height: 100%;
+    width: 100%;
+}
+.border-left-warning:hover .hover_container{
+    height: 100%;
+    width: 100%;
+}
+
+.border-left-primary{
+    border-left: 5px solid #df4e4e!important;
+}
+
+.border-left-success{
+    border-left:  5px solid #1cc88a!important;
+}
+
+.border-left-info{
+    border-left: 5px solid #36b9cc!important;
+}
+
+.border-left-warning{
+    border-left:  5px solid #f6c23e!important;
+}
+
+.btn:hover {
+    background-color: inherit !important;
+    color: inherit !important; 
+}
+
+#advanced-search-input:focus {
+    border-color: #94b83d; /* Đặt màu viền bạn muốn */
+    box-shadow: 0 0 0 0.25rem rgba(148, 184, 61, 0.5); /* Tạo hiệu ứng viền sáng nhẹ */
+    outline: none; /* Loại bỏ đường viền mặc định */
+}
+
+.table td:hover {
+    overflow: visible; /* Hiển thị nội dung đầy đủ khi di chuột */
+    white-space: normal; /* Cho phép xuống dòng */
+ }

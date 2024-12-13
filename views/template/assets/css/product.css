@@ -1,0 +1,135 @@
+
+#background-section {
+    position: relative;
+    background-image: url('/views/template/assets/images/background/product-main-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 500px; /* Adjust height as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#background-section h1 {
+    color: transparent;
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    font-weight: bold;
+    position: relative;
+}
+
+/* Add a transparent overlay effect */
+#background-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); /* Adjust transparency */
+    z-index: 0;
+}
+
+@supports(-webkit-text-stroke: 2px white) {
+    .outline {
+        color: transparent;
+        -webkit-text-stroke: 2px white; /* Increased stroke width */
+        text-shadow: none;
+        font-size: 80px; /* Increased font size */
+        font-weight: bold;
+        letter-spacing: 5px;
+    }
+}
+
+#production-text {
+    font-size: 18px;
+    text-align: center;
+}
+
+.heo-section, .bo-section, .ga-section,
+.vit-section, .tom-section, .ca-section, .de-section {
+    width: 900px;
+    height: 420px;
+    align-content: center;
+    border-radius: 10px;
+}
+
+.heo-section, .vit-section, .tom-section, .de-section {
+    background-color: #e1f1e1;
+}
+
+.bo-section, .ga-section, .ca-section {
+    background-color: #fff8d9; /* Light yellow for cow feed section */
+}
+
+.heo-section .slide,
+.vit-section .slide,
+.tom-section .slide,
+.de-section .slide  {
+    margin-top: 30px;
+    margin-right: 170px;
+}
+
+.bo-section .slide,
+.ga-section .slide,
+.ca-section .slide {
+    margin-top: 30px;
+    margin-left: 170px;
+}
+
+.image_dv_number {
+    position: absolute;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+main h2 {
+    font-size: 34px;
+    font-weight: bold;
+    color: #333;
+}
+
+.custom-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 50px;
+    font-size: 20px !important;
+    padding: 5px 5px;
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+}
+
+.card {
+    min-height: 300px;
+    max-height: 300px;
+    width: 18rem;
+    text-align: center;
+    border: none;
+    background-color: white;
+}
+
+.carousel-item .d-flex {
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;
+    gap: 20px;
+}
+
+.carousel-item {
+    transition: transform 0.6s ease-in-out;
+}
+
+/* Carousel container setup */
+.carousel.slide {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    min-height: 400px; /* Consistent height for the carousel */
+}
+

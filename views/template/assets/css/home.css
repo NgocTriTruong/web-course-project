@@ -1,0 +1,348 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /*cuộn mượt mà */
+    font-family: Helvetica, Arial, sans-serif; /*set font chữ cho cả website , chữ không có chân*/
+}
+
+.slide-show-1 img {
+    image-rendering: pixelated;
+    object-fit: cover;
+}
+
+.slide-show-1 {
+    width: 100%;
+    height: 650px;
+    overflow: hidden;
+}
+
+.slide-show-1 .list-images {
+    position: relative;
+    height: 100%;
+}
+
+.slide-show-1 .list-images div {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 3s ease;
+    overflow: hidden;
+}
+
+.slide-show-1 .list-images div.active {
+    opacity: 1;
+    position: relative;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.slide-show-1 .list-images div .slide_in_para {
+    font-size: 40px;
+    color: #2E4EA1;
+    opacity: 0;
+    position: absolute;
+    top: 20%;
+    left: 5%;
+    transform: translateX(50%);
+    width: 40%;
+    line-height: 1.5;
+    transition: opacity 0.5s ease;
+}
+
+.slide-show-1 .list-images .active .slide_in_para {
+    animation: slideIn 1s forwards;
+    opacity: 1;
+}
+
+/* Position buttons */
+.slide-show-1 .prev, .slide-show-1 .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    border-radius: 50px;
+    color: black;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.3s;
+    border: none;
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.slide-show-1 .prev {
+    left: 10px;
+    top: 300px;
+}
+
+.slide-show-1 .next {
+    right: 10px;
+    top: 300px;
+}
+
+/* HOME */
+
+.trang_chu .slide_show-1 {
+    width: 750px;
+}
+
+.trang_chu .carousel-inner img {
+    border: 1px solid #ccc;
+}
+
+.trang_chu .list_images {
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid #ccc;
+}
+
+.trang_chu .khung_near_slide1,
+.trang_chu .khung_near_slide2 {
+    width: 280px;
+    height: 150px;
+    border-radius: 10px;
+    margin-right: 20px;
+    margin-top: -30px;
+    align-content: center;
+    padding-left: 20px;
+    z-index: 2;
+}
+
+.trang_chu .khung_near_slide1{
+    background-color: #fcae18;
+}
+
+.trang_chu .khung_near_slide2{
+    background-color: #94b83d;
+}
+
+.trang_chu .home-sp {
+    position: relative;
+}
+
+.trang_chu .home-sp .home-text {
+    position: absolute;
+    top: 200px;
+    margin-left: 250px;
+}
+
+.trang_chu .home_icon {
+    position: absolute;
+    bottom: -81px;
+    right: 35px;
+}
+
+.trang_chu .home_sp_icon {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background-color: #94b83d;
+    border: 5px solid white;
+}
+
+.trang_chu .home_sp_icon_active {
+    background-color: #fcae18;
+}
+
+.trang_chu .home_sp_icon:hover {
+    background-color: #fcae18;
+}
+
+.trang_chu li {
+    list-style-type: none;
+    padding: 0 10px;
+}
+
+.trang_chu li a {
+    text-decoration: none;
+} 
+
+.trang_chu li a img {
+    margin-left: 20px;
+    margin-top: 17px;
+}
+
+.slide-show-2 {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+    width: 100%;
+    height: 80vh;
+    overflow: hidden;
+}
+
+.slide-show-2 .container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+.slide-show-2 .list-products {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.slide-show-2 .list-products .item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.7s ease;
+}
+
+.slide-show-2 .list-products .item.active {
+    display: flex;
+    opacity: 1;
+    transform: scale(1);
+}
+
+.slide-show-2 .image-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90%;
+    width: 60%;
+    border: solid #fcae18;
+    border-width: 30px 12px 6px 12px;
+    border-radius: 50%;
+    background-color: white;
+    overflow: hidden;
+}
+
+.slide-show-2 .image-section img {
+    width: 60%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.slide-show-2 .info-section {
+    width: 20%;
+    padding: 10px;
+    margin-left: 20px;
+    color: black;
+    text-align: left;
+}
+
+.slide-show-2 .info-section h2 {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.slide-show-2 .info-section p {
+    font-size: 18px;
+    margin-bottom: 1rem;
+}
+
+.slide-show-2 .info-section button {
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: #94b83d;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.slide-show-2 .info-section a:hover button {
+    background-color: #688528;
+}
+
+.slide-2-controls {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    gap: 750px;
+    margin-left: 400px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 3;
+    pointer-events: auto;
+}
+
+.slide-2-controls button {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background-color: #94b83d;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.slide-2-controls button:hover {
+    background-color: #688528;
+}
+
+.slide-2-controls .prev {
+    margin-left: 1rem;
+}
+
+.slide-2-controls .next {
+    margin-right: 1rem;
+}
+
+
+/* Home tu van */
+.home-tu-van .tu_van_text {
+    width: 600px;
+    margin: 0 auto;
+}
+
+.home-tu-van img {
+    border-radius: 20px;
+    max-width: 100%;
+    transition: transform 1s ease;
+}
+
+.home-tu-van .tu-van-number {
+    max-width: 290px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 20px;
+}
+
+.home-tu-van .tu-van-number:hover img {
+    transform: scale(1.2);
+}
+
+/*  */
+.quoc_te_text {
+    width: 80%;
+    margin: 0 auto;
+    font-size: 18px;
+}
+
+#wave {
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+}
