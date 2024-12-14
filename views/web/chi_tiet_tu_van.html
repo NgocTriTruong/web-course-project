@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TVKFEED</title>
+    <link rel="stylesheet" href="/views/template/bootstrap/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="/views/template/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/views/template/fonts/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="/views/template/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/views/template/bootstrap/bootstrap.min.css">
+
+    <link rel="stylesheet" href="/views/template/assets/css/chi_tiet_tu_van.css"></link>
+    <link rel="stylesheet" href="/views/template/assets/css/layout/header.css">
+    <link rel="stylesheet" href="/views/template/assets/css/layout/footer.css">
+
+    <script src="/template/assets/scripts/add_layout/add_layout.js" defer></script>
+
+    <script src="/scripts/confirm_login.js"></script>
+</head>
+<body>
+
+<div id="header-placeholder"></div>
+<main style="margin-top: 90px; margin-bottom: 90px;">
+    <div class="chi_tiet_tu_van">
+        <div class="background-section">
+            <img src="/views/template/assets/images/represent-images/chicken_2.jpg" alt="">
+            <div class="desc">
+                <h1 class="mb-3">CHUYÊN ĐỀ GÀ</h1>
+                <div class="detailed_desc mt-4">
+                    <p>
+                        Dưới đây là một số câu hỏi thường gặp và giải đáp. Nếu bạn vẫn chưa tìm được câu trả lời, hãy liên hệ với VINAFEED.
+                    </p>
+                    <a href="/views/web/ho_tro.html">
+                        <button>
+                            Gửi câu hỏi
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-section ms-auto me-auto">
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="content d-flex mt-4">
+                        <div class="h3 text-start" style="padding-top: 6px;">Làm cách nào để bổ sung vitamin cho gà phù hợp để gà mạnh khỏe?</div>
+                        <button id="toggle-button1" class="ms-4" onclick="toggleDescription('description-content1', 'toggle-button1')">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div id="description-content1" style="display: none;" class="content mt-3">
+                    <div class="p container text-start mb-2">
+                        <strong>Giải đáp câu hỏi:</strong> <br>
+                        Vitamin có ở trong nhiều loại thức ăn với số lượng nhỏ. Tuy nhiên để lựa chọn được sản phẩm chứa liều lượng thích hợp thì không hề đơn giản.
+                        <br>
+                        Anh/ Chị có thể tham khảo cách bổ sung vitamin thông qua thức ăn. Cám gà VINA 257 là lựa chọn nhanh chóng và chất lượng cho người chăn nuôi, cung cấp vitamin cho đàn gà lông màu từ 01 ngày tuổi đến khi xuất bán.
+                        <br>
+                        - Thức ăn đáp ứng nhu cầu vitamin giúp gà chuyển hóa tốt, phát triển tốt. <br>
+                        - Thức ăn dạng hạt với dinh dưỡng được phân bổ đồng đều. <br>
+                        - Thức ăn giúp bổ sung nhiều men tiêu hoá kết hợp công nghệ ép đùn, viên cám chín hoàn toàn giúp gà dễ tiêu hoá, hấp thu. <br>
+                        Thức ăn chăn nuôi gà lông màu giúp gà ăn không bị dính mỏ. Ít rơi vãi, tiết kiệm chi phí thức ăn, không làm dơ nước uống.
+                    </div>
+                </div>
+            </div>
+
+            <div class="line"></div>
+
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="content d-flex mt-4">
+                        <div class="h3 text-start" style="padding-top: 6px;">Tôi muốn thảm khảo cám dành cho gà thịt từ 1 tuổi đến khi xuất bán.</div>
+                        <button id="toggle-button2" class="ms-4" onclick="toggleDescription('description-content2', 'toggle-button2')">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div id="description-content2" style="display: none;" class="content mt-3">
+                    <div class="p container text-start mb-2">
+                        <strong>Giải đáp câu hỏi:</strong> <br>
+                        Anh/ Chị có thể sử dụng sản phẩm cám gà VINA 200 CHUYÊN DÙNG CHO GÀ THỊT TỪ 01 NGÀY TUỔI ĐẾN KHI XUẤT BÁN.
+                        <br>
+                        Cám gà VINA 200 được bổ sung kháng sinh phòng tiêu chảy và cầu trùng, sử dụng công nghệ mới về cân bằng ion khoáng.
+                        <br>
+                        - Sản phẩm bổ sung nhiều men tiêu hoá kết hợp công nghệ ép đùn, viên cám chín hoàn toàn giúp gà dễ tiêu hoá, hấp thu tốt. <br>
+                        - Sản phẩm chứa nhiều đạm, cân đối axit amin hợp lý giúp gà phát triển nhanh, mau mọc lông, chân chắc khỏe, không bị tiêu chảy. <br>
+                        - Sản phẩm dạng mảnh, viên giúp gà dễ dàng lấy thức ăn, tăng tính thèm ăn và giảm hao hụt, giảm thải các chất gây ô nhiễm trong chuồng trại. <br>
+                        - Hệ số chuyển đổi thức ăn thấp, giảm giá thành, tăng lợi nhuận. <br>
+                        <a href="/views/web/each_product/product_chicken.html" class="text-primary">>> <u>Xem chi tiết tại đây</u></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="line"></div>
+
+        </div>
+
+
+    </div>
+</main>
+<div id="footer-placeholder"></div>
+
+
+<script src="/views/template/assets/bootstrap/bootstrap.bundle.min.js"></script>
+
+<script>
+    function toggleDescription(contentId, buttonId) {
+        var content = document.getElementById(contentId);
+        var button = document.getElementById(buttonId);
+
+        if (content.style.display === "none") {
+            content.style.display = "block";
+            button.textContent = "-";
+        } else {
+            content.style.display = "none";
+            button.textContent = "+";
+        }
+    }
+</script>
+
+
+</body>
+</html>

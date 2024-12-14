@@ -1,0 +1,167 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="../../css/admin_home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js Library for Charts -->
+  </head>
+  <body>
+  <div class="container">
+    <aside class="sidebar">
+      <h2>Admin</h2>
+      <ul class="menu">
+        <li onclick="showSection('home')"><i class="fas fa-home"></i> Trang chủ</li>
+        <li onclick="showSection('user-management')"><i class="fas fa-users"></i> Người dùng</li>
+        <li onclick="showSection('product-management')"><i class="fas fa-cogs"></i> Sản phẩm</li>
+        <li onclick="showSection('order-management')"><i class="fas fa-shopping-cart"></i> Đơn hàng</li>
+        <li onclick="showSection('shipper-management')"><i class="fas fa-truck"></i> Shipper</li>
+        <li onclick="showSection('news-management')"><i class="fas fa-newspaper"></i>Tin tức</li>
+        <li onclick="logout()"><i class="fas fa-sign-out-alt"></i> Đăng xuất</li>
+      </ul>
+    </aside>
+
+    <main class="dashboard">
+      <header class="dashboard-header">
+        <p>Dashboard</p>
+        <div class="user-info">
+          <i class="far fa-frown"></i>
+          <span>Admin</span>
+        </div>
+      </header>
+
+      <!-- Trang chủ -->
+      <section id="home" class="section active">
+        <h3>Chào mừng đến với trang Admin!</h3>
+        <p>Chọn một mục từ menu để quản lý hệ thống.</p>
+      </section>
+
+      <!-- Quản lý Sản phẩm -->
+      <section id="product-management" class="section">
+        <h3>Quản lý Sản phẩm</h3>
+        <div class="controls">
+          <div class="input-group">
+            <input type="text" id="product-id" placeholder="Mã sản phẩm">
+            <input type="text" id="category-id" placeholder="Mã danh mục">
+            <input type="text" id="product-name" placeholder="Tên sản phẩm">
+            <input type="number" id="product-price" placeholder="Giá tiền">
+            <input type="number" id="product-quantity" placeholder="Số lượng">
+            <select id="product-status">
+              <option value="">Chọn trạng thái</option>
+              <option value="active">Đang bán</option>
+              <option value="inactive">Ngừng bán</option>
+            </select>
+            <select id="product-type">
+              <option value="">Chọn loại sản phẩm</option>
+              <option value="Loại A">Loại A</option>
+              <option value="Loại B">Loại B</option>
+              <option value="Loại C">Loại C</option>
+            </select>
+            <select id="sale-type">
+              <option value="">Chọn loại giảm giá</option>
+              <option value="no_sale">Không giảm</option>
+              <option value="sale_20">Giảm 20%</option>
+            </select>
+            <input type="text" id="brand-name" placeholder="Tên thương hiệu">
+            <input type="date" id="product-date">
+            <input type="file" id="product-image" accept="image/*">
+          </div>
+          <textarea id="product-desc" placeholder="Mô tả sản phẩm"></textarea>
+          <button onclick="addProduct()">Thêm Sản phẩm</button>
+        </div>
+        <ul id="product-list"></ul>
+      </section>
+
+      <!-- Thống kê Sản phẩm -->
+      <section id="product-statistics" class="section">
+        <h3>Thống kê Sản phẩm</h3>
+        <div class="chart-container">
+          <h4>Sản phẩm bán chạy</h4>
+          <canvas id="top-selling-chart"></canvas>
+        </div>
+        <div class="chart-container">
+          <h4>Sản phẩm mới</h4>
+          <canvas id="new-products-chart"></canvas>
+        </div>
+      </section>
+
+      <!-- Quản lý Người dùng -->
+      <section id="user-management" class="section">
+        <h3>Quản lý Người dùng</h3>
+        <div class="controls">
+          <input type="text" id="user-name" placeholder="Tên người dùng">
+          <button onclick="addUser()">Thêm Người dùng</button>
+        </div>
+        <ul id="user-list"></ul>
+      </section>
+
+      <!-- Quản lý Đơn hàng -->
+      <section id="order-management" class="section">
+        <h3>Quản lý Đơn hàng</h3>
+        <div class="controls">
+          <input type="text" id="order-id" placeholder="Mã đơn hàng">
+          <input type="text" id="customer-name" placeholder="Tên khách hàng">
+          <select id="order-status">
+            <option value="Đang chuẩn bị hàng">Đang chuẩn bị hàng</option>
+            <option value="Đang vận chuyển">Đang vận chuyển</option>
+            <option value="Hoàn tất giao hàng">Hoàn tất giao hàng</option>
+            <option value="Đang chuẩn bị hàng">Đã hủy</option>
+          </select>
+          <button onclick="addOrder()">Thêm Đơn hàng</button>
+          <button onclick="fetchOrders()">Lấy Danh sách Đơn hàng</button>
+        </div>
+        <table id="order-table">
+          <thead>
+          <tr>
+            <th>Mã Đơn hàng</th>
+            <th>Tên Khách hàng</th>
+            <th>Trạng thái</th>
+            <th>Thao tác</th>
+          </tr>
+          </thead>
+          <tbody>
+          <!-- Dữ liệu đơn hàng sẽ được thêm vào đây -->
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Quản lý Shipper -->
+      <section id="shipper-management" class="section">
+        <h3>Quản lý Shipper</h3>
+        <div class="controls">
+          <input type="text" id="shipper-name" placeholder="Tên shipper">
+          <button onclick="addShipper()">Thêm Shipper</button>
+        </div>
+        <table id="shipper-table">
+          <thead>
+          <tr>
+            <th>Tên shipper</th>
+            <th>Thao tác</th>
+          </tr>
+          </thead>
+          <tbody>
+          <!-- Dữ liệu shipper sẽ được thêm vào đây -->
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Quản lý Tin tức -->
+      <section id="news-management" class="section">
+        <h3>Quản lý Tin tức</h3>
+        <div class="controls">
+          <input type="text" id="news-title" placeholder="Tiêu đề tin tức">
+          <textarea id="news-content" placeholder="Nội dung tin tức"></textarea>
+          <button onclick="addNews()">Thêm Tin tức</button>
+        </div>
+        <ul id="news-list"></ul>
+      </section>
+    </main>
+  </div>
+    </section>
+
+  <script src="../../scripts/admin_home.js"></script>
+  </body>
+  </html>
+

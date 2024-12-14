@@ -1,0 +1,221 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /*cuộn mượt mà */
+    font-family: Helvetica, Arial, sans-serif; /*set font chữ cho cả website , chữ không có chân*/
+}
+
+.product .overlay-text {
+    width: 1000px;
+    position: absolute;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    color: transparent;
+    font-size: 6rem; 
+    font-weight: bold;
+    text-transform: uppercase;
+    -webkit-text-stroke: 1.5px white;
+} 
+
+.product .product_button_icon {
+    width: 170px;
+    height: 55px;
+    background-color: #94b83d;
+    border-radius: 10px;
+    margin: 0 5px;
+    font-size: 15px;
+    border: none;
+    line-height: 55px;
+    text-align: center;
+}
+
+img {
+    object-fit: cover;
+}
+
+.product .product_button_icon:hover {
+    background-color: #fcae18;
+}
+
+.product .product_button_icon img {
+    margin-top: 10px;
+    margin-left: 7px;
+} 
+
+.product .row {
+    width: 1220px;
+    margin: 0 auto;
+}
+
+.product .col {
+    width: 272px;
+}
+
+.product .col .product-img {
+    transition: transform 0.8s ease; /* Điều chỉnh thời gian và hiệu ứng chuyển đổi */
+}
+
+.product .col .product-img:hover {
+    transform: scale(1.2);
+}
+
+.product .col .text-h {
+    color: #198754;
+}
+.product .col:hover .text-h {
+    color: #fcae18;
+}
+
+.product .col .text-p {
+    margin: 0 5px;
+}
+
+.product .product_number {
+    -webkit-box-shadow: -1px 3px 23px 5px rgba(227,227,227,1);
+    -moz-box-shadow: -1px 3px 23px 5px rgba(227,227,227,1);
+    box-shadow: -1px 3px 23px 5px rgba(227,227,227,1);
+    position: relative;
+}
+
+.product .sale_all {
+    position: relative;
+    width: 0;
+    height: 0;
+    border-left: 60px solid transparent; /* Tạo cạnh tam giác bên trái */
+    border-right: 60px solid transparent; /* Tạo cạnh tam giác bên phải */
+    border-bottom: 60px solid #fcae18; /* Màu tam giác */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotate(-45deg);
+    margin-left: -51px;
+    margin-top: -9px;
+}
+
+.product .sale_badge {
+    position: absolute;
+    top: 14px; /* Căn chỉnh vị trí text */
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.product .new_badge {
+    position: absolute;
+    top: 23px; /* Căn chỉnh vị trí text */
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.product_sale_new {
+    height: 80px;
+}
+
+.product_sale_new .product_sale {
+    width: 250px;
+    margin-left: 40px;
+    line-height: 39px;
+    cursor: pointer;
+    justify-content: center;
+}
+
+.product_sale_new .active-tab {
+    border-bottom: 3px solid #fcae18;
+    color: #fcae18;
+}
+
+.product_sale_new .product_new, 
+.product_sale_new .product_best {
+    width: 250px;
+    line-height: 39px;
+    cursor: pointer;
+    justify-content: center;
+
+}
+
+.product_sale_new .product_new:hover,
+.product_sale_new .product_sale:hover,
+.product_sale_new .product_best:hover {
+    border-bottom: 3px solid #fcae18;
+    color: #fcae18;
+}
+
+.product .line {
+     border: 1px solid rgba(128, 128, 128, 0.2);
+}
+
+/*  */
+.product .product-tab {
+    width: 140px;
+    margin: 0 auto;
+}
+
+.product .product-tab .tab {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    align-content: center;
+    margin: 0  2px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.product .product-tab .product-active {
+    background-color: #fcae18;
+}
+
+.product .product-tab .tab:hover {
+    background-color: #fcae18;
+}
+
+/* more sale product */
+.product .more_product_sale {
+    display: none;
+    transition: height 0.3s ease-in-out;
+}
+
+/* more text */
+.product .more_text_product {
+    display: none;
+    transition: height 0.3s ease-in-out;
+}
+
+.product .toggle-button-text,
+.product .toggle-button-sale {
+    display: block;
+    font-size: 20px;
+    background-color: rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    width: 160px;
+    margin: 0 auto;
+    border-radius: 20px;
+}
+
+.product .toggle-button-text:hover,
+.product .toggle-button-sale:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/*  */
+  /* Tạo hiệu ứng zoom khi hover */
+  .card-img-container {
+    overflow: hidden; /* Đảm bảo ảnh không bị tràn ra ngoài */
+}
+
+.card-img-top {
+    transition: transform 0.3s ease-in-out; /* Hiệu ứng mượt */
+}
+
+.card-img-container:hover .card-img-top {
+    transform: scale(1.1); /* Phóng to ảnh khi hover */
+}
+.card:hover .card-body {
+    background-color: #94b83d;
+}

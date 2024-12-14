@@ -1,0 +1,118 @@
+html, body {
+    padding: 0;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    /* font-size: 13px; */
+    font-family: sans-serif, Tahoma;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+}
+
+.main .tin_tuc {
+    max-width: 1000px;
+}
+
+.main h1 {
+    font-size: 2.5rem ;
+    font-weight: bold;
+    color: #333;
+}
+
+.main .container p:not(.img-label) {
+    font-size: 18px;
+    color: #555;
+}
+
+.main .text-center img {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.main .img-label {
+    background-color: #eae7e7;
+    padding: 5px 0;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.main  a {
+    text-decoration: none;
+}
+
+.main .carousel-item {
+    padding: 0 15px;
+}
+.main .news-card {
+    height: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: white;
+}
+.main .news-card img {
+    width: 100%;
+    height: auto;
+}
+
+.main .news-card .card-body {
+    padding: 15px;
+}
+
+.main .carousel-control-prev-icon,
+.main .carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5); /* Dark background for better visibility */
+    border-radius: 50%; /* Optional: make them round */
+    width: 30px;
+    height: 30px;
+    background-size: 30px 30px;
+}
+
+/* Responsive styles for mobile */
+@media (max-width: 768px) {
+    .main .tin_tuc {
+        max-width: 100%; /* Allow full width for smaller screens */
+        padding: 0 15px; /* Add padding for better readability */
+    }
+
+    .main h1 {
+        font-size: 1.8rem; /* Smaller font size for headlines */
+        line-height: 1.4; /* Adjust line height for readability */
+    }
+
+    .main .container p:not(.img-label) {
+        font-size: 16px; /* Slightly smaller text for mobile */
+    }
+
+    .main .text-center img {
+        width: 100%; /* Ensure images fit within the screen width */
+        height: auto;
+    }
+
+    .main .carousel-item {
+        padding: 0; /* Remove extra padding for carousel items */
+    }
+
+    .main .news-card {
+        margin-bottom: 20px; /* Add spacing between cards */
+        box-shadow: none; /* Remove box shadow for a cleaner look on mobile */
+    }
+
+    .main .carousel-inner {
+        width: 100%; /* Carousel should span the full width */
+    }
+
+    .main .carousel-control-prev-icon,
+    .main .carousel-control-next-icon {
+        width: 25px; /* Reduce icon size for smaller screens */
+        height: 25px;
+        background-size: 25px 25px;
+    }
+}
+
+
+

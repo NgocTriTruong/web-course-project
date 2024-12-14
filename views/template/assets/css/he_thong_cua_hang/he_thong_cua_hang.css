@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /*cuộn mượt mà */
+    font-family: Helvetica, Arial, sans-serif; /*set font chữ cho cả website , chữ không có chân*/
+}
+
+.cua_hang {
+    
+}
+
+.cua_hang .cua_hang_left {
+    border-radius: 10px;
+}
+
+.cua_hang .cua_hang_right {
+    border-radius: 10px;
+}
+
+.cua_hang .cua_hang_right .cua_hang_right_80 {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.cua_hang .cua_hang_right .cua_hang_right_80 .cua_hang_right_number {
+    width: 290px;
+}
+
+.cua_hang .line_red {
+    border: 1px solid #94b83d;
+}

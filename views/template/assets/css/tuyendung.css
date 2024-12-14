@@ -1,0 +1,309 @@
+*{
+    margin: 0 auto;
+    padding: 0;
+}
+.tuyendung {
+    margin: 0 auto; /* Center the container */
+}
+
+/* Centered H2 Headers */
+.tuyendung h2 {
+    font-size: 40px;
+    line-height: 60px;
+    font-weight: bold;
+    text-align: center;
+    margin: 20px 0;
+    color: #94b83d;
+}
+
+.tuyendung .header-tuyendung {
+    background-color: #94b83d;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Banner Section */
+.tuyendung .background-section {
+    position: relative;
+    background-image: url('/views/template/assets/images/banner/banner_tuyendung.png');
+    background-size: cover;
+    background-position: center;
+    height: 500px; /* Adjust height as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tuyendung .background-section h1 {
+    color: transparent;
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    font-weight: bold;
+    position: relative;
+}
+
+/* Add a transparent overlay effect */
+.tuyendung .background-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); /* Adjust transparency */
+    z-index: 0;
+}
+
+@supports(-webkit-text-stroke: 2px white) {
+    .outline {
+        color: transparent;
+        -webkit-text-stroke: 2px white; /* Increased stroke width */
+        text-shadow: none;
+        font-size: 80px; /* Increased font size */
+        font-weight: bold;
+        letter-spacing: 5px;
+    }
+}
+
+/* Outlined Text Style */
+.tuyendung .outlined-text-tuyendung {
+    font-size: 100px; /* Adjust the size as needed */
+    font-weight: bold;
+    color: transparent;
+    -webkit-text-stroke: 2px white; /* White outline around text */
+    text-transform: uppercase;
+    letter-spacing: 10px; /* Adjust spacing between letters */
+}
+
+.tuyendung .navbar-tuyendung a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.tuyendung .benefits {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.tuyendung .benefit-card {
+    width: 320px;
+    background-color: white;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    text-align: center; 
+}
+
+.tuyendung .benefit-card h3 {
+    color: #e74c3c;
+    margin: 10px;
+}
+
+.tuyendung .benefit-card p {
+    font-size: 15px;
+    line-height: 23px;
+    color: #333;
+}
+
+/* Vị Trí Ứng Tuyển Section */
+.tuyendung .job-listings {
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Elevated shadow effect for entire section */
+    margin-bottom: 20px;
+}
+
+.tuyendung .job-listings p {
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 16px;
+    line-height: 20px;
+    animation-delay: 0.2s;
+    margin-bottom: 35px;
+    margin-block: inherit;
+}
+
+.tuyendung .search-bar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.tuyendung .search-bar input,
+.tuyendung .search-bar select {
+    padding: 8px;
+    margin: 0 5px;
+    font-size: 14px;
+}
+
+.tuyendung .search-bar button {
+    padding: 8px 15px;
+    font-size: 14px;
+    background-color: #0073e6;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.tuyendung .job-table-container {
+    overflow-x: auto; /* Ensure the table is scrollable on smaller screens */
+    width: 90%; /* Reduce the overall width */
+    margin: 0 auto; /* Center the container */
+}
+
+.tuyendung .job-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tuyendung .job-table th, .tuyendung .job-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.tuyendung .detail-button {
+    padding: 5px 10px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+/* Pagination Styles */
+.tuyendung .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.tuyendung .pagination button {
+    padding: 8px 12px;
+    margin: 0 5px;
+    background-color: #0073e6;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.tuyendung .pagination button.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+#footer-placeholder{
+    padding-top: 25px;
+}
+
+@media (max-width: 768px) {
+    /* Centered Header */
+    .tuyendung h2 {
+        font-size: 28px;
+        line-height: 40px;
+        margin: 15px 0;
+    }
+
+    /* Adjust Banner Section */
+    .tuyendung .background-section {
+        height: 300px; /* Reduce height for smaller screens */
+    }
+
+    .tuyendung .background-section h1 {
+        font-size: 24px;
+        letter-spacing: 5px;
+    }
+
+    /* Adjust Outlined Text */
+    .tuyendung .outlined-text-tuyendung {
+        font-size: 60px; /* Smaller font size */
+        letter-spacing: 5px;
+    }
+
+    /* Navbar links */
+    .tuyendung .navbar-tuyendung a {
+        margin: 0 10px;
+        font-size: 14px; /* Smaller font size for mobile */
+    }
+
+    /* Benefits Section */
+    .tuyendung .benefits {
+        flex-direction: column; /* Stack the benefit cards vertically */
+        gap: 20px;
+        padding: 15px;
+    }
+
+    .tuyendung .benefit-card {
+        width: 100%; /* Full width for small screens */
+        box-shadow: none; /* Remove shadow for mobile */
+        padding: 10px;
+    }
+
+    .tuyendung .job-listings {
+        padding: 15px;
+    }
+
+    .tuyendung .search-bar input,
+    .tuyendung .search-bar select,
+    .tuyendung .search-bar button {
+        font-size: 12px; /* Smaller font size for input fields */
+        padding: 6px; /* Smaller padding */
+    }
+
+    /* Job Table Container */
+    .tuyendung .job-table-container {
+        width: 100%; /* Full width for smaller screens */
+        padding: 0 15px; /* Add padding to avoid touching the edges */
+    }
+
+    .tuyendung .job-table th, .tuyendung .job-table td {
+        font-size: 12px; /* Smaller text inside table */
+    }
+
+    /* Pagination Styles */
+    .tuyendung .pagination button {
+        font-size: 12px; /* Smaller buttons */
+        padding: 6px 10px;
+    }
+
+    #footer-placeholder {
+        padding-top: 15px;
+    }
+}
+
+/* Additional mobile-specific tweaks */
+@media (max-width: 480px) {
+    /* Adjust font sizes for very small screens */
+    .tuyendung h2 {
+        font-size: 22px;
+        line-height: 30px;
+    }
+
+    .tuyendung .outlined-text-tuyendung {
+        font-size: 45px; /* Further reduce the font size */
+    }
+
+    .tuyendung .navbar-tuyendung a {
+        font-size: 12px; /* Make navbar items smaller */
+        margin: 0 8px;
+    }
+
+    /* Benefit cards */
+    .tuyendung .benefit-card {
+        width: 100%; /* Full width for small screens */
+    }
+
+    /* Pagination buttons */
+    .tuyendung .pagination button {
+        font-size: 10px; /* Even smaller font for mobile pagination */
+        padding: 5px 8px;
+    }
+}
+
