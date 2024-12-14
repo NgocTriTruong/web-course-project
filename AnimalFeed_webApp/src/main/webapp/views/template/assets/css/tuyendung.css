@@ -27,7 +27,7 @@
 /* Banner Section */
 .tuyendung .background-section {
     position: relative;
-    background-image: url('/assets/images/banner/banner_tuyendung.png');
+    background-image: url("/views/template/assets/images/banner/banner_tuyendung.png");
     background-size: cover;
     background-position: center;
     height: 500px; /* Adjust height as needed */
@@ -98,7 +98,7 @@
     padding: 15px;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    text-align: center; 
+    text-align: center;
 }
 
 .tuyendung .benefit-card h3 {
