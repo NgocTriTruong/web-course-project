@@ -12,102 +12,102 @@
 
     <ul class="sidenav-menu text-white mb-5">
       <li class="sidenav-item">
-        <a class="sidenav-link text-white" href="${pageContext.request.contextPath}/views/admin/home.html">
+        <a class="sidenav-link text-white" href="${pageContext.request.contextPath}/views/admin/home.jsp">
           <i class="fas fa-tachometer-alt fa-fw me-3 "></i><span class="h5 text">Trang chủ</span></a>
       </li>
       <li class="sidenav-item pt-3">
         <span class="sidenav-subheading text-muted text-uppercase fw-bold" style="font-size: 15px; padding-bottom: 10px;">Quản lý</span>
       </li>
       <li class="sidenav-item mt-2">
-        <a class="sidenav-link " href="${pageContext.request.contextPath}/views/admin/userManagement.html">
+        <a class="sidenav-link " href="${pageContext.request.contextPath}/views/admin/userManagement.jsp">
           <i class="fas fa-users fa-fw me-2"></i><span class="h5 text">Quản lý người dùng</span><i class="fas fa-chevron-down" style="margin-left: 11px;margin-bottom: 1px;"></i></a>
         <ul class="sidenav-collapse">
           <li class="sidenav-item">
-            <a class="sidenav-link h6" href="${pageContext.request.contextPath}/views/admin/userAddition.html" style="font-size: 17px;">Thêm người dùng</a>
+            <a class="sidenav-link h6" href="${pageContext.request.contextPath}/views/admin/userAddition.jsp" style="font-size: 17px;">Thêm người dùng</a>
           </li>
           <li class="sidenav-item">
-            <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/userManagement.html" style="font-size: 17px;">Danh sách người dùng</a>
+            <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/userManagement.jsp" style="font-size: 17px;">Danh sách người dùng</a>
           </li>
         </ul>
       </li>
       <li class="sidenav-item">
-        <a class="sidenav-link " href="${pageContext.request.contextPath}/views/admin/productManagement.html">
+        <a class="sidenav-link " href="${pageContext.request.contextPath}/views/admin/productManagement.jsp">
           <i class="fas fa-gift fa-fw me-2"></i><span class="h5 text">Quản lý sản phẩm</span> <i class="fas fa-chevron-down" style="margin-left: 31px;margin-bottom: 2px;"></i></a>
         <ul class="sidenav-collapse ">
           <li class="sidenav-item">
-            <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/productAddition.html" style="font-size: 17px;">Thêm sản phẩm</a>
+            <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/productAddition.jsp" style="font-size: 17px;">Thêm sản phẩm</a>
           </li>
           <li class="sidenav-item"> 
-            <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/productManagement.html" style="font-size: 17px;">Danh sách sản phẩm</a>
+            <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/productManagement.jsp" style="font-size: 17px;">Danh sách sản phẩm</a>
           </li>
         </ul>
       </li>
       <li class="sidenav-item">
-        <a class="sidenav-link " href="${pageContext.request.contextPath}/views/admin/categoryManagement.html">
+        <a class="sidenav-link " href="${pageContext.request.contextPath}/views/admin/categoryManagement.jsp">
           <i class="fas fa-bars fa-fw me-2 "></i><span  class="h5 text">Quản lý danh mục</span><i class="fas fa-chevron-down" style="margin-left: 33px;"></i></a>
         <ul class="sidenav-collapse ">
           <li class="sidenav-item">
-            <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/categoryAddition.html" style="font-size: 17px;">Thêm danh mục</a>
+            <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/categoryAddition.jsp" style="font-size: 17px;">Thêm danh mục</a>
           </li>
           <li class="sidenav-item">
-            <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/categoryManagement.html" style="font-size: 17px;">Danh sách danh mục</a>
+            <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/categoryManagement.jsp" style="font-size: 17px;">Danh sách danh mục</a>
           </li>
         </ul>
       </li>
       <li class="sidenav-item">
-        <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/orderManagement.html">
+        <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/orderManagement.jsp">
           <i class="fas fa-cart-shopping fa-fw me-2 "></i><span class="h5 text">Quản lý đơn đặt hàng</span><i class="fas fa-chevron-down" style="margin-left: -1px; margin-bottom: 2px;"></i></a>
         <ul class="sidenav-collapse ">
           <li class="sidenav-item">
-            <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/orderAddition.html" style="font-size: 17px;">Thêm đơn đặt hàng</a>
+            <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/orderAddition.jsp" style="font-size: 17px;">Thêm đơn đặt hàng</a>
           </li>
           <li class="sidenav-item">
-            <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/orderManagement.html" style="font-size: 17px;">Danh sách đơn đặt hàng</a>
+            <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/orderManagement.jsp" style="font-size: 17px;">Danh sách đơn đặt hàng</a>
           </li>
         </ul>
       </li>
       <li class="sidenav-item">
-        <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/contactManagemet.html">
+        <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/contactManagemet.jsp">
           <i class="fas fa-message fa-fw me-2 "></i><span class="h5 text">Quản lý trang liên hệ</span><i class="fas fa-chevron-down" style="margin-left: 10px;"></i></a>
         <ul class="sidenav-collapse ">
           <li class="sidenav-item">
-            <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/contactManagemet.html" style="font-size: 17px;">Danh sách liên hệ</a>
+            <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/contactManagemet.jsp" style="font-size: 17px;">Danh sách liên hệ</a>
           </li>
         </ul>
       </li>
       <li class="sidenav-item">
-        <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/postManagement.html">
+        <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/postManagement.jsp">
           <i class="fas fa-blog fa-fw me-2 "></i><span class="h5 text">Quản lý trang tin tức</span><i class="fas fa-chevron-down" style="margin-left: 10px;"></i></a>
         <ul class="sidenav-collapse ">
           <li class="sidenav-item">
-            <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/postAddition.html" style="font-size: 17px;">Thêm bài viết</a>
+            <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/postAddition.jsp" style="font-size: 17px;">Thêm bài viết</a>
           </li>
           <li class="sidenav-item">
-            <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/postManagement.html" style="font-size: 17px;">Danh sách bài viết</a>
+            <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/postManagement.jsp" style="font-size: 17px;">Danh sách bài viết</a>
           </li>
         </ul>
       </li>
       <li class="sidenav-item">
-        <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/shipperManagemet.html">
+        <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/shipperManagemet.jsp">
           <i class="fas fa-shipping-fast fa-fw me-2 "></i><span class="h5 text">Quản lý shipper</span><i class="fas fa-chevron-down" style="margin-left: 48px;"></i></a>
         <ul class="sidenav-collapse ">
           <li class="sidenav-item">
-            <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/shipperAddtion.html" style="font-size: 17px;">Thêm shipper</a>
+            <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/shipperAddtion.jsp" style="font-size: 17px;">Thêm shipper</a>
           </li>
           <li class="sidenav-item">
-            <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/shipperManagemet.html" style="font-size: 17px;">Danh sách shipper</a>
+            <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/shipperManagemet.jsp" style="font-size: 17px;">Danh sách shipper</a>
           </li>
         </ul>
       </li>
       <li class="sidenav-item">
-        <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/jobManagemet.html">
+        <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/jobManagemet.jsp">
           <i class="fas fa-handshake fa-fw me-2 "></i><span class="h5 text">Trang tuyển dụng</span><i class="fas fa-chevron-down" style="margin-left: 30px;"></i></a>
         <ul class="sidenav-collapse ">
           <li class="sidenav-item">
-            <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/jobAddtion.html" style="font-size: 17px;">Thêm công việc</a>
+            <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/jobAddtion.jsp" style="font-size: 17px;">Thêm công việc</a>
           </li>
           <li class="sidenav-item">
-            <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/jobManagemet.html" style="font-size: 17px;">Danh sách tuyển dụng</a>
+            <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/jobManagemet.jsp" style="font-size: 17px;">Danh sách tuyển dụng</a>
           </li>
         </ul>
       </li>
@@ -137,7 +137,7 @@
                  loading="lazy"/>
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/views/admin/profile.html">Hồ sơ của tôi</a></li>
+            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/views/admin/profile.jsp">Hồ sơ của tôi</a></li>
             <li><a class="dropdown-item" href="/index.html">Đăng xuất</a></li>
           </ul>
         </li>

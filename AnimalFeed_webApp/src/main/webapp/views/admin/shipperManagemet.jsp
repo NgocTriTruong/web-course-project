@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,25 +6,25 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
-    <title>Quản lý tuyển dụng</title>
+    <title>Quản lý shipper</title>
     <!-- Bootstrap CSS -->
-    <link href="/assets/bootstrap/bootstrap.min.css" rel="stylesheet">
-    <script src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
+    <link href="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <script src="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.bundle.min.js"></script>
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="/assets/fonts/fontawesome-free-6.6.0-web/css/all.min.css" />
-    <link rel="stylesheet" href="/assets/html/admin/assets/css/mdb.min.css">
-    <link rel="stylesheet" href="/assets/html/admin/assets/css/home.css">
-    <link rel="stylesheet" href="/assets/html/admin/assets/css/header.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/fontawesome-free-6.6.0-web/css/all.min.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/admin/assets/css/mdb.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/admin/assets/css/home.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/admin/assets/css/header.css">
 
-    <script src="/assets/html/admin/assets/js/mdb.min.js"></script>
+    <script src="${pageContext.request.contextPath}/views/admin/assets/js/mdb.min.js"></script>
 
     <!-- js add header -->
-     <script src="/assets/html/admin/assets/js/add_header.js" defer></script>
+     <script src="${pageContext.request.contextPath}/views/admin/assets/js/add_header.js" defer></script>
 </head>
 
 <body>
 
-<div id="header-placeholder"></div>
+<%@ include file="layout/header.jsp" %>
 
 <!--Main layout-->
 <main class="mb-5">
@@ -45,7 +46,7 @@
             <div class="card-body py-5 px-5">
               <div class="row gx-lg-4 align-items-center">
                 <div class="col-lg-6 mb-4 mb-lg-0 text-center text-lg-start">
-                  <h1 class="">Quản lý tuyển dụng</h1>
+                  <h1 class="">Quản lý shipper</h1>
                 </div>
               </div>
             </div>
@@ -56,9 +57,9 @@
     <!-- Container for demo purpose -->
     <div class="container px-4 ">
         <div class="mb-3 d-flex justify-content-end px-4">
-            <a class="btn bg_green text-white fw-bold" href="jobAddtion.html">
+            <a class="btn bg_green text-white fw-bold" href="shipperAddtion.jsp">
                 <i class="far fa-square-plus"></i>
-                <span>Thêm công việc</span>
+                <span>Thêm Shipper</span>
             </a>
         </div>
         <div class="input-group mb-4 px-4">
@@ -72,9 +73,10 @@
             <thead class="bg-light">
             <tr class="h6">
                 <th>STT</th>
-                <th>Vị trí công việc</th>
-                <th>Nơi làm việc</th>
-                <th>Số điện thoại liên hệ</th>
+                <th>Tên Shipper</th>
+                <th>Số điện thoại</th>
+                <th>Tiền lương</th>
+                <th>Trạng thái</th>
                 <th>Hành động</th>
             </tr>
             </thead>
@@ -85,12 +87,7 @@
                 </td>
                 <td>
                     <div class="">
-                        <p class="h6 fw-bold mb-1">TUYỂN DỤNG NHÂN VIÊN PHÒNG KINH DOANH</p>
-                    </div>
-                </td>
-                <td>
-                    <div class="">
-                        <p class="h6 fw-bold mb-1">Tỉnh Hà Nam</p>
+                        <p class="h6 fw-bold mb-1">Trương Ngọc Trí</p>
                     </div>
                 </td>
                 <td>
@@ -99,7 +96,15 @@
                     </div>
                 </td>
                 <td>
-                    <a href="jobAddition.html" class="btn bg_green btn-floating" style="font-size: 16px;">
+                    <div class="ms-1">
+                        <p class="h6 mb-1">7.000.000</p>
+                    </div>
+                </td>
+                <td>
+                    <span class="badge badge-success rounded-pill d-inline" style="font-size: 13px;">Đang làm việc</span>
+                </td>
+                <td>
+                    <a href="shipperAddition.jsp" class="btn bg_green btn-floating" style="font-size: 16px;">
                         <i class="far fa-pen-to-square"></i>
                     </a>
                     <button type="button" class="btn bg_yellow btn-floating" style="font-size: 16px;">
@@ -113,12 +118,7 @@
                 </td>
                 <td>
                     <div class="">
-                        <p class="h6 fw-bold mb-1">TUYỂN DỤNG NHÂN VIÊN PHÒNG KINH DOANH</p>
-                    </div>
-                </td>
-                <td>
-                    <div class="">
-                        <p class="h6 fw-bold mb-1">Tỉnh Hà Nam</p>
+                        <p class="h6 fw-bold mb-1">Trương Ngọc Trí</p>
                     </div>
                 </td>
                 <td>
@@ -127,7 +127,15 @@
                     </div>
                 </td>
                 <td>
-                    <a href="jobAddition.html" class="btn bg_green btn-floating" style="font-size: 16px;">
+                    <div class="ms-1">
+                        <p class="h6 mb-1">7.000.000</p>
+                    </div>
+                </td>
+                <td>
+                    <span class="badge badge-success rounded-pill d-inline" style="font-size: 13px;">Đang làm việc</span>
+                </td>
+                <td>
+                    <a href="shipperAddition.jsp" class="btn bg_green btn-floating" style="font-size: 16px;">
                         <i class="far fa-pen-to-square"></i>
                     </a>
                     <button type="button" class="btn bg_yellow btn-floating" style="font-size: 16px;">
@@ -141,12 +149,7 @@
                 </td>
                 <td>
                     <div class="">
-                        <p class="h6 fw-bold mb-1">TUYỂN DỤNG NHÂN VIÊN PHÒNG KINH DOANH</p>
-                    </div>
-                </td>
-                <td>
-                    <div class="">
-                        <p class="h6 fw-bold mb-1">Tỉnh Hà Nam</p>
+                        <p class="h6 fw-bold mb-1">Trương Ngọc Trí</p>
                     </div>
                 </td>
                 <td>
@@ -155,7 +158,15 @@
                     </div>
                 </td>
                 <td>
-                    <a href="jobAddition.html" class="btn bg_green btn-floating" style="font-size: 16px;">
+                    <div class="ms-1">
+                        <p class="h6 mb-1">7.000.000</p>
+                    </div>
+                </td>
+                <td>
+                    <span class="badge badge-danger rounded-pill d-inline" style="font-size: 13px;">Đã nghỉ làm</span>
+                </td>
+                <td>
+                    <a href="shipperAddition.jsp" class="btn bg_green btn-floating" style="font-size: 16px;">
                         <i class="far fa-pen-to-square"></i>
                     </a>
                     <button type="button" class="btn bg_yellow btn-floating" style="font-size: 16px;">
