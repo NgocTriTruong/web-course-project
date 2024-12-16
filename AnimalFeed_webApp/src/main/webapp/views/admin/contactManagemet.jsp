@@ -24,7 +24,7 @@
 
 <body>
 
-<div id="header-placeholder"></div>
+<%@ include file="layout/header.jsp" %>
 
 <!--Main layout-->
 <main class="mb-5">
@@ -149,7 +149,7 @@
 </main>
 <!--Main layout-->
 
-<footer class="position-fixed bottom-0 w-100 text-center py-2 bg-light">
+<footer class="bottom-0 w-100 text-center py-2 bg-light">
     <p class="pt-3" style="color: rgba(0, 0, 0, 0.5); margin-left: 150px;">©2024 Group-11</p>
 </footer>
 

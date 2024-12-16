@@ -24,8 +24,7 @@
 <body>
 <!-- Start your project here-->
 
-<header id="header-placeholder"></header>
-
+<%@ include file="layout/header.jsp" %>
     
     <!-- Main layout -->
     <main class="mb-5">

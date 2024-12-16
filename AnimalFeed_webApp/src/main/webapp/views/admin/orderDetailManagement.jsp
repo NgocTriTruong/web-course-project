@@ -24,7 +24,7 @@
 
 <body>
 
-<div id="header-placeholder"></div>
+<%@ include file="layout/header.jsp" %>
 
 <!--Main layout-->
 <main class="mb-5">
@@ -57,7 +57,7 @@
     <!-- Container for demo purpose -->
     <div class="container px-4">
         <div class="mb-3 d-flex justify-content-end px-4">
-            <a class="btn bg_green text-white fw-bold" href="orderAddition.html">
+            <a class="btn bg_green text-white fw-bold" href="orderAddition.jsp">
                 <i class="far fa-square-plus"></i>
                 <span>Thêm đơn đặt hàng</span>
             </a>

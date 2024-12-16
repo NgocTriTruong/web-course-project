@@ -24,7 +24,7 @@
 
 <body>
 
-<div id="header-placeholder"></div>
+<%@ include file="layout/header.jsp" %>
 
 <!--Main layout-->
 <main class="mb-5" style="margin-top: 100px;">
@@ -32,7 +32,7 @@
 
     <!-- Container for demo purpose -->
     <div class="container px-4 ">
-        <a href="orderManagement.html" class="btn btn-link mb-2 text_green" style="font-size: 16px;">
+        <a href="orderManagement.jsp" class="btn btn-link mb-2 text_green" style="font-size: 16px;">
             <i class="fas fa-angle-left"></i> Quay lại
         </a>
         <div class="mb-3 bg_green p-2">

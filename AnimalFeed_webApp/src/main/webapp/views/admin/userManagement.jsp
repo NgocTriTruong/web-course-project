@@ -1,35 +1,36 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
-    <title>Quản lý bài viết</title>
+    <title>Quản lý người dùng</title>
     <!-- Bootstrap CSS -->
-    <link href="/assets/bootstrap/bootstrap.min.css" rel="stylesheet">
-    <script src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
+    <link href="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <script src="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.bundle.min.js"></script>
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="/assets/fonts/fontawesome-free-6.6.0-web/css/all.min.css" />
-    <link rel="stylesheet" href="/assets/html/admin/assets/css/mdb.min.css">
-    <link rel="stylesheet" href="/assets/html/admin/assets/css/home.css">
-    <link rel="stylesheet" href="/assets/html/admin/assets/css/header.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/fontawesome-free-6.6.0-web/css/all.min.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/admin/assets/css/mdb.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/admin/assets/css/home.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/admin/assets/css/header.css">
 
-    <script src="/assets/html/admin/assets/js/mdb.min.js"></script>
+    <script src="${pageContext.request.contextPath}/views/admin/assets/js/mdb.min.js"></script>
 
     <!-- js add header -->
-     <script src="/assets/html/admin/assets/js/add_header.js" defer></script>
+     <script src="${pageContext.request.contextPath}/views/admin/assets/js/add_header.js" defer></script>
 </head>
 
 <body>
 <!-- Start your project here-->
 <!--Main Navigation-->
-<div id="header-placeholder"></div>
+<%@ include file="layout/header.jsp" %>
 
 <!--Main Navigation-->
 
 <!--Main layout-->
-<main class="mb-5">
+<main style="padding-bottom: 100px;">
+
     <section class="mb-5 text-center text-md-start">
         <!-- Background gradient -->
         <div class="p-5" style="height: 200px;
@@ -48,7 +49,7 @@
             <div class="card-body py-5 px-5">
               <div class="row gx-lg-4 align-items-center">
                 <div class="col-lg-6 mb-4 mb-lg-0 text-center text-lg-start">
-                  <h1 class="">Quản lý tin tức</h1>
+                  <h1 class="">Quản lý người dùng</h1>
                 </div>
               </div>
             </div>
@@ -59,9 +60,9 @@
     <!-- Container for demo purpose -->
     <div class="container  px-4 ">
         <div class="mb-3 d-flex justify-content-end px-4">
-            <a class="btn bg_green text-white fw-bold" href="postAddition.html">
+            <a class="btn bg_green text-white fw-bold" href="userAddition.jsp">
                 <i class="far fa-square-plus"></i>
-                <span>Thêm bài viết</span>
+                <span class="">Thêm người dùng</span>
             </a>
         </div>
         <div class="input-group mb-4 px-4">
@@ -76,12 +77,11 @@
                 <thead class="bg-light">
                 <tr class="h6">
                     <th>STT</th>
-                    <th>Tiêu đề</th>
-                    <th>Mô tả</th>
-                    <th>Người tạo</th>
-                    <th>Thời gian tạo</th>
+                    <th>Tên người dùng</th>
+                    <th>Số điện thoại</th>
+                    <th>Xác thực số điện thoại</th>
                     <th>Trạng thái</th>
-                    <th>Hành động</th>
+                    <th>Thao tác</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -92,27 +92,24 @@
                     <td>
                         <div class="d-flex align-items-center">
                             <div class="">
-                                <p class="fw-bold mb-1">LẬP TRÌNH WEB</p>
+                                <p class="h6 mb-1 ms-1">Trương Ngọc Trí</p>
                             </div>
                         </div>
                     </td>
                     <td>
-                        <span>Lập trình web thầy Long. Project website bán thức ăn chăn nuôi</span>
+                        <span class="h6 ms-1">0123456789</span>
                     </td>
                     <td>
-                        <p class="fw-normal mb-1 h6">Trương Ngọc Trí</p>
+                        <span class="badge badge-success rounded-pill d-inline ms-4" style="font-size: 13px;">Đã xác thực</span>
                     </td>
                     <td>
-                        <span class="h6 ms-2">10/11/2024</span>
+                        <span class="badge badge-danger rounded-pill d-inline" style="font-size: 13px;">Ngừng hoạt động</span>
                     </td>
                     <td>
-                        <span class="badge badge-success rounded-pill d-inline  ms-2" style="font-size: 13px;">Hiển thị</span>
-                    </td>
-                    <td>
-                        <a href="postAddition.html" class="btn bg_green btn-floating">
+                        <a href="productAddition.jsp" class="btn bg_green btn-floating" style="font-size: 16px;">
                             <i class="far fa-pen-to-square"></i>
                         </a>
-                        <button type="button" class="btn bg_yellow btn-floating">
+                        <button type="button" class="btn bg_yellow btn-floating" style="font-size: 16px;">
                             <i class="far fa-trash-can"></i>
                         </button>
                     </td>
@@ -124,27 +121,24 @@
                     <td>
                         <div class="d-flex align-items-center">
                             <div class="">
-                                <p class="fw-bold mb-1">LẬP TRÌNH WEB</p>
+                                <p class="h6 ms-1 mb-1">Trương Ngọc Trí</p>
                             </div>
                         </div>
                     </td>
                     <td>
-                        <span>Lập trình web thầy Long. Project website bán thức ăn chăn nuôi</span>
+                        <span class="h6 ms-1">0123456789</span>
                     </td>
                     <td>
-                        <p class="fw-normal mb-1 h6">Trương Ngọc Trí</p>
+                        <span class="badge badge-success rounded-pill d-inline ms-4" style="font-size: 13px;">Đã xác thực</span>
                     </td>
                     <td>
-                        <span class="h6 ms-2">10/11/2024</span>
+                        <span class="badge badge-success rounded-pill d-inline" style="font-size: 13px;">Đang hoạt động</span>
                     </td>
                     <td>
-                        <span class="badge badge-success rounded-pill d-inline ms-2" style="font-size: 13px;">Hiển thị</span>
-                    </td>
-                    <td>
-                        <a href="postAddition.html" class="btn bg_green btn-floating">
+                        <a href="productAddition.jsp" class="btn bg_green btn-floating" style="font-size: 16px;">
                             <i class="far fa-pen-to-square"></i>
                         </a>
-                        <button type="button" class="btn bg_yellow btn-floating">
+                        <button type="button" class="btn bg_yellow btn-floating" style="font-size: 16px;">
                             <i class="far fa-trash-can"></i>
                         </button>
                     </td>
