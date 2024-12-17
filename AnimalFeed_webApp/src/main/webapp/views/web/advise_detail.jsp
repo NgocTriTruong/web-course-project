@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +23,7 @@
 </head>
 <body>
 
-<div id="header-placeholder"></div>
+<%@ include file="layout/header.jsp" %>
 <main style="margin-top: 90px; margin-bottom: 90px;">
     <div class="chi_tiet_tu_van">
         <div class="background-section">
@@ -103,7 +104,8 @@
 
     </div>
 </main>
-<div id="footer-placeholder"></div>
+<%@ include file="layout/footer.jsp" %>
+<%@ include file="layout/near_footer.jsp" %>
 
 
 <script src="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.bundle.min.js"></script>

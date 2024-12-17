@@ -1,24 +1,25 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart</title>
-    <link rel="stylesheet" href="/assets/bootstrap/bootstrap.bundle.min.js">
-    <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/cart.css">
-    <link rel="stylesheet" href="/assets/css/layout/header.css">
-    <link rel="stylesheet" href="/assets/css/layout/footer.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/cart.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/header.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/footer.css">
 
-    <link rel="stylesheet" href="/assets/fonts/themify-icons/themify-icons.css">
-    <link rel="stylesheet" href="/assets/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
 
-    <script src="/assets/scripts/add_layout/add_layout.js" defer></script>
+    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/add_layout.js" defer></script>
 
-    <script src="../scripts/confirm_login.js"></script>
+    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/confirm_login.js"></script>
 </head>
 <body>
-    <div id="header-placeholder"></div>
+<%@ include file="layout/header.jsp" %>
     <main style="margin-top: 65px;">
         <div class="container-fuild bg-light">
             <div class="container pt-5 cart">
@@ -34,7 +35,7 @@
                         <div class="cart-item bg-white">
                             <div class="d-flex align-items-center">
                                 <input type="checkbox" class="me-3 item-checkbox">
-                                <img src="/assets/images/product/pig/TOP_01.png" alt="TOP 1 Image" class="me-3" width="150px" height="150px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_01.png" alt="TOP 1 Image" class="me-3" width="150px" height="150px">
                                 <div class="" style="width: 530px;">
                                     <div class="float-start cart-item-text">
                                         <h6 class="mt-3" style="font-size: 18px;">Dùng cho heo con từ 05 ngày tuổi đến 35 ngày tuổi</h6>
@@ -60,7 +61,7 @@
                         <div class="cart-item bg-white">
                             <div class="d-flex align-items-center">
                                 <input type="checkbox" class="me-3 item-checkbox">
-                                <img src="/assets/images/product/pig/TOP_02.png" alt="TOP 2 Image" class="me-3" width="150px" height="150px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_02.png" alt="TOP 2 Image" class="me-3" width="150px" height="150px">
                                 <div class="" style="width: 530px;">
                                     <div class="float-start cart-item-text">
                                         <h6 class="mt-3" style="font-size: 18px;"> Dùng cho heo con tập ăn đến 20kg</h6>
@@ -86,7 +87,7 @@
                         <div class="cart-item bg-white">
                             <div class="d-flex align-items-center">
                                 <input type="checkbox" class="me-3 item-checkbox">
-                                <img src="/assets/images/product/pig/TOP_03.png" alt="TOP 3 Image" class="me-3" width="150px" height="150px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_03.png" alt="TOP 3 Image" class="me-3" width="150px" height="150px">
                                 <div class="" style="width: 530px;">
                                     <div class="float-start cart-item-text">
                                         <h6 class="mt-3" style="font-size: 18px;">Dùng cho heo thịt giống tốt từ 12 – 30kg</h6>
@@ -121,14 +122,15 @@
                             <p>Phí vận chuyển: <span class="float-end">Miễn phí</span></p>
                             <div class="line-gray mb-2"></div>
                             <p>Cần thanh toán: <span class="float-end text-danger" id="final-price">0 đ</span></p>
-                            <button class="btn mt-3 fw-bold" style="background-color: #fcae18; font-size: 17px;" onclick="window.location.href='/assets/html/confirm_order.html'">Xác nhận đơn</button>
+                            <button class="btn mt-3 fw-bold" style="background-color: #fcae18; font-size: 17px;" onclick="window.location.href='confirm_order.jsp'">Xác nhận đơn</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </main>
-    <div id="footer-placeholder"></div>
+    <%@ include file="layout/footer.jsp" %>
+    <%@ include file="layout/near_footer.jsp" %>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>

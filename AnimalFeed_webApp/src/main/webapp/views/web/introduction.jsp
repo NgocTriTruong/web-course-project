@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,34 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <link rel="stylesheet" href="/assets/bootstrap/bootstrap.bundle.min.js">
-    <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/gioi_thieu.css">
-    <link rel="stylesheet" href="/assets/css/layout/header.css">
-    <link rel="stylesheet" href="/assets/css/layout/footer.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/gioi_thieu.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/header.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/footer.css">
 
-    <link rel="stylesheet" href="/assets/fonts/themify-icons/themify-icons.css">
-    <link rel="stylesheet" href="/assets/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
 
-    <script src="/assets/scripts/add_layout/add_layout.js" defer></script>
+    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/add_layout.js" defer></script>
     
-    <link rel="stylesheet" href="/assets/css/login.css">
-    <link rel="stylesheet" href="/assets/css/signup.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/login.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/signup.css">
   
     <!-- scrollToTopBtn -->
-    <link rel="stylesheet" href="/assets/css/layout/scrollToTopBtn.css">
-    <script src="/assets/scripts/add_layout/scrollToTopBtn.js" defer></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/scrollToTopBtn.css">
+    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/scrollToTopBtn.js" defer></script>
 
-     <script src="../scripts/confirm_login.js"></script>
+     <script src="${pageContext.request.contextPath}/views/template/assets/scripts/confirm_login.js"></script>
 
 
 </head>
 <body>
-    <div id="header-placeholder"></div>
+<%@ include file="layout/header.jsp" %>
     <main style="margin-top: 90px;">
         <div class="gioi_thieu">
             <div class="position-relative text-center mb-4">
-                <img src="/assets/images/gioi_thieu/banner_ab.jpg" class="img-fluid w-100" alt="Giơi thieu" style="height: 600px;">
+                <img src="${pageContext.request.contextPath}/views/template/assets/images/gioi_thieu/banner_ab.jpg" class="img-fluid w-100" alt="Giơi thieu" style="height: 600px;">
                 <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark" style="opacity: 0.1;"></div>
                 <h1 class="overlay-text">GIỚI THIỆU</h1>
             </div>
@@ -41,7 +42,7 @@
                 <div class="content text-center">
                     <div id="gioi_thieu_chung" class="h1 m-4 pt-4" style="color: #fcae18;">GIỚI THIỆU CHUNG</div>
                     <div class="img_cty mb-4">
-                        <img src="/assets/images/gioi_thieu/cty.jpg" alt="" height="550px" width="100%">
+                        <img src="${pageContext.request.contextPath}/views/template/assets/images/gioi_thieu/cty.jpg" alt="" height="550px" width="100%">
                     </div>
                     <div class="row">
                         <div class="col-md-6">
@@ -57,20 +58,20 @@
                         </div>
                         <div class="col-md-6">
                             <div>
-                                <img src="/assets/images/gioi_thieu/Niem_tin_chan_nuoi.png" alt="" height="550px" width="550px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/gioi_thieu/Niem_tin_chan_nuoi.png" alt="" height="550px" width="550px">
                             </div>
                         </div>
                     </div>
         
                     <div class="h1 m-5">VƯƠN TẦM QUỐC TẾ</div>
                     <div class="align-content-center">
-                        <img src="/assets/images/gioi_thieu/vuong_quoc_te.jpg" alt="">
+                        <img src="${pageContext.request.contextPath}/views/template/assets/images/gioi_thieu/vuong_quoc_te.jpg" alt="">
                     </div>
                     
                     <div class="row muc_tieu">
                         <div class="h2 m-4">MUC TIÊU</div>
                         <div class="col-md-5 mt-5">
-                            <img src="/assets/images/gioi_thieu/Muc_tieu1.png" alt="">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/gioi_thieu/Muc_tieu1.png" alt="">
                         </div>
                         <div class="col-md-7 mt-2">
                             <div class="p">Không ngừng nghiên cứu, nâng cấp cải tiến công nghệ máy móc, quy trình sản xuất...Nhằm nâng cao chất lượng sản phẩm ở mức cao hơn nữa. 
@@ -115,7 +116,7 @@
                                 công suất lên tới 1 triệu tấn mỗi năm, đáp ứng yêu cầu kỹ thuật cao về độ đồng đều và bảo đảm nguồn dinh dưỡng tối ưu cho vật nuôi. 
                             </div>
                             <div class="lich_su_img" style="mix-blend-mode: darken;">
-                                <img src="/assets/images/logo/logo.png" alt="" class="mb-5 mt-3">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/logo/logo.png" alt="" class="mb-5 mt-3">
                             </div>
                             <div class="row">
                                 <div class="col-md-5">
@@ -138,7 +139,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-2" style="mix-blend-mode: darken;">
-                                    <img src="/assets/images/gioi_thieu/lich_su.jpg" alt="" height="100%">
+                                    <img src="${pageContext.request.contextPath}/views/template/assets/images/gioi_thieu/lich_su.jpg" alt="" height="100%">
                                 </div>
                                 <div class="col-md-5">
                                     <div class="year_number_bg text-start">
@@ -169,7 +170,7 @@
                     <div id="chien_luoc" class="h1 m-4">Tầm nhìn chiến lược</div>
                     <div class="row">
                         <div class="col-md-7 mb-5">
-                            <img src="/assets/images/gioi_thieu/tam_nhin_chien_luoc_1.png" alt="" height="" width="100%">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/gioi_thieu/tam_nhin_chien_luoc_1.png" alt="" height="" width="100%">
                         </div>
                         <div class="col-md-5">
                             <div class="line_red mb-3"></div>
@@ -191,7 +192,7 @@
                             </div>
                         </div>
                         <div class="col-md-7 mb-5">
-                            <img src="/assets/images/gioi_thieu/tam_nhin_chien_luoc_2.png" alt="" height="" width="100%">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/gioi_thieu/tam_nhin_chien_luoc_2.png" alt="" height="" width="100%">
                         </div>
                     </div>
                 </div>
@@ -203,7 +204,7 @@
                         <div id="quan_diem" class="h1 p-4">Quan điểm kinh doanh</div>
                         <div class="row">
                             <div class="col-md-5 mb-5">
-                                <img src="/assets/images/gioi_thieu/quan_diem.jpg" alt="">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/gioi_thieu/quan_diem.jpg" alt="">
                             </div>
                             <div class="col-md-7">
                                 <div class="mt-3" style="display: flex;">
@@ -247,7 +248,7 @@
                             </div>
                         </div>
                         <div class="col-md-4 mt-5">
-                            <img src="/assets/images/gioi_thieu/chung_nhan_chat_luong.jpg" alt="">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/gioi_thieu/chung_nhan_chat_luong.jpg" alt="">
                         </div>
                         <div class="col-md-4">
                             <div class="h3 text-start">Phòng thí nghiệm</div>
@@ -272,7 +273,7 @@
                     <div class="content text-center san_xuat">
                         <div id="san_xuat" class="h1 p-4">Nhà máy sản xuất</div>
                         <div>
-                            <img src="/assets/images/gioi_thieu/nha_may_sx.png" alt="" width="100%" height="100%">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/gioi_thieu/nha_may_sx.png" alt="" width="100%" height="100%">
                         </div>
                         <div class="p mt-4">
                             Với định hướng: chất lượng sản phẩm là giá trị cốt lõi cho sự phát triển, VINA GROUP luôn đầu tư những công nghệ tiên tiến nhất, 
@@ -290,7 +291,7 @@
                         <div class="h3 text-start mt-4 mb-4">Các nhà máy của VINA GROUP bao gồm:</div>
                         <div class="row number_sx">
                             <div class="col-md-7">
-                                <img src="/assets/images/gioi_thieu/tvk_bac.jpg" alt="" width="100%" height="100%">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/gioi_thieu/tvk_bac.jpg" alt="" width="100%" height="100%">
                             </div>
                             <div class="col-md-5 mt-auto mb-auto">
                                 <div class="h3">VINA Miền Bắc</div>
@@ -303,12 +304,12 @@
                                 <div class="p">Khánh thành năm 2006 với công suất 300 ngàn tấn thức ăn chăn nuôi/năm.</div>
                             </div>
                             <div class="col-md-7">
-                                <img src="/assets/images/gioi_thieu/tvk_trung.jpg" alt="" width="100%" height="100%">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/gioi_thieu/tvk_trung.jpg" alt="" width="100%" height="100%">
                             </div>
                         </div>
                         <div class="row number_sx">
                             <div class="col-md-7">
-                                <img src="/assets/images/gioi_thieu/tvk_nam.jpg" alt="" width="100%" height="100%">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/gioi_thieu/tvk_nam.jpg" alt="" width="100%" height="100%">
                             </div>
                             <div class="col-md-5 mt-auto mb-auto">
                                 <div class="h3">VINA Miền Nam</div>
@@ -325,7 +326,7 @@
                     <div id="nhan_luc" class="h1 text-danger mt-4 mb-4">Nguồn nhân lực</div>
                     <div class="row">
                         <div class="col-md-6 mb-5">
-                            <img src="/assets/images/gioi_thieu/nhan_luc.png" alt="">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/gioi_thieu/nhan_luc.png" alt="">
                         </div>
                         <div class="col-md-6">
                             <div class="line_red"></div>
@@ -353,7 +354,7 @@
                         <div id="van_hoa" class="h1 text-danger pt-4 mb-4">Văn hóa công ty</div>
                         <div class="row">
                             <div class="col-md-7 mb-4">
-                                <img src="/assets/images/gioi_thieu/Van_hoa_cong_ty1.png" alt="">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/gioi_thieu/Van_hoa_cong_ty1.png" alt="">
                             </div>
                             <div class="col-md-5">
                                 <div class="line_red"></div>
@@ -372,12 +373,12 @@
                                 </div>
                             </div>
                             <div class="col-md-7 mb-4">
-                                <img src="/assets/images/gioi_thieu/Van_hoa_cong_ty_2.png" alt="">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/gioi_thieu/Van_hoa_cong_ty_2.png" alt="">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-7 mb-4">
-                                <img src="/assets/images/gioi_thieu/Van_hoa_cong_ty_3.png" alt="">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/gioi_thieu/Van_hoa_cong_ty_3.png" alt="">
                             </div>
                             <div class="col-md-5">
                                 <div class="line_red"></div>
@@ -436,25 +437,25 @@
                         <div class="d-flex">
                             <div class="bg-white text-center m-3 col thanh_tich_number">
                                 <div class="product-img mt-4">
-                                    <img src="/assets/images/gioi_thieu/thanh_tich1.jpg" alt="Thành tích 01" height="250px" width="200px">
+                                    <img src="${pageContext.request.contextPath}/views/template/assets/images/gioi_thieu/thanh_tich1.jpg" alt="Thành tích 01" height="250px" width="200px">
                                 </div>
                                 <div class="p mb-4 text-p mt-3 text-center">Chứng Nhận ISO 9001 - 2015</div>
                             </div>
                             <div class="bg-white text-center m-3 col thanh_tich_number">
                                 <div class="product-img mt-4">
-                                    <img src="/assets/images/gioi_thieu/thanh_tich3.jpg" alt="Thành tích 02" height="250px" width="200px">
+                                    <img src="${pageContext.request.contextPath}/views/template/assets/images/gioi_thieu/thanh_tich3.jpg" alt="Thành tích 02" height="250px" width="200px">
                                 </div>
                                 <div class="p mb-4 text-p mt-3 text-center">Hàng Việt Nam Chất Lượng Cao 2024</div>
                             </div>
                             <div class="bg-white text-center m-3 col thanh_tich_number">
                                 <div class="product-img mt-4">
-                                    <img src="/assets/images/gioi_thieu/thanh_tich2.jpg" alt="Thành tích 03" height="250px" width="200px">
+                                    <img src="${pageContext.request.contextPath}/views/template/assets/images/gioi_thieu/thanh_tich2.jpg" alt="Thành tích 03" height="250px" width="200px">
                                 </div>
                                 <div class="p mb-4 text-p mt-3 text-center">Bằng khen " An toàn vệ sinh lao động "</div>
                             </div>
                             <div class="bg-white text-center m-3 col thanh_tich_number">
                                 <div class="product-img mt-4">
-                                    <img src="/assets/images/gioi_thieu/thanh_tich4.jpg" alt="Thành tích 04" height="250px" width="200px">
+                                    <img src="${pageContext.request.contextPath}/views/template/assets/images/gioi_thieu/thanh_tich4.jpg" alt="Thành tích 04" height="250px" width="200px">
                                 </div>
                                 <div class="p mb-4 text-p mt-3 text-center">Top 500 doanh nghiệp lớn nhất VIỆT NAM 2023</div>
                             </div>
@@ -464,18 +465,19 @@
             </div>
         </div>
     </main>
-    <div id="footer-placeholder"></div>
+<%@ include file="layout/near_footer.jsp" %>
+<%@ include file="layout/footer.jsp" %>
 
         <!-- Login -->
 <div id="login" class ="login">
     <div id ="login_container">
         <div class="login_close">
-            <img src="/assets/images/logo/close.png" alt="">
+            <img src="${pageContext.request.contextPath}/views/template/assets/images/logo/close.png" alt="">
         </div>
   
         <div class="login_header">
             <div class="login_logo_shop">
-                <img src="/assets/images/header/logo_vina.png" alt="Logo Shop">
+                <img src="${pageContext.request.contextPath}/views/template/assets/images/header/logo_vina.png" alt="Logo Shop">
             </div>
             <div class="login_header_text">
                 <h3 style="font-size: 24px;">Đăng nhập tài khoản</h3>
@@ -498,11 +500,11 @@
             </div>
             <div class="login_social">
                 <a href="" class="social_btn login_social_gg">
-                    <img src="/assets/images/social/google.png" alt="">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/social/google.png" alt="">
                     <p>Google</p>
                 </a>
                 <a href="" class="social_btn login_social_zl">
-                    <img src="/assets/images/social/zalo.png" alt="">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/social/zalo.png" alt="">
                     <p>Zalo</p>
                 </a>
             </div>
@@ -517,12 +519,12 @@
   <div id="signup" class ="signup">
     <div id="signup_container">
         <div class="signup_close">
-            <img src="/assets/images/logo/close.png" alt="">
+            <img src="${pageContext.request.contextPath}/views/template/assets/images/logo/close.png" alt="">
         </div>
   
         <div class="signup_header">
             <div class="signup_logo_shop">
-                <img src="/assets/images/header/logo_vina.png" alt="Logo Shop">
+                <img src="${pageContext.request.contextPath}/views/template/assets/images/header/logo_vina.png" alt="Logo Shop">
             </div>
             <div class="signup_header_text">
                 <h3 style="font-size: 24px;">Đăng ký tài khoản</h3>
@@ -557,11 +559,11 @@
             </div>
             <div class="signup_social">
                 <a href="" class="social_btn signup_social_gg">
-                    <img src="/assets/images/social/google.png" alt="">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/social/google.png" alt="">
                     <p>Google</p>
                 </a>
                 <a href="" class="social_btn signup_social_zl">
-                    <img src="/assets/images/social/zalo.png" alt="">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/social/zalo.png" alt="">
                     <p>Zalo</p>
                 </a>
             </div>

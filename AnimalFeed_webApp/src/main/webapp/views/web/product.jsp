@@ -26,7 +26,7 @@
 
 </head>
 <body>
-  <div id="header-placeholder"></div>
+<%@ include file="layout/header.jsp" %>
   <main style="margin-top: 65px;" class="bg-light">
     <section id="background-section">
       <h1 class="outline">SẢN PHẨM</h1>
@@ -431,8 +431,8 @@
     </section>
 
   </main>
-  <div id="near-footer-placeholder"></div>
-  <div id="footer-placeholder"></div>
+<%@ include file="layout/near_footer.jsp" %>
+<%@ include file="layout/footer.jsp" %>
 
   <!-- Login -->
   <div id="login" class ="login">

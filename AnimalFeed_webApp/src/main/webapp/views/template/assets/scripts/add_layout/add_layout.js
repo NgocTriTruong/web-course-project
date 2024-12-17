@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 document.addEventListener("DOMContentLoaded", function() {
-    fetch("/AnimalFeed_webApp/views/web/layout/header.jsp")
+    fetch("/AnimalFeed_webApp/views/web/layout/near_footer.jsp")
         .then(response => response.text())
         .then(data => {
             document.getElementById("near-footer-placeholder").innerHTML = data;
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 document.addEventListener("DOMContentLoaded", function() {
-    fetch("/assets/html/layout/footer.html")
+    fetch("/AnimalFeed_webApp/views/web/layout/footer.jsp")
         .then(response => response.text())
         .then(data => {
             document.getElementById("footer-placeholder").innerHTML = data;

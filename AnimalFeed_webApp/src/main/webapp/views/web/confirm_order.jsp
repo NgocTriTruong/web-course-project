@@ -1,21 +1,22 @@
-        <!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart</title>
-    <link rel="stylesheet" href="/assets/bootstrap/bootstrap.bundle.min.js">
-    <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/cart.css">
-    <link rel="stylesheet" href="/assets/css/layout/header.css">
-    <link rel="stylesheet" href="/assets/css/layout/footer.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/cart.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/header.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/footer.css">
 
-    <link rel="stylesheet" href="/assets/fonts/themify-icons/themify-icons.css">
-    <link rel="stylesheet" href="/assets/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
 
-    <script src="/assets/scripts/add_layout/add_layout.js" defer></script>
+    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/add_layout.js" defer></script>
 
-    <script src="../scripts/confirm_login.js"></script>
+    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/confirm_login.js"></script>
 
     <style>
         .address-form {
@@ -59,11 +60,11 @@
     </style>
 </head>
 <body>
-    <div id="header-placeholder"></div>
+<%@ include file="layout/header.jsp" %>
     <main style="margin-top: 85px;">
         <div class="container-fuild bg-light">
             <div class="container pt-4 checkout">
-                <a href="/assets/html/cart.html" style="color: rgb(7, 93, 54);">
+                <a href="${pageContext.request.contextPath}/views/web/templatecart.html" style="color: rgb(7, 93, 54);">
                     <i class="fas fa-chevron-left me-1"></i>
                     Quay lại giỏ hàng
                 </a>
@@ -76,7 +77,7 @@
                             <!-- Cart Item 1 -->
                             <div class="cart-item bg-white">
                                 <div class="d-flex align-items-center">
-                                    <img src="/assets/images/product/pig/TOP_01.png" alt="TOP 1 Image" class="me-3" width="150px" height="150px">
+                                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_01.png" alt="TOP 1 Image" class="me-3" width="150px" height="150px">
                                     <div class="" style="width: 100%;">
                                         <div class="float-start cart-item-text">
                                             <h6 class="mt-3" style="font-size: 18px;">Dùng cho heo con từ 05 ngày tuổi đến 35 ngày tuổi</h6>
@@ -94,7 +95,7 @@
                             <!-- Cart Item 2 -->
                             <div class="cart-item bg-white">
                                 <div class="d-flex align-items-center">
-                                    <img src="/assets/images/product/pig/TOP_02.png" alt="TOP 2 Image" class="me-3" width="150px" height="150px">
+                                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_02.png" alt="TOP 2 Image" class="me-3" width="150px" height="150px">
                                     <div class="" style="width: 100%;">
                                         <div class="float-start cart-item-text">
                                             <h6 class="mt-3" style="font-size: 18px;">Dùng cho heo con tập ăn đến 20kg</h6>
@@ -186,27 +187,27 @@
                             <h5 class="mt-2 ms-4">Phương thức thanh toán</h5>
                             <div class="form-check ms-4 mt-4 d-flex">
                                 <input type="radio" class="form-check-input me-2" id="delivery" name="chose_payment">
-                                <img src="/assets/images/payment/cod.jpg" alt="" width="40px" height="40px" style="margin-top: -7px;">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/payment/cod.jpg" alt="" width="40px" height="40px" style="margin-top: -7px;">
                                 <label class="form-check-label ms-2" for="delivery">Thanh toán khi nhận hàng</label>
                             </div>
                             <div class="form-check ms-4 mt-5 d-flex">
                                 <input type="radio" class="form-check-input me-2" id="delivery" name="chose_payment" checked>
-                                <img src="/assets/images/payment/vnpay.jpg" alt="" width="40px" height="40px" style="margin-top: -7px;">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/payment/vnpay.jpg" alt="" width="40px" height="40px" style="margin-top: -7px;">
                                 <label class="form-check-label ms-2" for="delivery">Thanh toán bằng thẻ ATM nội địa (Qua VNPay)</label>
                             </div>
                             <div class="form-check ms-4 mt-5 d-flex">
                                 <input type="radio" class="form-check-input me-2" id="delivery" name="chose_payment">
-                                <img src="/assets/images/payment/khac.jpg" alt="" width="40px" height="40px" style="margin-top: -7px;">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/payment/khac.jpg" alt="" width="40px" height="40px" style="margin-top: -7px;">
                                 <label class="form-check-label ms-2" for="delivery">Các ngân hàng khác</label>
                             </div>
                             <div class="form-check ms-4 mt-5 d-flex">
                                 <input type="radio" class="form-check-input me-2" id="delivery" name="chose_payment">
-                                <img src="/assets/images/payment/momo.jpg" alt="" width="40px" height="40px" style="margin-top: -7px;">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/payment/momo.jpg" alt="" width="40px" height="40px" style="margin-top: -7px;">
                                 <label class="form-check-label ms-2" for="delivery">Thanh toán bằng vi MoMo</label>
                             </div>
                             <div class="form-check ms-4 mt-5 pb-4 d-flex">
                                 <input type="radio" class="form-check-input me-2" id="delivery" name="chose_payment">
-                                <img src="/assets/images/payment/zaloPay.jpg" alt="" width="40px" height="40px" style="margin-top: -7px;">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/payment/zaloPay.jpg" alt="" width="40px" height="40px" style="margin-top: -7px;">
                                 <label class="form-check-label ms-2" for="delivery">Thanh toán bằng vi ZaloPay</label>
                             </div>
                         </div>
@@ -233,8 +234,9 @@
             </div>
         </div>
     </main>
-    <div id="footer-placeholder"></div>
+<%@ include file="layout/near_footer.jsp" %>
+<%@ include file="layout/footer.jsp" %>
 
-    <script src="/assets/scripts/call-api-address.js"></script>
+    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/call-api-address.js"></script>
 </body>
 </html>
