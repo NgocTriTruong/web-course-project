@@ -32,7 +32,7 @@
 </head>
 <body>
 
-<div id="header-placeholder"></div>
+<%@ include file="layout/header.jsp" %>
 <main style="margin-top: 90px;">
     <div class="tu_van">
         <div class="background-section">
@@ -114,7 +114,8 @@
         </div>
     </div>
 </main>
-<div id="footer-placeholder"></div>
+<%@ include file="layout/near_footer.jsp" %>
+<%@ include file="layout/footer.jsp" %>
 
     <!-- Login -->
     <div id="login" class ="login">
