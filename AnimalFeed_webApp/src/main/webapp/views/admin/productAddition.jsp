@@ -1,4 +1,4 @@
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html lang="en">
 
 <head>
@@ -7,31 +7,31 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
     <title>Thêm sản phẩm</title>
     <!-- Bootstrap CSS -->
-    <link href="/assets/bootstrap/bootstrap.min.css" rel="stylesheet">
-    <script src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
+    <link href="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <script src="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.bundle.min.js"></script>
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="/assets/fonts/fontawesome-free-6.6.0-web/css/all.min.css" />
-    <link rel="stylesheet" href="/assets/html/admin/assets/css/mdb.min.css">
-    <link rel="stylesheet" href="/assets/html/admin/assets/css/home.css">
-    <link rel="stylesheet" href="/assets/html/admin/assets/css/header.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/fontawesome-free-6.6.0-web/css/all.min.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/admin/assets/css/mdb.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/admin/assets/css/home.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/admin/assets/css/header.css">
 
-    <script src="/assets/html/admin/assets/js/mdb.min.js"></script>
+    <script src="${pageContext.request.contextPath}/views/admin/assets/js/mdb.min.js"></script>
 
     <!-- js add header -->
-     <script src="/assets/html/admin/assets/js/add_header.js" defer></script>
+     <script src="${pageContext.request.contextPath}/views/admin/assets/js/add_header.js" defer></script>
 </head>
 
 <body>
 <!-- Start your project here-->
 <!--Main Navigation-->
-<div id="header-placeholder"></div>
+<%@ include file="layout/header.jsp" %>
 
 <!--Main Navigation-->
 
 <!--Main layout-->
 <main class="mb-5" style="margin-top: 100px;">
     <div class="container px-4">
-        <a href="productManagement.html" class="btn btn-link mb-2 text_green" style="font-size: 16px;">
+        <a href="productManagement.jsp" class="btn btn-link mb-2 text_green" style="font-size: 16px;">
             <i class="fas fa-angle-left"></i> Quay lại
         </a>
 

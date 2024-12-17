@@ -1,7 +1,7 @@
 
 #background-section {
     position: relative;
-    background-image: url('/assets/images/background/product-main-bg.jpg');
+    background-image: url('../images/background/product-main-bg.jpg');
     background-size: cover;
     background-position: center;
     height: 500px; /* Adjust height as needed */

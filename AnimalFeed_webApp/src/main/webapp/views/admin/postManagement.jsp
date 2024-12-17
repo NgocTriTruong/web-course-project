@@ -1,4 +1,4 @@
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,29 +6,31 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
-    <title>Quản lý sản phẩm</title>
+    <title>Quản lý bài viết</title>
     <!-- Bootstrap CSS -->
-    <link href="/assets/bootstrap/bootstrap.min.css" rel="stylesheet">
-    <script src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
+    <link href="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <script src="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.bundle.min.js"></script>
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="/assets/fonts/fontawesome-free-6.6.0-web/css/all.min.css" />
-    <link rel="stylesheet" href="/assets/html/admin/assets/css/mdb.min.css">
-    <link rel="stylesheet" href="/assets/html/admin/assets/css/home.css">
-    <link rel="stylesheet" href="/assets/html/admin/assets/css/header.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/fontawesome-free-6.6.0-web/css/all.min.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/admin/assets/css/mdb.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/admin/assets/css/home.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/admin/assets/css/header.css">
 
-    <script src="/assets/html/admin/assets/js/mdb.min.js"></script>
+    <script src="${pageContext.request.contextPath}/views/admin/assets/js/mdb.min.js"></script>
 
     <!-- js add header -->
-     <script src="/assets/html/admin/assets/js/add_header.js" defer></script>
+     <script src="${pageContext.request.contextPath}/views/admin/assets/js/add_header.js" defer></script>
 </head>
 
 <body>
+<!-- Start your project here-->
+<!--Main Navigation-->
+<%@ include file="layout/header.jsp" %>
 
-<div id="header-placeholder"></div>
+<!--Main Navigation-->
 
 <!--Main layout-->
 <main class="mb-5">
-
     <section class="mb-5 text-center text-md-start">
         <!-- Background gradient -->
         <div class="p-5" style="height: 200px;
@@ -47,7 +49,7 @@
             <div class="card-body py-5 px-5">
               <div class="row gx-lg-4 align-items-center">
                 <div class="col-lg-6 mb-4 mb-lg-0 text-center text-lg-start">
-                  <h1 class="">Quản lý sản phẩm</h1>
+                  <h1 class="">Quản lý tin tức</h1>
                 </div>
               </div>
             </div>
@@ -55,13 +57,12 @@
         </div>
       </section>
 
-
     <!-- Container for demo purpose -->
-    <div class="container px-4 ">
+    <div class="container  px-4 ">
         <div class="mb-3 d-flex justify-content-end px-4">
-            <a class="btn bg_green text-white fw-bold" href="productAddition.html">
+            <a class="btn bg_green text-white fw-bold" href="postAddition.jsp">
                 <i class="far fa-square-plus"></i>
-                <span>Thêm sản phẩm</span>
+                <span>Thêm bài viết</span>
             </a>
         </div>
         <div class="input-group mb-4 px-4">
@@ -76,13 +77,12 @@
                 <thead class="bg-light">
                 <tr class="h6">
                     <th>STT</th>
-                    <th>Danh mục</th>
-                    <th>Tên sản phẩm</th>
+                    <th>Tiêu đề</th>
                     <th>Mô tả</th>
-                    <th>Giá</th>
-                    <th>Khuyến mãi</th>
+                    <th>Người tạo</th>
+                    <th>Thời gian tạo</th>
                     <th>Trạng thái</th>
-                    <th>Thao tác</th>
+                    <th>Hành động</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -91,34 +91,29 @@
                         <span class="ms-2 h6">1</span>
                     </td>
                     <td>
-                        <div>
-                            <p class="h6 mb-1">Thức ăn cho heo</p>
-                        </div>
-                    </td>
-                    <td>
                         <div class="d-flex align-items-center">
                             <div class="">
-                                <p class="h6 mb-1 ms-1">TOP 01</p>
+                                <p class="fw-bold mb-1">LẬP TRÌNH WEB</p>
                             </div>
                         </div>
                     </td>
                     <td>
-                        <span class="h6">Dùng cho heo con từ 05 ngày tuổi đến 35 ngày tuổi</span>
+                        <span>Lập trình web thầy Long. Project website bán thức ăn chăn nuôi</span>
                     </td>
                     <td>
-                        <p class="fw-normal mb-1 h6">420.000đ</p>
+                        <p class="fw-normal mb-1 h6">Trương Ngọc Trí</p>
                     </td>
                     <td>
-                        <span class="badge badge-danger rounded-pill d-inline ms-2" style="font-size: 14px;">20%</span>
+                        <span class="h6 ms-2">10/11/2024</span>
                     </td>
                     <td>
-                        <span class="badge badge-success rounded-pill d-inline ms-1" style="font-size: 14px;">Còn bán</span>
+                        <span class="badge badge-success rounded-pill d-inline  ms-2" style="font-size: 13px;">Hiển thị</span>
                     </td>
                     <td>
-                        <a href="productAddition.html" class="btn bg_green btn-floating" style="font-size: 16px;">
+                        <a href="postAddition.jsp" class="btn bg_green btn-floating">
                             <i class="far fa-pen-to-square"></i>
                         </a>
-                        <button type="button" class="btn bg_yellow btn-floating" style="font-size: 16px;">
+                        <button type="button" class="btn bg_yellow btn-floating">
                             <i class="far fa-trash-can"></i>
                         </button>
                     </td>
@@ -128,45 +123,39 @@
                         <span class="ms-2 h6">2</span>
                     </td>
                     <td>
-                        <div>
-                            <p class="h6 mb-1">Thức ăn cho heo</p>
-                        </div>
-                    </td>
-                    <td>
                         <div class="d-flex align-items-center">
                             <div class="">
-                                <p class="h6 mb-1 ms-1">TOP 02</p>
+                                <p class="fw-bold mb-1">LẬP TRÌNH WEB</p>
                             </div>
                         </div>
                     </td>
                     <td>
-                        <span class="h6">Dùng cho heo con từ 05 ngày tuổi đến 35 ngày tuổi</span>
+                        <span>Lập trình web thầy Long. Project website bán thức ăn chăn nuôi</span>
                     </td>
                     <td>
-                        <p class="fw-normal mb-1 h6">420.000đ</p>
+                        <p class="fw-normal mb-1 h6">Trương Ngọc Trí</p>
                     </td>
                     <td>
-                        <span class="badge badge-danger rounded-pill d-inline ms-2" style="font-size: 14px;">0%</span>
+                        <span class="h6 ms-2">10/11/2024</span>
                     </td>
                     <td>
-                        <span class="badge badge-success rounded-pill d-inline ms-1" style="font-size: 14px;">Còn bán</span>
+                        <span class="badge badge-success rounded-pill d-inline ms-2" style="font-size: 13px;">Hiển thị</span>
                     </td>
                     <td>
-                        <a href="productAddition.html" class="btn bg_green btn-floating" style="font-size: 16px;">
+                        <a href="postAddition.jsp" class="btn bg_green btn-floating">
                             <i class="far fa-pen-to-square"></i>
                         </a>
-                        <button type="button" class="btn bg_yellow btn-floating" style="font-size: 16px;">
+                        <button type="button" class="btn bg_yellow btn-floating">
                             <i class="far fa-trash-can"></i>
                         </button>
                     </td>
                 </tr>
-
                 </tbody>
             </table>
         </div>
 
-
     </div>
+    <!-- Container for demo purpose -->
 </main>
 <!--Main layout-->
 

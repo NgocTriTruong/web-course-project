@@ -4,25 +4,25 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Web Project</title>
-  <link rel="stylesheet" href="/assets/css/product.css" />
-  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css" />
-  <link rel="stylesheet" href="/assets/fonts/font-awesome/all.css" />
-  <link rel="stylesheet" href="/assets/css/layout/header.css">
-  <link rel="stylesheet" href="/assets/css/layout/footer.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/product.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.min.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/font-awesome/all.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/header.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/footer.css">
 
-  <link rel="stylesheet" href="/assets/fonts/themify-icons/themify-icons.css">
-  <link rel="stylesheet" href="/assets/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/themify-icons/themify-icons.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
 
-  <script src="/assets/scripts/add_layout/add_layout.js" defer></script>
+  <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/add_layout.js" defer></script>
 
-  <link rel="stylesheet" href="/assets/css/login.css">
-  <link rel="stylesheet" href="/assets/css/signup.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/login.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/signup.css">
 
   <!-- scrollToTopBtn -->
-  <link rel="stylesheet" href="/assets/css/layout/scrollToTopBtn.css">
-  <script src="/assets/scripts/add_layout/scrollToTopBtn.js" defer></script>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/scrollToTopBtn.css">
+  <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/scrollToTopBtn.js" defer></script>
 
-  <script src="../scripts/confirm_login.js"></script>
+  <script src="${pageContext.request.contextPath}/views/template/assets/scripts/confirm_login.js"></script>
 
 </head>
 <body>
@@ -40,7 +40,7 @@
 
   <!--  Heo Section-->
     <section class="w-100 d-flex justify-content-between align-items-center">
-      <img src="../images/represent-images/pig.jpg" class="image_dv_number" alt="Pig Image" width="360px" height="360px" style="margin-left: 732px; margin-bottom: 22px;">
+      <img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/pig.jpg" class="image_dv_number" alt="Pig Image" width="360px" height="360px" style="margin-left: 732px; margin-bottom: 22px;">
       <div class="heo-section d-flex mb-4">
         <div class="d-flex w-100 justify-content-around mt-4">
           <div id="productPigCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -49,14 +49,14 @@
               <div class="carousel-item active">
                 <div class="d-flex justify-content-center gap-4">
                   <div class="card">
-                    <img src="../images/product/pig/48A.png" class="card-img-top" alt="Feed Bag 1">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/48A.png" class="card-img-top" alt="Feed Bag 1">
                     <div class="card-body text-center">
                       <h5 class="card-title">TOP 01</h5>
                       <p class="card-text">Dùng cho heo từ 5kg đến khi xuất chuồng</p>
                     </div>
                   </div>
                   <div class="card">
-                    <img src="../images/product/pig/100S_Font.png" class="card-img-top" alt="Feed Bag 2">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/100S_Font.png" class="card-img-top" alt="Feed Bag 2">
                     <div class="card-body text-center">
                       <h5 class="card-title">TOP 02</h5>
                       <p class="card-text">Dùng cho heo sữa từ 5 ngày tuổi đến 8kg</p>
@@ -69,14 +69,14 @@
               <div class="carousel-item">
                 <div class="d-flex justify-content-center gap-4">
                   <div class="card">
-                    <img src="../images/product/pig/101S_Font.png" class="card-img-top" alt="Feed Bag 3">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/101S_Font.png" class="card-img-top" alt="Feed Bag 3">
                     <div class="card-body text-center">
                       <h5 class="card-title">ViNa 101S</h5>
                       <p class="card-text">Dùng cho heo con từ tập ăn đến 20kg</p>
                     </div>
                   </div>
                   <div class="card">
-                    <img src="../images/product/pig/102S___mien_bac.png" class="card-img-top" alt="Feed Bag 4">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/102S___mien_bac.png" class="card-img-top" alt="Feed Bag 4">
                     <div class="card-body text-center">
                       <h5 class="card-title">ViNa 102S</h5>
                       <p class="card-text">Dùng cho lợn siêu nạc từ 12kg đến 25kg</p>
@@ -90,7 +90,7 @@
       </div>
       <div class="flex-column text-start me-5 pe-5">
         <h2 class="text-dark">THỨC ĂN CHO HEO</h2>
-        <a href="/assets/html/each_product/product_pig.html" class="btn custom-btn" style="background-color: #fcae18; font-size: 17px; border-radius: 30px;">Xem tất cả</a>
+        <a href="${pageContext.request.contextPath}/views/web/each_product/product_pig.html" class="btn custom-btn" style="background-color: #fcae18; font-size: 17px; border-radius: 30px;">Xem tất cả</a>
       </div>
     </section>
 
@@ -98,7 +98,7 @@
     <section class="w-100 d-flex justify-content-between align-items-center">
       <div class="flex-column text-end ms-5 ps-5">
         <h2 class="text-dark">THỨC ĂN CHO GÀ</h2>
-        <a href="/assets/html/each_product/product_chicken.html" class="btn custom-btn" style="background-color: #fcae18; font-size: 17px; border-radius: 30px;">Xem tất cả</a>
+        <a href="${pageContext.request.contextPath}/views/web/each_product/product_chicken.html" class="btn custom-btn" style="background-color: #fcae18; font-size: 17px; border-radius: 30px;">Xem tất cả</a>
       </div>
       <div class="ga-section d-flex mb-4">
         <div class="d-flex w-100 justify-content-around mt-4">
@@ -108,14 +108,14 @@
               <div class="carousel-item active">
                 <div class="d-flex justify-content-center gap-4">
                   <div class="card">
-                    <img src="../images/product/chicken/200.png" class="card-img-top" alt="Feed Bag 1">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/200.png" class="card-img-top" alt="Feed Bag 1">
                     <div class="card-body text-center">
                       <h5 class="card-title">ViNa 200</h5>
                       <p class="card-text">Dùng cho gà thịt từ 1 ngày tuổi đến xuất bán</p>
                     </div>
                   </div>
                   <div class="card">
-                    <img src="../images/product/chicken/220_mien_nam.png" class="card-img-top" alt="Feed Bag 2">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/220_mien_nam.png" class="card-img-top" alt="Feed Bag 2">
                     <div class="card-body text-center">
                       <h5 class="card-title">ViNa 220</h5>
                       <p class="card-text">Dùng cho gà siêu thịt từ 1 đến 21 ngày tuổi</p>
@@ -128,14 +128,14 @@
               <div class="carousel-item">
                 <div class="d-flex justify-content-center gap-4">
                   <div class="card">
-                    <img src="../images/product/chicken/221_mien_nam.png" class="card-img-top" alt="Feed Bag 3">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/221_mien_nam.png" class="card-img-top" alt="Feed Bag 3">
                     <div class="card-body text-center">
                       <h5 class="card-title">ViNa 221</h5>
                       <p class="card-text">Dùng cho gà siêu thịt từ 22 đến 42 ngày tuổi</p>
                     </div>
                   </div>
                   <div class="card">
-                    <img src="../images/product/chicken/222_mien_nam.png" class="card-img-top" alt="Feed Bag 4">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/222_mien_nam.png" class="card-img-top" alt="Feed Bag 4">
                     <div class="card-body text-center">
                       <h5 class="card-title">ViNa 222</h5>
                       <p class="card-text">Dùng cho gà siêu thịt từ 60 đến 85 ngày tuổi.</p>
@@ -147,12 +147,12 @@
           </div>
         </div>
       </div>
-      <img src="../images/represent-images/chicken.jpg" class="image_dv_number" alt="Chicken Image" width="360px" height="360px" style="margin-left: 400px; margin-bottom: 22px;">
+      <img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/chicken.jpg" class="image_dv_number" alt="Chicken Image" width="360px" height="360px" style="margin-left: 400px; margin-bottom: 22px;">
     </section>
 
     <!--  Vit Section-->
     <section class="w-100 d-flex justify-content-between align-items-center">
-      <img src="../images/represent-images/duck.jpg" class="image_dv_number" alt="Duck Image" width="360px" height="360px" style="margin-left: 732px; margin-bottom: 22px;">
+      <img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/duck.jpg" class="image_dv_number" alt="Duck Image" width="360px" height="360px" style="margin-left: 732px; margin-bottom: 22px;">
       <div class="vit-section d-flex mb-4">
         <div class="d-flex w-100 justify-content-around mt-4">
           <div id="productDuckCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -161,14 +161,14 @@
               <div class="carousel-item active">
                 <div class="d-flex justify-content-center gap-4">
                   <div class="card">
-                    <img src="../images/product/duck/320.png" class="card-img-top" alt="Feed Bag 1">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/320.png" class="card-img-top" alt="Feed Bag 1">
                     <div class="card-body text-center">
                       <h5 class="card-title">ViNa 320</h5>
                       <p class="card-text">Dùng cho vịt siêu thịt từ 1 đến 21 ngày tuổi</p>
                     </div>
                   </div>
                   <div class="card">
-                    <img src="../images/product/duck/355.png" class="card-img-top" alt="Feed Bag 2">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/355.png" class="card-img-top" alt="Feed Bag 2">
                     <div class="card-body text-center">
                       <h5 class="card-title">ViNa 355</h5>
                       <p class="card-text">Dùng cho vịt/ngan siêu thịt từ 1 đến 21 ngày tuổi</p>
@@ -181,14 +181,14 @@
               <div class="carousel-item">
                 <div class="d-flex justify-content-center gap-4">
                   <div class="card">
-                    <img src="../images/product/duck/356.png" class="card-img-top" alt="Feed Bag 3">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/356.png" class="card-img-top" alt="Feed Bag 3">
                     <div class="card-body text-center">
                       <h5 class="card-title">ViNa 356</h5>
                       <p class="card-text">Dùng cho vịt thịt từ 22 ngày tuổi đến xuất bán</p>
                     </div>
                   </div>
                   <div class="card">
-                    <img src="../images/product/duck/357.png" class="card-img-top" alt="Feed Bag 4">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/357.png" class="card-img-top" alt="Feed Bag 4">
                     <div class="card-body text-center">
                       <h5 class="card-title">ViNa 357</h5>
                       <p class="card-text">Dùng cho vịt vỗ béo</p>
@@ -202,7 +202,7 @@
       </div>
       <div class="flex-column text-start me-5 pe-5">
         <h2 class="text-dark">THỨC ĂN CHO VỊT</h2>
-        <a href="/assets/html/each_product/product_duck.html" class="btn custom-btn" style="background-color: #fcae18; font-size: 17px; border-radius: 30px;">Xem tất cả</a>
+        <a href="${pageContext.request.contextPath}/views/web/each_product/product_duck.html" class="btn custom-btn" style="background-color: #fcae18; font-size: 17px; border-radius: 30px;">Xem tất cả</a>
       </div>
     </section>
 
@@ -210,7 +210,7 @@
     <section class="w-100 d-flex justify-content-between align-items-center">
       <div class="flex-column text-end ms-5 ps-5">
         <h2 class="text-dark">THỨC ĂN CHO BÒ</h2>
-        <a href="/assets/html/each_product/product_cow.html" class="btn custom-btn" style="background-color: #fcae18; font-size: 17px; border-radius: 30px;">Xem tất cả</a>
+        <a href="${pageContext.request.contextPath}/views/web/each_product/product_cow.html" class="btn custom-btn" style="background-color: #fcae18; font-size: 17px; border-radius: 30px;">Xem tất cả</a>
       </div>
       <div class="bo-section d-flex mb-4">
         <div class="d-flex w-100 justify-content-around mt-4">
@@ -220,14 +220,14 @@
               <div class="carousel-item active">
                 <div class="d-flex justify-content-center gap-4">
                   <div class="card">
-                    <img src="../images/product/cow/222_1.png" class="card-img-top" alt="Feed Bag 1">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/cow/222_1.png" class="card-img-top" alt="Feed Bag 1">
                     <div class="card-body text-center">
                       <h5 class="card-title">HAPPY 222</h5>
                       <p class="card-text">Dùng cho bò sữa</p>
                     </div>
                   </div>
                   <div class="card">
-                    <img src="../images/product/cow/223_Font.png" class="card-img-top" alt="Feed Bag 2">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/cow/223_Font.png" class="card-img-top" alt="Feed Bag 2">
                     <div class="card-body text-center">
                       <h5 class="card-title">HAPPY 223</h5>
                       <p class="card-text">Dùng cho bò Lai Sind, bò thịt, bò vỗ béo, bê</p>
@@ -240,14 +240,14 @@
               <div class="carousel-item">
                 <div class="d-flex justify-content-center gap-4">
                   <div class="card">
-                    <img src="../images/product/cow/901_Font.png" class="card-img-top" alt="Feed Bag 3">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/cow/901_Font.png" class="card-img-top" alt="Feed Bag 3">
                     <div class="card-body text-center">
                       <h5 class="card-title">ViNa 901</h5>
                       <p class="card-text">Dùng cho bò sữa</p>
                     </div>
                   </div>
                   <div class="card">
-                    <img src="../images/product/cow/910_Font.png" class="card-img-top" alt="Feed Bag 4">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/cow/910_Font.png" class="card-img-top" alt="Feed Bag 4">
                     <div class="card-body text-center">
                       <h5 class="card-title">ViNa 910</h5>
                       <p class="card-text">Dùng cho bò Lai Sind, bò thịt, bò vỗ béo, bê</p>
@@ -259,12 +259,12 @@
           </div>
         </div>
       </div>
-      <img src="../images/represent-images/cow.jpg" class="image_dv_number" alt="Cow Image" width="360px" height="360px" style="margin-left: 400px; margin-bottom: 22px;">
+      <img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/cow.jpg" class="image_dv_number" alt="Cow Image" width="360px" height="360px" style="margin-left: 400px; margin-bottom: 22px;">
     </section>
 
     <!--  Tom Section-->
     <section class="w-100 d-flex justify-content-between align-items-center">
-      <img src="../images/represent-images/shrimp.png" class="image_dv_number" alt="Shrimp Image" width="360px" height="360px" style="margin-left: 732px; margin-bottom: 22px;">
+      <img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/shrimp.png" class="image_dv_number" alt="Shrimp Image" width="360px" height="360px" style="margin-left: 732px; margin-bottom: 22px;">
       <div class="tom-section d-flex mb-4">
         <div class="d-flex w-100 justify-content-around mt-4">
           <div id="productShrimpCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -273,14 +273,14 @@
               <div class="carousel-item active">
                 <div class="d-flex justify-content-center gap-4">
                   <div class="card">
-                    <img src="../images/product/shrimp/img1.png" class="card-img-top" alt="Feed Bag 1">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/shrimp/img1.png" class="card-img-top" alt="Feed Bag 1">
                     <div class="card-body text-center">
                       <h5 class="card-title">BEIKESU 01</h5>
                       <p class="card-text">Dùng cho giai đọ nuôi gièo</p>
                     </div>
                   </div>
                   <div class="card">
-                    <img src="../images/product/shrimp/img2.png" class="card-img-top" alt="Feed Bag 2">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/shrimp/img2.png" class="card-img-top" alt="Feed Bag 2">
                     <div class="card-body text-center">
                       <h5 class="card-title">LT 175</h5>
                       <p class="card-text">Dùng cho tôm thẻ</p>
@@ -293,14 +293,14 @@
               <div class="carousel-item">
                 <div class="d-flex justify-content-center gap-4">
                   <div class="card">
-                    <img src="../images/product/shrimp/img3.png" class="card-img-top" alt="Feed Bag 3">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/shrimp/img3.png" class="card-img-top" alt="Feed Bag 3">
                     <div class="card-body text-center">
                       <h5 class="card-title">GT 104</h5>
                       <p class="card-text">Dùng cho tôm sú</p>
                     </div>
                   </div>
                   <div class="card">
-                    <img src="../images/product/shrimp/img4.png" class="card-img-top" alt="Feed Bag 4">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/shrimp/img4.png" class="card-img-top" alt="Feed Bag 4">
                     <div class="card-body text-center">
                       <h5 class="card-title">GL 554</h5>
                       <p class="card-text">Dùng cho tôm sú</p>
@@ -314,7 +314,7 @@
       </div>
       <div class="flex-column text-start me-5 pe-5">
         <h2 class="text-dark">THỨC ĂN CHO TÔM</h2>
-        <a href="/assets/html/each_product/product_shirmp.html" class="btn custom-btn" style="background-color: #fcae18; font-size: 17px; border-radius: 30px;">Xem tất cả</a>
+        <a href="${pageContext.request.contextPath}/views/web/each_product/product_shirmp.html" class="btn custom-btn" style="background-color: #fcae18; font-size: 17px; border-radius: 30px;">Xem tất cả</a>
       </div>
     </section>
 
@@ -322,7 +322,7 @@
     <section class="w-100 d-flex justify-content-between align-items-center">
       <div class="flex-column text-end ms-5 ps-5">
         <h2 class="text-dark">THỨC ĂN CHO CÁ</h2>
-        <a href="/assets/html/each_product/product_fish.html" class="btn custom-btn" style="background-color: #fcae18; font-size: 17px; border-radius: 30px;">Xem tất cả</a>
+        <a href="${pageContext.request.contextPath}/views/web/each_product/product_fish.html" class="btn custom-btn" style="background-color: #fcae18; font-size: 17px; border-radius: 30px;">Xem tất cả</a>
       </div>
       <div class="ca-section d-flex mb-4">
         <div class="d-flex w-100 justify-content-around mt-4">
@@ -332,14 +332,14 @@
               <div class="carousel-item active">
                 <div class="d-flex justify-content-center gap-4">
                   <div class="card">
-                    <img src="../images/product/fish/img.png" class="card-img-top" alt="Feed Bag 1">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/fish/img.png" class="card-img-top" alt="Feed Bag 1">
                     <div class="card-body text-center">
                       <h5 class="card-title">ViNa 7010</h5>
                       <p class="card-text">Dùng cho cá rô phi, điêu hồng, cá lóc giai đoạn đến 5gr/con</p>
                     </div>
                   </div>
                   <div class="card">
-                    <img src="../images/product/fish/img_1.png" class="card-img-top" alt="Feed Bag 2">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/fish/img_1.png" class="card-img-top" alt="Feed Bag 2">
                     <div class="card-body text-center">
                       <h5 class="card-title">ViNa 7030</h5>
                       <p class="card-text">Dùng cho cá rô phi, điêu hồng giai đoạn từ 20gr/con đến 200gr/con</p>
@@ -352,14 +352,14 @@
               <div class="carousel-item">
                 <div class="d-flex justify-content-center gap-4">
                   <div class="card">
-                    <img src="../images/product/fish/img_2.png" class="card-img-top" alt="Feed Bag 3">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/fish/img_2.png" class="card-img-top" alt="Feed Bag 3">
                     <div class="card-body text-center">
                       <h5 class="card-title">ViNa 7040</h5>
                       <p class="card-text">Dùng cho cá nước ngọt trên 500gr</p>
                     </div>
                   </div>
                   <div class="card">
-                    <img src="../images/product/fish/img_3.png" class="card-img-top" alt="Feed Bag 4">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/fish/img_3.png" class="card-img-top" alt="Feed Bag 4">
                     <div class="card-body text-center">
                       <h5 class="card-title">ViNa 7080</h5>
                       <p class="card-text">Dùng cho cá rô phi, điêu hồng trên 500gr</p>
@@ -371,12 +371,12 @@
           </div>
         </div>
       </div>
-      <img src="../images/represent-images/fish.jpg" class="image_dv_number" alt="Fish Image" width="360px" height="360px" style="margin-left: 400px; margin-bottom: 22px;">
+      <img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/fish.jpg" class="image_dv_number" alt="Fish Image" width="360px" height="360px" style="margin-left: 400px; margin-bottom: 22px;">
     </section>
 
     <!--  De Section-->
     <section class="w-100 d-flex justify-content-between align-items-center">
-      <img src="../images/represent-images/goat.png" class="image_dv_number" alt="Goat Image" width="360px" height="360px" style="margin-left: 732px; margin-bottom: 22px;">
+      <img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/goat.png" class="image_dv_number" alt="Goat Image" width="360px" height="360px" style="margin-left: 732px; margin-bottom: 22px;">
       <div class="de-section d-flex mb-4">
         <div class="d-flex w-100 justify-content-around mt-4">
           <div id="productGoatCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -385,14 +385,14 @@
               <div class="carousel-item active">
                 <div class="d-flex justify-content-center gap-4">
                   <div class="card">
-                    <img src="../images/product/goat/a35-s---25kg---27.03.23.png" class="card-img-top" alt="Feed Bag 1">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/goat/a35-s---25kg---27.03.23.png" class="card-img-top" alt="Feed Bag 1">
                     <div class="card-body text-center">
                       <h5 class="card-title">A 35S</h5>
                       <p class="card-text">Dùng cho dê thịt, dê vỗ béo</p>
                     </div>
                   </div>
                   <div class="card">
-                    <img src="../images/product/goat/a35-s---25kg---27.03.23.png" class="card-img-top" alt="Feed Bag 1">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/goat/a35-s---25kg---27.03.23.png" class="card-img-top" alt="Feed Bag 1">
                     <div class="card-body text-center">
                       <h5 class="card-title">A 35S</h5>
                       <p class="card-text">Dùng cho dê thịt, dê vỗ béo</p>
@@ -405,14 +405,14 @@
               <div class="carousel-item">
                 <div class="d-flex justify-content-center gap-4">
                   <div class="card">
-                    <img src="../images/product/goat/a35-s---25kg---27.03.23.png" class="card-img-top" alt="Feed Bag 1">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/goat/a35-s---25kg---27.03.23.png" class="card-img-top" alt="Feed Bag 1">
                     <div class="card-body text-center">
                       <h5 class="card-title">A 35S</h5>
                       <p class="card-text">Dùng cho dê thịt, dê vỗ béo</p>
                     </div>
                   </div>
                   <div class="card">
-                    <img src="../images/product/goat/a35-s---25kg---27.03.23.png" class="card-img-top" alt="Feed Bag 1">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/goat/a35-s---25kg---27.03.23.png" class="card-img-top" alt="Feed Bag 1">
                     <div class="card-body text-center">
                       <h5 class="card-title">A 35S</h5>
                       <p class="card-text">Dùng cho dê thịt, dê vỗ béo</p>
@@ -426,7 +426,7 @@
       </div>
       <div class="flex-column text-start me-5 pe-5">
         <h2 class="text-dark">THỨC ĂN CHO DÊ</h2>
-        <a href="/assets/html/each_product/product_goat.html" class="btn custom-btn" style="background-color: #fcae18; font-size: 17px; border-radius: 30px;">Xem tất cả</a>
+        <a href="${pageContext.request.contextPath}/views/web/each_product/product_goat.html" class="btn custom-btn" style="background-color: #fcae18; font-size: 17px; border-radius: 30px;">Xem tất cả</a>
       </div>
     </section>
 
@@ -438,12 +438,12 @@
   <div id="login" class ="login">
     <div id ="login_container">
         <div class="login_close">
-            <img src="/assets/images/logo/close.png" alt="">
+            <img src="${pageContext.request.contextPath}/views/template/assets/images/logo/close.png" alt="">
         </div>
-  
+
         <div class="login_header">
             <div class="login_logo_shop">
-                <img src="/assets/images/header/logo_vina.png" alt="Logo Shop">
+                <img src="${pageContext.request.contextPath}/views/template/assets/images/header/logo_vina.png" alt="Logo Shop">
             </div>
             <div class="login_header_text">
                 <h3 style="font-size: 24px;">Đăng nhập tài khoản</h3>
@@ -451,26 +451,26 @@
         </div>
         <div class="login_body">
             <div class="form-floating mb-3 mt-3">
-                <input type="text" class="form-control" id="contact" placeholder="Nhập số điện thoại/email" name="contact" required autocomplete="off"> 
+                <input type="text" class="form-control" id="contact" placeholder="Nhập số điện thoại/email" name="contact" required autocomplete="off">
                 <label for="contact">Nhập số điện thoại<span class="req">*</span></label>
             </div>
             <div class="form-floating mb-3 mt-3">
-                <input type="password" class="form-control" id="pwd" placeholder="Nhập mật khẩu" name="password" required autocomplete="off"> 
+                <input type="password" class="form-control" id="pwd" placeholder="Nhập mật khẩu" name="password" required autocomplete="off">
                 <label for="password">Nhập mật khẩu<span class="req">*</span></label>
             </div>
             <p class="login_forgot"><a href="#">Quên mật khẩu?</a></p>
-  
+
             <button type="submit" id="login-submit" class="login_button_submit">Đăng nhập</button>
             <div class="login_split">
                 <p>Hoặc</p>
             </div>
             <div class="login_social">
                 <a href="" class="social_btn login_social_gg">
-                    <img src="/assets/images/social/google.png" alt="">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/social/google.png" alt="">
                     <p>Google</p>
                 </a>
                 <a href="" class="social_btn login_social_zl">
-                    <img src="/assets/images/social/zalo.png" alt="">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/social/zalo.png" alt="">
                     <p>Zalo</p>
                 </a>
             </div>
@@ -485,12 +485,12 @@
 <div id="signup" class ="signup">
   <div id="signup_container">
       <div class="signup_close">
-          <img src="/assets/images/logo/close.png" alt="">
+          <img src="${pageContext.request.contextPath}/views/template/assets/images/logo/close.png" alt="">
       </div>
 
       <div class="signup_header">
           <div class="signup_logo_shop">
-              <img src="/assets/images/header/logo_vina.png" alt="Logo Shop">
+              <img src="${pageContext.request.contextPath}/views/template/assets/images/header/logo_vina.png" alt="Logo Shop">
           </div>
           <div class="signup_header_text">
               <h3 style="font-size: 24px;">Đăng ký tài khoản</h3>
@@ -498,21 +498,21 @@
       </div>
       <div class="signup_body">
           <div class="form-floating mb-2 mt-2">
-              <input type="text" class="form-control" id="name" placeholder="Nhập họ và tên" name="Name" required autocomplete="off"> 
+              <input type="text" class="form-control" id="name" placeholder="Nhập họ và tên" name="Name" required autocomplete="off">
               <label for="password">Nhập họ và tên<span class="req">*</span></label>
           </div>
 
           <div class="form-floating mb-2 mt-2">
-              <input type="text" class="form-control" id="contact" placeholder="Nhập số điện thoại/email" name="Contact" required autocomplete="off"> 
+              <input type="text" class="form-control" id="contact" placeholder="Nhập số điện thoại/email" name="Contact" required autocomplete="off">
               <label for="contact">Nhập số điện thoại<span class="req">*</span></label>
           </div>
           <div class="form-floating mb-2 mt-2">
-              <input type="password" class="form-control" id="pwd" placeholder="Nhập mật khẩu" name="password" required autocomplete="off"> 
+              <input type="password" class="form-control" id="pwd" placeholder="Nhập mật khẩu" name="password" required autocomplete="off">
               <label for="password">Nhập mật khẩu<span class="req">*</span></label>
           </div>
-        
+
           <div class="form-floating mb-2 mt-2">
-              <input type="password" class="form-control" id="pwd" placeholder="Nhập lại mật khẩu" name="password again" required autocomplete="off"> 
+              <input type="password" class="form-control" id="pwd" placeholder="Nhập lại mật khẩu" name="password again" required autocomplete="off">
               <label for="password again">Nhập lại mật khẩu<span class="req">*</span></label>
           </div>
 
@@ -525,11 +525,11 @@
           </div>
           <div class="signup_social">
               <a href="" class="social_btn signup_social_gg">
-                  <img src="/assets/images/social/google.png" alt="">
+                  <img src="${pageContext.request.contextPath}/views/template/assets/images/social/google.png" alt="">
                   <p>Google</p>
               </a>
               <a href="" class="social_btn signup_social_zl">
-                  <img src="/assets/images/social/zalo.png" alt="">
+                  <img src="${pageContext.request.contextPath}/views/template/assets/images/social/zalo.png" alt="">
                   <p>Zalo</p>
               </a>
           </div>
@@ -545,6 +545,6 @@
 
 <!-- Optional JavaScript -->
 <!-- Bootstrap Bundle with Popper -->
-<script src="../bootstrap/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.bundle.min.js"></script>
 </body>
 </html>
