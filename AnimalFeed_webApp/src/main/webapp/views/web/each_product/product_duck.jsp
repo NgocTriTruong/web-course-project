@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,70 +6,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thức ăn cho vịt</title>
 
-    <link rel="stylesheet" href="/assets/bootstrap/bootstrap.bundle.min.js">
-    <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/each_product.css">
-    <link rel="stylesheet" href="/assets/css/layout/header.css">
-    <link rel="stylesheet" href="/assets/css/layout/footer.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/each_product.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/header.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/footer.css">
 
-    <link rel="stylesheet" href="/assets/fonts/themify-icons/themify-icons.css">
-    <link rel="stylesheet" href="/assets/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
 
-    <script src="/assets/scripts/add_layout/add_layout.js" defer></script>
-    <script src="/assets/scripts/product/product_sale_new.js"></script>
-    <script src="/assets/scripts/product/tab_product_all.js"></script>
+    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/add_layout.js" defer></script>
+    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/product/product_sale_new.js"></script>
+    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/product/tab_product_all.js"></script>
 
-    <script src="../scripts/confirm_login.js"></script>
+    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/confirm_login.js"></script>
 </head>
 <body>
-    <div id="header-placeholder"></div>
+<%@ include file="../layout/header.jsp" %>
+
     <main style="margin-top: 95px;" class="product bg-light">
 
         <div class="position-relative text-center mb-4">
-            <img src="/assets/images/background/product-main-bg.jpg" class="img-fluid w-100" alt="Thức ăn cho vịt">
+            <img src="${pageContext.request.contextPath}/views/template/assets/images/background/product-main-bg.jpg" class="img-fluid w-100" alt="Thức ăn cho vịt">
             <h1 class="overlay-text">THỨC ĂN CHO VỊT</h1>
         </div>
 
         <div class="container">
             <div class="d-flex mb-3">
-                <button class="d-flex product_button_icon ms-3" onclick="window.location.href='/assets/html/each_product/product_pig.html'">
-                    <img src="/assets/images/represent-images/icon-pig.png" alt="pig-icon" width="30px" height="30px">
+                <button class="d-flex product_button_icon ms-3" onclick="window.location.href='${pageContext.request.contextPath}/views/web/each_product/product_pig.jsp'">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-pig.png" alt="pig-icon" width="30px" height="30px">
                     <p class="ms-1 text-white">
                         Thức Ăn Cho Heo
                     </p>
                 </button>
-                <button class="d-flex product_button_icon " onclick="window.location.href='/assets/html/each_product/product_chicken.html'">
-                    <img src="/assets/images/represent-images/icon-chicken.png" alt="chicken-icon" width="30px" height="30px">
+                <button class="d-flex product_button_icon " onclick="window.location.href='${pageContext.request.contextPath}/views/web/each_product/product_chicken.jsp'">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-chicken.png" alt="chicken-icon" width="30px" height="30px">
                     <p class="ms-1 text-white">
                         Thức Ăn Cho Gà
                     </p>
                 </button>
-                <button class="d-flex product_button_icon " style="background-color: #fcae18;" onclick="window.location.href='/assets/html/each_product/product_duck.html'">
-                    <img src="/assets/images/represent-images/icon-duck.png" alt="duck-icon" width="30px" height="30px">
+                <button class="d-flex product_button_icon " style="background-color: #fcae18;" onclick="window.location.href='${pageContext.request.contextPath}/views/web/each_product/product_duck.jsp'">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-duck.png" alt="duck-icon" width="30px" height="30px">
                     <p class="ms-1 text-white fw-bold">
                         Thức Ăn Cho Vịt
                     </p>
                 </button>
-                <button class="d-flex product_button_icon " onclick="window.location.href='/assets/html/each_product/product_cow.html'">
-                    <img src="/assets/images/represent-images/icon-cow.png" alt="cow-icon" width="30px" height="30px">
+                <button class="d-flex product_button_icon " onclick="window.location.href='${pageContext.request.contextPath}/views/web/each_product/product_cow.jsp'">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-cow.png" alt="cow-icon" width="30px" height="30px">
                     <p class="ms-1 text-white">
                         Thức Ăn Cho Bò
                     </p>
                 </button>
-                <button class="d-flex product_button_icon " onclick="window.location.href='/assets/html/each_product/product_shirmp.html'">
-                    <img src="/assets/images/represent-images/icon-shrimp.png" alt="shrimp-icon" width="30px" height="30px">
+                <button class="d-flex product_button_icon " onclick="window.location.href='${pageContext.request.contextPath}/views/web/each_product/product_shirmp.jsp'">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-shrimp.png" alt="shrimp-icon" width="30px" height="30px">
                     <p class="ms-1 text-white">
                         Thức Ăn Cho Tôm
                     </p>
                 </button>
-                <button class="d-flex product_button_icon " onclick="window.location.href='/assets/html/each_product/product_fish.html'">
-                    <img src="/assets/images/represent-images/icon-fish.png" alt="fish-icon" width="30px" height="30px">
+                <button class="d-flex product_button_icon " onclick="window.location.href='${pageContext.request.contextPath}/views/web/each_product/product_fish.jsp'">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-fish.png" alt="fish-icon" width="30px" height="30px">
                     <p class="ms-1 text-white">
                         Thức Ăn Cho Cá
                     </p>
                 </button>
-                <button class="d-flex product_button_icon " onclick="window.location.href='/assets/html/each_product/product_goat.html'">
-                    <img src="/assets/images/represent-images/icon-goat.png" alt="goat-icon" width="30px" height="30px">
+                <button class="d-flex product_button_icon " onclick="window.location.href='${pageContext.request.contextPath}/views/web/each_product/product_goat.jsp'">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-goat.png" alt="goat-icon" width="30px" height="30px">
                     <p class="ms-1 text-white">
                         Thức Ăn Cho Dê
                     </p>
@@ -81,15 +83,15 @@
             <!-- Tab -->
             <div class="product_sale_new d-flex pt-4">
                 <div id="sale-tab" class="d-flex product_sale active-tab">
-                    <img src="/assets/images/product/share_all/product_sale.png" alt="" width="40px" height="40px">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/share_all/product_sale.png" alt="" width="40px" height="40px">
                     <p class="ms-2">Khuyến mãi Hot</p>
                 </div>
                 <div id="new-tab" class="d-flex product_new">
-                    <img src="/assets/images/product/share_all/product_new.png" alt="" width="40px" height="40px">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/share_all/product_new.png" alt="" width="40px" height="40px">
                     <p class="ms-2">Sản phẩm Mới</p>
                 </div>
                 <div id="best-tab" class="d-flex product_best">
-                    <img src="/assets/images/product/share_all/ban_chay.png" alt="" width="40px" height="40px">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/share_all/ban_chay.png" alt="" width="40px" height="40px">
                     <p class="ms-2">Sản phẩm Bán chạy</p>
                 </div>
             </div>
@@ -105,7 +107,7 @@
                                 <div class="sale_badge">20% OFF</div>
                             </div>
                             <div class="product-img">
-                                <img src="/assets/images/product/duck/320.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/320.png" alt="TOP 01" height="250px" width="200px">
                             </div>
                             <div class="h5 text-h">VINA 320</div>
                             <div class="p mb-2 text-p">Dùng cho vịt siêu thịt từ 1 đến 21 ngày tuổi</div>
@@ -123,7 +125,7 @@
                             <div class="sale_badge">20% OFF</div>
                         </div>
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 355</div>
                         <div class="p mb-2 text-p">Dùng cho vịt/ngan siêu thịt từ 01 đến 21 ngày tuổi</div>
@@ -140,7 +142,7 @@
                             <div class="sale_badge">20% OFF</div>
                         </div>
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">HAPPY 355</div>
                         <div class="p mb-2 text-p">Dùng cho vịt/ngan siêu thịt</div>
@@ -157,7 +159,7 @@
                             <div class="sale_badge">20% OFF</div>
                         </div>
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/356.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/356.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 356</div>
                         <div class="p mb-2 text-p">Dùng cho vịt từ 22 ngày tuổi đến khi xuất bán</div>
@@ -176,7 +178,7 @@
                             <div class="sale_badge">20% OFF</div>
                         </div>
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/356M.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/356M.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">HAPPY 356M</div>
                         <div class="p mb-4 text-p">Dùng cho vịt từ 22 ngày tuổi đến khi xuất bán.</div>
@@ -193,7 +195,7 @@
                             <div class="sale_badge">20% OFF</div>
                         </div>
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/357.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/357.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 357</div>
                         <div class="p mb-4 text-p">Dùng cho vịt vỗ béo.</div>
@@ -210,7 +212,7 @@
                             <div class="sale_badge">20% OFF</div>
                         </div>
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/358.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/358.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 358</div>
                         <div class="p mb-4 text-p">Dùng cho vịt thịt từ 1 ngày tuổi đến khi xuất bán</div>
@@ -227,7 +229,7 @@
                             <div class="sale_badge">20% OFF</div>
                         </div>
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/370.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/370.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 370</div>
                         <div class="p mb-4 text-p">Dùng cho vịt đẻ siêu trứng</div>
@@ -247,7 +249,7 @@
                                 <div class="sale_badge">20% OFF</div>
                             </div>
                             <div class="product-img">
-                                <img src="/assets/images/product/duck/380.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/380.png" alt="TOP 01" height="250px" width="200px">
                             </div>
                             <div class="h5 text-h">VINA 380</div>
                             <div class="p mb-4 text-p">Dùng cho vịt đẻ thương phẩm.</div>
@@ -264,7 +266,7 @@
                                 <div class="sale_badge">20% OFF</div>
                             </div>
                             <div class="product-img">
-                                <img src="/assets/images/product/duck/380_Font.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/380_Font.png" alt="TOP 01" height="250px" width="200px">
                             </div>
                             <div class="h5 text-h">HAPPY 380M</div>
                             <div class="p mb-4 text-p">Dùng cho vịt đẻ thương phẩm.</div>
@@ -281,7 +283,7 @@
                                 <div class="sale_badge">20% OFF</div>
                             </div>
                             <div class="product-img">
-                                <img src="/assets/images/product/duck/385.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/385.png" alt="TOP 01" height="250px" width="200px">
                             </div>
                             <div class="h5 text-h">VINA 385</div>
                             <div class="p mb-4 text-p">Dùng cho vịt/ngan từ 1 đến 21 ngày tuổi</div>
@@ -298,7 +300,7 @@
                                 <div class="sale_badge">20% OFF</div>
                             </div>
                             <div class="product-img">
-                                <img src="/assets/images/product/duck/386.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/386.png" alt="TOP 01" height="250px" width="200px">
                             </div>
                             <div class="h5 text-h">VINA 386</div>
                             <div class="p mb-4 text-p">Dùng cho vịt/ngan từ 22 ngày tuổi đến khi xuất bán</div>
@@ -318,7 +320,7 @@
                                     <div class="sale_badge">20% OFF</div>
                                 </div>
                                 <div class="product-img">
-                                    <img src="/assets/images/product/duck/441.png" alt="TOP 01" height="250px" width="200px">
+                                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/441.png" alt="TOP 01" height="250px" width="200px">
                                 </div>
                                 <div class="h5 text-h">HAPPY 441</div>
                                 <div class="p mb-2 text-p">Dùng cho vịt siêu thịt từ 1 đến 21 ngày tuổi</div>
@@ -336,7 +338,7 @@
                                 <div class="sale_badge">20% OFF</div>
                             </div>
                             <div class="product-img">
-                                <img src="/assets/images/product/duck/442.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/442.png" alt="TOP 01" height="250px" width="200px">
                             </div>
                             <div class="h5 text-h">HAPPY 442</div>
                             <div class="p mb-2 text-p">Dùng cho vịt thịt từ 22 ngày tuổi đến khi xuất bán</div>
@@ -353,7 +355,7 @@
                                 <div class="sale_badge">20% OFF</div>
                             </div>
                             <div class="product-img">
-                                <img src="/assets/images/product/duck/443.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/443.png" alt="TOP 01" height="250px" width="200px">
                             </div>
                             <div class="h5 text-h">HAPPY 443</div>
                             <div class="p mb-2 text-p">Dùng cho vịt vỗ béo</div>
@@ -370,7 +372,7 @@
                                 <div class="sale_badge">20% OFF</div>
                             </div>
                             <div class="product-img">
-                                <img src="/assets/images/product/duck/444.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/444.png" alt="TOP 01" height="250px" width="200px">
                             </div>
                             <div class="h5 text-h">HAPPY 444</div>
                             <div class="p mb-2 text-p">Dùng cho vịt đẻ siêu trứng</div>
@@ -395,7 +397,7 @@
                             <div class="new_badge">New</div>
                         </div>
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/445_Font.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/445_Font.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">HAPPY 445</div>
                         <div class="p mb-2 text-p">Dùng cho vịt đẻ thương phẩm</div>
@@ -411,7 +413,7 @@
                             <div class="new_badge">New</div>
                         </div>
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/446.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/446.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">HAPPY 446</div>
                         <div class="p mb-2 text-p">Dùng cho vịt đẻ thương phẩm</div>
@@ -427,7 +429,7 @@
                             <div class="new_badge">New</div>
                         </div>
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/447.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/447.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">HAPPY 447</div>
                         <div class="p mb-2 text-p">Dùng cho vịt thịt từ 22 ngày tuổi đến xuất bán</div>
@@ -443,7 +445,7 @@
                             <div class="new_badge">New</div>
                         </div>
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/888.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/888.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 888</div>
                         <div class="p mb-2 text-p">Dùng cho vịt đẻ thương phẩm</div>
@@ -461,7 +463,7 @@
                             <div class="new_badge">New</div>
                         </div>
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/445_Font.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/445_Font.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">HAPPY 445</div>
                         <div class="p mb-2 text-p">Dùng cho vịt đẻ thương phẩm</div>
@@ -477,7 +479,7 @@
                             <div class="new_badge">New</div>
                         </div>
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/446.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/446.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">HAPPY 446</div>
                         <div class="p mb-2 text-p">Dùng cho vịt đẻ thương phẩm</div>
@@ -493,7 +495,7 @@
                             <div class="new_badge">New</div>
                         </div>
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/447.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/447.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">HAPPY 447</div>
                         <div class="p mb-2 text-p">Dùng cho vịt thịt từ 22 ngày tuổi đến xuất bán</div>
@@ -509,7 +511,7 @@
                             <div class="new_badge">New</div>
                         </div>
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/888.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/888.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 888</div>
                         <div class="p mb-2 text-p">Dùng cho vịt đẻ thương phẩm</div>
@@ -528,7 +530,7 @@
                                 <div class="new_badge">New</div>
                             </div>
                             <div class="product-img">
-                                <img src="/assets/images/product/duck/445_Font.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/445_Font.png" alt="TOP 01" height="250px" width="200px">
                             </div>
                             <div class="h5 text-h">HAPPY 445</div>
                             <div class="p mb-2 text-p">Dùng cho vịt đẻ thương phẩm</div>
@@ -544,7 +546,7 @@
                                 <div class="new_badge">New</div>
                             </div>
                             <div class="product-img">
-                                <img src="/assets/images/product/duck/446.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/446.png" alt="TOP 01" height="250px" width="200px">
                             </div>
                             <div class="h5 text-h">HAPPY 446</div>
                             <div class="p mb-2 text-p">Dùng cho vịt đẻ thương phẩm</div>
@@ -560,7 +562,7 @@
                                 <div class="new_badge">New</div>
                             </div>
                             <div class="product-img">
-                                <img src="/assets/images/product/duck/447.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/447.png" alt="TOP 01" height="250px" width="200px">
                             </div>
                             <div class="h5 text-h">HAPPY 447</div>
                             <div class="p mb-2 text-p">Dùng cho vịt thịt từ 22 ngày tuổi đến xuất bán</div>
@@ -576,7 +578,7 @@
                                 <div class="new_badge">New</div>
                             </div>
                             <div class="product-img">
-                                <img src="/assets/images/product/duck/888.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/888.png" alt="TOP 01" height="250px" width="200px">
                             </div>
                             <div class="h5 text-h">VINA 888</div>
                             <div class="p mb-2 text-p">Dùng cho vịt đẻ thương phẩm</div>
@@ -594,7 +596,7 @@
                                 <div class="new_badge">New</div>
                             </div>
                             <div class="product-img">
-                                <img src="/assets/images/product/duck/445_Font.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/445_Font.png" alt="TOP 01" height="250px" width="200px">
                             </div>
                             <div class="h5 text-h">HAPPY 445</div>
                             <div class="p mb-2 text-p">Dùng cho vịt đẻ thương phẩm</div>
@@ -610,7 +612,7 @@
                                 <div class="new_badge">New</div>
                             </div>
                             <div class="product-img">
-                                <img src="/assets/images/product/duck/446.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/446.png" alt="TOP 01" height="250px" width="200px">
                             </div>
                             <div class="h5 text-h">HAPPY 446</div>
                             <div class="p mb-2 text-p">Dùng cho vịt đẻ thương phẩm</div>
@@ -626,7 +628,7 @@
                                 <div class="new_badge">New</div>
                             </div>
                             <div class="product-img">
-                                <img src="/assets/images/product/duck/447.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/447.png" alt="TOP 01" height="250px" width="200px">
                             </div>
                             <div class="h5 text-h">HAPPY 447</div>
                             <div class="p mb-2 text-p">Dùng cho vịt thịt từ 22 ngày tuổi đến xuất bán</div>
@@ -642,7 +644,7 @@
                                 <div class="new_badge">New</div>
                             </div>
                             <div class="product-img">
-                                <img src="/assets/images/product/duck/888.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/888.png" alt="TOP 01" height="250px" width="200px">
                             </div>
                             <div class="h5 text-h">VINA 888</div>
                             <div class="p mb-2 text-p">Dùng cho vịt đẻ thương phẩm</div>
@@ -664,7 +666,7 @@
                     <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <a href="">
                             <div class="product-img">
-                                <img src="/assets/images/product/duck/320.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/320.png" alt="TOP 01" height="250px" width="200px">
                             </div>
                             <div class="h5 text-h">VINA 320</div>
                             <div class="p mb-2 text-p">Dùng cho vịt siêu thịt từ 1 đến 21 ngày tuổi</div>
@@ -679,7 +681,7 @@
                     </div>
                     <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 355</div>
                         <div class="p mb-2 text-p">Dùng cho vịt/ngan siêu thịt từ 01 đến 21 ngày tuổi</div>
@@ -693,7 +695,7 @@
                     </div>
                     <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">HAPPY 355</div>
                         <div class="p mb-2 text-p">Dùng cho vịt/ngan siêu thịt</div>
@@ -707,7 +709,7 @@
                     </div>
                     <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/356.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/356.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 356</div>
                         <div class="p mb-2 text-p">Dùng cho vịt từ 22 ngày tuổi đến khi xuất bán</div>
@@ -724,7 +726,7 @@
                     <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <a href="">
                             <div class="product-img">
-                                <img src="/assets/images/product/duck/320.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/320.png" alt="TOP 01" height="250px" width="200px">
                             </div>
                             <div class="h5 text-h">VINA 320</div>
                             <div class="p mb-2 text-p">Dùng cho vịt siêu thịt từ 1 đến 21 ngày tuổi</div>
@@ -739,7 +741,7 @@
                     </div>
                     <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 355</div>
                         <div class="p mb-2 text-p">Dùng cho vịt/ngan siêu thịt từ 01 đến 21 ngày tuổi</div>
@@ -753,7 +755,7 @@
                     </div>
                     <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">HAPPY 355</div>
                         <div class="p mb-2 text-p">Dùng cho vịt/ngan siêu thịt</div>
@@ -767,7 +769,7 @@
                     </div>
                     <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/356.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/356.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 356</div>
                         <div class="p mb-2 text-p">Dùng cho vịt từ 22 ngày tuổi đến khi xuất bán</div>
@@ -785,7 +787,7 @@
                         <div class="col-md-3 bg-light text-center m-3 col product_number">
                             <a href="">
                                 <div class="product-img">
-                                    <img src="/assets/images/product/duck/320.png" alt="TOP 01" height="250px" width="200px">
+                                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/320.png" alt="TOP 01" height="250px" width="200px">
                                 </div>
                                 <div class="h5 text-h">VINA 320</div>
                                 <div class="p mb-2 text-p">Dùng cho vịt siêu thịt từ 1 đến 21 ngày tuổi</div>
@@ -800,7 +802,7 @@
                         </div>
                         <div class="col-md-3 bg-light text-center m-3 col product_number">
                             <div class="product-img">
-                                <img src="/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
                             </div>
                             <div class="h5 text-h">VINA 355</div>
                             <div class="p mb-2 text-p">Dùng cho vịt/ngan siêu thịt từ 01 đến 21 ngày tuổi</div>
@@ -814,7 +816,7 @@
                         </div>
                         <div class="col-md-3 bg-light text-center m-3 col product_number">
                             <div class="product-img">
-                                <img src="/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
                             </div>
                             <div class="h5 text-h">HAPPY 355</div>
                             <div class="p mb-2 text-p">Dùng cho vịt/ngan siêu thịt</div>
@@ -828,7 +830,7 @@
                         </div>
                         <div class="col-md-3 bg-light text-center m-3 col product_number">
                             <div class="product-img">
-                                <img src="/assets/images/product/duck/356.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/356.png" alt="TOP 01" height="250px" width="200px">
                             </div>
                             <div class="h5 text-h">VINA 356</div>
                             <div class="p mb-2 text-p">Dùng cho vịt từ 22 ngày tuổi đến khi xuất bán</div>
@@ -845,7 +847,7 @@
                         <div class="col-md-3 bg-light text-center m-3 col product_number">
                             <a href="">
                                 <div class="product-img">
-                                    <img src="/assets/images/product/duck/320.png" alt="TOP 01" height="250px" width="200px">
+                                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/320.png" alt="TOP 01" height="250px" width="200px">
                                 </div>
                                 <div class="h5 text-h">VINA 320</div>
                                 <div class="p mb-2 text-p">Dùng cho vịt siêu thịt từ 1 đến 21 ngày tuổi</div>
@@ -860,7 +862,7 @@
                         </div>
                         <div class="col-md-3 bg-light text-center m-3 col product_number">
                             <div class="product-img">
-                                <img src="/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
                             </div>
                             <div class="h5 text-h">VINA 355</div>
                             <div class="p mb-2 text-p">Dùng cho vịt/ngan siêu thịt từ 01 đến 21 ngày tuổi</div>
@@ -874,7 +876,7 @@
                         </div>
                         <div class="col-md-3 bg-light text-center m-3 col product_number">
                             <div class="product-img">
-                                <img src="/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
                             </div>
                             <div class="h5 text-h">HAPPY 355</div>
                             <div class="p mb-2 text-p">Dùng cho vịt/ngan siêu thịt</div>
@@ -888,7 +890,7 @@
                         </div>
                         <div class="col-md-3 bg-light text-center m-3 col product_number">
                             <div class="product-img">
-                                <img src="/assets/images/product/duck/356.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/356.png" alt="TOP 01" height="250px" width="200px">
                             </div>
                             <div class="h5 text-h">VINA 356</div>
                             <div class="p mb-2 text-p">Dùng cho vịt từ 22 ngày tuổi đến khi xuất bán</div>
@@ -940,7 +942,7 @@
                 <div class="row">
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 355</div>
                         <div class="p mb-2 text-p">Dùng cho vịt/ngan siêu thịt từ 1 đến 21 ngày tuổi</div>
@@ -953,7 +955,7 @@
                     </div>
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/320.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/320.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 320</div>
                         <div class="p mb-2 text-p"> Dùng cho vịt siêu thịt từ 1 đến 21 ngày tuổi</div>
@@ -966,7 +968,7 @@
                     </div>
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/356.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/356.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 356</div>
                         <div class="p mb-2 text-p">Dùng cho vịt thịt từ 22 ngày tuổi đến khi xuất bán</div>
@@ -979,7 +981,7 @@
                     </div>
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/357.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/357.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 357</div>
                         <div class="p mb-2 text-p">Dùng cho vịt vỗ béo</div>
@@ -994,7 +996,7 @@
                 <div class="row">
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 355</div>
                         <div class="p mb-2 text-p">Dùng cho vịt/ngan siêu thịt từ 1 đến 21 ngày tuổi</div>
@@ -1007,7 +1009,7 @@
                     </div>
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/320.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/320.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 320</div>
                         <div class="p mb-2 text-p"> Dùng cho vịt siêu thịt từ 1 đến 21 ngày tuổi</div>
@@ -1020,7 +1022,7 @@
                     </div>
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/356.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/356.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 356</div>
                         <div class="p mb-2 text-p">Dùng cho vịt thịt từ 22 ngày tuổi đến khi xuất bán</div>
@@ -1033,7 +1035,7 @@
                     </div>
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/357.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/357.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 357</div>
                         <div class="p mb-2 text-p">Dùng cho vịt vỗ béo</div>
@@ -1048,7 +1050,7 @@
                 <div class="row">
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 355</div>
                         <div class="p mb-2 text-p">Dùng cho vịt/ngan siêu thịt từ 1 đến 21 ngày tuổi</div>
@@ -1061,7 +1063,7 @@
                     </div>
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/320.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/320.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 320</div>
                         <div class="p mb-2 text-p"> Dùng cho vịt siêu thịt từ 1 đến 21 ngày tuổi</div>
@@ -1074,7 +1076,7 @@
                     </div>
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/356.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/356.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 356</div>
                         <div class="p mb-2 text-p">Dùng cho vịt thịt từ 22 ngày tuổi đến khi xuất bán</div>
@@ -1087,7 +1089,7 @@
                     </div>
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/357.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/357.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 357</div>
                         <div class="p mb-2 text-p">Dùng cho vịt vỗ béo</div>
@@ -1102,7 +1104,7 @@
                 <div class="row">
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 355</div>
                         <div class="p mb-2 text-p">Dùng cho vịt/ngan siêu thịt từ 1 đến 21 ngày tuổi</div>
@@ -1115,7 +1117,7 @@
                     </div>
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/320.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/320.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 320</div>
                         <div class="p mb-2 text-p"> Dùng cho vịt siêu thịt từ 1 đến 21 ngày tuổi</div>
@@ -1128,7 +1130,7 @@
                     </div>
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/356.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/356.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 356</div>
                         <div class="p mb-2 text-p">Dùng cho vịt thịt từ 22 ngày tuổi đến khi xuất bán</div>
@@ -1141,7 +1143,7 @@
                     </div>
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/357.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/357.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 357</div>
                         <div class="p mb-2 text-p">Dùng cho vịt vỗ béo</div>
@@ -1160,7 +1162,7 @@
                 <div class="row">
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 355</div>
                         <div class="p mb-2 text-p">Dùng cho vịt/ngan siêu thịt từ 1 đến 21 ngày tuổi</div>
@@ -1173,7 +1175,7 @@
                     </div>
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/320.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/320.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 320</div>
                         <div class="p mb-2 text-p"> Dùng cho vịt siêu thịt từ 1 đến 21 ngày tuổi</div>
@@ -1186,7 +1188,7 @@
                     </div>
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/356.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/356.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 356</div>
                         <div class="p mb-2 text-p">Dùng cho vịt thịt từ 22 ngày tuổi đến khi xuất bán</div>
@@ -1199,7 +1201,7 @@
                     </div>
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/357.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/357.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 357</div>
                         <div class="p mb-2 text-p">Dùng cho vịt vỗ béo</div>
@@ -1214,7 +1216,7 @@
                 <div class="row">
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 355</div>
                         <div class="p mb-2 text-p">Dùng cho vịt/ngan siêu thịt từ 1 đến 21 ngày tuổi</div>
@@ -1227,7 +1229,7 @@
                     </div>
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/320.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/320.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 320</div>
                         <div class="p mb-2 text-p"> Dùng cho vịt siêu thịt từ 1 đến 21 ngày tuổi</div>
@@ -1240,7 +1242,7 @@
                     </div>
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/356.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/356.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 356</div>
                         <div class="p mb-2 text-p">Dùng cho vịt thịt từ 22 ngày tuổi đến khi xuất bán</div>
@@ -1253,7 +1255,7 @@
                     </div>
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/357.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/357.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 357</div>
                         <div class="p mb-2 text-p">Dùng cho vịt vỗ béo</div>
@@ -1268,7 +1270,7 @@
                 <div class="row">
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 355</div>
                         <div class="p mb-2 text-p">Dùng cho vịt/ngan siêu thịt từ 1 đến 21 ngày tuổi</div>
@@ -1281,7 +1283,7 @@
                     </div>
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/320.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/320.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 320</div>
                         <div class="p mb-2 text-p"> Dùng cho vịt siêu thịt từ 1 đến 21 ngày tuổi</div>
@@ -1294,7 +1296,7 @@
                     </div>
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/356.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/356.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 356</div>
                         <div class="p mb-2 text-p">Dùng cho vịt thịt từ 22 ngày tuổi đến khi xuất bán</div>
@@ -1307,7 +1309,7 @@
                     </div>
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/357.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/357.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 357</div>
                         <div class="p mb-2 text-p">Dùng cho vịt vỗ béo</div>
@@ -1322,7 +1324,7 @@
                 <div class="row">
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 355</div>
                         <div class="p mb-2 text-p">Dùng cho vịt/ngan siêu thịt từ 1 đến 21 ngày tuổi</div>
@@ -1335,7 +1337,7 @@
                     </div>
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/320.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/320.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 320</div>
                         <div class="p mb-2 text-p"> Dùng cho vịt siêu thịt từ 1 đến 21 ngày tuổi</div>
@@ -1348,7 +1350,7 @@
                     </div>
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/356.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/356.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 356</div>
                         <div class="p mb-2 text-p">Dùng cho vịt thịt từ 22 ngày tuổi đến khi xuất bán</div>
@@ -1361,7 +1363,7 @@
                     </div>
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/357.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/357.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 357</div>
                         <div class="p mb-2 text-p">Dùng cho vịt vỗ béo</div>
@@ -1380,7 +1382,7 @@
                 <div class="row">
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 355</div>
                         <div class="p mb-2 text-p">Dùng cho vịt/ngan siêu thịt từ 1 đến 21 ngày tuổi</div>
@@ -1393,7 +1395,7 @@
                     </div>
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/320.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/320.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 320</div>
                         <div class="p mb-2 text-p"> Dùng cho vịt siêu thịt từ 1 đến 21 ngày tuổi</div>
@@ -1406,7 +1408,7 @@
                     </div>
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/356.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/356.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 356</div>
                         <div class="p mb-2 text-p">Dùng cho vịt thịt từ 22 ngày tuổi đến khi xuất bán</div>
@@ -1419,7 +1421,7 @@
                     </div>
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/357.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/357.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 357</div>
                         <div class="p mb-2 text-p">Dùng cho vịt vỗ béo</div>
@@ -1434,7 +1436,7 @@
                 <div class="row">
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 355</div>
                         <div class="p mb-2 text-p">Dùng cho vịt/ngan siêu thịt từ 1 đến 21 ngày tuổi</div>
@@ -1447,7 +1449,7 @@
                     </div>
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/320.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/320.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 320</div>
                         <div class="p mb-2 text-p"> Dùng cho vịt siêu thịt từ 1 đến 21 ngày tuổi</div>
@@ -1460,7 +1462,7 @@
                     </div>
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/356.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/356.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 356</div>
                         <div class="p mb-2 text-p">Dùng cho vịt thịt từ 22 ngày tuổi đến khi xuất bán</div>
@@ -1473,7 +1475,7 @@
                     </div>
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/357.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/357.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 357</div>
                         <div class="p mb-2 text-p">Dùng cho vịt vỗ béo</div>
@@ -1488,7 +1490,7 @@
                 <div class="row">
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 355</div>
                         <div class="p mb-2 text-p">Dùng cho vịt/ngan siêu thịt từ 1 đến 21 ngày tuổi</div>
@@ -1501,7 +1503,7 @@
                     </div>
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/320.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/320.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 320</div>
                         <div class="p mb-2 text-p"> Dùng cho vịt siêu thịt từ 1 đến 21 ngày tuổi</div>
@@ -1514,7 +1516,7 @@
                     </div>
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/356.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/356.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 356</div>
                         <div class="p mb-2 text-p">Dùng cho vịt thịt từ 22 ngày tuổi đến khi xuất bán</div>
@@ -1527,7 +1529,7 @@
                     </div>
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/357.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/357.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 357</div>
                         <div class="p mb-2 text-p">Dùng cho vịt vỗ béo</div>
@@ -1542,7 +1544,7 @@
                 <div class="row">
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/355.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 355</div>
                         <div class="p mb-2 text-p">Dùng cho vịt/ngan siêu thịt từ 1 đến 21 ngày tuổi</div>
@@ -1555,7 +1557,7 @@
                     </div>
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/320.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/320.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 320</div>
                         <div class="p mb-2 text-p"> Dùng cho vịt siêu thịt từ 1 đến 21 ngày tuổi</div>
@@ -1568,7 +1570,7 @@
                     </div>
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/356.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/356.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 356</div>
                         <div class="p mb-2 text-p">Dùng cho vịt thịt từ 22 ngày tuổi đến khi xuất bán</div>
@@ -1581,7 +1583,7 @@
                     </div>
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/duck/357.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/357.png" alt="TOP 01" height="250px" width="200px">
                         </div>
                         <div class="h5 text-h">VINA 357</div>
                         <div class="p mb-2 text-p">Dùng cho vịt vỗ béo</div>
@@ -1612,7 +1614,7 @@
         <!-- Text -->
         <div class="container mt-5">
             <div class="p text-center fw-bold mb-4" style="font-size: 22px;">VINAFEED GROUP LUÔN HIỂU RÕ NHU CẦU DINH DƯỠNG CHO VỊT</div>
-            <img src="/assets/images/gioi_thieu/nha_may_sx.png" alt="" height="500px" width="100%" style="border-radius: 10px;">
+            <img src="${pageContext.request.contextPath}/views/template/assets/images/gioi_thieu/nha_may_sx.png" alt="" height="500px" width="100%" style="border-radius: 10px;">
             <div class="p mt-4" style="text-indent: 30px;">
                 Nâng cao hiệu quả kinh tế và giá trị chăn nuôi từ đàn vịt của mình, luôn là mong muốn của toàn thể người chăn nuôi. Để đàn vịt của mình phát triển toàn diện, và cho năng suất cao thì
                 người chăn nuôi cần nắm rõ và vận dụng nhiều yếu tố hỗ trợ trong chăn nuôi vịt. Những yếu tố như: <span class="fw-bold">Thức ăn cho vịt</span>, kỹ thuật và sức khỏe vật nuôi đều góp phần tạo nên kết quả đó.
@@ -1632,7 +1634,7 @@
                     </p>
                 </div>
                 <div class="p mt-3 fw-bold mb-3" style="font-size: 22px;">Thức ăn chăn nuôi vịt XANH - SẠCH</div>
-                <img src="/assets/images/banner/Home_Banner_Web.jpg" alt="" width="70%" height="500px" style="margin-left: 200px; border-radius: 10px;">
+                <img src="${pageContext.request.contextPath}/views/template/assets/images/banner/Home_Banner_Web.jpg" alt="" width="70%" height="500px" style="margin-left: 200px; border-radius: 10px;">
                 <p class="mt-3" style="text-indent: 30px;">XANH - SẠCH là yếu tố chủ chốt và là kim chỉ nam trong suốt gần 30 năm sản xuất thức ăn chăn nuôi vịt của Vinafeed Group. </p>
                 <div class="p mt-3 fw-bold mb-3" style="font-size: 22px;">Đầu tư công nghệ dinh dưỡng và dây chuyền sản xuất</div>
                 <div class="p mt-2" style="text-indent: 30px;">
@@ -1659,7 +1661,7 @@
                         Từ đó cung cấp những kiến thức và kinh nghiệm thực tiễn về mối liên kết của thức ăn chăn nuôi vịt và cách chăn nuôi.
                     </p>
                 </div>
-                <img src="/assets/images/thu_vien/Cham_soc_ga.jpg" alt="Chăm sóc vịt" width="100%" height="500px" style="border-radius: 10px;">
+                <img src="${pageContext.request.contextPath}/views/template/assets/images/thu_vien/Cham_soc_ga.jpg" alt="Chăm sóc vịt" width="100%" height="500px" style="border-radius: 10px;">
                 <div class="p mt-3 fw-bold mb-3" style="font-size: 22px;">Tư vấn dinh dưỡng vật nuôi</div>
                 <div class="p mt-2" style="text-indent: 30px;">
                     Tất cả sản phẩm thức ăn chăn nuôi vịt của Vinafeed Group đều hướng tới mục tiêu duy nhất là ĐẢM BẢO SỨC KHỎE VẬT NUÔI và GIA TĂNG HIỆU QUẢ KINH TẾ BỀN VỮNG cho trang trại. Cùng với đó là những kiến thức về dinh dưỡng vật nuôi từ chuyên gia tập đoàn mà Vinafeed Group
@@ -1673,8 +1675,8 @@
             <a href="javascript:void(0)" id="toggle-button-text" class="toggle-button-text text-center">Xem thêm <i class="fa-solid fa-chevron-down ms-2"></i></a>
         </div>
     </main>
-    <div id="near-footer-placeholder"></div>
-    <div id="footer-placeholder"></div>
+<%@ include file="../layout/near_footer.jsp" %>
+<%@ include file="../layout/footer.jsp" %>
     
 </body>
 </html>
