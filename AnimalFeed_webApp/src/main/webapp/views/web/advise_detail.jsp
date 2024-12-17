@@ -1,39 +1,40 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TVKFEED</title>
-    <link rel="stylesheet" href="/assets/bootstrap/bootstrap.bundle.min.js">
-    <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/fonts/themify-icons/themify-icons.css">
-    <link rel="stylesheet" href="/assets/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.min.css">
 
-    <link rel="stylesheet" href="/assets/css/chi_tiet_tu_van.css"></link>
-    <link rel="stylesheet" href="/assets/css/layout/header.css">
-    <link rel="stylesheet" href="/assets/css/layout/footer.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/chi_tiet_tu_van.css"></link>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/header.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/footer.css">
 
-    <script src="/assets/scripts/add_layout/add_layout.js" defer></script>
+    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/add_layout.js" defer></script>
 
-    <script src="../scripts/confirm_login.js"></script>
+    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/confirm_login.js"></script>
 </head>
 <body>
 
-<div id="header-placeholder"></div>
+<%@ include file="layout/header.jsp" %>
 <main style="margin-top: 90px; margin-bottom: 90px;">
     <div class="chi_tiet_tu_van">
         <div class="background-section">
-            <img src="/assets/images/represent-images/chicken_2.jpg" alt="">
+            <img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/chicken_2.jpg" alt="">
             <div class="desc">
                 <h1 class="mb-3">CHUYÊN ĐỀ GÀ</h1>
                 <div class="detailed_desc mt-4">
                     <p>
                         Dưới đây là một số câu hỏi thường gặp và giải đáp. Nếu bạn vẫn chưa tìm được câu trả lời, hãy liên hệ với VINAFEED.
                     </p>
-                    <a href="/assets/html/ho_tro.html">
+                    <a href="${pageContext.request.contextPath}/views/web/help.jsp">
                         <button>
                             Gửi câu hỏi
                         </button>
@@ -91,7 +92,7 @@
                         - Sản phẩm chứa nhiều đạm, cân đối axit amin hợp lý giúp gà phát triển nhanh, mau mọc lông, chân chắc khỏe, không bị tiêu chảy. <br>
                         - Sản phẩm dạng mảnh, viên giúp gà dễ dàng lấy thức ăn, tăng tính thèm ăn và giảm hao hụt, giảm thải các chất gây ô nhiễm trong chuồng trại. <br>
                         - Hệ số chuyển đổi thức ăn thấp, giảm giá thành, tăng lợi nhuận. <br>
-                        <a href="/assets/html/each_product/product_chicken.html" class="text-primary">>> <u>Xem chi tiết tại đây</u></a>
+                        <a href="${pageContext.request.contextPath}/views/web/each_product/product_chicken.html" class="text-primary">>> <u>Xem chi tiết tại đây</u></a>
                     </div>
                 </div>
             </div>
@@ -103,10 +104,11 @@
 
     </div>
 </main>
-<div id="footer-placeholder"></div>
+<%@ include file="layout/footer.jsp" %>
+<%@ include file="layout/near_footer.jsp" %>
 
 
-<script src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.bundle.min.js"></script>
 
 <script>
     function toggleDescription(contentId, buttonId) {

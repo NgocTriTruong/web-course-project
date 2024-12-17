@@ -5,64 +5,65 @@
     <div id="header" class="bg-light">
       <div class="content d-flex justify-content-center">
         <div class="logo_shop">
-          <a href="/index.jsp">
+
+          <a href="${pageContext.request.contextPath}/index.jsp">
             <img src="${pageContext.request.contextPath}/views/template/assets/images/header/logo_vina.png" alt="Logo Vina" height="75px" width="90px" style=" margin: 9px 0 0 22px;">
           </a>
         </div>
         <ul class="d-flex justify-content-center">
             <li class="p-4">
-              <a href="/views/web/gioi_thieu.jsp" class="text_h1">GIỚI THIỆU</a>
+              <a href="${pageContext.request.contextPath}/views/web/introduction.jsp" class="text_h1">GIỚI THIỆU</a>
               <ul class="header_line_2">
                 <li class="p-3 li_hover">
-                  <a href="/views/web/gioi_thieu.jsp#gioi_thieu_chung">
+                  <a href="${pageContext.request.contextPath}/views/web/introduction.jsp#gioi_thieu_chung">
                     <span class="text_line_2">Giới thiệu chung</span>
                     <i class="ti-angle-right ti_number"></i>
                   </a>
                 </li>
                 <li class="p-3 li_hover">
-                  <a href="/views/web/gioi_thieu.jsp#lich_su">
+                  <a href="${pageContext.request.contextPath}/views/web/introduction.jsp#lich_su">
                     <span class="text_line_2">Lịch sử hình thành</span>
                     <i class="ti-angle-right ti_number"></i>
                   </a>
                 </li>
                 <li class="p-3 li_hover">
-                  <a href="/views/web/gioi_thieu.jsp#chien_luoc">
+                  <a href="${pageContext.request.contextPath}/views/web/introduction.jsp#chien_luoc">
                     <span class="text_line_2">Tầm nhìn chiến lược</span>
                     <i class="ti-angle-right ti_number"></i>
                   </a>
                 </li>
                 <li class="p-3 li_hover">
-                  <a href="/views/web/gioi_thieu.jsp#quan_diem">
+                  <a href="${pageContext.request.contextPath}/views/web/introduction.jsp#quan_diem">
                     <span class="text_line_2">Quan điểm kinh doanh</span>
                     <i class="ti-angle-right ti_number"></i>
                   </a>
                 </li>
                 <li class="p-3 li_hover">
-                  <a href="/views/web/gioi_thieu.jsp#cam_ket">
+                  <a href="${pageContext.request.contextPath}/views/web/introduction.jsp#cam_ket">
                     <span class="text_line_2">Cam kết chất lượng</span>
                     <i class="ti-angle-right ti_number"></i>
                   </a>
                 </li>
                 <li class="p-3 li_hover">
-                  <a href="/views/web/gioi_thieu.jsp#san_xuat">
+                  <a href="${pageContext.request.contextPath}/views/web/introduction.jsp#san_xuat">
                     <span class="text_line_2">Nhà máy sản xuất</span>
                     <i class="ti-angle-right ti_number"></i>
                   </a>
                 </li>
                 <li class="p-3 li_hover">
-                  <a href="/views/web/gioi_thieu.jsp#nhan_luc">
+                  <a href="${pageContext.request.contextPath}/views/web/introduction.jsp#nhan_luc">
                     <span class="text_line_2">Nguồn nhân lực</span>
                     <i class="ti-angle-right ti_number"></i>
                   </a>
                 </li>
                 <li class="p-3 li_hover">
-                  <a href="/views/web/gioi_thieu.jsp#van_hoa">
+                  <a href="${pageContext.request.contextPath}/views/web/introduction.jsp#van_hoa">
                     <span class="text_line_2">Văn hóa công ty</span>
                     <i class="ti-angle-right ti_number"></i>
                   </a>
                 </li>
                 <li class="p-3 li_hover">
-                  <a href="/views/web/gioi_thieu.jsp#thanh_tich">
+                  <a href="${pageContext.request.contextPath}/views/web/introduction.jsp#thanh_tich">
                     <span class="text_line_2">Thành tích</span>
                     <i class="ti-angle-right ti_number"></i>
                   </a>
@@ -71,52 +72,52 @@
             </li>
   
             <li class="p-4 san-pham">
-              <a href="/views/web/product.jsp" class="text_h1">SẢN PHẨM</a>
+              <a href="${pageContext.request.contextPath}/views/web/product.jsp" class="text_h1">SẢN PHẨM</a>
               <ul class="header_line_2">
                 <li class="p-2 li_hover">
-                  <a href="/views/web/each_product/product_pig.jsp">
+                  <a href="${pageContext.request.contextPath}/views/web/each_product/product_pig.jsp">
                     <span class="icon"><img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-pig.png" alt="" width="28px" height="25px"></span>
                     <span class="ms-2">Thức ăn cho Heo</span>
                     <i class="ti-angle-right ti_number mt-2"></i>
                   </a>
                 </li>
                 <li class="p-2 li_hover">
-                  <a href="/views/web/each_product/product_chicken.jsp">
+                  <a href="${pageContext.request.contextPath}/views/web/each_product/product_chicken.jsp">
                     <span class="icon"><img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-chicken.png" alt="" width="28px" height="20px"></span>
                     <span class="ms-2">Thức ăn cho Gà</span>
                     <i class="ti-angle-right ti_number mt-2"></i>
                   </a>
                 </li>
                 <li class="p-2 li_hover">
-                  <a href="/views/web/each_product/product_duck.jsp">
+                  <a href="${pageContext.request.contextPath}/views/web/each_product/product_duck.jsp">
                     <span class="icon"><img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-duck.png" alt="" width="28px" height="20px"></span>
                     <span class="ms-2">Thức ăn cho Vịt</span>
                     <i class="ti-angle-right ti_number mt-2"></i>
                   </a>
                 </li>
                 <li class="p-2 li_hover">
-                  <a href="/views/web/each_product/product_cow.jsp">
+                  <a href="${pageContext.request.contextPath}/views/web/each_product/product_cow.jsp">
                     <span class="icon"><img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-cow.png" alt="" width="28px" height="20px"></span>
                     <span class="ms-2">Thức ăn cho Bò</span>
                     <i class="ti-angle-right ti_number mt-2"></i>
                   </a>
                 </li>
                 <li class="p-2 li_hover">
-                  <a href="/views/web/each_product/product_shirmp.jsp">
+                  <a href="${pageContext.request.contextPath}/views/web/each_product/product_shirmp.jsp">
                     <span class="icon"><img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-shrimp.png" alt="" width="28px" height="20px"></span>
                     <span class="ms-2">Thức ăn cho Tôm</span>
                     <i class="ti-angle-right ti_number mt-2"></i>
                   </a>
                 </li>
                 <li class="p-2 li_hover">
-                  <a href="/views/web/each_product/product_fish.jsp">
+                  <a href="${pageContext.request.contextPath}/views/web/each_product/product_fish.jsp">
                     <span class="icon"><img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-fish.png" alt="" width="28px" height="20px"></span>
                     <span class="ms-2">Thức ăn cho Cá</span>
                     <i class="ti-angle-right ti_number mt-2"></i>
                   </a>
                 </li>
                 <li class="p-2 li_hover">
-                  <a href="/views/web/each_product/product_goat.jsp">
+                  <a href="${pageContext.request.contextPath}/views/web/each_product/product_goat.jsp">
                     <span class="icon"><img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-goat.png" alt="" width="28px" height="20px"></span>
                     <span class="ms-2">Thức ăn cho Dê</span>
                     <i class="ti-angle-right ti_number mt-2"></i>
@@ -126,28 +127,28 @@
             </li>
   
             <li class="p-4">
-              <a href="/views/web/tu_van.jsp" class="text_h1">TƯ VẤN KỸ THUẬT</a>
+              <a href="${pageContext.request.contextPath}/views/web/advise.jsp" class="text_h1">TƯ VẤN KỸ THUẬT</a>
             </li>
             <li class="p-4">
-              <a href="/views/web/tuyen_dung.jsp" class="text_h1">TUYỂN DỤNG</a>
+              <a href="${pageContext.request.contextPath}/views/web/recruitment.jsp" class="text_h1">TUYỂN DỤNG</a>
             </li>
             <li class="p-4">
-              <a href="/views/web/tin_tuc/tin_tuc.jsp" class="text_h1">TIN TỨC</a>
+              <a href="${pageContext.request.contextPath}/views/web/tin_tuc/tin_tuc.jsp" class="text_h1">TIN TỨC</a>
             </li>
             <li class="p-4">
-              <a href="/views/web/ho_tro.jsp" class="text_h1">HỖ TRỢ KHÁCH HÀNG</a>
+              <a href="${pageContext.request.contextPath}/views/web/help.jsp" class="text_h1">HỖ TRỢ KHÁCH HÀNG</a>
             </li>
   
             <li class="p-4 mt-1 pointer">
               <i class="ti-align-justify i_right_number"></i>
               <ul class="header_line_2" style="min-width: 150px;">
-                <a href="/views/web/thu_vien.jsp">
+                <a href="${pageContext.request.contextPath}/views/web/library.jsp">
                   <li class="d-flex p-2 li_hover">
                     <span class="text_line_2">Thư viện</span>
                     <i class="mt-1 ti-angle-right ti_number" style="margin-left: 50px;"></i>
                   </li>
                 </a>
-                <a href="/views/web/doi_tac.jsp">
+                <a href="${pageContext.request.contextPath}/views/web/partner.jsp">
                   <li class="d-flex p-2 li_hover">
                     <span class="text_line_2">Đối tác</span>
                     <i class="mt-1 ti-angle-right ti_number" style="margin-left: 60px;"></i>
@@ -173,17 +174,17 @@
             </li>
             <!-- đã đăng nhập -->
             <li id="logged-in" class="p-4" style="display: none;">
-              <a href="/views/web/chi_tiet_ca_nhan/thong_tin_ca_nhan.jsp">
+              <a href="${pageContext.request.contextPath}/views/web/chi_tiet_ca_nhan/thong_tin_ca_nhan.jsp">
                 <div id="user-icon" class="user add_login">
                   <i class="fa-solid fa-user i_right_number mt-3 ms-3 text-white"></i>
                   <ul class="header_line_2 me-2" style="min-width: 150px; margin-top: 25px;">
-                    <a href="/views/web/chi_tiet_ca_nhan/thong_tin_ca_nhan.jsp">
+                    <a href="${pageContext.request.contextPath}/views/web/chi_tiet_ca_nhan/thong_tin_ca_nhan.jsp">
                       <li class="d-flex p-2 li_hover">
                         <i class="mt-1 fa-solid fa-user ms-2 me-2"></i>
                         <span class="text_line_2">Thông tin cá nhân</span>
                       </li>
                     </a>
-                    <a href="/views/web/chi_tiet_ca_nhan/don_hang_cua_toi.jsp">
+                    <a href="${pageContext.request.contextPath}/views/web/chi_tiet_ca_nhan/don_hang_cua_toi.jsp">
                       <li class="d-flex p-2 li_hover">
                         <i class="mt-1 fa-solid fa-box ms-2 me-2"></i>
                         <span class="text_line_2">Đơn hàng của tôi</span>
@@ -208,7 +209,7 @@
   
             <li class="p-4">
               <div class="cart d-flex">
-                <a href="/views/web/cart.jsp">
+                <a href="${pageContext.request.contextPath}/views/web/cart.jsp">
                   <i class="fa-solid fa-shopping-cart i_right_number mt-3 text-white"></i>
                   <span class="ms-1 text-white" style="margin-top: 14px;" >Giỏ hàng</span>
                 </a>

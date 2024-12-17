@@ -9,7 +9,7 @@
                 </div>
                 <div class="text_right mt-4">
                     <div class="button" style="background-color: #fcac18bc;">
-                        <a href="/assets/html/he_thong_cua_hang.html">
+                        <a href="${pageContext.request.contextPath}/views/web/he_thong_cua_hang.jsp">
                             <p class="text-white fw-bold" style="line-height: 47px;">Xem danh sách các cửa hàng</p>
                         </a>
                     </div>
@@ -36,76 +36,76 @@
                     </div>
                     <div class="col-md-2 text-left">
                         <div class="h4 text-light">SẢN PHẨM</div>
-                        <a href="/assets/html/each_product/product_pig.html">
+                        <a href="${pageContext.request.contextPath}/views/web/each_product/product_pig.jsp">
                             <div class="p mt-3">Thức ăn cho Heo</div>
                         </a>
-                        <a href="/assets/html/each_product/product_chicken.html">
+                        <a href="${pageContext.request.contextPath}/views/web/each_product/product_chicken.jsp">
                             <div class="p mt-3">Thức ăn cho Gà</div>
                         </a>
-                        <a href="/assets/html/each_product/product_duck.html">
+                        <a href="${pageContext.request.contextPath}/views/web/each_product/product_duck.jsp">
                             <div class="p mt-3">Thức ăn cho Vịt</div>
                         </a>
-                        <a href="/assets/html/each_product/product_cow.html">
+                        <a href="${pageContext.request.contextPath}/views/web/each_product/product_cow.jsp">
                             <div class="p mt-3">Thức ăn cho Bò</div>
                         </a>
-                        <a href="/assets/html/each_product/product_shirmp.html">
+                        <a href="${pageContext.request.contextPath}/views/web/each_product/product_shirmp.jsp">
                             <div class="p mt-3">Thức ăn cho Tôm</div>
                         </a>
-                        <a href="/assets/html/each_product/product_fish.html">
+                        <a href="${pageContext.request.contextPath}/views/web/each_product/product_fish.jsp">
                             <div class="p mt-3">Thức ăn cho Cá</div>
                         </a>
-                        <a href="/assets/html/each_product/product_goat.html">
+                        <a href="${pageContext.request.contextPath}/views/web/each_product/product_goat.jsp">
                             <div class="p mt-3">Thức ăn cho Dê</div>
                         </a>
                     </div>
                     <div class="col-md-2">
                         <div class="h4 text-light text-left">VỀ VINAFEED</div>
-                        <a href="/assets/html/gioi_thieu.html#gioi_thieu_chung">
+                        <a href="${pageContext.request.contextPath}/views/web/introduction.jsp#gioi_thieu_chung">
                             <div class="p mt-3">Giới thiệu chung</div>
                         </a>
-                        <a href="/assets/html/gioi_thieu.html#lich_su">
+                        <a href="${pageContext.request.contextPath}/views/web/introduction.jsp#lich_su">
                             <div class="p mt-3">Lịch sử hình thành</div>
                         </a>
-                        <a href="/assets/html/gioi_thieu.html#chien_luoc">
+                        <a href="${pageContext.request.contextPath}/views/web/introduction.jsp#chien_luoc">
                             <div class="p mt-3">Tầm nhìn chiến lược</div>
                         </a>
-                        <a href="/assets/html/gioi_thieu.html#quan_diem">
+                        <a href="${pageContext.request.contextPath}/views/web/introduction.jsp#quan_diem">
                             <div class="p mt-3">Quan điểm kinh doanh</div>
                         </a>
-                        <a href="/assets/html/gioi_thieu.html#cam_ket">
+                        <a href="${pageContext.request.contextPath}/views/web/introduction.jsp#cam_ket">
                             <div class="p mt-3">Cam kết chất lượng</div>
                         </a>
-                        <a href="/assets/html/gioi_thieu.html#nhan_luc">
+                        <a href="${pageContext.request.contextPath}/views/web/introduction.jsp#nhan_luc">
                             <div class="p mt-3">Nguồn nhân lực</div>
                         </a>
-                        <a href="/assets/html/gioi_thieu.html#van_hoa">
+                        <a href="${pageContext.request.contextPath}/views/web/introduction.jsp#van_hoa">
                             <div class="p mt-3">Văn hóa công ty</div>
                         </a>
-                        <a href="/assets/html/gioi_thieu.html#thanh_tich">
+                        <a href="${pageContext.request.contextPath}/views/web/introduction.jsp#thanh_tich">
                             <div class="p mt-3">Thành tích</div>
                         </a>
                     </div>
                     <div class="col-md-3">
                         <div class="h4 text-light">THÔNG TIN THÊM</div>
-                        <a href="/assets/html/tu_van.html">
+                        <a href="${pageContext.request.contextPath}/views/web/advise.jsp">
                             <div class="p mt-3">Tư vấn kỹ thuật</div>
                         </a>
-                        <a href="/assets/html/tin_tuc/tin_tuc.html">
+                        <a href="${pageContext.request.contextPath}/views/web/tin_tuc/tin_tuc.jsp">
                             <div class="p mt-3">Tin tức</div>
                         </a>
-                        <a href="/assets/html/thu_vien.html">
+                        <a href="${pageContext.request.contextPath}/views/web/library.jsp">
                             <div class="p mt-3">Thư viện</div>
                         </a>
-                        <a href="/assets/html/doi_tac.html">
+                        <a href="${pageContext.request.contextPath}/views/web/partner.jsp">
                             <div class="p mt-3">Đối tác</div>
                         </a>
-                        <a href="/assets/html/chinh_sach_bao_mat.html">
+                        <a href="${pageContext.request.contextPath}/views/web/privacy_policy.jsp">
                             <div class="p mt-3">Chính sách bảo mật</div>
                         </a>
-                        <a href="/assets/html/chinh_sach_mua_hang.html">
+                        <a href="${pageContext.request.contextPath}/views/web/purchasing_policy.jsp">
                             <div class="p mt-3">Hướng dẫn mua hàng & thanh toán online</div>
                         </a>
-                        <a href="/assets/html/ho_tro.html">
+                        <a href="${pageContext.request.contextPath}/views/web/help.jsp">
                             <div class="p mt-3">Hỗ trợ khách hàng</div>
                         </a>
                     </div>

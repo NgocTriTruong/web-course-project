@@ -186,7 +186,7 @@
         </div>
     </div>
 </main>
-
+<%@ include file="layout/near_footer.jsp" %>
 <%@ include file="layout/footer.jsp" %>
 </body>
 </html>

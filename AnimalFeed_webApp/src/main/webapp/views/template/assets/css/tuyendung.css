@@ -27,7 +27,7 @@
 /* Banner Section */
 .tuyendung .background-section {
     position: relative;
-    background-image: url("/views/template/assets/images/banner/banner_tuyendung.png");
+    background-image: url("../images/banner/banner_tuyendung.png");
     background-size: cover;
     background-position: center;
     height: 500px; /* Adjust height as needed */

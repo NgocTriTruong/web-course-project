@@ -1,20 +1,21 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cửa hàng</title>
-    <link rel="stylesheet" href="/assets/bootstrap/bootstrap.bundle.min.js">
-    <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/he_thong_cua_hang/he_thong_cua_hang.css">
-    <link rel="stylesheet" href="/assets/css/layout/header.css">
-    <link rel="stylesheet" href="/assets/css/layout/footer.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/he_thong_cua_hang/he_thong_cua_hang.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/header.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/footer.css">
 
-    <link rel="stylesheet" href="/assets/fonts/themify-icons/themify-icons.css">
-    <link rel="stylesheet" href="/assets/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
-    <script src="/assets/scripts/add_layout/add_layout.js" defer></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
+    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/add_layout.js" defer></script>
 
-     <script src="../scripts/confirm_login.js"></script>
+     <script src="${pageContext.request.contextPath}/views/template/assets/scripts/confirm_login.js"></script>
 
      <style>
         .address-form {
@@ -60,7 +61,8 @@
 
 </head>
 <body>
-    <div id="header-placeholder"></div>
+<%@ include file="layout/header.jsp" %>
+
     <main style="margin-top: 90px;">
         <div class="cua_hang bg-light pt-2">
             <div class="container">
@@ -137,21 +139,21 @@
                             </div>
                             <div class="row">
                                 <div class="cua_hang_right_number d-flex mt-4">
-                                    <img src="/assets/images/he_thong_cua_hang/nhan_vien_nhiet_tinh_icon_5d2e570b30.svg" alt="" height="50px">
+                                    <img src="${pageContext.request.contextPath}/views/template/assets/images/he_thong_cua_hang/nhan_vien_nhiet_tinh_icon_5d2e570b30.svg" alt="" height="50px">
                                     <div class="cua_hang_right_number_text ms-3">
                                         <div class="p fw-bold">Nhân viên nhiệt tình</div>
                                         <div class="p">Đỗ xe tiện lợi, phục vụ nhiệt tình, Quý Khách có thể hoàn toàn tin tưởng để mua sắm.</div>
                                     </div>
                                 </div>
                                 <div class="cua_hang_right_number d-flex mt-4">
-                                    <img src="/assets/images/he_thong_cua_hang/cua_hang_chinh_hang_icon_5f653abe67.svg" alt="" height="50px">
+                                    <img src="${pageContext.request.contextPath}/views/template/assets/images/he_thong_cua_hang/cua_hang_chinh_hang_icon_5f653abe67.svg" alt="" height="50px">
                                     <div class="cua_hang_right_number_text ms-3">
                                         <div class="p fw-bold">Cửa hàng chính hãng</div>
                                         <div class="p">Nhà phân phối các sản phẩm VINA, HAPPY... chính hãng.</div>
                                     </div>
                                 </div>
                                 <div class="cua_hang_right_number d-flex mt-4">
-                                    <img src="/assets/images/he_thong_cua_hang/giao_hang_mien_phi_icon_e1f184de65.svg" alt="" height="50px">
+                                    <img src="${pageContext.request.contextPath}/views/template/assets/images/he_thong_cua_hang/giao_hang_mien_phi_icon_e1f184de65.svg" alt="" height="50px">
                                     <div class="cua_hang_right_number_text ms-3">
                                         <div class="p fw-bold">Giao hàng miễn phí</div>
                                         <div class="p">Giao hàng tận nơi và miễn phí trong phạm vi bán kính lên đến 20km.</div>
@@ -160,21 +162,21 @@
                             </div>
                             <div class="row">
                                 <div class="cua_hang_right_number d-flex mt-5">
-                                    <img src="/assets/images/he_thong_cua_hang/thanh_toan_tien_loi_icon_99f781c7a5.svg" alt="" height="50px">
+                                    <img src="${pageContext.request.contextPath}/views/template/assets/images/he_thong_cua_hang/thanh_toan_tien_loi_icon_99f781c7a5.svg" alt="" height="50px">
                                     <div class="cua_hang_right_number_text ms-3">
                                         <div class="p fw-bold">Thanh toán tiện lợi</div>
                                         <div class="p">Thanh toán nhanh chóng từ tiền mặt đến thẻ ATM nội địa, VISA, MasterCard,...</div>
                                     </div>
                                 </div>
                                 <div class="cua_hang_right_number d-flex mt-5">
-                                    <img src="/assets/images/he_thong_cua_hang/thong_tin_san_pham_icon_163124fa49.svg" alt="" height="50px">
+                                    <img src="${pageContext.request.contextPath}/views/template/assets/images/he_thong_cua_hang/thong_tin_san_pham_icon_163124fa49.svg" alt="" height="50px">
                                     <div class="cua_hang_right_number_text ms-3">
                                         <div class="p fw-bold">Thông tin sản phẩm</div>
                                         <div class="p">Kiểm tra thông tin sản phẩm nhanh chóng tại các cửa hàng trên toàn quốc.</div>
                                     </div>
                                 </div>
                                 <div class="cua_hang_right_number d-flex mt-5">
-                                    <img src="/assets/images/he_thong_cua_hang/chinh_sach_bao_hanh_icon_b1d7a5f1d5.svg" alt="" height="50px">
+                                    <img src="${pageContext.request.contextPath}/views/template/assets/images/he_thong_cua_hang/chinh_sach_bao_hanh_icon_b1d7a5f1d5.svg" alt="" height="50px">
                                     <div class="cua_hang_right_number_text ms-3">
                                         <div class="p fw-bold">Chính sách bảo mật</div>
                                         <div class="p">Bảo mật tuyệt đối cho khách hàng của VINAFEED</div>
@@ -183,10 +185,10 @@
                             </div>
                             <div class="p fw-bold mt-3">Hình ảnh nhận diện hệ thống phân phối VINAFEED</div>
                             <div class="row d-flex mt-3 mb-5">
-                                <img src="/assets/images/he_thong_cua_hang/nha_phan_phoi1.jpg" alt="" height="100px" style="width: 210px;">
-                                <img src="/assets/images/he_thong_cua_hang/nha_phan_phoi2.jpg" alt="" height="100px" style="width: 210px;">
-                                <img src="/assets/images/he_thong_cua_hang/nha_phan_phoi3.jpg" alt="" height="100px" style="width: 210px;">
-                                <img src="/assets/images/he_thong_cua_hang/nha_phan_phoi4.jpg" alt="" height="100px" style="width: 210px;">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/he_thong_cua_hang/nha_phan_phoi1.jpg" alt="" height="100px" style="width: 210px;">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/he_thong_cua_hang/nha_phan_phoi2.jpg" alt="" height="100px" style="width: 210px;">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/he_thong_cua_hang/nha_phan_phoi3.jpg" alt="" height="100px" style="width: 210px;">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/he_thong_cua_hang/nha_phan_phoi4.jpg" alt="" height="100px" style="width: 210px;">
                             </div>
                         </div>
                     </div>
@@ -194,8 +196,9 @@
             </div>
         </div>
     </main>
-    <div id="footer-placeholder"></div>
+    <%@ include file="layout/near_footer.jsp" %>
+    <%@ include file="layout/footer.jsp" %>
 
-    <script src="/assets/scripts/call-api-address.js"></script>
+    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/call-api-address.js"></script>
 </body>
 </html>

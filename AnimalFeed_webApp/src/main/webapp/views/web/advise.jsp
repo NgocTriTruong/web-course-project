@@ -5,34 +5,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tư vấn</title>
-    <link rel="stylesheet" href="/assets/bootstrap/bootstrap.bundle.min.js">
-    <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="../template/assets/css/tu_van.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/tu_van.css">
 
-    <link rel="stylesheet" href="/assets/fonts/themify-icons/themify-icons.css">
-    <link rel="stylesheet" href="/assets/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.min.css">
 
-    <link rel="stylesheet" href="/assets/css/tu_van.css"></link>
-    <link rel="stylesheet" href="/assets/css/layout/header.css">
-    <link rel="stylesheet" href="/assets/css/layout/footer.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/tu_van.css"></link>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/header.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/footer.css">
 
-    <script src="/assets/scripts/add_layout/add_layout.js" defer></script>
+    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/add_layout.js" defer></script>
     
-    <link rel="stylesheet" href="/assets/css/login.css">
-    <link rel="stylesheet" href="/assets/css/signup.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/login.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/signup.css">
   
     <!-- scrollToTopBtn -->
-    <link rel="stylesheet" href="/assets/css/layout/scrollToTopBtn.css">
-    <script src="/assets/scripts/add_layout/scrollToTopBtn.js" defer></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/scrollToTopBtn.css">
+    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/scrollToTopBtn.js" defer></script>
 
-    <script src="/assets/scripts/confirm_login.js" defer></script>
+    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/confirm_login.js" defer></script>
 </head>
 <body>
 
-<div id="header-placeholder"></div>
+<%@ include file="layout/header.jsp" %>
 <main style="margin-top: 90px;">
     <div class="tu_van">
         <div class="background-section">
@@ -43,89 +43,90 @@
             <div class="container">
                 <div class="topic reverse">
                     <div class="image">
-                        <img src="/assets/images/represent-images/chicken_2.jpg" alt="Chickens">
+                        <img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/chicken_2.jpg" alt="Chickens">
                     </div>
                     <div class="content">
                         <h2>CHUYÊN ĐỀ GÀ</h2>
-                        <a href="/assets/html/chi_tiet_tu_van.html"><button>Xem tư vấn</button></a>
+                        <a href="${pageContext.request.contextPath}/views/web/advise_detail.jsp"><button>Xem tư vấn</button></a>
                     </div>
                 </div>
 
                 <div class="topic">
                     <div class="image">
-                        <img src="/assets/images/represent-images/duck_2.jpg" alt="Ducks">
+                        <img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/duck_2.jpg" alt="Ducks">
                     </div>
                     <div class="content">
                         <h2>CHUYÊN ĐỀ VỊT</h2>
-                        <a href="/assets/html/chi_tiet_tu_van.html"><button>Xem tư vấn</button></a>
+                        <a href="${pageContext.request.contextPath}/views/web/advise_detail.jsp"><button>Xem tư vấn</button></a>
                     </div>
                 </div>
 
                 <div class="topic reverse">
                     <div class="image">
-                        <img src="/assets/images/represent-images/pig_2.jpg" alt="Chickens">
+                        <img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/pig_2.jpg" alt="Chickens">
                     </div>
                     <div class="content">
                         <h2>CHUYÊN ĐỀ HEO</h2>
-                        <a href="/assets/html/chi_tiet_tu_van.html"><button>Xem tư vấn</button></a>
+                        <a href="${pageContext.request.contextPath}/views/web/advise_detail.jsp"><button>Xem tư vấn</button></a>
                     </div>
                 </div>
 
                 <div class="topic">
                     <div class="image">
-                        <img src="/assets/images/represent-images/cow_2.jpg" alt="Ducks">
+                        <img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/cow_2.jpg" alt="Ducks">
                     </div>
                     <div class="content">
                         <h2>CHUYÊN ĐỀ BÒ</h2>
-                        <a href="/assets/html/chi_tiet_tu_van.html"><button>Xem tư vấn</button></a>
+                        <a href="${pageContext.request.contextPath}/views/web/advise_detail.jsp"><button>Xem tư vấn</button></a>
                     </div>
                 </div>
 
                 <div class="topic reverse">
                     <div class="image">
-                        <img src="/assets/images/represent-images/shrimp.png" alt="Chickens">
+                        <img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/shrimp.png" alt="Chickens">
                     </div>
                     <div class="content">
                         <h2>CHUYÊN ĐỀ TÔM</h2>
-                        <a href="/assets/html/chi_tiet_tu_van.html"><button>Xem tư vấn</button></a>
+                        <a href="${pageContext.request.contextPath}/views/web/advise_detail.jsp"><button>Xem tư vấn</button></a>
                     </div>
                 </div>
 
                 <div class="topic">
                     <div class="image">
-                        <img src="/assets/images/represent-images/fish_2.jpg" alt="Ducks">
+                        <img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/fish_2.jpg" alt="Ducks">
                     </div>
                     <div class="content">
                         <h2>CHUYÊN ĐỀ CÁ</h2>
-                        <a href="/assets/html/chi_tiet_tu_van.html"><button>Xem tư vấn</button></a>
+                        <a href="${pageContext.request.contextPath}/views/web/advise_detail.jsp"><button>Xem tư vấn</button></a>
                     </div>
                 </div>
 
                 <div class="topic reverse">
                     <div class="image">
-                        <img src="/assets/images/represent-images/goat_2.jpg" alt="Chickens">
+                        <img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/goat_2.jpg" alt="Chickens">
                     </div>
                     <div class="content">
                         <h2>CHUYÊN ĐỀ DÊ</h2>
-                        <a href="/assets/html/chi_tiet_tu_van.html"><button>Xem tư vấn</button></a>
+                        <a href="${pageContext.request.contextPath}/views/web/advise_detail.jsp"><button>Xem tư vấn</button></a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </main>
-<div id="footer-placeholder"></div>
+<%@ include file="layout/near_footer.jsp" %>
+<%@ include file="layout/footer.jsp" %>
 
     <!-- Login -->
     <div id="login" class ="login">
         <div id ="login_container">
             <div class="login_close">
-                <img src="/assets/images/logo/close.png" alt="">
+                <img src="${pageContext.request.contextPath}/views/template/assets/images/logo/close.png" alt="">
             </div>
       
             <div class="login_header">
                 <div class="login_logo_shop">
-                    <img src="/assets/images/header/logo_vina.png" alt="Logo Shop">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/header/logo_vina.png" alt="Logo Shop">
                 </div>
                 <div class="login_header_text">
                     <h3 style="font-size: 24px;">Đăng nhập tài khoản</h3>
@@ -148,11 +149,11 @@
                 </div>
                 <div class="login_social">
                     <a href="" class="social_btn login_social_gg">
-                        <img src="/assets/images/social/google.png" alt="">
+                        <img src="${pageContext.request.contextPath}/views/template/assets/images/social/google.png" alt="">
                         <p>Google</p>
                     </a>
                     <a href="" class="social_btn login_social_zl">
-                        <img src="/assets/images/social/zalo.png" alt="">
+                        <img src="${pageContext.request.contextPath}/views/template/assets/images/social/zalo.png" alt="">
                         <p>Zalo</p>
                     </a>
                 </div>
@@ -167,12 +168,12 @@
       <div id="signup" class ="signup">
         <div id="signup_container">
             <div class="signup_close">
-                <img src="/assets/images/logo/close.png" alt="">
+                <img src="${pageContext.request.contextPath}/views/template/assets/images/logo/close.png" alt="">
             </div>
       
             <div class="signup_header">
                 <div class="signup_logo_shop">
-                    <img src="/assets/images/header/logo_vina.png" alt="Logo Shop">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/header/logo_vina.png" alt="Logo Shop">
                 </div>
                 <div class="signup_header_text">
                     <h3 style="font-size: 24px;">Đăng ký tài khoản</h3>
@@ -207,11 +208,11 @@
                 </div>
                 <div class="signup_social">
                     <a href="" class="social_btn signup_social_gg">
-                        <img src="/assets/images/social/google.png" alt="">
+                        <img src="${pageContext.request.contextPath}/views/template/assets/images/social/google.png" alt="">
                         <p>Google</p>
                     </a>
                     <a href="" class="social_btn signup_social_zl">
-                        <img src="/assets/images/social/zalo.png" alt="">
+                        <img src="${pageContext.request.contextPath}/views/template/assets/images/social/zalo.png" alt="">
                         <p>Zalo</p>
                     </a>
                 </div>
@@ -226,7 +227,7 @@
       <button id="scrollToTopBtn"><i class="fa-solid fa-chevron-up"></i></button>
 
 
-<script src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

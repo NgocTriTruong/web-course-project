@@ -94,6 +94,7 @@
     </section>
   </div>
 </main>
+<%@ include file="layout/near_footer.jsp" %>
 <%@ include file="layout/footer.jsp" %>
 <script src="${pageContext.request.contextPath}/views/template/assets/scripts/tuyendung.js"></script>
 </body>
