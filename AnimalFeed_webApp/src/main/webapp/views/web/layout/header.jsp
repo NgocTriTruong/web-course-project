@@ -5,6 +5,7 @@
     <div id="header" class="bg-light">
       <div class="content d-flex justify-content-center">
         <div class="logo_shop">
+
           <a href="${pageContext.request.contextPath}/index.jsp">
             <img src="${pageContext.request.contextPath}/views/template/assets/images/header/logo_vina.png" alt="Logo Vina" height="75px" width="90px" style=" margin: 9px 0 0 22px;">
           </a>
