@@ -47,7 +47,7 @@
   <button class="prev" onclick="changeSlideFirst(-1)">&#10094;</button>
   <button class="next" onclick="changeSlideFirst(1)">&#10095;</button>
 </div>
-<div id="header-placeholder"></div>
+<div id="header-placeholder"><%@ include file="views/web/layout/header.jsp" %></div>
 <div class="container-fuild bg-light text-center" style="height: 90px;">
   <marquee behavior="scroll" direction="left" scrollamount="10">
     <h3 class="text-center pt-3" style="color: #94b83d;">
@@ -450,7 +450,8 @@
     </div>
   </div>
 </main>
-<div id="footer-placeholder"></div>
+<%@ include file="views/web/layout/near_footer.jsp" %>
+<%@ include file="views/web/layout/footer.jsp" %>
 
 <!-- Login -->
 <div id="login" class ="login">
