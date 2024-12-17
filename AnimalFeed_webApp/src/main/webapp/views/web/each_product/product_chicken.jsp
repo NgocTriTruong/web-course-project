@@ -1,74 +1,83 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thức ăn cho bò</title>
+    <title>Thức ăn cho Gà</title>
 
-    <link rel="stylesheet" href="/assets/bootstrap/bootstrap.bundle.min.js">
-    <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/each_product.css">
-    <link rel="stylesheet" href="/assets/css/layout/header.css">
-    <link rel="stylesheet" href="/assets/css/layout/footer.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/each_product.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/header.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/footer.css">
 
-    <link rel="stylesheet" href="/assets/fonts/themify-icons/themify-icons.css">
-    <link rel="stylesheet" href="/assets/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
 
-    <script src="/assets/scripts/add_layout/add_layout.js" defer></script>
-    <script src="/assets/scripts/product/product_sale_new.js"></script>
-    <script src="/assets/scripts/product/tab_product_all.js"></script>
+    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/add_layout.js" defer></script>
+    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/product/product_sale_new.js"></script>
+    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/product/tab_product_all.js"></script>
 
-    <script src="../scripts/confirm_login.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/login.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/signup.css">
+  
+    <!-- scrollToTopBtn -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/scrollToTopBtn.css">
+    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/scrollToTopBtn.js" defer></script>
+
+    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/confirm_login.js"></script>
 </head>
 <body>
-    <div id="header-placeholder"></div>
+<%@ include file="../layout/header.jsp" %>
+
     <main style="margin-top: 95px;" class="product bg-light">
 
         <div class="position-relative text-center mb-4">
-            <img src="/assets/images/background/product-main-bg.jpg" class="img-fluid w-100" alt="Thức ăn cho vịt">
-            <h1 class="overlay-text">THỨC ĂN CHO BÒ</h1>
+            <img src="${pageContext.request.contextPath}/views/template/assets/images/background/product-main-bg.jpg" class="img-fluid w-100" alt="Thức ăn cho heo">
+            <h1 class="overlay-text">THỨC ĂN CHO GÀ</h1>
         </div>
 
         <div class="container">
             <div class="d-flex mb-3">
-                <button class="d-flex product_button_icon ms-3" onclick="window.location.href='/assets/html/each_product/product_pig.html'">
-                    <img src="/assets/images/represent-images/icon-pig.png" alt="pig-icon" width="30px" height="30px">
-                    <p class="ms-1 text-white">
+                <button class="d-flex product_button_icon ms-3" onclick="window.location.href='${pageContext.request.contextPath}/views/web/each_product/product_pig.jsp'">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-pig.png" alt="pig-icon" width="30px" height="30px">
+                    <p class="ms-1 text-white fw-bold">
                         Thức Ăn Cho Heo
                     </p>
                 </button>
-                <button class="d-flex product_button_icon " onclick="window.location.href='/assets/html/each_product/product_chicken.html'">
-                    <img src="/assets/images/represent-images/icon-chicken.png" alt="chicken-icon" width="30px" height="30px">
+                <button class="d-flex product_button_icon " style="background-color: #fcae18;" onclick="window.location.href='${pageContext.request.contextPath}/views/web/each_product/product_chicken.jsp'">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-chicken.png" alt="chicken-icon" width="30px" height="30px">
                     <p class="ms-1 text-white">
                         Thức Ăn Cho Gà
                     </p>
                 </button>
-                <button class="d-flex product_button_icon " onclick="window.location.href='/assets/html/each_product/product_duck.html'">
-                    <img src="/assets/images/represent-images/icon-duck.png" alt="duck-icon" width="30px" height="30px">
+                <button class="d-flex product_button_icon " onclick="window.location.href='${pageContext.request.contextPath}/views/web/each_product/product_duck.jsp'">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-duck.png" alt="duck-icon" width="30px" height="30px">
                     <p class="ms-1 text-white">
                         Thức Ăn Cho Vịt
                     </p>
                 </button>
-                <button class="d-flex product_button_icon " style="background-color: #fcae18;" onclick="window.location.href='/assets/html/each_product/product_cow.html'">
-                    <img src="/assets/images/represent-images/icon-cow.png" alt="cow-icon" width="30px" height="30px">
-                    <p class="ms-1 text-white fw-bold">
+                <button class="d-flex product_button_icon " onclick="window.location.href='${pageContext.request.contextPath}/views/web/each_product/product_cow.jsp'">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-cow.png" alt="cow-icon" width="30px" height="30px">
+                    <p class="ms-1 text-white">
                         Thức Ăn Cho Bò
                     </p>
                 </button>
-                <button class="d-flex product_button_icon " onclick="window.location.href='/assets/html/each_product/product_shirmp.html'">
-                    <img src="/assets/images/represent-images/icon-shrimp.png" alt="shrimp-icon" width="30px" height="30px">
+                <button class="d-flex product_button_icon " onclick="window.location.href='${pageContext.request.contextPath}/views/web/each_product/product_shirmp.jsp'">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-shrimp.png" alt="shrimp-icon" width="30px" height="30px">
                     <p class="ms-1 text-white">
                         Thức Ăn Cho Tôm
                     </p>
                 </button>
-                <button class="d-flex product_button_icon " onclick="window.location.href='/assets/html/each_product/product_fish.html'">
-                    <img src="/assets/images/represent-images/icon-fish.png" alt="fish-icon" width="30px" height="30px">
+                <button class="d-flex product_button_icon " onclick="window.location.href='${pageContext.request.contextPath}/views/web/each_product/product_fish.jsp'">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-fish.png" alt="fish-icon" width="30px" height="30px">
                     <p class="ms-1 text-white">
                         Thức Ăn Cho Cá
                     </p>
                 </button>
-                <button class="d-flex product_button_icon " onclick="window.location.href='/assets/html/each_product/product_goat.html'">
-                    <img src="/assets/images/represent-images/icon-goat.png" alt="goat-icon" width="30px" height="30px">
+                <button class="d-flex product_button_icon " onclick="window.location.href='${pageContext.request.contextPath}/views/web/each_product/product_goat.jsp'">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-goat.png" alt="goat-icon" width="30px" height="30px">
                     <p class="ms-1 text-white">
                         Thức Ăn Cho Dê
                     </p>
@@ -81,15 +90,15 @@
             <!-- Tab -->
             <div class="product_sale_new d-flex pt-4">
                 <div id="sale-tab" class="d-flex product_sale active-tab">
-                    <img src="/assets/images/product/share_all/product_sale.png" alt="" width="40px" height="40px">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/share_all/product_sale.png" alt="" width="40px" height="40px">
                     <p class="ms-2">Khuyến mãi Hot</p>
                 </div>
                 <div id="new-tab" class="d-flex product_new">
-                    <img src="/assets/images/product/share_all/product_new.png" alt="" width="40px" height="40px">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/share_all/product_new.png" alt="" width="40px" height="40px">
                     <p class="ms-2">Sản phẩm Mới</p>
                 </div>
                 <div id="best-tab" class="d-flex product_best">
-                    <img src="/assets/images/product/share_all/ban_chay.png" alt="" width="40px" height="40px">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/share_all/ban_chay.png" alt="" width="40px" height="40px">
                     <p class="ms-2">Sản phẩm Bán chạy</p>
                 </div>
             </div>
@@ -105,10 +114,10 @@
                                 <div class="sale_badge">20% OFF</div>
                             </div>
                             <div class="product-img">
-                                <img src="/assets/images/product/cow/222_1.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/341_Font.png" alt="TOP 01" height="250px" width="200px">
                             </div>
-                            <div class="h5 text-h">HAPPY 222</div>
-                            <div class="p mb-2 text-p">Dùng cho bò sữa</div>
+                            <div class="h5 text-h">HAPPY 341</div>
+                            <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 22 ngày tuổi đến khi xuất bán</div>
                             <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>
                             <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>
                             <div class="p text-start ms-3">Đã bán 1,1k</div>
@@ -123,10 +132,10 @@
                             <div class="sale_badge">20% OFF</div>
                         </div>
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/223_Font.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/340_Font.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">HAPPY 223</div>
-                        <div class="p mb-2 text-p">Dùng cho bò Lai Sind, bò thịt, bò vỗ béo, bê</div>
+                        <div class="h5 text-h">HAPPY 340</div>
+                        <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 01 đến 21 ngày tuổi</div>
                         <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>
                         <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
@@ -140,10 +149,10 @@
                             <div class="sale_badge">20% OFF</div>
                         </div>
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/901_Font.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/339_Font.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">VINA 901</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa</div>
+                        <div class="h5 text-h">HAPPY 339</div>
+                        <div class="p mb-2 text-p">Dùng cho gà lông màu vỗ béo</div>
                         <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>
                         <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
@@ -157,10 +166,10 @@
                             <div class="sale_badge">20% OFF</div>
                         </div>
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/910_Font.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/338_Font.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">VINA 910</div>
-                        <div class="p mb-2 text-p">Dùng cho vịt từ 22 ngày tuổi đến khi xuất bán</div>
+                        <div class="h5 text-h">HAPPY 338</div>
+                        <div class="p mb-2 text-p">Dùng cho gà lông màu từ 01 ngày tuổi đến khi xuất bán</div>
                         <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>
                         <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
@@ -172,33 +181,14 @@
                 </div>
                 <div class="row">
                     <div class="col-md-3 bg-light text-center m-3 col product_number">
-                        <a href="">
-                            <div class="sale_all">
-                                <div class="sale_badge">20% OFF</div>
-                            </div>
-                            <div class="product-img">
-                                <img src="/assets/images/product/cow/222_1.png" alt="TOP 01" height="250px" width="200px">
-                            </div>
-                            <div class="h5 text-h">HAPPY 222</div>
-                            <div class="p mb-2 text-p">Dùng cho bò sữa</div>
-                            <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>
-                            <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>
-                            <div class="p text-start ms-3">Đã bán 1,1k</div>
-                            <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                                <i class="fa-solid fa-truck mt-1"></i>
-                                <p class="ms-2">2 -4 ngày</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="sale_all">
                             <div class="sale_badge">20% OFF</div>
                         </div>
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/223_Font.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/337.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">HAPPY 223</div>
-                        <div class="p mb-2 text-p">Dùng cho bò Lai Sind, bò thịt, bò vỗ béo, bê</div>
+                        <div class="h5 text-h">HAPPY 337</div>
+                        <div class="p mb-4 text-p">Dùng cho gà đẻ thương phẩm.</div>
                         <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>
                         <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
@@ -212,10 +202,10 @@
                             <div class="sale_badge">20% OFF</div>
                         </div>
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/901_Font.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/336.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">VINA 901</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa</div>
+                        <div class="h5 text-h">HAPPY 336</div>
+                        <div class="p mb-4 text-p">Dùng cho gà hậu bị từ 9 – 18 tuần tuổi.</div>
                         <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>
                         <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
@@ -229,10 +219,27 @@
                             <div class="sale_badge">20% OFF</div>
                         </div>
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/910_Font.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/335.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">VINA 910</div>
-                        <div class="p mb-2 text-p">Dùng cho vịt từ 22 ngày tuổi đến khi xuất bán</div>
+                        <div class="h5 text-h">HAPPY 335</div>
+                        <div class="p mb-4 text-p">Dùng cho gà lông màu vỗ béo</div>
+                        <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>
+                        <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>
+                        <div class="p text-start ms-3">Đã bán 1,1k</div>
+                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
+                            <i class="fa-solid fa-truck mt-1"></i>
+                            <p class="ms-2">2 -4 ngày</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
+                        <div class="sale_all">
+                            <div class="sale_badge">20% OFF</div>
+                        </div>
+                        <div class="product-img">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/334.png" alt="TOP 01" height="250px" width="200px">
+                        </div>
+                        <div class="h5 text-h">HAPPY 334</div>
+                        <div class="p mb-4 text-p">Dùng cho gà lông màu từ 01 ngày tuổi đến khi xuất bán</div>
                         <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>
                         <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
@@ -245,33 +252,14 @@
                 <div id="more_product_sale" class="more_product_sale">
                     <div class="row">
                         <div class="col-md-3 bg-light text-center m-3 col product_number">
-                            <a href="">
-                                <div class="sale_all">
-                                    <div class="sale_badge">20% OFF</div>
-                                </div>
-                                <div class="product-img">
-                                    <img src="/assets/images/product/cow/222_1.png" alt="TOP 01" height="250px" width="200px">
-                                </div>
-                                <div class="h5 text-h">HAPPY 222</div>
-                                <div class="p mb-2 text-p">Dùng cho bò sữa</div>
-                                <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>
-                                <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>
-                                <div class="p text-start ms-3">Đã bán 1,1k</div>
-                                <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                                    <i class="fa-solid fa-truck mt-1"></i>
-                                    <p class="ms-2">2 -4 ngày</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-md-3 bg-light text-center m-3 col product_number">
                             <div class="sale_all">
                                 <div class="sale_badge">20% OFF</div>
                             </div>
                             <div class="product-img">
-                                <img src="/assets/images/product/cow/223_Font.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/337.png" alt="TOP 01" height="250px" width="200px">
                             </div>
-                            <div class="h5 text-h">HAPPY 223</div>
-                            <div class="p mb-2 text-p">Dùng cho bò Lai Sind, bò thịt, bò vỗ béo, bê</div>
+                            <div class="h5 text-h">HAPPY 337</div>
+                            <div class="p mb-4 text-p">Dùng cho gà đẻ thương phẩm.</div>
                             <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>
                             <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>
                             <div class="p text-start ms-3">Đã bán 1,1k</div>
@@ -285,10 +273,10 @@
                                 <div class="sale_badge">20% OFF</div>
                             </div>
                             <div class="product-img">
-                                <img src="/assets/images/product/cow/901_Font.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/336.png" alt="TOP 01" height="250px" width="200px">
                             </div>
-                            <div class="h5 text-h">VINA 901</div>
-                            <div class="p mb-2 text-p">Dùng cho bò sữa</div>
+                            <div class="h5 text-h">HAPPY 336</div>
+                            <div class="p mb-4 text-p">Dùng cho gà hậu bị từ 9 – 18 tuần tuổi.</div>
                             <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>
                             <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>
                             <div class="p text-start ms-3">Đã bán 1,1k</div>
@@ -302,10 +290,27 @@
                                 <div class="sale_badge">20% OFF</div>
                             </div>
                             <div class="product-img">
-                                <img src="/assets/images/product/cow/910_Font.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/335.png" alt="TOP 01" height="250px" width="200px">
                             </div>
-                            <div class="h5 text-h">VINA 910</div>
-                            <div class="p mb-2 text-p">Dùng cho vịt từ 22 ngày tuổi đến khi xuất bán</div>
+                            <div class="h5 text-h">HAPPY 335</div>
+                            <div class="p mb-4 text-p">Dùng cho gà lông màu vỗ béo</div>
+                            <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>
+                            <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>
+                            <div class="p text-start ms-3">Đã bán 1,1k</div>
+                            <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
+                                <i class="fa-solid fa-truck mt-1"></i>
+                                <p class="ms-2">2 -4 ngày</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 bg-light text-center m-3 col product_number">
+                            <div class="sale_all">
+                                <div class="sale_badge">20% OFF</div>
+                            </div>
+                            <div class="product-img">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/334.png" alt="TOP 01" height="250px" width="200px">
+                            </div>
+                            <div class="h5 text-h">HAPPY 334</div>
+                            <div class="p mb-4 text-p">Dùng cho gà lông màu từ 01 ngày tuổi đến khi xuất bán</div>
                             <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>
                             <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>
                             <div class="p text-start ms-3">Đã bán 1,1k</div>
@@ -322,10 +327,10 @@
                                     <div class="sale_badge">20% OFF</div>
                                 </div>
                                 <div class="product-img">
-                                    <img src="/assets/images/product/cow/222_1.png" alt="TOP 01" height="250px" width="200px">
+                                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/341_Font.png" alt="TOP 01" height="250px" width="200px">
                                 </div>
-                                <div class="h5 text-h">HAPPY 222</div>
-                                <div class="p mb-2 text-p">Dùng cho bò sữa</div>
+                                <div class="h5 text-h">HAPPY 341</div>
+                                <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 22 ngày tuổi đến khi xuất bán</div>
                                 <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>
                                 <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>
                                 <div class="p text-start ms-3">Đã bán 1,1k</div>
@@ -340,10 +345,10 @@
                                 <div class="sale_badge">20% OFF</div>
                             </div>
                             <div class="product-img">
-                                <img src="/assets/images/product/cow/223_Font.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/340_Font.png" alt="TOP 01" height="250px" width="200px">
                             </div>
-                            <div class="h5 text-h">HAPPY 223</div>
-                            <div class="p mb-2 text-p">Dùng cho bò Lai Sind, bò thịt, bò vỗ béo, bê</div>
+                            <div class="h5 text-h">HAPPY 340</div>
+                            <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 01 đến 21 ngày tuổi</div>
                             <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>
                             <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>
                             <div class="p text-start ms-3">Đã bán 1,1k</div>
@@ -357,10 +362,10 @@
                                 <div class="sale_badge">20% OFF</div>
                             </div>
                             <div class="product-img">
-                                <img src="/assets/images/product/cow/901_Font.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/339_Font.png" alt="TOP 01" height="250px" width="200px">
                             </div>
-                            <div class="h5 text-h">VINA 901</div>
-                            <div class="p mb-2 text-p">Dùng cho bò sữa</div>
+                            <div class="h5 text-h">HAPPY 339</div>
+                            <div class="p mb-2 text-p">Dùng cho gà lông màu vỗ béo</div>
                             <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>
                             <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>
                             <div class="p text-start ms-3">Đã bán 1,1k</div>
@@ -374,10 +379,10 @@
                                 <div class="sale_badge">20% OFF</div>
                             </div>
                             <div class="product-img">
-                                <img src="/assets/images/product/cow/910_Font.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/338_Font.png" alt="TOP 01" height="250px" width="200px">
                             </div>
-                            <div class="h5 text-h">VINA 910</div>
-                            <div class="p mb-2 text-p">Dùng cho vịt từ 22 ngày tuổi đến khi xuất bán</div>
+                            <div class="h5 text-h">HAPPY 338</div>
+                            <div class="p mb-2 text-p">Dùng cho gà lông màu từ 01 ngày tuổi đến khi xuất bán</div>
                             <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>
                             <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>
                             <div class="p text-start ms-3">Đã bán 1,1k</div>
@@ -395,14 +400,14 @@
             <div id="new-products" style="display: none;">
                 <div class="row">
                     <div class="col-md-3 bg-light text-center m-3 col product_number">
-                        <div class="sale_all">
+                        <div class="sale_all">  
                             <div class="new_badge">New</div>
                         </div>
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/a60---25kg---05.09.22.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/341_Font.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">ANOVA 60</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa</div>
+                        <div class="h5 text-h">HAPPY 341</div>
+                        <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 22 ngày tuổi đến khi xuất bán</div>
                         <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
@@ -415,10 +420,10 @@
                             <div class="new_badge">New</div>
                         </div>
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/a61---25kg---13.02.23.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/340_Font.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">ANOVA 61</div>
-                        <div class="p mb-2 text-p">Dùng cho bò vỗ béo</div>
+                        <div class="h5 text-h">HAPPY 340</div>
+                        <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 01 đến 21 ngày tuổi</div>
                         <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
@@ -431,10 +436,10 @@
                             <div class="new_badge">New</div>
                         </div>
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/B60.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/258.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">TPD B60</div>
-                        <div class="p mb-2 text-p">Dùng cho bò thịt vỗ béo trên 6 tháng tuổi</div>
+                        <div class="h5 text-h">VINA 258</div>
+                        <div class="p mb-2 text-p">Dùng cho gà lông màu vỗ béo</div>
                         <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
@@ -447,10 +452,10 @@
                             <div class="new_badge">New</div>
                         </div>
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/B62S.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/259_Font.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">TPD B62S</div>
-                        <div class="p mb-2 text-p">Dùng cho bò thịt cao sản</div>
+                        <div class="h5 text-h">VINA 259</div>
+                        <div class="p mb-2 text-p">Dùng cho gà lông màu từ 01 ngày tuổi đến khi xuất bán</div>
                         <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
@@ -465,10 +470,10 @@
                             <div class="new_badge">New</div>
                         </div>
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/B75.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/260.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">TPD B75</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa, bò sinh sản</div>
+                        <div class="h5 text-h">VINA 260</div>
+                        <div class="p mb-4 text-p">Dùng cho gà lông màu vỗ béo</div>
                         <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
@@ -481,10 +486,26 @@
                             <div class="new_badge">New</div>
                         </div>
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/B77.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/271.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">TPD B77</div>
-                        <div class="p mb-2 text-p">Dùng cho bò thịt cao sản</div>
+                        <div class="h5 text-h">VINA 271</div>
+                        <div class="p mb-4 text-p">Dùng cho gà hậu bị từ 9 - 18 tuần tuổi</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
+                        <div class="p text-start ms-3">Đã bán 1,1k</div>
+                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
+                            <i class="fa-solid fa-truck mt-1"></i>
+                            <p class="ms-2">2 -4 ngày</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
+                        <div class="sale_all">  
+                            <div class="new_badge">New</div>
+                        </div>
+                        <div class="product-img">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/341_Font.png" alt="TOP 01" height="250px" width="200px">
+                        </div>
+                        <div class="h5 text-h">HAPPY 341</div>
+                        <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 22 ngày tuổi đến khi xuất bán</div>
                         <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
@@ -497,26 +518,10 @@
                             <div class="new_badge">New</div>
                         </div>
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/br_MGB_print-34.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/340_Font.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">5305</div>
-                        <div class="p mb-2 text-p">Dùng cho bò con từ 0 đến 4 tháng tuổi</div>
-                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
-                        <div class="p text-start ms-3">Đã bán 1,1k</div>
-                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                            <i class="fa-solid fa-truck mt-1"></i>
-                            <p class="ms-2">2 -4 ngày</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 bg-light text-center m-3 col product_number">
-                        <div class="sale_all">
-                            <div class="new_badge">New</div>
-                        </div>
-                        <div class="product-img">
-                            <img src="/assets/images/product/cow/br_MGB_print-35.png" alt="TOP 01" height="250px" width="200px">
-                        </div>
-                        <div class="h5 text-h">555</div>
-                        <div class="p mb-2 text-p">Dùng cho bò thịt, bò vỗ béo</div>
+                        <div class="h5 text-h">HAPPY 340</div>
+                        <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 01 đến 21 ngày tuổi</div>
                         <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
@@ -528,14 +533,14 @@
                 <div id="more_product_new" class="more_product_sale">
                     <div class="row">
                         <div class="col-md-3 bg-light text-center m-3 col product_number">
-                            <div class="sale_all">
+                            <div class="sale_all">  
                                 <div class="new_badge">New</div>
                             </div>
                             <div class="product-img">
-                                <img src="/assets/images/product/cow/br_MGB_print-39.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/341_Font.png" alt="TOP 01" height="250px" width="200px">
                             </div>
-                            <div class="h5 text-h">5605</div>
-                            <div class="p mb-2 text-p">Dùng cho bò sữa</div>
+                            <div class="h5 text-h">HAPPY 341</div>
+                            <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 22 ngày tuổi đến khi xuất bán</div>
                             <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                             <div class="p text-start ms-3">Đã bán 1,1k</div>
                             <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
@@ -548,10 +553,10 @@
                                 <div class="new_badge">New</div>
                             </div>
                             <div class="product-img">
-                                <img src="/assets/images/product/cow/hp60.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/340_Font.png" alt="TOP 01" height="250px" width="200px">
                             </div>
-                            <div class="h5 text-h">HP 60</div>
-                            <div class="p mb-2 text-p">Dùng cho bò thịt, bò vỗ béo</div>
+                            <div class="h5 text-h">HAPPY 340</div>
+                            <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 01 đến 21 ngày tuổi</div>
                             <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                             <div class="p text-start ms-3">Đã bán 1,1k</div>
                             <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
@@ -564,10 +569,10 @@
                                 <div class="new_badge">New</div>
                             </div>
                             <div class="product-img">
-                                <img src="/assets/images/product/cow/hp62-1.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/258.png" alt="TOP 01" height="250px" width="200px">
                             </div>
-                            <div class="h5 text-h">HP 62M</div>
-                            <div class="p mb-2 text-p">Dùng cho bò thịt, bò vỗ béo</div>
+                            <div class="h5 text-h">VINA 258</div>
+                            <div class="p mb-2 text-p">Dùng cho gà lông màu vỗ béo</div>
                             <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                             <div class="p text-start ms-3">Đã bán 1,1k</div>
                             <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
@@ -580,10 +585,10 @@
                                 <div class="new_badge">New</div>
                             </div>
                             <div class="product-img">
-                                <img src="/assets/images/product/cow/hp62.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/259_Font.png" alt="TOP 01" height="250px" width="200px">
                             </div>
-                            <div class="h5 text-h">HP 62</div>
-                            <div class="p mb-2 text-p">Dùng cho bò thịt</div>
+                            <div class="h5 text-h">VINA 259</div>
+                            <div class="p mb-2 text-p">Dùng cho gà lông màu từ 01 ngày tuổi đến khi xuất bán</div>
                             <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                             <div class="p text-start ms-3">Đã bán 1,1k</div>
                             <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
@@ -598,10 +603,10 @@
                                 <div class="new_badge">New</div>
                             </div>
                             <div class="product-img">
-                                <img src="/assets/images/product/cow/B75.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/260.png" alt="TOP 01" height="250px" width="200px">
                             </div>
-                            <div class="h5 text-h">TPD B75</div>
-                            <div class="p mb-2 text-p">Dùng cho bò sữa, bò sinh sản</div>
+                            <div class="h5 text-h">VINA 260</div>
+                            <div class="p mb-4 text-p">Dùng cho gà lông màu vỗ béo</div>
                             <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                             <div class="p text-start ms-3">Đã bán 1,1k</div>
                             <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
@@ -614,10 +619,26 @@
                                 <div class="new_badge">New</div>
                             </div>
                             <div class="product-img">
-                                <img src="/assets/images/product/cow/B77.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/271.png" alt="TOP 01" height="250px" width="200px">
                             </div>
-                            <div class="h5 text-h">TPD B77</div>
-                            <div class="p mb-2 text-p">Dùng cho bò thịt cao sản</div>
+                            <div class="h5 text-h">VINA 271</div>
+                            <div class="p mb-4 text-p">Dùng cho gà hậu bị từ 9 - 18 tuần tuổi</div>
+                            <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
+                            <div class="p text-start ms-3">Đã bán 1,1k</div>
+                            <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
+                                <i class="fa-solid fa-truck mt-1"></i>
+                                <p class="ms-2">2 -4 ngày</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 bg-light text-center m-3 col product_number">
+                            <div class="sale_all">  
+                                <div class="new_badge">New</div>
+                            </div>
+                            <div class="product-img">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/341_Font.png" alt="TOP 01" height="250px" width="200px">
+                            </div>
+                            <div class="h5 text-h">HAPPY 341</div>
+                            <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 22 ngày tuổi đến khi xuất bán</div>
                             <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                             <div class="p text-start ms-3">Đã bán 1,1k</div>
                             <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
@@ -630,26 +651,10 @@
                                 <div class="new_badge">New</div>
                             </div>
                             <div class="product-img">
-                                <img src="/assets/images/product/cow/br_MGB_print-34.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/340_Font.png" alt="TOP 01" height="250px" width="200px">
                             </div>
-                            <div class="h5 text-h">5305</div>
-                            <div class="p mb-2 text-p">Dùng cho bò con từ 0 đến 4 tháng tuổi</div>
-                            <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
-                            <div class="p text-start ms-3">Đã bán 1,1k</div>
-                            <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                                <i class="fa-solid fa-truck mt-1"></i>
-                                <p class="ms-2">2 -4 ngày</p>
-                            </div>
-                        </div>
-                        <div class="col-md-3 bg-light text-center m-3 col product_number">
-                            <div class="sale_all">
-                                <div class="new_badge">New</div>
-                            </div>
-                            <div class="product-img">
-                                <img src="/assets/images/product/cow/br_MGB_print-35.png" alt="TOP 01" height="250px" width="200px">
-                            </div>
-                            <div class="h5 text-h">555</div>
-                            <div class="p mb-2 text-p">Dùng cho bò thịt, bò vỗ béo</div>
+                            <div class="h5 text-h">HAPPY 340</div>
+                            <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 01 đến 21 ngày tuổi</div>
                             <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                             <div class="p text-start ms-3">Đã bán 1,1k</div>
                             <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
@@ -667,10 +672,10 @@
                 <div class="row">
                     <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/a60---25kg---05.09.22.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/341_Font.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">ANOVA 60</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa</div>
+                        <div class="h5 text-h">HAPPY 341</div>
+                        <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 22 ngày tuổi đến khi xuất bán</div>
                         <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
@@ -680,10 +685,10 @@
                     </div>
                     <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/a61---25kg---13.02.23.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/340_Font.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">ANOVA 61</div>
-                        <div class="p mb-2 text-p">Dùng cho bò vỗ béo</div>
+                        <div class="h5 text-h">HAPPY 340</div>
+                        <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 01 đến 21 ngày tuổi</div>
                         <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
@@ -693,10 +698,10 @@
                     </div>
                     <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/B60.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/258.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">TPD B60</div>
-                        <div class="p mb-2 text-p">Dùng cho bò thịt vỗ béo trên 6 tháng tuổi</div>
+                        <div class="h5 text-h">VINA 258</div>
+                        <div class="p mb-2 text-p">Dùng cho gà lông màu vỗ béo</div>
                         <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
@@ -706,10 +711,10 @@
                     </div>
                     <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/B62S.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/259_Font.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">TPD B62S</div>
-                        <div class="p mb-2 text-p">Dùng cho bò thịt cao sản</div>
+                        <div class="h5 text-h">VINA 259</div>
+                        <div class="p mb-2 text-p">Dùng cho gà lông màu từ 01 ngày tuổi đến khi xuất bán</div>
                         <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
@@ -721,10 +726,10 @@
                 <div class="row">
                     <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/a60---25kg---05.09.22.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/260.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">ANOVA 60</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa</div>
+                        <div class="h5 text-h">VINA 260</div>
+                        <div class="p mb-4 text-p">Dùng cho gà lông màu vỗ béo</div>
                         <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
@@ -734,10 +739,10 @@
                     </div>
                     <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/a61---25kg---13.02.23.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/271.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">ANOVA 61</div>
-                        <div class="p mb-2 text-p">Dùng cho bò vỗ béo</div>
+                        <div class="h5 text-h">VINA 271</div>
+                        <div class="p mb-4 text-p">Dùng cho gà hậu bị từ 9 - 18 tuần tuổi</div>
                         <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
@@ -747,10 +752,10 @@
                     </div>
                     <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/B60.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/341_Font.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">TPD B60</div>
-                        <div class="p mb-2 text-p">Dùng cho bò thịt vỗ béo trên 6 tháng tuổi</div>
+                        <div class="h5 text-h">HAPPY 341</div>
+                        <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 22 ngày tuổi đến khi xuất bán</div>
                         <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
@@ -760,10 +765,10 @@
                     </div>
                     <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/B62S.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/340_Font.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">TPD B62S</div>
-                        <div class="p mb-2 text-p">Dùng cho bò thịt cao sản</div>
+                        <div class="h5 text-h">HAPPY 340</div>
+                        <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 01 đến 21 ngày tuổi</div>
                         <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
@@ -776,10 +781,10 @@
                     <div class="row">
                         <div class="col-md-3 bg-light text-center m-3 col product_number">
                             <div class="product-img">
-                                <img src="/assets/images/product/cow/a60---25kg---05.09.22.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/341_Font.png" alt="TOP 01" height="250px" width="200px">
                             </div>
-                            <div class="h5 text-h">ANOVA 60</div>
-                            <div class="p mb-2 text-p">Dùng cho bò sữa</div>
+                            <div class="h5 text-h">HAPPY 341</div>
+                            <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 22 ngày tuổi đến khi xuất bán</div>
                             <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                             <div class="p text-start ms-3">Đã bán 1,1k</div>
                             <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
@@ -789,10 +794,10 @@
                         </div>
                         <div class="col-md-3 bg-light text-center m-3 col product_number">
                             <div class="product-img">
-                                <img src="/assets/images/product/cow/a61---25kg---13.02.23.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/340_Font.png" alt="TOP 01" height="250px" width="200px">
                             </div>
-                            <div class="h5 text-h">ANOVA 61</div>
-                            <div class="p mb-2 text-p">Dùng cho bò vỗ béo</div>
+                            <div class="h5 text-h">HAPPY 340</div>
+                            <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 01 đến 21 ngày tuổi</div>
                             <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                             <div class="p text-start ms-3">Đã bán 1,1k</div>
                             <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
@@ -802,10 +807,10 @@
                         </div>
                         <div class="col-md-3 bg-light text-center m-3 col product_number">
                             <div class="product-img">
-                                <img src="/assets/images/product/cow/B60.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/258.png" alt="TOP 01" height="250px" width="200px">
                             </div>
-                            <div class="h5 text-h">TPD B60</div>
-                            <div class="p mb-2 text-p">Dùng cho bò thịt vỗ béo trên 6 tháng tuổi</div>
+                            <div class="h5 text-h">VINA 258</div>
+                            <div class="p mb-2 text-p">Dùng cho gà lông màu vỗ béo</div>
                             <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                             <div class="p text-start ms-3">Đã bán 1,1k</div>
                             <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
@@ -815,10 +820,10 @@
                         </div>
                         <div class="col-md-3 bg-light text-center m-3 col product_number">
                             <div class="product-img">
-                                <img src="/assets/images/product/cow/B62S.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/259_Font.png" alt="TOP 01" height="250px" width="200px">
                             </div>
-                            <div class="h5 text-h">TPD B62S</div>
-                            <div class="p mb-2 text-p">Dùng cho bò thịt cao sản</div>
+                            <div class="h5 text-h">VINA 259</div>
+                            <div class="p mb-2 text-p">Dùng cho gà lông màu từ 01 ngày tuổi đến khi xuất bán</div>
                             <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                             <div class="p text-start ms-3">Đã bán 1,1k</div>
                             <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
@@ -830,10 +835,10 @@
                     <div class="row">
                         <div class="col-md-3 bg-light text-center m-3 col product_number">
                             <div class="product-img">
-                                <img src="/assets/images/product/cow/a60---25kg---05.09.22.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/260.png" alt="TOP 01" height="250px" width="200px">
                             </div>
-                            <div class="h5 text-h">ANOVA 60</div>
-                            <div class="p mb-2 text-p">Dùng cho bò sữa</div>
+                            <div class="h5 text-h">VINA 260</div>
+                            <div class="p mb-4 text-p">Dùng cho gà lông màu vỗ béo</div>
                             <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                             <div class="p text-start ms-3">Đã bán 1,1k</div>
                             <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
@@ -843,10 +848,10 @@
                         </div>
                         <div class="col-md-3 bg-light text-center m-3 col product_number">
                             <div class="product-img">
-                                <img src="/assets/images/product/cow/a61---25kg---13.02.23.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/271.png" alt="TOP 01" height="250px" width="200px">
                             </div>
-                            <div class="h5 text-h">ANOVA 61</div>
-                            <div class="p mb-2 text-p">Dùng cho bò vỗ béo</div>
+                            <div class="h5 text-h">VINA 271</div>
+                            <div class="p mb-4 text-p">Dùng cho gà hậu bị từ 9 - 18 tuần tuổi</div>
                             <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                             <div class="p text-start ms-3">Đã bán 1,1k</div>
                             <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
@@ -856,10 +861,10 @@
                         </div>
                         <div class="col-md-3 bg-light text-center m-3 col product_number">
                             <div class="product-img">
-                                <img src="/assets/images/product/cow/B60.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/341_Font.png" alt="TOP 01" height="250px" width="200px">
                             </div>
-                            <div class="h5 text-h">TPD B60</div>
-                            <div class="p mb-2 text-p">Dùng cho bò thịt vỗ béo trên 6 tháng tuổi</div>
+                            <div class="h5 text-h">HAPPY 341</div>
+                            <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 22 ngày tuổi đến khi xuất bán</div>
                             <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                             <div class="p text-start ms-3">Đã bán 1,1k</div>
                             <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
@@ -869,10 +874,10 @@
                         </div>
                         <div class="col-md-3 bg-light text-center m-3 col product_number">
                             <div class="product-img">
-                                <img src="/assets/images/product/cow/B62S.png" alt="TOP 01" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/340_Font.png" alt="TOP 01" height="250px" width="200px">
                             </div>
-                            <div class="h5 text-h">TPD B62S</div>
-                            <div class="p mb-2 text-p">Dùng cho bò thịt cao sản</div>
+                            <div class="h5 text-h">HAPPY 340</div>
+                            <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 01 đến 21 ngày tuổi</div>
                             <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                             <div class="p text-start ms-3">Đã bán 1,1k</div>
                             <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
@@ -892,9 +897,11 @@
                 <div class="col-md-3">
                     <select id="group" class="form-select" style="height: 50px; font-size: 20px;">
                         <option value="" selected>Nhóm sản phẩm</option>
-                        <option value="Bò thịt">Thức ăn cho bò thịt</option>
-                        <option value="Bò sữa">Thức ăn cho bò sữa</option>
-                        <option value="Bò con">Thức ăn cho bò con</option>
+                        <option value="Vịt thịt">Thức ăn cho gà con</option>
+                        <option value="Vịt trứng">Thức ăn cho gà thịt</option>
+                        <option value="Tổng hợp">Thức ăn cho gà nậu bị</option>
+                        <option value="Tổng hợp">Thức ăn cho gà mái</option>
+                        <option value="Tổng hợp">Thức ăn cho gà trống</option>
                     </select>
                 </div>
                 <div class="col-md-3">
@@ -902,10 +909,6 @@
                         <option value="" selected>Thương Hiệu</option>
                         <option value="Vina">Vina</option>
                         <option value="Happy">Happy</option>
-                        <option value="TPD">Tân Phương Đông</option>
-                        <option value="HP">HPFood</option>
-                        <option value="Anova">Anova</option>
-                        <option value="Kyodo">Kyodo</option>
                     </select>
                 </div>
                 <div class="col-md-3">
@@ -923,106 +926,52 @@
             <!--product one -->
             <div id="product_all_one">
                 <div class="row">
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/222_1.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/341_Font.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">HAPPY 222</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
+                        <div class="h5 text-h">HAPPY 341</div>
+                        <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 22 ngày tuổi đến khi xuất bán</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                             <i class="fa-solid fa-truck mt-1"></i>
                             <p class="ms-2">2 -4 ngày</p>
                         </div>
                     </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/910_Font.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/340_Font.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">VINA 910</div>
-                        <div class="p mb-2 text-p"> Dùng cho bò Lai Sind, bò thịt, bò vỗ béo, bê</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
+                        <div class="h5 text-h">HAPPY 340</div>
+                        <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 01 đến 21 ngày tuổi</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                             <i class="fa-solid fa-truck mt-1"></i>
                             <p class="ms-2">2 -4 ngày</p>
                         </div>
                     </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/a60---25kg---05.09.22.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/258.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">ANOVA 60</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
+                        <div class="h5 text-h">VINA 258</div>
+                        <div class="p mb-2 text-p">Dùng cho gà lông màu vỗ béo</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                             <i class="fa-solid fa-truck mt-1"></i>
                             <p class="ms-2">2 -4 ngày</p>
                         </div>
                     </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/B75.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/259_Font.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">TPD B75</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa, bò sinh sản</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
-                        <div class="p text-start ms-3">Đã bán 1,1k</div>
-                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                            <i class="fa-solid fa-truck mt-1"></i>
-                            <p class="ms-2">2 -4 ngày</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
-                        <div class="product-img">
-                            <img src="/assets/images/product/cow/222_1.png" alt="TOP 01" height="250px" width="200px">
-                        </div>
-                        <div class="h5 text-h">HAPPY 222</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
-                        <div class="p text-start ms-3">Đã bán 1,1k</div>
-                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                            <i class="fa-solid fa-truck mt-1"></i>
-                            <p class="ms-2">2 -4 ngày</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
-                        <div class="product-img">
-                            <img src="/assets/images/product/cow/910_Font.png" alt="TOP 01" height="250px" width="200px">
-                        </div>
-                        <div class="h5 text-h">VINA 910</div>
-                        <div class="p mb-2 text-p"> Dùng cho bò Lai Sind, bò thịt, bò vỗ béo, bê</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
-                        <div class="p text-start ms-3">Đã bán 1,1k</div>
-                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                            <i class="fa-solid fa-truck mt-1"></i>
-                            <p class="ms-2">2 -4 ngày</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
-                        <div class="product-img">
-                            <img src="/assets/images/product/cow/a60---25kg---05.09.22.png" alt="TOP 01" height="250px" width="200px">
-                        </div>
-                        <div class="h5 text-h">ANOVA 60</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
-                        <div class="p text-start ms-3">Đã bán 1,1k</div>
-                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                            <i class="fa-solid fa-truck mt-1"></i>
-                            <p class="ms-2">2 -4 ngày</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
-                        <div class="product-img">
-                            <img src="/assets/images/product/cow/B75.png" alt="TOP 01" height="250px" width="200px">
-                        </div>
-                        <div class="h5 text-h">TPD B75</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa, bò sinh sản</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
+                        <div class="h5 text-h">VINA 259</div>
+                        <div class="p mb-2 text-p">Dùng cho gà lông màu từ 01 ngày tuổi đến khi xuất bán</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                             <i class="fa-solid fa-truck mt-1"></i>
@@ -1031,52 +980,52 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/222_1.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/260.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">HAPPY 222</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
+                        <div class="h5 text-h">VINA 260</div>
+                        <div class="p mb-4 text-p">Dùng cho gà lông màu vỗ béo</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                             <i class="fa-solid fa-truck mt-1"></i>
                             <p class="ms-2">2 -4 ngày</p>
                         </div>
                     </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/910_Font.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/271.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">VINA 910</div>
-                        <div class="p mb-2 text-p"> Dùng cho bò Lai Sind, bò thịt, bò vỗ béo, bê</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
+                        <div class="h5 text-h">VINA 271</div>
+                        <div class="p mb-4 text-p">Dùng cho gà hậu bị từ 9 - 18 tuần tuổi</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                             <i class="fa-solid fa-truck mt-1"></i>
                             <p class="ms-2">2 -4 ngày</p>
                         </div>
                     </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/a60---25kg---05.09.22.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/341_Font.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">ANOVA 60</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
+                        <div class="h5 text-h">HAPPY 341</div>
+                        <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 22 ngày tuổi đến khi xuất bán</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                             <i class="fa-solid fa-truck mt-1"></i>
                             <p class="ms-2">2 -4 ngày</p>
                         </div>
                     </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/B75.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/340_Font.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">TPD B75</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa, bò sinh sản</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
+                        <div class="h5 text-h">HAPPY 340</div>
+                        <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 01 đến 21 ngày tuổi</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                             <i class="fa-solid fa-truck mt-1"></i>
@@ -1085,52 +1034,106 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/222_1.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/341_Font.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">HAPPY 222</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
+                        <div class="h5 text-h">HAPPY 341</div>
+                        <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 22 ngày tuổi đến khi xuất bán</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                             <i class="fa-solid fa-truck mt-1"></i>
                             <p class="ms-2">2 -4 ngày</p>
                         </div>
                     </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/910_Font.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/340_Font.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">VINA 910</div>
-                        <div class="p mb-2 text-p"> Dùng cho bò Lai Sind, bò thịt, bò vỗ béo, bê</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
+                        <div class="h5 text-h">HAPPY 340</div>
+                        <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 01 đến 21 ngày tuổi</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                             <i class="fa-solid fa-truck mt-1"></i>
                             <p class="ms-2">2 -4 ngày</p>
                         </div>
                     </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/a60---25kg---05.09.22.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/258.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">ANOVA 60</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
+                        <div class="h5 text-h">VINA 258</div>
+                        <div class="p mb-2 text-p">Dùng cho gà lông màu vỗ béo</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                             <i class="fa-solid fa-truck mt-1"></i>
                             <p class="ms-2">2 -4 ngày</p>
                         </div>
                     </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/B75.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/259_Font.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">TPD B75</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa, bò sinh sản</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
+                        <div class="h5 text-h">VINA 259</div>
+                        <div class="p mb-2 text-p">Dùng cho gà lông màu từ 01 ngày tuổi đến khi xuất bán</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
+                        <div class="p text-start ms-3">Đã bán 1,1k</div>
+                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
+                            <i class="fa-solid fa-truck mt-1"></i>
+                            <p class="ms-2">2 -4 ngày</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
+                        <div class="product-img">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/260.png" alt="TOP 01" height="250px" width="200px">
+                        </div>
+                        <div class="h5 text-h">VINA 260</div>
+                        <div class="p mb-4 text-p">Dùng cho gà lông màu vỗ béo</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
+                        <div class="p text-start ms-3">Đã bán 1,1k</div>
+                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
+                            <i class="fa-solid fa-truck mt-1"></i>
+                            <p class="ms-2">2 -4 ngày</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
+                        <div class="product-img">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/271.png" alt="TOP 01" height="250px" width="200px">
+                        </div>
+                        <div class="h5 text-h">VINA 271</div>
+                        <div class="p mb-4 text-p">Dùng cho gà hậu bị từ 9 - 18 tuần tuổi</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
+                        <div class="p text-start ms-3">Đã bán 1,1k</div>
+                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
+                            <i class="fa-solid fa-truck mt-1"></i>
+                            <p class="ms-2">2 -4 ngày</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
+                        <div class="product-img">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/341_Font.png" alt="TOP 01" height="250px" width="200px">
+                        </div>
+                        <div class="h5 text-h">HAPPY 341</div>
+                        <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 22 ngày tuổi đến khi xuất bán</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
+                        <div class="p text-start ms-3">Đã bán 1,1k</div>
+                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
+                            <i class="fa-solid fa-truck mt-1"></i>
+                            <p class="ms-2">2 -4 ngày</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
+                        <div class="product-img">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/340_Font.png" alt="TOP 01" height="250px" width="200px">
+                        </div>
+                        <div class="h5 text-h">HAPPY 340</div>
+                        <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 01 đến 21 ngày tuổi</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                             <i class="fa-solid fa-truck mt-1"></i>
@@ -1143,106 +1146,52 @@
             <!--product two -->
             <div id="product_all_two" style="display: none;">
                 <div class="row">
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/222_1.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/341_Font.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">HAPPY 222</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
+                        <div class="h5 text-h">HAPPY 341</div>
+                        <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 22 ngày tuổi đến khi xuất bán</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                             <i class="fa-solid fa-truck mt-1"></i>
                             <p class="ms-2">2 -4 ngày</p>
                         </div>
                     </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/910_Font.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/340_Font.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">VINA 910</div>
-                        <div class="p mb-2 text-p"> Dùng cho bò Lai Sind, bò thịt, bò vỗ béo, bê</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
+                        <div class="h5 text-h">HAPPY 340</div>
+                        <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 01 đến 21 ngày tuổi</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                             <i class="fa-solid fa-truck mt-1"></i>
                             <p class="ms-2">2 -4 ngày</p>
                         </div>
                     </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/a60---25kg---05.09.22.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/258.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">ANOVA 60</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
+                        <div class="h5 text-h">VINA 258</div>
+                        <div class="p mb-2 text-p">Dùng cho gà lông màu vỗ béo</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                             <i class="fa-solid fa-truck mt-1"></i>
                             <p class="ms-2">2 -4 ngày</p>
                         </div>
                     </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/B75.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/259_Font.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">TPD B75</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa, bò sinh sản</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
-                        <div class="p text-start ms-3">Đã bán 1,1k</div>
-                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                            <i class="fa-solid fa-truck mt-1"></i>
-                            <p class="ms-2">2 -4 ngày</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
-                        <div class="product-img">
-                            <img src="/assets/images/product/cow/222_1.png" alt="TOP 01" height="250px" width="200px">
-                        </div>
-                        <div class="h5 text-h">HAPPY 222</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
-                        <div class="p text-start ms-3">Đã bán 1,1k</div>
-                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                            <i class="fa-solid fa-truck mt-1"></i>
-                            <p class="ms-2">2 -4 ngày</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
-                        <div class="product-img">
-                            <img src="/assets/images/product/cow/910_Font.png" alt="TOP 01" height="250px" width="200px">
-                        </div>
-                        <div class="h5 text-h">VINA 910</div>
-                        <div class="p mb-2 text-p"> Dùng cho bò Lai Sind, bò thịt, bò vỗ béo, bê</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
-                        <div class="p text-start ms-3">Đã bán 1,1k</div>
-                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                            <i class="fa-solid fa-truck mt-1"></i>
-                            <p class="ms-2">2 -4 ngày</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
-                        <div class="product-img">
-                            <img src="/assets/images/product/cow/a60---25kg---05.09.22.png" alt="TOP 01" height="250px" width="200px">
-                        </div>
-                        <div class="h5 text-h">ANOVA 60</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
-                        <div class="p text-start ms-3">Đã bán 1,1k</div>
-                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                            <i class="fa-solid fa-truck mt-1"></i>
-                            <p class="ms-2">2 -4 ngày</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
-                        <div class="product-img">
-                            <img src="/assets/images/product/cow/B75.png" alt="TOP 01" height="250px" width="200px">
-                        </div>
-                        <div class="h5 text-h">TPD B75</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa, bò sinh sản</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
+                        <div class="h5 text-h">VINA 259</div>
+                        <div class="p mb-2 text-p">Dùng cho gà lông màu từ 01 ngày tuổi đến khi xuất bán</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                             <i class="fa-solid fa-truck mt-1"></i>
@@ -1251,52 +1200,52 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/222_1.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/260.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">HAPPY 222</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
+                        <div class="h5 text-h">VINA 260</div>
+                        <div class="p mb-4 text-p">Dùng cho gà lông màu vỗ béo</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                             <i class="fa-solid fa-truck mt-1"></i>
                             <p class="ms-2">2 -4 ngày</p>
                         </div>
                     </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/910_Font.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/271.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">VINA 910</div>
-                        <div class="p mb-2 text-p"> Dùng cho bò Lai Sind, bò thịt, bò vỗ béo, bê</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
+                        <div class="h5 text-h">VINA 271</div>
+                        <div class="p mb-4 text-p">Dùng cho gà hậu bị từ 9 - 18 tuần tuổi</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                             <i class="fa-solid fa-truck mt-1"></i>
                             <p class="ms-2">2 -4 ngày</p>
                         </div>
                     </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/a60---25kg---05.09.22.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/341_Font.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">ANOVA 60</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
+                        <div class="h5 text-h">HAPPY 341</div>
+                        <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 22 ngày tuổi đến khi xuất bán</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                             <i class="fa-solid fa-truck mt-1"></i>
                             <p class="ms-2">2 -4 ngày</p>
                         </div>
                     </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/B75.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/340_Font.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">TPD B75</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa, bò sinh sản</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
+                        <div class="h5 text-h">HAPPY 340</div>
+                        <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 01 đến 21 ngày tuổi</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                             <i class="fa-solid fa-truck mt-1"></i>
@@ -1305,52 +1254,106 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/222_1.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/260.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">HAPPY 222</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
+                        <div class="h5 text-h">VINA 260</div>
+                        <div class="p mb-4 text-p">Dùng cho gà lông màu vỗ béo</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                             <i class="fa-solid fa-truck mt-1"></i>
                             <p class="ms-2">2 -4 ngày</p>
                         </div>
                     </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/910_Font.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/271.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">VINA 910</div>
-                        <div class="p mb-2 text-p"> Dùng cho bò Lai Sind, bò thịt, bò vỗ béo, bê</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
+                        <div class="h5 text-h">VINA 271</div>
+                        <div class="p mb-4 text-p">Dùng cho gà hậu bị từ 9 - 18 tuần tuổi</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                             <i class="fa-solid fa-truck mt-1"></i>
                             <p class="ms-2">2 -4 ngày</p>
                         </div>
                     </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/a60---25kg---05.09.22.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/341_Font.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">ANOVA 60</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
+                        <div class="h5 text-h">HAPPY 341</div>
+                        <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 22 ngày tuổi đến khi xuất bán</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                             <i class="fa-solid fa-truck mt-1"></i>
                             <p class="ms-2">2 -4 ngày</p>
                         </div>
                     </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/B75.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/340_Font.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">TPD B75</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa, bò sinh sản</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
+                        <div class="h5 text-h">HAPPY 340</div>
+                        <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 01 đến 21 ngày tuổi</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
+                        <div class="p text-start ms-3">Đã bán 1,1k</div>
+                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
+                            <i class="fa-solid fa-truck mt-1"></i>
+                            <p class="ms-2">2 -4 ngày</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
+                        <div class="product-img">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/341_Font.png" alt="TOP 01" height="250px" width="200px">
+                        </div>
+                        <div class="h5 text-h">HAPPY 341</div>
+                        <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 22 ngày tuổi đến khi xuất bán</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
+                        <div class="p text-start ms-3">Đã bán 1,1k</div>
+                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
+                            <i class="fa-solid fa-truck mt-1"></i>
+                            <p class="ms-2">2 -4 ngày</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
+                        <div class="product-img">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/340_Font.png" alt="TOP 01" height="250px" width="200px">
+                        </div>
+                        <div class="h5 text-h">HAPPY 340</div>
+                        <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 01 đến 21 ngày tuổi</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
+                        <div class="p text-start ms-3">Đã bán 1,1k</div>
+                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
+                            <i class="fa-solid fa-truck mt-1"></i>
+                            <p class="ms-2">2 -4 ngày</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
+                        <div class="product-img">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/258.png" alt="TOP 01" height="250px" width="200px">
+                        </div>
+                        <div class="h5 text-h">VINA 258</div>
+                        <div class="p mb-2 text-p">Dùng cho gà lông màu vỗ béo</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
+                        <div class="p text-start ms-3">Đã bán 1,1k</div>
+                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
+                            <i class="fa-solid fa-truck mt-1"></i>
+                            <p class="ms-2">2 -4 ngày</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
+                        <div class="product-img">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/259_Font.png" alt="TOP 01" height="250px" width="200px">
+                        </div>
+                        <div class="h5 text-h">VINA 259</div>
+                        <div class="p mb-2 text-p">Dùng cho gà lông màu từ 01 ngày tuổi đến khi xuất bán</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                             <i class="fa-solid fa-truck mt-1"></i>
@@ -1363,106 +1366,52 @@
             <!--product three -->
             <div id="product_all_three" style="display: none;">
                 <div class="row">
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/222_1.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/341_Font.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">HAPPY 222</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
+                        <div class="h5 text-h">HAPPY 341</div>
+                        <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 22 ngày tuổi đến khi xuất bán</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                             <i class="fa-solid fa-truck mt-1"></i>
                             <p class="ms-2">2 -4 ngày</p>
                         </div>
                     </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/910_Font.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/340_Font.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">VINA 910</div>
-                        <div class="p mb-2 text-p"> Dùng cho bò Lai Sind, bò thịt, bò vỗ béo, bê</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
+                        <div class="h5 text-h">HAPPY 340</div>
+                        <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 01 đến 21 ngày tuổi</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                             <i class="fa-solid fa-truck mt-1"></i>
                             <p class="ms-2">2 -4 ngày</p>
                         </div>
                     </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/a60---25kg---05.09.22.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/258.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">ANOVA 60</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
+                        <div class="h5 text-h">VINA 258</div>
+                        <div class="p mb-2 text-p">Dùng cho gà lông màu vỗ béo</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                             <i class="fa-solid fa-truck mt-1"></i>
                             <p class="ms-2">2 -4 ngày</p>
                         </div>
                     </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/B75.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/259_Font.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">TPD B75</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa, bò sinh sản</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
-                        <div class="p text-start ms-3">Đã bán 1,1k</div>
-                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                            <i class="fa-solid fa-truck mt-1"></i>
-                            <p class="ms-2">2 -4 ngày</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
-                        <div class="product-img">
-                            <img src="/assets/images/product/cow/222_1.png" alt="TOP 01" height="250px" width="200px">
-                        </div>
-                        <div class="h5 text-h">HAPPY 222</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
-                        <div class="p text-start ms-3">Đã bán 1,1k</div>
-                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                            <i class="fa-solid fa-truck mt-1"></i>
-                            <p class="ms-2">2 -4 ngày</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
-                        <div class="product-img">
-                            <img src="/assets/images/product/cow/910_Font.png" alt="TOP 01" height="250px" width="200px">
-                        </div>
-                        <div class="h5 text-h">VINA 910</div>
-                        <div class="p mb-2 text-p"> Dùng cho bò Lai Sind, bò thịt, bò vỗ béo, bê</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
-                        <div class="p text-start ms-3">Đã bán 1,1k</div>
-                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                            <i class="fa-solid fa-truck mt-1"></i>
-                            <p class="ms-2">2 -4 ngày</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
-                        <div class="product-img">
-                            <img src="/assets/images/product/cow/a60---25kg---05.09.22.png" alt="TOP 01" height="250px" width="200px">
-                        </div>
-                        <div class="h5 text-h">ANOVA 60</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
-                        <div class="p text-start ms-3">Đã bán 1,1k</div>
-                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                            <i class="fa-solid fa-truck mt-1"></i>
-                            <p class="ms-2">2 -4 ngày</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
-                        <div class="product-img">
-                            <img src="/assets/images/product/cow/B75.png" alt="TOP 01" height="250px" width="200px">
-                        </div>
-                        <div class="h5 text-h">TPD B75</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa, bò sinh sản</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
+                        <div class="h5 text-h">VINA 259</div>
+                        <div class="p mb-2 text-p">Dùng cho gà lông màu từ 01 ngày tuổi đến khi xuất bán</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                             <i class="fa-solid fa-truck mt-1"></i>
@@ -1471,52 +1420,52 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/222_1.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/341_Font.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">HAPPY 222</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
+                        <div class="h5 text-h">HAPPY 341</div>
+                        <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 22 ngày tuổi đến khi xuất bán</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                             <i class="fa-solid fa-truck mt-1"></i>
                             <p class="ms-2">2 -4 ngày</p>
                         </div>
                     </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/910_Font.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/340_Font.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">VINA 910</div>
-                        <div class="p mb-2 text-p"> Dùng cho bò Lai Sind, bò thịt, bò vỗ béo, bê</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
+                        <div class="h5 text-h">HAPPY 340</div>
+                        <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 01 đến 21 ngày tuổi</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                             <i class="fa-solid fa-truck mt-1"></i>
                             <p class="ms-2">2 -4 ngày</p>
                         </div>
                     </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/a60---25kg---05.09.22.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/258.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">ANOVA 60</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
+                        <div class="h5 text-h">VINA 258</div>
+                        <div class="p mb-2 text-p">Dùng cho gà lông màu vỗ béo</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                             <i class="fa-solid fa-truck mt-1"></i>
                             <p class="ms-2">2 -4 ngày</p>
                         </div>
                     </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/B75.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/259_Font.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">TPD B75</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa, bò sinh sản</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
+                        <div class="h5 text-h">VINA 259</div>
+                        <div class="p mb-2 text-p">Dùng cho gà lông màu từ 01 ngày tuổi đến khi xuất bán</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                             <i class="fa-solid fa-truck mt-1"></i>
@@ -1525,52 +1474,106 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/222_1.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/260.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">HAPPY 222</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
+                        <div class="h5 text-h">VINA 260</div>
+                        <div class="p mb-4 text-p">Dùng cho gà lông màu vỗ béo</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                             <i class="fa-solid fa-truck mt-1"></i>
                             <p class="ms-2">2 -4 ngày</p>
                         </div>
                     </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/910_Font.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/271.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">VINA 910</div>
-                        <div class="p mb-2 text-p"> Dùng cho bò Lai Sind, bò thịt, bò vỗ béo, bê</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
+                        <div class="h5 text-h">VINA 271</div>
+                        <div class="p mb-4 text-p">Dùng cho gà hậu bị từ 9 - 18 tuần tuổi</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                             <i class="fa-solid fa-truck mt-1"></i>
                             <p class="ms-2">2 -4 ngày</p>
                         </div>
                     </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/a60---25kg---05.09.22.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/341_Font.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">ANOVA 60</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
+                        <div class="h5 text-h">HAPPY 341</div>
+                        <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 22 ngày tuổi đến khi xuất bán</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                             <i class="fa-solid fa-truck mt-1"></i>
                             <p class="ms-2">2 -4 ngày</p>
                         </div>
                     </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="/assets/images/product/cow/B75.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/340_Font.png" alt="TOP 01" height="250px" width="200px">
                         </div>
-                        <div class="h5 text-h">TPD B75</div>
-                        <div class="p mb-2 text-p">Dùng cho bò sữa, bò sinh sản</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
+                        <div class="h5 text-h">HAPPY 340</div>
+                        <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 01 đến 21 ngày tuổi</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
+                        <div class="p text-start ms-3">Đã bán 1,1k</div>
+                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
+                            <i class="fa-solid fa-truck mt-1"></i>
+                            <p class="ms-2">2 -4 ngày</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
+                        <div class="product-img">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/260.png" alt="TOP 01" height="250px" width="200px">
+                        </div>
+                        <div class="h5 text-h">VINA 260</div>
+                        <div class="p mb-4 text-p">Dùng cho gà lông màu vỗ béo</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
+                        <div class="p text-start ms-3">Đã bán 1,1k</div>
+                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
+                            <i class="fa-solid fa-truck mt-1"></i>
+                            <p class="ms-2">2 -4 ngày</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
+                        <div class="product-img">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/271.png" alt="TOP 01" height="250px" width="200px">
+                        </div>
+                        <div class="h5 text-h">VINA 271</div>
+                        <div class="p mb-4 text-p">Dùng cho gà hậu bị từ 9 - 18 tuần tuổi</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
+                        <div class="p text-start ms-3">Đã bán 1,1k</div>
+                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
+                            <i class="fa-solid fa-truck mt-1"></i>
+                            <p class="ms-2">2 -4 ngày</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
+                        <div class="product-img">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/341_Font.png" alt="TOP 01" height="250px" width="200px">
+                        </div>
+                        <div class="h5 text-h">HAPPY 341</div>
+                        <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 22 ngày tuổi đến khi xuất bán</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
+                        <div class="p text-start ms-3">Đã bán 1,1k</div>
+                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
+                            <i class="fa-solid fa-truck mt-1"></i>
+                            <p class="ms-2">2 -4 ngày</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 bg-light text-center m-3 col product_number">
+                        <div class="product-img">
+                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/340_Font.png" alt="TOP 01" height="250px" width="200px">
+                        </div>
+                        <div class="h5 text-h">HAPPY 340</div>
+                        <div class="p mb-2 text-p">Dùng cho gà siêu thịt từ 01 đến 21 ngày tuổi</div>
+                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                             <i class="fa-solid fa-truck mt-1"></i>
@@ -1595,33 +1598,49 @@
         </div>
 
         <!-- Text -->
-        <div class="container mt-5">
-            <div class="p text-center fw-bold mb-4" style="font-size: 22px;">VINAFEED GROUP LUÔN HIỂU RÕ NHU CẦU DINH DƯỠNG CHO BÒ</div>
-            <img src="/assets/images/gioi_thieu/nha_may_sx.png" alt="" height="500px" width="100%" style="border-radius: 10px;">
+         <div class="container mt-5">
+            <div class="p text-center fw-bold mb-4" style="font-size: 22px;">VINAFEED GROUP LUÔN HIỂU RÕ NHU CẦU DINH DƯỠNG CHO GÀ</div>
+            <img src="${pageContext.request.contextPath}/views/template/assets/images/gioi_thieu/nha_may_sx.png" alt="" height="500px" width="100%" style="border-radius: 10px;">
             <div class="p mt-4" style="text-indent: 30px;">
-                Nâng cao hiệu quả kinh tế và giá trị chăn nuôi từ đàn bò của mình, luôn là mong muốn của toàn thể người chăn nuôi. Để đàn bò của mình phát triển toàn diện, và cho năng suất cao thì
-                người chăn nuôi cần nắm rõ và vận dụng nhiều yếu tố hỗ trợ trong chăn nuôi bò. Những yếu tố như: <span class="fw-bold">Thức ăn cho bò</span>, kỹ thuật và sức khỏe vật nuôi đều góp phần tạo nên kết quả đó.
+                Nâng cao hiệu quả kinh tế và giá trị chăn nuôi từ đàn gà của mình, luôn là mong muốn của toàn thể người chăn nuôi. Để đàn gà của mình phát triển toàn diện, và cho năng suất cao thì 
+                người chăn nuôi cần nắm rõ và vận dụng nhiều yếu tố hỗ trợ trong chăn nuôi gà. Những yếu tố như: <span class="fw-bold">Thức ăn cho gà</span>, kỹ thuật và sức khỏe vật nuôi đều góp phần tạo nên kết quả đó.
                 <div class="mt-1" style="text-indent: 30px;">
-                    <span class="fw-bold" style="text-indent: 30px;">Vinafeed Group</span> luôn cung cấp những giải pháp tốt nhất hỗ trợ người chăn nuôi trong từng giai đoạn. Đặc biệt, những giải pháp thông qua thức ăn XANH - SẠCH sẽ đảm bảo trại bò của người chăn nuôi đạt được kết quả toàn diện nhất.
+                    <span class="fw-bold" style="text-indent: 30px;">Vinafeed Group</span> luôn cung cấp những giải pháp tốt nhất hỗ trợ người chăn nuôi trong từng giai đoạn. Đặc biệt, những giải pháp thông qua thức ăn XANH - SẠCH sẽ đảm bảo trại gà của người chăn nuôi đạt được kết quả toàn diện nhất.
                 </div>
+
             </div>
-            <div class="p mt-3 fw-bold" style="font-size: 22px;">Thức ăn chăn nuôi dành cho bò qua từng giai đoạn</div>
+            <div class="p mt-3 fw-bold" style="font-size: 22px;">Thức ăn chăn nuôi dành cho gà qua từng giai đoạn</div>
             <div id="more_text_product" class="more_text_product">
                 <div class="p mt-2" style="text-indent: 30px;">
-                    Hiểu rõ được nhu cầu dinh dưỡng thiết yếu cho từng giai đoạn sinh trưởng của bò, Vinafeed Group đã nghiên cứu, phát triển và sản xuất các dòng thức ăn chăn nuôi bò riêng biệt cho từng giai đoạn:
+                    Hiểu rõ được nhu cầu dinh dưỡng thiết yếu cho từng giai đoạn sinh trưởng của gà, Vinafeed Group đã nghiên cứu, phát triển và sản xuất các dòng thức ăn chăn nuôi gà riêng biệt cho từng giai đoạn:
                     <p style="text-indent: 50px;">
-                        - Thức ăn cho bò thịt.
+                        - Thức ăn cho gà con.
                     </p>
                     <p style="text-indent: 50px;">
-                        - Thức ăn cho bò sữa.
+                        - Thức ăn cho gà thịt.
+                    </p>
+                    <p style="text-indent: 50px;">
+                        - Thức ăn cho gà hậu bị.
+                    </p>
+                    <p style="text-indent: 50px;">
+                        - Thức ăn cho gà mái.
+                    </p>
+                    <p style="text-indent: 50px;">
+                        - Thức ăn cho gà trống. 
+                    </p>
+                    <p tyle="text-indent: 30px;">
+                        Mỗi giai đoạn gà sẽ được xây dựng một khẩu phần thức ăn phù hợp. Tất cả nguồn nguyên liệu đầu vào đều có nguồn gốc truy xuất rõ ràng, xanh sạch tốt cho gia súc. Từ đó mang đến những sản phẩm chất lượng cao cùng sự đảm bảo hiệu suất chăn nuôi bền vững cho trang trại.
+                    </p>
+                    <p tyle="text-indent: 30px;">
+                        Thức ăn chăn nuôi gà của Vinafeed Group cung cấp cho vật nuôi dinh dưỡng hoàn chỉnh từ nhiều loại nguyên liệu thô như đậu nành, bắp… Cùng những vi chất dinh dưỡng chính như các khoáng chất, vitamin…
                     </p>
                 </div>
-                <div class="p mt-3 fw-bold mb-3" style="font-size: 22px;">Thức ăn chăn nuôi bò XANH - SẠCH</div>
-                <img src="/assets/images/banner/Home_Banner_Web.jpg" alt="" width="70%" height="500px" style="margin-left: 200px; border-radius: 10px;">
-                <p class="mt-3" style="text-indent: 30px;">XANH - SẠCH là yếu tố chủ chốt và là kim chỉ nam trong suốt gần 30 năm sản xuất thức ăn chăn nuôi bò của Vinafeed Group. </p>
+                <div class="p mt-3 fw-bold mb-3" style="font-size: 22px;">Thức ăn chăn nuôi gà XANH - SẠCH</div>
+                <img src="${pageContext.request.contextPath}/views/template/assets/images/banner/Home_Banner_Web.jpg" alt="" width="70%" height="500px" style="margin-left: 200px; border-radius: 10px;">
+                <p class="mt-3" style="text-indent: 30px;">XANH - SẠCH là yếu tố chủ chốt và là kim chỉ nam trong suốt gần 30 năm sản xuất thức ăn chăn nuôi gà của Vinafeed Group. </p>
                 <div class="p mt-3 fw-bold mb-3" style="font-size: 22px;">Đầu tư công nghệ dinh dưỡng và dây chuyền sản xuất</div>
                 <div class="p mt-2" style="text-indent: 30px;">
-                    Tại 03 nhà máy của chúng tôi, dây chuyền sản xuất và công nghệ đều được đầu tư theo công nghệ Van Aarsen nhập khẩu từ Châu Âu. Đây là công nghệ hoàn toàn tự động từ khâu nhập nguyên liệu cho đến khâu cân, trộn,
+                    Tại 03 nhà máy của chúng tôi, dây chuyền sản xuất và công nghệ đều được đầu tư theo công nghệ Van Aarsen nhập khẩu từ Châu Âu. Đây là công nghệ hoàn toàn tự động từ khâu nhập nguyên liệu cho đến khâu cân, trộn, 
                     đóng bao thành phẩm, tạo ra những sản phẩm xuất xưởng có chất lượng vượt trội, an toàn cho người chăn nuôi và thân thiện với môi trường.
                     <p style="text-indent: 30px;">
                         Ngoài ra, việc vận hành của các nhà máy tại Vinafeed Group đều được áp dụng theo hệ thống quản lý chất lượng ISO, giúp phát hiện và loại trừ các rủi ro tiềm ẩn.
@@ -1629,26 +1648,26 @@
                 </div>
                 <div class="p mt-3 fw-bold mb-3" style="font-size: 22px;">Duy trì ổn định chất lượng mỗi ngày</div>
                 <div class="p mt-2" style="text-indent: 30px;">
-                    Vinafeed Group cũng là một trong số ít doanh nghiệp đã đầu tư được phòng thí nghiệm hiện đại và liên kết phòng thí nghiệm, giúp kiểm soát nguồn nguyên liệu mỗi ngày.
-                    Thông qua phòng thí nghiệm này, nguyên liệu được chọn lọc cẩn thận, nghiêm ngặt cho sản xuất.
+                    Vinafeed Group cũng là một trong số ít doanh nghiệp đã đầu tư được phòng thí nghiệm hiện đại và liên kết phòng thí nghiệm, giúp kiểm soát nguồn nguyên liệu mỗi ngày. 
+                    Thông qua phòng thí nghiệm này, nguyên liệu được chọn lọc cẩn thận, nghiêm ngặt cho sản xuất. 
                     <p style="text-indent: 30px;">
                         Vinafeed Group cũng kiểm soát thành phẩm trước khi đóng bao và xuất ra thị trường. Nhằm đảm bảo tuyệt đối cho chất lượng, hiệu quả chăn nuôi cao.
                     </p>
                 </div>
                 <div class="p mt-3 fw-bold mb-3" style="font-size: 22px;">Hỗ trợ trực tiếp kiến thức chăn nuôi thực tiễn</div>
                 <div class="p mt-2" style="text-indent: 30px;">
-                    Thông qua những yêu cầu hỗ trợ mỗi ngày của người chăn nuôi, Vinafeed Group mỗi ngày đều nhận và giải đáp cho hàng nghìn chủ trang trại bò gửi
-                    về trên khắp cả nước. Bên cạnh đó, đội ngũ kỹ thuật định kỳ đến thăm hàng trăm trang trại để hỗ trợ trực tiếp cho người chăn nuôi.
+                    Thông qua những yêu cầu hỗ trợ mỗi ngày của người chăn nuôi, Vinafeed Group mỗi ngày đều nhận và giải đáp cho hàng nghìn chủ trang trại gà gửi 
+                    về trên khắp cả nước. Bên cạnh đó, đội ngũ kỹ thuật định kỳ đến thăm hàng trăm trang trại để hỗ trợ trực tiếp cho người chăn nuôi. 
                     <p style="text-indent: 30px;">
-                        Các chuyên gia của Vinafeed Group đã và đang làm việc liên tục để nắm bắt xu thế chăn nuôi hiện đại. Cũng như sự ảnh hưởng của thay đổi môi trường đến vật nuôi.
-                        Từ đó cung cấp những kiến thức và kinh nghiệm thực tiễn về mối liên kết của thức ăn chăn nuôi bò và cách chăn nuôi.
+                        Các chuyên gia của Vinafeed Group đã và đang làm việc liên tục để nắm bắt xu thế chăn nuôi hiện đại. Cũng như sự ảnh hưởng của thay đổi môi trường đến vật nuôi. 
+                        Từ đó cung cấp những kiến thức và kinh nghiệm thực tiễn về mối liên kết của thức ăn chăn nuôi gà và cách chăn nuôi. 
                     </p>
                 </div>
-                <img src="/assets/images/thu_vien/Cham_soc_ga.jpg" alt="Chăm sóc bò" width="100%" height="500px" style="border-radius: 10px;">
+                <img src="${pageContext.request.contextPath}/views/template/assets/images/thu_vien/Cham_soc_ga.jpg" alt="Chăm sóc gà" width="100%" height="500px" style="border-radius: 10px;">
                 <div class="p mt-3 fw-bold mb-3" style="font-size: 22px;">Tư vấn dinh dưỡng vật nuôi</div>
                 <div class="p mt-2" style="text-indent: 30px;">
-                    Tất cả sản phẩm thức ăn chăn nuôi bò của Vinafeed Group đều hướng tới mục tiêu duy nhất là ĐẢM BẢO SỨC KHỎE VẬT NUÔI và GIA TĂNG HIỆU QUẢ KINH TẾ BỀN VỮNG cho trang trại. Cùng với đó là những kiến thức về dinh dưỡng vật nuôi từ chuyên gia tập đoàn mà Vinafeed Group
-                    cung cấp đến người chăn nuôi bò. Hơn thế, mạng lưới vận chuyển và cung cấp sản phẩm rộng khắp toàn quốc hoàn toàn đáp ứng được nhu cầu của từng người chăn nuôi mọi miền đất nước.
+                    Tất cả sản phẩm thức ăn chăn nuôi gà của Vinafeed Group đều hướng tới mục tiêu duy nhất là ĐẢM BẢO SỨC KHỎE VẬT NUÔI và GIA TĂNG HIỆU QUẢ KINH TẾ BỀN VỮNG cho trang trại. Cùng với đó là những kiến thức về dinh dưỡng vật nuôi từ chuyên gia tập đoàn mà Vinafeed Group 
+                    cung cấp đến người chăn nuôi gà. Hơn thế, mạng lưới vận chuyển và cung cấp sản phẩm rộng khắp toàn quốc hoàn toàn đáp ứng được nhu cầu của từng người chăn nuôi mọi miền đất nước. 
                     <p style="text-indent: 30px;">
                         Liên hệ ngay với chúng tôi, để được hỗ trợ nhanh nhất.
                     </p>
@@ -1658,8 +1677,118 @@
             <a href="javascript:void(0)" id="toggle-button-text" class="toggle-button-text text-center">Xem thêm <i class="fa-solid fa-chevron-down ms-2"></i></a>
         </div>
     </main>
-    <div id="near-footer-placeholder"></div>
-    <div id="footer-placeholder"></div>
+<%@ include file="../layout/near_footer.jsp" %>
+
+<%@ include file="../layout/footer.jsp" %>
+
+    <!-- Login -->
+<div id="login" class ="login">
+    <div id ="login_container">
+        <div class="login_close">
+            <img src="${pageContext.request.contextPath}/views/template/assets/images/logo/close.png" alt="">
+        </div>
+  
+        <div class="login_header">
+            <div class="login_logo_shop">
+                <img src="${pageContext.request.contextPath}/views/template/assets/images/header/logo_vina.png" alt="Logo Shop">
+            </div>
+            <div class="login_header_text">
+                <h3 style="font-size: 24px;">Đăng nhập tài khoản</h3>
+            </div>
+        </div>
+        <div class="login_body">
+            <div class="form-floating mb-3 mt-3">
+                <input type="text" class="form-control" id="contact" placeholder="Nhập số điện thoại/email" name="contact" required autocomplete="off"> 
+                <label for="contact">Nhập số điện thoại<span class="req">*</span></label>
+            </div>
+            <div class="form-floating mb-3 mt-3">
+                <input type="password" class="form-control" id="pwd" placeholder="Nhập mật khẩu" name="password" required autocomplete="off"> 
+                <label for="password">Nhập mật khẩu<span class="req">*</span></label>
+            </div>
+            <p class="login_forgot"><a href="#">Quên mật khẩu?</a></p>
+  
+            <button type="submit" class="login_button_submit">Đăng nhập</button>
+            <div class="login_split">
+                <p>Hoặc</p>
+            </div>
+            <div class="login_social">
+                <a href="" class="social_btn login_social_gg">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/social/google.png" alt="">
+                    <p>Google</p>
+                </a>
+                <a href="" class="social_btn login_social_zl">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/social/zalo.png" alt="">
+                    <p>Zalo</p>
+                </a>
+            </div>
+        </div>
+        <div class="login_footer">
+            <p>Bạn chưa có tài khoản? <a href="#" id="go-to-signup">Đăng ký ngay</a></p>
+        </div>
+    </div>
+  </div>
+  
+  <!-- sign up -->
+  <div id="signup" class ="signup">
+    <div id="signup_container">
+        <div class="signup_close">
+            <img src="${pageContext.request.contextPath}/views/template/assets/images/logo/close.png" alt="">
+        </div>
+  
+        <div class="signup_header">
+            <div class="signup_logo_shop">
+                <img src="${pageContext.request.contextPath}/views/template/assets/images/header/logo_vina.png" alt="Logo Shop">
+            </div>
+            <div class="signup_header_text">
+                <h3 style="font-size: 24px;">Đăng ký tài khoản</h3>
+            </div>
+        </div>
+        <div class="signup_body">
+            <div class="form-floating mb-2 mt-2">
+                <input type="text" class="form-control" id="name" placeholder="Nhập họ và tên" name="Name" required autocomplete="off"> 
+                <label for="password">Nhập họ và tên<span class="req">*</span></label>
+            </div>
+  
+            <div class="form-floating mb-2 mt-2">
+                <input type="text" class="form-control" id="contact" placeholder="Nhập số điện thoại/email" name="Contact" required autocomplete="off"> 
+                <label for="contact">Nhập số điện thoại<span class="req">*</span></label>
+            </div>
+            <div class="form-floating mb-2 mt-2">
+                <input type="password" class="form-control" id="pwd" placeholder="Nhập mật khẩu" name="password" required autocomplete="off"> 
+                <label for="password">Nhập mật khẩu<span class="req">*</span></label>
+            </div>
+          
+            <div class="form-floating mb-2 mt-2">
+                <input type="password" class="form-control" id="pwd" placeholder="Nhập lại mật khẩu" name="password again" required autocomplete="off"> 
+                <label for="password again">Nhập lại mật khẩu<span class="req">*</span></label>
+            </div>
+  
+            <div class="signup_okay">
+                <p>Bằng việc đăng ký này, bạn đã chấp nhận các chính sách của VINAFEED</p>
+            </div>
+            <button type="submit" class="signup_button_submit">Đăng ký</button>
+            <div class="signup_split">
+                <p>Hoặc</p>
+            </div>
+            <div class="signup_social">
+                <a href="" class="social_btn signup_social_gg">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/social/google.png" alt="">
+                    <p>Google</p>
+                </a>
+                <a href="" class="social_btn signup_social_zl">
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/social/zalo.png" alt="">
+                    <p>Zalo</p>
+                </a>
+            </div>
+        </div>
+        <div class="signup_footer">
+            <p>Bạn đã có tài khoản? <a href="#" id="go-to-login">Đăng nhập ngay</a></p>
+        </div>
+    </div>
+  </div>
+  
+  <!-- scrollToTopBtn -->
+  <button id="scrollToTopBtn"><i class="fa-solid fa-chevron-up"></i></button>
     
 </body>
 </html>
