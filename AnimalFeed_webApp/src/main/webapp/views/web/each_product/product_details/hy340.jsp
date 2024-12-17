@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,54 +6,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chi-tiết-sản-phẩm</title>
 
-    <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/gioi_thieu.css">
-    <link rel="stylesheet" href="/assets/css/each_product.css">
-    <link rel="stylesheet" href="/assets/css/chi_tiet_product.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/gioi_thieu.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/each_product.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/chi_tiet_product.css">
 
-    <link rel="stylesheet" href="/assets/css/layout/header.css">
-    <link rel="stylesheet" href="/assets/css/layout/footer.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/header.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/footer.css">
 
-    <link rel="stylesheet" href="/assets/fonts/themify-icons/themify-icons.css">
-    <link rel="stylesheet" href="/assets/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
 
-    <script src="/assets/scripts/add_layout/add_layout.js" defer></script>
-    <script src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
-
-    <link rel="stylesheet" href="/assets/css/login.css">
-    <link rel="stylesheet" href="/assets/css/signup.css">
-  
-    <!-- scrollToTopBtn -->
-    <link rel="stylesheet" href="/assets/css/layout/scrollToTopBtn.css">
-    <script src="/assets/scripts/add_layout/scrollToTopBtn.js" defer></script>
+    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/add_layout.js"></script>
+    <script src="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<div id="header-placeholder"></div>
+<div><%@ include file="../../layout/header.jsp" %></div>
 <main class="chi_tiet_product" style="margin-top: 105px;">
     <div class="container">
         <div class="content text-center pb-5">
             <div class="row">
                 <div class="col-md-4">
-                    <img src="/assets/images/product/pig/TOP_01.png" alt="" width="350px" height="100%"
+                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/340_Font.png" alt="" width="350px" height="100%"
                          style="object-fit: cover;">
                 </div>
                 <div class="col-md-1"></div>
                 <div class="col-md-6 text-start">
-                    <div class="h1 mt-5 mb-3" style="color:#94b83d;">TOP 01</div>
-                    <div class="h5 mt-3 mb-3">Dùng cho heo con từ 05 ngày tuổi đến 35 ngày tuổi</div>
+                    <div class="h1 mt-5 mb-3" style="color:#94b83d;">HAPPY 340</div>
+                    <div class="h5 mt-3 mb-3">Dùng cho gà siêu thịt từ 01 đến 21 ngày tuổi</div>
                     <div class="line_red"></div>
                     <div class="d-flex mt-3 mb-3">
                         <div class="h5 fw-bold p_bold text-start">Giá:</div>
-                        <div class="p text-start text-secondary price_sale me-4"
-                             style="font-size: 18px; margin-left: -95px">
-                            <del> 400.000 <u>đ</u></del>
-                            <span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>
-                        <div class="h4 text-danger">320.000 vnđ</div>
+                        <div class="h4 text-danger">450.000 vnđ</div>
                     </div>
                     <div class="line_gray"></div>
                     <div class="d-flex mt-2">
                         <div class="p fw-bold p_bold">Mã SP:</div>
-                        <div class="p">TOP01</div>
+                        <div class="p">HAPPY340</div>
                     </div>
                     <div class="d-flex mt-2">
                         <div class="p fw-bold p_bold text-start">Thị trường phân phối:</div>
@@ -65,7 +55,7 @@
                     <div class="d-flex mt-2">
                         <div class="p fw-bold p_bold">Dành cho:</div>
                         <div class="p">
-                            Dùng cho heo con từ 05 ngày tuổi đến 35 ngày tuổi
+                            Gà siêu thịt từ 01 đến 21 ngày tuổi
                         </div>
                     </div>
                     <div class="d-flex mt-2">
@@ -274,7 +264,7 @@
                         <div class="list-products d-flex justify-content-center">
                             <div class="product-card">
                                 <div class="product-img">
-                                    <img src="/assets/images/product/pig/TOP_01.png" alt="TOP 01" height="250px"
+                                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_01.png" alt="TOP 01" height="250px"
                                          width="200px">
                                 </div>
                                 <div class="h5 text-h">TOP 01</div>
@@ -282,7 +272,7 @@
                             </div>
                             <div class="product-card">
                                 <div class="product-img">
-                                    <img src="/assets/images/product/pig/TOP_01.png" alt="TOP 01" height="250px"
+                                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_01.png" alt="TOP 01" height="250px"
                                          width="200px">
                                 </div>
                                 <div class="h5 text-h">TOP 01</div>
@@ -290,7 +280,7 @@
                             </div>
                             <div class="product-card">
                                 <div class="product-img">
-                                    <img src="/assets/images/product/pig/TOP_01.png" alt="TOP 01" height="250px"
+                                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_01.png" alt="TOP 01" height="250px"
                                          width="200px">
                                 </div>
                                 <div class="h5 text-h">TOP 01</div>
@@ -302,7 +292,7 @@
                         <div class="list-products d-flex justify-content-center">
                             <div class="product-card">
                                 <div class="product-img">
-                                    <img src="/assets/images/product/pig/TOP_02.png" alt="TOP 02" height="250px"
+                                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_02.png" alt="TOP 02" height="250px"
                                          width="200px">
                                 </div>
                                 <div class="h5 text-h">TOP 02</div>
@@ -310,7 +300,7 @@
                             </div>
                             <div class="product-card">
                                 <div class="product-img">
-                                    <img src="/assets/images/product/pig/TOP_02.png" alt="TOP 02" height="250px"
+                                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_02.png" alt="TOP 02" height="250px"
                                          width="200px">
                                 </div>
                                 <div class="h5 text-h">TOP 02</div>
@@ -318,7 +308,7 @@
                             </div>
                             <div class="product-card">
                                 <div class="product-img">
-                                    <img src="/assets/images/product/pig/TOP_02.png" alt="TOP 02" height="250px"
+                                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_02.png" alt="TOP 02" height="250px"
                                          width="200px">
                                 </div>
                                 <div class="h5 text-h">TOP 02</div>
@@ -337,116 +327,7 @@
         </div>
     </div>
 </main>
-<div id="footer-placeholder"></div>
-
-    <!-- Login -->
-    <div id="login" class ="login">
-        <div id ="login_container">
-            <div class="login_close">
-                <img src="/assets/images/logo/close.png" alt="">
-            </div>
-      
-            <div class="login_header">
-                <div class="login_logo_shop">
-                    <img src="/assets/images/header/logo_vina.png" alt="Logo Shop">
-                </div>
-                <div class="login_header_text">
-                    <h3 style="font-size: 24px;">Đăng nhập tài khoản</h3>
-                </div>
-            </div>
-            <div class="login_body">
-                <div class="form-floating mb-3 mt-3">
-                    <input type="text" class="form-control" id="contact" placeholder="Nhập số điện thoại/email" name="contact" required autocomplete="off"> 
-                    <label for="contact">Nhập số điện thoại<span class="req">*</span></label>
-                </div>
-                <div class="form-floating mb-3 mt-3">
-                    <input type="password" class="form-control" id="pwd" placeholder="Nhập mật khẩu" name="password" required autocomplete="off"> 
-                    <label for="password">Nhập mật khẩu<span class="req">*</span></label>
-                </div>
-                <p class="login_forgot"><a href="#">Quên mật khẩu?</a></p>
-      
-                <button type="submit" class="login_button_submit">Đăng nhập</button>
-                <div class="login_split">
-                    <p>Hoặc</p>
-                </div>
-                <div class="login_social">
-                    <a href="" class="social_btn login_social_gg">
-                        <img src="/assets/images/social/google.png" alt="">
-                        <p>Google</p>
-                    </a>
-                    <a href="" class="social_btn login_social_zl">
-                        <img src="/assets/images/social/zalo.png" alt="">
-                        <p>Zalo</p>
-                    </a>
-                </div>
-            </div>
-            <div class="login_footer">
-                <p>Bạn chưa có tài khoản? <a href="#" id="go-to-signup">Đăng ký ngay</a></p>
-            </div>
-        </div>
-      </div>
-      
-      <!-- sign up -->
-      <div id="signup" class ="signup">
-        <div id="signup_container">
-            <div class="signup_close">
-                <img src="/assets/images/logo/close.png" alt="">
-            </div>
-      
-            <div class="signup_header">
-                <div class="signup_logo_shop">
-                    <img src="/assets/images/header/logo_vina.png" alt="Logo Shop">
-                </div>
-                <div class="signup_header_text">
-                    <h3 style="font-size: 24px;">Đăng ký tài khoản</h3>
-                </div>
-            </div>
-            <div class="signup_body">
-                <div class="form-floating mb-2 mt-2">
-                    <input type="text" class="form-control" id="name" placeholder="Nhập họ và tên" name="Name" required autocomplete="off"> 
-                    <label for="password">Nhập họ và tên<span class="req">*</span></label>
-                </div>
-      
-                <div class="form-floating mb-2 mt-2">
-                    <input type="text" class="form-control" id="contact" placeholder="Nhập số điện thoại/email" name="Contact" required autocomplete="off"> 
-                    <label for="contact">Nhập số điện thoại<span class="req">*</span></label>
-                </div>
-                <div class="form-floating mb-2 mt-2">
-                    <input type="password" class="form-control" id="pwd" placeholder="Nhập mật khẩu" name="password" required autocomplete="off"> 
-                    <label for="password">Nhập mật khẩu<span class="req">*</span></label>
-                </div>
-              
-                <div class="form-floating mb-2 mt-2">
-                    <input type="password" class="form-control" id="pwd" placeholder="Nhập lại mật khẩu" name="password again" required autocomplete="off"> 
-                    <label for="password again">Nhập lại mật khẩu<span class="req">*</span></label>
-                </div>
-      
-                <div class="signup_okay">
-                    <p>Bằng việc đăng ký này, bạn đã chấp nhận các chính sách của VINAFEED</p>
-                </div>
-                <button type="submit" class="signup_button_submit">Đăng ký</button>
-                <div class="signup_split">
-                    <p>Hoặc</p>
-                </div>
-                <div class="signup_social">
-                    <a href="" class="social_btn signup_social_gg">
-                        <img src="/assets/images/social/google.png" alt="">
-                        <p>Google</p>
-                    </a>
-                    <a href="" class="social_btn signup_social_zl">
-                        <img src="/assets/images/social/zalo.png" alt="">
-                        <p>Zalo</p>
-                    </a>
-                </div>
-            </div>
-            <div class="signup_footer">
-                <p>Bạn đã có tài khoản? <a href="#" id="go-to-login">Đăng nhập ngay</a></p>
-            </div>
-        </div>
-      </div>
-      
-      <!-- scrollToTopBtn -->
-      <button id="scrollToTopBtn"><i class="fa-solid fa-chevron-up"></i></button>
+<div><%@ include file="../../layout/footer.jsp" %></div>
 
 <script>
     function toggleDescription(contentId, buttonId) {
