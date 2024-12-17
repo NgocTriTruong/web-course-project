@@ -62,6 +62,7 @@
     </section>
   </div>
 </main>
+<%@ include file="layout/near_footer.jsp" %>
 <%@ include file="layout/footer.jsp" %>
 
 <script src="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.bundle.min.js" defer></script>
