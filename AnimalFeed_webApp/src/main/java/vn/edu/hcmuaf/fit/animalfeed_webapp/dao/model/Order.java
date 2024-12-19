@@ -1,0 +1,128 @@
+package vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model;
+
+import java.io.Serializable;
+import java.util.Date;
+
+public class Order implements Serializable {
+    private int id;
+    private int status;
+    private String address;
+    private String shipperId;
+    private double totalPrice;
+    private double totalQuantity;
+    private int userId;
+    private double shippingPrice;
+    private Date orderDate;
+    private Date shippingDate;
+
+    public Order() {}
+
+    public Order(int id, int status, String address, String shipperId, double totalPrice, double totalQuantity, int userId, double shippingPrice, Date orderDate, Date shippingDate) {
+        this.id = id;
+        this.status = status;
+        this.address = address;
+        this.shipperId = shipperId;
+        this.totalPrice = totalPrice;
+        this.totalQuantity = totalQuantity;
+        this.userId = userId;
+        this.shippingPrice = shippingPrice;
+        this.orderDate = orderDate;
+        this.shippingDate = shippingDate;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getShipperId() {
+        return shipperId;
+    }
+
+    public void setShipperId(String shipperId) {
+        this.shipperId = shipperId;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public double getTotalQuantity() {
+        return totalQuantity;
+    }
+
+    public void setTotalQuantity(double totalQuantity) {
+        this.totalQuantity = totalQuantity;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public double getShippingPrice() {
+        return shippingPrice;
+    }
+
+    public void setShippingPrice(double shippingPrice) {
+        this.shippingPrice = shippingPrice;
+    }
+
+    public Date getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public Date getShippingDate() {
+        return shippingDate;
+    }
+
+    public void setShippingDate(Date shippingDate) {
+        this.shippingDate = shippingDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", status=" + status +
+                ", address='" + address + '\'' +
+                ", shipperId='" + shipperId + '\'' +
+                ", totalPrice=" + totalPrice +
+                ", totalQuantity=" + totalQuantity +
+                ", userId=" + userId +
+                ", shippingPrice=" + shippingPrice +
+                ", orderDate=" + orderDate +
+                ", shippingDate=" + shippingDate +
+                '}';
+    }
+}
