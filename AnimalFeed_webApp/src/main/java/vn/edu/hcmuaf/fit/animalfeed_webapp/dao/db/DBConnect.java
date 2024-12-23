@@ -8,16 +8,16 @@ public class DBConnect {
 
     public static Statement get() {
         try {
-            if (conn == null || conn.isClosed())  makeConnect();
+            if (conn == null || conn.isClosed()) makeConnect();
             return conn.createStatement();
         } catch (SQLException | ClassNotFoundException e) {
-           return null;
+            return null;
         }
     }
 
     public static void makeConnect() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        conn= DriverManager.getConnection(url, DBProperties.username(), DBProperties.password());
+        conn = DriverManager.getConnection(url, DBProperties.username(), DBProperties.password());
     }
 
     public static void main(String[] args) throws SQLException {
@@ -35,6 +35,5 @@ public class DBConnect {
                     + "; " + re.getString("img")
                     + "; " + re.getDate("create_date"));
         }
-
     }
 }
