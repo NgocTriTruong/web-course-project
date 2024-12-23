@@ -16,7 +16,40 @@ public class DBConnect {
     }
 
     private static void makeConnect() throws ClassNotFoundException, SQLException {
-        Class.forName("conn.mysql.cj.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
         conn= DriverManager.getConnection(url, DBProperties.username(), DBProperties.password());
+    }
+
+    public static void main(String[] args) throws SQLException {
+        Statement statement =  get();
+        ResultSet re = statement.executeQuery("SELECT * FROM products");
+
+        while (re.next()) {
+            System.out.println(re.getInt("id")
+                    + "; " + re.getInt("categoryId")
+                    + "; " + re.getString("name")
+                    + "; " + re.getDouble("price")
+                    + "; " + re.getString("description")
+                    + "; " + re.getInt("quantity")
+                    + ";"  + re.getInt("status")
+                    + "; " + re.getString("img"));
+                    + "; " + re.getDate()
+
+
+            {" +
+                "id=" + id +
+                        ", categoryId=" + categoryId +
+                        ", name='" + name + '\'' +
+                        ", price=" + price +
+                        ", description='" + description + '\'' +
+                        ", quantity=" + quantity +
+                        ", status=" + status +
+                        ", image='" + image + '\'' +
+                        ", createDate=" + createDate +
+                        ", discountId=" + discountId +
+                        ", brandName='" + brandName + '\'' +
+                        '}';
+        }
+
     }
 }

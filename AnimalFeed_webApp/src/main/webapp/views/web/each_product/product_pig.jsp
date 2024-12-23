@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "f" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -107,7 +110,7 @@
             <div id="sale-products">
                 <div class="row">
                     <div class="col-md-3 bg-light text-center m-3 col product_number">
-                        <a href="${pageContext.request.contextPath}/views/web/each_product/product_details/pig_top1.jsp">
+                        <a href="${pageContext.request.contextPath}/views/web/each_product/product_details/product-detail.jsp">
                             <div class="sale_all">
                                 <div class="sale_badge">20% OFF</div>
                             </div>
