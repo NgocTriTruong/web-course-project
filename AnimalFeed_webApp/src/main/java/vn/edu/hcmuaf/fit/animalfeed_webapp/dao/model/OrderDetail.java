@@ -4,14 +4,16 @@ import java.io.Serializable;
 
 public class OrderDetail implements Serializable {
     private int id;
+    private int orderId;
     private int productId;
     private int quantity;
     private double totalPrice;
 
     public OrderDetail() {}
 
-    public OrderDetail(int id, int productId, int quantity, double totalPrice) {
+    public OrderDetail(int id, int orderId, int productId, int quantity, double totalPrice) {
         this.id = id;
+        this.orderId = orderId;
         this.productId = productId;
         this.quantity = quantity;
         this.totalPrice = totalPrice;
@@ -23,6 +25,14 @@ public class OrderDetail implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 
     public int getProductId() {
@@ -53,6 +63,7 @@ public class OrderDetail implements Serializable {
     public String toString() {
         return "OrderDetail{" +
                 "id=" + id +
+                ", orderId=" + orderId +
                 ", productId=" + productId +
                 ", quantity=" + quantity +
                 ", totalPrice=" + totalPrice +
