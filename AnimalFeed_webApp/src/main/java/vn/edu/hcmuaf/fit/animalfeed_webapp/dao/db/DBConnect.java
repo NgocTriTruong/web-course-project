@@ -8,16 +8,16 @@ public class DBConnect {
 
     public static Statement get() {
         try {
-            if (conn == null || conn.isClosed())  makeConnect();
+            if (conn == null || conn.isClosed()) makeConnect();
             return conn.createStatement();
         } catch (SQLException | ClassNotFoundException e) {
-           return null;
+            return null;
         }
     }
 
     private static void makeConnect() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        conn= DriverManager.getConnection(url, DBProperties.username(), DBProperties.password());
+        conn = DriverManager.getConnection(url, DBProperties.username(), DBProperties.password());
     }
 
     public static void main(String[] args) throws SQLException {
@@ -26,30 +26,14 @@ public class DBConnect {
 
         while (re.next()) {
             System.out.println(re.getInt("id")
-                    + "; " + re.getInt("categoryId")
+                    + "; " + re.getInt("cat_Id")
                     + "; " + re.getString("name")
                     + "; " + re.getDouble("price")
                     + "; " + re.getString("description")
                     + "; " + re.getInt("quantity")
                     + ";"  + re.getInt("status")
-                    + "; " + re.getString("img"));
-                    + "; " + re.getDate()
-
-
-            {" +
-                "id=" + id +
-                        ", categoryId=" + categoryId +
-                        ", name='" + name + '\'' +
-                        ", price=" + price +
-                        ", description='" + description + '\'' +
-                        ", quantity=" + quantity +
-                        ", status=" + status +
-                        ", image='" + image + '\'' +
-                        ", createDate=" + createDate +
-                        ", discountId=" + discountId +
-                        ", brandName='" + brandName + '\'' +
-                        '}';
+                    + "; " + re.getString("img")
+                    + "; " + re.getDate("create_date"));
         }
-
     }
 }
