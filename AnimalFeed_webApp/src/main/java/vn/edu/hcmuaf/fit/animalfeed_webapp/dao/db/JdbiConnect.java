@@ -34,11 +34,11 @@ public class JdbiConnect {
         jdbi = Jdbi.create(ds);
     }
 
-    public static void main(String[] args) {
-        Jdbi jdbi = getJdbi();
-        List<Product>products = jdbi.withHandle(handle -> {
-            return handle.createQuery("select * from products").mapToBean(Product.class).list();
-        });
-        System.out.println(products);
-    }
+//    public static void main(String[] args) {
+//        Jdbi jdbi = getJdbi();
+//        List<Product>products = jdbi.withHandle(handle -> {
+//            return handle.createQuery("select * from products").mapToBean(Product.class).list();
+//        });
+//        System.out.println(products);
+//    }
 }
