@@ -20,6 +20,22 @@ public class UserDao {
         return jdbi.withHandle(handle -> handle.createQuery("select * from users where id = :id").bind("id", id).mapToBean(User.class).findOne().orElse(null));
     }
 
+    public void insertUser(User user) {
+        Jdbi jdbi = JdbiConnect.getJdbi();
+        int rowsInserted = jdbi.withHandle(handle ->
+                handle.createUpdate("INSERT INTO users (fullName, password, phone, status, createDate, updateDate, role) VALUES (:fullName, :password, :phone, :status, :createDate, :updateDate, :role)")
+                        .bind("fullName", user.getFullName())
+                        .bind("password", user.getPassword())
+                        .bind("phone", user.getPhone())
+                        .bind("status", user.getStatus())
+                        .bind("createDate", user.getCreateDate())
+                        .bind("updateDate", user.getUpdateDate())
+                        .bind("role", user.getRole())
+                        .execute()
+        );
+        System.out.println(rowsInserted);
+    }
+
     // Method to update user information
     public void updateUser(User user) {
         Jdbi jdbi = JdbiConnect.getJdbi();

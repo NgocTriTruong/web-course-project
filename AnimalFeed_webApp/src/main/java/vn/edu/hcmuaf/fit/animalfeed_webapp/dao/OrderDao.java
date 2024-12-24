@@ -14,6 +14,24 @@ public class OrderDao {
         return jdbi.withHandle(handle -> handle.createQuery("select * from orders where id = :id").bind("id", id).mapToBean(Order.class).findOne().orElse(null));
     }
 
+    public void insertOrder(Order order) {
+        Jdbi jdbi = JdbiConnect.getJdbi();
+        int rowsInserted = jdbi.withHandle(handle ->
+                handle.createUpdate("INSERT INTO orders (status, address, shipper_id, total_price, total_quantity, user_id, ship_price, order_date, ship_date) VALUES (:status, :address, :shipper_id, :total_price, :total_quantity, :user_id, :ship_price, :order_date, :ship_date)")
+                        .bind("status", order.getStatus())
+                        .bind("address", order.getAddress())
+                        .bind("shipper_id", order.getShipperId())
+                        .bind("total_price", order.getTotalPrice())
+                        .bind("total_quantity", order.getTotalQuantity())
+                        .bind("user_id", order.getUserId())
+                        .bind("ship_price", order.getShippingPrice())
+                        .bind("order_date", order.getOrderDate())
+                        .bind("ship_date", order.getShippingDate())
+                        .execute()
+        );
+        System.out.println(rowsInserted);
+    }
+
     // Method to update user information
     public void updateOrderStatus(int status, int id) {
         Jdbi jdbi = JdbiConnect.getJdbi();
