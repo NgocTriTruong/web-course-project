@@ -8,21 +8,35 @@ import java.sql.SQLException;
 import java.util.*;
 
 public class UserDao {
+    private static Jdbi jdbi = JdbiConnect.getJdbi();
+
     // Method to fetch a user by their username
     public ArrayList<User> getUserByName(String name) throws SQLException, ClassNotFoundException {
-        Jdbi jdbi = JdbiConnect.getJdbi();
         return (ArrayList<User>) jdbi.withHandle(handle -> handle.createQuery("select * from users like :namePattern").bind("pattern", "%" + name).mapToBean(User.class).list());
     }
 
     // Method to insert a new user
     public User getUserById(int id) throws SQLException, ClassNotFoundException {
-        Jdbi jdbi = JdbiConnect.getJdbi();
         return jdbi.withHandle(handle -> handle.createQuery("select * from users where id = :id").bind("id", id).mapToBean(User.class).findOne().orElse(null));
+    }
+
+    public void insertUser(User user) {
+        int rowsInserted = jdbi.withHandle(handle ->
+                handle.createUpdate("INSERT INTO users (fullName, password, phone, status, createDate, updateDate, role) VALUES (:fullName, :password, :phone, :status, :createDate, :updateDate, :role)")
+                        .bind("fullName", user.getFullName())
+                        .bind("password", user.getPassword())
+                        .bind("phone", user.getPhone())
+                        .bind("status", user.getStatus())
+                        .bind("createDate", user.getCreateDate())
+                        .bind("updateDate", user.getUpdateDate())
+                        .bind("role", user.getRole())
+                        .execute()
+        );
+        System.out.println(rowsInserted);
     }
 
     // Method to update user information
     public void updateUser(User user) {
-        Jdbi jdbi = JdbiConnect.getJdbi();
         int rowsUpdated = jdbi.withHandle(handle ->
                 handle.createUpdate("UPDATE users SET fullName = :fullName, password = :password, phone = :phone, status = :status, createDate = :createDate, updateDate = :updateDate, role = :role WHERE id = :id")
                         .bind("fullName", user.getFullName())
@@ -40,7 +54,6 @@ public class UserDao {
 
     // Method to delete a user by username
     public void deleteUser(int id) {
-        Jdbi jdbi = JdbiConnect.getJdbi();
         int rowsDeleted = jdbi.withHandle(handle ->
                 handle.createUpdate("DELETE FROM users WHERE id = :id")
                         .bind("id", id)
@@ -51,7 +64,6 @@ public class UserDao {
 
     // Method to list all users
     public ArrayList<User> getAllUsers() {
-        Jdbi jdbi = JdbiConnect.getJdbi();
         return (ArrayList<User>) jdbi.withHandle(handle -> handle.createQuery("select * from users").mapToBean(User.class).list());
     }
 }
