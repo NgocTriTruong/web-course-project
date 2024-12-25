@@ -14,6 +14,21 @@ public class ProductService {
     }
 
     public Product getDetail(String in) {
-        return null;
+        try {
+            int id = Integer.parseInt(in);
+            return productDao.getById(id);
+        }catch (NumberFormatException e) {
+            return null;
+        }
+
     }
+
+    public int getTotalProduct(){
+        return productDao.getTotalProduct();
+    }
+
+    public List<Product> getProductByPage(int page, int id){
+        return productDao.getProductByPage(page, id);
+    }
+
 }
