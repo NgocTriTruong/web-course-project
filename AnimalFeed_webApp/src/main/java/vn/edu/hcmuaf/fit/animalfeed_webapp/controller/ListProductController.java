@@ -10,15 +10,16 @@ import vn.edu.hcmuaf.fit.animalfeed_webapp.services.ProductService;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "ListProduct", value = "/list-product")
+@WebServlet(name = "ListProductController", value = "/list-product")
 public class ListProductController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException, ServletException {
         ProductService productService = new ProductService();
         List<Product> products = productService.getAllProducts();
-        request.setAttribute("products", products);
-        request.getRequestDispatcher("product.jsp").forward(request, response);
+
+        request.setAttribute("productsData", products);
+        request.getRequestDispatcher("views/web/each_product/product_pig.jsp").forward(request, response);
     }
 
     @Override

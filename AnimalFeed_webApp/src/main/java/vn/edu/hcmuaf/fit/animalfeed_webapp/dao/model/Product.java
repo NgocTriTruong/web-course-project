@@ -5,28 +5,29 @@ import java.util.Date;
 
 public class Product implements Serializable {
     private int id;
-    private int categoryId;
+    private int cat_id;
     private String name;
     private double price;
     private String description;
     private int quantity;
     private int status;
-    private String image;
+    private String img;
     private Date createDate;
-    private int discountId ;
+    private int discountId;
     private String brandName;
 
-    public Product() {}
+    public Product() {
+    }
 
-    public Product(int id, int categoryId, String name, double price, String description, int quantity, int status, String image, Date createDate, int discountId, String brandName) {
+    public Product(int id, int cat_id, String name, double price, String description, int quantity, int status, String img, Date createDate, int discountId, String brandName) {
         this.id = id;
-        this.categoryId = categoryId;
+        this.cat_id = cat_id;
         this.name = name;
         this.price = price;
         this.description = description;
         this.quantity = quantity;
         this.status = status;
-        this.image = image;
+        this.img = img;
         this.createDate = createDate;
         this.discountId = discountId;
         this.brandName = brandName;
@@ -40,12 +41,12 @@ public class Product implements Serializable {
         this.id = id;
     }
 
-    public int getCategoryId() {
-        return categoryId;
+    public int getCat_id() {
+        return cat_id;
     }
 
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
+    public void setCat_id(int cat_id) {
+        this.cat_id = cat_id;
     }
 
     public String getName() {
@@ -88,12 +89,12 @@ public class Product implements Serializable {
         this.status = status;
     }
 
-    public String getImage() {
-        return image;
+    public String getImg() {
+        return img;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public Date getCreateDate() {
@@ -124,13 +125,13 @@ public class Product implements Serializable {
     public String toString() {
         return "Product{" +
                 "id=" + id +
-                ", categoryId=" + categoryId +
+                ", cat_id=" + cat_id +
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 ", description='" + description + '\'' +
                 ", quantity=" + quantity +
                 ", status=" + status +
-                ", image='" + image + '\'' +
+                ", img='" + img + '\'' +
                 ", createDate=" + createDate +
                 ", discountId=" + discountId +
                 ", brandName='" + brandName + '\'' +

@@ -2,20 +2,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd ">
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>vn.edu.hcmuaf.fit</groupId>
-  <artifactId>AnimalFeed_webApp</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <name>AnimalFeed_webApp</name>
-  <packaging>war</packaging>
+    <groupId>vn.edu.hcmuaf.fit</groupId>
+    <artifactId>AnimalFeed_webApp</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>AnimalFeed_webApp</name>
+    <packaging>war</packaging>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.target>19</maven.compiler.target>
-    <maven.compiler.source>19</maven.compiler.source>
-    <junit.version>5.11.0</junit.version>
-  </properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.target>19</maven.compiler.target>
+        <maven.compiler.source>19</maven.compiler.source>
+        <junit.version>5.11.0</junit.version>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -40,12 +40,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.jdbi</groupId>
-            <artifactId>jdbi3-core</artifactId>
-            <version>3.41.0</version>
-        </dependency>
-
-        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.33</version>
@@ -67,15 +61,23 @@
         </dependency>
 
 
+        <!-- https://mvnrepository.com/artifact/org.jdbi/jdbi3-core -->
+        <dependency>
+            <groupId>org.jdbi</groupId>
+            <artifactId>jdbi3-core</artifactId>
+            <version>3.47.0</version>
+        </dependency>
+
     </dependencies>
 
 
     <build>
-    <plugins>
-<plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>3.4.0</version>
-      </plugin>    </plugins>
-  </build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.4.0</version>
+            </plugin>
+        </plugins>
+    </build>
 </project>
