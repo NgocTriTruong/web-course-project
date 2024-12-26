@@ -927,221 +927,229 @@
             <!--product one -->
             <div id="product_all_one">
                 <div class="row">
+<%--                    <c:forEach begin="1" end="productsData" var="i">--%>
+                    <c:forEach var="p" items="${productsData}">
                     <div class="col-md-3 bg-white text-center m-3 col product_number">
                         <div class="product-img">
-                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_01.png" alt="TOP 01" height="250px" width="200px">
+                            <img src="${p.img}" alt="TOP 01" height="250px" width="200px">
+<%--                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_01.png" alt="TOP 01" height="250px" width="200px">--%>
                         </div>
-                        <div class="h5 text-h">TOP 01</div>
-                        <div class="p mb-2 text-p">Dùng cho heo con từ 05 ngày tuổi đến 35 ngày tuổi</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
+                        <div class="h5 text-h">${p.name}</div>
+                        <div class="p mb-2 text-p">${p.description}</div>
+                        <div class="h4 text-start ms-3" style="color: red;"><f:formatNumber value="${p.price}"/> <u>đ</u></div>
                         <div class="p text-start ms-3">Đã bán 1,1k</div>
                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                             <i class="fa-solid fa-truck mt-1"></i>
                             <p class="ms-2">2 -4 ngày</p>
                         </div>
                     </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
-                        <div class="product-img">
-                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_02.png" alt="TOP 01" height="250px" width="200px">
-                        </div>
-                        <div class="h5 text-h">TOP 02</div>
-                        <div class="p mb-2 text-p"> Dùng cho heo con tập ăn đến 20kg</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
-                        <div class="p text-start ms-3">Đã bán 1,1k</div>
-                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                            <i class="fa-solid fa-truck mt-1"></i>
-                            <p class="ms-2">2 -4 ngày</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
-                        <div class="product-img">
-                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_03.png" alt="TOP 01" height="250px" width="200px">
-                        </div>
-                        <div class="h5 text-h">TOP 03</div>
-                        <div class="p mb-2 text-p">Dùng cho heo thịt giống tốt từ 12 - 30kg</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
-                        <div class="p text-start ms-3">Đã bán 1,1k</div>
-                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                            <i class="fa-solid fa-truck mt-1"></i>
-                            <p class="ms-2">2 -4 ngày</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
-                        <div class="product-img">
-                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_04.png" alt="TOP 01" height="250px" width="200px">
-                        </div>
-                        <div class="h5 text-h">TOP 04</div>
-                        <div class="p mb-2 text-p">Dùng cho heo thịt giống tốt từ 30 - 70kg</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
-                        <div class="p text-start ms-3">Đã bán 1,1k</div>
-                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                            <i class="fa-solid fa-truck mt-1"></i>
-                            <p class="ms-2">2 -4 ngày</p>
-                        </div>
-                    </div>
+                    </c:forEach>
+
+
+<%--                    <div class="col-md-3 bg-white text-center m-3 col product_number">--%>
+<%--                        <div class="product-img">--%>
+<%--                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_02.png" alt="TOP 01" height="250px" width="200px">--%>
+<%--                        </div>--%>
+<%--                        <div class="h5 text-h">TOP 02</div>--%>
+<%--                        <div class="p mb-2 text-p"> Dùng cho heo con tập ăn đến 20kg</div>--%>
+<%--                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>--%>
+<%--                        <div class="p text-start ms-3">Đã bán 1,1k</div>--%>
+<%--                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">--%>
+<%--                            <i class="fa-solid fa-truck mt-1"></i>--%>
+<%--                            <p class="ms-2">2 -4 ngày</p>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="col-md-3 bg-white text-center m-3 col product_number">--%>
+<%--                        <div class="product-img">--%>
+<%--                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_03.png" alt="TOP 01" height="250px" width="200px">--%>
+<%--                        </div>--%>
+<%--                        <div class="h5 text-h">TOP 03</div>--%>
+<%--                        <div class="p mb-2 text-p">Dùng cho heo thịt giống tốt từ 12 - 30kg</div>--%>
+<%--                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>--%>
+<%--                        <div class="p text-start ms-3">Đã bán 1,1k</div>--%>
+<%--                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">--%>
+<%--                            <i class="fa-solid fa-truck mt-1"></i>--%>
+<%--                            <p class="ms-2">2 -4 ngày</p>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="col-md-3 bg-white text-center m-3 col product_number">--%>
+<%--                        <div class="product-img">--%>
+<%--                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_04.png" alt="TOP 01" height="250px" width="200px">--%>
+<%--                        </div>--%>
+<%--                        <div class="h5 text-h">TOP 04</div>--%>
+<%--                        <div class="p mb-2 text-p">Dùng cho heo thịt giống tốt từ 30 - 70kg</div>--%>
+<%--                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>--%>
+<%--                        <div class="p text-start ms-3">Đã bán 1,1k</div>--%>
+<%--                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">--%>
+<%--                            <i class="fa-solid fa-truck mt-1"></i>--%>
+<%--                            <p class="ms-2">2 -4 ngày</p>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
                 </div>
-                <div class="row">
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
-                        <div class="product-img">
-                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_05.png" alt="TOP 01" height="250px" width="200px">
-                        </div>
-                        <div class="h5 text-h">TOP 05</div>
-                        <div class="p mb-2 text-p">Dùng cho heo thịt giống tốt từ 70kg – xuất chuồng.</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
-                        <div class="p text-start ms-3">Đã bán 1,1k</div>
-                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                            <i class="fa-solid fa-truck mt-1"></i>
-                            <p class="ms-2">2 -4 ngày</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
-                        <div class="product-img">
-                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_06.png" alt="TOP 01" height="250px" width="200px">
-                        </div>
-                        <div class="h5 text-h">TOP 06</div>
-                        <div class="p mb-2 text-p">Dùng cho heo cho heo nái hậu bị, mang thai.</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
-                        <div class="p text-start ms-3">Đã bán 1,1k</div>
-                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                            <i class="fa-solid fa-truck mt-1"></i>
-                            <p class="ms-2">2 -4 ngày</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
-                        <div class="product-img">
-                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_07.png" alt="TOP 01" height="250px" width="200px">
-                        </div>
-                        <div class="h5 text-h">TOP 07</div>
-                        <div class="p mb-2 text-p">Dùng cho heo nái nuôi con giống tốt. Hoặc heo nọc (100kg....</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
-                        <div class="p text-start ms-3">Đã bán 1,1k</div>
-                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                            <i class="fa-solid fa-truck mt-1"></i>
-                            <p class="ms-2">2 -4 ngày</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
-                        <div class="product-img">
-                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/100S_Font.png" alt="TOP 01" height="250px" width="200px">
-                        </div>
-                        <div class="h5 text-h">VINA 100S</div>
-                        <div class="p mb-2 text-p">Dùng cho heo sữa từ 05 ngày tuổi đến 8kg</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
-                        <div class="p text-start ms-3">Đã bán 1,1k</div>
-                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                            <i class="fa-solid fa-truck mt-1"></i>
-                            <p class="ms-2">2 -4 ngày</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
-                        <div class="product-img">
-                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/101S_Font.png" alt="TOP 01" height="250px" width="200px">
-                        </div>
-                        <div class="h5 text-h">VINA 101S</div>
-                        <div class="p mb-2 text-p">Dùng cho heo con từ tập ăn đến khi đạt 20 kg thể trọng.</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
-                        <div class="p text-start ms-3">Đã bán 1,1k</div>
-                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                            <i class="fa-solid fa-truck mt-1"></i>
-                            <p class="ms-2">2 -4 ngày</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
-                        <div class="product-img">
-                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/102GP___mien_bac.png" alt="TOP 01" height="250px" width="200px">
-                        </div>
-                        <div class="h5 text-h">VINA 102GP (Miền Bắc)</div>
-                        <div class="p mb-2 text-p">Dùng cho heo siêu nạc từ 12kg đến 25kg</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
-                        <div class="p text-start ms-3">Đã bán 1,1k</div>
-                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                            <i class="fa-solid fa-truck mt-1"></i>
-                            <p class="ms-2">2 -4 ngày</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
-                        <div class="product-img">
-                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/102GP___mien_nam.png" alt="TOP 01" height="250px" width="200px">
-                        </div>
-                        <div class="h5 text-h">VINA 102GP (Miền Nam)</div>
-                        <div class="p mb-2 text-p">Dùng cho heo siêu nạc từ 12kg đến 25kg</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
-                        <div class="p text-start ms-3">Đã bán 1,1k</div>
-                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                            <i class="fa-solid fa-truck mt-1"></i>
-                            <p class="ms-2">2 -4 ngày</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
-                        <div class="product-img">
-                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/102s_mien_nampng.png" alt="TOP 01" height="250px" width="200px">
-                        </div>
-                        <div class="h5 text-h">VINA 102S (Miền Nam)</div>
-                        <div class="p mb-2 text-p">Dùng cho heo thịt siêu nạc từ 20 kg đến 50 kg.</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
-                        <div class="p text-start ms-3">Đã bán 1,1k</div>
-                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                            <i class="fa-solid fa-truck mt-1"></i>
-                            <p class="ms-2">2 -4 ngày</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
-                        <div class="product-img">
-                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/102S___mien_bac.png" alt="TOP 01" height="250px" width="200px">
-                        </div>
-                        <div class="h5 text-h">VINA 102S (Miền Bắc)</div>
-                        <div class="p mb-2 text-p">Dùng cho heo thịt siêu nạc từ 80 kg trở lên</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
-                        <div class="p text-start ms-3">Đã bán 1,1k</div>
-                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                            <i class="fa-solid fa-truck mt-1"></i>
-                            <p class="ms-2">2 -4 ngày</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
-                        <div class="product-img">
-                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/102M_Font.png" alt="TOP 01" height="250px" width="200px">
-                        </div>
-                        <div class="h5 text-h">VINA 102M</div>
-                        <div class="p mb-2 text-p">Dùng cho heo thịt siêu nạc từ 20kg đến 50kg</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
-                        <div class="p text-start ms-3">Đã bán 1,1k</div>
-                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                            <i class="fa-solid fa-truck mt-1"></i>
-                            <p class="ms-2">2 -4 ngày</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
-                        <div class="product-img">
-                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/103S_mien_nam.png" alt="TOP 01" height="250px" width="200px">
-                        </div>
-                        <div class="h5 text-h">VINA 103S (Miền Nam)</div>
-                        <div class="p mb-2 text-p">Dùng cho heo thịt siêu nạc từ 50kg - 80kg</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
-                        <div class="p text-start ms-3">Đã bán 1,1k</div>
-                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                            <i class="fa-solid fa-truck mt-1"></i>
-                            <p class="ms-2">2 -4 ngày</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 bg-white text-center m-3 col product_number">
-                        <div class="product-img">
-                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/104S_mien_nam.png" alt="TOP 01" height="250px" width="200px">
-                        </div>
-                        <div class="h5 text-h">VINA 104S (Miền Bắc)</div>
-                        <div class="p mb-2 text-p">Dùng cho heo thịt siêu nạc từ 95 kg đến khi xuất chuồng</div>
-                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>
-                        <div class="p text-start ms-3">Đã bán 1,1k</div>
-                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                            <i class="fa-solid fa-truck mt-1"></i>
-                            <p class="ms-2">2 -4 ngày</p>
-                        </div>
-                    </div>
-                </div>
+
+
+<%--                <div class="row">--%>
+<%--                    <div class="col-md-3 bg-white text-center m-3 col product_number">--%>
+<%--                        <div class="product-img">--%>
+<%--                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_05.png" alt="TOP 01" height="250px" width="200px">--%>
+<%--                        </div>--%>
+<%--                        <div class="h5 text-h">TOP 05</div>--%>
+<%--                        <div class="p mb-2 text-p">Dùng cho heo thịt giống tốt từ 70kg – xuất chuồng.</div>--%>
+<%--                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>--%>
+<%--                        <div class="p text-start ms-3">Đã bán 1,1k</div>--%>
+<%--                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">--%>
+<%--                            <i class="fa-solid fa-truck mt-1"></i>--%>
+<%--                            <p class="ms-2">2 -4 ngày</p>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="col-md-3 bg-white text-center m-3 col product_number">--%>
+<%--                        <div class="product-img">--%>
+<%--                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_06.png" alt="TOP 01" height="250px" width="200px">--%>
+<%--                        </div>--%>
+<%--                        <div class="h5 text-h">TOP 06</div>--%>
+<%--                        <div class="p mb-2 text-p">Dùng cho heo cho heo nái hậu bị, mang thai.</div>--%>
+<%--                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>--%>
+<%--                        <div class="p text-start ms-3">Đã bán 1,1k</div>--%>
+<%--                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">--%>
+<%--                            <i class="fa-solid fa-truck mt-1"></i>--%>
+<%--                            <p class="ms-2">2 -4 ngày</p>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="col-md-3 bg-white text-center m-3 col product_number">--%>
+<%--                        <div class="product-img">--%>
+<%--                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_07.png" alt="TOP 01" height="250px" width="200px">--%>
+<%--                        </div>--%>
+<%--                        <div class="h5 text-h">TOP 07</div>--%>
+<%--                        <div class="p mb-2 text-p">Dùng cho heo nái nuôi con giống tốt. Hoặc heo nọc (100kg....</div>--%>
+<%--                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>--%>
+<%--                        <div class="p text-start ms-3">Đã bán 1,1k</div>--%>
+<%--                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">--%>
+<%--                            <i class="fa-solid fa-truck mt-1"></i>--%>
+<%--                            <p class="ms-2">2 -4 ngày</p>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="col-md-3 bg-white text-center m-3 col product_number">--%>
+<%--                        <div class="product-img">--%>
+<%--                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/100S_Font.png" alt="TOP 01" height="250px" width="200px">--%>
+<%--                        </div>--%>
+<%--                        <div class="h5 text-h">VINA 100S</div>--%>
+<%--                        <div class="p mb-2 text-p">Dùng cho heo sữa từ 05 ngày tuổi đến 8kg</div>--%>
+<%--                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>--%>
+<%--                        <div class="p text-start ms-3">Đã bán 1,1k</div>--%>
+<%--                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">--%>
+<%--                            <i class="fa-solid fa-truck mt-1"></i>--%>
+<%--                            <p class="ms-2">2 -4 ngày</p>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="row">--%>
+<%--                    <div class="col-md-3 bg-white text-center m-3 col product_number">--%>
+<%--                        <div class="product-img">--%>
+<%--                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/101S_Font.png" alt="TOP 01" height="250px" width="200px">--%>
+<%--                        </div>--%>
+<%--                        <div class="h5 text-h">VINA 101S</div>--%>
+<%--                        <div class="p mb-2 text-p">Dùng cho heo con từ tập ăn đến khi đạt 20 kg thể trọng.</div>--%>
+<%--                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>--%>
+<%--                        <div class="p text-start ms-3">Đã bán 1,1k</div>--%>
+<%--                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">--%>
+<%--                            <i class="fa-solid fa-truck mt-1"></i>--%>
+<%--                            <p class="ms-2">2 -4 ngày</p>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="col-md-3 bg-white text-center m-3 col product_number">--%>
+<%--                        <div class="product-img">--%>
+<%--                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/102GP___mien_bac.png" alt="TOP 01" height="250px" width="200px">--%>
+<%--                        </div>--%>
+<%--                        <div class="h5 text-h">VINA 102GP (Miền Bắc)</div>--%>
+<%--                        <div class="p mb-2 text-p">Dùng cho heo siêu nạc từ 12kg đến 25kg</div>--%>
+<%--                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>--%>
+<%--                        <div class="p text-start ms-3">Đã bán 1,1k</div>--%>
+<%--                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">--%>
+<%--                            <i class="fa-solid fa-truck mt-1"></i>--%>
+<%--                            <p class="ms-2">2 -4 ngày</p>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="col-md-3 bg-white text-center m-3 col product_number">--%>
+<%--                        <div class="product-img">--%>
+<%--                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/102GP___mien_nam.png" alt="TOP 01" height="250px" width="200px">--%>
+<%--                        </div>--%>
+<%--                        <div class="h5 text-h">VINA 102GP (Miền Nam)</div>--%>
+<%--                        <div class="p mb-2 text-p">Dùng cho heo siêu nạc từ 12kg đến 25kg</div>--%>
+<%--                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>--%>
+<%--                        <div class="p text-start ms-3">Đã bán 1,1k</div>--%>
+<%--                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">--%>
+<%--                            <i class="fa-solid fa-truck mt-1"></i>--%>
+<%--                            <p class="ms-2">2 -4 ngày</p>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="col-md-3 bg-white text-center m-3 col product_number">--%>
+<%--                        <div class="product-img">--%>
+<%--                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/102s_mien_nampng.png" alt="TOP 01" height="250px" width="200px">--%>
+<%--                        </div>--%>
+<%--                        <div class="h5 text-h">VINA 102S (Miền Nam)</div>--%>
+<%--                        <div class="p mb-2 text-p">Dùng cho heo thịt siêu nạc từ 20 kg đến 50 kg.</div>--%>
+<%--                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>--%>
+<%--                        <div class="p text-start ms-3">Đã bán 1,1k</div>--%>
+<%--                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">--%>
+<%--                            <i class="fa-solid fa-truck mt-1"></i>--%>
+<%--                            <p class="ms-2">2 -4 ngày</p>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="row">--%>
+<%--                    <div class="col-md-3 bg-white text-center m-3 col product_number">--%>
+<%--                        <div class="product-img">--%>
+<%--                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/102S___mien_bac.png" alt="TOP 01" height="250px" width="200px">--%>
+<%--                        </div>--%>
+<%--                        <div class="h5 text-h">VINA 102S (Miền Bắc)</div>--%>
+<%--                        <div class="p mb-2 text-p">Dùng cho heo thịt siêu nạc từ 80 kg trở lên</div>--%>
+<%--                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>--%>
+<%--                        <div class="p text-start ms-3">Đã bán 1,1k</div>--%>
+<%--                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">--%>
+<%--                            <i class="fa-solid fa-truck mt-1"></i>--%>
+<%--                            <p class="ms-2">2 -4 ngày</p>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="col-md-3 bg-white text-center m-3 col product_number">--%>
+<%--                        <div class="product-img">--%>
+<%--                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/102M_Font.png" alt="TOP 01" height="250px" width="200px">--%>
+<%--                        </div>--%>
+<%--                        <div class="h5 text-h">VINA 102M</div>--%>
+<%--                        <div class="p mb-2 text-p">Dùng cho heo thịt siêu nạc từ 20kg đến 50kg</div>--%>
+<%--                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>--%>
+<%--                        <div class="p text-start ms-3">Đã bán 1,1k</div>--%>
+<%--                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">--%>
+<%--                            <i class="fa-solid fa-truck mt-1"></i>--%>
+<%--                            <p class="ms-2">2 -4 ngày</p>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="col-md-3 bg-white text-center m-3 col product_number">--%>
+<%--                        <div class="product-img">--%>
+<%--                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/103S_mien_nam.png" alt="TOP 01" height="250px" width="200px">--%>
+<%--                        </div>--%>
+<%--                        <div class="h5 text-h">VINA 103S (Miền Nam)</div>--%>
+<%--                        <div class="p mb-2 text-p">Dùng cho heo thịt siêu nạc từ 50kg - 80kg</div>--%>
+<%--                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>--%>
+<%--                        <div class="p text-start ms-3">Đã bán 1,1k</div>--%>
+<%--                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">--%>
+<%--                            <i class="fa-solid fa-truck mt-1"></i>--%>
+<%--                            <p class="ms-2">2 -4 ngày</p>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="col-md-3 bg-white text-center m-3 col product_number">--%>
+<%--                        <div class="product-img">--%>
+<%--                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/104S_mien_nam.png" alt="TOP 01" height="250px" width="200px">--%>
+<%--                        </div>--%>
+<%--                        <div class="h5 text-h">VINA 104S (Miền Bắc)</div>--%>
+<%--                        <div class="p mb-2 text-p">Dùng cho heo thịt siêu nạc từ 95 kg đến khi xuất chuồng</div>--%>
+<%--                        <div class="h4 text-start ms-3" style="color: red;">400.000 <u>đ</u></div>--%>
+<%--                        <div class="p text-start ms-3">Đã bán 1,1k</div>--%>
+<%--                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">--%>
+<%--                            <i class="fa-solid fa-truck mt-1"></i>--%>
+<%--                            <p class="ms-2">2 -4 ngày</p>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
             </div>
 
             <!--product two -->
