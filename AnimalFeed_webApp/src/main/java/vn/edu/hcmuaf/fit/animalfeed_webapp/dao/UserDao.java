@@ -2,6 +2,7 @@ package vn.edu.hcmuaf.fit.animalfeed_webapp.dao;
 
 import org.jdbi.v3.core.Jdbi;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.db.JdbiConnect;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
 
 import java.sql.SQLException;
@@ -65,5 +66,14 @@ public class UserDao {
     // Method to list all users
     public ArrayList<User> getAllUsers() {
         return (ArrayList<User>) jdbi.withHandle(handle -> handle.createQuery("select * from users").mapToBean(User.class).list());
+    }
+
+    public static void main(String[] args) {
+        UserDao userDao = new UserDao();
+        List<User> users = userDao.getAllUsers();
+        for (User user : users) {
+            System.out.println(user);
+        }
+
     }
 }

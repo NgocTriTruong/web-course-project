@@ -4,9 +4,11 @@ import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.JdbiException;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.db.JdbiConnect;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Category;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CategoryDao {
     private static Jdbi jdbi = JdbiConnect.getJdbi();
@@ -50,5 +52,14 @@ public class CategoryDao {
     // Method to list all users
     public ArrayList<Category> getAllCategories() {
         return (ArrayList<Category>) jdbi.withHandle(handle -> handle.createQuery("select * from categories").mapToBean(Category.class).list());
+    }
+
+    public static void main(String[] args) {
+        CategoryDao catDao = new CategoryDao();
+        List<Category> cats = catDao.getAllCategories();
+        for (Category cat : cats) {
+            System.out.println(cat);
+        }
+
     }
 }
