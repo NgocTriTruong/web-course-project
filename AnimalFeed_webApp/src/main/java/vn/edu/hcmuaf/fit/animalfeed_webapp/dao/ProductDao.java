@@ -13,28 +13,6 @@ import java.util.*;
 public class ProductDao {
 
     public List<Product> getAll() {
-//        Statement statement = DBConnect.get();
-//        ResultSet re = null;
-//        ArrayList<Product> listProduct = new ArrayList<>();
-//
-//        try {
-//            re =  statement.executeQuery("SELECT * FROM products");
-//            while (re.next()) {
-//                System.out.println(re.getInt("id")
-//                        + "; " + re.getInt("cat_Id")
-//                        + "; " + re.getString("name")
-//                        + "; " + re.getDouble("price")
-//                        + "; " + re.getString("description")
-//                        + "; " + re.getInt("quantity")
-//                        + ";"  + re.getInt("status")
-//                        + "; " + re.getString("img")
-//                        + "; " + re.getDate("create_date"));
-//            }
-//            return listProduct;
-//
-//        } catch (SQLException e) {
-//            return listProduct;
-//        }
         Jdbi jdbi = JdbiConnect.getJdbi();
         return jdbi.withHandle(handle ->  handle.createQuery("select * from products").mapToBean(Product.class).list());
     }
@@ -47,7 +25,16 @@ public class ProductDao {
                         .mapToBean(Product.class).findOne().orElse(null));
     }
 
-    //Dem so luong product tỏng db
+    // Lay product theo id danh muc
+    public List<Product> getByCatId(int categoryId) {
+        Jdbi jdbi = JdbiConnect.getJdbi();
+        return jdbi.withHandle(handle ->
+                handle.createQuery("select * from products where cat_id = :categoryId")
+                        .bind("categoryId", categoryId)
+                        .mapToBean(Product.class).list());
+    }
+
+    //Dem so luong product trong db
     public int getTotalProduct(){
         Jdbi jdbi = JdbiConnect.getJdbi();
         return jdbi.withHandle(handle ->
@@ -55,7 +42,7 @@ public class ProductDao {
                         .mapTo(Integer.class).findOne().orElse(0));
     }
 
-    //phan trang theo category
+    //phan trang product
     public List<Product> getProductByPage(int page, int id){
         Jdbi jdbi = JdbiConnect.getJdbi();
         return jdbi.withHandle(handle ->
@@ -65,6 +52,32 @@ public class ProductDao {
                         .bind("end", 16)
                         .mapToBean(Product.class).list());
     }
+
+    //Them product
+    public void insertProduct(Product product) {
+        Jdbi jdbi = JdbiConnect.getJdbi();
+        jdbi.useHandle(handle ->
+                handle.createUpdate("INSERT INTO products (cat_id, name, price, description, quantity, status, img, create_date) "
+                + "VALUES (:catId, :name, :price, :description, :quantity, :status, :img, :createDate)").bindBean(product).execute());
+    }
+
+    //xoa product
+    public void deleteProduct(int id) {
+        Jdbi jdbi = JdbiConnect.getJdbi();
+        jdbi.useHandle(handle ->
+                handle.createUpdate("DELETE FROM products WHERE id = :id")
+                        .bind("id", id).execute());
+    }
+
+    //sua product
+    public void updateProduct(Product product) {
+        Jdbi jdbi = JdbiConnect.getJdbi();
+        jdbi.useHandle(handle ->
+                handle.createUpdate("UPDATE products SET name = :name, price = :price, description = :description WHERE id = :id")
+                        .bindBean(product).execute());
+    }
+
+
 
     public static void main(String[] args) {
 //        ProductDao productDao = new ProductDao();

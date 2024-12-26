@@ -47,8 +47,16 @@ public class CategoryDao {
         System.out.println(rowsDeleted);
     }
 
-    // Method to list all users
-    public ArrayList<Category> getAllCategories() {
-        return (ArrayList<Category>) jdbi.withHandle(handle -> handle.createQuery("select * from categories").mapToBean(Category.class).list());
+    public List<Category> getAll() {
+        return jdbi.withHandle(handle -> handle.createQuery("select * from categories").mapToBean(Category.class).list());
     }
+
+    public static void main(String[] args) {
+        CategoryDao categoryDao = new CategoryDao();
+        List<Category> categories = categoryDao.getAll();
+        for (Category category : categories) {
+            System.out.println(category);
+        }
+
+
 }
