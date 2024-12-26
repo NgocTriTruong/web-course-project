@@ -40,7 +40,7 @@ public class CartDetailDao {
     }
 
     // Method to list all users
-    public ArrayList<Category> getAllCD() {
-        return (ArrayList<Category>) jdbi.withHandle(handle -> handle.createQuery("select * from cart_details").mapToBean(CartDetail.class).list());
+    public ArrayList<CartDetail> getAllCD() {
+        return (ArrayList<CartDetail>) jdbi.withHandle(handle -> handle.createQuery("select * from cart_details").mapToBean(CartDetail.class).list());
     }
 }

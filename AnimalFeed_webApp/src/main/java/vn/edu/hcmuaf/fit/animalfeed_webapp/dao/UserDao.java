@@ -66,4 +66,35 @@ public class UserDao {
     public ArrayList<User> getAllUsers() {
         return (ArrayList<User>) jdbi.withHandle(handle -> handle.createQuery("select * from users").mapToBean(User.class).list());
     }
+
+    public User login(String phone, String password) {
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT * FROM users WHERE phone = :phone AND password = :password")
+                        .bind("phone", phone)
+                        .bind("password", password)
+                        .mapToBean(User.class)
+                        .findOne() // Tìm user đầu tiên khớp (nếu có)
+                        .orElse(null) // Trả về null nếu không tìm thấy
+        );
+    }
+    // Kiểm tra dữ liệu
+    public void checkDatabase(String phone, String password) {
+        User user = login(phone, password);
+        if (user != null) {
+            System.out.println("Đăng nhập thành công!");
+            System.out.println("Thông tin người dùng:");
+            System.out.println("ID: " + user.getId());
+            System.out.println("Full Name: " + user.getFullName());
+            System.out.println("Phone: " + user.getPhone());
+            System.out.println("Role: " + user.getRole());
+            System.out.println("Status: " + user.getStatus());
+        } else {
+            System.out.println("Không tìm thấy người dùng hoặc mật khẩu không đúng.");
+        }
+    }
+
+    public static void main(String[] args) {
+        UserDao userDao = new UserDao();
+        userDao.checkDatabase("0989898989", "123456");
+    }
 }
