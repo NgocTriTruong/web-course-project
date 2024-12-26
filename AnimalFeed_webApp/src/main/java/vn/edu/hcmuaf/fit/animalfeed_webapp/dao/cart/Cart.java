@@ -1,5 +1,7 @@
 package vn.edu.hcmuaf.fit.animalfeed_webapp.dao.cart;
 
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.CartDetailDao;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.ProductDao;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.CartDetail;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
 
@@ -14,11 +16,14 @@ public class Cart {
     Map<Integer, CartDetail> cartData = new HashMap<>();
 
     public boolean addProduct(Product product) {
+        CartDetailDao cartDetailDao = new CartDetailDao();
         if (cartData.containsKey(product.getId())) {
             updateQuantity(product.getId(), cartData.get(product.getId()).getQuantity()+1);
+            cartDetailDao.updateQuantity(convert(product).getId(), cartData.get(product.getId()).getQuantity());
             return true;
         }
         cartData.put(product.getId(), convert(product));
+        cartDetailDao.insertCD(convert(product));
         return true;
     }
 
@@ -32,6 +37,10 @@ public class Cart {
     }
 
     public boolean removeProduct(int productId) {
+        CartDetailDao cartDetailDao = new CartDetailDao();
+        ProductDao productDao = new ProductDao();
+        Product product = productDao.getById(productId);
+        cartDetailDao.deleteCD(convert(product).getId());
         return cartData.remove(productId) != null;
     }
 

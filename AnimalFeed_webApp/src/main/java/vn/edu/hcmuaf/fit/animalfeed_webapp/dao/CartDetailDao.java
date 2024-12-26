@@ -29,6 +29,16 @@ public class CartDetailDao {
         System.out.println(rowsInserted);
     }
 
+    public void updateQuantity(int id, int quantity) {
+        int rowsUpdate = jdbi.withHandle(handle ->
+                handle.createUpdate("UPDATE cart_details SET quantity = :quantity WHERE id = :id")
+                        .bind("quantity", quantity)
+                        .bind("id", id)
+                        .execute()
+        );
+        System.out.println(rowsUpdate);
+    }
+
     // Method to delete a user by username
     public void deleteCD(int id) {
         int rowsDeleted = jdbi.withHandle(handle ->
