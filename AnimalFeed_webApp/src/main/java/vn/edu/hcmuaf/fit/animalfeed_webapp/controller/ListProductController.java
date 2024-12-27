@@ -4,7 +4,9 @@ package vn.edu.hcmuaf.fit.animalfeed_webapp.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Category;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.services.CategoryService;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.ProductService;
 
 import java.io.IOException;
@@ -16,9 +18,25 @@ public class ListProductController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException, ServletException {
         ProductService productService = new ProductService();
-        List<Product> products = productService.getAllProducts();
+        CategoryService categoryService = new CategoryService();
 
+        //Lay categoryId tu request
+        String catId = request.getParameter("categoryId");
+
+        List<Product> products;
+
+        if(catId != null && !catId.isEmpty()) {
+            products = productService.getByCatId(Integer.parseInt(catId));
+        } else {
+            products = productService.getAllProducts();
+        }
+
+        //Lay danh muc
+        List<Category> categories = categoryService.getAll();
+
+        request.setAttribute("categoriesData", categories);
         request.setAttribute("productsData", products);
+        request.setAttribute("selectedCategoryId", catId);
         request.getRequestDispatcher("views/web/each_product/product_pig.jsp").forward(request, response);
     }
 

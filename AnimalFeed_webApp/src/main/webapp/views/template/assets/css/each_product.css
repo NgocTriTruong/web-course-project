@@ -34,6 +34,11 @@ html {
     text-align: center;
 }
 
+/* Màu vàng khi nút được chọn */
+.product .product_button_icon.selected {
+    background-color: #fcae18; /* Màu vàng */
+}
+
 img {
     object-fit: cover;
 }
