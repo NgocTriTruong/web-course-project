@@ -20,15 +20,36 @@ public class ProductService {
         }catch (NumberFormatException e) {
             return null;
         }
-
     }
 
+    //Lay product theo id danh muc
+    public List<Product> getByCatId(int categoryId) {
+        return productDao.getByCatId(categoryId);
+    }
+
+    //Dem so luong product trong db
     public int getTotalProduct(){
         return productDao.getTotalProduct();
     }
 
+    //phan trang product
     public List<Product> getProductByPage(int page, int id){
         return productDao.getProductByPage(page, id);
+    }
+
+    //Them product
+    public void insertProduct(Product product) {
+        productDao.insertProduct(product);
+    }
+
+    //xoa product
+    public void deleteProduct(int id) {
+        productDao.deleteProduct(id);
+    }
+
+    //sua product
+    public void updateProduct(Product product) {
+        productDao.updateProduct(product);
     }
 
 }
