@@ -5,9 +5,11 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.cart.Cart;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.ProductService;
 
 import java.io.IOException;
+import java.util.Date;
 
 @WebServlet(name = "Add", value = "/add-cart")
 public class Add extends HttpServlet {
@@ -24,7 +26,7 @@ public class Add extends HttpServlet {
         Cart cart = (Cart) session.getAttribute("cart");
         if (cart == null) cart = new Cart();
 
-        cart.addProduct(product);
+        cart.addProduct(product, new User(4, "Phạm Văn A", "88888888", "012345678", 1, new Date(), new Date(), 0).getId());
         session.setAttribute("cart", cart);
 
         response.sendRedirect("list-product?addCart=true");

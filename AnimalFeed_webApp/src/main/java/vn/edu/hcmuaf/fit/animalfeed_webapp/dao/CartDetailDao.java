@@ -26,7 +26,7 @@ public class CartDetailDao {
                         .bind("status", cd.getStatus())
                         .execute()
         );
-        System.out.println(rowsInserted);
+        System.out.println("Succesfull insert into database: " + rowsInserted);
     }
 
     public void updateQuantity(int id, int quantity) {
@@ -36,7 +36,7 @@ public class CartDetailDao {
                         .bind("id", id)
                         .execute()
         );
-        System.out.println(rowsUpdate);
+        System.out.println("Succesfull change quantity in database: " + rowsUpdate);
     }
 
     // Method to delete a user by username
