@@ -27,13 +27,9 @@ public class Cart {
         return true;
     }
 
-    public boolean updateQuantity(int productId, int quantity) {
-        if (!cartData.containsKey(productId)) {
-            return false;
-        }
-        CartDetail cartDetail = cartData.get(productId);
-        cartDetail.setQuantity(quantity);
-        return true;
+    public boolean updateQuantity(int cartDetailId, int quantity) {
+        CartDetailDao cartDetailDao = new CartDetailDao();
+
     }
 
     public boolean removeProduct(int productId, int userId) {
@@ -69,12 +65,5 @@ public class Cart {
         cartDetail.setStatus(0);
         return cartDetail;
     }
-
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        Cart cart = new Cart();
-        cart.addProduct(new ProductDao().getById(1), 1);
-        System.out.println(cartData.toString());
-    }
-
 
 }

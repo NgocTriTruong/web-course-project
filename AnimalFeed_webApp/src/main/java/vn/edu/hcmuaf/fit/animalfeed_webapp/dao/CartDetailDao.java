@@ -12,8 +12,8 @@ import java.util.ArrayList;
 public class CartDetailDao {
     private static Jdbi jdbi = JdbiConnect.getJdbi();
 
-    public Category getCDById(int id) {
-        return jdbi.withHandle(handle -> handle.createQuery("select * from cart_details where id = :id").bind("id", id).mapToBean(Category.class).findOne().orElse(null));
+    public CartDetail getCDById(int id) {
+        return jdbi.withHandle(handle -> handle.createQuery("select * from cart_details where id = :id").bind("id", id).mapToBean(CartDetail.class).findOne().orElse(null));
     }
 
     public void insertCD(CartDetail cd) {
@@ -37,6 +37,16 @@ public class CartDetailDao {
                         .execute()
         );
         System.out.println("Succesfull change quantity in database: " + rowsUpdate);
+    }
+
+    public void updateStatus(int id, int status) {
+        int rowsUpdate = jdbi.withHandle(handle ->
+                handle.createUpdate("UPDATE cart_details SET status = :status WHERE id = :id")
+                        .bind("status", status)
+                        .bind("id", id)
+                        .execute()
+        );
+        System.out.println("Successfully updated status in database: " + rowsUpdate);
     }
 
     // Method to delete a user by username
