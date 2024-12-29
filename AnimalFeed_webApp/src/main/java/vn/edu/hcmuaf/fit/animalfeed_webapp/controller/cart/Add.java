@@ -36,25 +36,18 @@ public class Add extends HttpServlet {
                 return;
             }
 
-            // Get or create cart session
             HttpSession session = request.getSession(true);
+            User user = (User) session.getAttribute("user");
+            if (user == null) {
+                response.sendRedirect("login");
+                return;
+            }
+
             Cart cart = (Cart) session.getAttribute("cart");
             if (cart == null) {
                 cart = new Cart();
             }
 
-            // Get user from session (you should implement proper user session management)
-            User user = (User) session.getAttribute("user");
-            if (user == null) {
-                response.sendRedirect("login"); // Redirect to login if user not logged in
-                return;
-            }
-
-            // Add to cart session
-            cart.addProduct(product, user.getId());
-            session.setAttribute("cart", cart);
-
-            // Create cart detail for database
             CartDetail cartDetail = new CartDetail();
             cartDetail.setUserId(user.getId());
             cartDetail.setProductId(product.getId());
@@ -62,8 +55,10 @@ public class Add extends HttpServlet {
             cartDetail.setTotal(product.getPrice());
             cartDetail.setStatus(1);
 
-            // Save to database
             cartDetailDao.insertCD(cartDetail);
+
+            cart.addProduct(product, user.getId());
+            session.setAttribute("cart", cart);
 
             response.sendRedirect("list-product?addCart=true");
 
