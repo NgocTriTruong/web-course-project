@@ -29,11 +29,12 @@ public class CartDetailDao {
         System.out.println("Succesfull insert into database: " + rowsInserted);
     }
 
-    public void updateQuantity(int id, int quantity) {
+    public void updateQuantity(int productId, int userId, int quantity) {
         int rowsUpdate = jdbi.withHandle(handle ->
-                handle.createUpdate("UPDATE cart_details SET quantity = :quantity WHERE id = :id")
+                handle.createUpdate("UPDATE cart_details SET quantity = :quantity WHERE product_id = :productId AND user_id = :userId ")
                         .bind("quantity", quantity)
-                        .bind("id", id)
+                        .bind("productId", productId)
+                        .bind("userId", userId)
                         .execute()
         );
         System.out.println("Succesfull change quantity in database: " + rowsUpdate);
@@ -50,10 +51,11 @@ public class CartDetailDao {
     }
 
     // Method to delete a user by username
-    public void deleteCD(int id) {
+    public void deleteCD(int productId, int userId) {
         int rowsDeleted = jdbi.withHandle(handle ->
-                handle.createUpdate("DELETE FROM cart_details WHERE id = :id")
-                        .bind("id", id)
+                handle.createUpdate("DELETE FROM cart_details WHERE product_id = :productId AND user_id = :userId")
+                        .bind("productId", productId)
+                        .bind("userId", userId)
                         .execute()
         );
         System.out.println(rowsDeleted);

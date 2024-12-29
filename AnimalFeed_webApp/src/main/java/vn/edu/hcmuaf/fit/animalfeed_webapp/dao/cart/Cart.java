@@ -16,27 +16,23 @@ public class Cart {
     static Map<Integer, CartDetail> cartData = new HashMap<>();
 
     public boolean addProduct(Product product, int userId) {
-        CartDetailDao cartDetailDao = new CartDetailDao();
         if (cartData.containsKey(product.getId())) {
             updateQuantity(product.getId(), cartData.get(product.getId()).getQuantity()+1);
-            cartDetailDao.updateQuantity(convert(product, userId).getId(), cartData.get(product.getId()).getQuantity());
             return true;
         }
         cartData.put(product.getId(), convert(product, userId));
-        cartDetailDao.insertCD(convert(product, userId));
         return true;
     }
 
-    public boolean updateQuantity(int cartDetailId, int quantity) {
-        CartDetailDao cartDetailDao = new CartDetailDao();
-
+    public boolean updateQuantity(int productId, int quantity) {
+        if (!cartData.containsKey(productId)) {
+            return false;
+        }
+        cartData.get(productId).setQuantity(quantity);
+        return true;
     }
 
-    public boolean removeProduct(int productId, int userId) {
-        CartDetailDao cartDetailDao = new CartDetailDao();
-        ProductDao productDao = new ProductDao();
-        Product product = productDao.getById(productId);
-        cartDetailDao.deleteCD(convert(product, userId).getId());
+    public boolean removeProduct(int productId) {
         return cartData.remove(productId) != null;
     }
 
