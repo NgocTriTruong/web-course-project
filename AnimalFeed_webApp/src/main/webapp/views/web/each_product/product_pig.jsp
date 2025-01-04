@@ -18,9 +18,9 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/themify-icons/themify-icons.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
 
-    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/add_layout.js" defer></script>
     <script src="${pageContext.request.contextPath}/views/template/assets/scripts/product/product_sale_new.js"></script>
     <script src="${pageContext.request.contextPath}/views/template/assets/scripts/product/tab_product_all.js"></script>
+    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/page.js"></script>
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/login.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/signup.css">
@@ -46,12 +46,12 @@
         <div class="container">
             <div class="d-flex mb-3">
                 <c:forEach var="ca" items="${categoriesData}">
-                <button class="d-flex product_button_icon ms-3" onclick="selectCategory(this, '${ca.id}')">
-                    <img src="${ca.img}" alt="${ca.name}" width="30px" height="30px">
-                    <p class="ms-1 text-white fw-bold">
-                            ${ca.name}
-                    </p>
-                </button>
+                    <a class="d-flex product_button_icon ms-3" href="?categoryId=${ca.id}" style="text-decoration: none;">
+                        <img src="${ca.img}" alt="${ca.name}" width="30px" height="30px">
+                        <p class="ms-1 text-white fw-bold">
+                                ${ca.name}
+                        </p>
+                    </a>
                 </c:forEach>
             </div>
         </div>
@@ -863,7 +863,7 @@
         </div>
         
         <!-- Filter -->
-        <div class="containers my-4">
+        <div id="pagination" class="containers my-4">
             <div class="row justify-content-center mb-3 pt-3">
                 <div class="col-md-3">
                     <select id="group" class="form-select" style="height: 50px; font-size: 20px;">
@@ -885,8 +885,8 @@
                 <div class="col-md-3">
                     <select  class="form-select" id="" style="height: 50px; font-size: 20px;">
                         <option value="" selected>Sắp xếp giá</option>
-                        <option value="">Tăng dần</option>
-                        <option value="">Giảm dần</option>
+                        <option value="ascenting">Tăng dần</option>
+                        <option value="dcenting">Giảm dần</option>
                     </select>
                 </div>
             </div>
@@ -926,6 +926,19 @@
                 </div>
             </div>
         </div>
+
+        <div class="container mt-4">
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    <c:forEach var="i" begin="1" end="${endPage}">
+                        <li class="page-item ${i == currentPage ? 'active' : ''}">
+                            <a class="page-link" href="?categoryId=${selectedCategoryId}&page=${i}">${i}</a>
+                        </li>
+                    </c:forEach>
+                </ul>
+            </nav>
+        </div>
+
 
         <!-- Text -->
          <div class="container mt-5">
