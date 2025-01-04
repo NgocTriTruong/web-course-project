@@ -13,8 +13,6 @@ public class User implements Serializable {
     private Date updateDate;
     private int role;
 
-    public User() {}
-
     public User(int id, String fullName, String password, String phone, int status, Date createDate, Date updateDate, int role) {
         this.id = id;
         this.fullName = fullName;
@@ -24,6 +22,10 @@ public class User implements Serializable {
         this.createDate = createDate;
         this.updateDate = updateDate;
         this.role = role;
+    }
+
+    public User() {
+
     }
 
     public int getId() {

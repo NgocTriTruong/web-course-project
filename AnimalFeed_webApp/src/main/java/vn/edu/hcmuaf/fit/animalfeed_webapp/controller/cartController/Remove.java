@@ -1,20 +1,17 @@
-package vn.edu.hcmuaf.fit.animalfeed_webapp.controller.cart;
+package vn.edu.hcmuaf.fit.animalfeed_webapp.controller.cartController;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.CartDetailDao;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.ProductDao;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.cart.Cart;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.CartDetail;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.services.CartService;
 
 import java.io.IOException;
 
 @WebServlet(name = "RemoveCart", value = "/remove-cart")
 public class Remove extends HttpServlet {
-    private CartDetailDao cartDetailDao;
+    private CartService cartService;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -42,7 +39,7 @@ public class Remove extends HttpServlet {
 
         session.setAttribute("cart", cart);
 
-        cartDetailDao.deleteCD(productId, user.getId());
+        cartService.deleteCD(productId, user.getId());
 
         response.sendRedirect("cart.jsp?removed=true");
 

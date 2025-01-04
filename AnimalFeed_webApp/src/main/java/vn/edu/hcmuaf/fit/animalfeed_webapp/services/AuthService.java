@@ -1,25 +1,58 @@
 package vn.edu.hcmuaf.fit.animalfeed_webapp.services;
 
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.UserDao;
+import jakarta.servlet.*;
+import jakarta.servlet.annotation.WebFilter;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
 
-import java.util.Objects;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
-public class AuthService {
+@WebFilter("/*")
+public class AuthService implements Filter {
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
+        HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletResponse res = (HttpServletResponse) response;
+        HttpSession session = req.getSession(false);
 
-    private UserDao userDao = new UserDao();
+        String path = req.getRequestURI();
 
-    // Phương thức đăng nhập
-    public User login(String username, String password) {
-        User user = userDao.login(username, password);
-        if (user != null) {
-            return user;
+        // Danh sách các URL được phép truy cập mà không cần đăng nhập
+        List<String> allowedUrls = Arrays.asList("/login", "/views/web/login.jsp", "index.jsp");
+
+        // Kiểm tra nếu URL hiện tại nằm trong danh sách được phép
+        boolean isAllowedUrl = allowedUrls.stream()
+                .anyMatch(url -> path.endsWith(url));
+
+        if (isAllowedUrl) {
+            chain.doFilter(request, response);
+            return;
         }
-        return null;
-    }
 
-    // Phân quyền người dùng dựa trên vai trò
-    public boolean hasPermission(User user, String requiredRole) {
-        return Objects.equals(user.getRole(), requiredRole);
+        User user = (session != null) ? (User) session.getAttribute("user") : null;
+
+        // Kiểm tra quyền truy cập admin area
+        if (path.contains("/admin/")) {
+            if (user == null || user.getRole() != 1) {
+                res.sendRedirect(req.getContextPath() + "/views/web/login.jsp");
+                return;
+            }
+        }
+
+        // Kiểm tra quyền truy cập user area
+        else if (path.contains("/user/")) {
+            if (user == null || user.getRole() != 0) {
+                res.sendRedirect(req.getContextPath() + "/views/web/login.jsp");
+                return;
+            }
+        }
+
+        // Cho phép request tiếp tục
+        chain.doFilter(request, response);
     }
 }

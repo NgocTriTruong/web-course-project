@@ -62,13 +62,27 @@
                         <div class="p fw-bold p_bold">Lượt mua (bao):</div>
                         <div class="p">2.341</div>
                     </div>
+<%--                    <div class="button d-flex mt-3 ms-5">--%>
+<%--                        <div class="btn_h order d-flex justify-content-center">--%>
+<%--                            <div style="padding-top: 3px;">--%>
+<%--                                <i class="fa-solid fa-cart-plus"></i>--%>
+<%--                            </div>--%>
+<%--                            <div class="h5 text_order">Thêm vào giỏ hàng</div>--%>
+<%--                        </div>--%>
+<%--                        <div class="btn_h call d-flex justify-content-center">--%>
+<%--                            <div class="h5 text_call">Mua ngay</div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
                     <div class="button d-flex mt-3 ms-5">
-                        <div class="btn_h order d-flex justify-content-center">
-                            <div style="padding-top: 3px;">
-                                <i class="fa-solid fa-cart-plus"></i>
-                            </div>
-                            <div class="h5 text_order">Thêm vào giỏ hàng</div>
-                        </div>
+                        <form action="${pageContext.request.contextPath}/add-cart" method="GET" style="display: inline;">
+                            <input type="hidden" name="productId" value="${product.id}">
+                            <button type="submit" class="btn_h order d-flex justify-content-center" style="border: none;">
+                                <div style="padding-top: 3px;">
+                                    <i class="fa-solid fa-cart-plus"></i>
+                                </div>
+                                <div class="h5 text_order">Thêm vào giỏ hàng</div>
+                            </button>
+                        </form>
                         <div class="btn_h call d-flex justify-content-center">
                             <div class="h5 text_call">Mua ngay</div>
                         </div>

@@ -47,7 +47,7 @@
   <button class="prev" onclick="changeSlideFirst(-1)">&#10094;</button>
   <button class="next" onclick="changeSlideFirst(1)">&#10095;</button>
 </div>
-<div id="header-placeholder"><%@ include file="views/web/layout/header.jsp" %></div>
+<%@ include file="views/web/layout/header.jsp" %>
 <div class="container-fuild bg-light text-center" style="height: 90px;">
   <marquee behavior="scroll" direction="left" scrollamount="10">
     <h3 class="text-center pt-3" style="color: #94b83d;">
@@ -452,112 +452,6 @@
 </main>
 <%@ include file="views/web/layout/near_footer.jsp" %>
 <%@ include file="views/web/layout/footer.jsp" %>
-
-<!-- Login -->
-<div id="login" class ="login">
-  <div id ="login_container">
-      <div class="login_close">
-          <img src="${pageContext.request.contextPath}/views/template/assets/images/logo/close.png" alt="">
-      </div>
-
-      <div class="login_header">
-          <div class="login_logo_shop">
-              <img src="${pageContext.request.contextPath}/views/template/assets/images/header/logo_vina.png" alt="Logo Shop">
-          </div>
-          <div class="login_header_text">
-              <h3 style="font-size: 24px;">Đăng nhập tài khoản</h3>
-          </div>
-      </div>
-      <div class="login_body">
-          <div class="form-floating mb-3 mt-3">
-              <input type="text" class="form-control" id="contact" placeholder="Nhập số điện thoại/email" name="contact" required autocomplete="off"> 
-              <label for="contact">Nhập số điện thoại<span class="req">*</span></label>
-          </div>
-          <div class="form-floating mb-3 mt-3">
-              <input type="password" class="form-control" id="pwd" placeholder="Nhập mật khẩu" name="password" required autocomplete="off"> 
-              <label for="password">Nhập mật khẩu<span class="req">*</span></label>
-          </div>
-          <p class="login_forgot"><a href="#">Quên mật khẩu?</a></p>
-
-          <button type="submit" class="login_button_submit">Đăng nhập</button>
-          <div class="login_split">
-              <p>Hoặc</p>
-          </div>
-          <div class="login_social">
-              <a href="" class="social_btn login_social_gg">
-                  <img src="${pageContext.request.contextPath}/views/template/assets/images/social/google.png" alt="">
-                  <p>Google</p>
-              </a>
-              <a href="" class="social_btn login_social_zl">
-                  <img src="${pageContext.request.contextPath}/views/template/assets/images/social/zalo.png" alt="">
-                  <p>Zalo</p>
-              </a>
-          </div>
-      </div>
-      <div class="login_footer">
-          <p>Bạn chưa có tài khoản? <a href="#" id="go-to-signup">Đăng ký ngay</a></p>
-      </div>
-  </div>
-</div>
-
-<!-- sign up -->
-<div id="signup" class ="signup">
-  <div id="signup_container">
-      <div class="signup_close">
-          <img src="${pageContext.request.contextPath}/views/template/assets/images/logo/close.png" alt="">
-      </div>
-
-      <div class="signup_header">
-          <div class="signup_logo_shop">
-              <img src="${pageContext.request.contextPath}/views/template/assets/images/header/logo_vina.png" alt="Logo Shop">
-          </div>
-          <div class="signup_header_text">
-              <h3 style="font-size: 24px;">Đăng ký tài khoản</h3>
-          </div>
-      </div>
-      <div class="signup_body">
-          <div class="form-floating mb-2 mt-2">
-              <input type="text" class="form-control" id="name" placeholder="Nhập họ và tên" name="Name" required autocomplete="off"> 
-              <label for="password">Nhập họ và tên<span class="req">*</span></label>
-          </div>
-
-          <div class="form-floating mb-2 mt-2">
-              <input type="text" class="form-control" id="contact" placeholder="Nhập số điện thoại/email" name="Contact" required autocomplete="off"> 
-              <label for="contact">Nhập số điện thoại<span class="req">*</span></label>
-          </div>
-          <div class="form-floating mb-2 mt-2">
-              <input type="password" class="form-control" id="pwd" placeholder="Nhập mật khẩu" name="password" required autocomplete="off"> 
-              <label for="password">Nhập mật khẩu<span class="req">*</span></label>
-          </div>
-        
-          <div class="form-floating mb-2 mt-2">
-              <input type="password" class="form-control" id="pwd" placeholder="Nhập lại mật khẩu" name="password again" required autocomplete="off"> 
-              <label for="password again">Nhập lại mật khẩu<span class="req">*</span></label>
-          </div>
-
-          <div class="signup_okay">
-              <p>Bằng việc đăng ký này, bạn đã chấp nhận các chính sách của VINAFEED</p>
-          </div>
-          <button type="submit" class="signup_button_submit">Đăng ký</button>
-          <div class="signup_split">
-              <p>Hoặc</p>
-          </div>
-          <div class="signup_social">
-              <a href="" class="social_btn signup_social_gg">
-                  <img src="${pageContext.request.contextPath}/views/template/assets/images/social/google.png" alt="">
-                  <p>Google</p>
-              </a>
-              <a href="" class="social_btn signup_social_zl">
-                  <img src="${pageContext.request.contextPath}/views/template/assets/images/social/zalo.png" alt="">
-                  <p>Zalo</p>
-              </a>
-          </div>
-      </div>
-      <div class="signup_footer">
-          <p>Bạn đã có tài khoản? <a href="#" id="go-to-login">Đăng nhập ngay</a></p>
-      </div>
-  </div>
-</div>
 
 <!-- scrollToTopBtn -->
 <button id="scrollToTopBtn"><i class="fa-solid fa-chevron-up"></i></button>

@@ -1,31 +1,30 @@
-package vn.edu.hcmuaf.fit.animalfeed_webapp.controller.cart;
+package vn.edu.hcmuaf.fit.animalfeed_webapp.controller.cartController;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.CartDetailDao;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.cart.Cart;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.CartDetail;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.services.CartService;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.ProductService;
 
 import java.io.IOException;
-import java.util.Date;
 
 @WebServlet(name = "Add", value = "/add-cart")
 public class Add extends HttpServlet {
-    private CartDetailDao cartDetailDao;
+    private CartService cartService;
     private ProductService productService;
 
     @Override
     public void init() throws ServletException {
-        cartDetailDao = new CartDetailDao();
+        cartService = new CartService();
         productService = new ProductService();
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             // Get product details
             String productId =  request.getParameter("productId");
@@ -55,7 +54,7 @@ public class Add extends HttpServlet {
             cartDetail.setTotal(product.getPrice());
             cartDetail.setStatus(1);
 
-            cartDetailDao.insertCD(cartDetail);
+            cartService.insertCD(cartDetail);
 
             cart.addProduct(product, user.getId());
             session.setAttribute("cart", cart);

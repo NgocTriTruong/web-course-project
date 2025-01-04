@@ -12,8 +12,8 @@ import java.util.ArrayList;
 public class CartDetailDao {
     private static Jdbi jdbi = JdbiConnect.getJdbi();
 
-    public CartDetail getCDById(int id) {
-        return jdbi.withHandle(handle -> handle.createQuery("select * from cart_details where id = :id").bind("id", id).mapToBean(CartDetail.class).findOne().orElse(null));
+    public CartDetail getCartDetailByUser(int id) {
+        return jdbi.withHandle(handle -> handle.createQuery("select * from cart_details where user_id = :id and status = 1").bind("id", id).mapToBean(CartDetail.class).findOne().orElse(null));
     }
 
     public void insertCD(CartDetail cd) {
