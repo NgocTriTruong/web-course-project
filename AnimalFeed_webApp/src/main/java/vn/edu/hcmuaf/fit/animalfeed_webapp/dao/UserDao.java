@@ -13,7 +13,7 @@ public class UserDao {
 
     // Method to fetch a user by their username
     public ArrayList<User> getUserByName(String name) throws SQLException, ClassNotFoundException {
-        return (ArrayList<User>) jdbi.withHandle(handle -> handle.createQuery("select * from users where fullName like :namePattern")
+        return (ArrayList<User>) jdbi.withHandle(handle -> handle.createQuery("select * from users where full_Name like :namePattern")
                 .bind("namePattern", "%" + name + "%")
                 .mapToBean(User.class)
                 .list());
@@ -30,13 +30,13 @@ public class UserDao {
     public void insertUser(User user) {
 
         jdbi.withHandle(handle ->
-                handle.createUpdate("INSERT INTO users (fullName, password, phone, status, createDate, updateDate, role) VALUES (:fullName, :password, :phone, :status, :createDate, :updateDate, :role)")
-                        .bind("fullName", user.getFullName())
+                handle.createUpdate("INSERT INTO users (full_Name, password, phone, status, create_date, update_date, role) VALUES (:full_Name, :password, :phone, :status, :create_date, :update_date, :role)")
+                        .bind("full_Name", user.getFullName())
                         .bind("password", user.getPassword())
                         .bind("phone", user.getPhone())
                         .bind("status", user.getStatus())
-                        .bind("createDate", user.getCreateDate())
-                        .bind("updateDate", user.getUpdateDate())
+                        .bind("create_date", user.getCreateDate())
+                        .bind("update_date", user.getUpdateDate())
                         .bind("role", user.getRole())
                         .execute()
         );
@@ -83,7 +83,8 @@ public class UserDao {
     }
 
 
-        public static void main (String[]args){
+
+    public static void main (String[]args){
             Scanner scanner = new Scanner(System.in);
 
             System.out.println("Vui lòng nhập số điện thoại:");
