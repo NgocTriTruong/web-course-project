@@ -28,7 +28,7 @@ public class Add extends HttpServlet {
         try {
             // Get product details
             String productId =  request.getParameter("productId");
-            Product product = productService.getDetail(productId);
+            Product product = productService.getDetail(Integer.parseInt(productId));
 
             if (product == null) {
                 response.sendRedirect("list-product?addCart=false");

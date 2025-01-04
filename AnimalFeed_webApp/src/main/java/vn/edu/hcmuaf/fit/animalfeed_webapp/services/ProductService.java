@@ -13,6 +13,7 @@ public class ProductService {
         return productDao.getAll();
     }
 
+    //Lay product theo id
     public Product getDetail(int id) {
         return productDao.getById(id);
     }
@@ -30,11 +31,6 @@ public class ProductService {
     //phan trang product
     public List<Product> getProductByPage(int page, int id){
         return productDao.getProductByPage(page, id);
-    }
-
-    //Lay danh sach san pham co discount
-    public List<Product> discountedProducts() {
-        return productDao.discountedProducts();
     }
 
     //Them product

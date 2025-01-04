@@ -900,19 +900,21 @@
                         <c:when test="${not empty productsData}">
                             <c:forEach var="p" items="${productsData}">
                                 <div class="col-md-3 bg-white text-center m-3 col product_number">
-                                    <div class="product-img">
-                                        <img src="${p.img}" alt="${p.name}" height="250px" width="200px">
-                                    </div>
-                                    <div class="h5 text-h">${p.name}</div>
-                                    <div class="p mb-2 text-p">${p.description}</div>
-                                    <div class="h4 text-start ms-3" style="color: red;">
-                                        <f:formatNumber value="${p.price}"/> <u>đ</u>
-                                    </div>
-                                    <div class="p text-start ms-3">Đã bán 1,1k</div>
-                                    <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                                        <i class="fa-solid fa-truck mt-1"></i>
-                                        <p class="ms-2">2 - 4 ngày</p>
-                                    </div>
+                                    <a href="product-detail?pid=${p.id}" class="text-decoration-none text-dark">
+                                        <div class="product-img">
+                                            <img src="${p.img}" alt="${p.name}" height="250px" width="200px">
+                                        </div>
+                                        <div class="h5 text-h">${p.name}</div>
+                                        <div class="p mb-2 text-p">${p.description}</div>
+                                        <div class="h4 text-start ms-3" style="color: red;">
+                                            <f:formatNumber value="${p.price}"/> <u>đ</u>
+                                        </div>
+                                        <div class="p text-start ms-3">Đã bán 1,1k</div>
+                                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
+                                            <i class="fa-solid fa-truck mt-1"></i>
+                                            <p class="ms-2">2 - 4 ngày</p>
+                                        </div>
+                                    </a>
                                 </div>
                             </c:forEach>
                         </c:when>
