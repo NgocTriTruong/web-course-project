@@ -7,6 +7,7 @@ import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.CartDetail;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -50,6 +51,16 @@ public class Cart {
         AtomicReference<Double> sum = new AtomicReference<>(0.0);
         cartData.values().forEach(cartDetail -> sum.updateAndGet(value -> value + cartDetail.getTotal()));
         return sum.get();
+    }
+
+    public List<CartDetail> getConfirmedCartItem() {
+        List<CartDetail> confirmedCartItems = new ArrayList<>();
+        for (CartDetail cartDetail : cartData.values()) {
+            if (cartDetail.getStatus() == 1) {
+                confirmedCartItems.add(cartDetail);
+            }
+        }
+        return confirmedCartItems;
     }
 
     private CartDetail convert(Product product, int userId) {
