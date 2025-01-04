@@ -13,7 +13,7 @@ public class ProductService {
         return productDao.getAll();
     }
 
-    public Product getDetail(String in) {
+    public Product   getDetail(String in) {
         try {
             int id = Integer.parseInt(in);
             return productDao.getById(id);

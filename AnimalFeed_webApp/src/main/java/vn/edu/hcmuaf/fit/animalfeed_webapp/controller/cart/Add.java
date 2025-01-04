@@ -8,6 +8,7 @@ import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.cart.Cart;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.CartDetail;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.services.CartService;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.ProductService;
 
 import java.io.IOException;
@@ -15,12 +16,12 @@ import java.util.Date;
 
 @WebServlet(name = "Add", value = "/add-cart")
 public class Add extends HttpServlet {
-    private CartDetailDao cartDetailDao;
+    private CartService cartService;
     private ProductService productService;
 
     @Override
     public void init() throws ServletException {
-        cartDetailDao = new CartDetailDao();
+        cartService = new CartService();
         productService = new ProductService();
     }
 
@@ -55,7 +56,7 @@ public class Add extends HttpServlet {
             cartDetail.setTotal(product.getPrice());
             cartDetail.setStatus(1);
 
-            cartDetailDao.insertCD(cartDetail);
+            cartService.insertCD(cartDetail);
 
             cart.addProduct(product, user.getId());
             session.setAttribute("cart", cart);
