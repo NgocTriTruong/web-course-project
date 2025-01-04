@@ -270,10 +270,12 @@
                             <strong>Total:</strong>
                             <strong class="text-primary" id="total">${sessionScope.cart.totalPrice}</strong>
                         </div>
-                        <button onclick="proceedToCheckout()"
-                                class="btn btn-primary w-100 ${empty sessionScope.cart.cartDetails ? 'disabled' : ''}">
-                            Proceed to Checkout
-                        </button>
+                        <form action="${pageContext.request.contextPath}/order-confirm" method="get">
+                            <button type="submit"
+                                    class="btn btn-primary w-100 ${empty sessionScope.cart.cartDetails ? '' : ''}">
+                                Proceed to Checkout
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>

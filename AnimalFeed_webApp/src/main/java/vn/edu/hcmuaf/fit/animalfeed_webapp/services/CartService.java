@@ -6,7 +6,6 @@ import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.CartDetail;
 public class CartService {
     static CartDetailDao cartDetailDao = new CartDetailDao();
 
-
     public void insertCD(CartDetail cartDetail) {
         cartDetailDao.insertCD(cartDetail);
     }
