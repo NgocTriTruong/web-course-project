@@ -26,15 +26,32 @@ public class Add extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-            // Get product details
-            String productId =  request.getParameter("productId");
-            Product product = productService.getDetail(productId);
+            // Get product ID from request parameter
+            String productId = request.getParameter("productId");
 
-            if (product == null) {
-                response.sendRedirect("list-product?addCart=false");
+            // Check if productId is null or empty
+            if (productId == null || productId.isEmpty()) {
+                response.sendRedirect("list-product?addCart=false&error=Product ID is missing");
                 return;
             }
 
+            // Attempt to parse the productId
+            int parsedProductId;
+            try {
+                parsedProductId = Integer.parseInt(productId);
+            } catch (NumberFormatException e) {
+                response.sendRedirect("list-product?addCart=false&error=Invalid Product ID format");
+                return;
+            }
+
+            // Fetch product details
+            Product product = productService.getDetail(String.valueOf(parsedProductId));
+            if (product == null) {
+                response.sendRedirect("list-product?addCart=false&error=Product not found");
+                return;
+            }
+
+            // Check if user is logged in
             HttpSession session = request.getSession(true);
             User user = (User) session.getAttribute("user");
             if (user == null) {
@@ -42,11 +59,13 @@ public class Add extends HttpServlet {
                 return;
             }
 
+            // Get or create the cart
             Cart cart = (Cart) session.getAttribute("cart");
             if (cart == null) {
                 cart = new Cart();
             }
 
+            // Create a CartDetail object and add it to the cart
             CartDetail cartDetail = new CartDetail();
             cartDetail.setUserId(user.getId());
             cartDetail.setProductId(product.getId());
@@ -54,15 +73,17 @@ public class Add extends HttpServlet {
             cartDetail.setTotal(product.getPrice());
             cartDetail.setStatus(1);
 
+            // Save cart detail to the database
             cartService.insertCD(cartDetail);
 
+            // Add product to cart and update session
             cart.addProduct(product, user.getId());
             session.setAttribute("cart", cart);
 
             response.sendRedirect("list-product?addCart=true");
 
         } catch (Exception e) {
-            // Log the error
+            // Log the error and redirect with an error message
             e.printStackTrace();
             response.sendRedirect("list-product?addCart=false&error=" + e.getMessage());
         }
