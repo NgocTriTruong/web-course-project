@@ -20,23 +20,44 @@ public class ListProductController extends HttpServlet {
         ProductService productService = new ProductService();
         CategoryService categoryService = new CategoryService();
 
-        //Lay categoryId tu request
+        // Lấy categoryId và trang hiện tại từ request
         String catId = request.getParameter("categoryId");
+        String pageParam = request.getParameter("page");
+
+        int page = (pageParam != null && !pageParam.isEmpty()) ? Integer.parseInt(pageParam) : 1;
+
+        int countPro = productService.getByCatId(Integer.parseInt(catId)).size();
+        int endPage = countPro / 16 ;
+        if(countPro % 16 != 0){
+            endPage++;
+        }
 
         List<Product> products;
+        List<Product> totalProducts;
 
-        if(catId != null && !catId.isEmpty()) {
-            products = productService.getByCatId(Integer.parseInt(catId));
+        if (catId != null && !catId.isEmpty()) {
+            products = productService.getProductByPage(page, Integer.parseInt(catId));
+            totalProducts = productService.getByCatId(Integer.parseInt(catId));
         } else {
-            products = productService.getAllProducts();
+            products = productService.getProductByPage(page, 0);
+            totalProducts = productService.getAllProducts();
         }
+
+        // Tính toán số trang
+//        int totalPages = (int) Math.ceil((double) totalProducts / pageSize);
 
         //Lay danh muc
         List<Category> categories = categoryService.getAll();
 
+//        request.setAttribute("categoriesData", categories);
+//        request.setAttribute("productsData", products);
+//        request.setAttribute("selectedCategoryId", catId);
+
         request.setAttribute("categoriesData", categories);
         request.setAttribute("productsData", products);
         request.setAttribute("selectedCategoryId", catId);
+        request.setAttribute("currentPage", page);
+        request.setAttribute("endPage", endPage);
         request.getRequestDispatcher("views/web/each_product/product_pig.jsp").forward(request, response);
     }
 
