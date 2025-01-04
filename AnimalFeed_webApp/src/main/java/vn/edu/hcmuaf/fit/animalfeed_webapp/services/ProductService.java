@@ -13,13 +13,8 @@ public class ProductService {
         return productDao.getAll();
     }
 
-    public Product   getDetail(String in) {
-        try {
-            int id = Integer.parseInt(in);
-            return productDao.getById(id);
-        }catch (NumberFormatException e) {
-            return null;
-        }
+    public Product getDetail(int id) {
+        return productDao.getById(id);
     }
 
     //Lay product theo id danh muc
