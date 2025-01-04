@@ -37,6 +37,11 @@ public class ProductService {
         return productDao.getProductByPage(page, id);
     }
 
+    //Lay danh sach san pham co discount
+    public List<Product> discountedProducts() {
+        return productDao.discountedProducts();
+    }
+
     //Them product
     public void insertProduct(Product product) {
         productDao.insertProduct(product);

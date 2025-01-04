@@ -14,7 +14,7 @@ public class ProductDao {
 
     public List<Product> getAll() {
         Jdbi jdbi = JdbiConnect.getJdbi();
-        return jdbi.withHandle(handle ->  handle.createQuery("select * from products").mapToBean(Product.class).list());
+        return jdbi.withHandle(handle -> handle.createQuery("select * from products").mapToBean(Product.class).list());
     }
 
     public Product getById(int id) {
@@ -35,7 +35,7 @@ public class ProductDao {
     }
 
     //Dem so luong product trong db
-    public int getTotalProduct(){
+    public int getTotalProduct() {
         Jdbi jdbi = JdbiConnect.getJdbi();
         return jdbi.withHandle(handle ->
                 handle.createQuery("select count(*) from products")
@@ -43,14 +43,55 @@ public class ProductDao {
     }
 
     //phan trang product
-    public List<Product> getProductByPage(int page, int id){
+    public List<Product> getProductByPage(int page, int id) {
         Jdbi jdbi = JdbiConnect.getJdbi();
         return jdbi.withHandle(handle ->
                 handle.createQuery("select * from products where cat_id = :id order by id limit :end offset :start")
                         .bind("id", id)
-                        .bind("start", (page-1)*16)
+                        .bind("start", (page - 1) * 16)
                         .bind("end", 16)
                         .mapToBean(Product.class).list());
+    }
+
+    //Lay danh sach san pham co discount
+    public List<Product> discountedProducts() {
+        Jdbi jdbi = JdbiConnect.getJdbi();
+        return jdbi.withHandle(handle ->
+                handle.createQuery("""
+                                    SELECT
+                                        p.*,
+                                        d.percentage,
+                                        DATEDIFF(DATE_ADD(p.create_date, INTERVAL 3 YEAR), CURDATE()) AS days_left
+                                    FROM products p
+                                    JOIN discounts d ON p.discount_id = d.id
+                                    WHERE
+                                        DATEDIFF(DATE_ADD(p.create_date, INTERVAL 3 YEAR), CURDATE()) <= 150
+                                    ORDER BY
+                                        CASE 
+                                           WHEN DATEDIFF(DATE_ADD(p.create_date, INTERVAL 3 YEAR), CURDATE()) <= 30 THEN 50
+                                           WHEN DATEDIFF(DATE_ADD(p.create_date, INTERVAL 3 YEAR), CURDATE()) <= 90 THEN 25
+                                           WHEN DATEDIFF(DATE_ADD(p.create_date, INTERVAL 3 YEAR), CURDATE()) <= 150 THEN 15
+                                           ELSE 0
+                                        END DESC, p.price ASC
+                                """)
+                        .mapToBean(Product.class)
+                        .list()
+        );
+    }
+
+    //Cap nhat discount cho product
+    public void updateDiscounts() {
+        Jdbi jdbi = JdbiConnect.getJdbi();
+        String sql = """
+            UPDATE products
+            SET discount_id = CASE
+                WHEN DATEDIFF(DATE_ADD(create_date, INTERVAL 3 YEAR), CURDATE()) <= 30 THEN 3
+                WHEN DATEDIFF(DATE_ADD(create_date, INTERVAL 3 YEAR), CURDATE()) <= 90 THEN 2
+                WHEN DATEDIFF(DATE_ADD(create_date, INTERVAL 3 YEAR), CURDATE()) <= 150 THEN 1
+                ELSE NULL
+            END
+        """;
+        jdbi.useHandle(handle -> handle.execute(sql));
     }
 
     //Them product
@@ -58,7 +99,7 @@ public class ProductDao {
         Jdbi jdbi = JdbiConnect.getJdbi();
         jdbi.useHandle(handle ->
                 handle.createUpdate("INSERT INTO products (cat_id, name, price, description, quantity, status, img, create_date) "
-                + "VALUES (:catId, :name, :price, :description, :quantity, :status, :img, :createDate)").bindBean(product).execute());
+                        + "VALUES (:catId, :name, :price, :description, :quantity, :status, :img, :createDate)").bindBean(product).execute());
     }
 
     //xoa product
@@ -78,16 +119,10 @@ public class ProductDao {
     }
 
 
-
     public static void main(String[] args) {
-//        ProductDao productDao = new ProductDao();
-//        List<Product> products = productDao.getProductByPage(1, 1);
-//        for (Product product : products) {
-//            System.out.println(product);
-//        }
 
         ProductDao productDao = new ProductDao();
-        List<Product> products = productDao.getAll();
+        List<Product> products = productDao.discountedProducts();
         for (Product product : products) {
             System.out.println(product);
         }
