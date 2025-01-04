@@ -10,15 +10,29 @@ import vn.edu.hcmuaf.fit.animalfeed_webapp.services.ProductService;
 import java.io.IOException;
 
 @WebServlet(name = "ProductDetailocntroller", value = "/product-detail")
-public class ProductDetailocntroller extends HttpServlet {
+public class ProductDetailController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException, ServletException {
         String pid = request.getParameter("pid");
         ProductService productService = new ProductService();
-        Product detail = productService.getDetail(pid);
-        request.setAttribute("product", detail);
-        request.getRequestDispatcher("product-detail.jsp").forward(request, response);
+        Product product = null;
+
+        if (pid != null && !pid.isEmpty()) {
+            try {
+                int productId = Integer.parseInt(pid);
+                product = productService.getDetail(productId);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+                return;
+            }
+        } else {
+            return;
+        }
+
+
+        request.setAttribute("product", product);
+        request.getRequestDispatcher("views/web/each_product/product_details/product-detail.jsp").forward(request, response);
 
     }
 
