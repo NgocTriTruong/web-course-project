@@ -98,271 +98,271 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col-md-3 bg-light text-center m-3 col product_number">
-                        <div class="sale_all">
-                            <div class="sale_badge">20% OFF</div>
-                        </div>
-                        <div class="product-img">
-                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_02.png" alt="TOP 01" height="250px" width="200px">
-                        </div>
-                        <div class="h5 text-h">TOP 02</div>
-                        <div class="p mb-2 text-p"> Dùng cho heo con tập ăn đến 20kg</div>
-                        <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>
-                        <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>
-                        <div class="p text-start ms-3">Đã bán 1,1k</div>
-                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                            <i class="fa-solid fa-truck mt-1"></i>
-                            <p class="ms-2">2 -4 ngày</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 bg-light text-center m-3 col product_number">
-                        <div class="sale_all">
-                            <div class="sale_badge">20% OFF</div>
-                        </div>
-                        <div class="product-img">
-                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_03.png" alt="TOP 01" height="250px" width="200px">
-                        </div>
-                        <div class="h5 text-h">TOP 03</div>
-                        <div class="p mb-2 text-p">Dùng cho heo thịt giống tốt từ 12 - 30kg</div>
-                        <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>
-                        <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>
-                        <div class="p text-start ms-3">Đã bán 1,1k</div>
-                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                            <i class="fa-solid fa-truck mt-1"></i>
-                            <p class="ms-2">2 -4 ngày</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 bg-light text-center m-3 col product_number">
-                        <div class="sale_all">
-                            <div class="sale_badge">20% OFF</div>
-                        </div>
-                        <div class="product-img">
-                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_04.png" alt="TOP 01" height="250px" width="200px">
-                        </div>
-                        <div class="h5 text-h">TOP 04</div>
-                        <div class="p mb-2 text-p">Dùng cho heo thịt giống tốt từ 30 - 70kg</div>
-                        <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>
-                        <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>
-                        <div class="p text-start ms-3">Đã bán 1,1k</div>
-                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                            <i class="fa-solid fa-truck mt-1"></i>
-                            <p class="ms-2">2 -4 ngày</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3 bg-light text-center m-3 col product_number">
-                        <div class="sale_all">
-                            <div class="sale_badge">20% OFF</div>
-                        </div>
-                        <div class="product-img">
-                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_05.png" alt="TOP 01" height="250px" width="200px">
-                        </div>
-                        <div class="h5 text-h">TOP 05</div>
-                        <div class="p mb-4 text-p">Dùng cho heo thịt giống tốt từ 70kg – xuất chuồng.</div>
-                        <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>
-                        <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>
-                        <div class="p text-start ms-3">Đã bán 1,1k</div>
-                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                            <i class="fa-solid fa-truck mt-1"></i>
-                            <p class="ms-2">2 -4 ngày</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 bg-light text-center m-3 col product_number">
-                        <div class="sale_all">
-                            <div class="sale_badge">20% OFF</div>
-                        </div>
-                        <div class="product-img">
-                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_06.png" alt="TOP 01" height="250px" width="200px">
-                        </div>
-                        <div class="h5 text-h">TOP 06</div>
-                        <div class="p mb-4 text-p">Dùng cho heo cho heo nái hậu bị, mang thai.</div>
-                        <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>
-                        <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>
-                        <div class="p text-start ms-3">Đã bán 1,1k</div>
-                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                            <i class="fa-solid fa-truck mt-1"></i>
-                            <p class="ms-2">2 -4 ngày</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 bg-light text-center m-3 col product_number">
-                        <div class="sale_all">
-                            <div class="sale_badge">20% OFF</div>
-                        </div>
-                        <div class="product-img">
-                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_07.png" alt="TOP 01" height="250px" width="200px">
-                        </div>
-                        <div class="h5 text-h">TOP 07</div>
-                        <div class="p mb-4 text-p">Dùng cho heo nái nuôi con giống tốt. Hoặc heo nọc (100kg....</div>
-                        <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>
-                        <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>
-                        <div class="p text-start ms-3">Đã bán 1,1k</div>
-                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                            <i class="fa-solid fa-truck mt-1"></i>
-                            <p class="ms-2">2 -4 ngày</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 bg-light text-center m-3 col product_number">
-                        <div class="sale_all">
-                            <div class="sale_badge">20% OFF</div>
-                        </div>
-                        <div class="product-img">
-                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/100S_Font.png" alt="TOP 01" height="250px" width="200px">
-                        </div>
-                        <div class="h5 text-h">VINA 100S</div>
-                        <div class="p mb-4 text-p">Dùng cho heo sữa từ 05 ngày tuổi đến 8kg</div>
-                        <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>
-                        <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>
-                        <div class="p text-start ms-3">Đã bán 1,1k</div>
-                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                            <i class="fa-solid fa-truck mt-1"></i>
-                            <p class="ms-2">2 -4 ngày</p>
-                        </div>
-                    </div>
-                </div>
-                <div id="more_product_sale" class="more_product_sale">
-                    <div class="row">
-                        <div class="col-md-3 bg-light text-center m-3 col product_number">
-                            <a href="${pageContext.request.contextPath}/views/web/each_product/chi_tiet_chicken/pig_top1.jsp">
-                                <div class="sale_all">
-                                    <div class="sale_badge">20% OFF</div>
-                                </div>
-                                <div class="product-img">
-                                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_01.png" alt="TOP 01" height="250px" width="200px">
-                                </div>
-                                <div class="h5 text-h">TOP 01</div>
-                                <div class="p mb-2 text-p">Dùng cho heo con từ 05 ngày tuổi đến 35 ngày tuổi</div>
-                                <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>
-                                <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>
-                                <div class="p text-start ms-3">Đã bán 1,1k</div>
-                                <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                                    <i class="fa-solid fa-truck mt-1"></i>
-                                    <p class="ms-2">2 -4 ngày</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-md-3 bg-light text-center m-3 col product_number">
-                            <div class="sale_all">
-                                <div class="sale_badge">20% OFF</div>
-                            </div>
-                            <div class="product-img">
-                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_02.png" alt="TOP 01" height="250px" width="200px">
-                            </div>
-                            <div class="h5 text-h">TOP 02</div>
-                            <div class="p mb-2 text-p"> Dùng cho heo con tập ăn đến 20kg</div>
-                            <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>
-                            <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>
-                            <div class="p text-start ms-3">Đã bán 1,1k</div>
-                            <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                                <i class="fa-solid fa-truck mt-1"></i>
-                                <p class="ms-2">2 -4 ngày</p>
-                            </div>
-                        </div>
-                        <div class="col-md-3 bg-light text-center m-3 col product_number">
-                            <div class="sale_all">
-                                <div class="sale_badge">20% OFF</div>
-                            </div>
-                            <div class="product-img">
-                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_03.png" alt="TOP 01" height="250px" width="200px">
-                            </div>
-                            <div class="h5 text-h">TOP 03</div>
-                            <div class="p mb-2 text-p">Dùng cho heo thịt giống tốt từ 12 - 30kg</div>
-                            <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>
-                            <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>
-                            <div class="p text-start ms-3">Đã bán 1,1k</div>
-                            <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                                <i class="fa-solid fa-truck mt-1"></i>
-                                <p class="ms-2">2 -4 ngày</p>
-                            </div>
-                        </div>
-                        <div class="col-md-3 bg-light text-center m-3 col product_number">
-                            <div class="sale_all">
-                                <div class="sale_badge">20% OFF</div>
-                            </div>
-                            <div class="product-img">
-                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_04.png" alt="TOP 01" height="250px" width="200px">
-                            </div>
-                            <div class="h5 text-h">TOP 04</div>
-                            <div class="p mb-2 text-p">Dùng cho heo thịt giống tốt từ 30 - 70kg</div>
-                            <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>
-                            <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>
-                            <div class="p text-start ms-3">Đã bán 1,1k</div>
-                            <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                                <i class="fa-solid fa-truck mt-1"></i>
-                                <p class="ms-2">2 -4 ngày</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3 bg-light text-center m-3 col product_number">
-                            <div class="sale_all">
-                                <div class="sale_badge">20% OFF</div>
-                            </div>
-                            <div class="product-img">
-                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_05.png" alt="TOP 01" height="250px" width="200px">
-                            </div>
-                            <div class="h5 text-h">TOP 05</div>
-                            <div class="p mb-4 text-p">Dùng cho heo thịt giống tốt từ 70kg – xuất chuồng.</div>
-                            <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>
-                            <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>
-                            <div class="p text-start ms-3">Đã bán 1,1k</div>
-                            <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                                <i class="fa-solid fa-truck mt-1"></i>
-                                <p class="ms-2">2 -4 ngày</p>
-                            </div>
-                        </div>
-                        <div class="col-md-3 bg-light text-center m-3 col product_number">
-                            <div class="sale_all">
-                                <div class="sale_badge">20% OFF</div>
-                            </div>
-                            <div class="product-img">
-                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_06.png" alt="TOP 01" height="250px" width="200px">
-                            </div>
-                            <div class="h5 text-h">TOP 06</div>
-                            <div class="p mb-4 text-p">Dùng cho heo cho heo nái hậu bị, mang thai.</div>
-                            <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>
-                            <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>
-                            <div class="p text-start ms-3">Đã bán 1,1k</div>
-                            <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                                <i class="fa-solid fa-truck mt-1"></i>
-                                <p class="ms-2">2 -4 ngày</p>
-                            </div>
-                        </div>
-                        <div class="col-md-3 bg-light text-center m-3 col product_number">
-                            <div class="sale_all">
-                                <div class="sale_badge">20% OFF</div>
-                            </div>
-                            <div class="product-img">
-                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_07.png" alt="TOP 01" height="250px" width="200px">
-                            </div>
-                            <div class="h5 text-h">TOP 07</div>
-                            <div class="p mb-4 text-p">Dùng cho heo nái nuôi con giống tốt. Hoặc heo nọc (100kg....</div>
-                            <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>
-                            <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>
-                            <div class="p text-start ms-3">Đã bán 1,1k</div>
-                            <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                                <i class="fa-solid fa-truck mt-1"></i>
-                                <p class="ms-2">2 -4 ngày</p>
-                            </div>
-                        </div>
-                        <div class="col-md-3 bg-light text-center m-3 col product_number">
-                            <div class="sale_all">
-                                <div class="sale_badge">20% OFF</div>
-                            </div>
-                            <div class="product-img">
-                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_01.png" alt="TOP 01" height="250px" width="200px">
-                            </div>
-                            <div class="h5 text-h">TOP 01</div>
-                            <div class="p mb-4 text-p">Dùng cho heo sữa từ 05 ngày tuổi đến 8kg</div>
-                            <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>
-                            <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>
-                            <div class="p text-start ms-3">Đã bán 1,1k</div>
-                            <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                                <i class="fa-solid fa-truck mt-1"></i>
-                                <p class="ms-2">2 -4 ngày</p>
-                            </div>
-                        </div>
-                    </div>
+<%--                    <div class="col-md-3 bg-light text-center m-3 col product_number">--%>
+<%--                        <div class="sale_all">--%>
+<%--                            <div class="sale_badge">20% OFF</div>--%>
+<%--                        </div>--%>
+<%--                        <div class="product-img">--%>
+<%--                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_02.png" alt="TOP 01" height="250px" width="200px">--%>
+<%--                        </div>--%>
+<%--                        <div class="h5 text-h">TOP 02</div>--%>
+<%--                        <div class="p mb-2 text-p"> Dùng cho heo con tập ăn đến 20kg</div>--%>
+<%--                        <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>--%>
+<%--                        <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>--%>
+<%--                        <div class="p text-start ms-3">Đã bán 1,1k</div>--%>
+<%--                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">--%>
+<%--                            <i class="fa-solid fa-truck mt-1"></i>--%>
+<%--                            <p class="ms-2">2 -4 ngày</p>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="col-md-3 bg-light text-center m-3 col product_number">--%>
+<%--                        <div class="sale_all">--%>
+<%--                            <div class="sale_badge">20% OFF</div>--%>
+<%--                        </div>--%>
+<%--                        <div class="product-img">--%>
+<%--                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_03.png" alt="TOP 01" height="250px" width="200px">--%>
+<%--                        </div>--%>
+<%--                        <div class="h5 text-h">TOP 03</div>--%>
+<%--                        <div class="p mb-2 text-p">Dùng cho heo thịt giống tốt từ 12 - 30kg</div>--%>
+<%--                        <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>--%>
+<%--                        <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>--%>
+<%--                        <div class="p text-start ms-3">Đã bán 1,1k</div>--%>
+<%--                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">--%>
+<%--                            <i class="fa-solid fa-truck mt-1"></i>--%>
+<%--                            <p class="ms-2">2 -4 ngày</p>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="col-md-3 bg-light text-center m-3 col product_number">--%>
+<%--                        <div class="sale_all">--%>
+<%--                            <div class="sale_badge">20% OFF</div>--%>
+<%--                        </div>--%>
+<%--                        <div class="product-img">--%>
+<%--                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_04.png" alt="TOP 01" height="250px" width="200px">--%>
+<%--                        </div>--%>
+<%--                        <div class="h5 text-h">TOP 04</div>--%>
+<%--                        <div class="p mb-2 text-p">Dùng cho heo thịt giống tốt từ 30 - 70kg</div>--%>
+<%--                        <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>--%>
+<%--                        <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>--%>
+<%--                        <div class="p text-start ms-3">Đã bán 1,1k</div>--%>
+<%--                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">--%>
+<%--                            <i class="fa-solid fa-truck mt-1"></i>--%>
+<%--                            <p class="ms-2">2 -4 ngày</p>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="row">--%>
+<%--                    <div class="col-md-3 bg-light text-center m-3 col product_number">--%>
+<%--                        <div class="sale_all">--%>
+<%--                            <div class="sale_badge">20% OFF</div>--%>
+<%--                        </div>--%>
+<%--                        <div class="product-img">--%>
+<%--                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_05.png" alt="TOP 01" height="250px" width="200px">--%>
+<%--                        </div>--%>
+<%--                        <div class="h5 text-h">TOP 05</div>--%>
+<%--                        <div class="p mb-4 text-p">Dùng cho heo thịt giống tốt từ 70kg – xuất chuồng.</div>--%>
+<%--                        <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>--%>
+<%--                        <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>--%>
+<%--                        <div class="p text-start ms-3">Đã bán 1,1k</div>--%>
+<%--                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">--%>
+<%--                            <i class="fa-solid fa-truck mt-1"></i>--%>
+<%--                            <p class="ms-2">2 -4 ngày</p>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="col-md-3 bg-light text-center m-3 col product_number">--%>
+<%--                        <div class="sale_all">--%>
+<%--                            <div class="sale_badge">20% OFF</div>--%>
+<%--                        </div>--%>
+<%--                        <div class="product-img">--%>
+<%--                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_06.png" alt="TOP 01" height="250px" width="200px">--%>
+<%--                        </div>--%>
+<%--                        <div class="h5 text-h">TOP 06</div>--%>
+<%--                        <div class="p mb-4 text-p">Dùng cho heo cho heo nái hậu bị, mang thai.</div>--%>
+<%--                        <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>--%>
+<%--                        <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>--%>
+<%--                        <div class="p text-start ms-3">Đã bán 1,1k</div>--%>
+<%--                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">--%>
+<%--                            <i class="fa-solid fa-truck mt-1"></i>--%>
+<%--                            <p class="ms-2">2 -4 ngày</p>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="col-md-3 bg-light text-center m-3 col product_number">--%>
+<%--                        <div class="sale_all">--%>
+<%--                            <div class="sale_badge">20% OFF</div>--%>
+<%--                        </div>--%>
+<%--                        <div class="product-img">--%>
+<%--                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_07.png" alt="TOP 01" height="250px" width="200px">--%>
+<%--                        </div>--%>
+<%--                        <div class="h5 text-h">TOP 07</div>--%>
+<%--                        <div class="p mb-4 text-p">Dùng cho heo nái nuôi con giống tốt. Hoặc heo nọc (100kg....</div>--%>
+<%--                        <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>--%>
+<%--                        <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>--%>
+<%--                        <div class="p text-start ms-3">Đã bán 1,1k</div>--%>
+<%--                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">--%>
+<%--                            <i class="fa-solid fa-truck mt-1"></i>--%>
+<%--                            <p class="ms-2">2 -4 ngày</p>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="col-md-3 bg-light text-center m-3 col product_number">--%>
+<%--                        <div class="sale_all">--%>
+<%--                            <div class="sale_badge">20% OFF</div>--%>
+<%--                        </div>--%>
+<%--                        <div class="product-img">--%>
+<%--                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/100S_Font.png" alt="TOP 01" height="250px" width="200px">--%>
+<%--                        </div>--%>
+<%--                        <div class="h5 text-h">VINA 100S</div>--%>
+<%--                        <div class="p mb-4 text-p">Dùng cho heo sữa từ 05 ngày tuổi đến 8kg</div>--%>
+<%--                        <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>--%>
+<%--                        <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>--%>
+<%--                        <div class="p text-start ms-3">Đã bán 1,1k</div>--%>
+<%--                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">--%>
+<%--                            <i class="fa-solid fa-truck mt-1"></i>--%>
+<%--                            <p class="ms-2">2 -4 ngày</p>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div id="more_product_sale" class="more_product_sale">--%>
+<%--                    <div class="row">--%>
+<%--                        <div class="col-md-3 bg-light text-center m-3 col product_number">--%>
+<%--                            <a href="${pageContext.request.contextPath}/views/web/each_product/chi_tiet_chicken/pig_top1.jsp">--%>
+<%--                                <div class="sale_all">--%>
+<%--                                    <div class="sale_badge">20% OFF</div>--%>
+<%--                                </div>--%>
+<%--                                <div class="product-img">--%>
+<%--                                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_01.png" alt="TOP 01" height="250px" width="200px">--%>
+<%--                                </div>--%>
+<%--                                <div class="h5 text-h">TOP 01</div>--%>
+<%--                                <div class="p mb-2 text-p">Dùng cho heo con từ 05 ngày tuổi đến 35 ngày tuổi</div>--%>
+<%--                                <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>--%>
+<%--                                <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>--%>
+<%--                                <div class="p text-start ms-3">Đã bán 1,1k</div>--%>
+<%--                                <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">--%>
+<%--                                    <i class="fa-solid fa-truck mt-1"></i>--%>
+<%--                                    <p class="ms-2">2 -4 ngày</p>--%>
+<%--                                </div>--%>
+<%--                            </a>--%>
+<%--                        </div>--%>
+<%--                        <div class="col-md-3 bg-light text-center m-3 col product_number">--%>
+<%--                            <div class="sale_all">--%>
+<%--                                <div class="sale_badge">20% OFF</div>--%>
+<%--                            </div>--%>
+<%--                            <div class="product-img">--%>
+<%--                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_02.png" alt="TOP 01" height="250px" width="200px">--%>
+<%--                            </div>--%>
+<%--                            <div class="h5 text-h">TOP 02</div>--%>
+<%--                            <div class="p mb-2 text-p"> Dùng cho heo con tập ăn đến 20kg</div>--%>
+<%--                            <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>--%>
+<%--                            <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>--%>
+<%--                            <div class="p text-start ms-3">Đã bán 1,1k</div>--%>
+<%--                            <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">--%>
+<%--                                <i class="fa-solid fa-truck mt-1"></i>--%>
+<%--                                <p class="ms-2">2 -4 ngày</p>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                        <div class="col-md-3 bg-light text-center m-3 col product_number">--%>
+<%--                            <div class="sale_all">--%>
+<%--                                <div class="sale_badge">20% OFF</div>--%>
+<%--                            </div>--%>
+<%--                            <div class="product-img">--%>
+<%--                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_03.png" alt="TOP 01" height="250px" width="200px">--%>
+<%--                            </div>--%>
+<%--                            <div class="h5 text-h">TOP 03</div>--%>
+<%--                            <div class="p mb-2 text-p">Dùng cho heo thịt giống tốt từ 12 - 30kg</div>--%>
+<%--                            <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>--%>
+<%--                            <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>--%>
+<%--                            <div class="p text-start ms-3">Đã bán 1,1k</div>--%>
+<%--                            <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">--%>
+<%--                                <i class="fa-solid fa-truck mt-1"></i>--%>
+<%--                                <p class="ms-2">2 -4 ngày</p>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                        <div class="col-md-3 bg-light text-center m-3 col product_number">--%>
+<%--                            <div class="sale_all">--%>
+<%--                                <div class="sale_badge">20% OFF</div>--%>
+<%--                            </div>--%>
+<%--                            <div class="product-img">--%>
+<%--                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_04.png" alt="TOP 01" height="250px" width="200px">--%>
+<%--                            </div>--%>
+<%--                            <div class="h5 text-h">TOP 04</div>--%>
+<%--                            <div class="p mb-2 text-p">Dùng cho heo thịt giống tốt từ 30 - 70kg</div>--%>
+<%--                            <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>--%>
+<%--                            <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>--%>
+<%--                            <div class="p text-start ms-3">Đã bán 1,1k</div>--%>
+<%--                            <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">--%>
+<%--                                <i class="fa-solid fa-truck mt-1"></i>--%>
+<%--                                <p class="ms-2">2 -4 ngày</p>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="row">--%>
+<%--                        <div class="col-md-3 bg-light text-center m-3 col product_number">--%>
+<%--                            <div class="sale_all">--%>
+<%--                                <div class="sale_badge">20% OFF</div>--%>
+<%--                            </div>--%>
+<%--                            <div class="product-img">--%>
+<%--                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_05.png" alt="TOP 01" height="250px" width="200px">--%>
+<%--                            </div>--%>
+<%--                            <div class="h5 text-h">TOP 05</div>--%>
+<%--                            <div class="p mb-4 text-p">Dùng cho heo thịt giống tốt từ 70kg – xuất chuồng.</div>--%>
+<%--                            <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>--%>
+<%--                            <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>--%>
+<%--                            <div class="p text-start ms-3">Đã bán 1,1k</div>--%>
+<%--                            <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">--%>
+<%--                                <i class="fa-solid fa-truck mt-1"></i>--%>
+<%--                                <p class="ms-2">2 -4 ngày</p>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                        <div class="col-md-3 bg-light text-center m-3 col product_number">--%>
+<%--                            <div class="sale_all">--%>
+<%--                                <div class="sale_badge">20% OFF</div>--%>
+<%--                            </div>--%>
+<%--                            <div class="product-img">--%>
+<%--                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_06.png" alt="TOP 01" height="250px" width="200px">--%>
+<%--                            </div>--%>
+<%--                            <div class="h5 text-h">TOP 06</div>--%>
+<%--                            <div class="p mb-4 text-p">Dùng cho heo cho heo nái hậu bị, mang thai.</div>--%>
+<%--                            <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>--%>
+<%--                            <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>--%>
+<%--                            <div class="p text-start ms-3">Đã bán 1,1k</div>--%>
+<%--                            <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">--%>
+<%--                                <i class="fa-solid fa-truck mt-1"></i>--%>
+<%--                                <p class="ms-2">2 -4 ngày</p>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                        <div class="col-md-3 bg-light text-center m-3 col product_number">--%>
+<%--                            <div class="sale_all">--%>
+<%--                                <div class="sale_badge">20% OFF</div>--%>
+<%--                            </div>--%>
+<%--                            <div class="product-img">--%>
+<%--                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_07.png" alt="TOP 01" height="250px" width="200px">--%>
+<%--                            </div>--%>
+<%--                            <div class="h5 text-h">TOP 07</div>--%>
+<%--                            <div class="p mb-4 text-p">Dùng cho heo nái nuôi con giống tốt. Hoặc heo nọc (100kg....</div>--%>
+<%--                            <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>--%>
+<%--                            <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>--%>
+<%--                            <div class="p text-start ms-3">Đã bán 1,1k</div>--%>
+<%--                            <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">--%>
+<%--                                <i class="fa-solid fa-truck mt-1"></i>--%>
+<%--                                <p class="ms-2">2 -4 ngày</p>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                        <div class="col-md-3 bg-light text-center m-3 col product_number">--%>
+<%--                            <div class="sale_all">--%>
+<%--                                <div class="sale_badge">20% OFF</div>--%>
+<%--                            </div>--%>
+<%--                            <div class="product-img">--%>
+<%--                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_01.png" alt="TOP 01" height="250px" width="200px">--%>
+<%--                            </div>--%>
+<%--                            <div class="h5 text-h">TOP 01</div>--%>
+<%--                            <div class="p mb-4 text-p">Dùng cho heo sữa từ 05 ngày tuổi đến 8kg</div>--%>
+<%--                            <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> 400.000 <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>--%>
+<%--                            <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">320.000 <u>đ</u></div>--%>
+<%--                            <div class="p text-start ms-3">Đã bán 1,1k</div>--%>
+<%--                            <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">--%>
+<%--                                <i class="fa-solid fa-truck mt-1"></i>--%>
+<%--                                <p class="ms-2">2 -4 ngày</p>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
                 </div>
                 <a href="javascript:void(0)" id="toggle-product-sale" class="toggle-button-sale text-center mt-2">Xem tất cả <i class="fa-solid fa-chevron-down ms-2"></i></a>
             </div>
@@ -894,7 +894,6 @@
 
         <!-- product all -->
         <div class="container">
-            <!--product one -->
             <div id="product_all_one">
                 <div class="row">
                     <c:choose>
@@ -927,18 +926,33 @@
             </div>
         </div>
 
+        <!-- Pagination -->
         <div class="container mt-4">
             <nav aria-label="Page navigation">
                 <ul class="pagination justify-content-center">
+                    <li class="page-item ${currentPage > 1 ? '' : 'disabled'}">
+                        <a class="page-link" href="?categoryId=${selectedCategoryId}&page=${currentPage - 1}"><i class="fa-solid fa-chevron-left"></i></a>
+                    </li>
                     <c:forEach var="i" begin="1" end="${endPage}">
-                        <li class="page-item ${i == currentPage ? 'active' : ''}">
-                            <a class="page-link" href="?categoryId=${selectedCategoryId}&page=${i}">${i}</a>
-                        </li>
+                        <c:choose>
+                            <c:when test="${i == 1 || i == endPage || (i >= currentPage - 2 && i <= currentPage + 2)}">
+                                <li class="page-item ${i == currentPage ? 'active' : ''}" style="color: #94b83d;">
+                                    <a class="page-link" href="?categoryId=${selectedCategoryId}&page=${i}">${i}</a>
+                                </li>
+                            </c:when>
+                            <c:when test="${i == currentPage - 3 || i == currentPage + 3}">
+                                <li class="page-item disabled">
+                                    <span class="page-link">...</span>
+                                </li>
+                            </c:when>
+                        </c:choose>
                     </c:forEach>
+                    <li class="page-item ${currentPage < endPage ? '' : 'disabled'}">
+                        <a class="page-link" href="?categoryId=${selectedCategoryId}&page=${currentPage + 1}"><i class="fa-solid fa-chevron-right"></i></a>
+                    </li>
                 </ul>
             </nav>
         </div>
-
 
         <!-- Text -->
          <div class="container mt-5">
@@ -1023,112 +1037,6 @@
 <%@ include file="../layout/near_footer.jsp" %>
 
 <%@ include file="../layout/footer.jsp" %>
-
-    <!-- Login -->
-<div id="login" class ="login">
-    <div id ="login_container">
-        <div class="login_close">
-            <img src="${pageContext.request.contextPath}/views/template/assets/images/logo/close.png" alt="">
-        </div>
-  
-        <div class="login_header">
-            <div class="login_logo_shop">
-                <img src="${pageContext.request.contextPath}/views/template/assets/images/header/logo_vina.png" alt="Logo Shop">
-            </div>
-            <div class="login_header_text">
-                <h3 style="font-size: 24px;">Đăng nhập tài khoản</h3>
-            </div>
-        </div>
-        <div class="login_body">
-            <div class="form-floating mb-3 mt-3">
-                <input type="text" class="form-control" id="contact" placeholder="Nhập số điện thoại/email" name="contact" required autocomplete="off"> 
-                <label for="contact">Nhập số điện thoại<span class="req">*</span></label>
-            </div>
-            <div class="form-floating mb-3 mt-3">
-                <input type="password" class="form-control" id="pwd" placeholder="Nhập mật khẩu" name="password" required autocomplete="off"> 
-                <label for="password">Nhập mật khẩu<span class="req">*</span></label>
-            </div>
-            <p class="login_forgot"><a href="#">Quên mật khẩu?</a></p>
-  
-            <button type="submit" class="login_button_submit">Đăng nhập</button>
-            <div class="login_split">
-                <p>Hoặc</p>
-            </div>
-            <div class="login_social">
-                <a href="" class="social_btn login_social_gg">
-                    <img src="${pageContext.request.contextPath}/views/template/assets/images/social/google.png" alt="">
-                    <p>Google</p>
-                </a>
-                <a href="" class="social_btn login_social_zl">
-                    <img src="${pageContext.request.contextPath}/views/template/assets/images/social/zalo.png" alt="">
-                    <p>Zalo</p>
-                </a>
-            </div>
-        </div>
-        <div class="login_footer">
-            <p>Bạn chưa có tài khoản? <a href="#" id="go-to-signup">Đăng ký ngay</a></p>
-        </div>
-    </div>
-  </div>
-  
-  <!-- sign up -->
-  <div id="signup" class ="signup">
-    <div id="signup_container">
-        <div class="signup_close">
-            <img src="${pageContext.request.contextPath}/views/template/assets/images/logo/close.png" alt="">
-        </div>
-  
-        <div class="signup_header">
-            <div class="signup_logo_shop">
-                <img src="${pageContext.request.contextPath}/views/template/assets/images/header/logo_vina.png" alt="Logo Shop">
-            </div>
-            <div class="signup_header_text">
-                <h3 style="font-size: 24px;">Đăng ký tài khoản</h3>
-            </div>
-        </div>
-        <div class="signup_body">
-            <div class="form-floating mb-2 mt-2">
-                <input type="text" class="form-control" id="name" placeholder="Nhập họ và tên" name="Name" required autocomplete="off"> 
-                <label for="password">Nhập họ và tên<span class="req">*</span></label>
-            </div>
-  
-            <div class="form-floating mb-2 mt-2">
-                <input type="text" class="form-control" id="contact" placeholder="Nhập số điện thoại/email" name="Contact" required autocomplete="off"> 
-                <label for="contact">Nhập số điện thoại<span class="req">*</span></label>
-            </div>
-            <div class="form-floating mb-2 mt-2">
-                <input type="password" class="form-control" id="pwd" placeholder="Nhập mật khẩu" name="password" required autocomplete="off"> 
-                <label for="password">Nhập mật khẩu<span class="req">*</span></label>
-            </div>
-          
-            <div class="form-floating mb-2 mt-2">
-                <input type="password" class="form-control" id="pwd" placeholder="Nhập lại mật khẩu" name="password again" required autocomplete="off"> 
-                <label for="password again">Nhập lại mật khẩu<span class="req">*</span></label>
-            </div>
-  
-            <div class="signup_okay">
-                <p>Bằng việc đăng ký này, bạn đã chấp nhận các chính sách của VINAFEED</p>
-            </div>
-            <button type="submit" class="signup_button_submit">Đăng ký</button>
-            <div class="signup_split">
-                <p>Hoặc</p>
-            </div>
-            <div class="signup_social">
-                <a href="" class="social_btn signup_social_gg">
-                    <img src="${pageContext.request.contextPath}/views/template/assets/images/social/google.png" alt="">
-                    <p>Google</p>
-                </a>
-                <a href="" class="social_btn signup_social_zl">
-                    <img src="${pageContext.request.contextPath}/views/template/assets/images/social/zalo.png" alt="">
-                    <p>Zalo</p>
-                </a>
-            </div>
-        </div>
-        <div class="signup_footer">
-            <p>Bạn đã có tài khoản? <a href="#" id="go-to-login">Đăng nhập ngay</a></p>
-        </div>
-    </div>
-  </div>
   
   <!-- scrollToTopBtn -->
   <button id="scrollToTopBtn"><i class="fa-solid fa-chevron-up"></i></button>
