@@ -4,6 +4,7 @@ import org.jdbi.v3.core.Jdbi;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.db.JdbiConnect;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -12,16 +13,23 @@ public class UserDao {
 
     // Method to fetch a user by their username
     public ArrayList<User> getUserByName(String name) throws SQLException, ClassNotFoundException {
-        return (ArrayList<User>) jdbi.withHandle(handle -> handle.createQuery("select * from users like :namePattern").bind("pattern", "%" + name).mapToBean(User.class).list());
+        return (ArrayList<User>) jdbi.withHandle(handle -> handle.createQuery("select * from users where fullName like :namePattern")
+                .bind("namePattern", "%" + name + "%")
+                .mapToBean(User.class)
+                .list());
     }
 
-    // Method to insert a new user
-    public User getUserById(int id) throws SQLException, ClassNotFoundException {
-        return jdbi.withHandle(handle -> handle.createQuery("select * from users where id = :id").bind("id", id).mapToBean(User.class).findOne().orElse(null));
+    //check sdt da ton tai hay chua
+    public User getUserByPhone(String phone) {
+        return jdbi.withHandle(handle -> handle.createQuery("SELECT * FROM users WHERE phone = :phone")
+                .bind("phone", phone).mapToBean(User.class).findOne().orElse(null));
+
     }
 
+    //Method register
     public void insertUser(User user) {
-        int rowsInserted = jdbi.withHandle(handle ->
+
+        jdbi.withHandle(handle ->
                 handle.createUpdate("INSERT INTO users (fullName, password, phone, status, createDate, updateDate, role) VALUES (:fullName, :password, :phone, :status, :createDate, :updateDate, :role)")
                         .bind("fullName", user.getFullName())
                         .bind("password", user.getPassword())
@@ -32,69 +40,67 @@ public class UserDao {
                         .bind("role", user.getRole())
                         .execute()
         );
-        System.out.println(rowsInserted);
     }
 
-    // Method to update user information
-    public void updateUser(User user) {
-        int rowsUpdated = jdbi.withHandle(handle ->
-                handle.createUpdate("UPDATE users SET fullName = :fullName, password = :password, phone = :phone, status = :status, createDate = :createDate, updateDate = :updateDate, role = :role WHERE id = :id")
-                        .bind("fullName", user.getFullName())
-                        .bind("password", user.getPassword())
-                        .bind("phone", user.getPhone())
-                        .bind("status", user.getStatus())
-                        .bind("createDate", user.getCreateDate())
-                        .bind("updateDate", user.getUpdateDate())
-                        .bind("role", user.getRole())
-                        .bind("id", user.getId())
-                        .execute()
+    //load data user
+    public List<User> loadUsers() {
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT * FROM users")
+                        .map((rs, ctx) -> {
+                            int id = rs.getInt("id");
+                            String fullName = rs.getString("full_name"); // Tên cột: full_name
+                            String password = rs.getString("password");  // Tên cột: password
+                            String phone = rs.getString("phone");        // Tên cột: phone
+                            int status = rs.getInt("status");            // Tên cột: status
+                            Date createDate = rs.getDate("create_date"); // Tên cột: create_date
+                            Date updateDate = rs.getDate("update_date"); // Tên cột: update_date
+                            int role = rs.getInt("role");                // Tên cột: role
+                            return new User(id, fullName, password, phone, status, createDate, updateDate, role);
+                        })
+                        .list()
         );
-        System.out.println(rowsUpdated);
     }
 
-    // Method to delete a user by username
-    public void deleteUser(int id) {
-        int rowsDeleted = jdbi.withHandle(handle ->
-                handle.createUpdate("DELETE FROM users WHERE id = :id")
-                        .bind("id", id)
-                        .execute()
-        );
-        System.out.println(rowsDeleted);
-    }
-
-    // Method to list all users
-    public ArrayList<User> getAllUsers() {
-        return (ArrayList<User>) jdbi.withHandle(handle -> handle.createQuery("select * from users").mapToBean(User.class).list());
-    }
-
+    //login
     public User login(String phone, String password) {
+        Jdbi jdbi = JdbiConnect.getJdbi();
         return jdbi.withHandle(handle ->
                 handle.createQuery("SELECT * FROM users WHERE phone = :phone AND password = :password")
                         .bind("phone", phone)
                         .bind("password", password)
-                        .mapToBean(User.class)
-                        .findOne() // Tìm user đầu tiên khớp (nếu có)
-                        .orElse(null) // Trả về null nếu không tìm thấy
+                        .map((rs, ctx) -> {
+                            int id = rs.getInt("id");
+                            String fullName = rs.getString("full_name");
+                            int status = rs.getInt("status");
+                            Date createDate = rs.getDate("create_date");
+                            Date updateDate = rs.getDate("update_date");
+                            int role = rs.getInt("role");
+                            return new User(id, fullName, password, phone, status, createDate, updateDate, role);
+                        })
+                        .findOne()
+                        .orElse(null) // Nếu không tìm thấy, trả về null
         );
     }
-    // Kiểm tra dữ liệu
-    public void checkDatabase(String phone, String password) {
-        User user = login(phone, password);
-        if (user != null) {
-            System.out.println("Đăng nhập thành công!");
-            System.out.println("Thông tin người dùng:");
-            System.out.println("ID: " + user.getId());
-            System.out.println("Full Name: " + user.getFullName());
-            System.out.println("Phone: " + user.getPhone());
-            System.out.println("Role: " + user.getRole());
-            System.out.println("Status: " + user.getStatus());
-        } else {
-            System.out.println("Không tìm thấy người dùng hoặc mật khẩu không đúng.");
+
+
+        public static void main (String[]args){
+            Scanner scanner = new Scanner(System.in);
+
+            System.out.println("Vui lòng nhập số điện thoại:");
+            String phone = scanner.nextLine();
+
+            System.out.println("Vui lòng nhập mật khẩu:");
+            String password = scanner.nextLine();
+
+            UserDao myClass = new UserDao(); // Lớp chứa hàm login()
+            User user = myClass.login(phone, password);
+
+            if (user != null) {
+                System.out.println("Đăng nhập thành công!");
+                System.out.println("Xin chào, " + user.getFullName());
+            } else {
+                System.out.println("Số điện thoại hoặc mật khẩu không đúng. Vui lòng thử lại!");
+            }
         }
     }
 
-    public static void main(String[] args) {
-        UserDao userDao = new UserDao();
-        userDao.checkDatabase("0989898989", "123456");
-    }
-}
