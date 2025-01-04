@@ -1,9 +1,8 @@
-package vn.edu.hcmuaf.fit.animalfeed_webapp.controller.cart;
+package vn.edu.hcmuaf.fit.animalfeed_webapp.controller.cartController;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.CartDetailDao;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.cart.Cart;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.CartDetail;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
@@ -12,7 +11,6 @@ import vn.edu.hcmuaf.fit.animalfeed_webapp.services.CartService;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.ProductService;
 
 import java.io.IOException;
-import java.util.Date;
 
 @WebServlet(name = "Add", value = "/add-cart")
 public class Add extends HttpServlet {
