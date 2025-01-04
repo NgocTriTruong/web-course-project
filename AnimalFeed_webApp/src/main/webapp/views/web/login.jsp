@@ -275,7 +275,7 @@
 </head>
 <body>
 <div class="container" id="container">
-    <div class="form-container sign-up-container">
+    <div id="rs" class="form-container sign-up-container">
         <form action="register" method="post">
             <h1>Đăng kí tài khoản</h1>
             <div class="social-container">
@@ -295,7 +295,7 @@
         </c:if>
     </div>
 
-    <div class="form-container sign-in-container">
+    <div id="lo" class="form-container sign-in-container">
         <form action="login" method="POST">
             <h1>Đăng nhập tài khoản</h1>
             <div class="social-container">

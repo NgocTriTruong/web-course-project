@@ -36,27 +36,28 @@
     <div class="container">
         <div class="content text-center pb-5">
             <div class="row">
+                <jsp:useBean id="product" class="vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product" scope="request" />
                 <div class="col-md-4">
-                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_01.png" alt="" width="350px" height="100%"
+                    <img src="${product.img}" alt="${product.name}" width="350px" height="100%"
                          style="object-fit: cover;">
                 </div>
                 <div class="col-md-1"></div>
                 <div class="col-md-6 text-start">
-                    <div class="h1 mt-5 mb-3" style="color:#94b83d;">TOP 01</div>
-                    <div class="h5 mt-3 mb-3">Dùng cho heo con từ 05 ngày tuổi đến 35 ngày tuổi</div>
+                    <div class="h1 mt-5 mb-3" style="color:#94b83d;">${product.name}</div>
+                    <div class="h5 mt-3 mb-3">${product.description}</div>
                     <div class="line_red"></div>
                     <div class="d-flex mt-3 mb-3">
                         <div class="h5 fw-bold p_bold text-start">Giá:</div>
                         <div class="p text-start text-secondary price_sale me-4"
                              style="font-size: 18px; margin-left: -95px">
-                            <del> 400.000 <u>đ</u></del>
+                            <del> ${product.price} <u>đ</u></del>
                             <span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>
                         <div class="h4 text-danger">320.000 vnđ</div>
                     </div>
                     <div class="line_gray"></div>
                     <div class="d-flex mt-2">
                         <div class="p fw-bold p_bold">Mã SP:</div>
-                        <div class="p">TOP01</div>
+                        <div class="p">${product.name}</div>
                     </div>
                     <div class="d-flex mt-2">
                         <div class="p fw-bold p_bold text-start">Thị trường phân phối:</div>

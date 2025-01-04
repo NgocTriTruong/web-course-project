@@ -30,8 +30,10 @@ public class ProductDetailController extends HttpServlet {
             return;
         }
 
+
         request.setAttribute("product", product);
-        request.getRequestDispatcher("views/web/each_product/product-detail.jsp").forward(request, response);
+        request.getRequestDispatcher("views/web/each_product/product_details/product-detail.jsp").forward(request, response);
+
     }
 
     @Override

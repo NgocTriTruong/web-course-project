@@ -34,12 +34,12 @@ public class LoginController extends HttpServlet {
             }
         } else {
             req.setAttribute("error", "Số điện thoại hoặc mật khẩu không đúng!");
-            req.getRequestDispatcher("/views/web/login.jsp").forward(req, resp);
+            req.getRequestDispatcher("/views/web/login.jsp#rs").forward(req, resp);
         }
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/views/web/login.jsp").forward(req, resp);
+        req.getRequestDispatcher("/views/web/login.jsp#lo").forward(req, resp);
     }
 }

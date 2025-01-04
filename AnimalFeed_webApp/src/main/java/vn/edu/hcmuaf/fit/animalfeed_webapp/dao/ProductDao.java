@@ -53,47 +53,6 @@ public class ProductDao {
                         .mapToBean(Product.class).list());
     }
 
-    //Lay danh sach san pham co discount
-    public List<Product> discountedProducts() {
-        Jdbi jdbi = JdbiConnect.getJdbi();
-        return jdbi.withHandle(handle ->
-                handle.createQuery("""
-                                    SELECT
-                                        p.*,
-                                        d.percentage,
-                                        DATEDIFF(DATE_ADD(p.create_date, INTERVAL 3 YEAR), CURDATE()) AS days_left
-                                    FROM products p
-                                    JOIN discounts d ON p.discount_id = d.id
-                                    WHERE
-                                        DATEDIFF(DATE_ADD(p.create_date, INTERVAL 3 YEAR), CURDATE()) <= 150
-                                    ORDER BY
-                                        CASE 
-                                           WHEN DATEDIFF(DATE_ADD(p.create_date, INTERVAL 3 YEAR), CURDATE()) <= 30 THEN 50
-                                           WHEN DATEDIFF(DATE_ADD(p.create_date, INTERVAL 3 YEAR), CURDATE()) <= 90 THEN 25
-                                           WHEN DATEDIFF(DATE_ADD(p.create_date, INTERVAL 3 YEAR), CURDATE()) <= 150 THEN 15
-                                           ELSE 0
-                                        END DESC, p.price ASC
-                                """)
-                        .mapToBean(Product.class)
-                        .list()
-        );
-    }
-
-    //Cap nhat discount cho product
-    public void updateDiscounts() {
-        Jdbi jdbi = JdbiConnect.getJdbi();
-        String sql = """
-            UPDATE products
-            SET discount_id = CASE
-                WHEN DATEDIFF(DATE_ADD(create_date, INTERVAL 3 YEAR), CURDATE()) <= 30 THEN 3
-                WHEN DATEDIFF(DATE_ADD(create_date, INTERVAL 3 YEAR), CURDATE()) <= 90 THEN 2
-                WHEN DATEDIFF(DATE_ADD(create_date, INTERVAL 3 YEAR), CURDATE()) <= 150 THEN 1
-                ELSE NULL
-            END
-        """;
-        jdbi.useHandle(handle -> handle.execute(sql));
-    }
-
     //Them product
     public void insertProduct(Product product) {
         Jdbi jdbi = JdbiConnect.getJdbi();
@@ -120,12 +79,6 @@ public class ProductDao {
 
 
     public static void main(String[] args) {
-
-        ProductDao productDao = new ProductDao();
-        List<Product> products = productDao.discountedProducts();
-        for (Product product : products) {
-            System.out.println(product);
-        }
 
     }
 
