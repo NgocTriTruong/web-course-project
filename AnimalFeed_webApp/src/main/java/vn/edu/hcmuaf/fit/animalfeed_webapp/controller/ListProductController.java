@@ -39,15 +39,12 @@ public class ListProductController extends HttpServlet {
         //Lay danh muc
         List<Category> categories = categoryService.getAll();
 
-        //Lay san pham giam gia
-        List<Product> discountProducts = productService.discountedProducts();
 
         request.setAttribute("categoriesData", categories);
         request.setAttribute("productsData", products);
         request.setAttribute("selectedCategoryId", catId);
         request.setAttribute("currentPage", page);
         request.setAttribute("endPage", endPage);
-        request.setAttribute("discountProducts", discountProducts);
 
         request.getRequestDispatcher("views/web/each_product/product_pig.jsp").forward(request, response);
     }

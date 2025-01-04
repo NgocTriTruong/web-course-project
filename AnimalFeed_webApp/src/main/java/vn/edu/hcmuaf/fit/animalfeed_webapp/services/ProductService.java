@@ -13,13 +13,9 @@ public class ProductService {
         return productDao.getAll();
     }
 
-    public Product getDetail(String in) {
-        try {
-            int id = Integer.parseInt(in);
-            return productDao.getById(id);
-        }catch (NumberFormatException e) {
-            return null;
-        }
+    //Lay product theo id
+    public Product getDetail(int id) {
+        return productDao.getById(id);
     }
 
     //Lay product theo id danh muc
@@ -35,11 +31,6 @@ public class ProductService {
     //phan trang product
     public List<Product> getProductByPage(int page, int id){
         return productDao.getProductByPage(page, id);
-    }
-
-    //Lay danh sach san pham co discount
-    public List<Product> discountedProducts() {
-        return productDao.discountedProducts();
     }
 
     //Them product
