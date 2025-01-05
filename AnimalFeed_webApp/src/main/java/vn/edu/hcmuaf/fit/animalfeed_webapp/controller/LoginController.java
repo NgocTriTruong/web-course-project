@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.UserDao;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.cart.Cart;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
 
 import java.io.IOException;
@@ -31,6 +32,9 @@ public class LoginController extends HttpServlet {
                 resp.sendRedirect("views/admin/home.jsp"); // Admin được chuyển đến trang quản trị
             } else {
                 resp.sendRedirect("index.jsp"); // User được chuyển đến trang người dùng
+                Cart cart = new Cart();
+                cart.syncDatabase(user.getId());
+                session.setAttribute("cart", cart);
             }
         } else {
             req.setAttribute("error", "Số điện thoại hoặc mật khẩu không đúng!");

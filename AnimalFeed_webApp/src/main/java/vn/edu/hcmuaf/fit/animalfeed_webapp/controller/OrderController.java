@@ -4,10 +4,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.cart.Cart;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.CartDetail;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.OrderDetail;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Order;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.*;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.CartService;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.OrderService;
 
@@ -50,7 +47,7 @@ public class OrderController extends HttpServlet {
 
             // Get cart data
             Cart cart = (Cart) session.getAttribute("cart");
-            List<CartDetail> selectedItems = cart.getConfirmedCartItem(); // Gets items with status = 1
+            List<CartItem> selectedItems = cart.getConfirmedCartItem(); // Gets items with status = 1
 
             if (selectedItems.isEmpty()) {
                 response.sendRedirect(request.getContextPath() + "/cart");
@@ -58,11 +55,11 @@ public class OrderController extends HttpServlet {
             }
 
             double totalPrice = selectedItems.stream()
-                    .mapToDouble(CartDetail::getTotal)
+                    .mapToDouble(CartItem::getTotal)
                     .sum();
 
             int totalQuantity = selectedItems.stream()
-                    .mapToInt(CartDetail::getQuantity)
+                    .mapToInt(CartItem::getQuantity)
                     .sum();
 
             // Create order
@@ -79,7 +76,7 @@ public class OrderController extends HttpServlet {
             orderService.insertOrder(order);
 
             // Create order details for selected items
-            for (CartDetail cartItem : selectedItems) {
+            for (CartItem cartItem : selectedItems) {
                 // Remove item from cart
                 cart.removeProduct(cartItem.getProductId());
 
