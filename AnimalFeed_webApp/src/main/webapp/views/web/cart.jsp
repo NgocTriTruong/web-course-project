@@ -1,4 +1,4 @@
-<%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>--%>
+<%@ page import="vn.edu.hcmuaf.fit.animalfeed_webapp.dao.cart.Cart" %><%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>--%>
 <%--<!DOCTYPE html>--%>
 <%--<html lang="en">--%>
 <%--<head>--%>
@@ -174,6 +174,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -195,6 +196,7 @@
 </head>
 <body>
 <%@ include file="layout/header.jsp" %>
+
 <main style="margin-top: 65px;">
     <div class="container-fluid bg-light">
         <div class="container pt-5 cart">
@@ -215,22 +217,16 @@
                         </div>
                     </c:if>
 
-                    <c:forEach var="item" items="${sessionScope.cart.cartDetails}">
+                    <c:forEach var="item" items="${sessionScope.cart.cartDetails}" varStatus="status">
                         <div class="cart-item bg-white p-3 mb-3" data-product-id="${item.productId}">
                             <div class="d-flex align-items-center">
                                 <input type="checkbox" class="me-3 item-checkbox">
-                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/${item.productImage}"
-                                     alt="${item.productName}" class="me-3" width="150px" height="150px">
-                                <div class="flex-grow-1">
-                                    <div class="cart-item-text">
-                                        <h6 class="mt-3" style="font-size: 18px;">${item.productName}</h6>
+                                <img src="${item.img}"
+                                     alt="${item.name}" class="me-3" width="150px" height="150px">
                                         <h6 class="text-secondary">Product Code: ${item.productId}</h6>
                                     </div>
                                     <div class="price-section mt-2">
                                         <span class="price">${item.total}</span>
-                                        <c:if test="${item.originalPrice > item.total}">
-                                            <span class="original-price text-decoration-line-through ms-2">${item.originalPrice}</span>
-                                        </c:if>
                                     </div>
                                     <div class="quantity-controls mt-3">
                                         <div class="quantity-selector d-inline-flex align-items-center">
@@ -283,7 +279,6 @@
     </div>
 </main>
 <%@ include file="layout/footer.jsp" %>
-
 <script>
     function updateCartQuantity(productId, change) {
         const currentQuantity = parseInt(document.querySelector(`[data-product-id="${productId}"] .quantity-input`).value);

@@ -4,16 +4,22 @@ import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.JdbiException;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.db.JdbiConnect;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.CartDetail;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.CartItem;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Category;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CartDetailDao {
     private static Jdbi jdbi = JdbiConnect.getJdbi();
 
-    public CartDetail getCartDetailByUser(int id) {
-        return jdbi.withHandle(handle -> handle.createQuery("select * from cart_details where user_id = :id and status = 1").bind("id", id).mapToBean(CartDetail.class).findOne().orElse(null));
+    public List<CartItem> getCartDetailByUser(int id) {
+        return jdbi.withHandle(handle -> handle.createQuery(
+                        "SELECT cd.*, p.name, p.img, p.price FROM cart_details cd JOIN products p ON cd.product_id = p.id WHERE cd.user_id = :id")
+                .bind("id", id)
+                .mapToBean(CartItem.class)
+                .list());
     }
 
     public void insertCD(CartDetail cd) {
@@ -64,5 +70,9 @@ public class CartDetailDao {
     // Method to list all users
     public ArrayList<CartDetail> getAllCD() {
         return (ArrayList<CartDetail>) jdbi.withHandle(handle -> handle.createQuery("select * from cart_details").mapToBean(CartDetail.class).list());
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new CartDetailDao().getCartDetailByUser(2));
     }
 }

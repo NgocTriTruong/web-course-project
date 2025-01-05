@@ -46,6 +46,9 @@ public class Add extends HttpServlet {
             if (cart == null) {
                 cart = new Cart();
             }
+            cart.syncDatabase(user.getId());
+
+            session.setAttribute("cart", cart);
 
             CartDetail cartDetail = new CartDetail();
             cartDetail.setUserId(user.getId());

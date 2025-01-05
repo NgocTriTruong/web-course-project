@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.*;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.CartDetailDao;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.cart.Cart;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.CartDetail;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.CartItem;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.CartService;
 
@@ -43,7 +44,7 @@ public class ConfirmOrderController extends HttpServlet {
             return;
         }
 
-        List<CartDetail> confirmedItems = cart.getConfirmedCartItem();
+        List<CartItem> confirmedItems = cart.getConfirmedCartItem();
 
         request.setAttribute("confirmedItems", confirmedItems);
         request.setAttribute("totalPrice", cart.getTotalPrice());

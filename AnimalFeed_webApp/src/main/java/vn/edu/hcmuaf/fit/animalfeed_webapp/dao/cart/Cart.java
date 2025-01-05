@@ -4,6 +4,7 @@ import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.CartDetailDao;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.ProductDao;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.UserDao;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.CartDetail;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.CartItem;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
 
@@ -14,14 +15,17 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class Cart {
-    static Map<Integer, CartDetail> cartData = new HashMap<>();
+    private Map<Integer, CartItem> cartData = new HashMap<>();
 
     public boolean addProduct(Product product, int userId) {
         if (cartData.containsKey(product.getId())) {
             updateQuantity(product.getId(), cartData.get(product.getId()).getQuantity()+1);
             return true;
         }
-        cartData.put(product.getId(), convert(product, userId));
+        CartDetail cartDetail = convert(product, userId);
+        CartItem cartItem = new CartItem(cartDetail, product);
+
+        cartData.put(product.getId(), cartItem);
         return true;
     }
 
@@ -37,7 +41,7 @@ public class Cart {
         return cartData.remove(productId) != null;
     }
 
-    public List<CartDetail> getCartDetails() {
+    public List<CartItem> getCartDetails() {
         return new ArrayList<>(cartData.values());
     }
 
@@ -53,11 +57,11 @@ public class Cart {
         return sum.get();
     }
 
-    public List<CartDetail> getConfirmedCartItem() {
-        List<CartDetail> confirmedCartItems = new ArrayList<>();
-        for (CartDetail cartDetail : cartData.values()) {
-            if (cartDetail.getStatus() == 1) {
-                confirmedCartItems.add(cartDetail);
+    public List<CartItem> getConfirmedCartItem() {
+        List<CartItem> confirmedCartItems = new ArrayList<>();
+        for (CartItem cartItem : cartData.values()) {
+            if (cartItem.getStatus() == 1) {
+                confirmedCartItems.add(cartItem);
             }
         }
         return confirmedCartItems;
@@ -69,8 +73,16 @@ public class Cart {
         cartDetail.setProductId(product.getId());
         cartDetail.setQuantity(1);
         cartDetail.setTotal(product.getPrice() * cartDetail.getQuantity());
-        cartDetail.setStatus(0);
+        cartDetail.setStatus(1);
         return cartDetail;
     }
 
+    public void syncDatabase(int userId) {
+        CartDetailDao dao = new CartDetailDao();
+        List<CartItem> dbItems = dao.getCartDetailByUser(userId);
+        cartData.clear();
+        for (CartItem item : dbItems) {
+            cartData.put(item.getProductId(), item);
+        }
+    }
 }
