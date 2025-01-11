@@ -85,4 +85,12 @@ public class Cart {
             cartData.put(item.getProductId(), item);
         }
     }
+
+    public boolean updateStatus(int productId, int status) {
+        if (!cartData.containsKey(productId)) {
+            return false;
+        }
+        cartData.get(productId).setStatus(status);
+        return true;
+    }
 }
