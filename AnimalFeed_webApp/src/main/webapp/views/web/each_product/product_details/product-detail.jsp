@@ -196,12 +196,22 @@
                         </c:if>
 
                         <div class="product-card mx-2">
-                            <div class="product-img">
-                                <img src="${related.img}"
-                                     alt="${related.name}" height="250px" width="200px">
-                            </div>
-                            <div class="h5 text-h">${related.name}</div>
-                            <div class="p pb-4 text-p">${related.description}</div>
+                            <a href="product-detail?pid=${related.id}" class="text-decoration-none text-dark">
+                                <div class="product-img">
+                                    <img src="${related.img}"
+                                         alt="${related.name}" height="250px" width="200px">
+                                </div>
+                                <div class="h5 text-h">${related.name}</div>
+                                <div class="p pb-2 text-p">${related.description}</div>
+                                <div class="h4 text-start ms-3" style="color: red;">
+                                    <f:formatNumber value="${related.price}"/> <u>đ</u>
+                                </div>
+                                <div class="p text-start ms-3">Đã bán 1,1k</div>
+                                <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
+                                    <i class="fa-solid fa-truck mt-1"></i>
+                                    <p class="ms-2">2 -4 ngày</p>
+                                </div>
+                            </a>
                         </div>
 
                         <c:if test="${count % 3 == 2 || count == relatedProducts.size() - 1}">
