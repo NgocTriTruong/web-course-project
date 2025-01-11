@@ -5,20 +5,20 @@ import java.io.Serializable;
 public class ProductDetail implements Serializable {
     private int id;
     private int productId;
-    private String description;
+    private String detail_description;
     private String nutrition;
     private String ingredient;
-    private String instruction;
+    private String usage;
 
     public ProductDetail() {}
 
-    public ProductDetail(int id, int productId, String description, String nutrition, String ingredient, String instruction) {
+    public ProductDetail(int id, int productId, String detail_description, String nutrition, String ingredient, String usage) {
         this.id = id;
         this.productId = productId;
-        this.description = description;
+        this.detail_description = detail_description;
         this.nutrition = nutrition;
         this.ingredient = ingredient;
-        this.instruction = instruction;
+        this.usage = usage;
     }
 
     public int getId() {
@@ -37,12 +37,12 @@ public class ProductDetail implements Serializable {
         this.productId = productId;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDetail_description() {
+        return detail_description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDetail_description(String detail_description) {
+        this.detail_description = detail_description;
     }
 
     public String getNutrition() {
@@ -61,12 +61,12 @@ public class ProductDetail implements Serializable {
         this.ingredient = ingredient;
     }
 
-    public String getInstruction() {
-        return instruction;
+    public String getUsage() {
+        return usage;
     }
 
-    public void setInstruction(String instruction) {
-        this.instruction = instruction;
+    public void setUsage(String usage) {
+        this.usage = usage;
     }
 
     @Override
@@ -74,10 +74,10 @@ public class ProductDetail implements Serializable {
         return "ProductDetail{" +
                 "id=" + id +
                 ", productId=" + productId +
-                ", description='" + description + '\'' +
+                ", detail_description='" + detail_description + '\'' +
                 ", nutrition='" + nutrition + '\'' +
                 ", ingredient='" + ingredient + '\'' +
-                ", instruction='" + instruction + '\'' +
+                ", usage='" + usage + '\'' +
                 '}';
     }
 }
