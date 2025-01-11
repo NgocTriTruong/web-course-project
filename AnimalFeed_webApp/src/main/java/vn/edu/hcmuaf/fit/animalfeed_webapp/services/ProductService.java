@@ -1,6 +1,7 @@
 package vn.edu.hcmuaf.fit.animalfeed_webapp.services;
 
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.ProductDao;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.dto.ProductWithDiscountDTO;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
 
 import java.util.*;
@@ -46,6 +47,16 @@ public class ProductService {
     //sua product
     public void updateProduct(Product product) {
         productDao.updateProduct(product);
+    }
+
+    //cập nhật giảm giá
+    public void updateDiscount() {
+        productDao.updateDiscount();
+    }
+
+    //lấy sản phẩm giảm giá
+    public List<ProductWithDiscountDTO> getDiscountProduct() {
+        return productDao.getDiscountProduct();
     }
 
 }

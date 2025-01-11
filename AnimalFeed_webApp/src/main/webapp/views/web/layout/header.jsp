@@ -74,55 +74,15 @@
             <li class="p-4 san-pham">
               <a href="${pageContext.request.contextPath}/views/web/product.jsp" class="text_h1">SẢN PHẨM</a>
               <ul class="header_line_2">
+              <c:forEach var="ca" items="${categoriesData}">
                 <li class="p-2 li_hover">
-                  <a href="${pageContext.request.contextPath}/views/web/each_product/product_pig.jsp">
-                    <span class="icon"><img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-pig.png" alt="" width="28px" height="25px"></span>
-                    <span class="ms-2">Thức ăn cho Heo</span>
+                  <a href="list-product?categoryId=${ca.id}">
+                    <span class="icon"><img src="${ca.img}" alt="${ca.name}" width="28px" height="25px"></span>
+                    <span class="ms-2">${ca.name}</span>
                     <i class="ti-angle-right ti_number mt-2"></i>
                   </a>
                 </li>
-                <li class="p-2 li_hover">
-                  <a href="${pageContext.request.contextPath}/views/web/each_product/product_chicken.jsp">
-                    <span class="icon"><img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-chicken.png" alt="" width="28px" height="20px"></span>
-                    <span class="ms-2">Thức ăn cho Gà</span>
-                    <i class="ti-angle-right ti_number mt-2"></i>
-                  </a>
-                </li>
-                <li class="p-2 li_hover">
-                  <a href="${pageContext.request.contextPath}/views/web/each_product/product_duck.jsp">
-                    <span class="icon"><img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-duck.png" alt="" width="28px" height="20px"></span>
-                    <span class="ms-2">Thức ăn cho Vịt</span>
-                    <i class="ti-angle-right ti_number mt-2"></i>
-                  </a>
-                </li>
-                <li class="p-2 li_hover">
-                  <a href="${pageContext.request.contextPath}/views/web/each_product/product_cow.jsp">
-                    <span class="icon"><img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-cow.png" alt="" width="28px" height="20px"></span>
-                    <span class="ms-2">Thức ăn cho Bò</span>
-                    <i class="ti-angle-right ti_number mt-2"></i>
-                  </a>
-                </li>
-                <li class="p-2 li_hover">
-                  <a href="${pageContext.request.contextPath}/views/web/each_product/product_shirmp.jsp">
-                    <span class="icon"><img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-shrimp.png" alt="" width="28px" height="20px"></span>
-                    <span class="ms-2">Thức ăn cho Tôm</span>
-                    <i class="ti-angle-right ti_number mt-2"></i>
-                  </a>
-                </li>
-                <li class="p-2 li_hover">
-                  <a href="${pageContext.request.contextPath}/views/web/each_product/product_fish.jsp">
-                    <span class="icon"><img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-fish.png" alt="" width="28px" height="20px"></span>
-                    <span class="ms-2">Thức ăn cho Cá</span>
-                    <i class="ti-angle-right ti_number mt-2"></i>
-                  </a>
-                </li>
-                <li class="p-2 li_hover">
-                  <a href="${pageContext.request.contextPath}/views/web/each_product/product_goat.jsp">
-                    <span class="icon"><img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-goat.png" alt="" width="28px" height="20px"></span>
-                    <span class="ms-2">Thức ăn cho Dê</span>
-                    <i class="ti-angle-right ti_number mt-2"></i>
-                  </a>
-                </li>
+              </c:forEach>
               </ul>
             </li>
   

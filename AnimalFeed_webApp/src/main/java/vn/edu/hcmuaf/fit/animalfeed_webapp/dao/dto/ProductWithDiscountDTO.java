@@ -2,26 +2,26 @@ package vn.edu.hcmuaf.fit.animalfeed_webapp.dao.dto;
 
 public class ProductWithDiscountDTO {
     private int id;
+    private String img;
     private String name;
     private String description;
     private double price;
+    private int percentage; // Tỷ lệ giảm giá
     private double discountedPrice; // Giá sau giảm
-    private double percentage; // Tỷ lệ giảm giá
     private int daysLeft; // Số ngày còn lại của sản phẩm
-    private String img;
 
-    public ProductWithDiscountDTO(int id, String name, String description, double price, double discountedPrice, double percentage, int daysLeft, String img) {
+    public ProductWithDiscountDTO() {
+    }
+
+    public ProductWithDiscountDTO(int id, String img, String name, String description, double price, int percentage, double discountedPrice, int daysLeft) {
         this.id = id;
+        this.img = img;
         this.name = name;
         this.description = description;
         this.price = price;
-        this.discountedPrice = discountedPrice;
         this.percentage = percentage;
+        this.discountedPrice = discountedPrice;
         this.daysLeft = daysLeft;
-        this.img = img;
-    }
-
-    public ProductWithDiscountDTO() {
     }
 
     public int getId() {
@@ -30,6 +30,14 @@ public class ProductWithDiscountDTO {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public String getName() {
@@ -56,20 +64,20 @@ public class ProductWithDiscountDTO {
         this.price = price;
     }
 
+    public int getPercentage() {
+        return percentage;
+    }
+
+    public void setPercentage(int percentage) {
+        this.percentage = percentage;
+    }
+
     public double getDiscountedPrice() {
         return discountedPrice;
     }
 
     public void setDiscountedPrice(double discountedPrice) {
         this.discountedPrice = discountedPrice;
-    }
-
-    public double getPercentage() {
-        return percentage;
-    }
-
-    public void setPercentage(double percentage) {
-        this.percentage = percentage;
     }
 
     public int getDaysLeft() {
@@ -80,25 +88,17 @@ public class ProductWithDiscountDTO {
         this.daysLeft = daysLeft;
     }
 
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
-    }
-
     @Override
     public String toString() {
         return "ProductWithDiscountDTO{" +
                 "id=" + id +
+                ", img='" + img + '\'' +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price +
-                ", discountedPrice=" + discountedPrice +
                 ", percentage=" + percentage +
+                ", discountedPrice=" + discountedPrice +
                 ", daysLeft=" + daysLeft +
-                ", img='" + img + '\'' +
                 '}';
     }
 }

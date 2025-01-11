@@ -4,6 +4,7 @@ package vn.edu.hcmuaf.fit.animalfeed_webapp.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.dto.ProductWithDiscountDTO;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Category;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.CategoryService;
@@ -19,6 +20,9 @@ public class ListProductController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException, ServletException {
         ProductService productService = new ProductService();
         CategoryService categoryService = new CategoryService();
+
+        // **Cập nhật discount_id trước khi lấy danh sách sản phẩm**
+        productService.updateDiscount();
 
         // Lấy categoryId và trang hiện tại từ request
         String catId = request.getParameter("categoryId");
@@ -39,12 +43,15 @@ public class ListProductController extends HttpServlet {
         //Lay danh muc
         List<Category> categories = categoryService.getAll();
 
+        //Hiển thị sản phẩm giảm giá
+        List<ProductWithDiscountDTO> discountProducts = productService.getDiscountProduct();
 
         request.setAttribute("categoriesData", categories);
         request.setAttribute("productsData", products);
         request.setAttribute("selectedCategoryId", catId);
         request.setAttribute("currentPage", page);
         request.setAttribute("endPage", endPage);
+        request.setAttribute("discountProducts", discountProducts);
 
         request.getRequestDispatcher("views/web/each_product/product_pig.jsp").forward(request, response);
     }

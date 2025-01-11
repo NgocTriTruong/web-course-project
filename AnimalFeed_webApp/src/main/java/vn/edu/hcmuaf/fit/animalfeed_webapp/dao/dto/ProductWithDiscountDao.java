@@ -19,12 +19,7 @@ public class ProductWithDiscountDao {
                                  p.name,
                                  p.description,
                                  p.price,
-                                 CASE
-                                    WHEN DATEDIFF(DATE_ADD(p.create_date, INTERVAL 3 YEAR), CURDATE()) <= 30 THEN 50
-                                    WHEN DATEDIFF(DATE_ADD(p.create_date, INTERVAL 3 YEAR), CURDATE()) <= 90 THEN 25
-                                    WHEN DATEDIFF(DATE_ADD(p.create_date, INTERVAL 3 YEAR), CURDATE()) <= 150 THEN 15
-                                    ELSE 0
-                                 END AS percentage,
+                                 d.percentage,
                                  (p.price * (100 -
                                      CASE
                                         WHEN DATEDIFF(DATE_ADD(p.create_date, INTERVAL 3 YEAR), CURDATE()) <= 30 THEN 50
@@ -54,9 +49,12 @@ public class ProductWithDiscountDao {
     public static void main(String[] args) {
         ProductWithDiscountDao productWithDiscountDao = new ProductWithDiscountDao();
         List<ProductWithDiscountDTO> productWithDiscount = productWithDiscountDao.discountedProducts();
-        for (ProductWithDiscountDTO product : productWithDiscount) {
-            System.out.println(product);
+        if (productWithDiscount.isEmpty()) {
+            System.out.println("Không có sản phẩm giảm giá.");
+        } else {
+            for (ProductWithDiscountDTO product : productWithDiscount) {
+                System.out.println(product);
+            }
         }
-        System.out.println("Total discounted products: " + productWithDiscount.size());
     }
 }

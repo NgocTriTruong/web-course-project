@@ -3,6 +3,7 @@ package vn.edu.hcmuaf.fit.animalfeed_webapp.dao;
 import org.jdbi.v3.core.Jdbi;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.db.DBConnect;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.db.JdbiConnect;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.dto.ProductWithDiscountDTO;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
 
 import java.sql.ResultSet;
@@ -77,9 +78,49 @@ public class ProductDao {
                         .bindBean(product).execute());
     }
 
+    //cập nhật giam gia
+    public void updateDiscount() {
+        Jdbi jdbi = JdbiConnect.getJdbi();
+        String updateQuery = """ 
+                UPDATE products p
+                JOIN discounts d
+                    ON (DATEDIFF(DATE_ADD(p.create_date, INTERVAL 3 YEAR), NOW()) <= 30 AND d.percentage = 50)
+                    OR (DATEDIFF(DATE_ADD(p.create_date, INTERVAL 3 YEAR), NOW()) <= 90 AND d.percentage = 25)
+                    OR (DATEDIFF(DATE_ADD(p.create_date, INTERVAL 3 YEAR), NOW()) <= 150 AND d.percentage = 15)
+                    OR (DATEDIFF(DATE_ADD(p.create_date, INTERVAL 3 YEAR), NOW()) > 150 AND d.percentage = 0)
+                SET p.discount_id = d.id;
+                """;
+        jdbi.useHandle(handle -> {
+            int rowsUpdated = handle.createUpdate(updateQuery).execute();
+            System.out.println(rowsUpdated + " products updated with discount_id.");
+        });
+    }
+
+    //lấy sản phẩm giảm giá
+    public List<ProductWithDiscountDTO> getDiscountProduct() {
+        Jdbi jdbi = JdbiConnect.getJdbi();
+        String query = """
+                SELECT p.id, p.img, p.name, p.description, p.price, d.percentage, ROUND(p.price * (1 - d.percentage / 100), 2) AS discountedPrice
+                FROM products p
+                JOIN discounts d ON p.discount_id = d.id
+                WHERE p.discount_id != 1
+                """;
+        return jdbi.withHandle(handle ->
+                handle.createQuery(query)
+                        .mapToBean(ProductWithDiscountDTO.class).list());
+    }
+
 
     public static void main(String[] args) {
-
+        ProductDao productDao = new ProductDao();
+        List<ProductWithDiscountDTO> products = productDao.getDiscountProduct();
+        if (products.isEmpty()) {
+            System.out.println("Không có sản phẩm giảm giá.");
+        } else {
+            for (ProductWithDiscountDTO product : products) {
+                System.out.println(product);
+            }
+        }
     }
 
 }
