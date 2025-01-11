@@ -12,58 +12,58 @@
         </div>
         <ul class="d-flex justify-content-center">
             <li class="p-4">
-              <a href="${pageContext.request.contextPath}/views/web/introduction.jsp" class="text_h1">GIỚI THIỆU</a>
+              <a href="${pageContext.request.contextPath}/introduction" class="text_h1">GIỚI THIỆU</a>
               <ul class="header_line_2">
                 <li class="p-3 li_hover">
-                  <a href="${pageContext.request.contextPath}/views/web/introduction.jsp#gioi_thieu_chung">
+                  <a href="${pageContext.request.contextPath}/introduction#gioi_thieu_chung">
                     <span class="text_line_2">Giới thiệu chung</span>
                     <i class="ti-angle-right ti_number"></i>
                   </a>
                 </li>
                 <li class="p-3 li_hover">
-                  <a href="${pageContext.request.contextPath}/views/web/introduction.jsp#lich_su">
+                  <a href="${pageContext.request.contextPath}/introduction#lich_su">
                     <span class="text_line_2">Lịch sử hình thành</span>
                     <i class="ti-angle-right ti_number"></i>
                   </a>
                 </li>
                 <li class="p-3 li_hover">
-                  <a href="${pageContext.request.contextPath}/views/web/introduction.jsp#chien_luoc">
+                  <a href="${pageContext.request.contextPath}/introduction#chien_luoc">
                     <span class="text_line_2">Tầm nhìn chiến lược</span>
                     <i class="ti-angle-right ti_number"></i>
                   </a>
                 </li>
                 <li class="p-3 li_hover">
-                  <a href="${pageContext.request.contextPath}/views/web/introduction.jsp#quan_diem">
+                  <a href="${pageContext.request.contextPath}/introduction#quan_diem">
                     <span class="text_line_2">Quan điểm kinh doanh</span>
                     <i class="ti-angle-right ti_number"></i>
                   </a>
                 </li>
                 <li class="p-3 li_hover">
-                  <a href="${pageContext.request.contextPath}/views/web/introduction.jsp#cam_ket">
+                  <a href="${pageContext.request.contextPath}/introduction#cam_ket">
                     <span class="text_line_2">Cam kết chất lượng</span>
                     <i class="ti-angle-right ti_number"></i>
                   </a>
                 </li>
                 <li class="p-3 li_hover">
-                  <a href="${pageContext.request.contextPath}/views/web/introduction.jsp#san_xuat">
+                  <a href="${pageContext.request.contextPath}/introduction#san_xuat">
                     <span class="text_line_2">Nhà máy sản xuất</span>
                     <i class="ti-angle-right ti_number"></i>
                   </a>
                 </li>
                 <li class="p-3 li_hover">
-                  <a href="${pageContext.request.contextPath}/views/web/introduction.jsp#nhan_luc">
+                  <a href="${pageContext.request.contextPath}/introduction#nhan_luc">
                     <span class="text_line_2">Nguồn nhân lực</span>
                     <i class="ti-angle-right ti_number"></i>
                   </a>
                 </li>
                 <li class="p-3 li_hover">
-                  <a href="${pageContext.request.contextPath}/views/web/introduction.jsp#van_hoa">
+                  <a href="${pageContext.request.contextPath}/introduction#van_hoa">
                     <span class="text_line_2">Văn hóa công ty</span>
                     <i class="ti-angle-right ti_number"></i>
                   </a>
                 </li>
                 <li class="p-3 li_hover">
-                  <a href="${pageContext.request.contextPath}/views/web/introduction.jsp#thanh_tich">
+                  <a href="${pageContext.request.contextPath}/introduction#thanh_tich">
                     <span class="text_line_2">Thành tích</span>
                     <i class="ti-angle-right ti_number"></i>
                   </a>
@@ -72,7 +72,7 @@
             </li>
   
             <li class="p-4 san-pham">
-              <a href="${pageContext.request.contextPath}/views/web/product.jsp" class="text_h1">SẢN PHẨM</a>
+              <a href="${pageContext.request.contextPath}/product" class="text_h1">SẢN PHẨM</a>
               <ul class="header_line_2">
               <c:forEach var="ca" items="${categoriesData}">
                 <li class="p-2 li_hover">
@@ -108,7 +108,7 @@
                     <i class="mt-1 ti-angle-right ti_number" style="margin-left: 50px;"></i>
                   </li>
                 </a>
-                <a href="${pageContext.request.contextPath}/views/web/partner.jsp">
+                <a href="${pageContext.request.contextPath}/partner">
                   <li class="d-flex p-2 li_hover">
                     <span class="text_line_2">Đối tác</span>
                     <i class="mt-1 ti-angle-right ti_number" style="margin-left: 60px;"></i>

@@ -7,7 +7,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Web Project</title>
+  <title>Product</title>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/product.css" />
   <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.min.css" />
   <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/font-awesome/all.css" />
@@ -17,16 +17,12 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/themify-icons/themify-icons.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
 
-<%--  <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/add_layout.js" defer></script>--%>
-
   <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/login.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/signup.css">
 
   <!-- scrollToTopBtn -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/scrollToTopBtn.css">
   <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/scrollToTopBtn.js" defer></script>
-
-  <script src="${pageContext.request.contextPath}/views/template/assets/scripts/confirm_login.js"></script>
 
 </head>
 <body>
