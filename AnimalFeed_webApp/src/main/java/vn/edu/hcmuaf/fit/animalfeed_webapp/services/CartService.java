@@ -19,4 +19,8 @@ public class CartService {
     public void updateQuantity(int productId, int id, int quantity) {
         cartDetailDao.updateQuantity(productId, id, quantity);
     }
+
+    public void updateStatus(int productId, int userId, int status) {
+        cartDetailDao.updateStatus(productId, userId, status);
+    }
 }
