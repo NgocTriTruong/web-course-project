@@ -20,7 +20,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/themify-icons/themify-icons.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
 
-    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/add_layout.js" defer></script>
     <script src="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.bundle.min.js"></script>
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/login.css">
@@ -31,7 +30,8 @@
     <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/scrollToTopBtn.js" defer></script>
 </head>
 <body>
-<div><%@ include file="../../layout/header.jsp" %></div>
+<%@ include file="../../layout/header.jsp" %>
+
 <main class="chi_tiet_product" style="margin-top: 105px;">
     <div class="container">
         <div class="content text-center pb-5">
@@ -106,7 +106,8 @@
         <div class="container">
             <div class="content d-flex between mt-4">
                 <div class="h3" style="padding-top: 6px;">Mô tả sản phẩm</div>
-                <button id="toggle-button1" onclick="toggleDescription('description-content1', 'toggle-button1')">+
+                <button id="toggle-button1" onclick="toggleDescription('description-content1', 'toggle-button1')">
+                    <i class="fa-solid fa-chevron-down"></i>
                 </button>
             </div>
         </div>
@@ -115,26 +116,7 @@
     <div class="container">
         <div id="description-content1" style="display: none;" class="content mt-3">
             <div class="p text-start mb-2">
-                + HAPPY 340 dùng cho gà siêu thịt từ 01 đến 21 ngày tuổi.
-            </div>
-            <div class="p text-start mb-2">
-                + Sản phẩm giàu dinh dưỡng, giúp tăng cường, hỗ trợ hệ miễn dịch trên gia cầm non; cân bằng acid amin,
-                bổ sung men tiêu hóa; bổ sung ccas sản phẩm có nguồn gốc tự nhiên, kích thích tính thèm ăn.
-            </div>
-            <div class="p text-start mb-2">
-                + Sử dụng HAPPY 340 giúp gà con phát triển, tăng trọng tốt, giảm tỷ lệ hao hụt đầu con, giảm còi cọc;
-                tăng tỷ lệ đồng đều trên đàn gà. Phân gà khô, giảm mùi hôi chuồng.
-            </div>
-            <div class="p text-start mb-2">
-                + HAPPY 340 là thức ăn hỗn hợp dạng hạt, với dinh dưỡng được phân bổ đồng đều trong hạt thức ăn. Gà ăn
-                không bị dính mỏ. Ít rơi vãi, tiết kiệm chi phí thức ăn. Không làm dơ nước uống.
-            </div>
-            <div class="p text-start mb-2">
-                + Sản phẩm có chứa kháng sinh phòng bệnh viêm ruột hoại tử cho gà.
-            </div>
-            <div class="p text-start mb-5">
-                + Màu sắc thay đổi không ảnh hưởng đến chất lượng sản phẩm. Không sử dụng các chất cấm theo quy định
-                hiện hành.
+                ${productDetail.detail_description}
             </div>
         </div>
     </div>
@@ -143,7 +125,8 @@
         <div class="container">
             <div class="content d-flex between mt-4">
                 <div class="h3">Thành phần dinh dưỡng</div>
-                <button id="toggle-button2" onclick="toggleDescription('description-content2', 'toggle-button2')">+
+                <button id="toggle-button2" onclick="toggleDescription('description-content2', 'toggle-button2')">
+                    <i class="fa-solid fa-chevron-down"></i>
                 </button>
             </div>
         </div>
@@ -152,34 +135,7 @@
     <div class="container">
         <div id="description-content2" style="display: none;" class="content mt-3">
             <div class="p text-start mb-2">
-                + Protein thô tối thiểu: 21%
-            </div>
-            <div class="p text-start mb-2">
-                + Độ ẩm tối đa: 14%
-            </div>
-            <div class="p text-start mb-2">
-                + Năng lượng trao đổi tối thiểu: 2.950 kcal/kg
-            </div>
-            <div class="p text-start mb-2">
-                + Xơ thô tối đa: 6%
-            </div>
-            <div class="p text-start mb-2">
-                + Canxi trung bình từ 0,6 – 1,2%
-            </div>
-            <div class="p text-start mb-2">
-                + P tổng số từ 0,4 – 1,2%
-            </div>
-            <div class="p text-start mb-2">
-                + Lysine tổng số nhỏ nhất: 0,95%
-            </div>
-            <div class="p text-start mb-2">
-                + Methionine + Cystine tổng số nhỏ nhất: 0,73%
-            </div>
-            <div class="p text-start mb-2">
-                + Threonine tổng số tối thiểu: 0,61%
-            </div>
-            <div class="p text-start mb-5">
-                + Khoáng tổng số tối đa: 15%.
+                ${productDetail.nutrition}
             </div>
         </div>
     </div>
@@ -188,7 +144,8 @@
         <div class="container">
             <div class="content d-flex between mt-4">
                 <div class="h3">Thành phần nguyên liệu</div>
-                <button id="toggle-button3" onclick="toggleDescription('description-content3', 'toggle-button3')">+
+                <button id="toggle-button3" onclick="toggleDescription('description-content3', 'toggle-button3')">
+                    <i class="fa-solid fa-chevron-down"></i>
                 </button>
             </div>
         </div>
@@ -197,40 +154,7 @@
     <div class="container">
         <div id="description-content3" style="display: none;" class="content mt-3">
             <div class="p text-start mb-2">
-                + Bắp
-            </div>
-            <div class="p text-start mb-2">
-                + Tấm
-            </div>
-            <div class="p text-start mb-2">
-                + Cám gạo
-            </div>
-            <div class="p text-start mb-2">
-                + Cám mì
-            </div>
-            <div class="p text-start mb-2">
-                + Bột cá
-            </div>
-            <div class="p text-start mb-2">
-                + Khô dầu đậu nành
-            </div>
-            <div class="p text-start mb-2">
-                + DCP
-            </div>
-            <div class="p text-start mb-2">
-                + Chất acid hóa
-            </div>
-            <div class="p text-start mb-2">
-                + Các acid amin
-            </div>
-            <div class="p text-start mb-2">
-                + Men tiêu hóa
-            </div>
-            <div class="p text-start mb-2">
-                + Các chất bổ sung khoáng
-            </div>
-            <div class="p text-start mb-5">
-                + Vitamin.....
+                ${productDetail.ingredient}
             </div>
         </div>
     </div>
@@ -239,7 +163,8 @@
         <div class="container">
             <div class="content d-flex between mt-4">
                 <div class="h3">Hướng dẫn sử dụng</div>
-                <button id="toggle-button4" onclick="toggleDescription('description-content4', 'toggle-button4')">+
+                <button id="toggle-button4" onclick="toggleDescription('description-content4', 'toggle-button4')">
+                    <i class="fa-solid fa-chevron-down"></i>
                 </button>
             </div>
         </div>
@@ -248,22 +173,7 @@
     <div class="container">
         <div id="description-content4" style="display: none;" class="content mt-3">
             <div class="p text-start mb-2">
-                + Sản phẩm dùng cho gà siêu thịt từ 1 ngày tuổi đến 21 ngày tuổi.
-            </div>
-            <div class="p text-start mb-2">
-                + Số lần cho ăn: 3 - 4 lần/ngày.
-            </div>
-            <div class="p text-start mb-2">
-                + Cung cấp đầy đủ nước sạch, mát cho gà uống tự do
-            </div>
-            <div class="p text-start mb-2">
-                + Gà đạt trọng lượng bình quân: 300 – 360 gram/con
-            </div>
-            <div class="p text-start mb-2">
-                + Không cần pha trộn thêm các loại thực liệu khác.
-            </div>
-            <div class="p text-start mb-5">
-                + Tùy từng trại chăn nuôi và chủng loại heo có thể thay đổi cho phù hợp.
+                ${productDetail.usage}
             </div>
         </div>
     </div>
@@ -275,63 +185,31 @@
             </div>
             <div class="slide-show-1 mt-4 carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="list-products d-flex justify-content-center">
-                            <div class="product-card">
-                                <div class="product-img">
-                                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_01.png" alt="TOP 01" height="250px"
-                                         width="200px">
-                                </div>
-                                <div class="h5 text-h">TOP 01</div>
-                                <div class="p pb-4 text-p">Dùng cho heo con từ 05 ngày tuổi đến 35 ngày tuổi</div>
+                    <c:set var="count" value="0" />
+                    <c:forEach var="related" items="${relatedProducts}">
+                        <c:if test="${count % 3 == 0}">
+                            <div class="carousel-item ${count == 0 ? 'active' : ''}">
+                            <div class="list-products d-flex justify-content-center">
+                        </c:if>
+
+                        <div class="product-card mx-2">
+                            <div class="product-img">
+                                <img src="${related.img}"
+                                     alt="${related.name}" height="250px" width="200px">
                             </div>
-                            <div class="product-card">
-                                <div class="product-img">
-                                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_01.png" alt="TOP 01" height="250px"
-                                         width="200px">
-                                </div>
-                                <div class="h5 text-h">TOP 01</div>
-                                <div class="p pb-4 text-p">Dùng cho heo con từ 05 ngày tuổi đến 35 ngày tuổi</div>
-                            </div>
-                            <div class="product-card">
-                                <div class="product-img">
-                                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_01.png" alt="TOP 01" height="250px"
-                                         width="200px">
-                                </div>
-                                <div class="h5 text-h">TOP 01</div>
-                                <div class="p pb-4 text-p">Dùng cho heo con từ 05 ngày tuổi đến 35 ngày tuổi</div>
-                            </div>
+                            <div class="h5 text-h">${related.name}</div>
+                            <div class="p pb-4 text-p">${related.description}</div>
                         </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="list-products d-flex justify-content-center">
-                            <div class="product-card">
-                                <div class="product-img">
-                                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_02.png" alt="TOP 02" height="250px"
-                                         width="200px">
-                                </div>
-                                <div class="h5 text-h">TOP 02</div>
-                                <div class="p pb-4 text-p">Dùng cho heo con từ 05 ngày tuổi đến 35 ngày tuổi</div>
+
+                        <c:if test="${count % 3 == 2 || count == relatedProducts.size() - 1}">
                             </div>
-                            <div class="product-card">
-                                <div class="product-img">
-                                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_02.png" alt="TOP 02" height="250px"
-                                         width="200px">
-                                </div>
-                                <div class="h5 text-h">TOP 02</div>
-                                <div class="p pb-4 text-p">Dùng cho heo con từ 05 ngày tuổi đến 35 ngày tuổi</div>
                             </div>
-                            <div class="product-card">
-                                <div class="product-img">
-                                    <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_02.png" alt="TOP 02" height="250px"
-                                         width="200px">
-                                </div>
-                                <div class="h5 text-h">TOP 02</div>
-                                <div class="p pb-4 text-p">Dùng cho heo con từ 05 ngày tuổi đến 35 ngày tuổi</div>
-                            </div>
-                        </div>
-                    </div>
+                        </c:if>
+
+                        <c:set var="count" value="${count + 1}" />
+                    </c:forEach>
                 </div>
+
                 <button class="carousel-control-prev" type="button" data-bs-target=".carousel" data-bs-slide="prev">
                     &#10094;
                 </button>
@@ -341,115 +219,12 @@
             </div>
         </div>
     </div>
-</main>
-<div><%@ include file="../../layout/footer.jsp" %></div>
 
-    <!-- Login -->
-    <div id="login" class ="login">
-        <div id ="login_container">
-            <div class="login_close">
-                <img src="${pageContext.request.contextPath}/views/template/assets/images/logo/close.png" alt="">
-            </div>
-      
-            <div class="login_header">
-                <div class="login_logo_shop">
-                    <img src="${pageContext.request.contextPath}/views/template/assets/images/header/logo_vina.png" alt="Logo Shop">
-                </div>
-                <div class="login_header_text">
-                    <h3 style="font-size: 24px;">Đăng nhập tài khoản</h3>
-                </div>
-            </div>
-            <div class="login_body">
-                <div class="form-floating mb-3 mt-3">
-                    <input type="text" class="form-control" id="contact" placeholder="Nhập số điện thoại/email" name="contact" required autocomplete="off"> 
-                    <label for="contact">Nhập số điện thoại<span class="req">*</span></label>
-                </div>
-                <div class="form-floating mb-3 mt-3">
-                    <input type="password" class="form-control" id="pwd" placeholder="Nhập mật khẩu" name="password" required autocomplete="off"> 
-                    <label for="password">Nhập mật khẩu<span class="req">*</span></label>
-                </div>
-                <p class="login_forgot"><a href="#">Quên mật khẩu?</a></p>
-      
-                <button type="submit" class="login_button_submit">Đăng nhập</button>
-                <div class="login_split">
-                    <p>Hoặc</p>
-                </div>
-                <div class="login_social">
-                    <a href="" class="social_btn login_social_gg">
-                        <img src="${pageContext.request.contextPath}/views/template/assets/images/social/google.png" alt="">
-                        <p>Google</p>
-                    </a>
-                    <a href="" class="social_btn login_social_zl">
-                        <img src="${pageContext.request.contextPath}/views/template/assets/images/social/zalo.png" alt="">
-                        <p>Zalo</p>
-                    </a>
-                </div>
-            </div>
-            <div class="login_footer">
-                <p>Bạn chưa có tài khoản? <a href="#" id="go-to-signup">Đăng ký ngay</a></p>
-            </div>
-        </div>
-      </div>
-      
-      <!-- sign up -->
-      <div id="signup" class ="signup">
-        <div id="signup_container">
-            <div class="signup_close">
-                <img src="${pageContext.request.contextPath}/views/template/assets/images/logo/close.png" alt="">
-            </div>
-      
-            <div class="signup_header">
-                <div class="signup_logo_shop">
-                    <img src="${pageContext.request.contextPath}/views/template/assets/images/header/logo_vina.png" alt="Logo Shop">
-                </div>
-                <div class="signup_header_text">
-                    <h3 style="font-size: 24px;">Đăng ký tài khoản</h3>
-                </div>
-            </div>
-            <div class="signup_body">
-                <div class="form-floating mb-2 mt-2">
-                    <input type="text" class="form-control" id="name" placeholder="Nhập họ và tên" name="Name" required autocomplete="off"> 
-                    <label for="password">Nhập họ và tên<span class="req">*</span></label>
-                </div>
-      
-                <div class="form-floating mb-2 mt-2">
-                    <input type="text" class="form-control" id="contact" placeholder="Nhập số điện thoại/email" name="Contact" required autocomplete="off"> 
-                    <label for="contact">Nhập số điện thoại<span class="req">*</span></label>
-                </div>
-                <div class="form-floating mb-2 mt-2">
-                    <input type="password" class="form-control" id="pwd" placeholder="Nhập mật khẩu" name="password" required autocomplete="off"> 
-                    <label for="password">Nhập mật khẩu<span class="req">*</span></label>
-                </div>
-              
-                <div class="form-floating mb-2 mt-2">
-                    <input type="password" class="form-control" id="pwd" placeholder="Nhập lại mật khẩu" name="password again" required autocomplete="off"> 
-                    <label for="password again">Nhập lại mật khẩu<span class="req">*</span></label>
-                </div>
-      
-                <div class="signup_okay">
-                    <p>Bằng việc đăng ký này, bạn đã chấp nhận các chính sách của VINAFEED</p>
-                </div>
-                <button type="submit" class="signup_button_submit">Đăng ký</button>
-                <div class="signup_split">
-                    <p>Hoặc</p>
-                </div>
-                <div class="signup_social">
-                    <a href="" class="social_btn signup_social_gg">
-                        <img src="${pageContext.request.contextPath}/views/template/assets/images/social/google.png" alt="">
-                        <p>Google</p>
-                    </a>
-                    <a href="" class="social_btn signup_social_zl">
-                        <img src="${pageContext.request.contextPath}/views/template/assets/images/social/zalo.png" alt="">
-                        <p>Zalo</p>
-                    </a>
-                </div>
-            </div>
-            <div class="signup_footer">
-                <p>Bạn đã có tài khoản? <a href="#" id="go-to-login">Đăng nhập ngay</a></p>
-            </div>
-        </div>
-      </div>
-      
+</main>
+
+<%@ include file="../../layout/near_footer.jsp" %>
+<%@ include file="../../layout/footer.jsp" %>
+
       <!-- scrollToTopBtn -->
       <button id="scrollToTopBtn"><i class="fa-solid fa-chevron-up"></i></button>
 
@@ -460,13 +235,13 @@
 
         if (content.style.display === "none") {
             content.style.display = "block";
-            button.textContent = "-";
+            button.innerHTML = '<i class="fa-solid fa-chevron-up"></i>';
             button.style.fontSize = "70px";
             button.style.height = "33px";
-            button.style.lineHeight = "33px";
+            button.style.lineHeight = "17px";
         } else {
             content.style.display = "none";
-            button.textContent = "+";
+            button.innerHTML = '<i class="fa-solid fa-chevron-down"></i>';
             button.style.fontSize = "40px";
             button.style.height = "40px";
             button.style.lineHeight = "40px";
