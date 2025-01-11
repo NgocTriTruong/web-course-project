@@ -86,7 +86,14 @@
         </tr>
         </thead>
         <tbody id="jobList">
-        <!-- Danh sách việc làm sẽ được tự động thêm vào đây -->
+        <!-- Hiển thị danh sách công việc từ database -->
+        <c:forEach var="job" items="${jobList}">
+          <tr>
+            <td>${job.position}</td>
+            <td>${job.location}</td>
+            <td>${job.phone}</td>
+          </tr>
+        </c:forEach>
         </tbody>
       </table>
 
