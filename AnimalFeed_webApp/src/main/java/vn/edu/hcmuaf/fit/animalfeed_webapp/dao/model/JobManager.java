@@ -6,15 +6,15 @@ public class JobManager implements Serializable {
     private int id;
     private String location;
     private String phone;
-    private String position;
+    private String job_position;
 
     public JobManager() {}
 
-    public JobManager(int id, String location, String phone, String position) {
+    public JobManager(int id, String location, String phone, String job_position) {
         this.id = id;
         this.location = location;
         this.phone = phone;
-        this.position = position;
+        this.job_position = job_position;
     }
 
     public int getId() {
@@ -41,13 +41,14 @@ public class JobManager implements Serializable {
         this.phone = phone;
     }
 
-    public String getPosition() {
-        return position;
+    public String getJob_position() {
+        return job_position;
     }
 
-    public void setPosition(String position) {
-        this.position = position;
+    public void setJob_position(String job_position) {
+        this.job_position = job_position;
     }
+
 
     @Override
     public String toString() {
@@ -55,7 +56,7 @@ public class JobManager implements Serializable {
                 "id=" + id +
                 ", location='" + location + '\'' +
                 ", phone='" + phone + '\'' +
-                ", position='" + position + '\'' +
+                ", job_position='" + job_position + '\'' +
                 '}';
     }
 }
