@@ -10,6 +10,7 @@ public class CartItem {
     private String name;
     private String img;
     private double price;
+    private String desc;
 
 
     // Constructor
@@ -23,7 +24,7 @@ public class CartItem {
         this.name = product.getName();
         this.img = product.getImg();
         this.price = product.getPrice();
-
+        this.desc = product.getDescription();
     }
 
     public CartItem() {
@@ -102,6 +103,10 @@ public class CartItem {
         this.price = price;
     }
 
+    public String getDesc() { return desc; }
+
+    public void setDesc(String desc) { this.desc = desc; }
+
     @Override
     public String toString() {
         return "CartItem{" +
@@ -114,6 +119,7 @@ public class CartItem {
                 ", name='" + name + '\'' +
                 ", img='" + img + '\'' +
                 ", price=" + price +
+                ", desc='" + desc + '\'' +
                 '}';
     }
 }

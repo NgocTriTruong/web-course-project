@@ -16,7 +16,7 @@ public class CartDetailDao {
 
     public List<CartItem> getCartDetailByUser(int id) {
         return jdbi.withHandle(handle -> handle.createQuery(
-                        "SELECT cd.*, p.name, p.img, p.price FROM cart_details cd JOIN products p ON cd.product_id = p.id WHERE cd.user_id = :id")
+                        "SELECT cd.*, p.name, p.img, p.price, p.description FROM cart_details cd JOIN products p ON cd.product_id = p.id WHERE cd.user_id = :id")
                 .bind("id", id)
                 .mapToBean(CartItem.class)
                 .list());
@@ -46,11 +46,12 @@ public class CartDetailDao {
         System.out.println("Succesfull change quantity in database: " + rowsUpdate);
     }
 
-    public void updateStatus(int id, int status) {
+    public void updateStatus(int productId, int userId, int status) {
         int rowsUpdate = jdbi.withHandle(handle ->
-                handle.createUpdate("UPDATE cart_details SET status = :status WHERE id = :id")
+                handle.createUpdate("UPDATE cart_details SET status = :status WHERE product_id = :productId AND user_id = :userId ")
                         .bind("status", status)
-                        .bind("id", id)
+                        .bind("productId", productId)
+                        .bind("userId", userId)
                         .execute()
         );
         System.out.println("Successfully updated status in database: " + rowsUpdate);
