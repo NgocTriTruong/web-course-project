@@ -2,11 +2,11 @@ package vn.edu.hcmuaf.fit.animalfeed_webapp.dao.cart;
 
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.CartDetailDao;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.CartDetail;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.CartItem;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class Cart {
     private Map<Integer, CartItem> cartData = new HashMap<>();

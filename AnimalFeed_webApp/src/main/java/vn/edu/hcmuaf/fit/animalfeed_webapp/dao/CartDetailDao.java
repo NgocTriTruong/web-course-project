@@ -3,7 +3,7 @@ package vn.edu.hcmuaf.fit.animalfeed_webapp.dao;
 import org.jdbi.v3.core.Jdbi;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.db.JdbiConnect;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.CartDetail;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.cart.CartItem;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.CartItem;
 
 import java.util.ArrayList;
 import java.util.List;

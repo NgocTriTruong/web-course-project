@@ -1,7 +1,4 @@
-package vn.edu.hcmuaf.fit.animalfeed_webapp.dao.cart;
-
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.CartDetail;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
+package vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model;
 
 public class CartItem {
     private int id;

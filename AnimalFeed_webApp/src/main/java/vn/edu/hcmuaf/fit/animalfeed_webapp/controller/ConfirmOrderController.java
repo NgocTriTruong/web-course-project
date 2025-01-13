@@ -4,7 +4,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.cart.Cart;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.cart.CartItem;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.CartItem;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.CartService;
 
