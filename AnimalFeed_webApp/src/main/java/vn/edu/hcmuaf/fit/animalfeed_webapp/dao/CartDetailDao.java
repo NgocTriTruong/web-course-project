@@ -1,13 +1,10 @@
 package vn.edu.hcmuaf.fit.animalfeed_webapp.dao;
 
 import org.jdbi.v3.core.Jdbi;
-import org.jdbi.v3.core.JdbiException;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.db.JdbiConnect;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.CartDetail;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.CartItem;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Category;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.cart.CartItem;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 

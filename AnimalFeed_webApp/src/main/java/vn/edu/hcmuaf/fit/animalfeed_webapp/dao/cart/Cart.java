@@ -1,15 +1,9 @@
 package vn.edu.hcmuaf.fit.animalfeed_webapp.dao.cart;
 
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.CartDetailDao;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.ProductDao;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.UserDao;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.CartDetail;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.CartItem;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
