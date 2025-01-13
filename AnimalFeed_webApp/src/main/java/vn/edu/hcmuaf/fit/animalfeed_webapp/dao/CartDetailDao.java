@@ -22,6 +22,16 @@ public class CartDetailDao {
                 .list());
     }
 
+    public boolean getCDById(int productId, int userId) {
+        return jdbi.withHandle(handle -> handle.createQuery(
+                "SELECT * FROM cart_details WHERE product_id = :productId AND user_id = :userId")
+                .bind("productId", productId)
+                .bind("userId", userId)
+                .mapToBean(CartDetail.class)
+                .findOne()
+                .isPresent());
+    }
+
     public void insertCD(CartDetail cd) {
         int rowsInserted = jdbi.withHandle(handle ->
                 handle.createUpdate("INSERT INTO cart_details (user_id, product_id, total, quantity, status) VALUES (:userId, :productId, :total, :quantity, :status)")
@@ -33,6 +43,16 @@ public class CartDetailDao {
                         .execute()
         );
         System.out.println("Succesfull insert into database: " + rowsInserted);
+    }
+
+    public void increaseQuantity(int productId, int userId) {
+        int rowsUpdate = jdbi.withHandle(handle ->
+                handle.createUpdate("UPDATE cart_details SET quantity = quantity + 1 WHERE product_id = :productId AND user_id = :userId ")
+                        .bind("productId", productId)
+                        .bind("userId", userId)
+                        .execute()
+        );
+        System.out.println("Succesfull change quantity in database: " + rowsUpdate);
     }
 
     public void updateQuantity(int productId, int userId, int quantity) {

@@ -52,9 +52,10 @@ public class Cart {
     }
 
     public double getTotalPrice() {
-        AtomicReference<Double> sum = new AtomicReference<>(0.0);
-        cartData.values().forEach(cartDetail -> sum.updateAndGet(value -> value + cartDetail.getTotal()));
-        return sum.get();
+        return cartData.values().stream()
+                .filter(cartItem -> cartItem.getStatus() == 1) // Only include items with status = 1
+                .mapToDouble(CartItem::getTotal) // Extract the total price
+                .sum(); // Sum the filtered totals
     }
 
     public List<CartItem> getConfirmedCartItem() {
