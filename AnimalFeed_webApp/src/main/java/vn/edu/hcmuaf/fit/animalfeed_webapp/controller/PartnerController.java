@@ -1,4 +1,4 @@
-package vn.edu.hcmuaf.fit.animalfeed_webapp.controller.partner;
+package vn.edu.hcmuaf.fit.animalfeed_webapp.controller;
 
 
 import jakarta.servlet.*;
