@@ -132,10 +132,43 @@
         });
     }
 
+    function removeSelectedItems() {
+        const selectedItems = document.querySelectorAll('.item-checkbox:checked');
+
+        console.log(selectedItems);
+
+        if (selectedItems.length === 0) {
+            alert('Please select items to remove');
+            return;
+        }
+
+        if (!confirm('Are you sure you want to remove these items?')) {
+            return;
+        }
+
+        const contextPath = '${pageContext.request.contextPath}';
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = contextPath + '/remove-selected';
+        form.style.display = 'none';
+
+        selectedItems.forEach(checkbox => {
+            const productId = checkbox.closest('.cart-item').dataset.productId;
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'productIds';
+            input.value = productId;
+            form.appendChild(input);
+        });
+
+        // Append form to the body and submit
+        document.body.appendChild(form);
+        form.submit();
+    }
+
     function updateCartQuantity(productId, quantityChange) {
         console.log('Product ID:', productId); // Debug log
         console.log('All cart items:', document.querySelectorAll('.cart-item'));
-
 
         const cartItem = document.querySelector('.cart-item[data-product-id="' + productId + '"]');
         if (!cartItem) {
@@ -164,7 +197,7 @@
                     input.value = newQuantity;
                     updateTotals();
                 } else if (response.status === 401) {
-                    window.location.href = `${contextPath}/login`;
+                    window.location.href = contextPath + '/login';
                 } else {
                     alert('Error updating cart');
                 }
@@ -179,7 +212,8 @@
     function updateCheckboxStatus(productId, checked) {
         const contextPath = '${pageContext.request.contextPath}';
         const status = checked ? 1 : 0;
-        const url = `${contextPath}/update-cart?productId=${productId}&status=${status}`;
+        const url = contextPath + '/update-cart?productId='+ productId + '& status=' + status;
+        console.log(url);
 
         fetch(url)
             .then(response => {
