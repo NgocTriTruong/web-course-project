@@ -27,8 +27,8 @@ public class Add extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             // Get product details
-            String productId =  request.getParameter("productId");
-            Product product = productService.getDetail(Integer.parseInt(productId));
+            int productId =  Integer.parseInt(request.getParameter("productId"));
+            Product product = productService.getDetail(productId);
 
             if (product == null) {
                 response.sendRedirect("list-product?addCart=false");
@@ -46,7 +46,6 @@ public class Add extends HttpServlet {
             if (cart == null) {
                 cart = new Cart();
             }
-            cart.syncDatabase(user.getId());
 
             session.setAttribute("cart", cart);
 
@@ -55,9 +54,13 @@ public class Add extends HttpServlet {
             cartDetail.setProductId(product.getId());
             cartDetail.setQuantity(1);
             cartDetail.setTotal(product.getPrice());
-            cartDetail.setStatus(1);
+            cartDetail.setStatus(0);
 
-            cartService.insertCD(cartDetail);
+            if (cartService.getCDById(productId, user.getId())) {
+                cartService.increaseQuantity(cartDetail.getProductId(), cartDetail.getUserId());
+            } else {
+                cartService.insertCD(cartDetail);
+            }
 
             cart.addProduct(product, user.getId());
             session.setAttribute("cart", cart);

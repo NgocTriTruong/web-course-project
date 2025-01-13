@@ -1,177 +1,4 @@
-<%@ page import="vn.edu.hcmuaf.fit.animalfeed_webapp.dao.cart.Cart" %><%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>--%>
-<%--<!DOCTYPE html>--%>
-<%--<html lang="en">--%>
-<%--<head>--%>
-<%--    <meta charset="UTF-8">--%>
-<%--    <meta name="viewport" content="width=device-width, initial-scale=1.0">--%>
-<%--    <title>Shopping Cart</title>--%>
-<%--    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.bundle.min.js">--%>
-<%--    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.min.css">--%>
-<%--    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/cart.css">--%>
-<%--    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/header.css">--%>
-<%--    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/footer.css">--%>
-
-<%--    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/themify-icons/themify-icons.css">--%>
-<%--    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/fontawesome-free-6.6.0-web/css/all.min.css">--%>
-
-<%--    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/add_layout.js" defer></script>--%>
-
-<%--    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/confirm_login.js"></script>--%>
-<%--</head>--%>
-<%--<body>--%>
-<%--<%@ include file="layout/header.jsp" %>--%>
-<%--    <main style="margin-top: 65px;">--%>
-<%--        <div class="container-fuild bg-light">--%>
-<%--            <div class="container pt-5 cart">--%>
-<%--                <div class="row">--%>
-<%--                    <!-- Cart Items List -->--%>
-<%--                    <div class="col-md-8 pb-4">--%>
-<%--                        <h5 class="mb-3 bg-white cart-select-all">--%>
-<%--                            <input type="checkbox" id="select-all" class="me-1"> Chọn tất cả (0)--%>
-<%--                            <i class="fa-solid fa-trash text-secondary float-end p-3 me-3 mt-1"></i>--%>
-<%--                        </h5>--%>
-<%--            --%>
-<%--                        <!-- Cart Item 1 -->--%>
-<%--                        <div class="cart-item bg-white">--%>
-<%--                            <div class="d-flex align-items-center">--%>
-<%--                                <input type="checkbox" class="me-3 item-checkbox">--%>
-<%--                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_01.png" alt="TOP 1 Image" class="me-3" width="150px" height="150px">--%>
-<%--                                <div class="" style="width: 530px;">--%>
-<%--                                    <div class="float-start cart-item-text">--%>
-<%--                                        <h6 class="mt-3" style="font-size: 18px;">Dùng cho heo con từ 05 ngày tuổi đến 35 ngày tuổi</h6>--%>
-<%--                                        <h6 class="text-p text-center">Mã SP: TOP 01</h6>--%>
-<%--                                    </div>--%>
-<%--                                    <div class="float-end">--%>
-<%--                                        <p class="price mt-4 me-3">290.000 đ </p>--%>
-<%--                                        <p class="original-price ms-1" style="margin-top: -13px;">490.000 đ</p>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                                <div class="d-flex flex align-items-center ms-2">--%>
-<%--                                    <div class="quantity-selector">--%>
-<%--                                        <button class="btn btn-outline-secondary" type="button" onclick="updateQuantity(this, -1)">-</button>--%>
-<%--                                        <input type="text" class="form-control text-center quantity-input" value="1">--%>
-<%--                                        <button class="btn btn-outline-secondary" type="button" onclick="updateQuantity(this, 1)">+</button>--%>
-<%--                                    </div>--%>
-<%--                                    <i class="fa-solid fa-trash text-secondary float-end mt-1 ms-3"></i>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--            --%>
-<%--                        <!-- Cart Item 2 -->--%>
-<%--                        <div class="cart-item bg-white">--%>
-<%--                            <div class="d-flex align-items-center">--%>
-<%--                                <input type="checkbox" class="me-3 item-checkbox">--%>
-<%--                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_02.png" alt="TOP 2 Image" class="me-3" width="150px" height="150px">--%>
-<%--                                <div class="" style="width: 530px;">--%>
-<%--                                    <div class="float-start cart-item-text">--%>
-<%--                                        <h6 class="mt-3" style="font-size: 18px;"> Dùng cho heo con tập ăn đến 20kg</h6>--%>
-<%--                                        <h6 class="text-p text-center">Mã SP: TOP 02</h6>--%>
-<%--                                    </div>--%>
-<%--                                    <div class="float-end">--%>
-<%--                                        <p class="price mt-4 me-3">490.000 đ </p>--%>
-<%--                                        <!-- <p class="original-price ms-1" style="margin-top: -13px;">12.990.000 đ</p> -->--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                                <div class="d-flex flex align-items-center ms-2">--%>
-<%--                                    <div class="quantity-selector">--%>
-<%--                                        <button class="btn btn-outline-secondary" type="button" onclick="updateQuantity(this, -1)">-</button>--%>
-<%--                                        <input type="text" class="form-control text-center quantity-input" value="1">--%>
-<%--                                        <button class="btn btn-outline-secondary" type="button" onclick="updateQuantity(this, 1)">+</button>--%>
-<%--                                    </div>--%>
-<%--                                    <i class="fa-solid fa-trash text-secondary float-end mt-1 ms-3"></i>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--    --%>
-<%--                        <!-- Cart Item 3 -->--%>
-<%--                        <div class="cart-item bg-white">--%>
-<%--                            <div class="d-flex align-items-center">--%>
-<%--                                <input type="checkbox" class="me-3 item-checkbox">--%>
-<%--                                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_03.png" alt="TOP 3 Image" class="me-3" width="150px" height="150px">--%>
-<%--                                <div class="" style="width: 530px;">--%>
-<%--                                    <div class="float-start cart-item-text">--%>
-<%--                                        <h6 class="mt-3" style="font-size: 18px;">Dùng cho heo thịt giống tốt từ 12 – 30kg</h6>--%>
-<%--                                        <h6 class="text-p text-center">Mã SP: TOP 03</h6>--%>
-<%--                                    </div>--%>
-<%--                                    <div class="float-end">--%>
-<%--                                        <p class="price mt-4 me-3">290.000 đ </p>--%>
-<%--                                        <p class="original-price ms-1" style="margin-top: -13px;">490.000 đ</p>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                                <div class="d-flex flex align-items-center ms-2">--%>
-<%--                                    <div class="quantity-selector">--%>
-<%--                                        <button class="btn btn-outline-secondary" type="button" onclick="updateQuantity(this, -1)">-</button>--%>
-<%--                                        <input type="text" class="form-control text-center quantity-input" value="1">--%>
-<%--                                        <button class="btn btn-outline-secondary" type="button" onclick="updateQuantity(this, 1)">+</button>--%>
-<%--                                    </div>--%>
-<%--                                    <i class="fa-solid fa-trash text-secondary float-end mt-1 ms-3"></i>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--            --%>
-<%--                        <!-- Add more items as needed -->--%>
-<%--                    </div>--%>
-<%--            --%>
-<%--                    <!-- Order Summary -->--%>
-<%--                    <div class="col-md-4">--%>
-<%--                        <div class="cart-summary bg-white">--%>
-<%--                            <h6>Thông tin đơn hàng</h6>--%>
-<%--                            <p>Tổng tiền: <span class="float-end" id="total-price">0 đ</span></p>--%>
-<%--                            <div class="line-gray mb-2"></div>--%>
-<%--                            <p>Tổng khuyến mãi: <span class="float-end">0 đ</span></p>--%>
-<%--                            <p>Phí vận chuyển: <span class="float-end">Miễn phí</span></p>--%>
-<%--                            <div class="line-gray mb-2"></div>--%>
-<%--                            <p>Cần thanh toán: <span class="float-end text-danger" id="final-price">0 đ</span></p>--%>
-<%--                            <button class="btn mt-3 fw-bold" style="background-color: #fcae18; font-size: 17px;" onclick="window.location.href='confirm_order.jsp'">Xác nhận đơn</button>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </main>--%>
-<%--    <%@ include file="layout/footer.jsp" %>--%>
-<%--    <%@ include file="layout/near_footer.jsp" %>--%>
-
-<%--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>--%>
-<%--<script>--%>
-<%--    document.getElementById("select-all").addEventListener("change", function() {--%>
-<%--        let checkboxes = document.querySelectorAll(".item-checkbox");--%>
-<%--        checkboxes.forEach(cb => cb.checked = this.checked);--%>
-<%--        updateTotalPrice();--%>
-<%--    });--%>
-
-<%--    document.querySelectorAll(".item-checkbox, .option-checkbox").forEach(item => {--%>
-<%--        item.addEventListener("change", updateTotalPrice);--%>
-<%--    });--%>
-
-<%--    function updateQuantity(button, change) {--%>
-<%--        let quantityInput = button.parentNode.querySelector(".quantity-input");--%>
-<%--        let newValue = parseInt(quantityInput.value) + change;--%>
-<%--        if (newValue >= 1) {--%>
-<%--            quantityInput.value = newValue;--%>
-<%--            updateTotalPrice();--%>
-<%--        }--%>
-<%--    }--%>
-
-<%--    function updateTotalPrice() {--%>
-<%--        let total = 0;--%>
-<%--        document.querySelectorAll(".cart-item").forEach(item => {--%>
-<%--            if (item.querySelector(".item-checkbox").checked) {--%>
-<%--                let quantity = parseInt(item.querySelector(".quantity-input").value);--%>
-<%--                let basePrice = parseInt(item.querySelector(".price").textContent.replace(/[^0-9]/g, ""));--%>
-<%--                total += basePrice * quantity;--%>
-<%--                item.querySelectorAll(".option-checkbox:checked").forEach(option => {--%>
-<%--                    total += parseInt(option.getAttribute("data-price")) * quantity;--%>
-<%--                });--%>
-<%--            }--%>
-<%--        });--%>
-<%--        document.getElementById("total-price").textContent = total.toLocaleString("vi-VN") + " đ";--%>
-<%--        document.getElementById("final-price").textContent = total.toLocaleString("vi-VN") + " đ";--%>
-<%--    }--%>
-<%--</script>--%>
-<%--</body>--%>
-<%--</html>--%>
-
+<%@ page import="vn.edu.hcmuaf.fit.animalfeed_webapp.dao.cart.Cart" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -213,32 +40,33 @@
                     <c:if test="${empty sessionScope.cart.cartDetails}">
                         <div class="text-center p-5 bg-white">
                             <h4>Your cart is empty</h4>
-                            <a href="${pageContext.request.contextPath}/views/web/product.jsp" class="btn btn-primary mt-3">Continue Shopping</a>
+                            <a href="${pageContext.request.contextPath}/list-product" class="btn btn-primary mt-3">Continue Shopping</a>
                         </div>
                     </c:if>
 
                     <c:forEach var="item" items="${sessionScope.cart.cartDetails}" varStatus="status">
-                        <div class="cart-item bg-white p-3 mb-3" data-product-id="${item.productId}">
+                        <div class="cart-item bg-white p-3 mb-3" data-product-id="${item.productId}" data-status="${item.status}">
                             <div class="d-flex align-items-center">
                                 <input type="checkbox" class="me-3 item-checkbox">
-                                <img src="${item.img}"
-                                     alt="${item.name}" class="me-3" width="150px" height="150px">
-                                        <h6 class="text-secondary">Product Code: ${item.productId}</h6>
-                                    </div>
+                                <img src="${item.img}" alt="${item.name}" class="me-3" width="150px" height="150px">
+                                <div>
+                                    <h5>${item.name}</h5>
+                                    <h6>${item.desc}</h6>
+                                    <h6 class="text-secondary">Product Code: ${item.productId}</h6>
                                     <div class="price-section mt-2">
-                                        <span class="price">${item.total}</span>
+                                        <span class="price">${item.price}</span>
                                     </div>
                                     <div class="quantity-controls mt-3">
                                         <div class="quantity-selector d-inline-flex align-items-center">
                                             <button class="btn btn-outline-secondary" type="button"
-                                                    onclick="updateCartQuantity(${item.productId}, -1)">-</button>
+                                                    onclick="updateCartQuantity('${item.productId}', -1)">-</button>
                                             <input type="text" class="form-control text-center quantity-input mx-2"
                                                    value="${item.quantity}" style="width: 60px"
-                                                   onchange="updateCartQuantity(${item.productId}, this.value - ${item.quantity})">
+                                                   onchange="updateCartQuantity('${item.productId}', 0)">
                                             <button class="btn btn-outline-secondary" type="button"
-                                                    onclick="updateCartQuantity(${item.productId}, 1)">+</button>
+                                                    onclick="updateCartQuantity('${item.productId}', 1)">+</button>
                                         </div>
-                                        <button onclick="removeFromCart(${item.productId})"
+                                        <button onclick="removeFromCart('${item.productId}')"
                                                 class="btn btn-link text-secondary ms-3">
                                             <i class="fa-solid fa-trash"></i>
                                         </button>
@@ -280,67 +108,171 @@
 </main>
 <%@ include file="layout/footer.jsp" %>
 <script>
-    function updateCartQuantity(productId, change) {
-        const currentQuantity = parseInt(document.querySelector(`[data-product-id="${productId}"] .quantity-input`).value);
-        const newQuantity = currentQuantity + parseInt(change);
-
-        if (newQuantity < 1) return;
-
-        fetch('${pageContext.request.contextPath}/update-cart?productId=' + productId + '&quantity=' + newQuantity, {
-            method: 'GET'
-        }).then(response => {
-            if (response.ok) {
-                location.reload();
-            }
-        });
-    }
-
     function removeFromCart(productId) {
+        const contextPath = '${pageContext.request.contextPath}';
+        const url = contextPath + '/remove-cart?productId=' + productId;
+        console.log('Attempting to call:', url);
+
         if (!confirm('Are you sure you want to remove this item?')) return;
 
-        fetch('${pageContext.request.contextPath}/remove-cart?productId=' + productId, {
+        fetch(url, {
             method: 'GET'
         }).then(response => {
             if (response.ok) {
-                location.reload();
+                window.location.href = contextPath + '/cart';
+            } else if (response.status === 401) {
+                window.location.href = contextPath + '/login';
+            } else {
+                console.error('Response status:', response.status);
+                alert('Error removing item from cart');
             }
+        }).catch(error => {
+            console.error('Error:', error);
+            alert('Error removing item from cart');
         });
     }
 
     function removeSelectedItems() {
         const selectedItems = document.querySelectorAll('.item-checkbox:checked');
-        if (!selectedItems.length || !confirm('Remove selected items?')) return;
 
-        const promises = Array.from(selectedItems).map(checkbox => {
+        console.log(selectedItems);
+
+        if (selectedItems.length === 0) {
+            alert('Please select items to remove');
+            return;
+        }
+
+        if (!confirm('Are you sure you want to remove these items?')) {
+            return;
+        }
+
+        const contextPath = '${pageContext.request.contextPath}';
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = contextPath + '/remove-selected';
+        form.style.display = 'none';
+
+        selectedItems.forEach(checkbox => {
             const productId = checkbox.closest('.cart-item').dataset.productId;
-            return fetch('${pageContext.request.contextPath}/remove-cart?productId=' + productId, {
-                method: 'GET'
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'productIds';
+            input.value = productId;
+            form.appendChild(input);
+        });
+
+        // Append form to the body and submit
+        document.body.appendChild(form);
+        form.submit();
+    }
+
+    function updateCartQuantity(productId, quantityChange) {
+        console.log('Product ID:', productId); // Debug log
+        console.log('All cart items:', document.querySelectorAll('.cart-item'));
+
+        const cartItem = document.querySelector('.cart-item[data-product-id="' + productId + '"]');
+        if (!cartItem) {
+            console.error('Cart item not found for product ID:', productId);
+            return;
+        }
+
+        const input = cartItem.querySelector('.quantity-input');
+        if (!input) {
+            console.error('Quantity input not found for product ID:', productId);
+            return;
+        }
+
+        const newQuantity = parseInt(input.value) + quantityChange;
+        console.log('New quantity:', newQuantity); // Debug log
+
+        if (newQuantity < 1) return;
+
+        const contextPath = '${pageContext.request.contextPath}';
+        const url = contextPath + '/update-cart?productId=' + productId+'&quantity='+ newQuantity;
+        console.log(url);
+
+        fetch(url)
+            .then(response => {
+                if (response.ok) {
+                    input.value = newQuantity;
+                    updateTotals();
+                } else if (response.status === 401) {
+                    window.location.href = contextPath + '/login';
+                } else {
+                    alert('Error updating cart');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error updating cart');
             });
+    }
+
+    // Update checkbox status in database
+    function updateCheckboxStatus(productId, checked) {
+        const contextPath = '${pageContext.request.contextPath}';
+        const status = checked ? 1 : 0;
+        const url = contextPath + '/update-cart?productId='+ productId + '& status=' + status;
+        console.log(url);
+
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                updateTotals();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error updating item status');
+            });
+    }
+
+    // Calculate and update totals based on checked items
+    function updateTotals() {
+        let total = 0;
+        let selectedCount = 0;
+
+        document.querySelectorAll('.cart-item').forEach(item => {
+            const checkbox = item.querySelector('.item-checkbox');
+            if (checkbox.checked) {
+                const quantity = parseInt(item.querySelector('.quantity-input').value);
+                const price = parseFloat(item.querySelector('.price').textContent);
+                total += quantity * price;
+                selectedCount++;
+            }
         });
 
-        Promise.all(promises).then(() => location.reload());
+        document.getElementById('subtotal').textContent = total.toFixed(2);
+        document.getElementById('total').textContent = total.toFixed(2);
+        document.getElementById('selected-count').textContent = selectedCount;
     }
 
-    function proceedToCheckout() {
-        window.location.href = '${pageContext.request.contextPath}/checkout';
-    }
-
-    // Update selected count when checkboxes change
-    document.querySelectorAll('.item-checkbox').forEach(checkbox => {
-        checkbox.addEventListener('change', updateSelectedCount);
-    });
-
+    // Handle "Select All" checkbox
     document.getElementById('select-all').addEventListener('change', function() {
+        const isChecked = this.checked;
         document.querySelectorAll('.item-checkbox').forEach(checkbox => {
-            checkbox.checked = this.checked;
+            checkbox.checked = isChecked;
+            const productId = checkbox.closest('.cart-item').dataset.productId;
+            updateCheckboxStatus(productId, isChecked);
         });
-        updateSelectedCount();
+        updateTotals();
     });
 
-    function updateSelectedCount() {
-        const count = document.querySelectorAll('.item-checkbox:checked').length;
-        document.getElementById('selected-count').textContent = count;
-    }
+    // Handle individual item checkboxes
+    document.querySelectorAll('.item-checkbox').forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            const productId = this.closest('.cart-item').dataset.productId;
+            updateCheckboxStatus(productId, this.checked);
+
+            // Update "Select All" checkbox
+            const allChecked = [...document.querySelectorAll('.item-checkbox')]
+                .every(cb => cb.checked);
+            document.getElementById('select-all').checked = allChecked;
+
+            updateTotals();
+        });
+    });
 </script>
 </body>
 </html>

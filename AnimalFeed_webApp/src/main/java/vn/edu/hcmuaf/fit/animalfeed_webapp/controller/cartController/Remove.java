@@ -11,7 +11,7 @@ import java.io.IOException;
 
 @WebServlet(name = "RemoveCart", value = "/remove-cart")
 public class Remove extends HttpServlet {
-    private CartService cartService;
+    private CartService cartService = new CartService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -19,15 +19,15 @@ public class Remove extends HttpServlet {
         try {
             productId = Integer.parseInt(request.getParameter("productId"));
         } catch (NumberFormatException e) {
-            response.sendRedirect("/cart");
+            response.sendRedirect(request.getContextPath() + "/cart");
+            return;
         }
 
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
 
         if (user == null) {
-            request.setAttribute("error", "Please login first");
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
 
@@ -35,15 +35,13 @@ public class Remove extends HttpServlet {
         if (cart == null) {
             cart = new Cart();
         }
+
         cart.removeProduct(productId);
-
         session.setAttribute("cart", cart);
-
         cartService.deleteCD(productId, user.getId());
 
-        response.sendRedirect("cart.jsp?removed=true");
-
-        response.sendRedirect("/cart");
+        // Update redirect paths to use context path
+        response.sendRedirect(request.getContextPath() + "/cart");
     }
 
     @Override
