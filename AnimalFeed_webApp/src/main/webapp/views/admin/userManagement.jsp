@@ -18,7 +18,7 @@
     <script src="${pageContext.request.contextPath}/views/admin/assets/js/mdb.min.js"></script>
 
     <!-- js add header -->
-     <script src="${pageContext.request.contextPath}/views/admin/assets/js/add_header.js" defer></script>
+    <script src="${pageContext.request.contextPath}/views/admin/assets/js/add_header.js" defer></script>
 </head>
 
 <body>
@@ -41,21 +41,21 @@
                                 );">
         </div>
         <!-- Background gradient -->
-    
+
         <div class="container px-4">
-          <div class="card shadow-0" style="
+            <div class="card shadow-0" style="
                                             margin-top: -100px;
                                             ">
-            <div class="card-body py-5 px-5">
-              <div class="row gx-lg-4 align-items-center">
-                <div class="col-lg-6 mb-4 mb-lg-0 text-center text-lg-start">
-                  <h1 class="">Quản lý người dùng</h1>
+                <div class="card-body py-5 px-5">
+                    <div class="row gx-lg-4 align-items-center">
+                        <div class="col-lg-6 mb-4 mb-lg-0 text-center text-lg-start">
+                            <h1 class="">Quản lý người dùng</h1>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </section>
+    </section>
 
     <!-- Container for demo purpose -->
     <div class="container  px-4 ">

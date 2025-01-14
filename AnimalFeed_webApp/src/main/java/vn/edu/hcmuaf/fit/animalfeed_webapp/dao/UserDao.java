@@ -4,7 +4,6 @@ import org.jdbi.v3.core.Jdbi;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.db.JdbiConnect;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -27,7 +26,7 @@ public class UserDao {
     }
 
     //Method register
-    public void insertUser(User user) {
+    public boolean insertUser(User user) {
 
         jdbi.withHandle(handle ->
                 handle.createUpdate("INSERT INTO users (full_Name, password, phone, status, create_date, update_date, role) VALUES (:full_Name, :password, :phone, :status, :create_date, :update_date, :role)")
@@ -40,6 +39,7 @@ public class UserDao {
                         .bind("role", user.getRole())
                         .execute()
         );
+        return false;
     }
 
     //load data user
@@ -48,18 +48,19 @@ public class UserDao {
                 handle.createQuery("SELECT * FROM users")
                         .map((rs, ctx) -> {
                             int id = rs.getInt("id");
-                            String fullName = rs.getString("full_name"); // Tên cột: full_name
-                            String password = rs.getString("password");  // Tên cột: password
-                            String phone = rs.getString("phone");        // Tên cột: phone
-                            int status = rs.getInt("status");            // Tên cột: status
-                            Date createDate = rs.getDate("create_date"); // Tên cột: create_date
-                            Date updateDate = rs.getDate("update_date"); // Tên cột: update_date
-                            int role = rs.getInt("role");                // Tên cột: role
+                            String fullName = rs.getString("full_name"); // Tên cột chính xác
+                            String password = rs.getString("password");
+                            String phone = rs.getString("phone");
+                            int status = rs.getInt("status");
+                            Date createDate = rs.getDate("create_date");
+                            Date updateDate = rs.getDate("update_date");
+                            int role = rs.getInt("role");
                             return new User(id, fullName, password, phone, status, createDate, updateDate, role);
                         })
                         .list()
         );
     }
+
 
     //login
     public User login(String phone, String password) {
@@ -82,26 +83,60 @@ public class UserDao {
         );
     }
 
+    //delete user
+    public boolean deleteUser(int userId) {
+        jdbi.withHandle(handle ->
+                handle.createUpdate("DELETE FROM users WHERE id = :id")
+                        .bind("id", userId)
+                        .execute()
+        );
+        return false;
+    }
+
+    //get id user
+    public User getIdUser(int userID) {
+        return jdbi.withHandle(handle -> handle.createQuery("select * from users where id = :id")
+                .bind("id", userID).mapToBean(User.class)
+                .findOne().orElse(null));
+    }
+
+    //update user
+    public boolean updateUser(User user) {
+        jdbi.withHandle(handle ->
+                handle.createUpdate("UPDATE users SET full_Name = :fullName, password = :password, phone = :phone, role = :role, status = :status, update_date = :updateDate WHERE id = :id")
+                        .bind("fullName", user.getFullName())
+                        .bind("password", user.getPassword())
+                        .bind("phone", user.getPhone())
+                        .bind("role", user.getRole())
+                        .bind("status", user.getStatus())
+                        .bind("updateDate", user.getUpdateDate())
+                        .bind("id", user.getId())
+                        .execute()
+        );
+        return false;
+    }
 
 
     public static void main (String[]args){
-            Scanner scanner = new Scanner(System.in);
+//            Scanner scanner = new Scanner(System.in);
 
-            System.out.println("Vui lòng nhập số điện thoại:");
-            String phone = scanner.nextLine();
+//            System.out.println("Vui lòng nhập số điện thoại:");
+//            String phone = scanner.nextLine();
+//
+//            System.out.println("Vui lòng nhập mật khẩu:");
+//            String password = scanner.nextLine();
+        UserDao dao = new UserDao();
+        List<User> users = dao.loadUsers();
+        System.out.print("Danh sách người dùng: " + users);
+//
 
-            System.out.println("Vui lòng nhập mật khẩu:");
-            String password = scanner.nextLine();
 
-            UserDao myClass = new UserDao(); // Lớp chứa hàm login()
-            User user = myClass.login(phone, password);
-
-            if (user != null) {
-                System.out.println("Đăng nhập thành công!");
-                System.out.println("Xin chào, " + user.getFullName());
-            } else {
-                System.out.println("Số điện thoại hoặc mật khẩu không đúng. Vui lòng thử lại!");
-            }
+//            if (user != null) {
+//                System.out.println("Đăng nhập thành công!");
+//                System.out.println("Xin chào, " + user.getFullName());
+//            } else {
+//                System.out.println("Số điện thoại hoặc mật khẩu không đúng. Vui lòng thử lại!");
+//            }
         }
     }
 
