@@ -14,56 +14,65 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/admin/assets/css/mdb.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/admin/assets/css/home.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/admin/assets/css/header.css">
-
     <script src="${pageContext.request.contextPath}/views/admin/assets/js/mdb.min.js"></script>
-
-    <!-- js add header -->
-     <script src="${pageContext.request.contextPath}/views/admin/assets/js/add_header.js" defer></script>
+    <script src="${pageContext.request.contextPath}/views/admin/assets/js/add_header.js" defer></script>
 </head>
 
 <body>
 
 <%@ include file="layout/header.jsp" %>
 
-<!--Main layout-->
 <main class="mb-5" style="margin-top: 100px;">
-
-
-    <!-- Container for demo purpose -->
     <div class="container px-4 ">
+        <!-- Nút quay lại -->
         <a href="userManagement.jsp" class="btn btn-link mb-2 text_green" style="font-size: 16px;">
             <i class="fas fa-angle-left"></i> Quay lại
         </a>
+
+        <!-- Tiêu đề -->
         <div class="mb-3 bg_green p-2">
             <span class="text-white h5">Thông tin người dùng</span>
         </div>
-        <form class="border p-5">
+
+        <!-- Hiển thị thông báo -->
+        <%
+            String success = request.getParameter("success");
+            String error = request.getParameter("error");
+        %>
+        <% if ("true".equals(success)) { %>
+        <div class="alert alert-success">Thêm người dùng thành công!</div>
+        <% } else if ("true".equals(error)) { %>
+        <div class="alert alert-danger">Có lỗi xảy ra. Vui lòng thử lại.</div>
+        <% } %>
+
+        <!-- Form thêm người dùng -->
+        <form action="${pageContext.request.contextPath}/addUser" method="POST" class="border p-5">
+            <!-- Dòng 1 -->
             <div class="row">
                 <div class="col-md-4">
                     <div class="mb-3">
                         <label for="phone" class="form-label style_18"><b>Số điện thoại</b></label>
                         <i class="fas fa-phone ms-2"></i>
-                        <input type="number" class="form-control" id="phone" name="phone"
-                               placeholder="Nhập số điện thoại..." required>
+                        <input type="number" class="form-control" id="phone" name="phone" placeholder="Nhập số điện thoại..." required>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="mb-3">
                         <label for="password" class="form-label style_18"><b>Mật khẩu</b></label>
                         <i class="fas fa-key ms-2"></i>
-                        <input type="password" class="form-control" id="password" name="password"
-                               placeholder="Nhập mật khẩu..." required>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu..." required>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="mb-3">
                         <label for="fullname" class="form-label style_18"><b>Tên đầy đủ</b></label>
                         <i class="fas fa-user ms-2"></i>
-                        <input type="text" class="form-control" id="fullname" name="fullname"
-                               placeholder="Nhập họ và tên..." required>
+                        <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Nhập họ và tên..." required>
                     </div>
                 </div>
             </div>
+
+            <!-- Dòng 2 -->
             <div class="row">
                 <div class="col-md-4">
                     <label for="role" class="form-label style_18"><b>Vai trò</b></label>
@@ -71,8 +80,7 @@
                     <select class="form-select" id="role" name="role" required>
                         <option value="" disabled selected>Chọn vai trò</option>
                         <option value="1">Quản trị</option>
-                        <option value="2">Người dùng</option>
-                        <!-- Add more options as needed -->
+                        <option value="0">Người dùng</option>
                     </select>
                 </div>
                 <div class="col-md-4 mt-3">
@@ -108,15 +116,12 @@
                     </div>
                 </div>
             </div>
-            <!-- Repeat the pattern for other form elements -->
 
+            <!-- Nút submit -->
             <button type="submit" class="btn text-white bg_green fw-bold">Thêm mới</button>
         </form>
-
     </div>
-    <!-- Container for demo purpose -->
 </main>
-<!--Main layout-->
 
 <footer class="position-fixed bottom-0 w-100 text-center py-2 bg-light">
     <p class="pt-3" style="color: rgba(0, 0, 0, 0.5); margin-left: 150px;">©2024 Group-11</p>
