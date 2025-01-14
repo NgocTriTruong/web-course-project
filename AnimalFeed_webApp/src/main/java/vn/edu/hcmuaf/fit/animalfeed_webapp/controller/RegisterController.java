@@ -6,15 +6,21 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.UserDao;
+import org.jdbi.v3.core.Jdbi;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.services.UserService;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
 
 import java.io.IOException;
-import java.util.Date;
 
 @WebServlet(name = "RegisterController", value = "/register")
 public class RegisterController extends HttpServlet {
 
+    private UserService userService;
+
+    @Override
+    public void init() {
+        userService = new UserService(); // Khởi tạo service khi servlet được tạo
+    }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Lấy dữ liệu từ form
@@ -24,34 +30,24 @@ public class RegisterController extends HttpServlet {
         String confirmPassword = req.getParameter("confirmPassword");
 
         // Kiểm tra mật khẩu xác nhận
-        if (password == null || confirmPassword == null || !password.equals(confirmPassword)) {
+        if (!userService.isPasswordMatch(password, confirmPassword)) {
             req.setAttribute("error", "Mật khẩu xác nhận không khớp!");
             req.getRequestDispatcher("register").forward(req, resp);
             return;
         }
 
         // Kiểm tra nếu số điện thoại đã tồn tại
-        UserDao userDao = new UserDao();
-        User existingUser = userDao.getUserByPhone(phone);
-        if (existingUser != null) {
+        if (userService.isPhoneExists(phone)) {
             req.setAttribute("error", "Số điện thoại đã được đăng ký!");
-            req.getRequestDispatcher("register").forward(req, resp);
+            req.getRequestDispatcher("/views/web/register.jsp").forward(req, resp);
             return;
         }
 
-        // Tạo đối tượng User và lưu vào cơ sở dữ liệu
-        User newUser = new User();
-        newUser.setFullName(fullName);
-        newUser.setPhone(phone);
-        newUser.setPassword(password);
-        newUser.setRole(0); // Mặc định là user (role = 0)
-        newUser.setStatus(1); // Mặc định là active (status = 1)
-        newUser.setCreateDate(new Date());
-        newUser.setUpdateDate(new Date());
+        // Đăng ký người dùng
+        userService.registerUser(fullName, phone, password);
 
-        userDao.insertUser(newUser);
-
-        // Đăng nhập ngay sau khi đăng ký thành công
+        // Lấy người dùng từ số điện thoại để đăng nhập
+        User newUser = userService.getUserByPhone(phone); // Lấy lại người dùng mới từ cơ sở dữ liệu
         HttpSession session = req.getSession();
         session.setAttribute("user", newUser);
         resp.sendRedirect("home"); // Chuyển hướng về trang chính
