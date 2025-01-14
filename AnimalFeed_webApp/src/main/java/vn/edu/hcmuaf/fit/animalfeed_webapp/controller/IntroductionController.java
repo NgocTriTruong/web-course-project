@@ -1,6 +1,6 @@
 package vn.edu.hcmuaf.fit.animalfeed_webapp.controller;
 
-import jakarta.servlet.ServletException;
+import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Category;
@@ -11,8 +11,8 @@ import vn.edu.hcmuaf.fit.animalfeed_webapp.services.ProductService;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "CategoryController", value = "/product")
-public class CategoryController extends HttpServlet {
+@WebServlet(name = "IntroductionController", value = "/introduction")
+public class IntroductionController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException, ServletException {
@@ -24,7 +24,7 @@ public class CategoryController extends HttpServlet {
 
         request.setAttribute("categoriesData", categories);
         request.setAttribute("productsData", products);
-        request.getRequestDispatcher("views/web/product.jsp").forward(request, response);
+        request.getRequestDispatcher("views/web/introduction.jsp").forward(request, response);
     }
 
     @Override

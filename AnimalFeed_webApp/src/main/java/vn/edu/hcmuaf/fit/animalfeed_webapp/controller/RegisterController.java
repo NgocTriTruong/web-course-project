@@ -18,15 +18,15 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Lấy dữ liệu từ form
-        String fullName = req.getParameter("fullName");
+        String fullName = req.getParameter("username");
         String phone = req.getParameter("phone");
         String password = req.getParameter("password");
         String confirmPassword = req.getParameter("confirmPassword");
 
         // Kiểm tra mật khẩu xác nhận
-        if (!password.equals(confirmPassword)) {
+        if (password == null || confirmPassword == null || !password.equals(confirmPassword)) {
             req.setAttribute("error", "Mật khẩu xác nhận không khớp!");
-            req.getRequestDispatcher("/views/web/login.jsp").forward(req, resp);
+            req.getRequestDispatcher("register").forward(req, resp);
             return;
         }
 
@@ -35,7 +35,7 @@ public class RegisterController extends HttpServlet {
         User existingUser = userDao.getUserByPhone(phone);
         if (existingUser != null) {
             req.setAttribute("error", "Số điện thoại đã được đăng ký!");
-            req.getRequestDispatcher("/views/web/register.jsp").forward(req, resp);
+            req.getRequestDispatcher("register").forward(req, resp);
             return;
         }
 
@@ -44,7 +44,7 @@ public class RegisterController extends HttpServlet {
         newUser.setFullName(fullName);
         newUser.setPhone(phone);
         newUser.setPassword(password);
-        newUser.setRole(0); // Mặc định là user (role = 1)
+        newUser.setRole(0); // Mặc định là user (role = 0)
         newUser.setStatus(1); // Mặc định là active (status = 1)
         newUser.setCreateDate(new Date());
         newUser.setUpdateDate(new Date());
@@ -54,11 +54,11 @@ public class RegisterController extends HttpServlet {
         // Đăng nhập ngay sau khi đăng ký thành công
         HttpSession session = req.getSession();
         session.setAttribute("user", newUser);
-        resp.sendRedirect("index.jsp"); // Chuyển hướng về trang chính
+        resp.sendRedirect("home"); // Chuyển hướng về trang chính
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/views/web/login.jsp").forward(req, resp);
+        req.getRequestDispatcher("/views/web/register.jsp").forward(req, resp);
     }
 }
