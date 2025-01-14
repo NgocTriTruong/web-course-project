@@ -8,6 +8,10 @@ import java.util.List;
 public class CartService {
     static CartDetailDao cartDetailDao = new CartDetailDao();
 
+    public boolean getCDById(int productId, int userId) {
+        return cartDetailDao.getCDById(productId, userId);
+    }
+
     public void insertCD(CartDetail cartDetail) {
         cartDetailDao.insertCD(cartDetail);
     }
@@ -16,7 +20,15 @@ public class CartService {
         cartDetailDao.deleteCD(productId, id);
     }
 
+    public void increaseQuantity(int productId, int userId) {
+        cartDetailDao.increaseQuantity(productId, userId);
+    }
+
     public void updateQuantity(int productId, int id, int quantity) {
         cartDetailDao.updateQuantity(productId, id, quantity);
+    }
+
+    public void updateStatus(int productId, int userId, int status) {
+        cartDetailDao.updateStatus(productId, userId, status);
     }
 }
