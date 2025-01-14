@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -20,6 +21,12 @@
         <h2>ĐĂNG KÝ TÀI KHOẢN</h2>
         <p class="text-center">Nếu chưa có tài khoản vui lòng đăng ký tại đây</p>
         <div class="success-message" id="successMessage">Đăng ký thành công!</div>
+
+        <!-- Thêm phần thông báo lỗi -->
+        <c:if test="${not empty error}">
+            <div class="alert alert-danger">${error}</div>
+        </c:if>
+
         <form action="<%= request.getContextPath() %>/register" method="POST" id="registrationForm" novalidate>
             <div class="mb-3">
                 <input class="form-control" id="id_username" type="text" name="username" maxlength="100" placeholder="Tên tài khoản *" required>
@@ -61,5 +68,7 @@
 <!-- Font Awesome -->
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 <script src="<%= request.getContextPath() %>/views/template/assets/scripts/register.js"></script>
+
+
 </body>
 </html>

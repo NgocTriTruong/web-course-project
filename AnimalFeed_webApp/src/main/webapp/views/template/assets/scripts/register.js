@@ -59,3 +59,46 @@ document.getElementById("registrationForm").addEventListener("submit", function(
         document.getElementById("registrationForm").submit();
     }
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById('registrationForm');
+    const errorDiv = document.querySelector('.alert');
+
+    form.addEventListener('submit', function(event) {
+        let isValid = true;
+
+        // Reset các thông báo lỗi
+        const errorMessages = form.querySelectorAll('.error-message');
+        errorMessages.forEach(function(errorMessage) {
+            errorMessage.style.display = 'none';
+        });
+
+        // Kiểm tra trường "username"
+        const username = form.querySelector('input[name="username"]').value;
+        if (username === '') {
+            form.querySelector('#usernameError').style.display = 'block';
+            isValid = false;
+        }
+
+        // Kiểm tra trường "phone"
+        const phone = form.querySelector('input[name="phone"]').value;
+        if (phone === '') {
+            form.querySelector('#phoneError').style.display = 'block';
+            isValid = false;
+        }
+
+        // Kiểm tra mật khẩu và xác nhận mật khẩu
+        const password = form.querySelector('input[name="password"]').value;
+        const confirmPassword = form.querySelector('input[name="confirmPassword"]').value;
+        if (password !== confirmPassword) {
+            form.querySelector('#password2Error').style.display = 'block';
+            isValid = false;
+        }
+
+        // Nếu có lỗi, hiển thị thông báo lỗi và ngừng gửi form
+        if (!isValid) {
+            errorDiv.style.display = 'block'; // Hiển thị thông báo lỗi
+            event.preventDefault(); // Ngừng gửi form
+        }
+    });
+});

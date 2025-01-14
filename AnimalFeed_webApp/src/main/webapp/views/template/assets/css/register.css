@@ -182,3 +182,23 @@ input.invalid {
     color: #0056b3;
     text-decoration: underline;
 }
+
+/* Thông báo lỗi */
+.error-message {
+    color: red;
+    font-size: 0.9rem;
+    display: none; /* Ẩn mặc định */
+}
+
+.alert-danger {
+    display: none; /* Ẩn thông báo lỗi mặc định */
+    color: white;
+    background-color: red;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+/* Ẩn thông báo lỗi mặc định */
+.alert {
+    display: none;
+}
