@@ -17,7 +17,7 @@ public class ProductDao {
     public List<Product> getAll() {
         Jdbi jdbi = JdbiConnect.getJdbi();
         return jdbi.withHandle(handle -> handle.createQuery("select * FROM products WHERE status = :status AND discount_id = :discountId")
-                .bind("status", 1)
+                .bind("status", "1")
                 .bind("discountId", 1)  // Lấy sản phẩm không giảm giá
                 .mapToBean(Product.class).list());
     }
@@ -33,7 +33,7 @@ public class ProductDao {
         return jdbi.withHandle(handle ->
                 handle.createQuery("select * from products where id = :id and status = :status")
                         .bind("id", id)
-                        .bind("status", 1)  // Lấy sản phẩm có trạng thái 'active'
+                        .bind("status", "1")  // Lấy sản phẩm có trạng thái 'active'
                         .mapToBean(Product.class).findOne().orElse(null));
     }
 
@@ -43,7 +43,7 @@ public class ProductDao {
         return jdbi.withHandle(handle ->
                 handle.createQuery("select * from products where cat_id = :categoryId and status = :status")
                         .bind("categoryId", categoryId)
-                        .bind("status", 1)  // Lấy sản phẩm có trạng thái 'active'
+                        .bind("status", "1")  // Lấy sản phẩm có trạng thái 'active'
                         .mapToBean(Product.class).list());
     }
 
@@ -52,7 +52,7 @@ public class ProductDao {
         Jdbi jdbi = JdbiConnect.getJdbi();
         return jdbi.withHandle(handle ->
                 handle.createQuery("select count(*) from products where status = :status")
-                        .bind("status", 1)  // Lấy sản phẩm có trạng thái 'active'
+                        .bind("status", "1")  // Lấy sản phẩm có trạng thái 'active'
                         .mapTo(Integer.class).findOne().orElse(0));
     }
 
@@ -60,8 +60,9 @@ public class ProductDao {
     public List<Product> getProductByPage(int page, int id) {
         Jdbi jdbi = JdbiConnect.getJdbi();
         return jdbi.withHandle(handle ->
-                handle.createQuery("select * from products where cat_id = :id order by id limit :end offset :start")
+                handle.createQuery("select * from products where cat_id = :id AND discount_id = :discountId order by id limit :end offset :start")
                         .bind("id", id)
+                        .bind("discountId", 1)
                         .bind("start", (page - 1) * 16)
                         .bind("end", 16)
                         .mapToBean(Product.class).list());
@@ -106,12 +107,13 @@ public class ProductDao {
             jdbi.useTransaction(handle -> {
 
                 // Cập nhật trạng thái sản phẩm thành 'deleted' ( deleted = 0)
-                int updatedRows = handle.createUpdate("UPDATE products SET status = 0 WHERE id = :productId")
+                int updatedRows = handle.createUpdate("UPDATE products SET status = :status WHERE id = :productId")
+                        .bind("status", "0") // Trạng thái 'deleted'
                         .bind("productId", productId).execute();
 
                 // Ghi log hành động vào bảng action_log
                 if (updatedRows > 0) {
-                    handle.createUpdate("INSERT INTO action_log (user_id, action_type, entity_type, entity_id, created_at, description) VALUES VALUES (:userId, :actionType, :entityType, :entityId, CURRENT_DATE, :description)")
+                    handle.createUpdate("INSERT INTO action_log (user_id, action_type, entity_type, entity_id, created_at, description) VALUES (:userId, :actionType, :entityType, :entityId, CURRENT_DATE, :description)")
                             .bind("userId", userId)
                             .bind("actionType", "DELETE")
                             .bind("entityType", "PRODUCT")
@@ -178,7 +180,7 @@ public class ProductDao {
                 SELECT p.id, p.img, p.name, p.description, p.price, d.percentage, ROUND(p.price * (1 - d.percentage / 100), 2) AS discountedPrice
                 FROM products p
                 JOIN discounts d ON p.discount_id = d.id
-                WHERE p.discount_id != 1 and p.status = 1
+                WHERE p.discount_id != 1 and p.status = '1'
                 """;
         return jdbi.withHandle(handle ->
                 handle.createQuery(query)

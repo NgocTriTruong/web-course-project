@@ -26,6 +26,7 @@ public class LoginController extends HttpServlet {
         if (user != null) {
             HttpSession session = req.getSession();
             session.setAttribute("user", user); // Lưu thông tin người dùng vào session
+            session.setAttribute("userId", user.getId());  // Lưu userId vào session
 
             // Chuyển hướng tới trang chính (dashboard)
             if (user.getRole() == 1) {

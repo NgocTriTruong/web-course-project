@@ -141,9 +141,11 @@
                             <a href="productAddition.jsp?id=${p.id}" class="btn bg_green btn-floating" style="font-size: 16px;">
                                 <i class="far fa-pen-to-square"></i>
                             </a>
-                            <button type="button" class="btn bg_yellow btn-floating" style="font-size: 16px;">
-                                <i class="far fa-trash-can"></i>
-                            </button>
+                            <a href="delete-product?productId= ${p.id}">
+                                <button type="button" class="btn bg_yellow btn-floating" style="font-size: 16px;">
+                                    <i class="far fa-trash-can"></i>
+                                </button>
+                            </a>
                         </td>
                     </tr>
                 </c:forEach>
