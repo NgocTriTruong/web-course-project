@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -57,8 +57,7 @@
         </div>
     </section>
 
-    <!-- Container for demo purpose -->
-    <div class="container  px-4 ">
+    <div class="container px-4">
         <div class="mb-3 d-flex justify-content-end px-4">
             <a class="btn bg_green text-white fw-bold" href="userAddition.jsp">
                 <i class="far fa-square-plus"></i>
@@ -85,76 +84,63 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>
-                        <span class="ms-2 h6">1</span>
-                    </td>
-                    <td>
-                        <div class="d-flex align-items-center">
-                            <div class="">
-                                <p class="h6 mb-1 ms-1">Trương Ngọc Trí</p>
+                <c:forEach items="${users}" var="user" varStatus="loop">
+                    <tr>
+                        <td>
+                            <span class="ms-2 h6">${loop.index + 1}</span>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div class="">
+                                    <p class="h6 mb-1 ms-1">${user.fullName}</p>
+                                </div>
                             </div>
-                        </div>
-                    </td>
-                    <td>
-                        <span class="h6 ms-1">0123456789</span>
-                    </td>
-                    <td>
-                        <span class="badge badge-success rounded-pill d-inline ms-4" style="font-size: 13px;">Đã xác thực</span>
-                    </td>
-                    <td>
-                        <span class="badge badge-danger rounded-pill d-inline" style="font-size: 13px;">Ngừng hoạt động</span>
-                    </td>
-                    <td>
-                        <a href="productAddition.jsp" class="btn bg_green btn-floating" style="font-size: 16px;">
-                            <i class="far fa-pen-to-square"></i>
-                        </a>
-                        <button type="button" class="btn bg_yellow btn-floating" style="font-size: 16px;">
-                            <i class="far fa-trash-can"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span class="ms-2 h6">2</span>
-                    </td>
-                    <td>
-                        <div class="d-flex align-items-center">
-                            <div class="">
-                                <p class="h6 ms-1 mb-1">Trương Ngọc Trí</p>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <span class="h6 ms-1">0123456789</span>
-                    </td>
-                    <td>
-                        <span class="badge badge-success rounded-pill d-inline ms-4" style="font-size: 13px;">Đã xác thực</span>
-                    </td>
-                    <td>
-                        <span class="badge badge-success rounded-pill d-inline" style="font-size: 13px;">Đang hoạt động</span>
-                    </td>
-                    <td>
-                        <a href="productAddition.jsp" class="btn bg_green btn-floating" style="font-size: 16px;">
-                            <i class="far fa-pen-to-square"></i>
-                        </a>
-                        <button type="button" class="btn bg_yellow btn-floating" style="font-size: 16px;">
-                            <i class="far fa-trash-can"></i>
-                        </button>
-                    </td>
-                </tr>
+                        </td>
+                        <td>
+                            <span class="h6 ms-1">${user.phone}</span>
+                        </td>
+                        <td>
+                            <span class="badge badge-success rounded-pill d-inline ms-4" style="font-size: 13px;">
+                                <c:choose>
+                                    <c:when test="${user.status == 1}">Đã xác thực</c:when>
+                                    <c:otherwise>Chưa xác thực</c:otherwise>
+                                </c:choose>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="badge ${user.status == 1 ? 'badge-success' : 'badge-danger'} rounded-pill d-inline" style="font-size: 13px;">
+                                    ${user.status == 1 ? 'Đang hoạt động' : 'Ngừng hoạt động'}
+                            </span>
+                        </td>
+                        <td>
+                            <a href="userEdit?id=${user.id}" class="btn bg_green btn-floating" style="font-size: 16px;">
+                                <i class="far fa-pen-to-square"></i>
+                            </a>
+                            <button type="button" class="btn bg_yellow btn-floating" style="font-size: 16px;"
+                                    onclick="deleteUser(${user.id})">
+                                <i class="far fa-trash-can"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </c:forEach>
                 </tbody>
             </table>
         </div>
-
     </div>
-    <!-- Container for demo purpose -->
 </main>
-<!--Main layout-->
 
 <footer class="bottom-0 w-100 text-center py-2 bg-light">
     <p class="pt-3" style="color: rgba(0, 0, 0, 0.5); margin-left: 150px;">©2024 Group-11</p>
 </footer>
+
+<!-- Add JavaScript for delete functionality -->
+<script>
+    function deleteUser(userId) {
+        if (confirm('Bạn có chắc chắn muốn xóa người dùng này?')) {
+            window.location.href = 'userManagement?action=delete&id=' + userId;
+        }
+    }
+</script>
 
 </body>
 </html>
