@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <%--    <link rel="stylesheet" href="<%= request.getContextPath() %>/views/template/assets/css/login.css">--%>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.bundle.min.js">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.min.css">
     <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet"/>
@@ -124,44 +123,14 @@
             color: #0056b3;
             text-decoration: underline;
         }
-
-        /* Phần Navbar */
-        .navbar {
-            background-color: #007bff;
-            padding: 15px 20px;
-            display: flex;
-            align-items: center;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-        }
-
-        .navbar a {
+        /* Thông báo lỗi */
+        .alert {
             color: white;
-            font-size: 18px;
-            text-decoration: none;
-            margin-left: 20px;
-        }
-
-        .navbar a:hover {
-            text-decoration: underline;
-        }
-
-        /* Tạo khoảng cách giữa các phần */
-        .mb-3 {
+            background-color: #dc3545;
+            padding: 10px;
+            border-radius: 5px;
             margin-bottom: 20px;
-        }
-
-        /* Phần thân của form, đảm bảo không bị kéo dài quá */
-        .login-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            min-height: 100vh;
-            background-color: #f7f9fc;
+            display: none; /* Ẩn thông báo lỗi mặc định */
         }
 
     </style>
@@ -171,6 +140,12 @@
     <div class="login-form-section">
         <h2>Đăng nhập</h2>
         <p class="text-center">Vui lòng đăng nhập để truy cập tài khoản của bạn</p>
+
+        <!-- Hiển thị thông báo lỗi nếu có -->
+        <c:if test="${not empty error}">
+            <div class="alert alert-danger">${error}</div>
+        </c:if>
+
         <!-- Chuyển action tới servlet xử lý đăng nhập -->
         <form action="<%= request.getContextPath() %>/login" method="post" id="loginForm">
             <div class="mb-3">
@@ -189,5 +164,40 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3vI0Txkzl5M7G7rvB/JF9QFJzUawmGJlfyep7EJiF" crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const form = document.getElementById('loginForm');
+        const errorDiv = document.querySelector('.alert');
+
+        form.addEventListener('submit', function(event) {
+            let isValid = true;
+
+            // Reset các thông báo lỗi
+            errorDiv.style.display = 'none'; // Ẩn thông báo lỗi cũ
+
+            // Kiểm tra trường "phone"
+            const phone = form.querySelector('input[name="phone"]').value;
+            if (phone === '') {
+                errorDiv.innerText = 'Vui lòng nhập số điện thoại';
+                errorDiv.style.display = 'block';
+                isValid = false;
+            }
+
+            // Kiểm tra mật khẩu
+            const password = form.querySelector('input[name="password"]').value;
+            if (password === '') {
+                errorDiv.innerText = 'Vui lòng nhập mật khẩu';
+                errorDiv.style.display = 'block';
+                isValid = false;
+            }
+
+            // Nếu có lỗi, hiển thị thông báo lỗi và ngừng gửi form
+            if (!isValid) {
+                event.preventDefault(); // Ngừng gửi form
+            }
+        });
+    });
+
+</script>
 </body>
 </html>
