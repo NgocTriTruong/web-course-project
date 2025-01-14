@@ -10,8 +10,14 @@ public class ProductService {
 
     static ProductDao productDao = new ProductDao();
 
+    //Lay tat ca product có trạng thái 'active'
     public List<Product> getAllProducts() {
         return productDao.getAll();
+    }
+
+    //Lay tat ca product
+    public List<Product> getAllProductOfAdmin() {
+        return productDao.getAllProductOfAdmin();
     }
 
     //Lay product theo id
@@ -35,18 +41,18 @@ public class ProductService {
     }
 
     //Them product
-    public void insertProduct(Product product) {
-        productDao.insertProduct(product);
+    public void insertProduct(Product product, int userId) {
+        productDao.insertProduct(product, userId);
     }
 
     //xoa product
-    public void deleteProduct(int id) {
-        productDao.deleteProduct(id);
+    public void deleteProduct(int productID, int userId) {
+        productDao.deleteProduct(productID, userId);
     }
 
     //sua product
-    public void updateProduct(Product product) {
-        productDao.updateProduct(product);
+    public void updateProduct(Product product, int userId) {
+        productDao.updateProduct(product, userId);
     }
 
     //cập nhật giảm giá

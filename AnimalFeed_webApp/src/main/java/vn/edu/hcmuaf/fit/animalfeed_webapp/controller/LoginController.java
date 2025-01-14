@@ -26,24 +26,37 @@ public class LoginController extends HttpServlet {
         if (user != null) {
             HttpSession session = req.getSession();
             session.setAttribute("user", user); // Lưu thông tin người dùng vào session
+            session.setAttribute("userId", user.getId());  // Lưu userId vào session
 
             // Chuyển hướng tới trang chính (dashboard)
             if (user.getRole() == 1) {
-                resp.sendRedirect("views/admin/home.jsp"); // Admin được chuyển đến trang quản trị
+                resp.sendRedirect("dashboard"); // Admin được chuyển đến trang quản trị
             } else {
-                resp.sendRedirect("index.jsp"); // User được chuyển đến trang người dùng
+                resp.sendRedirect("home"); // User được chuyển đến trang người dùng
                 Cart cart = new Cart();
                 cart.syncDatabase(user.getId());
                 session.setAttribute("cart", cart);
             }
         } else {
             req.setAttribute("error", "Số điện thoại hoặc mật khẩu không đúng!");
-            req.getRequestDispatcher("/views/web/login.jsp#rs").forward(req, resp);
+            req.getRequestDispatcher("login").forward(req, resp);
         }
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/views/web/login.jsp#lo").forward(req, resp);
+        HttpSession session = req.getSession(false);
+        User user = (User) (session != null ? session.getAttribute("user") : null);
+
+        if (user != null) {
+            // Chuyển hướng nếu đã đăng nhập
+            if (user.getRole() == 1) {
+                resp.sendRedirect("dashboard");
+            }else if (user.getRole() == 0) {
+                resp.sendRedirect("home");
+            }
+        } else {
+            req.getRequestDispatcher("/views/web/login.jsp").forward(req, resp);
+        }
     }
 }

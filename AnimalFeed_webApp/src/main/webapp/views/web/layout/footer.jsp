@@ -36,52 +36,36 @@
                     </div>
                     <div class="col-md-2 text-left">
                         <div class="h4 text-light">SẢN PHẨM</div>
-                        <a href="${pageContext.request.contextPath}/views/web/each_product/product_pig.jsp">
-                            <div class="p mt-3">Thức ăn cho Heo</div>
-                        </a>
-                        <a href="${pageContext.request.contextPath}/views/web/each_product/product_chicken.jsp">
-                            <div class="p mt-3">Thức ăn cho Gà</div>
-                        </a>
-                        <a href="${pageContext.request.contextPath}/views/web/each_product/product_duck.jsp">
-                            <div class="p mt-3">Thức ăn cho Vịt</div>
-                        </a>
-                        <a href="${pageContext.request.contextPath}/views/web/each_product/product_cow.jsp">
-                            <div class="p mt-3">Thức ăn cho Bò</div>
-                        </a>
-                        <a href="${pageContext.request.contextPath}/views/web/each_product/product_shirmp.jsp">
-                            <div class="p mt-3">Thức ăn cho Tôm</div>
-                        </a>
-                        <a href="${pageContext.request.contextPath}/views/web/each_product/product_fish.jsp">
-                            <div class="p mt-3">Thức ăn cho Cá</div>
-                        </a>
-                        <a href="${pageContext.request.contextPath}/views/web/each_product/product_goat.jsp">
-                            <div class="p mt-3">Thức ăn cho Dê</div>
-                        </a>
+                        <c:forEach var="ca" items="${categoriesData}">
+                            <a href="list-product?categoryId=${ca.id}">
+                                <div class="p mt-3">${ca.name}</div>
+                            </a>
+                        </c:forEach>
                     </div>
                     <div class="col-md-2">
                         <div class="h4 text-light text-left">VỀ VINAFEED</div>
-                        <a href="${pageContext.request.contextPath}/views/web/introduction.jsp#gioi_thieu_chung">
+                        <a href="${pageContext.request.contextPath}/introduction#gioi_thieu_chung">
                             <div class="p mt-3">Giới thiệu chung</div>
                         </a>
-                        <a href="${pageContext.request.contextPath}/views/web/introduction.jsp#lich_su">
+                        <a href="${pageContext.request.contextPath}/introduction#lich_su">
                             <div class="p mt-3">Lịch sử hình thành</div>
                         </a>
-                        <a href="${pageContext.request.contextPath}/views/web/introduction.jsp#chien_luoc">
+                        <a href="${pageContext.request.contextPath}/introduction#chien_luoc">
                             <div class="p mt-3">Tầm nhìn chiến lược</div>
                         </a>
-                        <a href="${pageContext.request.contextPath}/views/web/introduction.jsp#quan_diem">
+                        <a href="${pageContext.request.contextPath}/introduction#quan_diem">
                             <div class="p mt-3">Quan điểm kinh doanh</div>
                         </a>
-                        <a href="${pageContext.request.contextPath}/views/web/introduction.jsp#cam_ket">
+                        <a href="${pageContext.request.contextPath}/introduction#cam_ket">
                             <div class="p mt-3">Cam kết chất lượng</div>
                         </a>
-                        <a href="${pageContext.request.contextPath}/views/web/introduction.jsp#nhan_luc">
+                        <a href="${pageContext.request.contextPath}/introduction#nhan_luc">
                             <div class="p mt-3">Nguồn nhân lực</div>
                         </a>
-                        <a href="${pageContext.request.contextPath}/views/web/introduction.jsp#van_hoa">
+                        <a href="${pageContext.request.contextPath}/introduction#van_hoa">
                             <div class="p mt-3">Văn hóa công ty</div>
                         </a>
-                        <a href="${pageContext.request.contextPath}/views/web/introduction.jsp#thanh_tich">
+                        <a href="${pageContext.request.contextPath}/introduction#thanh_tich">
                             <div class="p mt-3">Thành tích</div>
                         </a>
                     </div>
@@ -96,13 +80,13 @@
                         <a href="${pageContext.request.contextPath}/views/web/library.jsp">
                             <div class="p mt-3">Thư viện</div>
                         </a>
-                        <a href="${pageContext.request.contextPath}/views/web/partner.jsp">
+                        <a href="${pageContext.request.contextPath}/partner">
                             <div class="p mt-3">Đối tác</div>
                         </a>
-                        <a href="${pageContext.request.contextPath}/views/web/privacy_policy.jsp">
+                        <a href="${pageContext.request.contextPath}/privacy-policy">
                             <div class="p mt-3">Chính sách bảo mật</div>
                         </a>
-                        <a href="${pageContext.request.contextPath}/views/web/purchasing_policy.jsp">
+                        <a href="${pageContext.request.contextPath}/purchasing-policy">
                             <div class="p mt-3">Hướng dẫn mua hàng & thanh toán online</div>
                         </a>
                         <a href="${pageContext.request.contextPath}/views/web/help.jsp">

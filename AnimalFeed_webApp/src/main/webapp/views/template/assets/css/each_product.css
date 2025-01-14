@@ -69,7 +69,7 @@ img {
     transform: scale(1.2);
 }
 
-.product .col .text-h {
+.text-h {
     color: #198754;
 }
 .product .col:hover .text-h {
