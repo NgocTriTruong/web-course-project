@@ -26,7 +26,7 @@ public class UserDao {
     }
 
     //Method register
-    public boolean insertUser(User user) {
+    public void insertUser(User user) {
 
         jdbi.withHandle(handle ->
                 handle.createUpdate("INSERT INTO users (full_Name, password, phone, status, create_date, update_date, role) VALUES (:full_Name, :password, :phone, :status, :create_date, :update_date, :role)")
@@ -39,7 +39,6 @@ public class UserDao {
                         .bind("role", user.getRole())
                         .execute()
         );
-        return false;
     }
 
     //load data user
@@ -64,7 +63,6 @@ public class UserDao {
 
     //login
     public User login(String phone, String password) {
-        Jdbi jdbi = JdbiConnect.getJdbi();
         return jdbi.withHandle(handle ->
                 handle.createQuery("SELECT * FROM users WHERE phone = :phone AND password = :password")
                         .bind("phone", phone)
