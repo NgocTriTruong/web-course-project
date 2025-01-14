@@ -1,372 +1,193 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: ADMIN
-  Date: 12/26/2024
-  Time: 4:53 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VINAFEED</title>
-
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/themify-icons/themify-icons.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
-
+    <%--    <link rel="stylesheet" href="<%= request.getContextPath() %>/views/template/assets/css/login.css">--%>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.min.css">
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet"/>
+    <title>Đăng nhập</title>
     <style>
-        @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
-
-        * {
-            box-sizing: border-box;
-        }
-
+        /* Cải tiến chung */
         body {
-            background: #f6f5f7;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            font-family: 'Montserrat', sans-serif;
-            height: 100vh;
-            margin: -20px 0 50px;
-        }
-
-        h1 {
-            font-weight: bold;
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f9fc;
             margin: 0;
-        }
-
-        h2 {
-            text-align: center;
-        }
-
-        p {
-            font-size: 14px;
-            font-weight: 100;
-            line-height: 20px;
-            letter-spacing: 0.5px;
-            margin: 20px 0 30px;
-        }
-
-        span {
-            font-size: 12px;
-        }
-
-        a {
-            color: #333;
-            font-size: 14px;
-            text-decoration: none;
-            margin: 15px 0;
-        }
-
-        button {
-            border-radius: 20px;
-            border: 1px solid #FF4B2B;
-            background-color: #FF4B2B;
-            color: #FFFFFF;
-            font-size: 12px;
-            font-weight: bold;
-            padding: 12px 45px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            transition: transform 80ms ease-in;
-        }
-
-        button:active {
-            transform: scale(0.95);
-        }
-
-        button:focus {
-            outline: none;
-        }
-
-        button.ghost {
-            background-color: transparent;
-            border-color: #FFFFFF;
-        }
-
-        form {
-            background-color: #FFFFFF;
+            padding: 0;
             display: flex;
-            align-items: center;
             justify-content: center;
-            flex-direction: column;
-            padding: 0 50px;
-            height: 100%;
-            text-align: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
         }
 
-        input {
-            background-color: #eee;
-            border: none;
-            padding: 12px 15px;
-            margin: 8px 0;
+        /* Tạo hiệu ứng cho phần đăng nhập */
+        .login-form-section {
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
             width: 100%;
+            max-width: 500px;
+            padding: 40px;
+            animation: fadeIn 1s ease-in-out;
         }
 
-        .container {
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
-            0 10px 10px rgba(0, 0, 0, 0.22);
-            position: relative;
-            overflow: hidden;
-            width: 768px;
-            max-width: 100%;
-            min-height: 480px;
-        }
-
-        .form-container {
-            position: absolute;
-            top: 0;
-            height: 100%;
-            transition: all 0.6s ease-in-out;
-        }
-
-        .sign-in-container {
-            left: 0;
-            width: 50%;
-            z-index: 2;
-        }
-
-        .container.right-panel-active .sign-in-container {
-            transform: translateX(100%);
-        }
-
-        .sign-up-container {
-            left: 0;
-            width: 50%;
-            opacity: 0;
-            z-index: 1;
-        }
-
-        .container.right-panel-active .sign-up-container {
-            transform: translateX(100%);
-            opacity: 1;
-            z-index: 5;
-            animation: show 0.6s;
-        }
-
-        @keyframes show {
-
-            0%,
-            49.99% {
+        /* Hiệu ứng fade-in cho phần đăng nhập */
+        @keyframes fadeIn {
+            0% {
                 opacity: 0;
-                z-index: 1;
+                transform: translateY(-30px);
             }
-
-            50%,
             100% {
                 opacity: 1;
-                z-index: 5;
+                transform: translateY(0);
             }
         }
 
-        .overlay-container {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            width: 50%;
-            height: 100%;
-            overflow: hidden;
-            transition: transform 0.6s ease-in-out;
-            z-index: 100;
+        /* Tiêu đề */
+        .login-form-section h2 {
+            font-size: 2.4rem;
+            font-weight: bold;
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
         }
 
-        .container.right-panel-active .overlay-container {
-            transform: translateX(-100%);
+        /* Phần nhập liệu */
+        .form-control {
+            font-size: 16px;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .overlay {
-            background: #FF416C;
-            background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
-            background: linear-gradient(to right, #FF4B2B, #FF416C);
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: 0 0;
-            color: #FFFFFF;
-            position: relative;
-            left: -100%;
-            height: 100%;
-            width: 200%;
-            transform: translateX(0);
-            transition: transform 0.6s ease-in-out;
+        /* Màu khi focus vào input */
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
         }
 
-        .container.right-panel-active .overlay {
-            transform: translateX(50%);
+        /* Nút đăng nhập */
+        .btn-primary {
+            width: 100%;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 16px;
+            background-color: #007bff;
+            border: none;
+            color: white;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
 
-        .overlay-panel {
-            position: absolute;
+        /* Hiệu ứng khi hover nút đăng nhập */
+        .btn-primary:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        /* Liên kết đăng ký */
+        .register-link {
+            text-align: center;
+            color: #007bff;
+            font-size: 16px;
+            text-decoration: none;
+            display: block;
+            margin-top: 20px;
+            transition: color 0.3s ease, text-decoration 0.3s ease;
+        }
+
+        /* Hiệu ứng hover cho liên kết đăng ký */
+        .register-link:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+        /* Liên kết quên mk */
+        .reset_pass-link {
+            text-align: center;
+            color: #007bff;
+            font-size: 16px;
+            text-decoration: none;
+            display: block;
+            margin-top: 20px;
+            transition: color 0.3s ease, text-decoration 0.3s ease;
+        }
+
+        /* Hiệu ứng hover cho liên kết đăng ký */
+        .reset_pass-link:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+        /* Phần Navbar */
+        .navbar {
+            background-color: #007bff;
+            padding: 15px 20px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            padding: 0 40px;
-            text-align: center;
+            position: fixed;
+            width: 100%;
             top: 0;
-            height: 100%;
-            width: 50%;
-            transform: translateX(0);
-            transition: transform 0.6s ease-in-out;
+            left: 0;
+            z-index: 1000;
         }
 
-        .overlay-left {
-            transform: translateX(-20%);
+        .navbar a {
+            color: white;
+            font-size: 18px;
+            text-decoration: none;
+            margin-left: 20px;
         }
 
-        .container.right-panel-active .overlay-left {
-            transform: translateX(0);
+        .navbar a:hover {
+            text-decoration: underline;
         }
 
-        .overlay-right {
-            right: 0;
-            transform: translateX(0);
+        /* Tạo khoảng cách giữa các phần */
+        .mb-3 {
+            margin-bottom: 20px;
         }
 
-        .container.right-panel-active .overlay-right {
-            transform: translateX(20%);
-        }
-
-        .social-container {
-            margin: 20px 0;
-        }
-
-        .social-container a {
-            border: 1px solid #DDDDDD;
-            border-radius: 50%;
-            display: inline-flex;
+        /* Phần thân của form, đảm bảo không bị kéo dài quá */
+        .login-container {
+            display: flex;
             justify-content: center;
             align-items: center;
-            margin: 0 5px;
-            height: 40px;
-            width: 40px;
+            width: 100%;
+            min-height: 100vh;
+            background-color: #f7f9fc;
         }
 
-        footer {
-            background-color: #222;
-            color: #fff;
-            font-size: 14px;
-            bottom: 0;
-            position: fixed;
-            left: 0;
-            right: 0;
-            text-align: center;
-            z-index: 999;
-        }
-
-        footer p {
-            margin: 10px 0;
-        }
-
-        footer i {
-            color: red;
-        }
-
-        footer a {
-            color: #3c97bf;
-            text-decoration: none;
-        }
     </style>
 </head>
 <body>
-<div class="container" id="container">
-    <div id="rs" class="form-container sign-up-container">
-        <form action="register" method="post">
-            <h1>Đăng kí tài khoản</h1>
-            <div class="social-container">
-                <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+<div class="login-container">
+    <div class="login-form-section">
+        <h2>Đăng nhập</h2>
+        <p class="text-center">Vui lòng đăng nhập để truy cập tài khoản của bạn</p>
+        <!-- Chuyển action tới servlet xử lý đăng nhập -->
+        <form action="<%= request.getContextPath() %>/login" method="post" id="loginForm">
+            <div class="mb-3">
+                <input type="tel" class="form-control" id="id_phone" name="phone" placeholder="Nhập số điện thoại" required>
             </div>
-            <span>hoặc sử dụng số điện thoại và mật khẩu để đăng kí</span>
-            <input type="text" name="fullName" placeholder="Full Name" required />
-            <input type="text" name="phone" placeholder="Phone" required />
-            <input type="password" name="password" placeholder="Password" required />
-            <input type="password" name="confirmPassword" placeholder="Confirm Password" required />
-            <button type="submit">Sign Up</button>
+            <div class="mb-3">
+                <input class="form-control" id="id_password" placeholder="Nhập mật khẩu" name="password" type="password" aria-label="Mật khẩu" required />
+            </div>
+            <div class="text-center">
+                <button class="btn btn-primary" type="submit">ĐĂNG NHẬP</button>
+            </div>
         </form>
-        <c:if test="${not empty errorMessage}">
-            <p>${errorMessage}</p>
-        </c:if>
-    </div>
-
-    <div id="lo" class="form-container sign-in-container">
-        <form action="login" method="POST">
-            <h1>Đăng nhập tài khoản</h1>
-            <div class="social-container">
-                <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-            </div>
-            <span>hoặc sử dụng tài khoản của bạn</span>
-            <input type="text" name="phone" placeholder="Phone" required />
-            <input type="password" name="password" placeholder="Password" required />
-            <a href="#">Quên mật khẩu ?</a>
-            <button type="submit">Sign In</button>
-        </form>
-        <c:if test="${not empty errorMessage}">
-            <p>${errorMessage}</p>
-        </c:if>
-    </div>
-
-    <div class="overlay-container">
-        <div class="overlay">
-            <div class="overlay-panel overlay-left">
-                <h1>Welcome Back!</h1>
-                <p>To keep connected with us please log in with your personal info</p>
-                <button class="ghost" id="signIn">Sign In</button>
-            </div>
-            <div class="overlay-panel overlay-right">
-                <h1>Hello, Friend!</h1>
-                <p>Enter your personal details and start journey with us</p>
-                <button class="ghost" id="signUp">Sign Up</button>
-            </div>
-        </div>
+        <a href="<%= request.getContextPath() %>/register" class="register-link">Chưa có tài khoản? Đăng ký</a>
+        <a href="<%= request.getContextPath() %>/reset_pass" class="reset_pass-link">Quên mật khẩu</a>
     </div>
 </div>
-
-<script>
-    const signUpButton = document.getElementById('signUp');
-    const signInButton = document.getElementById('signIn');
-    const container = document.getElementById('container');
-
-    signUpButton.addEventListener('click', () => {
-        container.classList.add('right-panel-active');
-    });
-
-    signInButton.addEventListener('click', () => {
-        container.classList.remove('right-panel-active');
-    });
-
-    // Kiểm tra dữ liệu trước khi gửi
-    document.querySelectorAll("form").forEach(form => {
-        form.addEventListener("submit", function(event) {
-            const phone = form.querySelector("input[name='phone']").value;
-            const password = form.querySelector("input[name='password']").value;
-
-            if (!phone || !password) {
-                alert("Please fill in both fields.");
-                event.preventDefault();
-            }
-        });
-    });
-</script>
-<script>
-    function validatePassword() {
-        const password = document.querySelector("input[name='password']").value;
-        const confirmPassword = document.querySelector("input[name='confirmPassword']").value;
-
-        if (password !== confirmPassword) {
-            alert("Passwords do not match.");
-            return false;
-        }
-        return true;
-    }
-</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3vI0Txkzl5M7G7rvB/JF9QFJzUawmGJlfyep7EJiF" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 </html>

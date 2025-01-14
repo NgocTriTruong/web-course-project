@@ -460,7 +460,7 @@
 <script>
   window.addEventListener("scroll", addStickyClass);
 
-  var header = document.getElementById("header-placeholder"); // lấy phần tử header theo ID
+  var header = document.getElementById("header"); // lấy phần tử header theo ID
   var sticky = header.offsetTop; // lấy vị trí của header
 
   function addStickyClass() {
