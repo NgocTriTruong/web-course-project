@@ -4,6 +4,7 @@ import org.jdbi.v3.core.Jdbi;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.db.JdbiConnect;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -45,24 +46,14 @@ public class UserDao {
     public List<User> loadUsers() {
         return jdbi.withHandle(handle ->
                 handle.createQuery("SELECT * FROM users")
-                        .map((rs, ctx) -> {
-                            int id = rs.getInt("id");
-                            String fullName = rs.getString("full_name"); // Tên cột chính xác
-                            String password = rs.getString("password");
-                            String phone = rs.getString("phone");
-                            int status = rs.getInt("status");
-                            Date createDate = rs.getDate("create_date");
-                            Date updateDate = rs.getDate("update_date");
-                            int role = rs.getInt("role");
-                            return new User(id, fullName, password, phone, status, createDate, updateDate, role);
-                        })
                         .mapToBean(User.class)
-
                         .list()
         );
     }
 
+    // Login method
     public User login(String phone, String password) {
+        Jdbi jdbi = JdbiConnect.getJdbi();
         return jdbi.withHandle(handle ->
                 handle.createQuery("SELECT * FROM users WHERE phone = :phone AND password = :password")
                         .bind("phone", phone)    // Gắn giá trị biến 'phone'
@@ -73,22 +64,6 @@ public class UserDao {
         );
     }
 
-    //delete user
-    public boolean deleteUser(int userId) {
-        jdbi.withHandle(handle ->
-                handle.createUpdate("DELETE FROM users WHERE id = :id")
-                        .bind("id", userId)
-                        .execute()
-        );
-        return false;
-    }
-
-    //get id user
-    public User getIdUser(int userID) {
-        return jdbi.withHandle(handle -> handle.createQuery("select * from users where id = :id")
-                .bind("id", userID).mapToBean(User.class)
-                .findOne().orElse(null));
-
     //Kiểm tra xem user có phải là admin hay không
     public static boolean checkIfAdmin(int userId) {
         return jdbi.withHandle(handle ->
@@ -97,46 +72,25 @@ public class UserDao {
                         .mapTo(Integer.class).findOne().
                         orElse(0) == 1    // role = 1 là admin
         );
-
     }
-
-    //update user
-    public boolean updateUser(User user) {
-        jdbi.withHandle(handle ->
-                handle.createUpdate("UPDATE users SET full_Name = :fullName, password = :password, phone = :phone, role = :role, status = :status, update_date = :updateDate WHERE id = :id")
-                        .bind("fullName", user.getFullName())
-                        .bind("password", user.getPassword())
-                        .bind("phone", user.getPhone())
-                        .bind("role", user.getRole())
-                        .bind("status", user.getStatus())
-                        .bind("updateDate", user.getUpdateDate())
-                        .bind("id", user.getId())
-                        .execute()
-        );
-        return false;
-    }
-
 
     public static void main (String[]args){
-//            Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
-//            System.out.println("Vui lòng nhập số điện thoại:");
-//            String phone = scanner.nextLine();
-//
-//            System.out.println("Vui lòng nhập mật khẩu:");
-//            String password = scanner.nextLine();
-        UserDao dao = new UserDao();
-        List<User> users = dao.loadUsers();
-        System.out.print("Danh sách người dùng: " + users);
-//
+        System.out.println("Vui lòng nhập số điện thoại:");
+        String phone = scanner.nextLine();
 
+        System.out.println("Vui lòng nhập mật khẩu:");
+        String password = scanner.nextLine();
 
-//            if (user != null) {
-//                System.out.println("Đăng nhập thành công!");
-//                System.out.println("Xin chào, " + user.getFullName());
-//            } else {
-//                System.out.println("Số điện thoại hoặc mật khẩu không đúng. Vui lòng thử lại!");
-//            }
+        UserDao myClass = new UserDao(); // Lớp chứa hàm login()
+        User user = myClass.login(phone, password);
+
+        if (user != null) {
+            System.out.println("Đăng nhập thành công!");
+            System.out.println("Xin chào, " + user.getFullName());
+        } else {
+            System.out.println("Số điện thoại hoặc mật khẩu không đúng. Vui lòng thử lại!");
         }
     }
-
+}
