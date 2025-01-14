@@ -1,0 +1,184 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f1f4f8;
+    margin: 0;
+    padding: 20px 0;
+    color: #333;
+    scrollbar-width: auto; /* Firefox */
+    scrollbar-color: #888 #f1f1f1; /* Firefox */
+}
+
+body::-webkit-scrollbar {
+    width: 16px;
+}
+
+body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 8px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+}
+
+.form-section {
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    max-width: 700px;
+    margin: 20px auto 60px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-section h2 {
+    /* margin-bottom: 5px; Điều chỉnh khoảng cách giữa tiêu đề và các trường */
+    font-size: 2rem;
+    font-weight: 600;
+    color: #007bff;
+    text-align: center;
+}
+
+.form-section p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.form-control {
+    margin-bottom: 10px; /* Rút ngắn khoảng cách giữa các trường */
+    border-radius: 8px;
+    padding: 10px; /* Padding nhẹ hơn để các trường nhập không bị quá rộng */
+    border: 1px solid #ced4da;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    font-size: 1rem;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+    outline: none;
+}
+
+.form-control::placeholder {
+    color: #888;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 14px 20px;
+    width: 100%;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.breadcrumb {
+    background-color: transparent;
+    padding-left: 0;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.breadcrumb-item a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.breadcrumb-item a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb-item.active {
+    color: #6c757d;
+}
+
+/* Style cho thông báo lỗi */
+.error-message {
+    color: red;
+    font-size: 0.875rem;
+    display: none;
+    margin-top: 5px;
+}
+
+/* Style cho các trường hợp lỗi khi nhập */
+input.invalid {
+    border-color: red;
+}
+
+
+.error-message.visible {
+    visibility: visible;
+}
+
+.success-message {
+    color: #28a745;
+    font-size: 1.1rem;
+    text-align: center;
+    display: none;
+    margin-bottom: 20px;
+}
+
+/* Điều chỉnh cho các màn hình nhỏ hơn */
+@media (max-width: 576px) {
+    .form-section {
+        padding: 25px;
+    }
+
+    .form-control {
+        font-size: 1rem;
+        padding: 12px;
+    }
+
+    .btn-primary {
+        padding: 12px;
+    }
+}
+
+/* Liên kết đăng ký */
+.login-link {
+    text-align: center;
+    color: #007bff;
+    font-size: 16px;
+    text-decoration: none;
+    display: block;
+    margin-top: 20px;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+/* Hiệu ứng hover cho liên kết đăng ký */
+.login-link:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}

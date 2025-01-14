@@ -23,7 +23,7 @@ public class AuthService implements Filter {
         String path = req.getRequestURI();
 
         // Danh sách các URL được phép truy cập mà không cần đăng nhập
-        List<String> allowedUrls = Arrays.asList("/login", "/views/web/login.jsp", "index.jsp");
+        List<String> allowedUrls = Arrays.asList("/login", "/register", "home");
 
         // Kiểm tra nếu URL hiện tại nằm trong danh sách được phép
         boolean isAllowedUrl = allowedUrls.stream()
@@ -39,7 +39,7 @@ public class AuthService implements Filter {
         // Kiểm tra quyền truy cập admin area
         if (path.contains("/admin/")) {
             if (user == null || user.getRole() != 1) {
-                res.sendRedirect(req.getContextPath() + "/views/web/login.jsp");
+                res.sendRedirect(req.getContextPath() + "login");
                 return;
             }
         }
@@ -47,7 +47,7 @@ public class AuthService implements Filter {
         // Kiểm tra quyền truy cập user area
         else if (path.contains("/user/")) {
             if (user == null || user.getRole() != 0) {
-                res.sendRedirect(req.getContextPath() + "/views/web/login.jsp");
+                res.sendRedirect(req.getContextPath() + "login");
                 return;
             }
         }
