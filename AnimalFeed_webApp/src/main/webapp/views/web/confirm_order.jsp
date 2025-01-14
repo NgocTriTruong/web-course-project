@@ -18,9 +18,6 @@
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/views/template/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
 
-    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/add_layout.js"
-            defer></script>
-
     <script src="${pageContext.request.contextPath}/views/template/assets/scripts/confirm_login.js"></script>
 
     <style>
@@ -146,7 +143,7 @@
                                 <div class="address-form-content bg-white">
                                     <div class="form-header d-flex justify-content-between align-items-center p-3">
                                         <h5 class="m-0">Thêm địa chỉ nhận hàng</h5>
-                                        <button class="btn-close" onclick="closeAddressForm()">&times;</button>
+                                        <button type="button" id="closeAddressForm" class="btn-close" >&times;</button>
                                     </div>
 
                                     <div class="form-container p-3">
@@ -179,8 +176,8 @@
                                     </div>
 
                                     <div class="form-footer p-3">
-                                        <button class="btn w-100" onclick="saveAddress()"
-                                                style="background-color: #fcae18;">Lưu địa chỉ
+                                        <button type="button" id="saveAddressButton" class="btn w-100" style="background-color: #fcae18;">
+                                            Lưu địa chỉ
                                         </button>
                                     </div>
                                 </div>
@@ -229,5 +226,27 @@
 <%@ include file="layout/footer.jsp" %>
 
 <script src="${pageContext.request.contextPath}/views/template/assets/scripts/call-api-address.js"></script>
+
+<script>
+    // Load provinces when page loads
+    document.addEventListener("DOMContentLoaded", function() {
+        loadProvinces();
+
+        // Add click handler for opening the modal
+        document.querySelector('.chose_location').addEventListener('click', function() {
+            openAddressForm();
+        });
+
+        document.getElementById('closeAddressForm').addEventListener('click', function() {
+            console.log('Close button clicked');
+            closeAddressForm();
+        });
+
+        document.getElementById('saveAddressButton').addEventListener('click', function() {
+            console.log('Save button clicked');
+            saveAddress();
+        });
+    });
+</script>
 </body>
 </html>

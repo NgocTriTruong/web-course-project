@@ -15,14 +15,14 @@ import java.util.List;
 
 @WebServlet(name = "Order", value = "/create-order")
 public class OrderController extends HttpServlet {
-    private OrderService orderService;
     private CartService cartService;
+    private OrderService orderService;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        orderService = new OrderService();
         cartService = new CartService();
+        orderService = new OrderService();
     }
 
     @Override
@@ -73,14 +73,10 @@ public class OrderController extends HttpServlet {
             order.setOrderDate(new Timestamp(System.currentTimeMillis()));
             order.setShippingPrice(0.0); // Free shipping as per UI
 
-            // Insert order and get generated ID
             orderService.insertOrder(order);
 
             // Create order details for selected items
             for (CartItem cartItem : selectedItems) {
-                // Remove item from cart
-                cart.removeProduct(cartItem.getProductId());
-
                 // Delete from cart_details table
                 cartService.deleteCD(cartItem.getProductId(), user.getId());
 
@@ -91,8 +87,11 @@ public class OrderController extends HttpServlet {
                 orderDetail.setQuantity(cartItem.getQuantity());
                 orderDetail.setTotalPrice(cartItem.getTotal());
 
-                // Insert order detail
-                orderService.insertOrderDetail(orderDetail);
+                orderService.insertOrderDetails(orderDetail);
+
+                // Remove item from cart
+                cart.removeProduct(cartItem.getProductId());
+
             }
 
             // Update session cart
