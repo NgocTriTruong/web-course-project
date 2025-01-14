@@ -12,7 +12,7 @@
 <div class="container">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="<%= request.getContextPath() %>/index.jsp" class="home-link">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="<%= request.getContextPath() %>/home" class="home-link">Trang chủ</a></li>
             <li class="breadcrumb-item active" aria-current="page">Đăng ký tài khoản</li>
         </ol>
     </nav>
@@ -30,11 +30,11 @@
                 <div class="error-message" id="phoneError">Lỗi số điện thoại</div>
             </div>
             <div class="mb-3">
-                <input class="form-control" id="id_password1" type="password" name="password1" maxlength="100" placeholder="Mật khẩu *" required>
+                <input class="form-control" id="id_password1" type="password" name="password" maxlength="100" placeholder="Mật khẩu *" required>
                 <div class="error-message" id="password1Error">Lỗi mật khẩu</div>
             </div>
             <div class="mb-3">
-                <input class="form-control" id="id_password2" type="password" name="password2" maxlength="100" placeholder="Nhập lại mật khẩu *" required>
+                <input class="form-control" id="id_password2" type="password" name="confirmPassword" maxlength="100" placeholder="Nhập lại mật khẩu *" required>
                 <div class="error-message" id="password2Error">Mật khẩu không khớp</div>
             </div>
             <div class="text-center">
