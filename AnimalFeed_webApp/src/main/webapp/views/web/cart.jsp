@@ -212,7 +212,7 @@
     function updateCheckboxStatus(productId, checked) {
         const contextPath = '${pageContext.request.contextPath}';
         const status = checked ? 1 : 0;
-        const url = contextPath + '/update-cart?productId='+ productId + '& status=' + status;
+        const url = contextPath + '/update-cart?productId='+ productId + '&status=' + status;
         console.log(url);
 
         fetch(url)
