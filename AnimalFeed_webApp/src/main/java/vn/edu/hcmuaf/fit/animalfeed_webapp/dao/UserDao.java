@@ -56,27 +56,19 @@ public class UserDao {
                             int role = rs.getInt("role");
                             return new User(id, fullName, password, phone, status, createDate, updateDate, role);
                         })
+                        .mapToBean(User.class)
+
                         .list()
         );
     }
 
-
-    //login
     public User login(String phone, String password) {
         return jdbi.withHandle(handle ->
                 handle.createQuery("SELECT * FROM users WHERE phone = :phone AND password = :password")
-                        .bind("phone", phone)
-                        .bind("password", password)
-                        .map((rs, ctx) -> {
-                            int id = rs.getInt("id");
-                            String fullName = rs.getString("full_name");
-                            int status = rs.getInt("status");
-                            Date createDate = rs.getDate("create_date");
-                            Date updateDate = rs.getDate("update_date");
-                            int role = rs.getInt("role");
-                            return new User(id, fullName, password, phone, status, createDate, updateDate, role);
-                        })
-                        .findOne()
+                        .bind("phone", phone)    // Gắn giá trị biến 'phone'
+                        .bind("password", password)  // Gắn giá trị biến 'password'
+                        .mapToBean(User.class)  // Tự động ánh xạ kết quả vào lớp User
+                        .findOne()  // Lấy kết quả đầu tiên, nếu có
                         .orElse(null) // Nếu không tìm thấy, trả về null
         );
     }
@@ -96,6 +88,16 @@ public class UserDao {
         return jdbi.withHandle(handle -> handle.createQuery("select * from users where id = :id")
                 .bind("id", userID).mapToBean(User.class)
                 .findOne().orElse(null));
+
+    //Kiểm tra xem user có phải là admin hay không
+    public static boolean checkIfAdmin(int userId) {
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT role FROM users WHERE id = :userId")
+                        .bind("userId", userId)
+                        .mapTo(Integer.class).findOne().
+                        orElse(0) == 1    // role = 1 là admin
+        );
+
     }
 
     //update user

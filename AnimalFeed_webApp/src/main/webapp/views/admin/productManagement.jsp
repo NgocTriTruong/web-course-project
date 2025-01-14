@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "f" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,8 +21,6 @@
 
     <script src="${pageContext.request.contextPath}/views/admin/assets/js/mdb.min.js"></script>
 
-    <!-- js add header -->
-     <script src="${pageContext.request.contextPath}/views/admin/assets/js/add_header.js" defer></script>
 </head>
 
 <body>
@@ -86,86 +87,71 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>
-                        <span class="ms-2 h6">1</span>
-                    </td>
-                    <td>
-                        <div>
-                            <p class="h6 mb-1">Thức ăn cho heo</p>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="d-flex align-items-center">
-                            <div class="">
-                                <p class="h6 mb-1 ms-1">TOP 01</p>
+                <c:forEach var="p" items="${products}" varStatus="status">
+                    <tr>
+                        <td>
+                            <span class="ms-2 h6">${p.id}</span>
+                        </td>
+                        <td>
+                            <div>
+                                <c:forEach var="ca" items="${categories}">
+                                    <p class="h6 mb-1">
+                                        <c:if test="${p.cat_id == ca.id}">
+                                            ${ca.name}
+                                        </c:if>
+                                    </p>
+                                </c:forEach>
                             </div>
-                        </div>
-                    </td>
-                    <td>
-                        <span class="h6">Dùng cho heo con từ 05 ngày tuổi đến 35 ngày tuổi</span>
-                    </td>
-                    <td>
-                        <p class="fw-normal mb-1 h6">420.000đ</p>
-                    </td>
-                    <td>
-                        <span class="badge badge-danger rounded-pill d-inline ms-2" style="font-size: 14px;">20%</span>
-                    </td>
-                    <td>
-                        <span class="badge badge-success rounded-pill d-inline ms-1" style="font-size: 14px;">Còn bán</span>
-                    </td>
-                    <td>
-                        <a href="productAddition.jsp" class="btn bg_green btn-floating" style="font-size: 16px;">
-                            <i class="far fa-pen-to-square"></i>
-                        </a>
-                        <button type="button" class="btn bg_yellow btn-floating" style="font-size: 16px;">
-                            <i class="far fa-trash-can"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span class="ms-2 h6">2</span>
-                    </td>
-                    <td>
-                        <div>
-                            <p class="h6 mb-1">Thức ăn cho heo</p>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="d-flex align-items-center">
-                            <div class="">
-                                <p class="h6 mb-1 ms-1">TOP 02</p>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div class="">
+                                    <p class="h6 mb-1 ms-1">${p.name}</p>
+                                </div>
                             </div>
-                        </div>
-                    </td>
-                    <td>
-                        <span class="h6">Dùng cho heo con từ 05 ngày tuổi đến 35 ngày tuổi</span>
-                    </td>
-                    <td>
-                        <p class="fw-normal mb-1 h6">420.000đ</p>
-                    </td>
-                    <td>
-                        <span class="badge badge-danger rounded-pill d-inline ms-2" style="font-size: 14px;">0%</span>
-                    </td>
-                    <td>
-                        <span class="badge badge-success rounded-pill d-inline ms-1" style="font-size: 14px;">Còn bán</span>
-                    </td>
-                    <td>
-                        <a href="productAddition.jsp" class="btn bg_green btn-floating" style="font-size: 16px;">
-                            <i class="far fa-pen-to-square"></i>
-                        </a>
-                        <button type="button" class="btn bg_yellow btn-floating" style="font-size: 16px;">
-                            <i class="far fa-trash-can"></i>
-                        </button>
-                    </td>
-                </tr>
+                        </td>
+                        <td>
+                            <span class="h6">${p.description}</span>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1 h6">${p.price}</p>
+                        </td>
+                        <td>
+                            <div>
+                                <c:forEach var="dis" items="${discountsData}">
+                                    <c:if test="${p.discountId == dis.id}">
+                                        <span class="badge badge-danger rounded-pill d-inline ms-3" style="font-size: 14px;">
+                                                ${dis.percentage}%
+                                        </span>
+                                    </c:if>
+                                </c:forEach>
+                            </div>
+                        </td>
 
+                        <td>
+                            <span class="badge rounded-pill d-inline ms-1" style="font-size: 14px; background-color: ${p.status == 1 ? 'green' : p.status == 2 ? 'orange' : 'red'};">
+                                <c:choose>
+                                    <c:when test="${p.status == 1}">Đang bán</c:when>
+                                    <c:when test="${p.status == 2}">Ngưng bán</c:when>
+                                    <c:otherwise>Đã xóa</c:otherwise>
+                                </c:choose>
+                            </span>
+                        </td>
+                        <td>
+                            <a href="productAddition.jsp?id=${p.id}" class="btn bg_green btn-floating" style="font-size: 16px;">
+                                <i class="far fa-pen-to-square"></i>
+                            </a>
+                            <a href="delete-product?productId= ${p.id}">
+                                <button type="button" class="btn bg_yellow btn-floating" style="font-size: 16px;">
+                                    <i class="far fa-trash-can"></i>
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                </c:forEach>
                 </tbody>
             </table>
         </div>
-
-
     </div>
 </main>
 <!--Main layout-->

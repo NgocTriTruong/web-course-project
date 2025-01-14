@@ -1,18 +1,12 @@
 package vn.edu.hcmuaf.fit.animalfeed_webapp.dao.cart;
 
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.CartDetailDao;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.ProductDao;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.UserDao;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.CartDetail;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.CartItem;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class Cart {
     private Map<Integer, CartItem> cartData = new HashMap<>();
@@ -52,9 +46,10 @@ public class Cart {
     }
 
     public double getTotalPrice() {
-        AtomicReference<Double> sum = new AtomicReference<>(0.0);
-        cartData.values().forEach(cartDetail -> sum.updateAndGet(value -> value + cartDetail.getTotal()));
-        return sum.get();
+        return cartData.values().stream()
+                .filter(cartItem -> cartItem.getStatus() == 1) // Only include items with status = 1
+                .mapToDouble(CartItem::getTotal) // Extract the total price
+                .sum(); // Sum the filtered totals
     }
 
     public List<CartItem> getConfirmedCartItem() {
@@ -84,5 +79,13 @@ public class Cart {
         for (CartItem item : dbItems) {
             cartData.put(item.getProductId(), item);
         }
+    }
+
+    public boolean updateStatus(int productId, int status) {
+        if (!cartData.containsKey(productId)) {
+            return false;
+        }
+        cartData.get(productId).setStatus(status);
+        return true;
     }
 }
