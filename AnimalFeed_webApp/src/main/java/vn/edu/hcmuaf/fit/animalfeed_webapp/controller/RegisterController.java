@@ -26,7 +26,7 @@ public class RegisterController extends HttpServlet {
         // Kiểm tra mật khẩu xác nhận
         if (!password.equals(confirmPassword)) {
             req.setAttribute("error", "Mật khẩu xác nhận không khớp!");
-            req.getRequestDispatcher("/views/web/login.jsp").forward(req, resp);
+            req.getRequestDispatcher("login").forward(req, resp);
             return;
         }
 
@@ -35,7 +35,7 @@ public class RegisterController extends HttpServlet {
         User existingUser = userDao.getUserByPhone(phone);
         if (existingUser != null) {
             req.setAttribute("error", "Số điện thoại đã được đăng ký!");
-            req.getRequestDispatcher("/views/web/register.jsp").forward(req, resp);
+            req.getRequestDispatcher("register").forward(req, resp);
             return;
         }
 
@@ -59,6 +59,6 @@ public class RegisterController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/views/web/login.jsp").forward(req, resp);
+        req.getRequestDispatcher("/views/web/register.jsp").forward(req, resp);
     }
 }
