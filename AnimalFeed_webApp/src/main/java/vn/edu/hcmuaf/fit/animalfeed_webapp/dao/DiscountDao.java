@@ -15,8 +15,12 @@ public class DiscountDao {
                 .mapToBean(Discount.class).list());
     }
 
-    public static void main(String[] args) {
-        DiscountDao discountDao = new DiscountDao();
-        System.out.println(discountDao.getAll());
+    //lay discount theo id
+    public Discount getDiscountById(int id) {
+        Jdbi jdbi = JdbiConnect.getJdbi();
+        return jdbi.withHandle(handle ->
+                handle.createQuery("select * from discounts where id = :id")
+                        .bind("id", id)
+                        .mapToBean(Discount.class).findOne().orElse(null));
     }
 }
