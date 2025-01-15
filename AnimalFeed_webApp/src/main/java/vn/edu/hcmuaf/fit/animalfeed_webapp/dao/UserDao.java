@@ -75,23 +75,22 @@ public class UserDao {
     }
 
     public static void main (String[]args){
-            Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
-            System.out.println("Vui lòng nhập số điện thoại:");
-            String phone = scanner.nextLine();
+        System.out.println("Vui lòng nhập số điện thoại:");
+        String phone = scanner.nextLine();
 
-            System.out.println("Vui lòng nhập mật khẩu:");
-            String password = scanner.nextLine();
+        System.out.println("Vui lòng nhập mật khẩu:");
+        String password = scanner.nextLine();
 
-            UserDao myClass = new UserDao(); // Lớp chứa hàm login()
-            User user = myClass.login(phone, password);
+        UserDao myClass = new UserDao(); // Lớp chứa hàm login()
+        User user = myClass.login(phone, password);
 
-            if (user != null) {
-                System.out.println("Đăng nhập thành công!");
-                System.out.println("Xin chào, " + user.getFullName());
-            } else {
-                System.out.println("Số điện thoại hoặc mật khẩu không đúng. Vui lòng thử lại!");
-            }
+        if (user != null) {
+            System.out.println("Đăng nhập thành công!");
+            System.out.println("Xin chào, " + user.getFullName());
+        } else {
+            System.out.println("Số điện thoại hoặc mật khẩu không đúng. Vui lòng thử lại!");
         }
     }
-
+}
