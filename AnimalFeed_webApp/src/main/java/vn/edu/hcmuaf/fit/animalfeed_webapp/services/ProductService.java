@@ -1,6 +1,8 @@
 package vn.edu.hcmuaf.fit.animalfeed_webapp.services;
 
+import org.jdbi.v3.core.Jdbi;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.ProductDao;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.db.JdbiConnect;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.dto.ProductWithDiscountDTO;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
 
@@ -20,14 +22,24 @@ public class ProductService {
         return productDao.getAllProductOfAdmin();
     }
 
-    //Lay product theo id
+    //Lấy sản phẩm có trạng thái 'active' theo id
     public Product getDetail(int id) {
         return productDao.getById(id);
     }
 
-    //Lay product theo id danh muc
+    //Lấy sản phẩm theo id
+    public Product getProductByIdOfAdmin(int id) {
+        return productDao.getProductByIdOfAdmin(id);
+    }
+
+    //Lay product theo id danh muc - sản phẩm bình thường
     public List<Product> getByCatId(int categoryId) {
         return productDao.getByCatId(categoryId);
+    }
+
+    // Lay product theo id danh muc -sản phẩm giảm giá
+    public List<Product> getByCatIdOfDiscount(int categoryId) {
+        return productDao.getByCatIdOfDiscount(categoryId);
     }
 
     //Dem so luong product trong db
@@ -63,6 +75,46 @@ public class ProductService {
     //lấy sản phẩm giảm giá
     public List<ProductWithDiscountDTO> getDiscountProduct() {
         return productDao.getDiscountProduct();
+    }
+
+    // Phân trang sản phẩm giảm giá
+    public List<ProductWithDiscountDTO> getProductByPageOfDiscount(int page, int id) {
+        return productDao.getProductByPageOfDiscount(page, id);
+    }
+
+    //Hiển thị sản phâm mới nhất
+    public List<Product> getNewProduct() {
+        return productDao.getNewProduct();
+    }
+
+    //hiển thị sản phẩm bán chạy nhất
+    public List<Product> getBestSellingProducts() {
+        return productDao.getBestSellingProducts();
+    }
+
+    //Loc sản phẩm theo Brand
+    public List<Product> getProductByBrand(String brand) {
+        return productDao.getProductByBrand(brand);
+    }
+
+    //lấy danh sách thương hiệu
+    public List<String> getBrands() {
+        return productDao.getBrands();
+    }
+
+    //lấy danh sách sản phẩm theo bộ lọc.
+    public List<Product> getFilteredProducts(String brand, String priceOrder) {
+        return productDao.getFilteredProducts(brand, priceOrder);
+    }
+
+    //đếm số product search
+    public int countSearchProducts(String keyword, Double minPrice, Double maxPrice, String description, int categoryId) {
+        return productDao.countSearchProducts(keyword, minPrice, maxPrice, description, categoryId);
+    }
+
+    //tìm kiếm sản phẩm , phân trang
+    public List<Product> searchProducts(String keyword, Double minPrice, Double maxPrice, String description, int categoryId, int currentPage, int pageSize) {
+        return productDao.searchProducts(keyword, minPrice, maxPrice, description, categoryId, currentPage, pageSize);
     }
 
 }

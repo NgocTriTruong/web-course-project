@@ -117,12 +117,20 @@
               </ul>
             </li>
   
-            <li class="p-4 ms-2 pointer">
+            <li class="p-4 ms-2 pointer" >
               <div>
-                <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal3">
-                  <i class="fa-solid fa-magnifying-glass i_right_number mt-1"></i>
-                </a>
+                  <i class="fa-solid fa-magnifying-glass i_right_number mt-1" id="search-toggle"></i>
               </div>
+            </li>
+
+            <!-- Form tìm kiếm ẩn -->
+            <li id="search-form-container" style="display: none; position: absolute; top: 50px; right: 20px; background: white; border: 1px solid #ddd; padding: 10px; border-radius: 10px; margin-right: 133px; margin-top: 19px; width: 324px; z-index: 9999;">
+              <form method="get" action="product-list-search">
+                <input type="text" name="description" placeholder="Tìm kiếm theo mô tả" style="display: block; margin-bottom: 10px; width: 100%; height: 42px;    padding-left: 5px;" />
+                <input type="number" name="minPrice" placeholder="Giá tối thiểu" style="display: block; margin-bottom: 10px; width: 100%; height: 42px;    padding-left: 5px;" />
+                <input type="number" name="maxPrice" placeholder="Giá tối đa" style="display: block; margin-bottom: 10px; width: 100%; height: 42px;    padding-left: 5px;" />
+                <button type="submit" style="width: 100%;">Tìm kiếm</button>
+              </form>
             </li>
   
             <!-- chưa đăng nhập -->
