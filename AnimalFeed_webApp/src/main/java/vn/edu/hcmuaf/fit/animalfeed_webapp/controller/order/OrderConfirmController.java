@@ -1,4 +1,4 @@
-package vn.edu.hcmuaf.fit.animalfeed_webapp.controller;
+package vn.edu.hcmuaf.fit.animalfeed_webapp.controller.order;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
