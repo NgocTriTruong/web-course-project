@@ -24,6 +24,7 @@ public class DiscountDao {
                 handle.createQuery("select * from discounts where id = :id")
                         .bind("id", id)
                         .mapToBean(Discount.class).findOne().orElse(null));
+    }
 
     public double calculateDiscountedPrice(double originalPrice, int discountId) {
         Discount discount = getById(discountId);

@@ -59,7 +59,7 @@
 
   <!-- Filter -->
   <div class="containers my-4">
-    <div class="row justify-content-center mb-3 pt-3">
+    <div class="h1 row justify-content-center mb-3 pt-3">
       Kết quả tìm kiếm
     </div>
   </div>
