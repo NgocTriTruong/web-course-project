@@ -69,9 +69,22 @@ public class UserService {
 
     // Cập nhật thông tin người dùng (với quyền admin)
     public boolean updateUser(User user, int adminUserId) {
-        userDao.updateUser(user, adminUserId); // Cập nhật thông tin người dùng và ghi log nếu admin
-        return false;
+        // Kiểm tra quyền của admin
+        User adminUser = userDao.getUserById(adminUserId);
+        if (adminUser == null || adminUser.getRole() != 1) {
+            return false; // Nếu không phải admin, trả về false
+        }
+
+        // Cập nhật người dùng
+        try {
+            userDao.updateUser(user, adminUserId);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
+
+
 
     // Xóa người dùng (với quyền admin)
     public void deleteUser(int userId, int adminUserId) {

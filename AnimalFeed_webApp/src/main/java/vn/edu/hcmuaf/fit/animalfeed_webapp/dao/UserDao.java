@@ -127,39 +127,41 @@ public class UserDao {
         }
     }
 
-
     public void updateUser(User user, int adminUserId) {
         // Kiểm tra quyền admin
         boolean isAdmin = UserDao.checkIfAdmin(adminUserId);
+        System.out.println("Admin check result for user " + adminUserId + ": " + isAdmin);  // In ra kết quả kiểm tra
 
-        if (isAdmin) {
-            Jdbi jdbi = JdbiConnect.getJdbi();
-            jdbi.useTransaction(handle -> {
-                // Cập nhật thông tin người dùng
-                int updatedRows = handle.createUpdate("UPDATE users SET full_name = :fullName, phone = :phone, role = :role, status = :status, update_date = NOW() WHERE id = :id")
-                        .bind("fullName", user.getFullName())
-                        .bind("phone", user.getPhone())
-                        .bind("role", user.getRole())
-                        .bind("status", user.getStatus())
-                        .bind("id", user.getId())
-                        .execute();
-
-                // Ghi log hành động vào bảng action_log
-                if (updatedRows > 0) {
-                    handle.createUpdate("INSERT INTO action_log (user_id, action_type, entity_type, entity_id, created_at, description) " +
-                                    "VALUES (:userId, :actionType, :entityType, :entityId, CURRENT_DATE, :description)")
-                            .bind("userId", adminUserId)
-                            .bind("actionType", "UPDATE")
-                            .bind("entityType", "USER")
-                            .bind("entityId", user.getId())
-                            .bind("description", "Admin user " + adminUserId + " updated user " + user.getId())
-                            .execute();
-                } else {
-                    throw new RuntimeException("Failed to update user with ID: " + user.getId());
-                }
-            });
+        if (!isAdmin) {
+            throw new RuntimeException("User is not authorized to update.");
         }
+
+        // Nếu đã là admin, tiếp tục thực hiện cập nhật
+        Jdbi jdbi = JdbiConnect.getJdbi();
+        jdbi.useTransaction(handle -> {
+            int updatedRows = handle.createUpdate("UPDATE users SET full_name = :fullName, phone = :phone, role = :role, status = :status, update_date = NOW() WHERE id = :id")
+                    .bind("fullName", user.getFullName())
+                    .bind("phone", user.getPhone())
+                    .bind("status", user.getStatus())
+                    .bind("role", user.getRole())
+                    .bind("id", user.getId())
+                    .execute();
+
+            if (updatedRows > 0) {
+                handle.createUpdate("INSERT INTO action_log (user_id, action_type, entity_type, entity_id, created_at, description) " +
+                                "VALUES (:userId, :actionType, :entityType, :entityId, CURRENT_DATE, :description)")
+                        .bind("userId", adminUserId)
+                        .bind("actionType", "UPDATE")
+                        .bind("entityType", "USER")
+                        .bind("entityId", user.getId())
+                        .bind("description", "Admin user " + adminUserId + " updated user " + user.getId())
+                        .execute();
+            } else {
+                throw new RuntimeException("Failed to update user with ID: " + user.getId());
+            }
+        });
     }
+
     // Chèn người dùng mới vào cơ sở dữ liệu
     public void insertUser(User user) {
         jdbi.useHandle(handle ->
