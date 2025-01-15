@@ -99,7 +99,7 @@
                             <div class="p mb-2 text-p">${discountP.description}</div>
                             <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> <f:formatNumber value="${discountP.price}"/> <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-${discountP.percentage}%</span></div>
                             <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;"><f:formatNumber value="${discountP.discountedPrice}"/> <u>đ</u></div>
-                            <div class="p text-start ms-3">Đã bán 1,1k</div>
+                            <div class="p text-start ms-3">Đã bán <c:out value="${salesData[discountP.id] != null ? salesData[discountP.id] : 0}" /> sản phẩm</div>
                             <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                                 <i class="fa-solid fa-truck mt-1"></i>
                                 <p class="ms-2">2 -4 ngày</p>
@@ -155,7 +155,7 @@
                             <div class="h5 text-h">${newP.name}</div>
                             <div class="p mb-2 text-p">${newP.description}</div>
                             <div class="h4 text-start ms-3" style="color: red;"><f:formatNumber value="${newP.price}"/> <u>đ</u></div>
-                            <div class="p text-start ms-3">Đã bán 1,1k</div>
+                            <div class="p text-start ms-3">Đã bán <c:out value="${salesData[newP.id] != null ? salesData[newP.id] : 0}" /> sản phẩm</div>
                             <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                                 <i class="fa-solid fa-truck mt-1"></i>
                                 <p class="ms-2">2 -4 ngày</p>
@@ -187,7 +187,7 @@
                             <div class="h5 text-h">${bestSellP.name}</div>
                             <div class="p mb-2 text-p">${bestSellP.description}</div>
                             <div class="h4 text-start ms-3" style="color: red;"><f:formatNumber value="${bestSellP.price}"/> <u>đ</u></div>
-                            <div class="p text-start ms-3">Đã bán 1,1k</div>
+                            <div class="p text-start ms-3">Đã bán <c:out value="${salesData[bestSellP.id] != null ? salesData[bestSellP.id] : 0}" /> sản phẩm</div>
                             <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                                 <i class="fa-solid fa-truck mt-1"></i>
                                 <p class="ms-2">2 -4 ngày</p>
@@ -250,7 +250,7 @@
                                         <div class="h4 text-start ms-3" style="color: red;">
                                             <f:formatNumber value="${p.price}"/> <u>đ</u>
                                         </div>
-                                        <div class="p text-start ms-3">Đã bán 1,1k</div>
+                                        <div class="p text-start ms-3">Đã bán <c:out value="${salesData[p.id] != null ? salesData[p.id] : 0}" /> sản phẩm</div>
                                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                                             <i class="fa-solid fa-truck mt-1"></i>
                                             <p class="ms-2">2 - 4 ngày</p>
