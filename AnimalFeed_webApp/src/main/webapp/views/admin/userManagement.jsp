@@ -139,48 +139,15 @@
     <p class="pt-3" style="color: rgba(0, 0, 0, 0.5);">©2024 Group-11</p>
 </footer>
 
-<!-- JavaScript -->
 <script>
-    // Xử lý tìm kiếm nâng cao
-    document.getElementById('advanced-search-button').addEventListener('click', function () {
-        const searchQuery = document.getElementById('advanced-search-input').value.trim();
-        if (searchQuery) {
-            window.location.href = `userManagement?action=search&query=${encodeURIComponent(searchQuery)}`;
-        } else {
-            alert('Vui lòng nhập từ khóa tìm kiếm.');
-        }
-    });
-
-    // Xử lý phân trang
-    function goToPage(pageNumber) {
-        const currentUrl = new URL(window.location.href);
-        currentUrl.searchParams.set('page', pageNumber);
-        window.location.href = currentUrl.toString();
-    }
-
-    // Xác nhận trước khi xóa
+    // JavaScript cho thao tác xóa người dùng
     function deleteUser(userId) {
-        if (!userId) {
-            alert('ID người dùng không hợp lệ.');
-            return;
-        }
-
-        if (confirm('Bạn có chắc chắn muốn xóa người dùng này?')) {
-            try {
-                window.location.href = `userManagement?action=delete&id=${userId}`;
-            } catch (error) {
-                alert('Có lỗi xảy ra khi xóa người dùng.');
-            }
+        if (confirm("Bạn có chắc chắn muốn xóa người dùng này?")) {
+            window.location.href = "userManagement?action=delete&id=" + userId;
         }
     }
-
-
-    // Tự động chuyển focus về ô tìm kiếm khi trang tải lại
-    window.addEventListener('load', function () {
-        const searchInput = document.getElementById('advanced-search-input');
-        if (searchInput) searchInput.focus();
-    });
 </script>
-
 </body>
 </html>
+
+

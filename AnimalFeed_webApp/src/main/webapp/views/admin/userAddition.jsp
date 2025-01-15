@@ -93,7 +93,7 @@
                             <label class="form-check-label" for="active">Ngưng hoạt động</label>
                         </div>
                         <div class="form-check-inline">
-                            <input class="form-check-input" type="radio" name="status" id="inactive" value="0">
+                            <input class="form-check-input" type="radio" name="status" id="inactive" value="2">
                             <label class="form-check-label" for="inactive">Đang hoạt động</label>
                         </div>
                     </div>
