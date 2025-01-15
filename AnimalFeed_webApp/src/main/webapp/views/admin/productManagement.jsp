@@ -154,6 +154,33 @@
                 </tbody>
             </table>
         </div>
+
+        <div class="container mt-4">
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item ${currentPage > 1 ? '' : 'disabled'}">
+                        <a class="page-link" href="?categoryId=${selectedCategoryId}&page=${currentPage - 1}"><i class="fa-solid fa-chevron-left"></i></a>
+                    </li>
+                    <c:forEach var="i" begin="1" end="${endPage}">
+                        <c:choose>
+                            <c:when test="${i == 1 || i == endPage || (i >= currentPage - 2 && i <= currentPage + 2)}">
+                                <li class="page-item ${i == currentPage ? 'active' : ''}" style="color: #94b83d;">
+                                    <a class="page-link" href="?categoryId=${selectedCategoryId}&page=${i}">${i}</a>
+                                </li>
+                            </c:when>
+                            <c:when test="${i == currentPage - 3 || i == currentPage + 3}">
+                                <li class="page-item disabled">
+                                    <span class="page-link">...</span>
+                                </li>
+                            </c:when>
+                        </c:choose>
+                    </c:forEach>
+                    <li class="page-item ${currentPage < endPage ? '' : 'disabled'}">
+                        <a class="page-link" href="?categoryId=${selectedCategoryId}&page=${currentPage + 1}"><i class="fa-solid fa-chevron-right"></i></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </div>
 </main>
 <!--Main layout-->

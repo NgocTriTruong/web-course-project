@@ -83,13 +83,13 @@ public class ProductService {
     }
 
     //Hiển thị sản phâm mới nhất
-    public List<Product> getNewProduct() {
-        return productDao.getNewProduct();
+    public List<Product> getNewProduct(int id) {
+        return productDao.getNewProduct(id);
     }
 
     //hiển thị sản phẩm bán chạy nhất
-    public List<Product> getBestSellingProducts() {
-        return productDao.getBestSellingProducts();
+    public List<Product> getBestSellingProducts(int id) {
+        return productDao.getBestSellingProducts(id);
     }
 
     //Loc sản phẩm theo Brand

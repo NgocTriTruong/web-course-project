@@ -27,13 +27,28 @@ public class ProductManagerAdmin extends HttpServlet {
         List<Category> categories = categoryService.getAll();
         List<Discount> discounts = discountService.getAll();
 
+        String pageParam = request.getParameter("page");
+        int page = (pageParam != null && !pageParam.isEmpty()) ? Integer.parseInt(pageParam) : 1;
+        int countPro = productService.getAllProductOfAdmin().size();
+        // Tính số trang cuối cùng
+        int endPage = (int) Math.ceil((double) countPro / 10);
+
+        // Lấy sản phẩm cho trang hiện tại
+        int startIndex = (page - 1) * 10;
+        int endIndex = Math.min(startIndex + 10, countPro);
+        List<Product> productsForPage = products.subList(startIndex, endIndex);
+
         if (discounts == null || discounts.isEmpty()) {
             System.out.println("Discount list is empty or null");
         }
 
-        request.setAttribute("products", products);
+        request.setAttribute("products", productsForPage);
         request.setAttribute("categories", categories);
         request.setAttribute("discountsData", discounts);
+
+        request.setAttribute("currentPage", page);
+        request.setAttribute("endPage", endPage);
+
         request.getRequestDispatcher("views/admin/productManagement.jsp").forward(request, response);
 
     }

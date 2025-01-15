@@ -61,10 +61,10 @@ public class ListProductController extends HttpServlet {
         List<ProductWithDiscountDTO> discountProducts  = productService.getProductByPageOfDiscount(discountPage, categoryId);
 
         //hien thi san pham moi
-        List<Product> newProducts = productService.getNewProduct();
+        List<Product> newProducts = productService.getNewProduct(categoryId);
 
         //hiển th sản phẩm bán chạy
-        List<Product> getBestSellingProducts = productService.getBestSellingProducts();
+        List<Product> getBestSellingProducts = productService.getBestSellingProducts(categoryId);
 
 
         request.setAttribute("categoriesData", categories);

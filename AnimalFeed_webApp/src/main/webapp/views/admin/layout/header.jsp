@@ -31,14 +31,14 @@
         </ul>
       </li>
       <li class="sidenav-item">
-        <a class="sidenav-link " href="${pageContext.request.contextPath}/product-manager.jsp">
+        <a class="sidenav-link " href="product-manager">
           <i class="fas fa-gift fa-fw me-2"></i><span class="h5 text">Quản lý sản phẩm</span> <i class="fas fa-chevron-down" style="margin-left: 31px;margin-bottom: 2px;"></i></a>
         <ul class="sidenav-collapse ">
           <li class="sidenav-item">
-            <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/productAddition.jsp" style="font-size: 17px;">Thêm sản phẩm</a>
+            <a class="sidenav-link" href="product-manager" style="font-size: 17px;">Thêm sản phẩm</a>
           </li>
           <li class="sidenav-item"> 
-            <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/productManagement.jsp" style="font-size: 17px;">Danh sách sản phẩm</a>
+            <a class="sidenav-link" href="add-product" style="font-size: 17px;">Danh sách sản phẩm</a>
           </li>
         </ul>
       </li>

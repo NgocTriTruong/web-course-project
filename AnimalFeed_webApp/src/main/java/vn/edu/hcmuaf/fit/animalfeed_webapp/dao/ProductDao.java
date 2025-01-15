@@ -231,16 +231,17 @@ public class ProductDao {
 
 
     //Hiển thị sản phẩm mới nhất
-    public List<Product> getNewProduct() {
+    public List<Product> getNewProduct(int id) {
         Jdbi jdbi = JdbiConnect.getJdbi();
         return jdbi.withHandle(handle ->
-                handle.createQuery("select * from products where status = :status and create_date >= DATE_SUB(CURDATE(), INTERVAL 10 DAY) ORDER BY create_date DESC")
+                handle.createQuery("select * from products where status = :status and cat_id = :id and create_date >= DATE_SUB(CURDATE(), INTERVAL 10 DAY) ORDER BY create_date DESC")
                         .bind("status", "1")  // Lấy sản phẩm có trạng thái 'active'
+                        .bind("id", id)
                         .mapToBean(Product.class).list());
     }
 
     //Hiển thị sản phẩm bán chạy nhất
-    public List<Product> getBestSellingProducts() {
+    public List<Product> getBestSellingProducts(int id) {
         Jdbi jdbi = JdbiConnect.getJdbi();
         return jdbi.withHandle(handle ->
                 handle.createQuery("""
@@ -249,11 +250,13 @@ public class ProductDao {
                 JOIN order_details od ON p.id = od.product_id
                 JOIN orders o ON od.order_id = o.id
                 WHERE p.status = :status
+                and p.cat_id = :id
                 GROUP BY p.id
                 ORDER BY o.total_quantity DESC
                 LIMIT 10
             """)
                         .bind("status", "1")  // Lấy sản phẩm có trạng thái 'active'
+                        .bind("id", id)
                         .mapToBean(Product.class).list());
     }
 
