@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/font-awesome/all.css" />
     <style>
         .success-container {
+            font-family: sans-serif, Tahoma;
             max-width: 800px;
             margin: 2rem auto;
             padding: 2rem;
@@ -98,25 +99,25 @@
 <div class="success-container">
     <div class="success-header">
         <i class="fas fa-check-circle success-icon"></i>
-        <h1>Order Placed Successfully!</h1>
-        <p>Thank you for your order. We'll process it right away!</p>
+        <h1>Đặt hàng thành công!</h1>
+        <p>Cảm ơn quý khách đã đặt hàng, đơn hàng của quý khách sẽ được xử lý sớm nhất!</p>
     </div>
 
     <div class="order-details">
-        <h2>Order Details</h2>
+        <h2>Đơn hàng</h2>
         <div class="order-items">
             <div class="item-row item-header">
-                <div>Product</div>
-                <div>Quantity</div>
-                <div>Price</div>
-                <div>Total</div>
+                <div>Sản phẩm</div>
+                <div>Số lượng</div>
+                <div>Đơn giá</div>
+                <div>Tổng</div>
             </div>
             <c:forEach items="${sessionScope.orderItems}" var="item">
                 <div class="item-row">
                     <div>${item.name}</div>
                     <div>${item.quantity}</div>
                     <div>
-                        <fmt:formatNumber value="${item.price}" type="currency" currencySymbol="₫"/>
+                        <fmt:formatNumber value="${item.unitPrice}" type="currency" currencySymbol="₫"/>
                     </div>
                     <div>
                         <fmt:formatNumber value="${item.total}" type="currency" currencySymbol="₫"/>
@@ -127,7 +128,7 @@
 
         <div class="total-section">
             <p>
-                <strong>Total Amount: </strong>
+                <strong>Tổng thanh toán: </strong>
                 <fmt:formatNumber value="${sessionScope.successOrder.totalPrice}" type="currency" currencySymbol="₫"/>
             </p>
         </div>
@@ -135,11 +136,11 @@
 
     <div class="customer-info">
         <div class="info-group">
-            <p class="info-label">Full Name:</p>
+            <p class="info-label">Họ tên:</p>
             <p>${sessionScope.customerInfo.fullName}</p>
         </div>
         <div class="info-group">
-            <p class="info-label">Phone:</p>
+            <p class="info-label">SĐT:</p>
             <p>${sessionScope.customerInfo.phone}</p>
         </div>
         <div class="info-group">
@@ -147,27 +148,27 @@
             <p>${sessionScope.customerInfo.email}</p>
         </div>
         <div class="info-group">
-            <p class="info-label">Delivery Address:</p>
+            <p class="info-label">Địa chỉ nhận hàng:</p>
             <p>${sessionScope.customerInfo.address}</p>
         </div>
         <div class="info-group">
-            <p class="info-label">Delivery Method:</p>
+            <p class="info-label">Hình thức nhận hàng:</p>
             <p>${sessionScope.customerInfo.deliveryMethod}</p>
         </div>
         <div class="info-group">
-            <p class="info-label">Payment Method:</p>
+            <p class="info-label">Hình thức thanh toán:</p>
             <p>${sessionScope.customerInfo.paymentMethod}</p>
         </div>
         <c:if test="${not empty sessionScope.customerInfo.note}">
             <div class="info-group">
-                <p class="info-label">Note:</p>
+                <p class="info-label">Ghi chú:</p>
                 <p>${sessionScope.customerInfo.note}</p>
             </div>
         </c:if>
     </div>
 
     <a href="${pageContext.request.contextPath}/" class="back-button">
-        Continue Shopping
+        Tiếp tục mua hàng
     </a>
 </div>
 <%

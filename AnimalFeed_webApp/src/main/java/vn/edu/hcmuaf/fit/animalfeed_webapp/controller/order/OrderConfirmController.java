@@ -42,9 +42,12 @@ public class OrderConfirmController extends HttpServlet {
         // Calculate total price for confirmed items
         double totalPrice = cart.getTotalPrice();
 
+        int totalQuantity = cart.getTotalQuantity();
+
         // Set attributes for the JSP
         request.setAttribute("confirmedItems", confirmedItems);
         request.setAttribute("totalPrice", totalPrice);
+        request.setAttribute("totalQuantity", totalQuantity);
 
         // Forward to the order confirmation page
         request.getRequestDispatcher("/views/web/confirm_order.jsp")
