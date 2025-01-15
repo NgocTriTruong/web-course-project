@@ -7,7 +7,6 @@ import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.cart.Cart;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.CartItem;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.*;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.CartService;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.services.OrderService;
 
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -15,13 +14,11 @@ import java.util.List;
 
 @WebServlet(name = "Order", value = "/create-order")
 public class OrderController extends HttpServlet {
-    private OrderService orderService;
     private CartService cartService;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        orderService = new OrderService();
         cartService = new CartService();
     }
 
@@ -73,8 +70,6 @@ public class OrderController extends HttpServlet {
             order.setOrderDate(new Timestamp(System.currentTimeMillis()));
             order.setShippingPrice(0.0); // Free shipping as per UI
 
-            // Insert order and get generated ID
-            orderService.insertOrder(order);
 
             // Create order details for selected items
             for (CartItem cartItem : selectedItems) {
@@ -91,8 +86,6 @@ public class OrderController extends HttpServlet {
                 orderDetail.setQuantity(cartItem.getQuantity());
                 orderDetail.setTotalPrice(cartItem.getTotal());
 
-                // Insert order detail
-                orderService.insertOrderDetail(orderDetail);
             }
 
             // Update session cart

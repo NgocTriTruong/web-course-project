@@ -67,8 +67,8 @@
             <div class="form-group">
                 <label for="status">Trạng thái</label>
                 <select class="form-control" name="status" required>
-                    <option value="2" ${user.status == 2 }>Đang hoạt động</option>
-                    <option value="1" ${user.status == 1 }>Ngưng hoạt động</option>
+                    <option value="2" ${user.status == 2 ? 'selected' : '' }>Đang hoạt động</option>
+                    <option value="1" ${user.status == 1 ? 'selected' : ''}>Ngưng hoạt động</option>
                 </select>
             </div>
 

@@ -85,7 +85,12 @@ public class UserService {
     }
 
     // Xóa người dùng (với quyền admin)
-    public void deleteUser(int userId, int adminUserId) {
+    public boolean deleteUser(int userId, int adminUserId) {
+        // Kiểm tra quyền của admin
+        User adminUser = userDao.getUserById(adminUserId);
+        if (adminUser == null || adminUser.getRole() != 1) {
+            return false; // Nếu không phải admin, trả về false
+        }
         try {
             // Kiểm tra user tồn tại
             User userToDelete = userDao.getUserById(userId);
@@ -102,6 +107,7 @@ public class UserService {
         } catch (Exception e) {
             throw new RuntimeException("Lỗi khi xóa người dùng: " + e.getMessage());
         }
+        return true;
     }
 
     public List<User> getAllUsers() {
@@ -110,4 +116,8 @@ public class UserService {
     public User getById(int userId) {
         return userDao.getUserById(userId);
     }
+
+//    public List<User> getUsersWithPagination(int page, int pageSize){
+//        return userDao.getUsersWithPagination(page, pageSize);
+//    }
 }
