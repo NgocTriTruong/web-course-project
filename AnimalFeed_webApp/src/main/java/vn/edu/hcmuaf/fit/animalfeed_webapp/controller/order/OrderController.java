@@ -76,7 +76,6 @@ public class OrderController extends HttpServlet {
 
             int orderId = orderService.insertOrder(order);
             order.setId(orderId);
-
             // Create order details for selected items
             for (CartItem cartItem : selectedItems) {
                 // Create corresponding order detail
