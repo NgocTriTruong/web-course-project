@@ -12,26 +12,26 @@
 
     <ul class="sidenav-menu text-white mb-5">
       <li class="sidenav-item">
-        <a class="sidenav-link text-white" href="${pageContext.request.contextPath}/views/admin/home.jsp">
+        <a class="sidenav-link text-white" href="${pageContext.request.contextPath}/dashboard">
           <i class="fas fa-tachometer-alt fa-fw me-3 "></i><span class="h5 text">Trang chủ</span></a>
       </li>
       <li class="sidenav-item pt-3">
         <span class="sidenav-subheading text-muted text-uppercase fw-bold" style="font-size: 15px; padding-bottom: 10px;">Quản lý</span>
       </li>
       <li class="sidenav-item mt-2">
-        <a class="sidenav-link " href="${pageContext.request.contextPath}/views/admin/userManagement.jsp">
+        <a class="sidenav-link " href="userManagement">
           <i class="fas fa-users fa-fw me-2"></i><span class="h5 text">Quản lý người dùng</span><i class="fas fa-chevron-down" style="margin-left: 11px;margin-bottom: 1px;"></i></a>
         <ul class="sidenav-collapse">
           <li class="sidenav-item">
-            <a class="sidenav-link h6" href="${pageContext.request.contextPath}/views/admin/userAddition.jsp" style="font-size: 17px;">Thêm người dùng</a>
+            <a class="sidenav-link h6" href="addUser" style="font-size: 17px;">Thêm người dùng</a>
           </li>
           <li class="sidenav-item">
-            <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/userManagement.jsp" style="font-size: 17px;">Danh sách người dùng</a>
+            <a class="sidenav-link" href="userManagement" style="font-size: 17px;">Danh sách người dùng</a>
           </li>
         </ul>
       </li>
       <li class="sidenav-item">
-        <a class="sidenav-link " href="${pageContext.request.contextPath}/views/admin/productManagement.jsp">
+        <a class="sidenav-link " href="${pageContext.request.contextPath}/product-manager.jsp">
           <i class="fas fa-gift fa-fw me-2"></i><span class="h5 text">Quản lý sản phẩm</span> <i class="fas fa-chevron-down" style="margin-left: 31px;margin-bottom: 2px;"></i></a>
         <ul class="sidenav-collapse ">
           <li class="sidenav-item">
