@@ -37,13 +37,33 @@ public class ProductDao {
                         .mapToBean(Product.class).findOne().orElse(null));
     }
 
-    // Lay product theo id danh muc
+    public Product getProductByIdOfAdmin(int id) {
+        Jdbi jdbi = JdbiConnect.getJdbi();
+        return jdbi.withHandle(handle ->
+                handle.createQuery("select * from products where id = :id")
+                        .bind("id", id)
+                        .mapToBean(Product.class).findOne().orElse(null));
+    }
+
+    // Lay product theo id danh muc -sản phẩm không giảm giá
     public List<Product> getByCatId(int categoryId) {
         Jdbi jdbi = JdbiConnect.getJdbi();
         return jdbi.withHandle(handle ->
-                handle.createQuery("select * from products where cat_id = :categoryId and status = :status")
+                handle.createQuery("select * from products where cat_id = :categoryId and status = :status and discount_id = :discountId")
                         .bind("categoryId", categoryId)
                         .bind("status", "1")  // Lấy sản phẩm có trạng thái 'active'
+                        .bind("discountId", 1)  // Lấy sản phẩm không giảm giá
+                        .mapToBean(Product.class).list());
+    }
+
+    // Lay product theo id danh muc -sản phẩm giảm giá
+    public List<Product> getByCatIdOfDiscount(int categoryId) {
+        Jdbi jdbi = JdbiConnect.getJdbi();
+        return jdbi.withHandle(handle ->
+                handle.createQuery("select * from products where cat_id = :categoryId and status = :status and discount_id != :discountId")
+                        .bind("categoryId", categoryId)
+                        .bind("status", "1")  // Lấy sản phẩm có trạng thái 'active'
+                        .bind("discountId", 1)  // Lấy sản phẩm không giảm giá
                         .mapToBean(Product.class).list());
     }
 
@@ -60,7 +80,8 @@ public class ProductDao {
     public List<Product> getProductByPage(int page, int id) {
         Jdbi jdbi = JdbiConnect.getJdbi();
         return jdbi.withHandle(handle ->
-                handle.createQuery("select * from products where cat_id = :id AND discount_id = :discountId order by id limit :end offset :start")
+                handle.createQuery("select * from products where status = :status and cat_id = :id AND discount_id = :discountId order by id limit :end offset :start")
+                        .bind("status", "1")  // Lấy sản phẩm có trạng thái 'active'
                         .bind("id", id)
                         .bind("discountId", 1)
                         .bind("start", (page - 1) * 16)
@@ -78,8 +99,8 @@ public class ProductDao {
             // Thực hiện thêm sản phẩm và ghi log
             jdbi.useTransaction(handle ->{
 
-                    int productId = handle.createUpdate("INSERT INTO products (cat_id, name, price, description, quantity, status, img, create_date) "
-                            + "VALUES (:catId, :name, :price, :description, :quantity, :status, :img, :createDate)")
+                    int productId = handle.createUpdate("INSERT INTO products (cat_id, name, price, description, quantity, img, create_date, discount_id) "
+                            + "VALUES (:cat_id, :name, :price, :description, :quantity, :img, :createDate, :discountId)")
                             .bindBean(product)
                             .executeAndReturnGeneratedKeys("id").mapTo(Integer.class).one();
 
@@ -136,7 +157,7 @@ public class ProductDao {
             Jdbi jdbi = JdbiConnect.getJdbi();
             jdbi.useTransaction(handle -> {
                 // Cập nhật thông tin sản phẩm và ghi log
-                int updatedRows = handle.createUpdate("UPDATE products SET cat_id = :cat_id, name = :name, price = :price, description = :description, quantity = :quantity, status = :status, img = :img WHERE id = :id")
+                int updatedRows = handle.createUpdate("UPDATE products SET cat_id = :cat_id, name = :name, price = :price, description = :description, quantity = :quantity, status = :status, img = :img, discount_id =:discountId WHERE id = :id")
                         .bindBean(product).execute();
 
                 // Ghi log hành động vào bảng action_log
@@ -185,6 +206,171 @@ public class ProductDao {
         return jdbi.withHandle(handle ->
                 handle.createQuery(query)
                         .mapToBean(ProductWithDiscountDTO.class).list());
+    }
+
+    // Phân trang sản phẩm giảm giá
+    public List<ProductWithDiscountDTO> getProductByPageOfDiscount(int page, int id) {
+        Jdbi jdbi = JdbiConnect.getJdbi();
+        String query = """
+            SELECT p.id, p.img, p.name, p.description, p.price, d.percentage, ROUND(p.price * (1 - d.percentage / 100), 2) AS discountedPrice
+            FROM products p
+            JOIN discounts d ON p.discount_id = d.id
+            WHERE p.cat_id = :id AND p.discount_id != :discountId
+            ORDER BY p.id
+            LIMIT :end OFFSET :start
+            """;
+        return jdbi.withHandle(handle ->
+                handle.createQuery(query)
+                        .bind("id", id)
+                        .bind("discountId", 1)  // Trả về các sản phẩm có discount khác 1
+                        .bind("start", (page - 1) * 12)
+                        .bind("end", 12)
+                        .mapToBean(ProductWithDiscountDTO.class)  // Ánh xạ kết quả vào ProductWithDiscountDTO
+                        .list());
+    }
+
+
+    //Hiển thị sản phẩm mới nhất
+    public List<Product> getNewProduct() {
+        Jdbi jdbi = JdbiConnect.getJdbi();
+        return jdbi.withHandle(handle ->
+                handle.createQuery("select * from products where status = :status and create_date >= DATE_SUB(CURDATE(), INTERVAL 10 DAY) ORDER BY create_date DESC")
+                        .bind("status", "1")  // Lấy sản phẩm có trạng thái 'active'
+                        .mapToBean(Product.class).list());
+    }
+
+    //Hiển thị sản phẩm bán chạy nhất
+    public List<Product> getBestSellingProducts() {
+        Jdbi jdbi = JdbiConnect.getJdbi();
+        return jdbi.withHandle(handle ->
+                handle.createQuery("""
+                SELECT p.*
+                FROM products p
+                JOIN order_details od ON p.id = od.product_id
+                JOIN orders o ON od.order_id = o.id
+                WHERE p.status = :status
+                GROUP BY p.id
+                ORDER BY o.total_quantity DESC
+                LIMIT 10
+            """)
+                        .bind("status", "1")  // Lấy sản phẩm có trạng thái 'active'
+                        .mapToBean(Product.class).list());
+    }
+
+    //Loc sản phẩm theo Brand
+    public List<Product> getProductByBrand(String brand) {
+        Jdbi jdbi = JdbiConnect.getJdbi();
+        return jdbi.withHandle(handle ->
+                handle.createQuery("select * from products where brand = :brand and status = :status and discount_id = :discountId")
+                        .bind("brand", brand)
+                        .bind("status", "1")  // Lấy sản phẩm có trạng thái 'active'
+                        .bind("discountId", 1)  // Lấy sản phẩm không giảm giá
+                        .mapToBean(Product.class).list());
+    }
+
+    //lấy danh sách thương hiệu
+    public List<String> getBrands() {
+        Jdbi jdbi = JdbiConnect.getJdbi();
+        return jdbi.withHandle(handle ->
+                handle.createQuery("select distinct brand_name from products where status = :status")
+                        .bind("status", "1")  // Lấy sản phẩm có trạng thái 'active'
+                        .mapTo(String.class).list());
+    }
+
+    //lấy danh sách sản phẩm theo bộ lọc.
+    public List<Product> getFilteredProducts(String brand, String priceOrder){
+        Jdbi jdbi = JdbiConnect.getJdbi();
+        String query = """
+                SELECT * FROM products
+                WHERE status = :status
+                """;
+        if (brand != null && !brand.isEmpty()) {
+            query += " AND brand_name = :brandName";
+        }
+
+        if ("ascending".equals(priceOrder)) {
+            query +=" ORDER BY price ASC";
+        } else if ("descending".equals(priceOrder)) {
+            query +=" ORDER BY price DESC";
+        }
+
+        String finalQuery = query;
+        return jdbi.withHandle(handle ->
+                handle.createQuery(finalQuery)
+                        .bind("status", "1")  // Lấy sản phẩm có trạng thái 'active'
+                        .bind("brand_name", brand)
+                        .bind("priceOrder", priceOrder)
+                        .mapToBean(Product.class).list());
+    }
+
+    //đếm số product search
+    public int countSearchProducts(String keyword, Double minPrice, Double maxPrice, String description, int categoryId) {
+        Jdbi jdbi = JdbiConnect.getJdbi();
+        return jdbi.withHandle(handle -> {
+            StringBuilder query = new StringBuilder("SELECT COUNT(*) FROM products WHERE status = '1' ");
+
+            if (keyword != null && !keyword.trim().isEmpty()) {
+                query.append(" AND name LIKE :keyword");
+            }
+            if (minPrice != null) {
+                query.append(" AND price >= :minPrice");
+            }
+            if (maxPrice != null) {
+                query.append(" AND price <= :maxPrice");
+            }
+            if (description != null && !description.trim().isEmpty()) {
+                query.append(" AND description LIKE :description");
+            }
+            if (categoryId > 0) {
+                query.append(" AND cat_id = :categoryId");
+            }
+
+            return handle.createQuery(query.toString())
+                    .bind("keyword", "%" + keyword + "%")
+                    .bind("minPrice", minPrice)
+                    .bind("maxPrice", maxPrice)
+                    .bind("description", "%" + description + "%")
+                    .bind("categoryId", categoryId)
+                    .mapTo(Integer.class)
+                    .one();
+        });
+    }
+
+    //tìm kiếm sản phẩm , phân trang
+    public List<Product> searchProducts(String keyword, Double minPrice, Double maxPrice, String description, int categoryId, int currentPage, int pageSize) {
+        Jdbi jdbi = JdbiConnect.getJdbi();
+        return jdbi.withHandle(handle -> {
+            StringBuilder query = new StringBuilder("SELECT * FROM products WHERE status = '1' ");
+
+            if (keyword != null && !keyword.trim().isEmpty()) {
+                query.append(" AND name LIKE :keyword");
+            }
+            if (minPrice != null) {
+                query.append(" AND price >= :minPrice");
+            }
+            if (maxPrice != null) {
+                query.append(" AND price <= :maxPrice");
+            }
+            if (description != null && !description.trim().isEmpty()) {
+                query.append(" AND description LIKE :description");
+            }
+            if (categoryId > 0) {
+                query.append(" AND cat_id = :categoryId");
+            }
+
+            query.append(" LIMIT :limit OFFSET :offset");
+
+            return handle.createQuery(query.toString())
+                    .bind("keyword", "%" + keyword + "%")
+                    .bind("minPrice", minPrice)
+                    .bind("maxPrice", maxPrice)
+                    .bind("description", "%" + description + "%")
+                    .bind("categoryId", categoryId)
+                    .bind("limit", pageSize)
+                    .bind("offset", (currentPage - 1) * pageSize)
+                    .mapToBean(Product.class)
+                    .list();
+        });
     }
 
     public static void main(String[] args) {

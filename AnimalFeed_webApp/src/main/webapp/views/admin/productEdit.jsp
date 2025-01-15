@@ -8,7 +8,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
-    <title>Thêm sản phẩm</title>
+    <title>Chỉnh sửa sản phẩm</title>
     <!-- Bootstrap CSS -->
     <link href="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.min.css" rel="stylesheet">
     <script src="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.bundle.min.js"></script>
@@ -38,7 +38,13 @@
             <span class="text-white h5">Thông tin sản phẩm</span>
         </div>
 
-        <form action="add-product" method="post" class="border p-5" enctype="multipart/form-data">
+        <form action="edit-product" method="post" class="border p-5" enctype="multipart/form-data">
+
+            <div class="col-md-4">
+                <label for="productId" class="form-label style_18"><b>ID sản phẩm</b></label>
+                <input type="text" class="form-control" id="productId" name="productId" value="${product.id}" readonly>
+            </div>
+
             <!-- Thông tin cơ bản -->
             <div class="row mb-3">
                 <div class="col-md-4">
@@ -46,22 +52,22 @@
                     <i class="fas fa-bars ms-2"></i>
                     <select class="form-select" id="category" name="category" required>
                         <c:forEach var="ca" items="${categoriesData}" >
-                            <option value="${ca.id}">${ca.name}</option>
-                        </c:forEach>
+                            <option value="${ca.id}" ${ca.id == product.cat_id ? 'selected' : ''}>${ca.name}</option>
+                        </c:forEach>    
                     </select>
                 </div>
 
                 <div class="col-md-4">
                     <label for="name" class="form-label style_18"><b>Tên sản phẩm</b></label>
                     <i class="fas fa-gift ms-2"></i>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Nhập tên sản phẩm..."
+                    <input type="text" class="form-control" id="name" name="name" value="${product.name}"
                            required>
                 </div>
 
                 <div class="col-md-4">
                     <label for="price" class="form-label style_18"><b>Giá tiền</b></label>
                     <i class="fas fa-dollar ms-2"></i>
-                    <input type="number" class="form-control" id="price" name="price" placeholder="VNĐ..." required>
+                    <input type="number" class="form-control" id="price" name="price" value="${product.price}" required>
                 </div>
             </div>
 
@@ -70,16 +76,27 @@
                 <div class="col-md-4">
                     <label for="quantity" class="form-label style_18"><b>Số lượng</b></label>
                     <i class="fas fa-cubes ms-2"></i>
-                    <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Bao..." required>
+                    <input type="number" class="form-control" id="quantity" name="quantity" value="${product.quantity}" required>
                 </div>
                 <div class="col-md-4">
                     <label for="discount" class="form-label style_18"><b>Khuyến mãi</b></label>
                     <i class="fas fa-percent ms-2"></i>
                     <select class="form-select" id="discount" name="discount" required>
                         <c:forEach var="dis" items="${discountsData}" >
-                            <option value="${dis.id}">${dis.percentage}</option>
+                            <option value="${dis.id}" ${dis.id == product.discountId ? "selected" : ""}>${dis.percentage}%</option>
                         </c:forEach>
                     </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label style_18"><b>Trạng thái</b></label>
+                    <div style="font-size: 20px;">
+                        <input type="radio" id="status1" name="status" value="1" ${product.status == "1" ? "checked" : ""}>
+                        <label for="status1">Đang bán</label>
+                    </div>
+                    <div style="font-size: 20px;">
+                        <input type="radio" id="status2" name="status" value="2" ${product.status == "2" ? "checked" : ""}>
+                        <label for="status2">Ngừng bán</label>
+                    </div>
                 </div>
 
             </div>
@@ -89,7 +106,7 @@
                 <div class="col-md-4">
                     <label class="form-label style_18"><b>Mô tả</b></label>
                     <textarea class="form-control" id="description" name="description" rows="7"
-                              placeholder="Mô tả..."></textarea>
+                              placeholder="Mô tả...">${product.description}</textarea>
                 </div>
 
                 <div class="col-md-4">
@@ -104,7 +121,7 @@
             <!-- Nút Submit -->
             <div class="row mt-3">
                 <div class="col-md-8">
-                    <button type="submit" class="btn bg_green text-white fw-bold">Thêm mới</button>
+                    <button type="submit" class="btn bg_green text-white fw-bold">Cập nhật</button>
                 </div>
             </div>
         </form>
