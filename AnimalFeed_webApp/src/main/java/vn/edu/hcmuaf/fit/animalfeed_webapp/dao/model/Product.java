@@ -1,7 +1,7 @@
 package vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Product implements Serializable {
     private int id;
@@ -12,14 +12,14 @@ public class Product implements Serializable {
     private int quantity;
     private int status;
     private String img;
-    private Date createDate;
+    private LocalDate createDate;
     private int discountId;
     private String brandName;
 
     public Product() {
     }
 
-    public Product(int id, int cat_id, String name, double price, String description, int quantity, int status, String img, Date createDate, int discountId, String brandName) {
+    public Product(int id, int cat_id, String name, double price, String description, int quantity, int status, String img, LocalDate createDate, int discountId, String brandName) {
         this.id = id;
         this.cat_id = cat_id;
         this.name = name;
@@ -97,11 +97,11 @@ public class Product implements Serializable {
         this.img = img;
     }
 
-    public Date getCreateDate() {
+    public LocalDate getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(LocalDate createDate) {
         this.createDate = createDate;
     }
 

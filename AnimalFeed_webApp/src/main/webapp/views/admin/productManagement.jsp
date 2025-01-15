@@ -60,7 +60,7 @@
     <!-- Container for demo purpose -->
     <div class="container px-4 ">
         <div class="mb-3 d-flex justify-content-end px-4">
-            <a class="btn bg_green text-white fw-bold" href="productAddition.jsp">
+            <a class="btn bg_green text-white fw-bold" href="add-product">
                 <i class="far fa-square-plus"></i>
                 <span>Thêm sản phẩm</span>
             </a>
@@ -138,14 +138,16 @@
                             </span>
                         </td>
                         <td>
-                            <a href="productAddition.jsp?id=${p.id}" class="btn bg_green btn-floating" style="font-size: 16px;">
+                            <a href="edit-product?productId=${p.id}" class="btn bg_green btn-floating" style="font-size: 16px;">
                                 <i class="far fa-pen-to-square"></i>
                             </a>
-                            <a href="delete-product?productId= ${p.id}">
-                                <button type="button" class="btn bg_yellow btn-floating" style="font-size: 16px;">
+                            <c:if test="${p.status != 0}">
+                            <a href="#" onclick="showMessConfirm(${p.id})">
+                                <button type="button" class="btn bg_yellow btn-floating" style="font-size: 16px;" >
                                     <i class="far fa-trash-can"></i>
                                 </button>
                             </a>
+                            </c:if>
                         </td>
                     </tr>
                 </c:forEach>
@@ -159,6 +161,8 @@
 <footer class="bottom-0 w-100 text-center py-2 bg-light">
     <p class="pt-3" style="color: rgba(0, 0, 0, 0.5); margin-left: 150px;">©2024 Group-11</p>
 </footer>
+
+<script src="${pageContext.request.contextPath}/views/admin/assets/js/showMessConfirm.js"></script>
 
 </body>
 </html>

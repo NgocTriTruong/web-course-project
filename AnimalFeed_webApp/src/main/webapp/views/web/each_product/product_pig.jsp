@@ -7,7 +7,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thức ăn cho Heo</title>
+    <c:forEach var="ca" items="${categoriesData}">
+        <c:if test="${ca.id == selectedCategoryId}">
+            <title>${ca.name}</title>
+        </c:if>
+    </c:forEach>
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.bundle.min.js">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.min.css">
@@ -28,13 +32,14 @@
     <!-- scrollToTopBtn -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/scrollToTopBtn.css">
     <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/scrollToTopBtn.js" defer></script>
+    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/search.js" defer></script>
 </head>
 <body>
 <%@ include file="../layout/header.jsp" %>
 
     <main style="margin-top: 95px;" class="product bg-light">
 
-        <div class="position-relative text-center mb-4">
+        <div id="pagination" class="position-relative text-center mb-4">
             <img src="${pageContext.request.contextPath}/views/template/assets/images/background/product-main-bg.jpg" class="img-fluid w-100" alt="Thức ăn">
             <c:forEach var="ca" items="${categoriesData}">
                 <c:if test="${ca.id == selectedCategoryId}">
@@ -111,27 +116,22 @@
                     </c:choose>
                 </div>
                 <div class="container mt-4">
-                    <nav aria-label="Page navigation">
+                    <nav aria-label="Discount products pagination">
                         <ul class="pagination justify-content-center">
-                            <li class="page-item ${currentPage > 1 ? '' : 'disabled'}">
-                                <a class="page-link" href="?categoryId=${selectedCategoryId}&page=${currentPage - 1}"><i class="fa-solid fa-chevron-left"></i></a>
+                            <li class="page-item ${discountPage > 1 ? '' : 'disabled'}">
+                                <a class="page-link" href="?categoryId=${selectedCategoryId}&discountPage=${discountPage - 1}#sale-products">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </a>
                             </li>
-                            <c:forEach var="i" begin="1" end="${endPage}">
-                                <c:choose>
-                                    <c:when test="${i == 1 || i == endPage || (i >= currentPage - 2 && i <= currentPage + 2)}">
-                                        <li class="page-item ${i == currentPage ? 'active' : ''}" style="color: #94b83d;">
-                                            <a class="page-link" href="?categoryId=${selectedCategoryId}&page=${i}">${i}</a>
-                                        </li>
-                                    </c:when>
-                                    <c:when test="${i == currentPage - 3 || i == currentPage + 3}">
-                                        <li class="page-item disabled">
-                                            <span class="page-link">...</span>
-                                        </li>
-                                    </c:when>
-                                </c:choose>
+                            <c:forEach var="i" begin="1" end="${endDiscountPage}">
+                                <li class="page-item ${i == discountPage ? 'active' : ''}">
+                                    <a class="page-link" href="?categoryId=${selectedCategoryId}&discountPage=${i}#sale-products">${i}</a>
+                                </li>
                             </c:forEach>
-                            <li class="page-item ${currentPage < endPage ? '' : 'disabled'}">
-                                <a class="page-link" href="?categoryId=${selectedCategoryId}&page=${currentPage + 1}"><i class="fa-solid fa-chevron-right"></i></a>
+                            <li class="page-item ${discountPage < endDiscountPage ? '' : 'disabled'}">
+                                <a class="page-link" href="?categoryId=${selectedCategoryId}&discountPage=${discountPage + 1}#sale-products">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </a>
                             </li>
                         </ul>
                     </nav>
@@ -141,74 +141,95 @@
             <!-- New -->
             <div id="new-products" style="display: none;">
                 <div class="row">
+                    <c:choose>
+                    <c:when test="${not empty newProducts}">
+                    <c:forEach var="newP" items="${newProducts}">
                     <div class="col-md-3 bg-light text-center m-3 col product_number">
-                        <div class="sale_all">  
-                            <div class="new_badge">New</div>
-                        </div>
-                        <div class="product-img">
-                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_01.png" alt="TOP 01" height="250px" width="200px">
-                        </div>
-                        <div class="h5 text-h">TOP 01</div>
-                        <div class="p mb-2 text-p">Dùng cho heo con từ 05 ngày tuổi đến 35 ngày tuổi</div>
-                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
-                        <div class="p text-start ms-3">Đã bán 1,1k</div>
-                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                            <i class="fa-solid fa-truck mt-1"></i>
-                            <p class="ms-2">2 -4 ngày</p>
-                        </div>
+                        <a href="product-detail?pid=${newP.id}" class="text-decoration-none text-dark">
+                            <div class="sale_all">
+                                <div class="new_badge">New</div>
+                            </div>
+                            <div class="product-img">
+                                <img src="${newP.img}" alt="${newP.name}" height="250px" width="200px">
+                            </div>
+                            <div class="h5 text-h">${newP.name}</div>
+                            <div class="p mb-2 text-p">${newP.description}</div>
+                            <div class="h4 text-start ms-3" style="color: red;"><f:formatNumber value="${newP.price}"/> <u>đ</u></div>
+                            <div class="p text-start ms-3">Đã bán 1,1k</div>
+                            <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
+                                <i class="fa-solid fa-truck mt-1"></i>
+                                <p class="ms-2">2 -4 ngày</p>
+                            </div>
+                        </a>
                     </div>
+                    </c:forEach>
+                    </c:when>
+                        <c:otherwise>
+                            <div class="col-12 text-center mt-5">
+                                <p class="text-muted h5">Không có sản phẩm nào trong danh mục này.</p>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
-                <a href="javascript:void(0)" id="toggle-product-new" class="toggle-button-sale text-center mt-2">Xem tất cả <i class="fa-solid fa-chevron-down ms-2"></i></a>
             </div>
 
             <!-- Ban chay -->
             <div id="best-products" style="display: none;">
                 <div class="row">
+                    <c:choose>
+                    <c:when test="${not empty bestSellingProducts}">
+                    <c:forEach var="bestSellP" items="${bestSellingProducts}">
                     <div class="col-md-3 bg-light text-center m-3 col product_number">
-                        <div class="product-img">
-                            <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/TOP_01.png" alt="TOP 01" height="250px" width="200px">
-                        </div>
-                        <div class="h5 text-h">TOP 01</div>
-                        <div class="p mb-2 text-p">Dùng cho heo con từ 05 ngày tuổi đến 35 ngày tuổi</div>
-                        <div class="h4 text-start ms-3" style="color: red;">420.000 <u>đ</u></div>
-                        <div class="p text-start ms-3">Đã bán 1,1k</div>
-                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                            <i class="fa-solid fa-truck mt-1"></i>
-                            <p class="ms-2">2 -4 ngày</p>
-                        </div>
+                        <a href="product-detail?pid=${bestSellP.id}" class="text-decoration-none text-dark">
+                            <div class="product-img">
+                                <img src="${bestSellP.img}" alt="${bestSellP.name}" height="250px" width="200px">
+                            </div>
+                            <div class="h5 text-h">${bestSellP.name}</div>
+                            <div class="p mb-2 text-p">${bestSellP.description}</div>
+                            <div class="h4 text-start ms-3" style="color: red;"><f:formatNumber value="${bestSellP.price}"/> <u>đ</u></div>
+                            <div class="p text-start ms-3">Đã bán 1,1k</div>
+                            <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
+                                <i class="fa-solid fa-truck mt-1"></i>
+                                <p class="ms-2">2 -4 ngày</p>
+                            </div>
+                        </a>
                     </div>
+                    </c:forEach>
+                    </c:when>
+                        <c:otherwise>
+                            <div class="col-12 text-center mt-5">
+                                <p class="text-muted h5">Không có sản phẩm nào trong danh mục này.</p>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
-                <a href="javascript:void(0)" id="toggle-product-best" class="toggle-button-sale text-center mt-2">Xem tất cả <i class="fa-solid fa-chevron-down ms-2"></i></a>
             </div>
         </div>
         
         <!-- Filter -->
-        <div id="pagination" class="containers my-4">
+        <div class="containers my-4">
             <div class="row justify-content-center mb-3 pt-3">
-                <div class="col-md-3">
-                    <select id="group" class="form-select" style="height: 50px; font-size: 20px;">
-                        <option value="" selected>Nhóm sản phẩm</option>
-                        <option value="Vịt thịt">Thức ăn cho heo con</option>
-                        <option value="Vịt trứng">Thức ăn cho heo thịt</option>
-                        <option value="Tổng hợp">Thức ăn cho heo nậu bị</option>
-                        <option value="Tổng hợp">Thức ăn cho heo nái</option>
-                        <option value="Tổng hợp">Thức ăn cho heo đực</option>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <select id="brand" class="form-select" style="height: 50px; font-size: 20px;">
-                        <option value="" selected>Thương Hiệu</option>
-                        <option value="Vina">Vina</option>
-                        <option value="Happy">Happy</option>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <select  class="form-select" id="" style="height: 50px; font-size: 20px;">
-                        <option value="" selected>Sắp xếp giá</option>
-                        <option value="ascenting">Tăng dần</option>
-                        <option value="dcenting">Giảm dần</option>
-                    </select>
-                </div>
+                <form method="get" action="filter-product" class="d-flex flex-wrap justify-content-center">
+                    <div class="col-md-3">
+                        <select id="brand" name="brand" class="form-select" style="height: 50px; font-size: 20px;">
+                            <option value="" selected>Thương Hiệu</option>
+                            <c:forEach var="brand" items="${brandList}">
+                                <option value="${brand}">${brand}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <div class="col-md-3 ms-2">
+                        <select id="priceOrder" name="priceOrder" class="form-select" id="" style="height: 50px; font-size: 20px;">
+                            <option value="" selected>Sắp xếp giá</option>
+                            <option value="ascenting">Tăng dần</option>
+                            <option value="dcenting">Giảm dần</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" style="  margin-left: 14px;margin-top: 7px; width: 68px;height: 41px;">Lọc</button>
+                    </div>
+                </form>
+
             </div>
         </div>
 
@@ -278,45 +299,45 @@
 
         <!-- Text -->
          <div class="container mt-5">
-            <div class="p text-center fw-bold mb-4" style="font-size: 22px;">VINAFEED GROUP LUÔN HIỂU RÕ NHU CẦU DINH DƯỠNG CHO HEO</div>
+            <div class="p text-center fw-bold mb-4" style="font-size: 22px;">VINAFEED GROUP LUÔN HIỂU RÕ NHU CẦU DINH DƯỠNG CHO VẬT NUÔI</div>
             <img src="${pageContext.request.contextPath}/views/template/assets/images/gioi_thieu/nha_may_sx.png" alt="" height="500px" width="100%" style="border-radius: 10px;">
             <div class="p mt-4" style="text-indent: 30px;">
-                Nâng cao hiệu quả kinh tế và giá trị chăn nuôi từ đàn heo của mình, luôn là mong muốn của toàn thể người chăn nuôi. Để đàn heo của mình phát triển toàn diện, và cho năng suất cao thì 
-                người chăn nuôi cần nắm rõ và vận dụng nhiều yếu tố hỗ trợ trong chăn nuôi heo. Những yếu tố như: <span class="fw-bold">Thức ăn cho heo</span>, kỹ thuật và sức khỏe vật nuôi đều góp phần tạo nên kết quả đó.
+                Nâng cao hiệu quả kinh tế và giá trị chăn nuôi từ vật nuôi của mình, luôn là mong muốn của toàn thể người chăn nuôi. Để đàn heo của mình phát triển toàn diện, và cho năng suất cao thì
+                người chăn nuôi cần nắm rõ và vận dụng nhiều yếu tố hỗ trợ trong chăn nuôi heo. Những yếu tố như: <span class="fw-bold">Thức ăn cho vật nuôi</span>, kỹ thuật và sức khỏe vật nuôi đều góp phần tạo nên kết quả đó.
                 <div class="mt-1" style="text-indent: 30px;">
                     <span class="fw-bold" style="text-indent: 30px;">Vinafeed Group</span> luôn cung cấp những giải pháp tốt nhất hỗ trợ người chăn nuôi trong từng giai đoạn. Đặc biệt, những giải pháp thông qua thức ăn XANH - SẠCH sẽ đảm bảo trại heo của người chăn nuôi đạt được kết quả toàn diện nhất.
                 </div>
 
             </div>
-            <div class="p mt-3 fw-bold" style="font-size: 22px;">Thức ăn chăn nuôi dành cho heo qua từng giai đoạn</div>
+            <div class="p mt-3 fw-bold" style="font-size: 22px;">Thức ăn chăn nuôi dành cho vật nuôi qua từng giai đoạn</div>
             <div id="more_text_product" class="more_text_product">
                 <div class="p mt-2" style="text-indent: 30px;">
-                    Hiểu rõ được nhu cầu dinh dưỡng thiết yếu cho từng giai đoạn sinh trưởng của heo, Vinafeed Group đã nghiên cứu, phát triển và sản xuất các dòng thức ăn chăn nuôi heo riêng biệt cho từng giai đoạn:
+                    Hiểu rõ được nhu cầu dinh dưỡng thiết yếu cho từng giai đoạn sinh trưởng của vật nuôi, Vinafeed Group đã nghiên cứu, phát triển và sản xuất các dòng thức ăn chăn nuôi heo riêng biệt cho từng giai đoạn:
                     <p style="text-indent: 50px;">
-                        - Thức ăn cho heo con.
+                        - Thức ăn cho vật nuôi con.
                     </p>
                     <p style="text-indent: 50px;">
-                        - Thức ăn cho heo thịt.
+                        - Thức ăn cho vật nuôi thịt.
                     </p>
                     <p style="text-indent: 50px;">
-                        - Thức ăn cho heo hậu bị.
+                        - Thức ăn cho vật nuôi hậu bị.
                     </p>
                     <p style="text-indent: 50px;">
-                        - Thức ăn cho heo nái.
+                        - Thức ăn cho vật nuôi nái.
                     </p>
                     <p style="text-indent: 50px;">
-                        - Thức ăn cho heo đực.
+                        - Thức ăn cho vật nuôi đực.
                     </p>
                     <p tyle="text-indent: 30px;">
-                        Mỗi giai đoạn heo sẽ được xây dựng một khẩu phần thức ăn phù hợp. Tất cả nguồn nguyên liệu đầu vào đều có nguồn gốc truy xuất rõ ràng, xanh sạch tốt cho gia súc. Từ đó mang đến những sản phẩm chất lượng cao cùng sự đảm bảo hiệu suất chăn nuôi bền vững cho trang trại.
+                        Mỗi giai đoạn vật nuôi sẽ được xây dựng một khẩu phần thức ăn phù hợp. Tất cả nguồn nguyên liệu đầu vào đều có nguồn gốc truy xuất rõ ràng, xanh sạch tốt cho gia súc. Từ đó mang đến những sản phẩm chất lượng cao cùng sự đảm bảo hiệu suất chăn nuôi bền vững cho trang trại.
                     </p>
                     <p tyle="text-indent: 30px;">
-                        Thức ăn chăn nuôi heo của Vinafeed Group cung cấp cho vật nuôi dinh dưỡng hoàn chỉnh từ nhiều loại nguyên liệu thô như đậu nành, bắp… Cùng những vi chất dinh dưỡng chính như các khoáng chất, vitamin…
+                        Thức ăn chăn nuôi vật nuôi của Vinafeed Group cung cấp cho vật nuôi dinh dưỡng hoàn chỉnh từ nhiều loại nguyên liệu thô như đậu nành, bắp… Cùng những vi chất dinh dưỡng chính như các khoáng chất, vitamin…
                     </p>
                 </div>
-                <div class="p mt-3 fw-bold mb-3" style="font-size: 22px;">Thức ăn chăn nuôi heo XANH - SẠCH</div>
+                <div class="p mt-3 fw-bold mb-3" style="font-size: 22px;">Thức ăn chăn nuôi XANH - SẠCH</div>
                 <img src="${pageContext.request.contextPath}/views/template/assets/images/banner/Home_Banner_Web.jpg" alt="" width="70%" height="500px" style="margin-left: 200px; border-radius: 10px;">
-                <p class="mt-3" style="text-indent: 30px;">XANH - SẠCH là yếu tố chủ chốt và là kim chỉ nam trong suốt gần 30 năm sản xuất thức ăn chăn nuôi heo của Vinafeed Group. </p>
+                <p class="mt-3" style="text-indent: 30px;">XANH - SẠCH là yếu tố chủ chốt và là kim chỉ nam trong suốt gần 30 năm sản xuất thức ăn chăn nuôi vật nuôi của Vinafeed Group. </p>
                 <div class="p mt-3 fw-bold mb-3" style="font-size: 22px;">Đầu tư công nghệ dinh dưỡng và dây chuyền sản xuất</div>
                 <div class="p mt-2" style="text-indent: 30px;">
                     Tại 03 nhà máy của chúng tôi, dây chuyền sản xuất và công nghệ đều được đầu tư theo công nghệ Van Aarsen nhập khẩu từ Châu Âu. Đây là công nghệ hoàn toàn tự động từ khâu nhập nguyên liệu cho đến khâu cân, trộn, 
@@ -365,6 +386,6 @@
 
     <!-- Script -->
     <script src="${pageContext.request.contextPath}/views/template/assets/scripts/product/transferProduct.js" defer></script>
-    
+
 </body>
 </html>

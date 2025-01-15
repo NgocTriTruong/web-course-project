@@ -9,11 +9,12 @@ public class ProductWithDiscountDTO {
     private int percentage; // Tỷ lệ giảm giá
     private double discountedPrice; // Giá sau giảm
     private int daysLeft; // Số ngày còn lại của sản phẩm
+    private int cat_id;
 
     public ProductWithDiscountDTO() {
     }
 
-    public ProductWithDiscountDTO(int id, String img, String name, String description, double price, int percentage, double discountedPrice, int daysLeft) {
+    public ProductWithDiscountDTO(int id, String img, String name, String description, double price, int percentage, double discountedPrice, int daysLeft, int cat_id) {
         this.id = id;
         this.img = img;
         this.name = name;
@@ -22,6 +23,7 @@ public class ProductWithDiscountDTO {
         this.percentage = percentage;
         this.discountedPrice = discountedPrice;
         this.daysLeft = daysLeft;
+        this.cat_id = cat_id;
     }
 
     public int getId() {
@@ -88,6 +90,14 @@ public class ProductWithDiscountDTO {
         this.daysLeft = daysLeft;
     }
 
+    public int getCat_id() {
+        return cat_id;
+    }
+
+    public void setCat_id(int cat_id) {
+        this.cat_id = cat_id;
+    }
+
     @Override
     public String toString() {
         return "ProductWithDiscountDTO{" +
@@ -99,6 +109,7 @@ public class ProductWithDiscountDTO {
                 ", percentage=" + percentage +
                 ", discountedPrice=" + discountedPrice +
                 ", daysLeft=" + daysLeft +
+                ", cat_id=" + cat_id +
                 '}';
     }
 }

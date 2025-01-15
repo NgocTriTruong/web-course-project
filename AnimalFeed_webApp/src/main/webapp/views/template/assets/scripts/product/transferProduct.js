@@ -13,3 +13,20 @@ function selectCategory(button, categoryId) {
     // Chuyển hướng trang với categoryId
     window.location.href = '${pageContext.request.contextPath}/list-product?categoryId=' + categoryId;
 }
+
+// Thêm vào cuối file JavaScript
+function scrollToSection(sectionId) {
+    const element = document.getElementById(sectionId);
+    if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+// Sửa lại các link phân trang và category
+document.querySelectorAll('.category-link').forEach(link => {
+    link.addEventListener('click', function (e) {
+        e.preventDefault();
+        const href = this.getAttribute('href');
+        window.location.href = href + '#sale-products';
+    });
+});

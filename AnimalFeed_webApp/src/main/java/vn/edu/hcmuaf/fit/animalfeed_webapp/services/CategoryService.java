@@ -32,4 +32,13 @@ public class CategoryService {
     public List<Category> getAll() {
         return categoryDao.getAll();
     }
+
+
+    public static void main(String[] args) {
+        CategoryService categoryService = new CategoryService();
+        List<Category> categories = categoryService.getAll();
+        for (Category category : categories) {
+            System.out.println(category);
+        }
+    }
 }
