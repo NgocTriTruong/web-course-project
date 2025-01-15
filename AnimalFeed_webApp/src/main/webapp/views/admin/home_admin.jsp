@@ -89,7 +89,7 @@
       </section>
 
       <!-- Quản lý Người dùng -->
-      <section id="user-management" class="section">
+      <section id="userManagement" class="section">
         <h3>Quản lý Người dùng</h3>
         <div class="controls">
           <input type="text" id="user-name" placeholder="Tên người dùng">
