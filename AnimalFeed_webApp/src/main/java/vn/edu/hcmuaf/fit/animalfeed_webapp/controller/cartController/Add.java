@@ -53,7 +53,7 @@ public class Add extends HttpServlet {
             cartDetail.setUserId(user.getId());
             cartDetail.setProductId(product.getId());
             cartDetail.setQuantity(1);
-            cartDetail.setTotal(product.getPrice());
+            cartDetail.setTotal(cart.getDiscountedPrice(product));
             cartDetail.setStatus(0);
 
             if (cartService.getCDById(productId, user.getId())) {
