@@ -84,11 +84,24 @@ public class UserService {
         }
     }
 
-
-
     // Xóa người dùng (với quyền admin)
     public void deleteUser(int userId, int adminUserId) {
-        userDao.deleteUser(userId, adminUserId); // Xóa người dùng và ghi log nếu admin
+        try {
+            // Kiểm tra user tồn tại
+            User userToDelete = userDao.getUserById(userId);
+            if (userToDelete == null) {
+                throw new RuntimeException("Không tìm thấy người dùng cần xóa.");
+            }
+
+            // Kiểm tra không thể tự xóa chính mình
+            if (userId == adminUserId) {
+                throw new RuntimeException("Không thể xóa tài khoản của chính mình.");
+            }
+
+            userDao.deleteUser(userId, adminUserId);
+        } catch (Exception e) {
+            throw new RuntimeException("Lỗi khi xóa người dùng: " + e.getMessage());
+        }
     }
 
     public List<User> getAllUsers() {
