@@ -11,8 +11,12 @@ public class OrderDao {
     private static Jdbi jdbi = JdbiConnect.getJdbi();
 
     // Method to insert a new user
-    public Order getUserById(int id) throws SQLException, ClassNotFoundException {
-        return jdbi.withHandle(handle -> handle.createQuery("select * from orders where id = :id").bind("id", id).mapToBean(Order.class).findOne().orElse(null));
+    public ArrayList<Order> getOrdersByUserId(int userId) throws SQLException, ClassNotFoundException {
+        return (ArrayList<Order>) jdbi.withHandle(handle -> handle.createQuery("select * from orders where user_id = :userId")
+                .bind("userId", userId)
+                .mapToBean(Order.class)
+                .list()
+        );
     }
 
     public int insertOrder(Order order) {

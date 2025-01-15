@@ -62,7 +62,7 @@
     </style>
 </head>
 <body>
-<%@ include file="layout/header.jsp" %>
+<%@ include file="../layout/header.jsp" %>
 <main style="margin-top: 85px;">
     <div class="container-fluid bg-light">
         <div class="container pt-4 checkout">
@@ -222,8 +222,8 @@
         </div>
     </div>
 </main>
-<%@ include file="layout/near_footer.jsp" %>
-<%@ include file="layout/footer.jsp" %>
+<%@ include file="../layout/near_footer.jsp" %>
+<%@ include file="../layout/footer.jsp" %>
 
 <script src="${pageContext.request.contextPath}/views/template/assets/scripts/call-api-address.js"></script>
 

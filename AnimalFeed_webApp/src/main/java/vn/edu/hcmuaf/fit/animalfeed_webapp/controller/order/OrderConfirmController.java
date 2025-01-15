@@ -50,7 +50,7 @@ public class OrderConfirmController extends HttpServlet {
         request.setAttribute("totalQuantity", totalQuantity);
 
         // Forward to the order confirmation page
-        request.getRequestDispatcher("/views/web/confirm_order.jsp")
+        request.getRequestDispatcher("/views/web/order/confirm_order.jsp")
                 .forward(request, response);
     }
 }
