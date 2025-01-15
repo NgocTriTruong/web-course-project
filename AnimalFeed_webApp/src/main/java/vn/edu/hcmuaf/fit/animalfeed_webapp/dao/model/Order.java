@@ -1,6 +1,7 @@
 package vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Order implements Serializable {
@@ -12,12 +13,12 @@ public class Order implements Serializable {
     private double totalQuantity;
     private int userId;
     private double shippingPrice;
-    private Date orderDate;
+    private LocalDateTime orderDate;
     private Date shippingDate;
 
     public Order() {}
 
-    public Order(int id, int status, String address, String shipperId, double totalPrice, double totalQuantity, int userId, double shippingPrice, Date orderDate, Date shippingDate) {
+    public Order(int id, int status, String address, String shipperId, double totalPrice, double totalQuantity, int userId, double shippingPrice, LocalDateTime orderDate, Date shippingDate) {
         this.id = id;
         this.status = status;
         this.address = address;
@@ -94,11 +95,11 @@ public class Order implements Serializable {
         this.shippingPrice = shippingPrice;
     }
 
-    public Date getOrderDate() {
+    public LocalDateTime getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(Date orderDate) {
+    public void setOrderDate(LocalDateTime orderDate) {
         this.orderDate = orderDate;
     }
 
@@ -108,6 +109,11 @@ public class Order implements Serializable {
 
     public void setShippingDate(Date shippingDate) {
         this.shippingDate = shippingDate;
+    }
+
+    public String getFormattedOrderDate() {
+        if (orderDate == null) return "";
+        return orderDate.format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
     }
 
     @Override
