@@ -24,18 +24,6 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/scrollToTopBtn.css">
   <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/scrollToTopBtn.js" defer></script>
 
-  <style>
-    .carousel-item {
-      display: flex; /* Hiển thị các mục theo chiều ngang */
-      justify-content: center; /* Căn giữa nội dung */
-      align-items: center; /* Căn giữa theo chiều dọc */
-    }
-
-    .carousel-item:not(.active) {
-      display: none; /* Ẩn các mục không được kích hoạt */
-    }
-
-  </style>
 </head>
 <body>
 <%@ include file="layout/header.jsp" %>
@@ -59,33 +47,23 @@
             <div class="heo-section d-flex mb-4">
               <div class="d-flex w-100 justify-content-around mt-4">
                 <div id="productPigCarousel${ca.id}" class="carousel slide" data-bs-ride="carousel">
-                  <div class="carousel-inner">
+                  <div class="carousel-inner d-flex" style="margin-left: 30px;">
                     <!-- Duyệt qua sản phẩm thuộc danh mục -->
                     <c:forEach var="p" items="${productsData}" varStatus="status">
                       <c:if test="${p.cat_id == ca.id}">
-                        <div class="carousel-item ${status.first ? 'active' : ''}">
-                          <div class="d-flex justify-content-center gap-4">
+                          <div class="d-flex justify-content-center gap-4 ms-5">
                             <div class="card">
                               <div class="product-img">
                                 <img src="${p.img}" alt="${p.name}" height="250px" width="200px">
                               </div>
                               <div class="h5 text-h">${p.name}</div>
                               <div class="p mb-2 text-p">${p.description}</div>
-                              <div class="h4 text-start ms-3" style="color: red;">
-                                <f:formatNumber value="${p.price}"/> <u>đ</u>
-                              </div>
-                              <div class="p text-start ms-3">Đã bán 1,1k</div>
-                              <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                                <i class="fa-solid fa-truck mt-1"></i>
-                                <p class="ms-2">2 - 4 ngày</p>
-                              </div>
                             </div>
                           </div>
-                        </div>
                       </c:if>
                     </c:forEach>
                   </div>
-                  <!-- Điều hướng carousel -->
+                  <!-- Điều khiển slider -->
                   <button class="carousel-control-prev" type="button" data-bs-target="#productPigCarousel${ca.id}" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
@@ -114,35 +92,33 @@
             <div class="ga-section d-flex mb-4">
               <div class="d-flex w-100 justify-content-around mt-4">
                 <div id="productChickenCarousel${ca.id}" class="carousel slide" data-bs-ride="carousel">
-                  <div class="carousel-inner">
+                  <div class="carousel-inner d-flex" style="margin-right: 30px;">
 
                     <c:forEach var="p" items="${productsData}">
                       <c:if test="${p.cat_id == ca.id}">
-                        <div class="carousel-item ${p == productsData[0] ? 'active' : ''}">
-                          <div class="d-flex justify-content-center gap-4">
-                            <div class="card">
-                              <img src="${p.img}" class="card-img-top" alt="${p.name}">
-                              <div class="card-body text-center">
-                                <h5 class="card-title">${p.name}</h5>
-                                <p class="card-text">${p.description}</p>
-                              </div>
+                        <div class="d-flex justify-content-center gap-4 ms-5">
+                          <div class="card">
+                            <img src="${p.img}" class="card-img-top" alt="${p.name}">
+                            <div class="card-body text-center">
+                              <h5 class="card-title">${p.name}</h5>
+                              <p class="card-text">${p.description}</p>
                             </div>
                           </div>
                         </div>
                       </c:if>
                     </c:forEach>
                   </div>
+                  <!-- Điều khiển slider -->
+                  <button class="carousel-control-prev" type="button" data-bs-target="#productChickenCarousel${ca.id}" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#productChickenCarousel${ca.id}" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
                 </div>
               </div>
-              <!-- Điều hướng carousel -->
-              <button class="carousel-control-prev" type="button" data-bs-target="#productPigCarousel${ca.id}" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#productPigCarousel${ca.id}" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-              </button>
             </div>
             <img src="${ca.img}" class="image_dv_number" alt="${ca.name}" width="360px" height="360px" style="margin-left: 400px; margin-bottom: 22px;">
           </section>

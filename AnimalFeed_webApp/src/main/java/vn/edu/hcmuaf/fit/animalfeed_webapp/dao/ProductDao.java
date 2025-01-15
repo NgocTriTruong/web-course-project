@@ -240,23 +240,22 @@ public class ProductDao {
                         .mapToBean(Product.class).list());
     }
 
-    //Hiển thị sản phẩm bán chạy nhất
-    public List<Product> getBestSellingProducts(int id) {
+    // Hiển thị sản phẩm bán chạy nhất
+    public List<Product> getBestSellingProducts(int categoryId) {
         Jdbi jdbi = JdbiConnect.getJdbi();
         return jdbi.withHandle(handle ->
                 handle.createQuery("""
                 SELECT p.*
                 FROM products p
                 JOIN order_details od ON p.id = od.product_id
-                JOIN orders o ON od.order_id = o.id
                 WHERE p.status = :status
-                and p.cat_id = :id
+                AND p.cat_id = :categoryId
                 GROUP BY p.id
-                ORDER BY o.total_quantity DESC
+                ORDER BY SUM(od.quantity) DESC
                 LIMIT 10
             """)
-                        .bind("status", "1")  // Lấy sản phẩm có trạng thái 'active'
-                        .bind("id", id)
+                        .bind("status", "1")  // Lọc sản phẩm có trạng thái 'active'
+                        .bind("categoryId", categoryId)
                         .mapToBean(Product.class).list());
     }
 
@@ -376,16 +375,55 @@ public class ProductDao {
         });
     }
 
-    public static void main(String[] args) {
-        ProductDao productDao = new ProductDao();
-        List<ProductWithDiscountDTO> products = productDao.getDiscountProduct();
-        if (products.isEmpty()) {
-            System.out.println("Không có sản phẩm giảm giá.");
-        } else {
-            for (ProductWithDiscountDTO product : products) {
-                System.out.println(product);
+    public Map<Integer, Integer> getProductSales() {
+        Jdbi jdbi = JdbiConnect.getJdbi();
+
+        // Truy vấn SQL
+        List<Map<String, Object>> results = jdbi.withHandle(handle ->
+                handle.createQuery("""
+            SELECT product_id, SUM(quantity) AS soldquantity
+            FROM order_details
+            GROUP BY product_id
+        """).mapToMap().list()
+        );
+
+        // Log kết quả trả về từ truy vấn
+        System.out.println("Query results: " + results);
+
+        Map<Integer, Integer> salesMap = new HashMap<>();
+        for (Map<String, Object> row : results) {
+            // Log từng row để kiểm tra
+            System.out.println("Row data: " + row);
+
+            // Sửa key thành đúng định dạng
+            Object productIdObj = row.get("product_id");
+            Object soldQuantityObj = row.get("soldquantity"); // Đảm bảo chữ thường
+
+            try {
+                if (productIdObj != null && soldQuantityObj != null) {
+                    // Ép kiểu chính xác
+                    Integer productId = ((Number) productIdObj).intValue();
+                    Integer soldQuantity = ((Number) soldQuantityObj).intValue();
+                    salesMap.put(productId, soldQuantity);
+                } else {
+                    // Log nếu gặp null
+                    System.err.println("Null value encountered in product_id or soldQuantity: " + row);
+                }
+            } catch (ClassCastException e) {
+                // Xử lý ngoại lệ khi ép kiểu
+                System.err.println("ClassCastException encountered: " + row);
+                e.printStackTrace();
             }
         }
+
+        // Trả về Map kết quả
+        return salesMap;
+    }
+
+    public static void main(String[] args) {
+        ProductDao productDao = new ProductDao();
+        Map<Integer, Integer> salesData = productDao.getProductSales();
+        System.out.println(salesData);
     }
 
 }

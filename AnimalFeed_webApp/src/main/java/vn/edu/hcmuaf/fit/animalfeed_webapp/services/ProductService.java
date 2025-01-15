@@ -117,4 +117,9 @@ public class ProductService {
         return productDao.searchProducts(keyword, minPrice, maxPrice, description, categoryId, currentPage, pageSize);
     }
 
+    //lượt bán
+    public Map<Integer, Integer> getProductSales() {
+        return productDao.getProductSales();
+    }
+
 }

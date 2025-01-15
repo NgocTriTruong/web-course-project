@@ -12,6 +12,7 @@ import vn.edu.hcmuaf.fit.animalfeed_webapp.services.ProductService;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @WebServlet(name = "ListProductController", value = "/list-product")
@@ -66,6 +67,8 @@ public class ListProductController extends HttpServlet {
         //hiển th sản phẩm bán chạy
         List<Product> getBestSellingProducts = productService.getBestSellingProducts(categoryId);
 
+        Map<Integer, Integer> salesData = productService.getProductSales();
+        request.setAttribute("salesData", salesData);
 
         request.setAttribute("categoriesData", categories);
         request.setAttribute("productsData", products);
