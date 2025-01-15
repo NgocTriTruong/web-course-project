@@ -1,4 +1,4 @@
-package vn.edu.hcmuaf.fit.animalfeed_webapp.controller;
+package vn.edu.hcmuaf.fit.animalfeed_webapp.controller.order;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -12,6 +12,7 @@ import vn.edu.hcmuaf.fit.animalfeed_webapp.services.OrderService;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet(name = "Order", value = "/create-order")
 public class OrderController extends HttpServlet {
@@ -73,16 +74,14 @@ public class OrderController extends HttpServlet {
             order.setOrderDate(new Timestamp(System.currentTimeMillis()));
             order.setShippingPrice(0.0); // Free shipping as per UI
 
-            orderService.insertOrder(order);
+            int orderId = orderService.insertOrder(order);
+            order.setId(orderId);
 
             // Create order details for selected items
             for (CartItem cartItem : selectedItems) {
-                // Delete from cart_details table
-                cartService.deleteCD(cartItem.getProductId(), user.getId());
-
                 // Create corresponding order detail
                 OrderDetail orderDetail = new OrderDetail();
-                orderDetail.setOrderId(order.getId());
+                orderDetail.setOrderId(orderId);
                 orderDetail.setProductId(cartItem.getProductId());
                 orderDetail.setQuantity(cartItem.getQuantity());
                 orderDetail.setTotalPrice(cartItem.getTotal());
@@ -91,11 +90,24 @@ public class OrderController extends HttpServlet {
 
                 // Remove item from cart
                 cart.removeProduct(cartItem.getProductId());
+                // Delete from cart_details table
+                cartService.deleteCD(cartItem.getProductId(), user.getId());
 
             }
 
             // Update session cart
             session.setAttribute("cart", cart);
+            session.setAttribute("successOrder", order);
+            session.setAttribute("orderItems", selectedItems);
+            session.setAttribute("customerInfo", Map.of(
+                    "fullName", fullName,
+                    "phone", phone,
+                    "email", email,
+                    "address", address,
+                    "deliveryMethod", deliveryMethod,
+                    "note", note,
+                    "paymentMethod", paymentMethod
+            ));
 
             // Redirect to order success page
             response.sendRedirect(request.getContextPath() + "/order-success");

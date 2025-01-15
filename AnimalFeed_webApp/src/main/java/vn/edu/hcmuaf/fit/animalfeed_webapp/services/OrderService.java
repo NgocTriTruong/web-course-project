@@ -9,8 +9,8 @@ public class OrderService {
     private OrderDao orderDao = new OrderDao();
     private OrderDetailDao orderDetailDao = new OrderDetailDao();
 
-    public void insertOrder(Order order) {
-        orderDao.insertOrder(order);
+    public int insertOrder(Order order) {
+        return orderDao.insertOrder(order);
     }
 
     public void insertOrderDetails(OrderDetail orderDetail) {

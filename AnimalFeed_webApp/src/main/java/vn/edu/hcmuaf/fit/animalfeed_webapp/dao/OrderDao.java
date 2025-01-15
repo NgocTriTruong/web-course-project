@@ -15,8 +15,8 @@ public class OrderDao {
         return jdbi.withHandle(handle -> handle.createQuery("select * from orders where id = :id").bind("id", id).mapToBean(Order.class).findOne().orElse(null));
     }
 
-    public void insertOrder(Order order) {
-        int rowsInserted = jdbi.withHandle(handle ->
+    public int insertOrder(Order order) {
+        return jdbi.withHandle(handle ->
                 handle.createUpdate("INSERT INTO orders (status, address, shipper_id, total_price, total_quantity, user_id, ship_price, order_date, ship_date) VALUES (:status, :address, :shipper_id, :total_price, :total_quantity, :user_id, :ship_price, :order_date, :ship_date)")
                         .bind("status", order.getStatus())
                         .bind("address", order.getAddress())
@@ -27,9 +27,10 @@ public class OrderDao {
                         .bind("ship_price", order.getShippingPrice())
                         .bind("order_date", order.getOrderDate())
                         .bind("ship_date", order.getShippingDate())
-                        .execute()
+                        .executeAndReturnGeneratedKeys("id")
+                        .mapTo(int.class)
+                        .one()
         );
-        System.out.println(rowsInserted);
     }
 
     // Method to update user information
