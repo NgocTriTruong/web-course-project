@@ -1,7 +1,3 @@
-document.addEventListener("DOMContentLoaded", function() {
-  loadProvinces();
-});
-
 async function loadProvinces() {
   try {
     const response = await fetch('https://provinces.open-api.vn/api/p/');
@@ -100,3 +96,13 @@ function openAddressForm() {
 function closeAddressForm() {
   document.getElementById('addressFormModal').style.display = 'none';
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+  const saveButton = document.getElementById('saveAddressButton');
+  saveButton.type = 'button'; // Change button type to prevent form submission
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  const closeButton = document.getElementById('closeAddressForm');
+  closeButton.type = 'button'; // Change button type to prevent form submission
+});

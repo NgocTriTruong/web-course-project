@@ -19,13 +19,12 @@
 </head>
 
 <body>
-
 <%@ include file="layout/header.jsp" %>
 
 <main class="mb-5" style="margin-top: 100px;">
-    <div class="container px-4 ">
+    <div class="container px-4">
         <!-- Nút quay lại -->
-        <a href="userManagement.jsp" class="btn btn-link mb-2 text_green" style="font-size: 16px;">
+        <a href="userManagement" class="btn btn-link mb-2 text_green" style="font-size: 16px;">
             <i class="fas fa-angle-left"></i> Quay lại
         </a>
 
@@ -46,14 +45,14 @@
         <% } %>
 
         <!-- Form thêm người dùng -->
-        <form action="${pageContext.request.contextPath}/addUser" method="POST" class="border p-5">
+        <form action="addUser" method="POST" class="border p-5">
             <!-- Dòng 1 -->
             <div class="row">
                 <div class="col-md-4">
                     <div class="mb-3">
                         <label for="phone" class="form-label style_18"><b>Số điện thoại</b></label>
                         <i class="fas fa-phone ms-2"></i>
-                        <input type="number" class="form-control" id="phone" name="phone" placeholder="Nhập số điện thoại..." required>
+                        <input type="text" class="form-control" id="phone" name="phone" placeholder="Nhập số điện thoại..." required>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -86,36 +85,21 @@
                 <div class="col-md-4 mt-3">
                     <div class="mb-3">
                         <div>
-                            <label class="form-label style_18"><b>Xác thực số điện thoại</b></label>
-                            <i class="fas fa-toggle-on ms-2"></i>
-                        </div>
-                        <div class="form-check-inline">
-                            <input class="form-check-input" type="radio" name="emailVerify" id="verify" value="1" checked>
-                            <label class="form-check-label" for="verify">Đã xác thực</label>
-                        </div>
-                        <div class="form-check-inline">
-                            <input class="form-check-input" type="radio" name="emailVerify" id="inVerify" value="0">
-                            <label class="form-check-label" for="inVerify">Chưa xác thực</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mt-3">
-                    <div class="mb-3">
-                        <div>
                             <label class="form-label style_18"><b>Trạng thái</b></label>
                             <i class="fas fa-toggle-on ms-2"></i>
                         </div>
                         <div class="form-check-inline">
                             <input class="form-check-input" type="radio" name="status" id="active" value="1" checked>
-                            <label class="form-check-label" for="active">Đang hoạt động</label>
+                            <label class="form-check-label" for="active">Ngưng hoạt động</label>
                         </div>
                         <div class="form-check-inline">
-                            <input class="form-check-input" type="radio" name="status" id="inactive" value="0">
-                            <label class="form-check-label" for="inactive">Ngừng hoạt động</label>
+                            <input class="form-check-input" type="radio" name="status" id="inactive" value="2">
+                            <label class="form-check-label" for="inactive">Đang hoạt động</label>
                         </div>
                     </div>
                 </div>
             </div>
+
 
             <!-- Nút submit -->
             <button type="submit" class="btn text-white bg_green fw-bold">Thêm mới</button>

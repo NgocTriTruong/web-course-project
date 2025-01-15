@@ -6,8 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.UserDao;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.cart.Cart;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.services.UserService;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
 
 import java.io.IOException;
@@ -15,13 +14,19 @@ import java.io.IOException;
 @WebServlet(name = "LoginController", value = "/login")
 public class LoginController extends HttpServlet {
 
+    private UserService userService;
+
+    @Override
+    public void init() {
+        userService = new UserService(); // Khởi tạo service khi servlet được tạo
+    }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String phone = req.getParameter("phone");
         String password = req.getParameter("password");
 
-        UserDao userDao = new UserDao();
-        User user = userDao.login(phone, password);
+        User user = userService.login(phone, password); // Sử dụng UserService để đăng nhập
 
         if (user != null) {
             HttpSession session = req.getSession();
@@ -33,13 +38,10 @@ public class LoginController extends HttpServlet {
                 resp.sendRedirect("dashboard"); // Admin được chuyển đến trang quản trị
             } else {
                 resp.sendRedirect("home"); // User được chuyển đến trang người dùng
-                Cart cart = new Cart();
-                cart.syncDatabase(user.getId());
-                session.setAttribute("cart", cart);
             }
         } else {
             req.setAttribute("error", "Số điện thoại hoặc mật khẩu không đúng!");
-            req.getRequestDispatcher("login").forward(req, resp);
+            req.getRequestDispatcher("/views/web/login.jsp").forward(req, resp);
         }
     }
 
@@ -52,7 +54,7 @@ public class LoginController extends HttpServlet {
             // Chuyển hướng nếu đã đăng nhập
             if (user.getRole() == 1) {
                 resp.sendRedirect("dashboard");
-            }else if (user.getRole() == 0) {
+            } else if (user.getRole() == 0) {
                 resp.sendRedirect("home");
             }
         } else {
