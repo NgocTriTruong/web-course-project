@@ -98,33 +98,33 @@ public class UserDao {
 
     public void deleteUser(int userId, int adminUserId) {
         // Kiểm tra quyền admin
-        boolean isAdmin = UserDao.checkIfAdmin(adminUserId);
+        boolean isAdmin = checkIfAdmin(adminUserId);
 
-        if (isAdmin) {
-            Jdbi jdbi = JdbiConnect.getJdbi();
-            // Thực hiện xóa mềm người dùng và ghi log
-            jdbi.useTransaction(handle -> {
-                // Cập nhật trạng thái người dùng thành 'deleted' (status = 0)
-                int updatedRows = handle.createUpdate("UPDATE users SET status = :status WHERE id = :userId")
-                        .bind("status", "0") // Trạng thái 'deleted'
-                        .bind("userId", userId)
-                        .execute();
-
-                // Ghi log hành động vào bảng action_log
-                if (updatedRows > 0) {
-                    handle.createUpdate("INSERT INTO action_log (user_id, action_type, entity_type, entity_id, created_at, description) " +
-                                    "VALUES (:userId, :actionType, :entityType, :entityId, CURRENT_DATE, :description)")
-                            .bind("userId", adminUserId)
-                            .bind("actionType", "DELETE")
-                            .bind("entityType", "USER")
-                            .bind("entityId", userId)
-                            .bind("description", "Admin user " + adminUserId + " deleted user " + userId)
-                            .execute();
-                } else {
-                    throw new RuntimeException("Failed to delete user with ID: " + userId);
-                }
-            });
+        if (!isAdmin) {
+            throw new RuntimeException("User is not authorized to delete.");
         }
+
+        jdbi.useTransaction(handle -> {
+            // Cập nhật status thành 0 (đã xóa) thay vì 0
+            int updatedRows = handle.createUpdate(
+                            "UPDATE users SET status = 0, update_date = NOW() WHERE id = :userId AND status != 0")
+                    .bind("userId", userId)
+                    .execute();
+
+            if (updatedRows > 0) {
+                // Ghi log
+                handle.createUpdate("INSERT INTO action_log (user_id, action_type, entity_type, entity_id, created_at, description) " +
+                                "VALUES (:userId, :actionType, :entityType, :entityId, NOW(), :description)")
+                        .bind("userId", adminUserId)
+                        .bind("actionType", "DELETE")
+                        .bind("entityType", "USER")
+                        .bind("entityId", userId)
+                        .bind("description", String.format("Admin %d deleted user %d", adminUserId, userId))
+                        .execute();
+            } else {
+                throw new RuntimeException("Không thể xóa người dùng này hoặc người dùng đã bị xóa trước đó.");
+            }
+        });
     }
 
     public void updateUser(User user, int adminUserId) {
