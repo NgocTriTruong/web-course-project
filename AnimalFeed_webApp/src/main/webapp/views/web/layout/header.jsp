@@ -6,7 +6,7 @@
       <div class="content d-flex justify-content-center">
         <div class="logo_shop">
 
-          <a href="${pageContext.request.contextPath}/index.jsp">
+          <a href="${pageContext.request.contextPath}/home">
             <img src="${pageContext.request.contextPath}/views/template/assets/images/header/logo_vina.png" alt="Logo Vina" height="75px" width="90px" style=" margin: 9px 0 0 22px;">
           </a>
         </div>
@@ -96,7 +96,7 @@
               <a href="news" class="text_h1">TIN TỨC</a>
             </li>
             <li class="p-4">
-              <a href="${pageContext.request.contextPath}/views/web/help.jsp" class="text_h1">HỖ TRỢ KHÁCH HÀNG</a>
+              <a href="${pageContext.request.contextPath}/contact" class="text_h1">HỖ TRỢ KHÁCH HÀNG</a>
             </li>
   
             <li class="p-4 mt-1 pointer">
@@ -179,7 +179,7 @@
 
           <li class="p-4">
             <div class="cart d-flex">
-              <a href="${pageContext.request.contextPath}/views/web/cart.jsp">
+              <a href="${pageContext.request.contextPath}/cart">
                 <i class="fa-solid fa-shopping-cart i_right_number mt-3 text-white"></i>
                   <span class="ms-1 text-white" style="margin-top: 14px;">Giỏ hàng</span>
                   <c:if test="${not empty sessionScope.cart}">

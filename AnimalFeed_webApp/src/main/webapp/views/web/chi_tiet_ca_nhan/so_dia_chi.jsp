@@ -54,7 +54,7 @@
                             </div>
                             <div class="tt_bottom_number d-flex mt-2">
                                 <i class="me-3 fa-solid fa-box ms-3"></i>
-                                <div class="p" onclick="window.location.href='personal_order.jsp'">Đơn hàng của tôi</div>
+                                <div class="p" onclick="window.location.href='${pageContext.request.contextPath}/order-history'">Đơn hàng của tôi</div>
                             </div>
                             <div class="tt_bottom_number d-flex mt-2">
                                 <i class="me-3 fa-solid fa-location-dot ms-3"></i>

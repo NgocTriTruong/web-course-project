@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpSession;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.dto.OrderDetailsWithProduct;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Order;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.OrderDetail;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.OrderService;
 
 import java.io.IOException;
@@ -90,6 +91,11 @@ public class OrderHistoryController extends HttpServlet {
             Map<Integer, Long> orderCounts = orders.stream()
                     .collect(Collectors.groupingBy(Order::getStatus, Collectors.counting()));
             request.setAttribute("orderCounts", orderCounts);
+
+            HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("user");
+
+            request.setAttribute("user", user);
 
             // Forward to JSP
             request.getRequestDispatcher("/views/web/chi_tiet_ca_nhan/personal_order.jsp")
