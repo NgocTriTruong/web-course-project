@@ -62,11 +62,11 @@
                             <p><strong>Trạng thái:</strong>
                                 <span class="status-badge status-${order.status}">
                                         <c:choose>
-                                            <c:when test="${order.status == 0}">Chờ xác nhận</c:when>
-                                            <c:when test="${order.status == 1}">Đang xử lý</c:when>
-                                            <c:when test="${order.status == 2}">Đang giao hàng</c:when>
-                                            <c:when test="${order.status == 3}">Đã giao hàng</c:when>
-                                            <c:when test="${order.status == 4}">Đã hủy</c:when>
+                                            <c:when test="${order.status == 1}">Chờ xác nhận</c:when>
+                                            <c:when test="${order.status == 2}">Đang xử lý</c:when>
+                                            <c:when test="${order.status == 3}">Đang giao hàng</c:when>
+                                            <c:when test="${order.status == 4}">Đã giao hàng</c:when>
+                                            <c:when test="${order.status == 0}">Đã hủy</c:when>
                                             <c:otherwise>Không xác định</c:otherwise>
                                         </c:choose>
                                     </span>
