@@ -63,32 +63,6 @@ async function loadWards() {
   }
 }
 
-function saveAddress() {
-  const province = document.getElementById('province');
-  const district = document.getElementById('district');
-  const ward = document.getElementById('ward');
-  const details = document.getElementById('addressDetails');
-
-  // Get the text of selected options
-  const provinceName = province.options[province.selectedIndex].text;
-  const districtName = district.options[district.selectedIndex].text;
-  const wardName = ward.options[ward.selectedIndex].text;
-  const addressDetailsText = details.value.trim();
-
-  if (province.value && district.value && ward.value) {
-    // Construct full address
-    const fullAddress = addressDetailsText 
-      ? `${addressDetailsText}, ${wardName}, ${districtName}, ${provinceName}` 
-      : `${wardName}, ${districtName}, ${provinceName}`;
-
-    // Update the input field
-    document.querySelector('.chose_location').value = fullAddress;
-    closeAddressForm();
-  } else {
-    alert('Vui lòng chọn đầy đủ Tỉnh, Huyện và Xã');
-  }
-}
-
 function openAddressForm() {
   document.getElementById('addressFormModal').style.display = 'block';
 }

@@ -34,6 +34,7 @@ public class DiscountDao {
         return originalPrice * (100 - discount.getPercentage()) / 100.0;
     }
 
+
     private Discount getById(int discountId) {
         return jdbi.withHandle(handle ->
                 handle.createQuery("SELECT * FROM discounts WHERE id = :id")
