@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "f" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,7 +31,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/scrollToTopBtn.css">
     <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/scrollToTopBtn.js" defer></script>
 
-    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/confirm_login.js" defer></script>
 </head>
 <body>
 
@@ -47,7 +49,7 @@
                     </div>
                     <div class="content">
                         <h2>CHUYÊN ĐỀ GÀ</h2>
-                        <a href="${pageContext.request.contextPath}/views/web/advise_detail.jsp"><button>Xem tư vấn</button></a>
+                        <a href="advise-detail"><button>Xem tư vấn</button></a>
                     </div>
                 </div>
 

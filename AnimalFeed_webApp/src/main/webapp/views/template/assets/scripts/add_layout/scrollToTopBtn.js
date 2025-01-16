@@ -12,5 +12,5 @@ window.addEventListener("scroll", function () {
 
 // Cuộn lên đầu trang khi nhấn vào nút
 scrollToTopBtn.addEventListener("click", function () {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({top: 0, behavior: "smooth"});
 });

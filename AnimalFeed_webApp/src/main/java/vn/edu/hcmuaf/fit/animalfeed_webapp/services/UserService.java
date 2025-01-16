@@ -110,6 +110,11 @@ public class UserService {
         return true;
     }
 
+    //thay đổi pass
+    public boolean updatePassword(int userId, String currentPassword, String newPassword) {
+        return userDao.updatePassword(userId, currentPassword, newPassword);
+    }
+
     public List<User> getAllUsers() {
         return userDao.loadUsers();
     }
@@ -134,6 +139,11 @@ public class UserService {
 
     public List<User> searchUsers(String searchTerm) {
         return userDao.searchUsers(searchTerm);
+    }
+
+    // Lấy số lượng người dùng
+    public int getTotalUser() {
+        return userDao.getTotalUser();
     }
 
 }

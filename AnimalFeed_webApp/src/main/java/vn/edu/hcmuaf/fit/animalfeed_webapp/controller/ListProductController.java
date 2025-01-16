@@ -12,6 +12,8 @@ import vn.edu.hcmuaf.fit.animalfeed_webapp.services.ProductService;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @WebServlet(name = "ListProductController", value = "/list-product")
 public class ListProductController extends HttpServlet {
@@ -27,7 +29,11 @@ public class ListProductController extends HttpServlet {
         // Lấy categoryId và trang hiện tại từ request
         String catId = request.getParameter("categoryId");
         String pageParam = request.getParameter("page");
+        String discountPageParam = request.getParameter("discountPage");
+        String sellingPageParam = request.getParameter("sellingPage");
+        String newPageParam = request.getParameter("newPage");
 
+        // Xử lý phân trang cho tất cả sản phẩm
         int page = (pageParam != null && !pageParam.isEmpty()) ? Integer.parseInt(pageParam) : 1;
         int categoryId = (catId != null && !catId.isEmpty()) ? Integer.parseInt(catId) : 0;
 
@@ -37,21 +43,47 @@ public class ListProductController extends HttpServlet {
             endPage++;
         }
 
+        // Xử lý phân trang cho sản phẩm giảm giá
+        int discountPage = (discountPageParam != null && !discountPageParam.isEmpty()) ?
+                Integer.parseInt(discountPageParam) : 1;
+        int countDiscountPro = productService.getByCatIdOfDiscount(categoryId).size();
+        int endDiscountPage = countDiscountPro / 12;
+        if(countDiscountPro % 12 != 0){
+            endDiscountPage++;
+        }
+
         // Lay danh sach san pham theo trang
         List<Product> products = productService.getProductByPage(page, categoryId);
 
         //Lay danh muc
         List<Category> categories = categoryService.getAll();
 
-        //Hiển thị sản phẩm giảm giá
-        List<ProductWithDiscountDTO> discountProducts = productService.getDiscountProduct();
+        //Hiển thị sản phẩm giảm giá theo trang
+        List<ProductWithDiscountDTO> discountProducts  = productService.getProductByPageOfDiscount(discountPage, categoryId);
+
+        //hien thi san pham moi
+        List<Product> newProducts = productService.getNewProduct(categoryId);
+
+        //hiển th sản phẩm bán chạy
+        List<Product> getBestSellingProducts = productService.getBestSellingProducts(categoryId);
+
+        Map<Integer, Integer> salesData = productService.getProductSales();
+        request.setAttribute("salesData", salesData);
 
         request.setAttribute("categoriesData", categories);
         request.setAttribute("productsData", products);
         request.setAttribute("selectedCategoryId", catId);
         request.setAttribute("currentPage", page);
         request.setAttribute("endPage", endPage);
+        request.setAttribute("discountPage", discountPage);
+        request.setAttribute("endDiscountPage", endDiscountPage);
         request.setAttribute("discountProducts", discountProducts);
+
+
+        //hien thi san pham moi
+        request.setAttribute("newProducts", newProducts);
+        //hiển thị sản phẩm bán chạy
+        request.setAttribute("bestSellingProducts", getBestSellingProducts);
 
         request.getRequestDispatcher("views/web/each_product/product_pig.jsp").forward(request, response);
     }

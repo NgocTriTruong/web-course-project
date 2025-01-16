@@ -30,8 +30,8 @@
             <div class="row">
                 <!-- Cart Items List -->
                 <div class="col-md-8 pb-4">
-                    <h5 class="mb-3 bg-white cart-select-all p-3">
-                        <input type="checkbox" id="select-all" class="me-1"> Select All (<span id="selected-count">0</span>)
+                    <h5 class="mb-3 bg-white cart-select-all p-3 justify-content-center">
+                        <input type="checkbox" id="select-all" class="me-1"> Chọn tất cả (<span id="selected-count">0</span>)
                         <button onclick="removeSelectedItems()" class="btn btn-link text-secondary float-end">
                             <i class="fa-solid fa-trash"></i>
                         </button>
@@ -52,9 +52,10 @@
                                 <div>
                                     <h5>${item.name}</h5>
                                     <h6>${item.desc}</h6>
-                                    <h6 class="text-secondary">Product Code: ${item.productId}</h6>
                                     <div class="price-section mt-2">
-                                        <span class="price">${item.price}</span>
+                                        <span class="price">
+                                            <fmt:formatNumber value="${item.unitPrice}" type="currency" currencySymbol="₫"/>
+                                        </span>
                                     </div>
                                     <div class="quantity-controls mt-3">
                                         <div class="quantity-selector d-inline-flex align-items-center">
@@ -80,19 +81,17 @@
                 <!-- Order Summary -->
                 <div class="col-md-4">
                     <div class="cart-summary bg-white p-4">
-                        <h6 class="mb-4">Order Summary</h6>
-                        <div class="d-flex justify-content-between mb-3">
-                            <span>Subtotal:</span>
-                            <span id="subtotal">${sessionScope.cart.totalPrice}</span>
-                        </div>
-                        <div class="d-flex justify-content-between mb-3">
-                            <span>Shipping:</span>
-                            <span>Free</span>
-                        </div>
+                        <h6 class="mb-4">Đơn hàng</h6>
                         <hr>
                         <div class="d-flex justify-content-between mb-4">
-                            <strong>Total:</strong>
-                            <strong class="text-primary" id="total">${sessionScope.cart.totalPrice}</strong>
+                            <strong>Số lượng:</strong>
+                            <strong class="text-primary" id="quantity">${sessionScope.cart.totalQuantity}</strong>
+                        </div>
+                        <div class="d-flex justify-content-between mb-4">
+                            <strong>Tổng tiền:</strong>
+                            <strong class="text-primary" id="total">
+                                <fmt:formatNumber value="${sessionScope.cart.totalPrice}" type="currency" currencySymbol="₫"/>
+                            </strong>
                         </div>
                         <form action="${pageContext.request.contextPath}/order-confirm" method="get">
                             <button type="submit"
@@ -106,6 +105,7 @@
         </div>
     </div>
 </main>
+<%@ include file="layout/near_footer.jsp" %>
 <%@ include file="layout/footer.jsp" %>
 <script>
     function removeFromCart(productId) {
@@ -167,7 +167,7 @@
     }
 
     function updateCartQuantity(productId, quantityChange) {
-        console.log('Product ID:', productId); // Debug log
+        console.log('Product ID:', productId);
         console.log('All cart items:', document.querySelectorAll('.cart-item'));
 
         const cartItem = document.querySelector('.cart-item[data-product-id="' + productId + '"]');
@@ -183,19 +183,19 @@
         }
 
         const newQuantity = parseInt(input.value) + quantityChange;
-        console.log('New quantity:', newQuantity); // Debug log
+        console.log('New quantity:', newQuantity);
 
         if (newQuantity < 1) return;
 
         const contextPath = '${pageContext.request.contextPath}';
-        const url = contextPath + '/update-cart?productId=' + productId+'&quantity='+ newQuantity;
+        const url = contextPath + '/update-cart?productId=' + productId + '&quantity=' + newQuantity;
         console.log(url);
 
         fetch(url)
             .then(response => {
                 if (response.ok) {
                     input.value = newQuantity;
-                    updateTotals();
+                    updateTotals(); // Update totals after successful quantity change
                 } else if (response.status === 401) {
                     window.location.href = contextPath + '/login';
                 } else {
@@ -231,21 +231,34 @@
     // Calculate and update totals based on checked items
     function updateTotals() {
         let total = 0;
+        let totalQuantity = 0;
         let selectedCount = 0;
 
         document.querySelectorAll('.cart-item').forEach(item => {
             const checkbox = item.querySelector('.item-checkbox');
             if (checkbox.checked) {
                 const quantity = parseInt(item.querySelector('.quantity-input').value);
-                const price = parseFloat(item.querySelector('.price').textContent);
+                const price = parseFloat(item.querySelector('.price').textContent.replace(/[^\d]/g, ''));
                 total += quantity * price;
+                totalQuantity += quantity;
                 selectedCount++;
             }
         });
 
-        document.getElementById('subtotal').textContent = total.toFixed(2);
-        document.getElementById('total').textContent = total.toFixed(2);
+        document.getElementById('total').textContent = formatPrice(total);
+        document.getElementById('quantity').textContent = totalQuantity;
         document.getElementById('selected-count').textContent = selectedCount;
+    }
+
+    function formatPrice(number) {
+        // Convert to string and split into integer and decimal parts
+        const parts = number.toString().split('.');
+
+        // Add thousands separators to the integer part
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+        // Return formatted price with đ symbol
+        return parts[0] + " đ";
     }
 
     // Handle "Select All" checkbox
@@ -271,6 +284,22 @@
             document.getElementById('select-all').checked = allChecked;
 
             updateTotals();
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Find all cart items
+        const cartItems = document.querySelectorAll('.cart-item');
+
+        // For each cart item
+        cartItems.forEach(item => {
+            const checkbox = item.querySelector('.item-checkbox');
+            const status = item.dataset.status;
+
+            // If status is 1, check the checkbox
+            if (status === '1') {
+                checkbox.checked = true;
+            }
         });
     });
 </script>

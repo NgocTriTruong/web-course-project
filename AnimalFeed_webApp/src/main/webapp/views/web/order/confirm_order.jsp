@@ -62,7 +62,7 @@
     </style>
 </head>
 <body>
-<%@ include file="layout/header.jsp" %>
+<%@ include file="../layout/header.jsp" %>
 <main style="margin-top: 85px;">
     <div class="container-fluid bg-light">
         <div class="container pt-4 checkout">
@@ -72,7 +72,10 @@
             </a>
             <div class="row mt-4">
                 <form id="orderForm" action="${pageContext.request.contextPath}/create-order" method="post">
-
+                    <input type="hidden" name="province" id="provinceHidden" value="">
+                    <input type="hidden" name="district" id="districtHidden" value="">
+                    <input type="hidden" name="ward" id="wardHidden" value="">
+                    <input type="hidden" name="addressDetails" id="addressDetailsHidden" value="">
                     <!-- Order Item Details -->
                     <div class="col-md-8 pb-4">
                         <div class="bg-white pt-3 order">
@@ -222,8 +225,8 @@
         </div>
     </div>
 </main>
-<%@ include file="layout/near_footer.jsp" %>
-<%@ include file="layout/footer.jsp" %>
+<%@ include file="../layout/near_footer.jsp" %>
+<%@ include file="../layout/footer.jsp" %>
 
 <script src="${pageContext.request.contextPath}/views/template/assets/scripts/call-api-address.js"></script>
 
@@ -247,6 +250,89 @@
             saveAddress();
         });
     });
+
+    function saveAddress() {
+        console.log('saveAddress function called');
+
+        const provinceSelect = document.getElementById('province');
+        const districtSelect = document.getElementById('district');
+        const wardSelect = document.getElementById('ward');
+        const addressDetailsInput = document.getElementById('addressDetails');
+
+        if (!provinceSelect || !districtSelect || !wardSelect || !addressDetailsInput) {
+            console.error('Required elements not found');
+            return;
+        }
+
+        // Get selected values
+        const provinceCode = provinceSelect.value;
+        const districtCode = districtSelect.value;
+        const wardCode = wardSelect.value;
+        const addressDetails = addressDetailsInput.value.trim();
+
+        // Get selected text and clean it
+        const provinceName = provinceSelect.options[provinceSelect.selectedIndex]?.text || '';
+        const districtName = districtSelect.options[districtSelect.selectedIndex]?.text || '';
+        const wardName = wardSelect.options[wardSelect.selectedIndex]?.text || '';
+
+        console.log('Raw selected names:', {
+            provinceName,
+            districtName,
+            wardName,
+            addressDetails
+        });
+
+        // Validate selections (check if valid selections were made)
+        if (!provinceCode || !districtCode || !wardCode ||
+            provinceName.includes('--Chọn') ||
+            districtName.includes('--Chọn') ||
+            wardName.includes('--Chọn')) {
+            alert('Vui lòng chọn đầy đủ Tỉnh, Huyện và Xã');
+            return;
+        }
+
+        // Update hidden fields
+        document.getElementById('provinceHidden').value = provinceName;
+        document.getElementById('districtHidden').value = districtName;
+        document.getElementById('wardHidden').value = wardName;
+        document.getElementById('addressDetailsHidden').value = addressDetails;
+
+        // Construct full address with proper filtering
+        const addressParts = [];
+
+        // Add address details if provided
+        if (addressDetails && addressDetails.trim()) {
+            addressParts.push(addressDetails.trim());
+        }
+
+        // Add location parts if they're valid (not placeholder values)
+        if (wardName && !wardName.includes('--Chọn')) {
+            addressParts.push(wardName.trim());
+        }
+        if (districtName && !districtName.includes('--Chọn')) {
+            addressParts.push(districtName.trim());
+        }
+        if (provinceName && !provinceName.includes('--Chọn')) {
+            addressParts.push(provinceName.trim());
+        }
+
+        // Join parts with commas only if there are valid parts
+        const fullAddress = addressParts.length > 0 ? addressParts.join(', ') : '';
+
+        console.log('Constructed address parts:', addressParts);
+        console.log('Final full address:', fullAddress);
+
+        // Update the display field
+        const displayField = document.querySelector('.chose_location');
+        if (displayField && fullAddress) {
+            displayField.value = fullAddress;
+            console.log('Display field updated with:', fullAddress);
+        } else {
+            console.error('Display field not found or address is empty');
+        }
+
+        closeAddressForm();
+    }
 </script>
 </body>
 </html>

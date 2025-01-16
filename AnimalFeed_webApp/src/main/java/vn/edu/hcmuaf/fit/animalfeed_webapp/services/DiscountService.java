@@ -12,4 +12,9 @@ public class DiscountService {
     public List<Discount> getAll() {
         return discountDao.getAll();
     }
+
+    //lay discount theo id
+    public Discount getDiscountById(int id) {
+        return discountDao.getDiscountById(id);
+    }
 }

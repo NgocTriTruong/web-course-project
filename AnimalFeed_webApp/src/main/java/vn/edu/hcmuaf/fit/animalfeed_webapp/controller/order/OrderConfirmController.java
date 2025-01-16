@@ -4,7 +4,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.cart.Cart;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.CartItem;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.dto.CartItem;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
 
 import java.io.IOException;
@@ -42,12 +42,15 @@ public class OrderConfirmController extends HttpServlet {
         // Calculate total price for confirmed items
         double totalPrice = cart.getTotalPrice();
 
+        int totalQuantity = cart.getTotalQuantity();
+
         // Set attributes for the JSP
         request.setAttribute("confirmedItems", confirmedItems);
         request.setAttribute("totalPrice", totalPrice);
+        request.setAttribute("totalQuantity", totalQuantity);
 
         // Forward to the order confirmation page
-        request.getRequestDispatcher("/views/web/confirm_order.jsp")
+        request.getRequestDispatcher("/views/web/order/confirm_order.jsp")
                 .forward(request, response);
     }
 }

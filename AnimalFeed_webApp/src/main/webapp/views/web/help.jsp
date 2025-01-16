@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "f" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,10 +21,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/themify-icons/themify-icons.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
     <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/add_layout.js" defer></script>
-
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    
-  <script src="${pageContext.request.contextPath}/views/template/scripts/confirm_login.js"></script>
 
 </head>
 <body>
@@ -148,7 +147,7 @@
                         <div class="card shadow-sm">
                             <div class="card-body">
                                 <h2 class="text-center mb-4">Gửi tin nhắn</h2>
-                                <form>
+                                <form id="demo-form" method="POST" action="contact">
                                     <!-- Họ tên -->
                                     <div class="mb-3">
                                         <input type="text" class="form-control" id="name" placeholder="Nhập họ tên *">
@@ -168,10 +167,6 @@
                                     <!-- Nội dung -->
                                     <div class="mb-3">
                                         <textarea class="form-control" id="message" rows="4" placeholder="Nhập nội dung *"></textarea>
-                                    </div>
-                                    <!-- reCAPTCHA -->
-                                    <div class="mb-3">
-                                        <div class="g-recaptcha" data-sitekey="your-site-key"></div>
                                     </div>
                                     <!-- Gửi -->
                                     <div class="text-center">

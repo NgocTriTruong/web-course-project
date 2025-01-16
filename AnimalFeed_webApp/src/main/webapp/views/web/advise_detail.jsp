@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "f" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,7 +37,7 @@
                     <p>
                         Dưới đây là một số câu hỏi thường gặp và giải đáp. Nếu bạn vẫn chưa tìm được câu trả lời, hãy liên hệ với VINAFEED.
                     </p>
-                    <a href="${pageContext.request.contextPath}/views/web/help.jsp">
+                    <a href="${pageContext.request.contextPath}contact">
                         <button>
                             Gửi câu hỏi
                         </button>
@@ -92,7 +95,7 @@
                         - Sản phẩm chứa nhiều đạm, cân đối axit amin hợp lý giúp gà phát triển nhanh, mau mọc lông, chân chắc khỏe, không bị tiêu chảy. <br>
                         - Sản phẩm dạng mảnh, viên giúp gà dễ dàng lấy thức ăn, tăng tính thèm ăn và giảm hao hụt, giảm thải các chất gây ô nhiễm trong chuồng trại. <br>
                         - Hệ số chuyển đổi thức ăn thấp, giảm giá thành, tăng lợi nhuận. <br>
-                        <a href="${pageContext.request.contextPath}/views/web/each_product/product_chicken.html" class="text-primary">>> <u>Xem chi tiết tại đây</u></a>
+                        <a href="list-product?categoryId=2" class="text-primary">>> <u>Xem chi tiết tại đây</u></a>
                     </div>
                 </div>
             </div>

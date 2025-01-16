@@ -9,7 +9,7 @@
                 </div>
                 <div class="text_right mt-4">
                     <div class="button" style="background-color: #fcac18bc;">
-                        <a href="${pageContext.request.contextPath}/views/web/he_thong_cua_hang.jsp">
+                        <a href="store">
                             <p class="text-white fw-bold" style="line-height: 47px;">Xem danh sách các cửa hàng</p>
                         </a>
                     </div>
@@ -71,16 +71,16 @@
                     </div>
                     <div class="col-md-3">
                         <div class="h4 text-light">THÔNG TIN THÊM</div>
-                        <a href="${pageContext.request.contextPath}/views/web/advise.jsp">
+                        <a href="advise">
                             <div class="p mt-3">Tư vấn kỹ thuật</div>
                         </a>
-                        <a href="${pageContext.request.contextPath}/views/web/tin_tuc/tin_tuc.jsp">
+                        <a href="news">
                             <div class="p mt-3">Tin tức</div>
                         </a>
-                        <a href="${pageContext.request.contextPath}/views/web/library.jsp">
+                        <a href="library">
                             <div class="p mt-3">Thư viện</div>
                         </a>
-                        <a href="${pageContext.request.contextPath}/partner">
+                        <a href="partner">
                             <div class="p mt-3">Đối tác</div>
                         </a>
                         <a href="${pageContext.request.contextPath}/privacy-policy">

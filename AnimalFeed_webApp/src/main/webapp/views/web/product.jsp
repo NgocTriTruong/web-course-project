@@ -47,25 +47,23 @@
             <div class="heo-section d-flex mb-4">
               <div class="d-flex w-100 justify-content-around mt-4">
                 <div id="productPigCarousel${ca.id}" class="carousel slide" data-bs-ride="carousel">
-                  <div class="carousel-inner">
-
-                    <c:forEach var="p" items="${productsData}">
+                  <div class="carousel-inner d-flex" style="margin-left: 30px;">
+                    <!-- Duyệt qua sản phẩm thuộc danh mục -->
+                    <c:forEach var="p" items="${productsData}" varStatus="status">
                       <c:if test="${p.cat_id == ca.id}">
-                        <div class="carousel-item ${p == productsData[0] ? 'active' : ''}">
-                          <div class="d-flex justify-content-center gap-4">
+                          <div class="d-flex justify-content-center gap-4 ms-5">
                             <div class="card">
-                              <img src="${p.img}" class="card-img-top" alt="${p.name}">
-                              <div class="card-body text-center">
-                                <h5 class="card-title">${p.name}</h5>
-                                <p class="card-text">${p.description}</p>
+                              <div class="product-img">
+                                <img src="${p.img}" alt="${p.name}" height="250px" width="200px">
                               </div>
+                              <div class="h5 text-h">${p.name}</div>
+                              <div class="p mb-2 text-p">${p.description}</div>
                             </div>
                           </div>
-                        </div>
                       </c:if>
                     </c:forEach>
                   </div>
-                  <!-- Điều hướng carousel -->
+                  <!-- Điều khiển slider -->
                   <button class="carousel-control-prev" type="button" data-bs-target="#productPigCarousel${ca.id}" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
@@ -94,35 +92,33 @@
             <div class="ga-section d-flex mb-4">
               <div class="d-flex w-100 justify-content-around mt-4">
                 <div id="productChickenCarousel${ca.id}" class="carousel slide" data-bs-ride="carousel">
-                  <div class="carousel-inner">
+                  <div class="carousel-inner d-flex" style="margin-right: 30px;">
 
                     <c:forEach var="p" items="${productsData}">
                       <c:if test="${p.cat_id == ca.id}">
-                        <div class="carousel-item ${p == productsData[0] ? 'active' : ''}">
-                          <div class="d-flex justify-content-center gap-4">
-                            <div class="card">
-                              <img src="${p.img}" class="card-img-top" alt="${p.name}">
-                              <div class="card-body text-center">
-                                <h5 class="card-title">${p.name}</h5>
-                                <p class="card-text">${p.description}</p>
-                              </div>
+                        <div class="d-flex justify-content-center gap-4 ms-5">
+                          <div class="card">
+                            <img src="${p.img}" class="card-img-top" alt="${p.name}">
+                            <div class="card-body text-center">
+                              <h5 class="card-title">${p.name}</h5>
+                              <p class="card-text">${p.description}</p>
                             </div>
                           </div>
                         </div>
                       </c:if>
                     </c:forEach>
                   </div>
+                  <!-- Điều khiển slider -->
+                  <button class="carousel-control-prev" type="button" data-bs-target="#productChickenCarousel${ca.id}" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#productChickenCarousel${ca.id}" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
                 </div>
               </div>
-              <!-- Điều hướng carousel -->
-              <button class="carousel-control-prev" type="button" data-bs-target="#productPigCarousel${ca.id}" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#productPigCarousel${ca.id}" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-              </button>
             </div>
             <img src="${ca.img}" class="image_dv_number" alt="${ca.name}" width="360px" height="360px" style="margin-left: 400px; margin-bottom: 22px;">
           </section>

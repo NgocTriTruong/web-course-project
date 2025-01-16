@@ -16,7 +16,6 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
 
   <script src="${pageContext.request.contextPath}/views/template/assets/scripts/slider.js"></script>
-  <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/add_layout.js" defer></script>
 
   <!-- Bootstrap -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/header_only_home.css">
@@ -27,7 +26,6 @@
   <!-- scrollToTopBtn -->
    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/scrollToTopBtn.css">
 <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/scrollToTopBtn.js" defer></script>
-
 
 </head>
 <body>

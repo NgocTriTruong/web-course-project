@@ -1,4 +1,8 @@
-package vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model;
+package vn.edu.hcmuaf.fit.animalfeed_webapp.dao.dto;
+
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.DiscountDao;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.CartDetail;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
 
 public class CartItem {
     private int id;
@@ -9,8 +13,10 @@ public class CartItem {
     private int status;
     private String name;
     private String img;
-    private double price;
+    private double price;        // Original price
+    private double unitPrice;
     private String desc;
+    private Product product;     // Store reference to product for discount info
 
 
     // Constructor
@@ -25,6 +31,13 @@ public class CartItem {
         this.img = product.getImg();
         this.price = product.getPrice();
         this.desc = product.getDescription();
+        this.product = product;  // Store product reference
+        if (product.getDiscountId() > 1) { // 1 is no discount
+            DiscountDao discountDao = new DiscountDao();
+            this.unitPrice = discountDao.calculateDiscountedPrice(price, product.getDiscountId());
+        } else {
+            this.unitPrice = price;
+        }
     }
 
     public CartItem() {
@@ -56,7 +69,7 @@ public class CartItem {
     }
 
     public double getTotal() {
-        return this.price*this.quantity;
+        return this.unitPrice * this.quantity;
     }
 
     public void setTotal(double total) {
@@ -101,6 +114,22 @@ public class CartItem {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public void setUnitPrice(double unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
+    public double getUnitPrice() {
+        return this.unitPrice;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public String getDesc() { return desc; }
