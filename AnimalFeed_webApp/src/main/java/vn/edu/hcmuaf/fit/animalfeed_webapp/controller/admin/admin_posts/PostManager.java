@@ -33,7 +33,6 @@ public class PostManager extends HttpServlet {
             response.getWriter().write("Error: " + e.getMessage());
         }
     }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
