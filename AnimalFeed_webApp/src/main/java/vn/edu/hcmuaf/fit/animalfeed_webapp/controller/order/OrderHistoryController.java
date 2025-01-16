@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.dto.OrderDetailsWithProduct;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Order;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.OrderDetail;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.OrderService;
@@ -36,6 +37,8 @@ public class OrderHistoryController extends HttpServlet {
         try {
             if ("/order-history".equals(path)) {
                 showOrderHistory(request, response, userId);
+            } else if ("/order-detail".equals(path)) {
+                showOrderDetail(request, response, userId);
             }
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -62,31 +65,29 @@ public class OrderHistoryController extends HttpServlet {
         orders.sort((o1, o2) -> o2.getOrderDate().compareTo(o1.getOrderDate()));
 
         request.setAttribute("orders", orders);
-        request.getRequestDispatcher("/views/web/order/order-history.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/web/chi_tiet_ca_nhan/personal_order.jsp").forward(request, response);
     }
 
-//    private void showOrderDetail(HttpServletRequest request, HttpServletResponse response, int userId)
-//            throws ServletException, IOException, SQLException, ClassNotFoundException {
-//        String orderId = request.getParameter("id");
-//        if (orderId == null || orderId.trim().isEmpty()) {
-//            response.sendRedirect(request.getContextPath() + "/order-history");
-//            return;
-//        }
-//
-//        // Lấy thông tin đơn hàng
-//        Order order = orderService.getODsByOrderId(Integer.parseInt(orderId));
-//
-//        // Kiểm tra xem đơn hàng có thuộc về user hiện tại không
-//        if (order == null || order.getUserId() != userId) {
-//            response.sendRedirect(request.getContextPath() + "/order-history");
-//            return;
-//        }
-//
-//        // Lấy chi tiết đơn hàng
-//        ArrayList<OrderDetail> orderDetails = orderDetailDao.getOrderDetailsByOrderId(order.getId());
-//
-//        request.setAttribute("order", order);
-//        request.setAttribute("orderDetails", orderDetails);
-//        request.getRequestDispatcher("/views/web/order-detail.jsp").forward(request, response);
-//    }
+    private void showOrderDetail(HttpServletRequest request, HttpServletResponse response, int userId)
+            throws ServletException, IOException, SQLException, ClassNotFoundException {
+        String orderId = request.getParameter("id");
+        if (orderId == null || orderId.trim().isEmpty()) {
+            response.sendRedirect(request.getContextPath() + "/order-history");
+            return;
+        }
+
+        Order order = orderService.getOrderById(Integer.parseInt(orderId));
+        if (order == null || order.getUserId() != userId) {
+            response.sendRedirect(request.getContextPath() + "/order-history");
+            return;
+        }
+
+        ArrayList<OrderDetailsWithProduct> orderDetailsWithProducts =
+                orderService.getOrderDetailsWithProductByOrderId(order.getId());
+
+        request.setAttribute("order", order);
+        request.setAttribute("orderDetailsWithProducts", orderDetailsWithProducts);
+        request.getRequestDispatcher("/views/web/chi_tiet_ca_nhan/order_details.jsp")
+                .forward(request, response);
+    }
 }

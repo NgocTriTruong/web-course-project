@@ -62,4 +62,12 @@ public class OrderDao {
     public ArrayList<Order> getAllOrders() {
         return (ArrayList<Order>) jdbi.withHandle(handle -> handle.createQuery("select * from orders").mapToBean(Order.class).list());
     }
+
+    public Order getOrderById(int orderId) {
+        return jdbi.withHandle(handle -> handle.createQuery("select * from orders where id = :orderId")
+                .bind("orderId", orderId)
+                .mapToBean(Order.class)
+                .findFirst()  // This returns an Optional<Order>
+                .orElse(null));  // This returns null if no order is found
+    }
 }
