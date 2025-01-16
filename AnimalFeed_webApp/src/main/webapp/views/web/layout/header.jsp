@@ -144,11 +144,11 @@
             </li>
             <!-- đã đăng nhập -->
             <li id="logged-in" class="p-4" style="${sessionScope.user == null ? 'display:none;' : ''}">
-              <a href="${pageContext.request.contextPath}/views/web/chi_tiet_ca_nhan/thong_tin_ca_nhan.jsp" style="width: 0;">
+              <a href="${pageContext.request.contextPath}/profile-user" style="width: 0;">
                 <div id="user-icon" class="user add_login">
                   <i class="fa-solid fa-user i_right_number mt-3 ms-3 text-white"></i>
                   <ul class="header_line_2 me-2" style="min-width: 150px; margin-top: 25px;">
-                    <a href="${pageContext.request.contextPath}/views/web/chi_tiet_ca_nhan/thong_tin_ca_nhan.jsp">
+                    <a href="${pageContext.request.contextPath}/profile-user">
                       <li class="d-flex p-2 li_hover">
                         <i class="mt-1 fa-solid fa-user ms-2 me-2"></i>
                         <span class="text_line_2">Thông tin cá nhân</span>
@@ -160,7 +160,7 @@
                         <span class="text_line_2">Đơn hàng của tôi</span>
                       </li>
                     </a>
-                    <a href="../chi_tiet_ca_nhan/so_dia_chi.jsp">
+                    <a href="location_user">
                       <li class="d-flex p-2 li_hover">
                         <i class="mt-1 fa-solid fa-location-dot ms-2 me-2"></i>
                         <span class="text_line_2">Sổ địa chỉ nhận hàng</span>

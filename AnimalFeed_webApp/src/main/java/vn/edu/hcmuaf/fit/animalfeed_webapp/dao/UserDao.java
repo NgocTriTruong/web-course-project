@@ -182,4 +182,39 @@ public class UserDao {
                         .list()
         );
     }
+
+    //thay đổi pass
+    public boolean updatePassword(int userId, String currentPassword, String newPassword) {
+        String checkPasswordQuery = "SELECT password FROM users WHERE id = ?";
+        String updatePasswordQuery = "UPDATE users SET password = ? WHERE id = ?";
+
+        // Kiểm tra mật khẩu hiện tại
+        String storedPassword = jdbi.withHandle(handle ->
+                handle.createQuery(checkPasswordQuery)
+                        .bind(0, userId)
+                        .mapTo(String.class)
+                        .findOnly()
+        );
+
+        // Nếu không tìm thấy mật khẩu, trả về false
+        if (storedPassword == null) {
+            return false;
+        }
+
+        // Kiểm tra mật khẩu hiện tại
+        if (storedPassword.equals(currentPassword)) {
+            // Cập nhật mật khẩu mới
+            int rowsUpdated = jdbi.withHandle(handle ->
+                    handle.createUpdate(updatePasswordQuery)
+                            .bind(0, newPassword)
+                            .bind(1, userId)
+                            .execute()
+            );
+
+            return rowsUpdated > 0;
+        }
+
+        // Nếu mật khẩu hiện tại không đúng
+        return false;
+    }
 }
