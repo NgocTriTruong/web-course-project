@@ -174,15 +174,25 @@
                 </div>
               </a>
             </li>
-  
-            <li class="p-4">
-              <div class="cart d-flex">
-                <a href="${pageContext.request.contextPath}/views/web/cart.jsp">
-                  <i class="fa-solid fa-shopping-cart i_right_number mt-3 text-white"></i>
-                  <span class="ms-1 text-white" style="margin-top: 14px;" >Giỏ hàng</span>
-                </a>
-              </div>
-            </li>
+
+          <li class="p-4">
+            <div class="cart d-flex">
+              <a href="${pageContext.request.contextPath}/views/web/cart.jsp">
+                <i class="fa-solid fa-shopping-cart i_right_number mt-3 text-white"></i>
+                  <span class="ms-1 text-white" style="margin-top: 14px;">Giỏ hàng</span>
+                  <c:if test="${not empty sessionScope.cart}">
+                    <span class="cart-count bg-danger text-white rounded-circle"
+                        style="position: absolute;
+                               padding: 2px 6px;
+                               font-size: 12px;
+                               margin-left: 5px;
+                               margin-top: -5px;">
+                      ${sessionScope.cart.getTotalItems()}
+                    </span>
+                  </c:if>
+              </a>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
