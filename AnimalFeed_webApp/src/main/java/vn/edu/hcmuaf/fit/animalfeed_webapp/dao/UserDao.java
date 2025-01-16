@@ -196,7 +196,7 @@ public class UserDao {
         // Nếu mật khẩu hiện tại không đúng
         return false;
     }
-}
+
     // Cập nhật mật khẩu theo số điện thoại
     public void updatePasswordByPhone(String phone, String newPassword) {
         jdbi.useHandle(handle -> {
