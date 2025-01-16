@@ -206,5 +206,16 @@ public class UserDao {
                     .execute();
         });
     }
+
+    // Lấy số lượng người dùng
+    public int getTotalUser() {
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT COUNT(*) FROM users")
+                        .mapTo(Integer.class)
+                        .findOnly()
+        );
+    }
+
+
 }
 

@@ -48,11 +48,18 @@
                     <div class="line_red"></div>
                     <div class="d-flex mt-3 mb-3">
                         <div class="h5 fw-bold p_bold text-start">Giá:</div>
-                        <div class="p text-start text-secondary price_sale me-4"
-                             style="font-size: 18px; margin-left: -95px">
-                            <del> ${product.price} <u>đ</u></del>
-                            <span style="color: red; font-size: 14px; margin-left: 5px;">-20%</span></div>
-                        <div class="h4 text-danger">320.000 vnđ</div>
+                        <c:if test="${product.discountId > 1}">
+                            <jsp:useBean id="discounts" scope="request" type="vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Discount"/>
+                            <div class="p text-start text-secondary price_sale me-4"
+                                 style="font-size: 18px; margin-left: -95px">
+                                <del><f:formatNumber value="${product.price}"/> <u>đ</u></del>
+                                <span style="color: red; font-size: 14px; margin-left: 5px;">-${discounts.percentage}%</span></div>
+                            <div class="h4 text-danger"><f:formatNumber value="${product.price * (1 - discounts.percentage / 100)}"/> <u>đ</u></div>
+                        </c:if>
+                        <c:if test="${product.discountId == 1}">
+                            <div class="h4 text-danger"><f:formatNumber value="${product.price}"/> <u>đ</u></div>
+                        </c:if>
+
                     </div>
                     <div class="line_gray"></div>
                     <div class="d-flex mt-2">

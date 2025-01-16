@@ -2,6 +2,7 @@ package vn.edu.hcmuaf.fit.animalfeed_webapp.services;
 
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.OrderDao;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.dto.OrderDetailsWithProduct;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.dto.UserStats;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Order;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.OrderDetailDao;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.OrderDetail;
@@ -45,5 +46,20 @@ public class OrderService {
 
     public void updateShippingDate(int orderId, LocalDateTime now) {
         orderDao.updateShippingDate(orderId, now);
+    }
+
+    // Tổng đơn ặt hàng
+    public int getTotalOrder() {
+        return orderDao.getTotalOrder();
+    }
+
+    // Tổng doanh thu
+    public double getTotalRevenue() {
+        return orderDao.getTotalRevenue();
+    }
+
+    // Định nghĩa một phương thức để lấy thông tin người dùng và thống kê
+    public List<UserStats> getUserStats() {
+        return orderDao.getUserStats();
     }
 }

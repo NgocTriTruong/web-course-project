@@ -92,8 +92,16 @@
                                 <i class="fa-solid fa-user mt-2 i_user"></i>
                             </div>
                             <div class="p mt-3">
-                                Nguyễn Văn A <br>
-                                0123456789
+                                <c:choose>
+                                    <c:when test="${not empty sessionScope.user}">
+                                        ${sessionScope.user.fullName} <br>
+                                        ${sessionScope.user.phone}
+                                    </c:when>
+                                    <c:otherwise>
+                                        Khách hàng <br>
+                                        Đăng nhập để xem thông tin
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                             <span class="text-primary ms-5 mt-5" onclick="window.location.href='${pageContext.request.contextPath}/profile-user'"  style="cursor: pointer;">xem hồ sơ</span>
                         </div>

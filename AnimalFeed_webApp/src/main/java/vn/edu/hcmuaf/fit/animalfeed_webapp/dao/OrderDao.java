@@ -2,6 +2,7 @@ package vn.edu.hcmuaf.fit.animalfeed_webapp.dao;
 
 import org.jdbi.v3.core.Jdbi;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.db.JdbiConnect;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.dto.UserStats;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Order;
 
 import java.sql.SQLException;
@@ -80,5 +81,45 @@ public class OrderDao {
                         .execute()
         );
         System.out.println(rowsUpdated);
+    }
+
+    //Tổng đơn đặt hàng
+    public int getTotalOrder() {
+        return jdbi.withHandle(handle -> handle.createQuery("select count(*) from orders")
+                .mapTo(int.class)
+                .one());
+    }
+
+    // Tổng doanh thu
+    public int getTotalRevenue() {
+        return jdbi.withHandle(handle -> handle.createQuery("select sum(total_price) from orders")
+                .mapTo(int.class)
+                .one());
+    }
+
+    // Định nghĩa một phương thức để lấy thông tin người dùng và thống kê
+    public List<UserStats> getUserStats() {
+        return jdbi.withHandle(handle ->
+                handle.createQuery(
+                                "SELECT u.full_name, u.phone, " +
+                                        "COUNT(o.id) AS total_orders, " +
+                                        "SUM(od.quantity) AS total_products_ordered, " +
+                                        "SUM(o.total_price) AS total_amount_to_pay " +
+                                        "FROM users u " +
+                                        "JOIN orders o ON u.id = o.user_id " +
+                                        "JOIN order_details od ON o.id = od.order_id " +
+                                        "GROUP BY u.id, u.full_name, u.phone "
+                        )
+                        .mapToBean(UserStats.class)
+                        .list()
+        );
+    }
+
+    public static void main(String[] args) {
+        OrderDao orderDao = new OrderDao();
+        List<UserStats> userStats = orderDao.getUserStats();
+        for (UserStats userStat : userStats) {
+            System.out.println(userStat);
+        }
     }
 }
