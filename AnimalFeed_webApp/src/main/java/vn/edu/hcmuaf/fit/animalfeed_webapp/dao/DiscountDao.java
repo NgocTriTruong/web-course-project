@@ -21,7 +21,7 @@ public class DiscountDao {
     public Discount getDiscountById(int id) {
         Jdbi jdbi = JdbiConnect.getJdbi();
         return jdbi.withHandle(handle ->
-                handle.createQuery("select * from discounts where id = :id")
+                handle.createQuery("SELECT d.* from discounts d JOIN products p ON d.id = p.discount_id where p.id = :id")
                         .bind("id", id)
                         .mapToBean(Discount.class).findOne().orElse(null));
     }
@@ -43,5 +43,10 @@ public class DiscountDao {
                         .findOne()
                         .orElse(null)
         );
+    }
+
+    public static void main(String[] args) {
+        DiscountDao discountDao = new DiscountDao();
+        System.out.println(discountDao.getDiscountById(100));
     }
 }

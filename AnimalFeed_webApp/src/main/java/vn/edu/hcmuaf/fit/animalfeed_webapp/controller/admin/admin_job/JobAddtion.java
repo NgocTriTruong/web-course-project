@@ -1,4 +1,4 @@
-package vn.edu.hcmuaf.fit.animalfeed_webapp.controller.admin.category_management;
+package vn.edu.hcmuaf.fit.animalfeed_webapp.controller.admin.admin_job;
 
 
 import jakarta.servlet.*;
@@ -7,12 +7,12 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet(name = "CategoryAdditionAdmin", value = "/category-addition-admin")
-public class CategoryAdditionAdmin extends HttpServlet {
+@WebServlet(name = "JobAddtion", value = "/job-addtion-admin")
+public class JobAddtion extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("views/admin/categoryAddition.jsp").forward(request, response);
+        request.getRequestDispatcher("views/admin/jobAddition.jsp").forward(request, response);
     }
 
     @Override
