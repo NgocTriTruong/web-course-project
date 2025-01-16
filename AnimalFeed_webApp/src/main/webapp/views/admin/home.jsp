@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "f" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -75,7 +78,7 @@
                                         <div class="h6 text-xs fw-bold text-danger text-uppercase mb-1" style="width: 175px;">
                                             Tổng đơn đặt hàng
                                         </div>
-                                        <div class="h4 mb-0 fw-bold text-gray-800 mt-3 ms-2">648</div>
+                                        <div class="h4 mb-0 fw-bold text-gray-800 mt-3 ms-2">${totalOrder}</div>
                                     </div>
                                     <div class="col-auto mt-4">
                                         <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
@@ -96,7 +99,7 @@
                                         <div class="h6 text-xs fw-bold text-success text-uppercase mb-1" style="width: 175px;">
                                             Doanh thu
                                         </div>
-                                        <div class="h4 mb-0 fw-bold text-gray-800 mt-3 ms-2">542.254.000đ</div>
+                                        <div class="h4 mb-0 fw-bold text-gray-800 mt-3 ms-2">${totalRevenue}đ</div>
                                     </div>
                                     <div class="col-auto mt-4">
                                         <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -116,7 +119,7 @@
                                         <div class="h6 text-xs fw-bold text-info text-uppercase mb-1" style="width: 178px;"> Tổng số
                                             khách hàng
                                         </div>
-                                        <div class="h4 mb-0 fw-bold text-gray-800 float-start mt-3 ms-2" style="width: 120px;">3.200</div>
+                                        <div class="h4 mb-0 fw-bold text-gray-800 float-start mt-3 ms-2" style="width: 120px;">${totalUser}</div>
                                         <div class="col-auto float-end ps-4 pt-2" style="width: 70px;">
                                             <i class="fas fa-user-group fa-2x text-gray-300"></i>
                                         </div>
@@ -136,7 +139,7 @@
                                         <div class="h6 text-xs fw-bold text-warning text-uppercase mb-1" style="width: 155px;">
                                             Tổng sản phẩm
                                         </div>
-                                        <div class="h4 mt-3 ms-2 mb-0 fw-bold text-gray-800">200</div>
+                                        <div class="h4 mt-3 ms-2 mb-0 fw-bold text-gray-800">${totalProduct}</div>
                                     </div>
                                     <div class="col-auto mt-4">
                                         <i class="fas fa-gift fa-2x text-gray-300"></i>
@@ -175,38 +178,16 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <th scope="row"> <span class="h6 ms-2">1</span></th>
-                                    <td><span class="h6">Trương Ngọc trí</span></td>
-                                    <td><span class="h6">0123456789</span></td>
-                                    <td><span class="h6 ms-4">20</span></td>
-                                    <td><span class="h6 ms-4">40</span></td>
-                                    <td><span class="h6 ms-3">16.200.000</span></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><span class="h6 ms-2">2</span></th>
-                                    <td><span class="h6">Trương Ngọc trí</span></td>
-                                    <td><span class="h6">0123456789</span></td>
-                                    <td><span class="h6 ms-4">20</span></td>
-                                    <td><span class="h6 ms-4">40</span></td>
-                                    <td><span class="h6 ms-3">16.200.000</span></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><span class="h6 ms-2">3</span></th>
-                                    <td><span class="h6">Trương Ngọc trí</span></td>
-                                    <td><span class="h6">0123456789</span></td>
-                                    <td><span class="h6 ms-4">20</span></td>
-                                    <td><span class="h6 ms-4">40</span></td>
-                                    <td><span class="h6 ms-3">16.200.000</span></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><span class="h6 ms-2">4</span></th>
-                                    <td><span class="h6">Trương Ngọc trí</span></td>
-                                    <td><span class="h6">0123456789</span></td>
-                                    <td><span class="h6 ms-4">20</span></td>
-                                    <td><span class="h6 ms-4">40</span></td>
-                                    <td><span class="h6 ms-3">16.200.000</span></td>
-                                </tr>
+                                <c:forEach var="user" items="${getUserStats}" varStatus="status">
+                                    <tr>
+                                        <th scope="row"> <span class="h6 ms-2">${status.index + 1}</span></th>
+                                        <td><span class="h6">${user.fullName}</span></td>
+                                        <td><span class="h6">${user.phone}</span></td>
+                                        <td><span class="h6 ms-4">${user.totalOrders}</span></td>
+                                        <td><span class="h6 ms-4">${user.totalProductsOrdered}</span></td>
+                                        <td><span class="h6 ms-3">${user.totalAmountToPay}</span></td>
+                                    </tr>
+                                </c:forEach>
                                 </tbody>
                             </table>
                         </div>
