@@ -65,6 +65,8 @@ public class OrderController extends HttpServlet {
                     .mapToInt(CartItem::getQuantity)
                     .sum();
 
+            System.out.println(address);
+
             // Create order
             Order order = new Order();
             order.setUserId(user.getId());
