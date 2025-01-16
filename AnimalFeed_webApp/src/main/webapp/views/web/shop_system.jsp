@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "f" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -126,11 +129,12 @@
                         <div class="h6">Cửa hàng gợi ý</div>
                         <div class="container" style="border: 1px solid #333; cursor: pointer;">
                             <div class="p mt-3 pb-3" style="border-bottom: 1px solid #333;">261 Khánh Hội, P.2, Q.4, TP.Hồ Chí Minh</div>
-                            <div class="p mt-3 pb-3" style="border-bottom: 1px solid #333;">261 Khánh Hội, P.2, Q.4, TP.Hồ Chí Minh</div>
-                            <div class="p mt-3 pb-3" style="border-bottom: 1px solid #333;">261 Khánh Hội, P.2, Q.4, TP.Hồ Chí Minh</div>
-                            <div class="p mt-3 pb-3" >261 Khánh Hội, P.2, Q.4, TP.Hồ Chí Minh</div>
+                            <div class="p mt-3 pb-3" style="border-bottom: 1px solid #333;">Tam Kỳ, Quảng Nam</div>
+                            <div class="p mt-3 pb-3" style="border-bottom: 1px solid #333;">Phường Linh Trung, Tp.Thủ Đức, Tp.Hồ Chí Mình</div>
+                            <div class="p mt-3 pb-3" >Phường Trung Đông,Quận Linh Chiểu, Đà Nẵng</div>
                         </div>
-                        
+                        <div class="text-center mt-3" >Xem thêm</div>
+
                     </div>
                     <div class="cua_hang_right col-md-8 bg-white mt-4 mb-5 pb-2 ms-2">
                         <div class="cua_hang_right_80">
