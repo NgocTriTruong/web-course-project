@@ -69,6 +69,12 @@ public class Cart {
                 .sum();
     }
 
+    public int getTotalItems() {
+        return cartData.values().stream()
+                .mapToInt(CartItem::getQuantity)
+                .sum();
+    }
+
     public double getTotalPrice() {
         return cartData.values().stream()
                 .filter(cartItem -> cartItem.getStatus() == 1)

@@ -89,7 +89,9 @@
                         </div>
                         <div class="d-flex justify-content-between mb-4">
                             <strong>Tổng tiền:</strong>
-                            <strong class="text-primary" id="total">${sessionScope.cart.totalPrice}</strong>
+                            <strong class="text-primary" id="total">
+                                <fmt:formatNumber value="${sessionScope.cart.totalPrice}" type="currency" currencySymbol="₫"/>
+                            </strong>
                         </div>
                         <form action="${pageContext.request.contextPath}/order-confirm" method="get">
                             <button type="submit"
@@ -235,16 +237,27 @@
             const checkbox = item.querySelector('.item-checkbox');
             if (checkbox.checked) {
                 const quantity = parseInt(item.querySelector('.quantity-input').value);
-                const price = parseFloat(item.querySelector('.price').textContent);
+                const price = parseFloat(item.querySelector('.price').textContent.replace(/[^\d]/g, ''));
                 total += quantity * price;
                 totalQuantity += quantity;
                 selectedCount++;
             }
         });
 
-        document.getElementById('total').textContent = total.toFixed(3);
+        document.getElementById('total').textContent = formatPrice(total);
         document.getElementById('quantity').textContent = totalQuantity;
         document.getElementById('selected-count').textContent = selectedCount;
+    }
+
+    function formatPrice(number) {
+        // Convert to string and split into integer and decimal parts
+        const parts = number.toString().split('.');
+
+        // Add thousands separators to the integer part
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+        // Return formatted price with đ symbol
+        return parts[0] + " đ";
     }
 
     // Handle "Select All" checkbox
@@ -270,6 +283,22 @@
             document.getElementById('select-all').checked = allChecked;
 
             updateTotals();
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Find all cart items
+        const cartItems = document.querySelectorAll('.cart-item');
+
+        // For each cart item
+        cartItems.forEach(item => {
+            const checkbox = item.querySelector('.item-checkbox');
+            const status = item.dataset.status;
+
+            // If status is 1, check the checkbox
+            if (status === '1') {
+                checkbox.checked = true;
+            }
         });
     });
 </script>
