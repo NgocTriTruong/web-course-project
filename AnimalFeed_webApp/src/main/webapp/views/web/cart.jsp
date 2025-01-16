@@ -54,7 +54,7 @@
                                     <h6>${item.desc}</h6>
                                     <div class="price-section mt-2">
                                         <span class="price">
-                                            <fmt:formatNumber value="${item.unitPrice}" type="currency" currencySymbol="₫"/>
+                                            <fmt:formatNumber value="${item.unitPrice}" type="number" pattern="#,###" />đ
                                         </span>
                                     </div>
                                     <div class="quantity-controls mt-3">
@@ -96,7 +96,7 @@
                         <form action="${pageContext.request.contextPath}/order-confirm" method="get">
                             <button type="submit"
                                     class="btn btn-primary w-100 ${empty sessionScope.cart.cartDetails ? '' : ''}">
-                                Proceed to Checkout
+                                Thanh toán
                             </button>
                         </form>
                     </div>
@@ -238,7 +238,8 @@
             const checkbox = item.querySelector('.item-checkbox');
             if (checkbox.checked) {
                 const quantity = parseInt(item.querySelector('.quantity-input').value);
-                const price = parseFloat(item.querySelector('.price').textContent.replace(/[^\d]/g, ''));
+                // Remove all non-digit characters and parse as integer
+                const price = parseInt(item.querySelector('.price').textContent.replace(/[^\d]/g, ''));
                 total += quantity * price;
                 totalQuantity += quantity;
                 selectedCount++;
@@ -251,14 +252,14 @@
     }
 
     function formatPrice(number) {
-        // Convert to string and split into integer and decimal parts
-        const parts = number.toString().split('.');
+        // Convert to integer to remove any decimals
+        const intValue = Math.round(number);
 
-        // Add thousands separators to the integer part
-        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        // Add thousands separators
+        const formatted = intValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
         // Return formatted price with đ symbol
-        return parts[0] + " đ";
+        return formatted + " đ";
     }
 
     // Handle "Select All" checkbox

@@ -48,6 +48,13 @@ public class OrderService {
         orderDao.updateShippingDate(orderId, now);
     }
 
+    public List<OrderDetail> getOrderDetails(int orderId) {
+        return orderDetailDao.getODsByOrderId(orderId);
+    }
+
+    public List<Order> searchOrders(String searchTerm) {
+        return null;
+
     // Tổng đơn ặt hàng
     public int getTotalOrder() {
         return orderDao.getTotalOrder();
@@ -61,5 +68,6 @@ public class OrderService {
     // Định nghĩa một phương thức để lấy thông tin người dùng và thống kê
     public List<UserStats> getUserStats() {
         return orderDao.getUserStats();
+
     }
 }
