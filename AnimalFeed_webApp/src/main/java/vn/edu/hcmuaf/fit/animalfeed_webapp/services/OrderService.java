@@ -54,6 +54,7 @@ public class OrderService {
 
     public List<Order> searchOrders(String searchTerm) {
         return null;
+    }
 
     // Tổng đơn ặt hàng
     public int getTotalOrder() {
