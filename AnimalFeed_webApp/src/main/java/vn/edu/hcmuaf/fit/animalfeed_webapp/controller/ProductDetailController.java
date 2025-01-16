@@ -3,11 +3,15 @@ package vn.edu.hcmuaf.fit.animalfeed_webapp.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.DiscountDao;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.ProductDetailDao;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.dto.ProductWithDiscountDTO;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Category;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Discount;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.ProductDetail;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.CategoryService;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.services.DiscountService;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.ProductDetailService;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.ProductService;
 
@@ -22,10 +26,13 @@ public class ProductDetailController extends HttpServlet {
         ProductDetailService productDetailService = new ProductDetailService();
         ProductService productService = new ProductService();
         CategoryService categoryService = new CategoryService();
+        DiscountService discountService = new DiscountService();
+
 
         String pid = request.getParameter("pid");
         Product product = null;
         ProductDetail productDetail = null;
+        Discount discount = null;
 
         if (pid != null && !pid.isEmpty()) {
             try {
@@ -35,6 +42,8 @@ public class ProductDetailController extends HttpServlet {
 
                 // Lấy thông tin chi tiết sản phẩm
                 productDetail = productDetailService.getDetail(productId);
+
+                discount = discountService.getDiscountById(productId);
 
                 if (productDetail == null) {
                     productDetail = new ProductDetail();
@@ -48,6 +57,9 @@ public class ProductDetailController extends HttpServlet {
         }
 
         List<Product> relatedProducts = productDetailService.getRelatedProducts(product.getCat_id(), product.getId());
+
+
+        request.setAttribute("discounts", discount);
 
         //Lay danh muc
         List<Category> categories = categoryService.getAll();

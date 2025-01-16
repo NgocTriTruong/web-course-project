@@ -141,4 +141,9 @@ public class UserService {
         return userDao.searchUsers(searchTerm);
     }
 
+    // Lấy số lượng người dùng
+    public int getTotalUser() {
+        return userDao.getTotalUser();
+    }
+
 }
