@@ -31,7 +31,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/scrollToTopBtn.css">
     <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/scrollToTopBtn.js" defer></script>
 
-    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/confirm_login.js" defer></script>
 </head>
 <body>
 
