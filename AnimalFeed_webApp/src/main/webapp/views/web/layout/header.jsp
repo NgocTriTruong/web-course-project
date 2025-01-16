@@ -87,13 +87,13 @@
             </li>
   
             <li class="p-4">
-              <a href="${pageContext.request.contextPath}/views/web/advise.jsp" class="text_h1">TƯ VẤN KỸ THUẬT</a>
+              <a href="advise" class="text_h1">TƯ VẤN KỸ THUẬT</a>
             </li>
             <li class="p-4">
-              <a href="${pageContext.request.contextPath}/views/web/recruitment.jsp" class="text_h1">TUYỂN DỤNG</a>
+              <a href="recruitment" class="text_h1">TUYỂN DỤNG</a>
             </li>
             <li class="p-4">
-              <a href="${pageContext.request.contextPath}/views/web/tin_tuc/tin_tuc.jsp" class="text_h1">TIN TỨC</a>
+              <a href="news" class="text_h1">TIN TỨC</a>
             </li>
             <li class="p-4">
               <a href="${pageContext.request.contextPath}/views/web/help.jsp" class="text_h1">HỖ TRỢ KHÁCH HÀNG</a>
@@ -102,13 +102,13 @@
             <li class="p-4 mt-1 pointer">
               <i class="ti-align-justify i_right_number"></i>
               <ul class="header_line_2" style="min-width: 150px;">
-                <a href="${pageContext.request.contextPath}/views/web/library.jsp">
+                <a href="library">
                   <li class="d-flex p-2 li_hover">
                     <span class="text_line_2">Thư viện</span>
                     <i class="mt-1 ti-angle-right ti_number" style="margin-left: 50px;"></i>
                   </li>
                 </a>
-                <a href="${pageContext.request.contextPath}/partner">
+                <a href="partner">
                   <li class="d-flex p-2 li_hover">
                     <span class="text_line_2">Đối tác</span>
                     <i class="mt-1 ti-angle-right ti_number" style="margin-left: 60px;"></i>
@@ -141,7 +141,7 @@
               </div>
             </li>
             <!-- đã đăng nhập -->
-            <li id="logged-in" class="p-4" style="display: none;">
+            <li id="logged-in" class="p-4" style="display: none">
               <a href="${pageContext.request.contextPath}/views/web/chi_tiet_ca_nhan/thong_tin_ca_nhan.jsp">
                 <div id="user-icon" class="user add_login">
                   <i class="fa-solid fa-user i_right_number mt-3 ms-3 text-white"></i>

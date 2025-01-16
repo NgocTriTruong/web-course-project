@@ -10,21 +10,21 @@ import vn.edu.hcmuaf.fit.animalfeed_webapp.services.CategoryService;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "PartnerController", value = "/partner")
-public class PartnerController extends HttpServlet {
+@WebServlet(name = "RecruitmentController", value = "/recruitment")
+public class RecruitmentController extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException, ServletException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         CategoryService categoryService = new CategoryService();
 
         List<Category> categories = categoryService.getAll();
         request.setAttribute("categoriesData", categories);
 
-        request.getRequestDispatcher("views/web/partner.jsp").forward(request, response);
+        request.getRequestDispatcher("views/web/recruitment.jsp").forward(request, response);
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
