@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Contact implements Serializable {
     private int id;
     private int userId;
-    private String nameContact;
+    private String contact_user;
     private String phone;
     private String email;
     private String address;
@@ -13,10 +13,10 @@ public class Contact implements Serializable {
 
     public Contact() {}
 
-    public Contact(int id, int userId, String nameContact, String phone, String email, String address, String content) {
+    public Contact(int id, int userId, String contact_user, String phone, String email, String address, String content) {
         this.id = id;
         this.userId = userId;
-        this.nameContact = nameContact;
+        this.contact_user = contact_user;
         this.phone = phone;
         this.email = email;
         this.address = address;
@@ -39,12 +39,12 @@ public class Contact implements Serializable {
         this.userId = userId;
     }
 
-    public String getNameContact() {
-        return nameContact;
+    public String getContact_user() {
+        return contact_user;
     }
 
-    public void setNameContact(String nameContact) {
-        this.nameContact = nameContact;
+    public void setContact_user(String contact_user) {
+        this.contact_user = contact_user;
     }
 
     public String getPhone() {
@@ -84,7 +84,7 @@ public class Contact implements Serializable {
         return "Contact{" +
                 "id=" + id +
                 ", userId=" + userId +
-                ", nameContact='" + nameContact + '\'' +
+                ", contact_user='" + contact_user + '\'' +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
                 ", address='" + address + '\'' +

@@ -122,7 +122,23 @@ public class UserService {
         return userDao.getUserById(userId);
     }
 
-//    public List<User> getUsersWithPagination(int page, int pageSize){
-//        return userDao.getUsersWithPagination(page, pageSize);
-//    }
+    public boolean updatePasswordByPhone(String phone, String newPassword) {
+        // Kiểm tra mật khẩu có đủ mạnh không
+        if (!isPasswordStrong(newPassword)) {
+            throw new IllegalArgumentException("Mật khẩu không đủ mạnh.");
+        }
+
+        // Gọi phương thức updatePasswordByPhone của UserDao để cập nhật mật khẩu
+        try {
+            userDao.updatePasswordByPhone(phone, newPassword);
+            return true; // Trả về true nếu cập nhật thành công
+        } catch (Exception e) {
+            return false; // Trả về false nếu có lỗi xảy ra
+        }
+    }
+
+    public List<User> searchUsers(String searchTerm) {
+        return userDao.searchUsers(searchTerm);
+    }
+
 }

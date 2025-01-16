@@ -1,4 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>h
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,45 +19,46 @@
 
     <script src="${pageContext.request.contextPath}/views/admin/assets/js/mdb.min.js"></script>
 
-    <!-- js add header -->
-     <script src="${pageContext.request.contextPath}/views/admin/assets/js/add_header.js" defer></script>
-
+    <script src="${pageContext.request.contextPath}/views/admin/assets/js/add_header.js" defer></script>
 </head>
 
 <body>
-
 <%@ include file="layout/header.jsp" %>
 
-<!--Main layout-->
 <main class="mb-5">
-
     <section class="mb-5 text-center text-md-start">
-        <!-- Background gradient -->
-        <div class="p-5" style="height: 200px;
-                                background: linear-gradient(
-                                to right,
-                                hsl(78, 50%, 48%),
-                                hsl(78, 50%, 68%)
-                                );">
-        </div>
-        <!-- Background gradient -->
-    
+        <div class="p-5" style="height: 200px; background: linear-gradient(to right, hsl(78, 50%, 48%), hsl(78, 50%, 68%));"></div>
         <div class="container px-4">
-          <div class="card shadow-0" style="
-                                            margin-top: -100px;
-                                            ">
-            <div class="card-body py-5 px-5">
-              <div class="row gx-lg-4 align-items-center">
-                <div class="col-lg-6 mb-4 mb-lg-0 text-center text-lg-start">
-                  <h1 class="">Quản lý liên hệ</h1>
+            <div class="card shadow-0" style="margin-top: -100px;">
+                <div class="card-body py-5 px-5">
+                    <div class="row gx-lg-4 align-items-center">
+                        <div class="col-lg-6 mb-4 mb-lg-0 text-center text-lg-start">
+                            <h1>Quản lý liên hệ</h1>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </section>
+    </section>
 
-    <!-- Container for demo purpose -->
+    <c:if test="${not empty error}">
+        <div class="container px-4">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    ${error}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </c:if>
+
+    <c:if test="${not empty success}">
+        <div class="container px-4">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    ${success}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </c:if>
+
     <div class="container px-4 mb-5">
         <div class="datatable">
             <table class="table align-middle mb-0 bg-white">
@@ -71,35 +74,26 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>
-                        <span class="h6 ms-2">1</span>
-                    </td>
-                    <td>
-                        <div class="d-flex align-items-center">
-                            <p class="fw-bold mb-1 h6">Trương Ngọc Trí</p>
-                        </div>
-                    </td>
-                    <td>
-                        <span class="ms-1 h6">0797534971</span>
-                    </td>
-                    <td>
-                        <p class="fw-normal mb-1 h6">tri12345@gmail.com</p>
-                    </td>
-                    <td>
-                        <span class="h6">Đà Nẵng</span>
-                    </td>
-                    <td>
-                        <span class="h6">Tôi cần thức ăn cho heo con từ 10 đến 15 ngày tuổi thì nên mua những loại nào?</span>
-                    </td>
-                    <td>
-                        <div class="justify-content-center">
-                            <button type="button" class="btn bg_yellow btn-floating ms-3" style="font-size: 16px;">
-                                <i class="far fa-trash-can"></i>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
+                <c:forEach var="contact" items="${contacts}">
+                    <tr>
+                        <td><span class="h6 ms-2">${contact.id}</span></td>
+                        <td><p class="fw-bold mb-1 h6">${contact.contact_user}</p></td>
+                        <td><span class="ms-1 h6">${contact.phone}</span></td>
+                        <td><p class="fw-normal mb-1 h6">${contact.email}</p></td>
+                        <td><span class="h6">${contact.address}</span></td>
+                        <td><span class="h6">${contact.content}</span></td>
+                        <td>
+                            <div class="justify-content-center">
+                                <button type="button" class="btn bg_yellow btn-floating ms-3" onclick="deleteContact(${contact.id})">
+                                    <i class="far fa-trash-can"></i>
+                                </button>
+                                <button type="button" class="btn bg_green btn-floating ms-3" onclick="prepareReply('${contact.email}')">
+                                    <i class="far fa-envelope"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </c:forEach>
                 </tbody>
             </table>
         </div>
@@ -107,24 +101,22 @@
 
     <div class="container px-4" style="margin-bottom: 150px">
         <div class="mb-3 bg_green p-2 w-50">
-            <span class=" fw-bold h4">Trả lời tin nhắn</span>
+            <span class="fw-bold h4">Trả lời tin nhắn</span>
         </div>
-        <form class="border p-2 w-50">
+        <form id="replyForm" class="border p-2 w-50" onsubmit="sendEmail(event)">
             <div class="row">
                 <div class="col-md-11">
                     <div class="mb-3">
-                        <label for="name" class="form-label"><b>Gmail</b></label>
-                        <input type="text" class="form-control" id="name" name="name"
-                               placeholder="Nhập gmail..." required>
+                        <label for="email" class="form-label"><b>Gmail</b></label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Nhập gmail..." required readonly>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-11">
                     <div class="mb-3">
-                        <label for="topic" class="form-label"><b>Chủ đề</b></label>
-                        <input type="text" class="form-control" id="topic" name="topic"
-                               placeholder="Nhập chủ đề..." required>
+                        <label for="subject" class="form-label"><b>Chủ đề</b></label>
+                        <input type="text" class="form-control" id="subject" name="subject" placeholder="Nhập chủ đề..." required>
                     </div>
                 </div>
             </div>
@@ -132,27 +124,72 @@
                 <div class="col-md-11">
                     <div class="mb-3">
                         <label class="form-label"><b>Nội dung</b></label>
-                        <textarea class="form-control" id="description" name="description" rows="7"
-                                  placeholder="Nội dung..."></textarea>
+                        <textarea class="form-control" id="content" name="content" rows="7" placeholder="Nội dung..." required></textarea>
                     </div>
                 </div>
             </div>
 
-            <!-- Repeat the pattern for other form elements -->
-
             <button type="submit" class="btn bg_green fw-bold h5">Trả lời</button>
         </form>
-
     </div>
-
-    <!-- Container for demo purpose -->
 </main>
-<!--Main layout-->
 
 <footer class="bottom-0 w-100 text-center py-2 bg-light">
     <p class="pt-3" style="color: rgba(0, 0, 0, 0.5); margin-left: 150px;">©2024 Group-11</p>
 </footer>
 
-</body>
+<script>
+    function prepareReply(email) {
+        document.getElementById('email').value = email;
+        document.getElementById('subject').value = '';
+        document.getElementById('content').value = '';
+        // Scroll to reply form
+        document.getElementById('replyForm').scrollIntoView({ behavior: 'smooth' });
+    }
 
+    function sendEmail(event) {
+        event.preventDefault();
+
+        const submitBtn = event.target.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Đang gửi...';
+
+        const form = document.getElementById('replyForm');
+        const formData = new FormData(form);
+        formData.append('action', 'sendEmail'); // Đảm bảo action là sendEmail
+
+        fetch('${pageContext.request.contextPath}/contact-admin', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+            .then(response => {
+                // Kiểm tra xem server có trả về mã lỗi không
+                if (!response.ok) {
+                    throw new Error('Server lỗi: ' + response.status);
+                }
+                // Kiểm tra xem phản hồi có phải là JSON không
+                return response.json();
+            })
+            .then(data => {
+                if (data.status === 'success') {
+                    alert(data.message);
+                    form.reset();
+                } else {
+                    alert('Lỗi: ' + data.message);
+                }
+            })
+            .catch(error => {
+                alert('Có lỗi xảy ra: ' + error.message);
+            })
+            .finally(() => {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Trả lời';
+            });
+    }
+
+</script>
+</body>
 </html>
