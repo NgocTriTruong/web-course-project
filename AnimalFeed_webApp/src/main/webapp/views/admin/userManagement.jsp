@@ -104,7 +104,7 @@
                             </span>
                         </td>
                         <td>
-                            <c:if test="${user.status != 2}">
+                            <c:if test="${user.status != 3}">
                                 <a href="userEdit?id=${user.id}" class="btn bg_green btn-floating"
                                    style="font-size: 16px;">
                                     <i class="far fa-pen-to-square"></i>
@@ -146,6 +146,28 @@
             window.location.href = "userManagement?action=delete&id=" + userId;
         }
     }
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('advanced-search-input');
+        const searchButton = document.getElementById('advanced-search-button');
+
+        // Function to perform search
+        function performSearch() {
+            const searchTerm = searchInput.value.trim();
+            window.location.href = 'userManagement?action=search&searchTerm=' + encodeURIComponent(searchTerm);
+        }
+
+        // Search button click handler
+        searchButton.addEventListener('click', performSearch);
+
+        // Enter key press handler
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+    });
 </script>
 </body>
 </html>
