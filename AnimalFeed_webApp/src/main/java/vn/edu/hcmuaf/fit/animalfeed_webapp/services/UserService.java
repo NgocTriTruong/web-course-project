@@ -110,6 +110,11 @@ public class UserService {
         return true;
     }
 
+    //thay đổi pass
+    public boolean updatePassword(int userId, String currentPassword, String newPassword) {
+        return userDao.updatePassword(userId, currentPassword, newPassword);
+    }
+
     public List<User> getAllUsers() {
         return userDao.loadUsers();
     }
