@@ -14,6 +14,8 @@ import vn.edu.hcmuaf.fit.animalfeed_webapp.services.OrderService;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @WebServlet(name = "OrderHistoryController", urlPatterns = {"/order-history", "/order-detail"})
 public class OrderHistoryController extends HttpServlet {
@@ -48,24 +50,56 @@ public class OrderHistoryController extends HttpServlet {
 
     private void showOrderHistory(HttpServletRequest request, HttpServletResponse response, int userId)
             throws ServletException, IOException, SQLException, ClassNotFoundException {
-        // Lấy danh sách đơn hàng của user
-        ArrayList<Order> orders = orderService.getOrdersByUserId(userId);
+        try {
+            // Lấy parameter lọc trạng thái
+            String statusFilter = request.getParameter("status");
+            ArrayList<Order> orders = orderService.getOrdersByUserId(userId);
 
-        System.out.println("Found " + orders.size() + " orders for user " + userId);
+            System.out.println("Found " + orders.size() + " orders for user " + userId);
 
-        for (Order order : orders) {
-            System.out.println("Order ID: " + order.getId() +
-                    ", Status: " + order.getStatus() +
-                    ", Time: " + order.getOrderDate() +
-                    ", Total: " + order.getTotalPrice());
+            // Lọc theo trạng thái nếu có yêu cầu
+            if (statusFilter != null && !statusFilter.equals("all")) {
+                try {
+                    int status = Integer.parseInt(statusFilter);
+                    orders = orders.stream()
+                            .filter(order -> order.getStatus() == status)
+                            .collect(Collectors.toCollection(ArrayList::new));
 
+                    System.out.println("Filtered to " + orders.size() + " orders with status " + status);
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid status filter: " + statusFilter);
+                }
+            }
+
+            // Log chi tiết đơn hàng
+            for (Order order : orders) {
+                System.out.println("Order ID: " + order.getId() +
+                        ", Status: " + order.getStatus() +
+                        ", Time: " + order.getOrderDate() +
+                        ", Total: " + order.getTotalPrice());
+            }
+
+            // Sắp xếp theo thời gian mới nhất
+            orders.sort((o1, o2) -> o2.getOrderDate().compareTo(o1.getOrderDate()));
+
+            // Set attributes cho JSP
+            request.setAttribute("orders", orders);
+            request.setAttribute("currentStatus", statusFilter != null ? statusFilter : "all");
+
+            // Thêm thông tin số lượng đơn hàng theo từng trạng thái
+            Map<Integer, Long> orderCounts = orders.stream()
+                    .collect(Collectors.groupingBy(Order::getStatus, Collectors.counting()));
+            request.setAttribute("orderCounts", orderCounts);
+
+            // Forward to JSP
+            request.getRequestDispatcher("/views/web/chi_tiet_ca_nhan/personal_order.jsp")
+                    .forward(request, response);
+
+        } catch (Exception e) {
+            System.err.println("Error in showOrderHistory: " + e.getMessage());
+            e.printStackTrace();
+            throw e;
         }
-
-        // Sắp xếp theo thời gian mới nhất
-        orders.sort((o1, o2) -> o2.getOrderDate().compareTo(o1.getOrderDate()));
-
-        request.setAttribute("orders", orders);
-        request.getRequestDispatcher("/views/web/chi_tiet_ca_nhan/personal_order.jsp").forward(request, response);
     }
 
     private void showOrderDetail(HttpServletRequest request, HttpServletResponse response, int userId)

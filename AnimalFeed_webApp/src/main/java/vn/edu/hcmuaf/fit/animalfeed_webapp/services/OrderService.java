@@ -7,7 +7,9 @@ import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.OrderDetailDao;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.OrderDetail;
 
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 public class OrderService {
     private OrderDao orderDao = new OrderDao();
@@ -31,5 +33,17 @@ public class OrderService {
 
     public ArrayList<OrderDetailsWithProduct> getOrderDetailsWithProductByOrderId(int orderId) {
         return orderDetailDao.getOrderDetailsWithProductByOrderId(orderId);
+    }
+
+    public void updateOrderStatus(int orderId, int newStatus) {
+        orderDao.updateOrderStatus(orderId, newStatus);
+    }
+
+    public List<Order> getAllOrders() {
+        return orderDao.getAllOrders();
+    }
+
+    public void updateShippingDate(int orderId, LocalDateTime now) {
+        orderDao.updateShippingDate(orderId, now);
     }
 }

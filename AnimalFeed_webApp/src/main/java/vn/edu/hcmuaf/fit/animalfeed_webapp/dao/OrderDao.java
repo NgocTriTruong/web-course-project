@@ -5,6 +5,7 @@ import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.db.JdbiConnect;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Order;
 
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class OrderDao {
@@ -38,10 +39,10 @@ public class OrderDao {
     }
 
     // Method to update user information
-    public void updateOrderStatus(int status, int id) {
+    public void updateOrderStatus(int id, int newStatus) {
         int rowsUpdated = jdbi.withHandle(handle ->
-                handle.createUpdate("UPDATE orders SET status = :status WHERE id = :id")
-                        .bind("status", status)
+                handle.createUpdate("UPDATE orders SET status = :newStatus WHERE id = :id")
+                        .bind("newStatus", newStatus)
                         .bind("id", id)
                         .execute()
         );
@@ -69,5 +70,15 @@ public class OrderDao {
                 .mapToBean(Order.class)
                 .findFirst()  // This returns an Optional<Order>
                 .orElse(null));  // This returns null if no order is found
+    }
+
+    public void updateShippingDate(int orderId, LocalDateTime now) {
+        int rowsUpdated = jdbi.withHandle(handle ->
+                handle.createUpdate("UPDATE orders SET ship_date = :now WHERE id = :orderId")
+                        .bind("now", now)
+                        .bind("orderId", orderId)
+                        .execute()
+        );
+        System.out.println(rowsUpdated);
     }
 }

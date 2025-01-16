@@ -19,6 +19,24 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
 
     <style>
+        .od_me {
+            text-decoration: none;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .od_me:hover {
+            background-color: #f8f9fa;
+            color: #007bff;
+        }
+
+        .od_me.active {
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+            font-weight: bold;
+        }
+
         .order-item {
             border: 1px solid #ddd;
             margin-bottom: 20px;
@@ -39,11 +57,22 @@
             border-radius: 4px;
             font-weight: bold;
         }
-        .status-0 { background-color: #fff3cd; color: #856404; }
-        .status-1 { background-color: #cce5ff; color: #004085; }
-        .status-2 { background-color: #d4edda; color: #155724; }
-        .status-3 { background-color: #c3e6cb; color: #155724; }
-        .status-4 { background-color: #f8d7da; color: #721c24; }
+
+        .detail-btn {
+            width: 100%;
+            height: 40px;
+            text-align: center;
+        }
+
+        .detail-btn i {
+            margin: 5px auto;
+        }
+
+        .status-1 { background-color: #fff3cd; color: #856404; }
+        .status-2 { background-color: #cce5ff; color: #004085; }
+        .status-3 { background-color: #d4edda; color: #155724; }
+        .status-4 { background-color: #c3e6cb; color: #155724; }
+        .status-0 { background-color: #f8d7da; color: #721c24; }
     </style>
 
     <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/add_layout.js" defer></script>
@@ -90,12 +119,19 @@
                 </div>
                 <div class="col-md-8 thong_tin_right ms-5 pt-5">
                     <div class="h4 fw-bold">Đơn hàng của tôi</div>
-                    <div class="bg-white d-flex mt-3 od_me_all">
-                        <div class="p od_me">Tất cả</div>
-                        <div class="p od_me">Đang xử lý</div>
-                        <div class="p od_me">Đang giao</div>
-                        <div class="p od_me">Hoàn tất</div>
-                        <div class="p od_me">Đã hủy</div>
+                    <div class="bg-white d-flex od_me_all">
+                        <a href="${pageContext.request.contextPath}/order-history?status=all"
+                           class="p od_me ${currentStatus == 'all' ? 'active' : ''}">Tất cả</a>
+                        <a href="${pageContext.request.contextPath}/order-history?status=1"
+                           class="p od_me ${currentStatus == '1' ? 'active' : ''}">Chờ xác nhận</a>
+                        <a href="${pageContext.request.contextPath}/order-history?status=2"
+                           class="p od_me ${currentStatus == '2' ? 'active' : ''}">Đang chuẩn bị</a>
+                        <a href="${pageContext.request.contextPath}/order-history?status=3"
+                           class="p od_me ${currentStatus == '3' ? 'active' : ''}">Đang vận chuyển</a>
+                        <a href="${pageContext.request.contextPath}/order-history?status=4"
+                           class="p od_me ${currentStatus == '4' ? 'active' : ''}">Hoàn tất</a>
+                        <a href="${pageContext.request.contextPath}/order-history?status=0"
+                           class="p od_me ${currentStatus == '0' ? 'active' : ''}">Đã hủy</a>
                     </div>
 
                     <c:choose>
@@ -108,11 +144,11 @@
                                         </div>
                                         <div class="order-status status-${order.status}">
                                             <c:choose>
-                                                <c:when test="${order.status == 0}">Chờ xác nhận</c:when>
-                                                <c:when test="${order.status == 1}">Đang xử lý</c:when>
-                                                <c:when test="${order.status == 2}">Đang giao hàng</c:when>
-                                                <c:when test="${order.status == 3}">Đã giao hàng</c:when>
-                                                <c:when test="${order.status == 4}">Đã hủy</c:when>
+                                                <c:when test="${order.status == 0}">Đã hủy</c:when>
+                                                <c:when test="${order.status == 1}">Chờ xác nhận</c:when>
+                                                <c:when test="${order.status == 2}">Đang chuẩn bị</c:when>
+                                                <c:when test="${order.status == 3}">Đang vận chuyển</c:when>
+                                                <c:when test="${order.status == 4}">Hoàn tất</c:when>
                                                 <c:otherwise>Không xác định</c:otherwise>
                                             </c:choose>
                                         </div>
@@ -134,9 +170,14 @@
                                             <div>${order.address}</div>
                                         </div>
                                         <div class="col-md-2 text-end">
-                                            <a href="order-detail?id=${order.id}" class="btn btn-primary btn-sm text-center">
+                                            <a href="order-detail?id=${order.id}" class="detail-btn btn btn-primary btn-sm text-center">
                                                 <i class="fas fa-eye"></i> Xem chi tiết
                                             </a>
+                                            <c:if test="${order.status == 1 || order.status == 2}">
+                                                <button onclick="confirmCancelOrder(${order.id})" class="detail-btn btn btn-danger btn-sm text-center">
+                                                    <i class="fas fa-times"></i> Hủy đơn
+                                                </button>
+                                            </c:if>
                                         </div>
                                     </div>
                                 </div>
@@ -163,6 +204,14 @@
 </main>
 <%@ include file="../layout/near_footer.jsp" %>
 <%@ include file="../layout/footer.jsp" %>
+
+<script>
+    function confirmCancelOrder(orderId) {
+        if (confirm('Bạn có chắc chắn muốn hủy đơn hàng này không?')) {
+            window.location.href = '${pageContext.request.contextPath}/cancel-order?id=' + orderId;
+        }
+    }
+</script>
 
 </body>
 </html>
