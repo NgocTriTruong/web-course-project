@@ -15,6 +15,6 @@ public class DiscountService {
 
     //lay discount theo id
     public Discount getDiscountById(int id) {
-        return discountDao.getDiscountById(id);
+        return discountDao.getById(id);
     }
 }

@@ -24,7 +24,7 @@
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/login.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/signup.css">
-  
+
     <!-- scrollToTopBtn -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/scrollToTopBtn.css">
     <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/scrollToTopBtn.js" defer></script>
@@ -245,8 +245,8 @@
 <%@ include file="../../layout/near_footer.jsp" %>
 <%@ include file="../../layout/footer.jsp" %>
 
-      <!-- scrollToTopBtn -->
-      <button id="scrollToTopBtn"><i class="fa-solid fa-chevron-up"></i></button>
+<!-- scrollToTopBtn -->
+<button id="scrollToTopBtn"><i class="fa-solid fa-chevron-up"></i></button>
 
 <script>
     function toggleDescription(contentId, buttonId) {

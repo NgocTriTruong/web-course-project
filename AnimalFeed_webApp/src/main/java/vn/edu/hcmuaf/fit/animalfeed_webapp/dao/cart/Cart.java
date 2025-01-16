@@ -6,6 +6,7 @@ import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.CartDetail;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.dto.CartItem;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
 
+
 import java.util.*;
 
 public class Cart {
@@ -64,12 +65,6 @@ public class Cart {
     public int getTotalQuantity() {
         return cartData.values().stream()
                 .filter(cartItem -> cartItem.getStatus() == 1)
-                .mapToInt(CartItem::getQuantity)
-                .sum();
-    }
-
-    public int getTotalItems() {
-        return cartData.values().stream()
                 .mapToInt(CartItem::getQuantity)
                 .sum();
     }

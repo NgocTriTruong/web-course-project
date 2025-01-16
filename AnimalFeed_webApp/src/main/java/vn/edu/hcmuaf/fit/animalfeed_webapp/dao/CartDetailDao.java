@@ -21,7 +21,7 @@ public class CartDetailDao {
 
     public boolean getCDById(int productId, int userId) {
         return jdbi.withHandle(handle -> handle.createQuery(
-                "SELECT * FROM cart_details WHERE product_id = :productId AND user_id = :userId")
+                        "SELECT * FROM cart_details WHERE product_id = :productId AND user_id = :userId")
                 .bind("productId", productId)
                 .bind("userId", userId)
                 .mapToBean(CartDetail.class)
