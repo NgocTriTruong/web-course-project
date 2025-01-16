@@ -154,7 +154,7 @@
                         <span class="text_line_2">Thông tin cá nhân</span>
                       </li>
                     </a>
-                    <a href="${pageContext.request.contextPath}/views/web/chi_tiet_ca_nhan/don_hang_cua_toi.jsp">
+                    <a href="${pageContext.request.contextPath}/order-history">
                       <li class="d-flex p-2 li_hover">
                         <i class="mt-1 fa-solid fa-box ms-2 me-2"></i>
                         <span class="text_line_2">Đơn hàng của tôi</span>
