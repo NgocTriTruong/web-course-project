@@ -55,7 +55,7 @@
         </ul>
       </li>
       <li class="sidenav-item">
-        <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/orderManagement.jsp">
+        <a class="sidenav-link" href="order-manager">
           <i class="fas fa-cart-shopping fa-fw me-2 "></i><span class="h5 text">Quản lý đơn đặt hàng</span><i class="fas fa-chevron-down" style="margin-left: -1px; margin-bottom: 2px;"></i></a>
         <ul class="sidenav-collapse ">
           <li class="sidenav-item">

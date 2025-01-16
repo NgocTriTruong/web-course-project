@@ -46,4 +46,12 @@ public class OrderService {
     public void updateShippingDate(int orderId, LocalDateTime now) {
         orderDao.updateShippingDate(orderId, now);
     }
+
+    public List<OrderDetail> getOrderDetails(int orderId) {
+        return orderDetailDao.getODsByOrderId(orderId);
+    }
+
+    public List<Order> searchOrders(String searchTerm) {
+        return null;
+    }
 }
