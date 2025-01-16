@@ -6,7 +6,7 @@
       <div class="content d-flex justify-content-center">
         <div class="logo_shop">
 
-          <a href="${pageContext.request.contextPath}/index.jsp">
+          <a href="${pageContext.request.contextPath}/home">
             <img src="${pageContext.request.contextPath}/views/template/assets/images/header/logo_vina.png" alt="Logo Vina" height="75px" width="90px" style=" margin: 9px 0 0 22px;">
           </a>
         </div>
@@ -96,7 +96,7 @@
               <a href="news" class="text_h1">TIN TỨC</a>
             </li>
             <li class="p-4">
-              <a href="${pageContext.request.contextPath}/views/web/help.jsp" class="text_h1">HỖ TRỢ KHÁCH HÀNG</a>
+              <a href="${pageContext.request.contextPath}/contact" class="text_h1">HỖ TRỢ KHÁCH HÀNG</a>
             </li>
   
             <li class="p-4 mt-1 pointer">
@@ -144,23 +144,23 @@
             </li>
             <!-- đã đăng nhập -->
             <li id="logged-in" class="p-4" style="${sessionScope.user == null ? 'display:none;' : ''}">
-              <a href="${pageContext.request.contextPath}/views/web/chi_tiet_ca_nhan/thong_tin_ca_nhan.jsp" style="width: 0;">
+              <a href="${pageContext.request.contextPath}/profile-user" style="width: 0;">
                 <div id="user-icon" class="user add_login">
                   <i class="fa-solid fa-user i_right_number mt-3 ms-3 text-white"></i>
                   <ul class="header_line_2 me-2" style="min-width: 150px; margin-top: 25px;">
-                    <a href="${pageContext.request.contextPath}/views/web/chi_tiet_ca_nhan/thong_tin_ca_nhan.jsp">
+                    <a href="${pageContext.request.contextPath}/profile-user">
                       <li class="d-flex p-2 li_hover">
                         <i class="mt-1 fa-solid fa-user ms-2 me-2"></i>
                         <span class="text_line_2">Thông tin cá nhân</span>
                       </li>
                     </a>
-                    <a href="${pageContext.request.contextPath}/views/web/chi_tiet_ca_nhan/don_hang_cua_toi.jsp">
+                    <a href="${pageContext.request.contextPath}/order-history">
                       <li class="d-flex p-2 li_hover">
                         <i class="mt-1 fa-solid fa-box ms-2 me-2"></i>
                         <span class="text_line_2">Đơn hàng của tôi</span>
                       </li>
                     </a>
-                    <a href="../chi_tiet_ca_nhan/so_dia_chi.jsp">
+                    <a href="location_user">
                       <li class="d-flex p-2 li_hover">
                         <i class="mt-1 fa-solid fa-location-dot ms-2 me-2"></i>
                         <span class="text_line_2">Sổ địa chỉ nhận hàng</span>
@@ -179,7 +179,7 @@
 
           <li class="p-4">
             <div class="cart d-flex">
-              <a href="${pageContext.request.contextPath}/views/web/cart.jsp">
+              <a href="${pageContext.request.contextPath}/cart">
                 <i class="fa-solid fa-shopping-cart i_right_number mt-3 text-white"></i>
                   <span class="ms-1 text-white" style="margin-top: 14px;">Giỏ hàng</span>
                   <c:if test="${not empty sessionScope.cart}">

@@ -2,8 +2,10 @@ package vn.edu.hcmuaf.fit.animalfeed_webapp.dao;
 
 import org.jdbi.v3.core.Jdbi;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.db.JdbiConnect;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.dto.OrderDetailsWithProduct;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Order;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.OrderDetail;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -22,5 +24,46 @@ public class OrderDetailDao {
                         .execute()
         );
         System.out.println(rowsInserted);
+    }
+
+    public ArrayList<OrderDetail> getODsByOrderId(int orderId) {
+        return (ArrayList<OrderDetail>) jdbi.withHandle(handle -> handle.createQuery("select * from order_details where order_id = :orderId")
+                .bind("orderId", orderId)
+                .mapToBean(OrderDetail.class)
+                .list());
+
+    }
+
+    public ArrayList<OrderDetailsWithProduct> getOrderDetailsWithProductByOrderId(int orderId) {
+        return jdbi.withHandle(handle -> {
+            String sql = """
+                SELECT od.*, p.*
+                FROM order_details od
+                JOIN products p ON od.product_id = p.id
+                WHERE od.order_id = :orderId
+                """;
+
+            return handle.createQuery(sql)
+                    .bind("orderId", orderId)
+                    .reduceRows(new ArrayList<OrderDetailsWithProduct>(), (list, row) -> {
+                        OrderDetail orderDetail = new OrderDetail(
+                                row.getColumn("id", Integer.class),
+                                row.getColumn("order_id", Integer.class),
+                                row.getColumn("product_id", Integer.class),
+                                row.getColumn("quantity", Integer.class),
+                                row.getColumn("total_price", Double.class)
+                        );
+
+                        Product product = new Product();
+                        product.setId(row.getColumn("id", Integer.class));
+                        product.setName(row.getColumn("name", String.class));
+                        product.setPrice(row.getColumn("price", Double.class));
+                        product.setImg(row.getColumn("img", String.class));
+                        // Set other product properties as needed
+
+                        list.add(new OrderDetailsWithProduct(orderDetail, product));
+                        return list;
+                    });
+        });
     }
 }

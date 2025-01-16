@@ -4,13 +4,12 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.cart.Cart;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.CartItem;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.dto.CartItem;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.*;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.CartService;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.OrderService;
 
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;

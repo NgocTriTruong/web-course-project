@@ -176,7 +176,7 @@ public class ProductDao {
         }
     }
 
-    //cập nhật giam gia
+    //tự động cập nhật giam gia
     public void updateDiscount() {
         Jdbi jdbi = JdbiConnect.getJdbi();
         String updateQuery = """ 

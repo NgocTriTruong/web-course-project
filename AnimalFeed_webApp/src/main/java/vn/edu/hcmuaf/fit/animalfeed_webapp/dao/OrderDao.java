@@ -2,9 +2,11 @@ package vn.edu.hcmuaf.fit.animalfeed_webapp.dao;
 
 import org.jdbi.v3.core.Jdbi;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.db.JdbiConnect;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.dto.UserStats;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Order;
 
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class OrderDao {
@@ -38,10 +40,10 @@ public class OrderDao {
     }
 
     // Method to update user information
-    public void updateOrderStatus(int status, int id) {
+    public void updateOrderStatus(int id, int newStatus) {
         int rowsUpdated = jdbi.withHandle(handle ->
-                handle.createUpdate("UPDATE orders SET status = :status WHERE id = :id")
-                        .bind("status", status)
+                handle.createUpdate("UPDATE orders SET status = :newStatus WHERE id = :id")
+                        .bind("newStatus", newStatus)
                         .bind("id", id)
                         .execute()
         );
@@ -61,5 +63,63 @@ public class OrderDao {
     // Method to list all users
     public ArrayList<Order> getAllOrders() {
         return (ArrayList<Order>) jdbi.withHandle(handle -> handle.createQuery("select * from orders").mapToBean(Order.class).list());
+    }
+
+    public Order getOrderById(int orderId) {
+        return jdbi.withHandle(handle -> handle.createQuery("select * from orders where id = :orderId")
+                .bind("orderId", orderId)
+                .mapToBean(Order.class)
+                .findFirst()  // This returns an Optional<Order>
+                .orElse(null));  // This returns null if no order is found
+    }
+
+    public void updateShippingDate(int orderId, LocalDateTime now) {
+        int rowsUpdated = jdbi.withHandle(handle ->
+                handle.createUpdate("UPDATE orders SET ship_date = :now WHERE id = :orderId")
+                        .bind("now", now)
+                        .bind("orderId", orderId)
+                        .execute()
+        );
+        System.out.println(rowsUpdated);
+    }
+
+    //Tổng đơn đặt hàng
+    public int getTotalOrder() {
+        return jdbi.withHandle(handle -> handle.createQuery("select count(*) from orders")
+                .mapTo(int.class)
+                .one());
+    }
+
+    // Tổng doanh thu
+    public int getTotalRevenue() {
+        return jdbi.withHandle(handle -> handle.createQuery("select sum(total_price) from orders")
+                .mapTo(int.class)
+                .one());
+    }
+
+    // Định nghĩa một phương thức để lấy thông tin người dùng và thống kê
+    public List<UserStats> getUserStats() {
+        return jdbi.withHandle(handle ->
+                handle.createQuery(
+                                "SELECT u.full_name, u.phone, " +
+                                        "COUNT(o.id) AS total_orders, " +
+                                        "SUM(od.quantity) AS total_products_ordered, " +
+                                        "SUM(o.total_price) AS total_amount_to_pay " +
+                                        "FROM users u " +
+                                        "JOIN orders o ON u.id = o.user_id " +
+                                        "JOIN order_details od ON o.id = od.order_id " +
+                                        "GROUP BY u.id, u.full_name, u.phone "
+                        )
+                        .mapToBean(UserStats.class)
+                        .list()
+        );
+    }
+
+    public static void main(String[] args) {
+        OrderDao orderDao = new OrderDao();
+        List<UserStats> userStats = orderDao.getUserStats();
+        for (UserStats userStat : userStats) {
+            System.out.println(userStat);
+        }
     }
 }

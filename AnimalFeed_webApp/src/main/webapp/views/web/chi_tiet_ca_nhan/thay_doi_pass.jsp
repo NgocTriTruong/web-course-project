@@ -20,7 +20,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/themify-icons/themify-icons.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
 
-    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/add_layout.js" defer></script>
 </head>
 <body>
 <%@ include file="../layout/header.jsp" %>
@@ -36,24 +35,32 @@
                                     <i class="fa-solid fa-user mt-2 i_user"></i>
                                 </div>
                                 <div class="p mt-3">
-                                    Nguyễn Văn A <br>
-                                    0123456789
+                                    <c:choose>
+                                        <c:when test="${not empty sessionScope.user}">
+                                            ${sessionScope.user.fullName} <br>
+                                            ${sessionScope.user.phone}
+                                        </c:when>
+                                        <c:otherwise>
+                                            Khách hàng <br>
+                                            Đăng nhập để xem thông tin
+                                        </c:otherwise>
+                                    </c:choose>
                                 </div>
-                                <span class="text-primary ms-5 mt-5" onclick="window.location.href='${pageContext.request.contextPath}/views/web/chi_tiet_ca_nhan/thong_tin_ca_nhan.jsp'"  style="cursor: pointer;">xem hồ sơ</span>
+                                <span class="text-primary ms-5 mt-5" onclick="window.location.href='${pageContext.request.contextPath}/profile-user'"  style="cursor: pointer;">xem hồ sơ</span>
                             </div>
                         </div>
                         <div class="tt_left_bottom bg-white mt-4 pt-3 pb-3">
                             <div class="tt_bottom_number d-flex mt-2">
                                 <i class="me-3 fa-solid fa-key ms-3"></i>
-                                <div class="p" onclick="window.location.href='${pageContext.request.contextPath}/views/web/chi_tiet_ca_nhan/thay_doi_pass.jsp'">Thay đổi mật khẩu của bạn</div>
+                                <div class="p" onclick="window.location.href='${pageContext.request.contextPath}/new-password'">Thay đổi mật khẩu của bạn</div>
                             </div>
                             <div class="tt_bottom_number d-flex mt-2">
                                 <i class="me-3 fa-solid fa-box ms-3"></i>
-                                <div class="p" onclick="window.location.href='${pageContext.request.contextPath}/views/web/chi_tiet_ca_nhan/don_hang_cua_toi.jsp'">Đơn hàng của tôi</div>
+                                <div class="p" onclick="window.location.href='${pageContext.request.contextPath}/order-history'">Đơn hàng của tôi</div>
                             </div>
                             <div class="tt_bottom_number d-flex mt-2">
                                 <i class="me-3 fa-solid fa-location-dot ms-3"></i>
-                                <div class="p" onclick="window.location.href='${pageContext.request.contextPath}/views/web/chi_tiet_ca_nhan/so_dia_chi.jsp'">Sổ địa chỉ nhận hàng</div>
+                                <div class="p" onclick="window.location.href='${pageContext.request.contextPath}/location_user'">Sổ địa chỉ nhận hàng</div>
                             </div>
                             <div class="tt_bottom_number d-flex mt-2" id="logout">
                                 <i class="me-3 fa-solid fa-right-from-bracket ms-3"></i>
@@ -63,30 +70,33 @@
                     </div>
                     <div class="col-md-8 thong_tin_right ms-5 pt-5">
                         <div class="h4 fw-bold">Thay đổi mật khẩu của bạn</div>
-                        <div class="tt_right_all bg-white justify-content-center">
-                            <div class="tt_right_all_80 pt-4 text-center">
-                                <div class="user">
-                                    <i class="fa-solid fa-user i_user"></i>
-                                </div>
-                                <div class="form-floating mb-3 mt-3">
-                                    <input type="text" class="form-control" id="pwd" placeholder="Nhập mật khẩu" name="password" required autocomplete="off"> 
-                                    <label for="password">Nhập mật khẩu hiện tại<span class="req">*</span></label>
-                                </div>
-                                <p class="login_forgot" style="text-align: end; margin-top: -10px;"><a href="#" style="color: red;">Quên mật khẩu?</a></p>
-                                <div class="line_gray mt-3 mb-3"></div>
-                                <div class="form-floating mb-3 mt-3">
-                                    <input type="text" class="form-control" id="pwd" placeholder="Nhập mật khẩu" name="password" required autocomplete="off"> 
-                                    <label for="password">Nhập mật khẩu mới<span class="req">*</span></label>
-                                </div>
-                                <div class="form-floating mb-3 mt-3">
-                                    <input type="text" class="form-control" id="pwd" placeholder="Nhập mật khẩu" name="password" required autocomplete="off"> 
-                                    <label for="password">Xác nhận mật khẩu mới<span class="req">*</span></label>
-                                </div>
-                                <div class="button mt-4 text-white fw-bold">
-                                    Lưu
-                                </div>
+
+                        <!-- Hiển thị thông báo lỗi hoặc thành công -->
+                        <c:if test="${not empty errorMessage}">
+                            <div class="alert alert-danger mt-3">${errorMessage}</div>
+                        </c:if>
+                        <c:if test="${not empty successMessage}">
+                            <div class="alert alert-success mt-3">${successMessage}</div>
+                        </c:if>
+
+                        <form action="${pageContext.request.contextPath}/new-password" method="POST">
+                            <div class="form-floating mb-3 mt-3">
+                                <input type="password" class="form-control" id="current-password" placeholder="Nhập mật khẩu hiện tại" name="currentPassword" required autocomplete="off">
+                                <label for="current-password">Nhập mật khẩu hiện tại<span class="req">*</span></label>
                             </div>
-                        </div>
+                            <p class="login_forgot" style="text-align: end; margin-top: -10px;"><a href="#" style="color: red;">Quên mật khẩu?</a></p>
+                            <div class="line_gray mt-3 mb-3"></div>
+                            <div class="form-floating mb-3 mt-3">
+                                <input type="password" class="form-control" id="new-password" placeholder="Nhập mật khẩu mới" name="newPassword" required autocomplete="off">
+                                <label for="new-password">Nhập mật khẩu mới<span class="req">*</span></label>
+                            </div>
+                            <div class="form-floating mb-3 mt-3">
+                                <input type="password" class="form-control" id="confirm-password" placeholder="Xác nhận mật khẩu mới" name="confirmPassword" required autocomplete="off">
+                                <label for="confirm-password">Xác nhận mật khẩu mới<span class="req">*</span></label>
+                            </div>
+                            <button type="submit" class="btn btn-primary mt-4 text-white fw-bold">Lưu</button>
+                        </form>
+
                     </div>
                 </div>
             </div>

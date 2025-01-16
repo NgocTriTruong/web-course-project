@@ -34,24 +34,32 @@
                                     <i class="fa-solid fa-user mt-2 i_user"></i>
                                 </div>
                                 <div class="p mt-3">
-                                    Nguyễn Văn A <br>
-                                    0123456789
+                                    <c:choose>
+                                        <c:when test="${not empty sessionScope.user}">
+                                            ${sessionScope.user.fullName} <br>
+                                            ${sessionScope.user.phone}
+                                        </c:when>
+                                        <c:otherwise>
+                                            Khách hàng <br>
+                                            Đăng nhập để xem thông tin
+                                        </c:otherwise>
+                                    </c:choose>
                                 </div>
-                                <span class="text-primary ms-5 mt-5" onclick="window.location.href='${pageContext.request.contextPath}/views/web/chi_tiet_ca_nhan/thong_tin_ca_nhan.jsp'" style="cursor: pointer;">xem hồ sơ</span>
+                                <span class="text-primary ms-5 mt-5" onclick="window.location.href='${pageContext.request.contextPath}/profile-user'" style="cursor: pointer;">xem hồ sơ</span>
                             </div>
                         </div>
                         <div class="tt_left_bottom bg-white mt-4 pt-3 pb-3">
                             <div class="tt_bottom_number d-flex mt-2">
                                 <i class="me-3 fa-solid fa-key ms-3"></i>
-                                <div class="p" onclick="window.location.href='${pageContext.request.contextPath}/views/web/chi_tiet_ca_nhan/thay_doi_pass.jsp'">Thay đổi mật khẩu của bạn</div>
+                                <div class="p" onclick="window.location.href='${pageContext.request.contextPath}/new-password'">Thay đổi mật khẩu của bạn</div>
                             </div>
                             <div class="tt_bottom_number d-flex mt-2">
                                 <i class="me-3 fa-solid fa-box ms-3"></i>
-                                <div class="p" onclick="window.location.href='${pageContext.request.contextPath}/views/web/chi_tiet_ca_nhan/don_hang_cua_toi.jsp'">Đơn hàng của tôi</div>
+                                <div class="p" onclick="window.location.href='${pageContext.request.contextPath}/order-history'">Đơn hàng của tôi</div>
                             </div>
                             <div class="tt_bottom_number d-flex mt-2">
                                 <i class="me-3 fa-solid fa-location-dot ms-3"></i>
-                                <div class="p" onclick="window.location.href='${pageContext.request.contextPath}/views/web/chi_tiet_ca_nhan/so_dia_chi.jsp'">Sổ địa chỉ nhận hàng</div>
+                                <div class="p" onclick="window.location.href='${pageContext.request.contextPath}/location_user'">Sổ địa chỉ nhận hàng</div>
                             </div>
                             <div class="tt_bottom_number d-flex mt-2" id="logout">
                                 <i class="me-3 fa-solid fa-right-from-bracket ms-3"></i>
@@ -68,17 +76,12 @@
                                 </div>
                                 <div class="user_name d-flex mt-3">
                                     <div class="p user_left">Họ và tên</div>
-                                    <div class="user_right">Quy Khach</div>
+                                    <div class="user_right">${sessionScope.user.fullName}</div>
                                 </div>
                                 <div class="line_gray mt-3 mb-3"></div>
                                 <div class="lien_he d-flex">
                                     <div class="p user_left">Thông tin liên hệ</div>
-                                    <div class="user_right">012.3456789 <br> abcd123@gmail.com</div>
-                                </div>
-                                <div class="line_gray mt-3 mb-3"></div>
-                                <div class="sex d-flex">
-                                    <div class="p user_left">Giới tính</div>
-                                    <div class="user_right>">Nam</div>
+                                    <div class="user_right">${sessionScope.user.phone}</div>
                                 </div>
                                 <div class="line_gray mt-3 mb-3"></div>
                                 <div class="button mt-4 text-white fw-bold">
