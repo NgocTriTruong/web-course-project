@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +48,7 @@
             <div class="card-body py-5 px-5">
               <div class="row gx-lg-4 align-items-center">
                 <div class="col-lg-6 mb-4 mb-lg-0 text-center text-lg-start">
-                  <h1 class="">Đơn hàng 1</h1>
+                  <h1 class="">Đơn hàng #${order.id}</h1>
                 </div>
               </div>
             </div>
@@ -56,19 +58,6 @@
 
     <!-- Container for demo purpose -->
     <div class="container px-4">
-        <div class="mb-3 d-flex justify-content-end px-4">
-            <a class="btn bg_green text-white fw-bold" href="orderAddition.jsp">
-                <i class="far fa-square-plus"></i>
-                <span>Thêm đơn đặt hàng</span>
-            </a>
-        </div>
-        <div class="input-group mb-4 px-4">
-            <input type="text" class="form-control" id="advanced-search-input"
-                   placeholder=""/>
-            <button class="btn bg_green" id="advanced-search-button" type="button">
-                <i class="fa fa-search"></i>
-            </button>
-        </div>
         <div class="datatable">
             <table class="table align-middle mb-0 bg-white">
                 <thead class="bg-light">
@@ -77,127 +66,25 @@
                     <th class="text-center">Sản phẩm</th>
                     <th class="text-center">Số lượng</th>
                     <th class="text-center">Tổng tiền</th>
-                    <th>Trạng thái</th>
-                    <th>Hành động</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>
-                        <span class="ms-2 h6">1</span>
-                    </td>
-                    <td>
-                        <div class="d-flex justify-content-center align-items-center">
-                            <div class="">
-                                <p class="fw-bold mb-1">TOP 1</p>
+                <c:forEach items="${orderDetails}" var="od" varStatus="loop">
+                    <tr>
+                        <td class="text-center">${loop.index + 1}</td>
+                        <td class="text-center">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <div>
+                                    <p class="fw-bold mb-1">Product ID: ${od.productId}</p>
+                                </div>
                             </div>
-                        </div>
-                    </td>
-                    <td>
-                        <p class="fw-normal mb-1 text-center h6">25</p>
-                    </td>
-                    <td>
-                        <p class="fw-normal mb-1 text-center h6">10.000.000</p>
-                    </td>
-                    <td>
-                        <span class="badge badge-success rounded-pill d-inline" style="font-size: 13px;">Hoàn thành</span>
-                    </td>
-                    <td>
-                        <button type="button" class="btn bg_green btn-floating" style="font-size: 16px;">
-                            <i class="far fa-pen-to-square"></i>
-                        </button>
-                        <button type="button" class="btn bg_yellow btn-floating" style="font-size: 16px;">
-                            <i class="far fa-trash-can"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span class="ms-2 h6">1</span>
-                    </td>
-                    <td>
-                        <div class="d-flex justify-content-center align-items-center">
-                            <div class="">
-                                <p class="fw-bold mb-1">HAPPY 303</p>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <p class="fw-normal mb-1 text-center h6">25</p>
-                    </td>
-                    <td>
-                        <p class="fw-normal mb-1 text-center h6">10.000.000</p>
-                    </td>
-                    <td>
-                        <span class="badge badge-success rounded-pill d-inline" style="font-size: 13px;">Hoàn thành</span>
-                    </td>
-                    <td>
-                        <button type="button" class="btn bg_green btn-floating" style="font-size: 16px;">
-                            <i class="far fa-pen-to-square"></i>
-                        </button>
-                        <button type="button" class="btn bg_yellow btn-floating" style="font-size: 16px;">
-                            <i class="far fa-trash-can"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span class="ms-2 h6">2</span>
-                    </td>
-                    <td>
-                        <div class="d-flex justify-content-center align-items-center">
-                            <div class="">
-                                <p class="fw-bold mb-1">TOP 2</p>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <p class="fw-normal mb-1 text-center h6">25</p>
-                    </td>
-                    <td>
-                        <p class="fw-normal mb-1 text-center h6">10.000.000</p>
-                    </td>
-                    <td>
-                        <span class="badge badge-success rounded-pill d-inline" style="font-size: 13px;">Hoàn thành</span>
-                    </td>
-                    <td>
-                        <button type="button" class="btn bg_green btn-floating" style="font-size: 16px;">
-                            <i class="far fa-pen-to-square"></i>
-                        </button>
-                        <button type="button" class="btn bg_yellow btn-floating" style="font-size: 16px;">
-                            <i class="far fa-trash-can"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span class="ms-2 h6">3</span>
-                    </td>
-                    <td>
-                        <div class="d-flex justify-content-center align-items-center">
-                            <div class="">
-                                <p class="fw-bold mb-1">VINA 203</p>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <p class="fw-normal mb-1 text-center h6">25</p>
-                    </td>
-                    <td>
-                        <p class="fw-normal mb-1 text-center h6">10.000.000</p>
-                    </td>
-                    <td>
-                        <span class="badge badge-success rounded-pill d-inline" style="font-size: 13px;">Hoàn thành</span>
-                    </td>
-                    <td>
-                        <button type="button" class="btn bg_green btn-floating" style="font-size: 16px;">
-                            <i class="far fa-pen-to-square"></i>
-                        </button>
-                        <button type="button" class="btn bg_yellow btn-floating" style="font-size: 16px;">
-                            <i class="far fa-trash-can"></i>
-                        </button>
-                    </td>
-                </tr>
+                        </td>
+                        <td class="text-center">${od.quantity}</td>
+                        <td class="text-center">
+                            <fmt:formatNumber value="${od.totalPrice}" type="currency" currencySymbol="₫"/>
+                        </td>
+                    </tr>
+                </c:forEach>
                 </tbody>
             </table>
         </div>
