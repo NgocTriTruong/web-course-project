@@ -62,6 +62,9 @@ public class Add extends HttpServlet {
                 cartService.insertCD(cartDetail);
             }
             cart.addProduct(product, user.getId());
+
+            System.out.println(cart.getDiscountedPrice(product));
+
             session.setAttribute("cart", cart);
 
             response.sendRedirect("product-detail?pid=" + productId);
