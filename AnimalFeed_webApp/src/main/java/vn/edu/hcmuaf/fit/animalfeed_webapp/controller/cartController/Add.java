@@ -61,7 +61,6 @@ public class Add extends HttpServlet {
             } else {
                 cartService.insertCD(cartDetail);
             }
-
             cart.addProduct(product, user.getId());
 
             System.out.println(cart.getDiscountedPrice(product));
@@ -69,7 +68,6 @@ public class Add extends HttpServlet {
             session.setAttribute("cart", cart);
 
             response.sendRedirect("product-detail?pid=" + productId);
-
         } catch (Exception e) {
             // Log the error
             e.printStackTrace();

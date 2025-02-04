@@ -167,7 +167,7 @@
         </c:if>
     </div>
 
-    <a href="${pageContext.request.contextPath}/" class="back-button">
+    <a href="${pageContext.request.contextPath}/product" class="back-button">
         Tiếp tục mua hàng
     </a>
 </div>

@@ -8,9 +8,9 @@ public class Order implements Serializable {
     private int id;
     private int status;
     private String address;
-    private String shipperId;
+    private int shipperId;
     private double totalPrice;
-    private double totalQuantity;
+    private int totalQuantity;
     private int userId;
     private double shippingPrice;
     private LocalDateTime orderDate;
@@ -18,7 +18,7 @@ public class Order implements Serializable {
 
     public Order() {}
 
-    public Order(int id, int status, String address, String shipperId, double totalPrice, double totalQuantity, int userId, double shippingPrice, LocalDateTime orderDate, Date shippingDate) {
+    public Order(int id, int status, String address, int shipperId, double totalPrice, int totalQuantity, int userId, double shippingPrice, LocalDateTime orderDate, Date shippingDate) {
         this.id = id;
         this.status = status;
         this.address = address;
@@ -55,11 +55,11 @@ public class Order implements Serializable {
         this.address = address;
     }
 
-    public String getShipperId() {
+    public int getShipperId() {
         return shipperId;
     }
 
-    public void setShipperId(String shipperId) {
+    public void setShipperId(int shipperId) {
         this.shipperId = shipperId;
     }
 
@@ -71,11 +71,11 @@ public class Order implements Serializable {
         this.totalPrice = totalPrice;
     }
 
-    public double getTotalQuantity() {
+    public int getTotalQuantity() {
         return totalQuantity;
     }
 
-    public void setTotalQuantity(double totalQuantity) {
+    public void setTotalQuantity(int totalQuantity) {
         this.totalQuantity = totalQuantity;
     }
 
@@ -111,18 +111,13 @@ public class Order implements Serializable {
         this.shippingDate = shippingDate;
     }
 
-    public String getFormattedOrderDate() {
-        if (orderDate == null) return "";
-        return orderDate.format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
-    }
-
     @Override
     public String toString() {
         return "Order{" +
                 "id=" + id +
                 ", status=" + status +
                 ", address='" + address + '\'' +
-                ", shipperId='" + shipperId + '\'' +
+                ", shipperId=" + shipperId +
                 ", totalPrice=" + totalPrice +
                 ", totalQuantity=" + totalQuantity +
                 ", userId=" + userId +

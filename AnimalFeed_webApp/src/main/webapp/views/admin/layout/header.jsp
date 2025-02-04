@@ -31,14 +31,14 @@
         </ul>
       </li>
       <li class="sidenav-item">
-        <a class="sidenav-link " href="${pageContext.request.contextPath}/product-manager">
+        <a class="sidenav-link " href="product-manager">
           <i class="fas fa-gift fa-fw me-2"></i><span class="h5 text">Quản lý sản phẩm</span> <i class="fas fa-chevron-down" style="margin-left: 31px;margin-bottom: 2px;"></i></a>
         <ul class="sidenav-collapse ">
           <li class="sidenav-item">
-            <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/productAddition.jsp" style="font-size: 17px;">Thêm sản phẩm</a>
+            <a class="sidenav-link" href="add-product" style="font-size: 17px;">Thêm sản phẩm</a>
           </li>
           <li class="sidenav-item"> 
-            <a class="sidenav-link" href="${pageContext.request.contextPath}/product-manager" style="font-size: 17px;">Danh sách sản phẩm</a>
+            <a class="sidenav-link" href="product-manager" style="font-size: 17px;">Danh sách sản phẩm</a>
           </li>
         </ul>
       </li>
@@ -55,14 +55,14 @@
         </ul>
       </li>
       <li class="sidenav-item">
-        <a class="sidenav-link" href="order-manager">
+        <a class="sidenav-link" href="${pageContext.request.contextPath}/order-manager">
           <i class="fas fa-cart-shopping fa-fw me-2 "></i><span class="h5 text">Quản lý đơn đặt hàng</span><i class="fas fa-chevron-down" style="margin-left: -1px; margin-bottom: 2px;"></i></a>
         <ul class="sidenav-collapse ">
           <li class="sidenav-item">
-            <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/orderAddition.jsp" style="font-size: 17px;">Thêm đơn đặt hàng</a>
+            <a class="sidenav-link" href="${pageContext.request.contextPath}/order-add-admin" style="font-size: 17px;">Thêm đơn đặt hàng</a>
           </li>
           <li class="sidenav-item">
-            <a class="sidenav-link" href="${pageContext.request.contextPath}/views/admin/orderManagement.jsp" style="font-size: 17px;">Danh sách đơn đặt hàng</a>
+            <a class="sidenav-link" href="${pageContext.request.contextPath}/order-manager" style="font-size: 17px;">Danh sách đơn đặt hàng</a>
           </li>
         </ul>
       </li>
@@ -92,7 +92,6 @@
           <i class="fas fa-shipping-fast fa-fw me-2 "></i><span class="h5 text">Quản lý shipper</span><i class="fas fa-chevron-down" style="margin-left: 48px;"></i></a>
         <ul class="sidenav-collapse ">
           <li class="sidenav-item">
-
             <a class="sidenav-link" href="${pageContext.request.contextPath}/shipper-addtion-admin" style="font-size: 17px;">Thêm shipper</a>
           </li>
           <li class="sidenav-item">
