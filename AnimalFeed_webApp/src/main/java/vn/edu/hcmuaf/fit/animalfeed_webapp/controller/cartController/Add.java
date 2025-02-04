@@ -61,12 +61,10 @@ public class Add extends HttpServlet {
             } else {
                 cartService.insertCD(cartDetail);
             }
-
             cart.addProduct(product, user.getId());
             session.setAttribute("cart", cart);
 
-            response.sendRedirect("list-product?addCart=true");
-
+            response.sendRedirect("product-detail?pid=" + productId);
         } catch (Exception e) {
             // Log the error
             e.printStackTrace();

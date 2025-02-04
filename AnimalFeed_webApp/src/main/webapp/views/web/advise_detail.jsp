@@ -37,7 +37,7 @@
                     <p>
                         Dưới đây là một số câu hỏi thường gặp và giải đáp. Nếu bạn vẫn chưa tìm được câu trả lời, hãy liên hệ với VINAFEED.
                     </p>
-                    <a href="${pageContext.request.contextPath}contact">
+                    <a href="${pageContext.request.contextPath}/contact">
                         <button>
                             Gửi câu hỏi
                         </button>

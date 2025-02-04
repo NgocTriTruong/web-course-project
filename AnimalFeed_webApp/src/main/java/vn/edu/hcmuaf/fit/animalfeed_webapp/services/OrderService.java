@@ -54,6 +54,7 @@ public class OrderService {
 
     public List<Order> searchOrders(String searchTerm) {
         return null;
+    }
 
     // Tổng đơn ặt hàng
     public int getTotalOrder() {
@@ -69,5 +70,13 @@ public class OrderService {
     public List<UserStats> getUserStats() {
         return orderDao.getUserStats();
 
+    }
+
+    public static void main(String[] args) {
+        OrderService orderService = new OrderService();
+        List<Order> orders = orderService.getAllOrders();
+        for (Order order : orders) {
+            System.out.println(order);
+        }
     }
 }
