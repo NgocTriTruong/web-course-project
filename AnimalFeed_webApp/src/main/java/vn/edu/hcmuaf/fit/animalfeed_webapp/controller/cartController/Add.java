@@ -27,7 +27,15 @@ public class Add extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             // Get product details
-            int productId =  Integer.parseInt(request.getParameter("productId"));
+            int productId = Integer.parseInt(request.getParameter("productId"));
+
+            // Get quantity, default to 1 if not specified
+            int quantity = 1;
+            String quantityParam = request.getParameter("quantity");
+            if (quantityParam != null && !quantityParam.isEmpty()) {
+                quantity = Math.max(1, Integer.parseInt(quantityParam));
+            }
+
             Product product = productService.getDetail(productId);
 
             if (product == null) {
@@ -49,21 +57,25 @@ public class Add extends HttpServlet {
 
             session.setAttribute("cart", cart);
 
+            // Create CartDetail with the specified quantity
             CartDetail cartDetail = new CartDetail();
             cartDetail.setUserId(user.getId());
             cartDetail.setProductId(product.getId());
-            cartDetail.setQuantity(1);
-            cartDetail.setTotal(cart.getDiscountedPrice(product));
+            cartDetail.setQuantity(quantity);
+            cartDetail.setTotal(cart.getDiscountedPrice(product) * quantity);
             cartDetail.setStatus(0);
 
+            // Check if product already exists in cart
             if (cartService.getCDById(productId, user.getId())) {
-                cartService.increaseQuantity(cartDetail.getProductId(), cartDetail.getUserId());
+                // If exists, update the quantity
+                cartService.updateQuantity(productId, user.getId(), quantity);
             } else {
+                // If not, insert new cart detail
                 cartService.insertCD(cartDetail);
             }
-            cart.addProduct(product, user.getId());
 
-            System.out.println(cart.getDiscountedPrice(product));
+            // Add product to cart session
+            cart.addProduct(product, user.getId(), quantity);
 
             session.setAttribute("cart", cart);
 
@@ -77,6 +89,6 @@ public class Add extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        // No post method implementation needed
     }
 }
