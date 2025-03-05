@@ -58,7 +58,8 @@
                                     </div>
                                     <div class="quantity-controls mt-3">
                                         <div class="quantity-selector d-inline-flex align-items-center">
-                                            <button class="btn btn-outline-secondary" type="button"
+                                            <button class=
+                                                            "btn btn-outline-secondary" type="button"
                                                     onclick="updateCartQuantity('${item.productId}', -1)">-</button>
                                             <input type="text" class="form-control text-center quantity-input mx-2"
                                                    value="${item.quantity}" style="width: 60px"
