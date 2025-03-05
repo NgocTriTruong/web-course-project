@@ -4,6 +4,7 @@ import org.jdbi.v3.core.Jdbi;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.db.JdbiConnect;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.CartDetail;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.dto.CartItem;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,38 @@ public class CartDetailDao {
         return jdbi.withHandle(handle -> handle.createQuery(
                         "SELECT cd.*, p.name, p.img, p.price, p.description FROM cart_details cd JOIN products p ON cd.product_id = p.id WHERE cd.user_id = :id")
                 .bind("id", id)
-                .mapToBean(CartItem.class)
+                .map((rs, ctx) -> {
+                    // Ánh xạ dữ liệu từ kết quả SQL vào CartItem
+                    CartItem item = new CartItem();
+                    item.setId(rs.getInt("id"));
+                    item.setUserId(rs.getInt("user_id"));
+                    item.setProductId(rs.getInt("product_id"));
+                    item.setQuantity(rs.getInt("quantity"));
+                    item.setStatus(rs.getInt("status"));
+                    item.setTotal(rs.getDouble("total"));
+                    item.setName(rs.getString("name"));
+                    item.setImg(rs.getString("img"));
+                    item.setPrice(rs.getDouble("price"));
+                    item.setDesc(rs.getString("description"));
+
+                    // Nếu có discount, tính lại giá
+                    Product product = new Product();
+                    product.setId(rs.getInt("product_id"));
+                    product.setName(rs.getString("name"));
+                    product.setImg(rs.getString("img"));
+                    product.setPrice(rs.getDouble("price"));
+                    product.setDescription(rs.getString("description"));
+
+                    // Giả sử bạn cần tính lại giá sau giảm giá, nếu có
+                    if (product.getDiscountId() > 1) { // Giảm giá
+                        DiscountDao discountDao = new DiscountDao();
+                        item.setUnitPrice(discountDao.calculateDiscountedPrice(item.getPrice(), product.getDiscountId()));
+                    } else {
+                        item.setUnitPrice(item.getPrice());
+                    }
+
+                    return item;  // Trả về CartItem đã được ánh xạ đầy đủ
+                })
                 .list());
     }
 

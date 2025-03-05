@@ -84,10 +84,17 @@
                         <div class="p fw-bold p_bold">Lượt mua (bao):</div>
                         <div class="p">2.341</div>
                     </div>
-                    <div class="button d-flex mt-3 ms-5">
-                        <form action="${pageContext.request.contextPath}/add-cart" method="GET" style="display: inline;">
+                    <div class="button d-flex mt-3 quantity-control">
+                        <div class="quantity-input-wrapper me-3 w-25">
+                            <div class="d-flex align-items-center h-100 border-1">
+                                <input type="number" id="product-quantity" class="form-control quantity-input border-2"
+                                       value="1" min="1" onchange="validateQuantity()">
+                            </div>
+                        </div>
+                        <form id="add-to-cart-form" action="${pageContext.request.contextPath}/add-cart" method="GET" style="display: inline;">
                             <input type="hidden" name="productId" value="${product.id}">
-                            <button type="submit" class="btn_h order d-flex justify-content-center" style="border: none;">
+                            <input type="hidden" id="quantity-input" name="quantity" value="1">
+                            <button type="submit" onclick="return validateQuantitySubmit()" class="btn_h order d-flex justify-content-center" style="border: none;">
                                 <div style="padding-top: 3px;">
                                     <i class="fa-solid fa-cart-plus"></i>
                                 </div>
@@ -308,6 +315,45 @@
         // Attach button events
         window.changeSlideProducts = changeSlide;  // Expose the function to the global scope
     });
+
+    function changeQuantity(change) {
+        const quantityInput = document.getElementById('product-quantity');
+        let currentValue = parseInt(quantityInput.value);
+        let newValue = currentValue + change;
+
+        // Ensure the value is at least 1
+        if (newValue < 1) {
+            newValue = 1;
+        }
+
+        quantityInput.value = newValue;
+        document.getElementById('quantity-input').value = newValue;
+    }
+
+    function validateQuantity() {
+        const quantityInput = document.getElementById('product-quantity');
+        let value = parseInt(quantityInput.value);
+
+        if (isNaN(value) || value < 1) {
+            alert('Số lượng sản phẩm phải ít nhất là 1');
+            quantityInput.value = 1;
+            document.getElementById('quantity-input').value = 1;
+        } else {
+            document.getElementById('quantity-input').value = value;
+        }
+    }
+
+    function validateQuantitySubmit() {
+        const quantityInput = document.getElementById('product-quantity');
+        let value = parseInt(quantityInput.value);
+
+        if (isNaN(value) || value < 1) {
+            alert('Số lượng sản phẩm phải ít nhất là 1');
+            return false;
+        }
+
+        return true;
+    }
 </script>
 
 </body>

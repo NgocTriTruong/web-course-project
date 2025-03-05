@@ -71,4 +71,12 @@ public class OrderService {
         return orderDao.getUserStats();
 
     }
+
+    public static void main(String[] args) {
+        OrderService orderService = new OrderService();
+        List<Order> orders = orderService.getAllOrders();
+        for (Order order : orders) {
+            System.out.println(order);
+        }
+    }
 }

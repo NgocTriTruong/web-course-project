@@ -208,6 +208,18 @@ img {
     background-color: rgba(0, 0, 0, 0.1);
 }
 
+.quantity-input {
+    width: 80px;
+    margin-right: 10px;
+    text-align: center;
+    border-width: 2px;
+    border-color: #94b83d !important;
+}
+.quantity-control {
+    display: flex;
+    align-items: center;
+}
+
 /*  */
   /* Tạo hiệu ứng zoom khi hover */
   .card-img-container {

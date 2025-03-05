@@ -25,6 +25,13 @@ public class Cart {
         return discountDao.calculateDiscountedPrice(product.getPrice(), product.getDiscountId());
     }
 
+    public boolean addProduct(Product product, int userId, int quantity) {
+        for (int i = 0; i < quantity; i++) {
+            addProduct(product, userId);
+        }
+        return true;
+    }
+
     public boolean addProduct(Product product, int userId) {
         if (cartData.containsKey(product.getId())) {
             updateQuantity(product.getId(), cartData.get(product.getId()).getQuantity() + 1);
@@ -32,11 +39,6 @@ public class Cart {
         }
         CartDetail cartDetail = convert(product, userId);
         CartItem cartItem = new CartItem(cartDetail, product);
-
-//        // Set the discounted price in CartItem
-//        double discountedPrice = getDiscountedPrice(product);
-//        cartItem.setUnitPrice(discountedPrice);
-//        cartItem.setTotal(discountedPrice * cartItem.getQuantity());
 
         cartData.put(product.getId(), cartItem);
         return true;

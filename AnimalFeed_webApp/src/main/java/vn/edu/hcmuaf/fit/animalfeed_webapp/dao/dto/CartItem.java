@@ -69,7 +69,7 @@ public class CartItem {
     }
 
     public double getTotal() {
-        return this.unitPrice * this.quantity;
+        return total;
     }
 
     public void setTotal(double total) {
@@ -116,12 +116,20 @@ public class CartItem {
         this.price = price;
     }
 
+    public double getUnitPrice() {
+        return unitPrice;
+    }
+
     public void setUnitPrice(double unitPrice) {
         this.unitPrice = unitPrice;
     }
 
-    public double getUnitPrice() {
-        return this.unitPrice;
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public Product getProduct() {
@@ -131,10 +139,6 @@ public class CartItem {
     public void setProduct(Product product) {
         this.product = product;
     }
-
-    public String getDesc() { return desc; }
-
-    public void setDesc(String desc) { this.desc = desc; }
 
     @Override
     public String toString() {

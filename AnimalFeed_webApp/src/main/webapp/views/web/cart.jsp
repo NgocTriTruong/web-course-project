@@ -19,7 +19,6 @@
 
     <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/add_layout.js" defer></script>
 
-    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/confirm_login.js"></script>
 </head>
 <body>
 <%@ include file="layout/header.jsp" %>
@@ -39,8 +38,8 @@
 
                     <c:if test="${empty sessionScope.cart.cartDetails}">
                         <div class="text-center p-5 bg-white">
-                            <h4>Your cart is empty</h4>
-                            <a href="${pageContext.request.contextPath}/list-product" class="btn btn-primary mt-3">Continue Shopping</a>
+                            <h4>Giỏ hàng của bạn trống</h4>
+                            <a href="${pageContext.request.contextPath}/list-product" class="btn btn-primary mt-3">Tiếp tục mua hàng</a>
                         </div>
                     </c:if>
 

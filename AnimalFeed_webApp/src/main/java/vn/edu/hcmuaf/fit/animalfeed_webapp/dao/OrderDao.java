@@ -61,8 +61,8 @@ public class OrderDao {
     }
 
     // Method to list all users
-    public ArrayList<Order> getAllOrders() {
-        return (ArrayList<Order>) jdbi.withHandle(handle -> handle.createQuery("select * from orders").mapToBean(Order.class).list());
+    public List<Order> getAllOrders() {
+        return jdbi.withHandle(handle -> handle.createQuery("select * from orders").mapToBean(Order.class).list());
     }
 
     public Order getOrderById(int orderId) {
