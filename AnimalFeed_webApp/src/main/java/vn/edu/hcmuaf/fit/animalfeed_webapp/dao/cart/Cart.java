@@ -40,6 +40,11 @@ public class Cart {
         CartDetail cartDetail = convert(product, userId);
         CartItem cartItem = new CartItem(cartDetail, product);
 
+//        // Set the discounted price in CartItem
+//        double discountedPrice = getDiscountedPrice(product);
+//        cartItem.setUnitPrice(discountedPrice);
+//        cartItem.setTotal(discountedPrice * cartItem.getQuantity());
+
         cartData.put(product.getId(), cartItem);
         return true;
     }
@@ -49,7 +54,8 @@ public class Cart {
             return false;
         }
         CartItem cartItem = cartData.get(productId);
-        cartItem.setQuantity(quantity);
+
+        cartItem.setQuantity(cartItem.getQuantity() + quantity);
 
         // Recalculate total with discounted price
         cartItem.setTotal(cartItem.getUnitPrice() * quantity);

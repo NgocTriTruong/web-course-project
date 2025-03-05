@@ -101,7 +101,7 @@
                                 <div class="h5 text_order">Thêm vào giỏ hàng</div>
                             </button>
                         </form>
-                        <div class="btn_h call d-flex justify-content-center">
+                        <div class="btn_h call d-flex justify-content-center" onclick="buyNow()">
                             <div class="h5 text_call">Mua ngay</div>
                         </div>
                     </div>
@@ -353,6 +353,14 @@
         }
 
         return true;
+    }
+
+    function buyNow() {
+        const quantity = document.getElementById('product-quantity').value;
+        const productId = "${product.id}";
+
+        // Redirect to order confirmation page with product details
+        window.location.href = "${pageContext.request.contextPath}/buy-now?productId=" + productId + "&quantity=" + quantity;
     }
 </script>
 
