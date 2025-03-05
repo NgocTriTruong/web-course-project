@@ -84,7 +84,7 @@
                                     <div class="user_right">${sessionScope.user.phone}</div>
                                 </div>
                                 <div class="line_gray mt-3 mb-3"></div>
-                                <div class="button mt-4 text-white fw-bold">
+                                <div class="button mt-4 text-white fw-bold" onclick="window.location.href='${pageContext.request.contextPath}/UpdateUserInfoServlet'">
                                     Chỉnh sửa thông tin
                                 </div>
                             </div>

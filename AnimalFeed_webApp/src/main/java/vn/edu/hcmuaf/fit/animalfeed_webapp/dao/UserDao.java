@@ -110,6 +110,15 @@ public class UserDao {
         }
     }
 
+    //eidt user
+    public void updateUserByUser(User user) {
+        jdbi.useHandle(handle ->
+                handle.createUpdate("UPDATE users SET full_name = :fullName, phone = :phone WHERE id = :id")
+                        .bindBean(user)
+                        .execute()
+        );
+    }
+
     // Cập nhật người dùng
     public void updateUser(User user, int adminUserId) {
         if (!checkIfAdmin(adminUserId)) {

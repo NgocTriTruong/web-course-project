@@ -67,6 +67,11 @@ public class UserService {
         userDao.addUser(user, adminUserId); // Thêm người dùng và ghi log nếu admin
     }
 
+    //edit user
+    public void updateUserByUser(User user) {
+        userDao.updateUserByUser(user);
+    }
+
     // Cập nhật thông tin người dùng (với quyền admin)
     public boolean updateUser(User user, int adminUserId) {
         // Kiểm tra quyền của admin
