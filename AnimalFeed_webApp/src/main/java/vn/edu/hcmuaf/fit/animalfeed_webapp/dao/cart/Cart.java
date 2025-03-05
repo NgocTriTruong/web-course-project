@@ -6,6 +6,7 @@ import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.CartDetail;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.dto.CartItem;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
 
+
 import java.util.*;
 
 public class Cart {
@@ -39,6 +40,11 @@ public class Cart {
         CartDetail cartDetail = convert(product, userId);
         CartItem cartItem = new CartItem(cartDetail, product);
 
+//        // Set the discounted price in CartItem
+//        double discountedPrice = getDiscountedPrice(product);
+//        cartItem.setUnitPrice(discountedPrice);
+//        cartItem.setTotal(discountedPrice * cartItem.getQuantity());
+
         cartData.put(product.getId(), cartItem);
         return true;
     }
@@ -48,7 +54,8 @@ public class Cart {
             return false;
         }
         CartItem cartItem = cartData.get(productId);
-        cartItem.setQuantity(quantity);
+
+        cartItem.setQuantity(cartItem.getQuantity() + quantity);
 
         // Recalculate total with discounted price
         cartItem.setTotal(cartItem.getUnitPrice() * quantity);
@@ -66,12 +73,6 @@ public class Cart {
     public int getTotalQuantity() {
         return cartData.values().stream()
                 .filter(cartItem -> cartItem.getStatus() == 1)
-                .mapToInt(CartItem::getQuantity)
-                .sum();
-    }
-
-    public int getTotalItems() {
-        return cartData.values().stream()
                 .mapToInt(CartItem::getQuantity)
                 .sum();
     }

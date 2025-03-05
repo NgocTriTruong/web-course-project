@@ -16,16 +16,6 @@ public class DiscountDao {
                 .mapToBean(Discount.class).list());
     }
 
-
-    //lay discount theo id
-    public Discount getDiscountById(int id) {
-        Jdbi jdbi = JdbiConnect.getJdbi();
-        return jdbi.withHandle(handle ->
-                handle.createQuery("SELECT d.* from discounts d JOIN products p ON d.id = p.discount_id where p.id = :id")
-                        .bind("id", id)
-                        .mapToBean(Discount.class).findOne().orElse(null));
-    }
-
     public double calculateDiscountedPrice(double originalPrice, int discountId) {
         Discount discount = getById(discountId);
         if (discount == null) {
@@ -34,8 +24,7 @@ public class DiscountDao {
         return originalPrice * (100 - discount.getPercentage()) / 100.0;
     }
 
-
-    private Discount getById(int discountId) {
+    public Discount getById(int discountId) {
         return jdbi.withHandle(handle ->
                 handle.createQuery("SELECT * FROM discounts WHERE id = :id")
                         .bind("id", discountId)
@@ -43,10 +32,5 @@ public class DiscountDao {
                         .findOne()
                         .orElse(null)
         );
-    }
-
-    public static void main(String[] args) {
-        DiscountDao discountDao = new DiscountDao();
-        System.out.println(discountDao.getDiscountById(100));
     }
 }
