@@ -84,9 +84,10 @@
                         <div class="p fw-bold p_bold">Lượt mua (bao):</div>
                         <div class="p">2.341</div>
                     </div>
-                    <div class="button d-flex mt-3 ms-5">
+                    <div class="button d-flex mt-3">
                         <form action="${pageContext.request.contextPath}/add-cart" method="GET" style="display: inline;">
                             <input type="hidden" name="productId" value="${product.id}">
+                            <input type="hidden" name="quantity" value="${param.quantity != null ? param.quantity : 1}">
                             <button type="submit" class="btn_h order d-flex justify-content-center" style="border: none;">
                                 <div style="padding-top: 3px;">
                                     <i class="fa-solid fa-cart-plus"></i>
@@ -96,6 +97,11 @@
                         </form>
                         <div class="btn_h call d-flex justify-content-center">
                             <div class="h5 text_call">Mua ngay</div>
+                        </div>
+                        <div class="quantity-input ms-3">
+                            <input type="number" name="quantity" value="1" min="1" max="500"
+                                   class="form-control h-100"
+                                   onchange="updateQuantity(this.value)">
                         </div>
                     </div>
                     <div class="share d-flex mt-4">
@@ -307,6 +313,29 @@
 
         // Attach button events
         window.changeSlideProducts = changeSlide;  // Expose the function to the global scope
+    });
+</script>
+
+<script>
+    function updateQuantity(value) {
+        document.querySelector('input[name="quantity"]').value = value;
+        console.log("Số lượng đã chọn: " + value);
+    }
+
+    // Cập nhật sự kiện cho nút "Thêm vào giỏ hàng"
+    document.querySelector('.btn_h.order').addEventListener('click', function(e) {
+        const quantity = document.querySelector('input[name="quantity"]').value;
+        const productId = document.querySelector('input[name="productId"]').value;
+        // Có thể gửi quantity qua URL hoặc xử lý tiếp
+        this.closest('form').action = `${pageContext.request.contextPath}/add-cart?productId=${productId}&quantity=${quantity}`;
+    });
+
+    // Thêm sự kiện cho nút "Mua ngay"
+    document.querySelector('.btn_h.call').addEventListener('click', function() {
+        const quantity = document.querySelector('input[name="quantity"]').value;
+        const productId = document.querySelector('input[name="productId"]').value;
+        // Chuyển hướng hoặc xử lý mua ngay với số lượng
+        window.location.href = `${pageContext.request.contextPath}/buy-now?productId=${productId}&quantity=${quantity}`;
     });
 </script>
 

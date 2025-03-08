@@ -237,9 +237,10 @@
             const checkbox = item.querySelector('.item-checkbox');
             if (checkbox.checked) {
                 const quantity = parseInt(item.querySelector('.quantity-input').value);
-                // Remove all non-digit characters and parse as integer
-                const price = parseInt(item.querySelector('.price').textContent.replace(/[^\d]/g, ''));
-                total += quantity * price;
+                // Use unitPrice from the price-section instead of recalculating
+                const unitPriceText = item.querySelector('.price').textContent.replace(/[^\d]/g, '');
+                const unitPrice = parseInt(unitPriceText) || 0; // Fallback to 0 if parsing fails
+                total += quantity * unitPrice;
                 totalQuantity += quantity;
                 selectedCount++;
             }
