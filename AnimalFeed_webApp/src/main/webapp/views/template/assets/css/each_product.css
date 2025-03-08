@@ -236,3 +236,18 @@ img {
 .card:hover .card-body {
     background-color: #94b83d;
 }
+
+.quantity-input {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-input input {
+    text-align: center;
+    border: 1px solid #94b83d;
+    border-radius: 5px;
+}
+
+.btn_h.call {
+    margin-left: 10px; /* Tạo khoảng cách giữa input và nút Mua ngay */
+}

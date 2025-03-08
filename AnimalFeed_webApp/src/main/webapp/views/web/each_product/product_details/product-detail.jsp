@@ -24,7 +24,7 @@
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/login.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/signup.css">
-
+  
     <!-- scrollToTopBtn -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/scrollToTopBtn.css">
     <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/scrollToTopBtn.js" defer></script>
@@ -53,7 +53,8 @@
                             <div class="p text-start text-secondary price_sale me-4"
                                  style="font-size: 18px; margin-left: -95px">
                                 <del><f:formatNumber value="${product.price}"/> <u>đ</u></del>
-                                <span style="color: red; font-size: 14px; margin-left: 5px;">-${discounts.percentage}%</span></div>
+                                <span style="color: red; font-size: 14px; margin-left: 5px;">-${discounts.percentage}%</span>
+                            </div>
                             <div class="h4 text-danger"><f:formatNumber value="${product.price * (1 - discounts.percentage / 100)}"/> <u>đ</u></div>
                         </c:if>
                         <c:if test="${product.discountId == 1}">
@@ -84,25 +85,24 @@
                         <div class="p fw-bold p_bold">Lượt mua (bao):</div>
                         <div class="p">2.341</div>
                     </div>
-                    <div class="button d-flex mt-3 quantity-control">
-                        <div class="quantity-input-wrapper me-3 w-25">
-                            <div class="d-flex align-items-center h-100 border-1">
-                                <input type="number" id="product-quantity" class="form-control quantity-input border-2"
-                                       value="1" min="1" onchange="validateQuantity()">
-                            </div>
-                        </div>
-                        <form id="add-to-cart-form" action="${pageContext.request.contextPath}/add-cart" method="GET" style="display: inline;">
+                    <div class="button d-flex mt-3">
+                        <form action="${pageContext.request.contextPath}/add-cart" method="GET" style="display: inline;">
                             <input type="hidden" name="productId" value="${product.id}">
-                            <input type="hidden" id="quantity-input" name="quantity" value="1">
-                            <button type="submit" onclick="return validateQuantitySubmit()" class="btn_h order d-flex justify-content-center" style="border: none;">
+                            <input type="hidden" name="quantity" value="${param.quantity != null ? param.quantity : 1}">
+                            <button type="submit" class="btn_h order d-flex justify-content-center" style="border: none;">
                                 <div style="padding-top: 3px;">
                                     <i class="fa-solid fa-cart-plus"></i>
                                 </div>
                                 <div class="h5 text_order">Thêm vào giỏ hàng</div>
                             </button>
                         </form>
-                        <div class="btn_h call d-flex justify-content-center" onclick="buyNow()">
+                        <div class="btn_h call d-flex justify-content-center">
                             <div class="h5 text_call">Mua ngay</div>
+                        </div>
+                        <div class="quantity-input ms-3">
+                            <input type="number" name="quantity" value="1" min="1" max="500"
+                                   class="form-control h-100"
+                                   onchange="updateQuantity(this.value)">
                         </div>
                     </div>
                     <div class="share d-flex mt-4">
@@ -252,8 +252,8 @@
 <%@ include file="../../layout/near_footer.jsp" %>
 <%@ include file="../../layout/footer.jsp" %>
 
-<!-- scrollToTopBtn -->
-<button id="scrollToTopBtn"><i class="fa-solid fa-chevron-up"></i></button>
+      <!-- scrollToTopBtn -->
+      <button id="scrollToTopBtn"><i class="fa-solid fa-chevron-up"></i></button>
 
 <script>
     function toggleDescription(contentId, buttonId) {
@@ -315,53 +315,29 @@
         // Attach button events
         window.changeSlideProducts = changeSlide;  // Expose the function to the global scope
     });
+</script>
 
-    function changeQuantity(change) {
-        const quantityInput = document.getElementById('product-quantity');
-        let currentValue = parseInt(quantityInput.value);
-        let newValue = currentValue + change;
-
-        // Ensure the value is at least 1
-        if (newValue < 1) {
-            newValue = 1;
-        }
-
-        quantityInput.value = newValue;
-        document.getElementById('quantity-input').value = newValue;
+<script>
+    function updateQuantity(value) {
+        document.querySelector('input[name="quantity"]').value = value;
+        console.log("Số lượng đã chọn: " + value);
     }
 
-    function validateQuantity() {
-        const quantityInput = document.getElementById('product-quantity');
-        let value = parseInt(quantityInput.value);
+    // Cập nhật sự kiện cho nút "Thêm vào giỏ hàng"
+    document.querySelector('.btn_h.order').addEventListener('click', function(e) {
+        const quantity = document.querySelector('input[name="quantity"]').value;
+        const productId = document.querySelector('input[name="productId"]').value;
+        // Có thể gửi quantity qua URL hoặc xử lý tiếp
+        this.closest('form').action = `${pageContext.request.contextPath}/add-cart?productId=${productId}&quantity=${quantity}`;
+    });
 
-        if (isNaN(value) || value < 1) {
-            alert('Số lượng sản phẩm phải ít nhất là 1');
-            quantityInput.value = 1;
-            document.getElementById('quantity-input').value = 1;
-        } else {
-            document.getElementById('quantity-input').value = value;
-        }
-    }
-
-    function validateQuantitySubmit() {
-        const quantityInput = document.getElementById('product-quantity');
-        let value = parseInt(quantityInput.value);
-
-        if (isNaN(value) || value < 1) {
-            alert('Số lượng sản phẩm phải ít nhất là 1');
-            return false;
-        }
-
-        return true;
-    }
-
-    function buyNow() {
-        const quantity = document.getElementById('product-quantity').value;
-        const productId = "${product.id}";
-
-        // Redirect to order confirmation page with product details
-        window.location.href = "${pageContext.request.contextPath}/buy-now?productId=" + productId + "&quantity=" + quantity;
-    }
+    // Thêm sự kiện cho nút "Mua ngay"
+    document.querySelector('.btn_h.call').addEventListener('click', function() {
+        const quantity = document.querySelector('input[name="quantity"]').value;
+        const productId = document.querySelector('input[name="productId"]').value;
+        // Chuyển hướng hoặc xử lý mua ngay với số lượng
+        window.location.href = `${pageContext.request.contextPath}/buy-now?productId=${productId}&quantity=${quantity}`;
+    });
 </script>
 
 </body>

@@ -33,7 +33,7 @@ public class ProductDao {
         return jdbi.withHandle(handle ->
                 handle.createQuery("select * from products where id = :id and status = :status")
                         .bind("id", id)
-                        .bind("status", "1")  // Lấy sản phẩm có trạng thái 'active'
+                        .bind("status", "1")
                         .mapToBean(Product.class).findOne().orElse(null));
     }
 

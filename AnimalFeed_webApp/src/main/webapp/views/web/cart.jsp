@@ -53,7 +53,7 @@
                                     <h6>${item.desc}</h6>
                                     <div class="price-section mt-2">
                                         <span class="price">
-                                            <fmt:formatNumber value="${item.unitPrice}" type="currency" currencySymbol="₫"/>
+                                            <fmt:formatNumber value="${item.unitPrice}" type="number" pattern="#,###" />đ
                                         </span>
                                     </div>
                                     <div class="quantity-controls mt-3">
@@ -89,12 +89,14 @@
                         </div>
                         <div class="d-flex justify-content-between mb-4">
                             <strong>Tổng tiền:</strong>
-                            <strong class="text-primary" id="total">${sessionScope.cart.totalPrice}</strong>
+                            <strong class="text-primary" id="total">
+                                <fmt:formatNumber value="${sessionScope.cart.totalPrice}" type="currency" currencySymbol="₫"/>
+                            </strong>
                         </div>
                         <form action="${pageContext.request.contextPath}/order-confirm" method="get">
                             <button type="submit"
                                     class="btn btn-primary w-100 ${empty sessionScope.cart.cartDetails ? '' : ''}">
-                                Proceed to Checkout
+                                Thanh toán
                             </button>
                         </form>
                     </div>
@@ -103,6 +105,7 @@
         </div>
     </div>
 </main>
+<%@ include file="layout/near_footer.jsp" %>
 <%@ include file="layout/footer.jsp" %>
 <script>
     function removeFromCart(productId) {
@@ -235,16 +238,29 @@
             const checkbox = item.querySelector('.item-checkbox');
             if (checkbox.checked) {
                 const quantity = parseInt(item.querySelector('.quantity-input').value);
-                const price = parseFloat(item.querySelector('.price').textContent);
-                total += quantity * price;
+                // Use unitPrice from the price-section instead of recalculating
+                const unitPriceText = item.querySelector('.price').textContent.replace(/[^\d]/g, '');
+                const unitPrice = parseInt(unitPriceText) || 0; // Fallback to 0 if parsing fails
+                total += quantity * unitPrice;
                 totalQuantity += quantity;
                 selectedCount++;
             }
         });
 
-        document.getElementById('total').textContent = total.toFixed(3);
+        document.getElementById('total').textContent = formatPrice(total);
         document.getElementById('quantity').textContent = totalQuantity;
         document.getElementById('selected-count').textContent = selectedCount;
+    }
+
+    function formatPrice(number) {
+        // Convert to integer to remove any decimals
+        const intValue = Math.round(number);
+
+        // Add thousands separators
+        const formatted = intValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+        // Return formatted price with đ symbol
+        return formatted + " đ";
     }
 
     // Handle "Select All" checkbox
@@ -270,6 +286,22 @@
             document.getElementById('select-all').checked = allChecked;
 
             updateTotals();
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Find all cart items
+        const cartItems = document.querySelectorAll('.cart-item');
+
+        // For each cart item
+        cartItems.forEach(item => {
+            const checkbox = item.querySelector('.item-checkbox');
+            const status = item.dataset.status;
+
+            // If status is 1, check the checkbox
+            if (status === '1') {
+                checkbox.checked = true;
+            }
         });
     });
 </script>

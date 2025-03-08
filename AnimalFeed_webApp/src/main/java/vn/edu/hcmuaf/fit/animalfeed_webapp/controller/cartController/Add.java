@@ -28,14 +28,6 @@ public class Add extends HttpServlet {
         try {
             // Get product details
             int productId = Integer.parseInt(request.getParameter("productId"));
-
-            // Get quantity, default to 1 if not specified
-            int quantity = 1;
-            String quantityParam = request.getParameter("quantity");
-            if (quantityParam != null && !quantityParam.isEmpty()) {
-                quantity = Math.max(1, Integer.parseInt(quantityParam));
-            }
-
             Product product = productService.getDetail(productId);
 
             if (product == null) {
@@ -57,31 +49,32 @@ public class Add extends HttpServlet {
 
             session.setAttribute("cart", cart);
 
-            // Create CartDetail with the specified quantity
+            // Get quantity from request, default to 1 if not provided
+            int quantity = 1;
+            if (request.getParameter("quantity") != null && !request.getParameter("quantity").isEmpty()) {
+                quantity = Integer.parseInt(request.getParameter("quantity"));
+                if (quantity < 1) quantity = 1; // Ensure quantity is not less than 1
+                if (quantity > 500) quantity = 500; // Limit to max 500 as per input
+            }
+
             CartDetail cartDetail = new CartDetail();
             cartDetail.setUserId(user.getId());
             cartDetail.setProductId(product.getId());
             cartDetail.setQuantity(quantity);
-            cartDetail.setTotal(cart.getDiscountedPrice(product) * quantity);
+            cartDetail.setTotal(cart.getDiscountedPrice(product) * quantity); // Calculate total with quantity
             cartDetail.setStatus(0);
 
-            // Check if product already exists in cart
             if (cartService.getCDById(productId, user.getId())) {
-                // If exists, update the quantity
-                cartService.updateQuantity(productId, user.getId(), quantity);
+                cartService.updateQuantity(cartDetail.getProductId(), cartDetail.getUserId(), quantity);
             } else {
-                // If not, insert new cart detail
                 cartService.insertCD(cartDetail);
             }
-
-            // Add product to cart session
-            cart.addProduct(product, user.getId(), quantity);
+            cart.addProduct(product, user.getId(), quantity); // Pass quantity to Cart
 
             session.setAttribute("cart", cart);
 
-            response.sendRedirect("product-detail?pid=" + productId);
+            response.sendRedirect("product-detail?pid=" + productId + "&addCart=true");
         } catch (Exception e) {
-            // Log the error
             e.printStackTrace();
             response.sendRedirect("list-product?addCart=false&error=" + e.getMessage());
         }
@@ -89,6 +82,6 @@ public class Add extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // No post method implementation needed
+
     }
 }

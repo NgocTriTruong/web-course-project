@@ -31,13 +31,12 @@ public class CartItem {
         this.img = product.getImg();
         this.price = product.getPrice();
         this.desc = product.getDescription();
-        this.product = product;  // Store product reference
-        if (product.getDiscountId() > 1) { // 1 is no discount
-            DiscountDao discountDao = new DiscountDao();
-            this.unitPrice = discountDao.calculateDiscountedPrice(price, product.getDiscountId());
-        } else {
-            this.unitPrice = price;
-        }
+        this.product = product;
+        DiscountDao discountDao = new DiscountDao();
+        this.unitPrice = (product.getDiscountId() > 1)
+                ? discountDao.calculateDiscountedPrice(price, product.getDiscountId())
+                : price;
+        this.total = this.unitPrice * this.quantity;
     }
 
     public CartItem() {
