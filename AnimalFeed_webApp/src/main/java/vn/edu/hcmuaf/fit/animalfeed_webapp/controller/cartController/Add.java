@@ -27,7 +27,7 @@ public class Add extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             // Get product details
-            int productId =  Integer.parseInt(request.getParameter("productId"));
+            int productId = Integer.parseInt(request.getParameter("productId"));
             Product product = productService.getDetail(productId);
 
             if (product == null) {
@@ -49,27 +49,32 @@ public class Add extends HttpServlet {
 
             session.setAttribute("cart", cart);
 
+            // Get quantity from request, default to 1 if not provided
+            int quantity = 1;
+            if (request.getParameter("quantity") != null && !request.getParameter("quantity").isEmpty()) {
+                quantity = Integer.parseInt(request.getParameter("quantity"));
+                if (quantity < 1) quantity = 1; // Ensure quantity is not less than 1
+                if (quantity > 500) quantity = 500; // Limit to max 500 as per input
+            }
+
             CartDetail cartDetail = new CartDetail();
             cartDetail.setUserId(user.getId());
             cartDetail.setProductId(product.getId());
-            cartDetail.setQuantity(1);
-            cartDetail.setTotal(cart.getDiscountedPrice(product));
+            cartDetail.setQuantity(quantity);
+            cartDetail.setTotal(cart.getDiscountedPrice(product) * quantity); // Calculate total with quantity
             cartDetail.setStatus(0);
 
             if (cartService.getCDById(productId, user.getId())) {
-                cartService.increaseQuantity(cartDetail.getProductId(), cartDetail.getUserId());
+                cartService.updateQuantity(cartDetail.getProductId(), cartDetail.getUserId(), quantity);
             } else {
                 cartService.insertCD(cartDetail);
             }
-            cart.addProduct(product, user.getId());
-
-            System.out.println(cart.getDiscountedPrice(product));
+            cart.addProduct(product, user.getId(), quantity); // Pass quantity to Cart
 
             session.setAttribute("cart", cart);
 
-            response.sendRedirect("product-detail?pid=" + productId);
+            response.sendRedirect("product-detail?pid=" + productId + "&addCart=true");
         } catch (Exception e) {
-            // Log the error
             e.printStackTrace();
             response.sendRedirect("list-product?addCart=false&error=" + e.getMessage());
         }

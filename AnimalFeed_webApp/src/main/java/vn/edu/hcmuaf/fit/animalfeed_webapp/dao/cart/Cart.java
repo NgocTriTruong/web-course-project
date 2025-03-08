@@ -10,32 +10,33 @@ import java.util.*;
 
 public class Cart {
     private Map<Integer, CartItem> cartData = new HashMap<>();
-    private DiscountDao discountDao; // Add DiscountDao to fetch discount information
+    private DiscountDao discountDao;
 
     public Cart() {
-        this.discountDao = new DiscountDao(); // Initialize DiscountDao
+        this.discountDao = new DiscountDao();
     }
 
     public double getDiscountedPrice(Product product) {
-        if (product.getDiscountId() <= 0) {
+        if (product.getDiscountId() <= 0 || product.getDiscountId() == 1) {
             return product.getPrice();
         }
-
         return discountDao.calculateDiscountedPrice(product.getPrice(), product.getDiscountId());
     }
 
-    public boolean addProduct(Product product, int userId) {
+    public boolean addProduct(Product product, int userId, int quantity) {
         if (cartData.containsKey(product.getId())) {
-            updateQuantity(product.getId(), cartData.get(product.getId()).getQuantity() + 1);
+            int newQuantity = cartData.get(product.getId()).getQuantity() + quantity;
+            updateQuantity(product.getId(), newQuantity);
             return true;
         }
-        CartDetail cartDetail = convert(product, userId);
+
+        CartDetail cartDetail = convert(product, userId, quantity);
         CartItem cartItem = new CartItem(cartDetail, product);
 
-//        // Set the discounted price in CartItem
-//        double discountedPrice = getDiscountedPrice(product);
-//        cartItem.setUnitPrice(discountedPrice);
-//        cartItem.setTotal(discountedPrice * cartItem.getQuantity());
+        // Ensure discounted price is applied
+        double discountedPrice = getDiscountedPrice(product);
+        cartItem.setUnitPrice(discountedPrice);
+        cartItem.setTotal(discountedPrice * quantity);
 
         cartData.put(product.getId(), cartItem);
         return true;
@@ -49,7 +50,9 @@ public class Cart {
         cartItem.setQuantity(quantity);
 
         // Recalculate total with discounted price
-        cartItem.setTotal(cartItem.getUnitPrice() * quantity);
+        double discountedPrice = getDiscountedPrice(cartItem.getProduct());
+        cartItem.setUnitPrice(discountedPrice);
+        cartItem.setTotal(discountedPrice * quantity);
         return true;
     }
 
@@ -91,18 +94,14 @@ public class Cart {
         return confirmedCartItems;
     }
 
-    private CartDetail convert(Product product, int userId) {
+    private CartDetail convert(Product product, int userId, int quantity) {
         CartDetail cartDetail = new CartDetail();
         cartDetail.setUserId(userId);
         cartDetail.setProductId(product.getId());
-        cartDetail.setQuantity(1);
+        cartDetail.setQuantity(quantity);
 
-        // Get discounted price
-        double discountedPrice = product.getDiscountId() > 1 ?
-                new DiscountDao().calculateDiscountedPrice(product.getPrice(), product.getDiscountId()) :
-                product.getPrice();
-
-        cartDetail.setTotal(discountedPrice * cartDetail.getQuantity());
+        double discountedPrice = getDiscountedPrice(product);
+        cartDetail.setTotal(discountedPrice * quantity);
         cartDetail.setStatus(0);
         return cartDetail;
     }
@@ -112,7 +111,6 @@ public class Cart {
         List<CartItem> dbItems = dao.getCartDetailByUser(userId);
         cartData.clear();
         for (CartItem item : dbItems) {
-            // Ensure the discounted price is set when loading from database
             Product product = item.getProduct();
             if (product != null) {
                 double discountedPrice = getDiscountedPrice(product);
