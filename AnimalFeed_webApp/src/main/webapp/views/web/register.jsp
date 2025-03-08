@@ -44,6 +44,10 @@
                 <input class="form-control" id="id_password2" type="password" name="confirmPassword" maxlength="100" placeholder="Nhập lại mật khẩu *" required>
                 <div class="error-message" id="password2Error">Mật khẩu không khớp</div>
             </div>
+            <div class="mb-3">
+                <div class="g-recaptcha" data-sitekey="6LciYeoqAAAAALAiQBkhttpGondAfDMVtaUCiHGW"></div>
+            </div>
+
             <div class="text-center">
                 <button class="btn btn-primary" type="submit">ĐĂNG KÝ</button>
             </div>
@@ -67,8 +71,18 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3vI0Txkzl5M7G7rvB/JF9QFJzUawmGJlfyep7EJiF" crossorigin="anonymous"></script>
 <!-- Font Awesome -->
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script src="<%= request.getContextPath() %>/views/template/assets/scripts/register.js"></script>
 
+<script>
+    document.getElementById("registrationForm").addEventListener("submit", function(event) {
+        var recaptchaResponse = grecaptcha.getResponse();
+        if (recaptchaResponse.length === 0) {
+            event.preventDefault(); // Ngăn chặn gửi form
+            alert("Vui lòng xác nhận bạn không phải là robot!");
+        }
+    });
+</script>
 
 </body>
 </html>

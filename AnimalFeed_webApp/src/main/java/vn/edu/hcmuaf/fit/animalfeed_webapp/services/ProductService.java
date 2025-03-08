@@ -32,6 +32,10 @@ public class ProductService {
         return productDao.getProductByIdOfAdmin(id);
     }
 
+    public Product getProductById(int id) {
+        return productDao.getProductByIdOfAdmin(id);
+    }
+
     //Lay product theo id danh muc - sản phẩm bình thường
     public List<Product> getByCatId(int categoryId) {
         return productDao.getByCatId(categoryId);
