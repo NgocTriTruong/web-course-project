@@ -53,7 +53,8 @@
                             <div class="p text-start text-secondary price_sale me-4"
                                  style="font-size: 18px; margin-left: -95px">
                                 <del><f:formatNumber value="${product.price}"/> <u>đ</u></del>
-                                <span style="color: red; font-size: 14px; margin-left: 5px;">-${discounts.percentage}%</span></div>
+                                <span style="color: red; font-size: 14px; margin-left: 5px;">-${discounts.percentage}%</span>
+                            </div>
                             <div class="h4 text-danger"><f:formatNumber value="${product.price * (1 - discounts.percentage / 100)}"/> <u>đ</u></div>
                         </c:if>
                         <c:if test="${product.discountId == 1}">

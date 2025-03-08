@@ -1,81 +1,61 @@
 package vn.edu.hcmuaf.fit.animalfeed_webapp.controller;
 
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.DiscountDao;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.ProductDetailDao;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.dto.ProductWithDiscountDTO;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Category;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.ProductDao;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Discount;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.ProductDetail;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.services.CategoryService;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.services.DiscountService;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.services.ProductDetailService;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.services.ProductService;
 
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet(name = "ProductDetailController", value = "/product-detail")
 public class ProductDetailController extends HttpServlet {
+    private ProductDao productDao;
+    private DiscountDao discountDao;
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException, ServletException {
-        ProductDetailService productDetailService = new ProductDetailService();
-        ProductService productService = new ProductService();
-        CategoryService categoryService = new CategoryService();
-        DiscountService discountService = new DiscountService();
+    public void init() throws ServletException {
+        productDao = new ProductDao();
+        discountDao = new DiscountDao();
+    }
 
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            // Get product ID from request
+            int productId = Integer.parseInt(request.getParameter("pid"));
+            Product product = productDao.getById(productId);
 
-        String pid = request.getParameter("pid");
-        Product product = null;
-        ProductDetail productDetail = null;
-        Discount discount = null;
-
-        if (pid != null && !pid.isEmpty()) {
-            try {
-                int productId = Integer.parseInt(pid);
-                // Lấy thông tin sản phẩm chính
-                product = productService.getDetail(productId);
-
-                // Lấy thông tin chi tiết sản phẩm
-                productDetail = productDetailService.getDetail(productId);
-
-                discount = discountService.getDiscountById(productId);
-
-                if (productDetail == null) {
-                    productDetail = new ProductDetail();
-                }
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
+            if (product == null) {
+                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Product not found");
                 return;
             }
-        } else {
-            return;
+
+            // Set product in request scope
+            request.setAttribute("product", product);
+
+            // Fetch discount if applicable
+            if (product.getDiscountId() > 1) {
+                Discount discount = discountDao.getDiscountById(productId);
+                if (discount == null) {
+                    // Handle case where discount_id is invalid
+                    product.setDiscountId(1); // Fallback to no discount
+                } else {
+                    request.setAttribute("discounts", discount);
+                }
+            }
+
+            // Forward to JSP
+            request.getRequestDispatcher("views/web/each_product/product_details/product-detail.jsp").forward(request, response);
+        } catch (NumberFormatException e) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid product ID");
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An error occurred while processing your request");
         }
-
-        List<Product> relatedProducts = productDetailService.getRelatedProducts(product.getCat_id(), product.getId());
-
-
-        request.setAttribute("discounts", discount);
-
-        //Lay danh muc
-        List<Category> categories = categoryService.getAll();
-
-        request.setAttribute("product", product);
-        request.setAttribute("productDetail", productDetail);
-        request.setAttribute("relatedProducts", relatedProducts);
-        request.setAttribute("categoriesData", categories);
-
-        request.getRequestDispatcher("views/web/each_product/product_details/product-detail.jsp").forward(request, response);
-
     }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException {
-
-    }
-
 }
