@@ -22,6 +22,9 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
     <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/add_layout.js" defer></script>
 
+    <!-- reCAPTCHA -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 </head>
 <body>
 
@@ -168,6 +171,10 @@
                                     <div class="mb-3">
                                         <textarea class="form-control" id="message" rows="4" placeholder="Nhập nội dung *"></textarea>
                                     </div>
+
+                                    <!-- Google reCAPTCHA -->
+                                    <div class="g-recaptcha mb-3" data-sitekey="6LciYeoqAAAAALAiQBkhttpGondAfDMVtaUCiHGW"></div>
+
                                     <!-- Gửi -->
                                     <div class="text-center">
                                         <button type="submit" class="btn px-5" style="background-color: #fcae18;">Gửi</button>
@@ -183,5 +190,30 @@
 </main>
 <%@ include file="layout/near_footer.jsp" %>
 <%@ include file="layout/footer.jsp" %>
+
+  <script>
+      document.addEventListener("DOMContentLoaded", function() {
+      const form = document.getElementById('loginForm');
+      const errorDiv = document.querySelector('.alert');
+
+      form.addEventListener('submit', function(event) {
+      let isValid = true;
+
+      errorDiv.style.display = 'none'; // Ẩn thông báo lỗi cũ
+
+      // Kiểm tra reCAPTCHA
+      const recaptchaResponse = grecaptcha.getResponse();
+      if (recaptchaResponse.length === 0) {
+      errorDiv.innerText = 'Vui lòng xác minh reCAPTCHA';
+      errorDiv.style.display = 'block';
+      isValid = false;
+  }
+      // Nếu có lỗi, ngăn gửi form
+      if (!isValid) {
+      event.preventDefault();
+  }
+  });
+  });
+  </script>
 </body>
 </html>
