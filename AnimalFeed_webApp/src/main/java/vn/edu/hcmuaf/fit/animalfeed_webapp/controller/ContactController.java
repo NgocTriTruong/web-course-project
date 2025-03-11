@@ -6,10 +6,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Category;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Contact;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.services.CategoryService;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.ContactService;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(value = "/contact")
 public class ContactController extends HttpServlet {
@@ -77,6 +80,12 @@ public class ContactController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        CategoryService categoryService = new CategoryService();
+        // Lấy danh sách danh mục
+        List<Category> categories = categoryService.getAll();
+
+        // Gửi dữ liệu tới JSP
+        request.setAttribute("categoriesData", categories);
         // Redirect to the contact page
         RequestDispatcher dispatcher = request.getRequestDispatcher("/views/web/help.jsp");
         dispatcher.forward(request, response);
