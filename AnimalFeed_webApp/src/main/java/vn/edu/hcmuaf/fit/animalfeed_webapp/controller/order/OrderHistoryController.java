@@ -14,6 +14,7 @@ import vn.edu.hcmuaf.fit.animalfeed_webapp.services.OrderService;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -78,6 +79,14 @@ public class OrderHistoryController extends HttpServlet {
                         ", Status: " + order.getStatus() +
                         ", Time: " + order.getOrderDate() +
                         ", Total: " + order.getTotalPrice());
+            }
+
+            for (Order order : orders) {
+                String formattedOrderDate = order.getOrderDate() != null
+                        ? order.getOrderDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))
+                        : "";
+                order.setOrderDate(order.getOrderDate()); // Keep original orderDate
+                request.setAttribute("formattedOrderDate_" + order.getId(), formattedOrderDate); // Unique attribute per order
             }
 
             // Sắp xếp theo thời gian mới nhất
