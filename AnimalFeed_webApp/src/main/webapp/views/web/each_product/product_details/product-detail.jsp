@@ -96,7 +96,7 @@
                                 <div class="h5 text_order">Thêm vào giỏ hàng</div>
                             </button>
                         </form>
-                        <form action="${pageContext.request.contextPath}/create-order" method="GET" style="display: inline;">
+                        <form action="${pageContext.request.contextPath}/order-confirm" method="GET" style="display: inline;">
                             <input type="hidden" name="productId" value="${product.id}">
                             <input type="hidden" name="quantity" value="${param.quantity != null ? param.quantity : 1}">
                             <button type="submit" class="btn_h call d-flex justify-content-center w-100" style="border: none;">
@@ -325,7 +325,7 @@
     function updateQuantity(value) {
         document.querySelector('input[name="quantity"]').value = value;
         document.querySelector('form[action$="/add-cart"] input[name="quantity"]').value = value;
-        document.querySelector('form[action$="/create-order"] input[name="buyNowQuantity"]').value = value;
+        document.querySelector('form[action$="/order-confirm"] input[name="quantity"]').value = value;
         console.log("Số lượng đã chọn: " + value);
     }
 </script>

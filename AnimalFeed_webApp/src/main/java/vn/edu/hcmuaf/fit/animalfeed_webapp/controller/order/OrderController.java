@@ -8,9 +8,11 @@ import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.dto.CartItem;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.*;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.CartService;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.OrderService;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.services.ProductService;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -46,8 +48,6 @@ public class OrderController extends HttpServlet {
             String address = buildAddress(request);
             String note = request.getParameter("note");
             String paymentMethod = request.getParameter("paymentMethod");
-
-            
 
             // Get cart data
             Cart cart = (Cart) session.getAttribute("cart");
