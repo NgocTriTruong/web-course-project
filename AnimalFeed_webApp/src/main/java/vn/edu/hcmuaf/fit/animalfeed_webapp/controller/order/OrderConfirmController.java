@@ -25,29 +25,34 @@ public class OrderConfirmController extends HttpServlet {
             return;
         }
 
-        Cart cart = (Cart) session.getAttribute("cart");
-        if (cart == null) {
-            cart = new Cart();
-            session.setAttribute("cart", cart);
+        // Try to get confirmed items from session (for Buy Now)
+        List<CartItem> confirmedItems = (List<CartItem>) session.getAttribute("confirmedItems");
+        Double totalPrice = (Double) session.getAttribute("totalPrice");
+        Integer totalQuantity = (Integer) session.getAttribute("totalQuantity");
+
+        // If no Buy Now data, fall back to cart
+        if (confirmedItems == null || totalPrice == null || totalQuantity == null) {
+            Cart cart = (Cart) session.getAttribute("cart");
+            if (cart == null) {
+                cart = new Cart();
+                session.setAttribute("cart", cart);
+            }
+
+            confirmedItems = cart.getConfirmedCartItem();
+            if (confirmedItems.isEmpty()) {
+                response.sendRedirect(request.getContextPath() + "/cart");
+                return;
+            }
+
+            totalPrice = cart.getTotalPrice();
+            totalQuantity = cart.getTotalQuantity();
         }
-
-        // Get only the confirmed items (status = 1)
-        List<CartItem> confirmedItems = cart.getConfirmedCartItem();
-
-        if (confirmedItems.isEmpty()) {
-            response.sendRedirect(request.getContextPath() + "/cart");
-            return;
-        }
-
-        // Calculate total price for confirmed items
-        double totalPrice = cart.getTotalPrice();
-
-        int totalQuantity = cart.getTotalQuantity();
 
         // Set attributes for the JSP
         request.setAttribute("confirmedItems", confirmedItems);
         request.setAttribute("totalPrice", totalPrice);
         request.setAttribute("totalQuantity", totalQuantity);
+        request.setAttribute("customerInfo", session.getAttribute("customerInfo"));
 
         // Forward to the order confirmation page
         request.getRequestDispatcher("/views/web/order/confirm_order.jsp")

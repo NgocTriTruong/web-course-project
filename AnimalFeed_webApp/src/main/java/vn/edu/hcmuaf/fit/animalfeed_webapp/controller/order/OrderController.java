@@ -47,6 +47,8 @@ public class OrderController extends HttpServlet {
             String note = request.getParameter("note");
             String paymentMethod = request.getParameter("paymentMethod");
 
+            
+
             // Get cart data
             Cart cart = (Cart) session.getAttribute("cart");
             List<CartItem> selectedItems = cart.getConfirmedCartItem(); // Gets items with status = 1

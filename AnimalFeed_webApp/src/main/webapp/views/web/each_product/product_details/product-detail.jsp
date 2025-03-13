@@ -96,9 +96,13 @@
                                 <div class="h5 text_order">Thêm vào giỏ hàng</div>
                             </button>
                         </form>
-                        <div class="btn_h call d-flex justify-content-center">
-                            <div class="h5 text_call">Mua ngay</div>
-                        </div>
+                        <form action="${pageContext.request.contextPath}/create-order" method="GET" style="display: inline;">
+                            <input type="hidden" name="productId" value="${product.id}">
+                            <input type="hidden" name="quantity" value="${param.quantity != null ? param.quantity : 1}">
+                            <button type="submit" class="btn_h call d-flex justify-content-center w-100" style="border: none;">
+                                <div class="h5 text_call">Mua ngay</div>
+                            </button>
+                        </form>
                         <div class="quantity-input ms-3">
                             <input type="number" name="quantity" value="1" min="1" max="500"
                                    class="form-control h-100"
@@ -320,24 +324,10 @@
 <script>
     function updateQuantity(value) {
         document.querySelector('input[name="quantity"]').value = value;
+        document.querySelector('form[action$="/add-cart"] input[name="quantity"]').value = value;
+        document.querySelector('form[action$="/create-order"] input[name="buyNowQuantity"]').value = value;
         console.log("Số lượng đã chọn: " + value);
     }
-
-    // Cập nhật sự kiện cho nút "Thêm vào giỏ hàng"
-    document.querySelector('.btn_h.order').addEventListener('click', function(e) {
-        const quantity = document.querySelector('input[name="quantity"]').value;
-        const productId = document.querySelector('input[name="productId"]').value;
-        // Có thể gửi quantity qua URL hoặc xử lý tiếp
-        this.closest('form').action = `${pageContext.request.contextPath}/add-cart?productId=${productId}&quantity=${quantity}`;
-    });
-
-    // Thêm sự kiện cho nút "Mua ngay"
-    document.querySelector('.btn_h.call').addEventListener('click', function() {
-        const quantity = document.querySelector('input[name="quantity"]').value;
-        const productId = document.querySelector('input[name="productId"]').value;
-        // Chuyển hướng hoặc xử lý mua ngay với số lượng
-        window.location.href = `${pageContext.request.contextPath}/buy-now?productId=${productId}&quantity=${quantity}`;
-    });
 </script>
 
 </body>
