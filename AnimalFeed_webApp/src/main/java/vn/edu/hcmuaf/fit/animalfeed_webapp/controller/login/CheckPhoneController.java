@@ -24,5 +24,4 @@ public class CheckPhoneController extends HttpServlet {
 
         response.getWriter().write(exists ? "exists" : "not_found");
     }
-
 }

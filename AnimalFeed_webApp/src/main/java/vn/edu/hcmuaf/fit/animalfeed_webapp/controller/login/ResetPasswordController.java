@@ -66,4 +66,5 @@ public class ResetPasswordController extends HttpServlet {
             response.getWriter().write("Có lỗi xảy ra khi cập nhật mật khẩu!");
         }
     }
+
 }

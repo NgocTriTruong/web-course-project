@@ -31,5 +31,4 @@ public class SendCodeController extends HttpServlet {
     private String generateVerificationCode() {
         return String.format("%06d", new Random().nextInt(999999));
     }
-
 }

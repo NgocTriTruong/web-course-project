@@ -31,4 +31,5 @@ public class VerifyCodeController extends HttpServlet {
         session.setAttribute("verified", true);
         response.setStatus(HttpServletResponse.SC_OK);
     }
+
 }
