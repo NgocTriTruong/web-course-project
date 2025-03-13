@@ -53,7 +53,8 @@
                     </div>
         
                     <div class="col-lg-6 text-center text-lg-end">
-                      <button type="button" class="btn mb-4 px-2 px-md-3 bg_green text-white" data-ripple-color="primary" style="font-size: 16px;">
+                      <button type="button" class="btn mb-4 px-2 px-md-3 bg_green text-white" data-ripple-color="primary" style="font-size: 16px;"
+                              onclick="exportToExcel()">
                         Export<i class="fas fa-download ms-2"></i>
                       </button>
         
@@ -204,7 +205,12 @@
 <footer class="text-center py-2 bg-light">
     <p class="pt-3" style="color: rgba(0, 0, 0, 0.5); margin-left: 150px;">©2024 Group-11</p>
 </footer>
-
 </body>
+
+<script>
+    function exportToExcel() {
+        window.location.href = "${pageContext.request.contextPath}/exportExcel";
+    }
+</script>
 
 </html>

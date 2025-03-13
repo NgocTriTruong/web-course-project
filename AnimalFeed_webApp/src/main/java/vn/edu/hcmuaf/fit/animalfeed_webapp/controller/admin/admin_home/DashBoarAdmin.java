@@ -34,6 +34,9 @@ public class DashBoarAdmin extends HttpServlet {
         request.setAttribute("totalRevenue", totalRevenue);
         request.setAttribute("getUserStats", getUserStats);
 
+        // Đặt getUserStats vào session
+        request.getSession().setAttribute("getUserStats", getUserStats);
+
         request.getRequestDispatcher("views/admin/home.jsp").forward(request, response);
     }
 
