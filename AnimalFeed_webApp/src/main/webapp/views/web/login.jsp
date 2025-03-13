@@ -133,7 +133,7 @@
         </form>
 
         <a href="<%= request.getContextPath() %>/register" class="register-link">Chưa có tài khoản? Đăng ký</a>
-        <a href="<%= request.getContextPath() %>/reset_pass" class="reset_pass-link">Quên mật khẩu?</a>
+        <a href="<%= request.getContextPath() %>/forgot-password" class="reset_pass-link">Quên mật khẩu?</a>
     </div>
 </div>
 

@@ -151,4 +151,16 @@ public class UserService {
         return userDao.getTotalUser();
     }
 
+    //kiem tra xem co nguoi dung ton tai chua
+    public boolean isUserExists(String contactInfo) {
+        User user = userDao.getUserByPhoneOrEmail(contactInfo);
+        return user != null;
+    }
+    public boolean isUserExistsEmail(String email) {
+        return userDao.getUserByEmail(email) != null;
+    }
+    public boolean updatePassword(String email, String newPassword) {
+        userDao.updatePassword(email, newPassword);
+        return true;
+    }
 }

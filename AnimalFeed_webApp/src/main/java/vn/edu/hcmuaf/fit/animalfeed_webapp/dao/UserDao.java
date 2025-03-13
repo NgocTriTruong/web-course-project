@@ -226,5 +226,35 @@ public class UserDao {
     }
 
 
+    public User getUserByPhoneOrEmail(String contactInfo) {
+        String query = "SELECT * FROM users WHERE phone = :contact OR email = :contact";
+
+        return jdbi.withHandle(handle ->
+                handle.createQuery(query)
+                        .bind("contact", contactInfo)
+                        .mapToBean(User.class)
+                        .findOne()
+                        .orElse(null)
+        );
+    }
+
+    public Optional<User> getUserByEmail(String email) {
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT * FROM users WHERE email = :email")
+                        .bind("email", email)
+                        .mapToBean(User.class)
+                        .findOne()
+        );
+    }
+
+
+    public void updatePassword(String email, String newPassword) {
+        jdbi.useHandle(handle -> {
+            handle.createUpdate("UPDATE users SET password = :password WHERE email = :email")
+                    .bind("password", newPassword)
+                    .bind("email", email)
+                    .execute();
+        });
+    }
 }
 

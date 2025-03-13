@@ -1,4 +1,4 @@
-package vn.edu.hcmuaf.fit.animalfeed_webapp.controller;
+package vn.edu.hcmuaf.fit.animalfeed_webapp.controller.login;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

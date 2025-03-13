@@ -71,6 +71,7 @@ public class EditUserAdmin extends HttpServlet {
             // Các tham số khác
             String fullName = request.getParameter("fullName");
             String phone = request.getParameter("phone");
+            String email = request.getParameter("email");
 
             if (fullName == null || fullName.trim().isEmpty()) {
                 throw new ServletException("Full name is required");
@@ -80,8 +81,12 @@ public class EditUserAdmin extends HttpServlet {
                 throw new ServletException("Phone number is required");
             }
 
+            if (email == null || email.trim().isEmpty()) {
+                throw new ServletException("Email is required");
+            }
+
             // Cập nhật thông tin người dùng
-            User user = new User(id, fullName, password, phone, status, new Date(), new Date(), role);
+            User user = new User(id, fullName, password, phone, email, status, new Date(), new Date(), role);
             boolean updated = userService.updateUser(user, userId); // Thực hiện cập nhật
 
             if (updated) {
