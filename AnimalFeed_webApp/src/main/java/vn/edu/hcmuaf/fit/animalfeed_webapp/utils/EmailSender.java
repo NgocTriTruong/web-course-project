@@ -44,7 +44,6 @@ public class EmailSender {
             throw new RuntimeException("Failed to send email", e);
         }
     }
-
 //    public static void main(String[] args) {
 //        sendEmail(
 //                "daocongkhanh1991@gmail.com",

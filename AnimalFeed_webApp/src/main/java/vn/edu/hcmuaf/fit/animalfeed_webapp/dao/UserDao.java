@@ -247,7 +247,6 @@ public class UserDao {
         );
     }
 
-
     public void updatePassword(String email, String newPassword) {
         jdbi.useHandle(handle -> {
             handle.createUpdate("UPDATE users SET password = :password WHERE email = :email")
@@ -256,5 +255,6 @@ public class UserDao {
                     .execute();
         });
     }
+
 }
 
