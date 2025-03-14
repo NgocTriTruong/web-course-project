@@ -121,7 +121,7 @@
                         </div>
                         <div class="tt_bottom_number d-flex mt-2" id="logout">
                             <i class="me-3 fa-solid fa-right-from-bracket ms-3"></i>
-                            <div class="p">Đăng xuất</div>
+                            <div class="p" onclick="window.location.href='${pageContext.request.contextPath}/logout'">Đăng xuất</div>
                         </div>
                     </div>
                 </div>
