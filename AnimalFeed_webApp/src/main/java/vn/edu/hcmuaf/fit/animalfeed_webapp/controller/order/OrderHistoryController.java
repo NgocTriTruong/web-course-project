@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.dto.OrderDetailsWithProduct;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Order;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.OrderDetail;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.OrderService;
 
@@ -29,11 +28,18 @@ public class OrderHistoryController extends HttpServlet {
         HttpSession session = request.getSession();
 
         System.out.println("Session ID: " + session.getId());
-        System.out.println("User ID from session: " + session.getAttribute("userId"));
+        System.out.println("User from session: " + session.getAttribute("user"));
 
-        // Kiểm tra đăng nhập
-        Integer userId = (Integer) session.getAttribute("userId");
-        if (userId == null) {
+        // Check login
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }
+
+        // Get userId from the User object
+        int userId = user.getId();
+        if (userId <= 0) { // Assuming a valid user ID is positive
             response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
@@ -46,67 +52,49 @@ public class OrderHistoryController extends HttpServlet {
             }
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-            response.sendRedirect(request.getContextPath() + "/error");
+            request.setAttribute("error", "An error occurred while loading the page.");
+            request.getRequestDispatcher("/views/web/error.jsp").forward(request, response);
         }
     }
 
     private void showOrderHistory(HttpServletRequest request, HttpServletResponse response, int userId)
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         try {
-            // Lấy parameter lọc trạng thái
             String statusFilter = request.getParameter("status");
             ArrayList<Order> orders = orderService.getOrdersByUserId(userId);
 
             System.out.println("Found " + orders.size() + " orders for user " + userId);
 
-            // Lọc theo trạng thái nếu có yêu cầu
             if (statusFilter != null && !statusFilter.equals("all")) {
                 try {
                     int status = Integer.parseInt(statusFilter);
-                    orders = orders.stream()
+                    orders = (ArrayList<Order>) orders.stream()
                             .filter(order -> order.getStatus() == status)
                             .collect(Collectors.toCollection(ArrayList::new));
-
                     System.out.println("Filtered to " + orders.size() + " orders with status " + status);
                 } catch (NumberFormatException e) {
                     System.out.println("Invalid status filter: " + statusFilter);
                 }
             }
 
-            // Log chi tiết đơn hàng
-            for (Order order : orders) {
-                System.out.println("Order ID: " + order.getId() +
-                        ", Status: " + order.getStatus() +
-                        ", Time: " + order.getOrderDate() +
-                        ", Total: " + order.getTotalPrice());
-            }
-
             for (Order order : orders) {
                 String formattedOrderDate = order.getOrderDate() != null
                         ? order.getOrderDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))
                         : "";
-                order.setOrderDate(order.getOrderDate()); // Keep original orderDate
-                request.setAttribute("formattedOrderDate_" + order.getId(), formattedOrderDate); // Unique attribute per order
+                request.setAttribute("formattedOrderDate_" + order.getId(), formattedOrderDate);
             }
 
-            // Sắp xếp theo thời gian mới nhất
             orders.sort((o1, o2) -> o2.getOrderDate().compareTo(o1.getOrderDate()));
 
-            // Set attributes cho JSP
             request.setAttribute("orders", orders);
             request.setAttribute("currentStatus", statusFilter != null ? statusFilter : "all");
 
-            // Thêm thông tin số lượng đơn hàng theo từng trạng thái
             Map<Integer, Long> orderCounts = orders.stream()
                     .collect(Collectors.groupingBy(Order::getStatus, Collectors.counting()));
             request.setAttribute("orderCounts", orderCounts);
 
-            HttpSession session = request.getSession();
-            User user = (User) session.getAttribute("user");
+            request.setAttribute("user", (User) request.getSession().getAttribute("user"));
 
-            request.setAttribute("user", user);
-
-            // Forward to JSP
             request.getRequestDispatcher("/views/web/chi_tiet_ca_nhan/personal_order.jsp")
                     .forward(request, response);
 
@@ -121,22 +109,36 @@ public class OrderHistoryController extends HttpServlet {
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         String orderId = request.getParameter("id");
         if (orderId == null || orderId.trim().isEmpty()) {
-            response.sendRedirect(request.getContextPath() + "/order-history");
+            response.sendRedirect(request.getContextPath() + "/order-history?error=missing_order_id");
             return;
         }
 
-        Order order = orderService.getOrderById(Integer.parseInt(orderId));
-        if (order == null || order.getUserId() != userId) {
-            response.sendRedirect(request.getContextPath() + "/order-history");
-            return;
+        try {
+            int orderIdInt = Integer.parseInt(orderId);
+            Order order = orderService.getOrderById(orderIdInt);
+            if (order == null || order.getUserId() != userId) {
+                response.sendRedirect(request.getContextPath() + "/order-history?error=invalid_order");
+                return;
+            }
+
+            ArrayList<OrderDetailsWithProduct> orderDetailsWithProducts =
+                    orderService.getOrderDetailsWithProductByOrderId(order.getId());
+
+            String formattedOrderDate = order.getOrderDate() != null
+                    ? order.getOrderDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))
+                    : "";
+            request.setAttribute("formattedOrderDate", formattedOrderDate);
+
+            request.setAttribute("order", order);
+            request.setAttribute("orderDetailsWithProducts", orderDetailsWithProducts);
+            request.getRequestDispatcher("/views/web/chi_tiet_ca_nhan/order_details.jsp")
+                    .forward(request, response);
+        } catch (NumberFormatException e) {
+            response.sendRedirect(request.getContextPath() + "/order-history?error=invalid_order_id");
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("error", "An error occurred while loading order details.");
+            request.getRequestDispatcher("/views/web/error.jsp").forward(request, response);
         }
-
-        ArrayList<OrderDetailsWithProduct> orderDetailsWithProducts =
-                orderService.getOrderDetailsWithProductByOrderId(order.getId());
-
-        request.setAttribute("order", order);
-        request.setAttribute("orderDetailsWithProducts", orderDetailsWithProducts);
-        request.getRequestDispatcher("/views/web/chi_tiet_ca_nhan/order_details.jsp")
-                .forward(request, response);
     }
 }
