@@ -7,10 +7,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.DiscountDao;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.ProductDao;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Category;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Discount;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.services.CategoryService;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "ProductDetailController", value = "/product-detail")
 public class ProductDetailController extends HttpServlet {
@@ -25,6 +28,10 @@ public class ProductDetailController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        CategoryService categoryService = new CategoryService();
+        //Lay danh muc
+        List<Category> categories = categoryService.getAll();
+        request.setAttribute("categoriesData", categories);
         try {
             // Get product ID from request
             int productId = Integer.parseInt(request.getParameter("pid"));

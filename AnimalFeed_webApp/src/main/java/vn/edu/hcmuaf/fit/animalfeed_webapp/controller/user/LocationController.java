@@ -25,7 +25,7 @@ public class LocationController extends HttpServlet {
 
         request.setAttribute("user", user);
 
-        request.setAttribute("categories", categories);
+        request.setAttribute("categoriesData", categories);
         request.getRequestDispatcher("views/web/chi_tiet_ca_nhan/so_dia_chi.jsp").forward(request, response);
     }
 
