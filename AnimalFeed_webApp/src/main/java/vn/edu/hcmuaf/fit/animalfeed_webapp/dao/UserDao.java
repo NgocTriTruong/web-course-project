@@ -152,8 +152,8 @@ public class UserDao {
     // Chèn người dùng vào cơ sở dữ liệu
     public void insertUser(User user) {
         jdbi.useHandle(handle ->
-                handle.createUpdate("INSERT INTO users (full_name, phone, password, role, status, create_date, update_date) " +
-                                "VALUES (:fullName, :phone, :password, :role, :status, :createDate, :updateDate)")
+                handle.createUpdate("INSERT INTO users (full_name, phone, email, password, role, status, create_date, update_date) " +
+                                "VALUES (:fullName, :phone, :email, :password, :role, :status, :createDate, :updateDate)")
                         .bindBean(user)
                         .execute()
         );
