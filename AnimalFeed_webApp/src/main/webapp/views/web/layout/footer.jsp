@@ -89,7 +89,7 @@
                         <a href="${pageContext.request.contextPath}/purchasing-policy">
                             <div class="p mt-3">Hướng dẫn mua hàng & thanh toán online</div>
                         </a>
-                        <a href="${pageContext.request.contextPath}/views/web/help.jsp">
+                        <a href="${pageContext.request.contextPath}/contact">
                             <div class="p mt-3">Hỗ trợ khách hàng</div>
                         </a>
                     </div>
