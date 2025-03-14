@@ -21,7 +21,7 @@ public class NewPasswordController extends HttpServlet {
         // Lấy danh sách danh mục
         List<Category> categories = categoryService.getAll();
 
-        request.setAttribute("categories", categories);
+        request.setAttribute("categoriesData", categories);
         request.getRequestDispatcher("views/web/chi_tiet_ca_nhan/thay_doi_pass.jsp").forward(request, response);
     }
 
