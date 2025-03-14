@@ -420,10 +420,26 @@ public class ProductDao {
         return salesMap;
     }
 
+    public List<Product> getRelatedProducts(int categoryId, int currentProductId) {
+        Jdbi jdbi = JdbiConnect.getJdbi();
+        try {
+            return jdbi.withHandle(handle ->
+                    handle.createQuery("SELECT * FROM products WHERE cat_id = :categoryId AND id != :currentProductId AND status = :status LIMIT 6")
+                            .bind("categoryId", categoryId)
+                            .bind("currentProductId", currentProductId)
+                            .bind("status", "1")
+                            .mapToBean(Product.class)
+                            .list()
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<>(); // Return empty list on error
+        }
+    }
+
     public static void main(String[] args) {
         ProductDao productDao = new ProductDao();
         Map<Integer, Integer> salesData = productDao.getProductSales();
         System.out.println(salesData);
     }
-
 }
