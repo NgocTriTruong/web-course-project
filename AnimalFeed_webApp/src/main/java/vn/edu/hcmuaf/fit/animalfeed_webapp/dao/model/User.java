@@ -12,12 +12,14 @@ public class User implements Serializable {
     private Date createDate;
     private Date updateDate;
     private int role;
+    private String email;
 
-    public User(int id, String fullName, String password, String phone, int status, Date createDate, Date updateDate, int role) {
+    public User(int id, String fullName, String password, String phone, String email, int status, Date createDate, Date updateDate, int role) {
         this.id = id;
         this.fullName = fullName;
         this.password = password;
         this.phone = phone;
+        this.email = email;
         this.status = status;
         this.createDate = createDate;
         this.updateDate = updateDate;
@@ -60,6 +62,14 @@ public class User implements Serializable {
         this.phone = phone;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public int getStatus() {
         return status;
     }
@@ -99,6 +109,7 @@ public class User implements Serializable {
                 ", fullName='" + fullName + '\'' +
                 ", password='" + password + '\'' +
                 ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
                 ", status=" + status +
                 ", createDate=" + createDate +
                 ", updateDate=" + updateDate +

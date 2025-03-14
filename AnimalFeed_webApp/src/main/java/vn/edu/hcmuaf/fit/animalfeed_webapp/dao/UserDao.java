@@ -152,8 +152,8 @@ public class UserDao {
     // Chèn người dùng vào cơ sở dữ liệu
     public void insertUser(User user) {
         jdbi.useHandle(handle ->
-                handle.createUpdate("INSERT INTO users (full_name, phone, password, role, status, create_date, update_date) " +
-                                "VALUES (:fullName, :phone, :password, :role, :status, :createDate, :updateDate)")
+                handle.createUpdate("INSERT INTO users (full_name, phone, email, password, role, status, create_date, update_date) " +
+                                "VALUES (:fullName, :phone, :email, :password, :role, :status, :createDate, :updateDate)")
                         .bindBean(user)
                         .execute()
         );
@@ -225,6 +225,36 @@ public class UserDao {
         );
     }
 
+
+    public User getUserByPhoneOrEmail(String contactInfo) {
+        String query = "SELECT * FROM users WHERE phone = :contact OR email = :contact";
+
+        return jdbi.withHandle(handle ->
+                handle.createQuery(query)
+                        .bind("contact", contactInfo)
+                        .mapToBean(User.class)
+                        .findOne()
+                        .orElse(null)
+        );
+    }
+
+    public Optional<User> getUserByEmail(String email) {
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT * FROM users WHERE email = :email")
+                        .bind("email", email)
+                        .mapToBean(User.class)
+                        .findOne()
+        );
+    }
+
+    public void updatePassword(String email, String newPassword) {
+        jdbi.useHandle(handle -> {
+            handle.createUpdate("UPDATE users SET password = :password WHERE email = :email")
+                    .bind("password", newPassword)
+                    .bind("email", email)
+                    .execute();
+        });
+    }
 
 }
 

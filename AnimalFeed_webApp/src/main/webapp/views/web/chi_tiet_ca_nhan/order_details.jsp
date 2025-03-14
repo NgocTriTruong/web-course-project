@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: ADMIN
-  Date: 16-Jan-25
-  Time: 1:52 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -23,7 +16,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/footer.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/themify-icons/themify-icons.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
-    <!-- Include your CSS files here -->
     <style>
         .order-detail-container {
             background: white;
@@ -58,18 +50,18 @@
                     <div class="row mb-4">
                         <div class="col-md-6">
                             <h5>Thông tin đơn hàng</h5>
-                            <p><strong>Ngày đặt:</strong> ${order.formattedOrderDate}</p>
+                            <p><strong>Ngày đặt:</strong> ${formattedOrderDate}</p>
                             <p><strong>Trạng thái:</strong>
                                 <span class="status-badge status-${order.status}">
-                                        <c:choose>
-                                            <c:when test="${order.status == 1}">Chờ xác nhận</c:when>
-                                            <c:when test="${order.status == 2}">Đang xử lý</c:when>
-                                            <c:when test="${order.status == 3}">Đang giao hàng</c:when>
-                                            <c:when test="${order.status == 4}">Đã giao hàng</c:when>
-                                            <c:when test="${order.status == 0}">Đã hủy</c:when>
-                                            <c:otherwise>Không xác định</c:otherwise>
-                                        </c:choose>
-                                    </span>
+                                    <c:choose>
+                                        <c:when test="${order.status == 1}">Chờ xác nhận</c:when>
+                                        <c:when test="${order.status == 2}">Đang xử lý</c:when>
+                                        <c:when test="${order.status == 3}">Đang giao hàng</c:when>
+                                        <c:when test="${order.status == 4}">Đã giao hàng</c:when>
+                                        <c:when test="${order.status == 0}">Đã hủy</c:when>
+                                        <c:otherwise>Không xác định</c:otherwise>
+                                    </c:choose>
+                                </span>
                             </p>
                         </div>
                         <div class="col-md-6">
