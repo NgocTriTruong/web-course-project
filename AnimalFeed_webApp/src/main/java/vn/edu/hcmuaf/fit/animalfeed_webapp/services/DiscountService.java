@@ -17,4 +17,8 @@ public class DiscountService {
     public Discount getDiscountById(int id) {
         return discountDao.getDiscountById(id);
     }
+
+    public double calculateDiscountedPrice(double price, int discountId) {
+        return discountDao.calculateDiscountedPrice(price, discountId);
+    }
 }

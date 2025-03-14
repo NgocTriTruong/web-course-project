@@ -125,5 +125,4 @@ public class ProductService {
     public Map<Integer, Integer> getProductSales() {
         return productDao.getProductSales();
     }
-
 }
