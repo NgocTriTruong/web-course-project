@@ -214,7 +214,6 @@
 
                     <!-- Order Summary section -->
                     <div class="cart-summary bg-white p-3">
-                        <!-- ... existing summary content ... -->
                         <button type="submit" class="btn w-100 mt-3 fw-bold"
                                 style="background-color: #fcae18; font-size: 17px;">
                             Đặt hàng

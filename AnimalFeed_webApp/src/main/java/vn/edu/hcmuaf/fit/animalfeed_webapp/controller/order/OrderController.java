@@ -8,7 +8,6 @@ import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.dto.CartItem;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.*;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.CartService;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.OrderService;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.services.ProductService;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -51,13 +50,28 @@ public class OrderController extends HttpServlet {
 
             // Get cart data
             Cart cart = (Cart) session.getAttribute("cart");
-            List<CartItem> selectedItems = cart.getConfirmedCartItem(); // Gets items with status = 1
+            List<CartItem> selectedItems = new ArrayList<>();
+
+            // Check if there are items in the cart or use confirmedItems from session (for Buy Now)
+            if (cart != null && !cart.getConfirmedCartItem().isEmpty()) {
+                selectedItems.addAll(cart.getConfirmedCartItem());
+            } else {
+                // For Buy Now scenario, use confirmedItems from session
+                List<CartItem> confirmedItems = (List<CartItem>) session.getAttribute("confirmedItems");
+                if (confirmedItems != null && !confirmedItems.isEmpty()) {
+                    selectedItems.addAll(confirmedItems);
+                } else {
+                    response.sendRedirect(request.getContextPath() + "/cart");
+                    return;
+                }
+            }
 
             if (selectedItems.isEmpty()) {
                 response.sendRedirect(request.getContextPath() + "/cart");
                 return;
             }
 
+            // Calculate total price and quantity
             double totalPrice = selectedItems.stream()
                     .mapToDouble(CartItem::getTotal)
                     .sum();
@@ -66,7 +80,7 @@ public class OrderController extends HttpServlet {
                     .mapToInt(CartItem::getQuantity)
                     .sum();
 
-            System.out.println(address);
+            System.out.println("Address: " + address);
 
             // Create order
             Order order = new Order();
@@ -80,9 +94,9 @@ public class OrderController extends HttpServlet {
 
             int orderId = orderService.insertOrder(order);
             order.setId(orderId);
+
             // Create order details for selected items
             for (CartItem cartItem : selectedItems) {
-                // Create corresponding order detail
                 OrderDetail orderDetail = new OrderDetail();
                 orderDetail.setOrderId(orderId);
                 orderDetail.setProductId(cartItem.getProductId());
@@ -91,15 +105,19 @@ public class OrderController extends HttpServlet {
 
                 orderService.insertOrderDetails(orderDetail);
 
-                // Remove item from cart
-                cart.removeProduct(cartItem.getProductId());
-                // Delete from cart_details table
-                cartService.deleteCD(cartItem.getProductId(), user.getId());
-
+                // For cart items, remove them from the cart and database
+                if (cart != null) {
+                    cart.removeProduct(cartItem.getProductId());
+                    cartService.deleteCD(cartItem.getProductId(), user.getId());
+                }
             }
 
-            // Update session cart
-            session.setAttribute("cart", cart);
+            // Update session cart (only if cart was used)
+            if (cart != null) {
+                session.setAttribute("cart", cart);
+            }
+
+            // Store order details in session
             session.setAttribute("successOrder", order);
             session.setAttribute("orderItems", selectedItems);
             session.setAttribute("customerInfo", Map.of(
@@ -111,6 +129,9 @@ public class OrderController extends HttpServlet {
                     "note", note,
                     "paymentMethod", paymentMethod
             ));
+
+            // Clear confirmedItems after order creation (for Buy Now)
+            session.removeAttribute("confirmedItems");
 
             // Redirect to order success page
             response.sendRedirect(request.getContextPath() + "/order-success");
@@ -135,6 +156,6 @@ public class OrderController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        // No changes needed for doGet unless you want to support GET requests
     }
 }
