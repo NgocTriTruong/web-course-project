@@ -164,7 +164,7 @@
                                     <div class="row">
                                         <div class="col-md-3">
                                             <div class="text-muted">Ngày đặt hàng</div>
-                                            <div>${order.formattedOrderDate}</div>
+                                            <div>${requestScope['formattedOrderDate_' += order.id]}</div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="text-muted">Tổng tiền</div>
