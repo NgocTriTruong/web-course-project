@@ -220,6 +220,7 @@
             </div>
 
             <!-- Google reCAPTCHA -->
+
             <div class="g-recaptcha mb-3" data-sitekey="6LciYeoqAAAAALAiQBkhttpGondAfDMVtaUCiHGW"></div>
 
             <div class="text-center">
