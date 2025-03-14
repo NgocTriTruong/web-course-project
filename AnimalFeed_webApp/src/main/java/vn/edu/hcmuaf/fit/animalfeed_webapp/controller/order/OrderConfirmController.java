@@ -5,7 +5,9 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.cart.Cart;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.dto.CartItem;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Category;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.services.CategoryService;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.DiscountService;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.ProductService;
 
@@ -18,6 +20,11 @@ public class OrderConfirmController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        CategoryService categoryService = new CategoryService();
+        //Lay danh muc
+        List<Category> categories = categoryService.getAll();
+        request.setAttribute("categoriesData", categories);
 
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
