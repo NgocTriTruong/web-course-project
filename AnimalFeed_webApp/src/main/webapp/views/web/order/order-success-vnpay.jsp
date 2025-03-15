@@ -56,10 +56,10 @@
         }
 
         .customer-info {
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
             margin-top: 2rem;
             display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
         }
 
         .info-group {
@@ -78,16 +78,16 @@
         }
 
         .back-button {
-            color: white;
-            text-decoration: none;
-            text-align: center;
-            border-radius: 4px;
-            transition: background-color 0.3s;
             display: block;
             width: 200px;
             margin: 2rem auto;
             padding: 0.75rem 1.5rem;
             background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 4px;
+            transition: background-color 0.3s;
         }
 
         .back-button:hover {
@@ -98,10 +98,19 @@
 <body>
 <div class="success-container">
     <div class="success-header">
-        <i class="fas fa-check-circle success-icon"></i>
-        <h1>Đặt hàng thành công!</h1>
-        <p>Cảm ơn quý khách đã đặt hàng, đơn hàng của quý khách sẽ được xử lý sớm nhất!</p>
+        <c:if test="${transResult}">
+            <i class="fas fa-check-circle success-icon"></i>
+            <h1>Đặt hàng thành công!</h1>
+            <p>Cảm ơn quý khách đã đặt hàng và thanh toán qua VNPAY, đơn hàng của quý khách sẽ được xử lý sớm nhất!</p>
+        </c:if>
+        <c:if test="${transResult == false}">
+            <i class="fas fa-times-circle error-icon" style="color: red; font-size: 4rem; margin-bottom: 1rem;"></i>
+            <h1 style="color: red;">Đặt hàng thất bại!</h1>
+            <p>Có lỗi xảy ra trong quá trình xử lý đơn hàng, vui lòng thử lại sau!</p>
+            <p>Liên hệ tổng đài để được tư vấn: <span style="color: red;">0905234543</span></p>
+        </c:if>
     </div>
+
     <div class="order-details">
         <h2>Đơn hàng</h2>
         <div class="order-items">

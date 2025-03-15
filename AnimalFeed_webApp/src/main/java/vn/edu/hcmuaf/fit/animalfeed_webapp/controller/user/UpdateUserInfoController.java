@@ -35,7 +35,7 @@ public class UpdateUserInfoController extends HttpServlet {
         // Set thông tin user vào request
         request.setAttribute("user", user);
 
-        request.setAttribute("categories", categories);
+        request.setAttribute("categoriesData", categories);
 
         request.getRequestDispatcher("views/web/chi_tiet_ca_nhan/edit_profile.jsp").forward(request, response);
     }
