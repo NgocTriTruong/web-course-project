@@ -10,6 +10,7 @@ import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.ProductDao;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Category;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Discount;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.services.ProductService;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.CategoryService;
 
 import java.io.IOException;
@@ -17,12 +18,12 @@ import java.util.List;
 
 @WebServlet(name = "ProductDetailController", value = "/product-detail")
 public class ProductDetailController extends HttpServlet {
-    private ProductDao productDao;
+    private ProductService productService;
     private DiscountDao discountDao;
 
     @Override
     public void init() throws ServletException {
-        productDao = new ProductDao();
+        productService = new ProductService();
         discountDao = new DiscountDao();
     }
 
@@ -35,7 +36,7 @@ public class ProductDetailController extends HttpServlet {
         try {
             // Get product ID from request
             int productId = Integer.parseInt(request.getParameter("pid"));
-            Product product = productDao.getById(productId);
+            Product product = productService.getProductById(productId);
 
             if (product == null) {
                 response.sendError(HttpServletResponse.SC_NOT_FOUND, "Product not found");
@@ -47,7 +48,7 @@ public class ProductDetailController extends HttpServlet {
 
             // Fetch discount if applicable
             if (product.getDiscountId() > 1) {
-                Discount discount = discountDao.getDiscountById(productId);
+                Discount discount = discountDao.getDiscountById(product.getDiscountId()); // Fix: Use discountId, not productId
                 if (discount == null) {
                     // Handle case where discount_id is invalid
                     product.setDiscountId(1); // Fallback to no discount
@@ -56,8 +57,12 @@ public class ProductDetailController extends HttpServlet {
                 }
             }
 
+            // Fetch related products based on category
+            List<Product> relatedProducts = productService.getRelatedProducts(product.getCat_id(), productId);
+            request.setAttribute("relatedProducts", relatedProducts);
+
             // Forward to JSP
-            request.getRequestDispatcher("views/web/each_product/product_details/product-detail.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/web/each_product/product_details/product-detail.jsp").forward(request, response);
         } catch (NumberFormatException e) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid product ID");
         } catch (Exception e) {

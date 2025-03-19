@@ -204,50 +204,58 @@
             <div class="content text-center">
                 <div class="h2 fw-bold mb-3 mt-5 pt-3">SẢN PHẨM LIÊN QUAN</div>
             </div>
-            <div class="slide-show-1 mt-4 carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
-                <div class="carousel-inner">
-                    <c:set var="count" value="0" />
-                    <c:forEach var="related" items="${relatedProducts}">
-                        <c:if test="${count % 3 == 0}">
-                            <div class="carousel-item ${count == 0 ? 'active' : ''}">
-                            <div class="list-products d-flex justify-content-center">
-                        </c:if>
+            <c:choose>
+                <c:when test="${not empty relatedProducts}">
+                    <div class="slide-show-1 mt-4 carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+                        <div class="carousel-inner">
+                            <c:set var="count" value="0" />
+                            <c:forEach var="related" items="${relatedProducts}">
+                                <c:if test="${count % 3 == 0}">
+                                    <div class="carousel-item ${count == 0 ? 'active' : ''}">
+                                    <div class="list-products d-flex justify-content-center">
+                                </c:if>
 
-                        <div class="product-card mx-2">
-                            <a href="product-detail?pid=${related.id}" class="text-decoration-none text-dark">
-                                <div class="product-img">
-                                    <img src="${related.img}"
-                                         alt="${related.name}" height="250px" width="200px">
+                                <div class="product-card mx-2">
+                                    <a href="product-detail?pid=${related.id}" class="text-decoration-none text-dark">
+                                        <div class="product-img">
+                                            <img src="${related.img}" alt="${related.name}" height="250px" width="200px">
+                                        </div>
+                                        <div class="h5 text-h">${related.name}</div>
+                                        <div class="p pb-2 text-p">${related.description}</div>
+                                        <div class="h4 text-start ms-3" style="color: red;">
+                                            <f:formatNumber value="${related.price}"/> <u>đ</u>
+                                        </div>
+                                        <div class="p text-start ms-3">Đã bán 1,1k</div>
+                                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
+                                            <i class="fa-solid fa-truck mt-1"></i>
+                                            <p class="ms-2">2 -4 ngày</p>
+                                        </div>
+                                    </a>
                                 </div>
-                                <div class="h5 text-h">${related.name}</div>
-                                <div class="p pb-2 text-p">${related.description}</div>
-                                <div class="h4 text-start ms-3" style="color: red;">
-                                    <f:formatNumber value="${related.price}"/> <u>đ</u>
-                                </div>
-                                <div class="p text-start ms-3">Đã bán 1,1k</div>
-                                <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                                    <i class="fa-solid fa-truck mt-1"></i>
-                                    <p class="ms-2">2 -4 ngày</p>
-                                </div>
-                            </a>
+
+                                <c:if test="${count % 3 == 2 || count == relatedProducts.size() - 1}">
+                                    </div>
+                                    </div>
+                                </c:if>
+
+                                <c:set var="count" value="${count + 1}" />
+                            </c:forEach>
                         </div>
 
-                        <c:if test="${count % 3 == 2 || count == relatedProducts.size() - 1}">
-                            </div>
-                            </div>
-                        </c:if>
-
-                        <c:set var="count" value="${count + 1}" />
-                    </c:forEach>
-                </div>
-
-                <button class="carousel-control-prev" type="button" data-bs-target=".carousel" data-bs-slide="prev">
-                    &#10094;
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target=".carousel" data-bs-slide="next">
-                    &#10095;
-                </button>
-            </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target=".carousel" data-bs-slide="prev">
+                            &#10094;
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target=".carousel" data-bs-slide="next">
+                            &#10095;
+                        </button>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <div class="text-center mt-4 mb-4">
+                        <p>Không có sản phẩm liên quan nào để hiển thị.</p>
+                    </div>
+                </c:otherwise>
+            </c:choose>
         </div>
     </div>
 
@@ -286,11 +294,17 @@
         let currentIndex = 0;
         let slideInterval;
 
+        // Kiểm tra xem slides có phần tử nào không
+        if (slides.length === 0) {
+            console.log("Không có sản phẩm liên quan để hiển thị slideshow.");
+            return; // Thoát nếu không có slides
+        }
+
         function showSlide(index) {
             slides.forEach((slide, i) => {
-                slide.classList.remove("active");  // Hide all slides
+                slide.classList.remove("active");  // Xóa lớp active khỏi tất cả slides
             });
-            slides[index].classList.add("active");  // Show the current slide
+            slides[index].classList.add("active");  // Thêm lớp active cho slide hiện tại
         }
 
         function nextSlide() {
@@ -299,25 +313,20 @@
         }
 
         function changeSlide(direction) {
-            // Clear the interval to pause automatic sliding when a button is clicked
-            clearInterval(slideInterval);
-
-            // Update the slide index
+            clearInterval(slideInterval); // Dừng interval khi người dùng tương tác
             currentIndex = (currentIndex + direction + slides.length) % slides.length;
             showSlide(currentIndex);
-
-            // Restart the interval for automatic sliding after a short delay
-            slideInterval = setInterval(nextSlide, 5000);
+            slideInterval = setInterval(nextSlide, 5000); // Khởi động lại interval
         }
 
-        // Initial slide display
+        // Hiển thị slide đầu tiên
         showSlide(currentIndex);
 
-        // Set the interval for automatic sliding
+        // Thiết lập interval cho slideshow tự động
         slideInterval = setInterval(nextSlide, 5000);
 
-        // Attach button events
-        window.changeSlideProducts = changeSlide;  // Expose the function to the global scope
+        // Gắn sự kiện cho các nút điều hướng
+        window.changeSlideProducts = changeSlide;
     });
 </script>
 

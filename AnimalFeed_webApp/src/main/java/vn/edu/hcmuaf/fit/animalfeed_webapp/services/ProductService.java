@@ -121,6 +121,11 @@ public class ProductService {
         return productDao.searchProducts(keyword, minPrice, maxPrice, description, categoryId, currentPage, pageSize);
     }
 
+    //Lấy sản phẩm liên quan (cùng category)
+    public List<Product> getRelatedProducts(int categoryId, int currentProductId) {
+        return productDao.getRelatedProducts(categoryId, currentProductId);
+    }
+
     //lượt bán
     public Map<Integer, Integer> getProductSales() {
         return productDao.getProductSales();
