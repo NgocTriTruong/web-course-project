@@ -5,6 +5,7 @@ import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public class UserService {
 
@@ -21,6 +22,15 @@ public class UserService {
             throw new RuntimeException("Số điện thoại hoặc mật khẩu không đúng.");
         }
         return user;
+    }
+
+    // Đăng nhập bằng Google (sử dụng email)
+    public User loginWithGoogle(String email) {
+        Optional<User> optionalUser = userDao.getUserByEmail(email);
+        if (!optionalUser.isPresent()) {
+            throw new RuntimeException("Không tìm thấy tài khoản với email " + email);
+        }
+        return optionalUser.get();
     }
 
     // Kiểm tra số điện thoại đã tồn tại
@@ -47,6 +57,11 @@ public class UserService {
         newUser.setCreateDate(new Date());
         newUser.setUpdateDate(new Date());
         userDao.insertUser(newUser);
+    }
+
+    // Đăng ký người dùng qua Google
+    public void registerUserWithGoogle(User user) {
+        userDao.insertUser(user);
     }
 
     // Lấy người dùng theo số điện thoại
@@ -151,4 +166,18 @@ public class UserService {
         return userDao.getTotalUser();
     }
 
+    //kiem tra xem co nguoi dung ton tai chua
+    public boolean isUserExists(String contactInfo) {
+        User user = userDao.getUserByPhoneOrEmail(contactInfo);
+        return user != null;
+    }
+
+    public boolean isUserExistsEmail(String email) {
+        return userDao.getUserByEmail(email).isPresent();
+    }
+
+    public boolean updatePassword(String email, String newPassword) {
+        userDao.updatePassword(email, newPassword);
+        return true;
+    }
 }

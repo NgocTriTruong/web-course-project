@@ -333,5 +333,24 @@
         closeAddressForm();
     }
 </script>
+
+<script>
+    document.getElementById("orderForm").addEventListener("submit", function (event) {
+        event.preventDefault(); // Ngăn chặn submit mặc định để xử lý điều kiện
+
+        let paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+
+        if (confirm("Bạn có chắc chắn muốn đặt hàng không?")) {
+            if (paymentMethod === "COD") {
+                // Submit form bình thường (chuyển đến /order-success theo xử lý servlet)
+                this.submit();
+            } else if (paymentMethod === "VNPAY") {
+                // Chuyển hướng form đến servlet payment
+                this.action = "${pageContext.request.contextPath}/payment";
+                this.submit();
+            }
+        }
+    });
+</script>
 </body>
 </html>
