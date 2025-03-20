@@ -28,50 +28,59 @@ public class AddUser extends HttpServlet {
         String fullName = request.getParameter("fullname");
         String phone = request.getParameter("phone");
         String password = request.getParameter("password");
+        String email = request.getParameter("email");
         String roleStr = request.getParameter("role");
         String statusStr = request.getParameter("status");
 
         try {
             // Kiểm tra các trường bắt buộc
-            if (fullName == null || phone == null || password == null || roleStr == null || statusStr == null) {
-                throw new IllegalArgumentException("Vui lòng điền đầy đủ thông tin.");
+            if (fullName == null || fullName.trim().isEmpty()) {
+                throw new IllegalArgumentException("Họ và tên không được để trống.");
+            }
+            if (phone == null || phone.trim().isEmpty()) {
+                throw new IllegalArgumentException("Số điện thoại không được để trống.");
+            }
+            if (password == null || password.trim().isEmpty()) {
+                throw new IllegalArgumentException("Mật khẩu không được để trống.");
+            }
+            if (email == null || email.trim().isEmpty()) {
+                throw new IllegalArgumentException("Email không được để trống.");
+            }
+            if (roleStr == null || statusStr == null) {
+                throw new IllegalArgumentException("Vai trò và trạng thái là bắt buộc.");
             }
 
             int role = Integer.parseInt(roleStr);
-            int status = Integer.parseInt(statusStr); // Chuyển đổi status thành int
+            int status = Integer.parseInt(statusStr);
 
-            // Kiểm tra giá trị status hợp lệ
             if (status != 1 && status != 2) {
                 throw new IllegalArgumentException("Trạng thái không hợp lệ.");
             }
 
-            // Kiểm tra độ mạnh mật khẩu
             if (!userService.isPasswordStrong(password)) {
-                throw new IllegalArgumentException("Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường và số.");
+                throw new IllegalArgumentException("Mật khẩu phải có ít nhất 6 ký tự, bao gồm chữ hoa, chữ thường, số và kí tự đặc biệt.");
             }
 
-            // Tạo người dùng mới
-            User newUser = new User();
-            newUser.setFullName(fullName);
-            newUser.setPhone(phone);
-            newUser.setPassword(password);
-            newUser.setRole(role);
-            newUser.setStatus(status); // Gán trực tiếp giá trị int cho status
-            newUser.setCreateDate(new Date());
-            newUser.setUpdateDate(new Date());
-
-            // Kiểm tra quyền
             HttpSession session = request.getSession();
             User currentUser = (User) session.getAttribute("user");
             if (currentUser == null || currentUser.getRole() != 1) {
                 throw new SecurityException("Bạn không có quyền thực hiện thao tác này.");
             }
 
+            User newUser = new User();
+            newUser.setFullName(fullName);
+            newUser.setPhone(phone);
+            newUser.setPassword(password);
+            newUser.setEmail(email);
+            newUser.setRole(role);
+            newUser.setStatus(status);
+            newUser.setCreateDate(new Date());
+            newUser.setUpdateDate(new Date());
+
             userService.addUser(newUser, currentUser.getId());
 
-            response.sendRedirect("userManagement?success=true");
+            response.sendRedirect("addUser?success=true");
         } catch (Exception e) {
-            e.printStackTrace();
             request.setAttribute("errorMessage", e.getMessage());
             request.getRequestDispatcher("/views/admin/userAddition.jsp").forward(request, response);
         }

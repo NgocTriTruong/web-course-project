@@ -48,25 +48,32 @@
         <form action="addUser" method="POST" class="border p-5">
             <!-- Dòng 1 -->
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="mb-3">
                         <label for="phone" class="form-label style_18"><b>Số điện thoại</b></label>
                         <i class="fas fa-phone ms-2"></i>
                         <input type="text" class="form-control" id="phone" name="phone" placeholder="Nhập số điện thoại..." required>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="mb-3">
                         <label for="password" class="form-label style_18"><b>Mật khẩu</b></label>
                         <i class="fas fa-key ms-2"></i>
                         <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu..." required>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="mb-3">
                         <label for="fullname" class="form-label style_18"><b>Tên đầy đủ</b></label>
                         <i class="fas fa-user ms-2"></i>
                         <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Nhập họ và tên..." required>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="mb-3">
+                        <label for="email" class="form-label style_18"><b>Email</b></label>
+                        <i class="fas fa-envelope ms-2"></i>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Nhập email..." required>
                     </div>
                 </div>
             </div>
@@ -89,11 +96,11 @@
                             <i class="fas fa-toggle-on ms-2"></i>
                         </div>
                         <div class="form-check-inline">
-                            <input class="form-check-input" type="radio" name="status" id="active" value="1" checked>
+                            <input class="form-check-input" type="radio" name="status" id="active" value="2" checked>
                             <label class="form-check-label" for="active">Ngưng hoạt động</label>
                         </div>
                         <div class="form-check-inline">
-                            <input class="form-check-input" type="radio" name="status" id="inactive" value="2">
+                            <input class="form-check-input" type="radio" name="status" id="inactive" value="1">
                             <label class="form-check-label" for="inactive">Đang hoạt động</label>
                         </div>
                     </div>
