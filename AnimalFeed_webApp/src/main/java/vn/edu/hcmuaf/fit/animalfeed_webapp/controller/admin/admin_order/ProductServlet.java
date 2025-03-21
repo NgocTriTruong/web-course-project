@@ -4,9 +4,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.dto.ProductDTO;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.ProductService;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.dto.ProductDTO;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -24,7 +24,7 @@ public class ProductServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        Gson gson = new Gson(); // Không cần TypeAdapter vì DTO không chứa LocalDate
+        Gson gson = new Gson();
 
         String value = request.getParameter("id");
         Product product = null;
@@ -45,7 +45,7 @@ public class ProductServlet extends HttpServlet {
 
             if (product != null && product.getStatus() == 1) {
                 System.out.println("Product found: " + product.getName());
-                ProductDTO productDTO = new ProductDTO(product.getId(), product.getName());
+                ProductDTO productDTO = new ProductDTO(product.getId(), product.getName(), product.getPrice());
                 response.getWriter().write(gson.toJson(productDTO));
             } else {
                 System.out.println("No active product found for value: " + value);
