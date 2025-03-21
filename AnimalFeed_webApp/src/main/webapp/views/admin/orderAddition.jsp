@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,144 +20,114 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/admin/assets/css/header.css">
 
     <script src="${pageContext.request.contextPath}/views/admin/assets/js/mdb.min.js"></script>
-
-    <!-- js add header -->
-     <script src="${pageContext.request.contextPath}/views/admin/assets/js/add_header.js" defer></script>
 </head>
 
 <body>
 
 <%@ include file="layout/header.jsp" %>
 
-<!--Main layout-->
-<main class="mb-5" style="margin-top: 100px;">
-
-
-    <!-- Container for demo purpose -->
-    <div class="container px-4 ">
-        <a href="orderManagement.jsp" class="btn btn-link mb-2 text_green" style="font-size: 16px;">
-            <i class="fas fa-angle-left"></i> Quay lại
-        </a>
-        <div class="mb-3 bg_green p-2">
-            <span class="text-white h5">Thông tin đơn hàng</span>
+<main style="padding-bottom: 100px;">
+    <section class="mb-5 text-center text-md-start">
+        <div class="p-5" style="height: 200px; background: linear-gradient(to right, hsl(78, 50%, 48%), hsl(78, 50%, 68%));"></div>
+        <div class="container px-4">
+            <div class="card shadow-0" style="margin-top: -100px;">
+                <div class="card-body py-5 px-5">
+                    <h1 class="mb-4">Thêm đơn hàng mới</h1>
+                    <form id="addOrderForm" action="${pageContext.request.contextPath}/order-add" method="post">
+                        <!-- Số điện thoại -->
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Số điện thoại</label>
+                            <input type="text" class="form-control" id="phone" name="phone" required>
+                        </div>
+                        <!-- Tên khách hàng -->
+                        <div class="mb-3">
+                            <label for="customerName" class="form-label">Tên khách hàng</label>
+                            <input type="text" class="form-control" id="customerName" name="customerName" required>
+                        </div>
+                        <!-- Địa chỉ giao hàng -->
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Địa chỉ giao hàng</label>
+                            <input type="text" class="form-control" id="address" name="address" required>
+                        </div>
+                        <!-- Danh sách sản phẩm -->
+                        <div id="productList">
+                            <div class="row mb-3 product-row">
+                                <div class="col-md-4">
+                                    <label class="form-label">Sản phẩm (ID hoặc tên)</label>
+                                    <input type="text" class="form-control product-id" name="productIds[]" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Tên sản phẩm</label>
+                                    <input type="text" class="form-control product-name" disabled>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">Số lượng</label>
+                                    <input type="number" class="form-control quantity" name="quantities[]" min="1" required>
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-danger remove-product mt-4"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary mb-3" id="addProduct"><i class="fas fa-plus"></i> Thêm sản phẩm</button>
+                        <!-- Tổng giá -->
+                        <div class="mb-3">
+                            <label for="totalPrice" class="form-label">Tổng giá</label>
+                            <input type="text" class="form-control" id="totalPrice" name="totalPrice" readonly>
+                        </div>
+                        <!-- Trạng thái đơn hàng -->
+                        <div class="mb-3">
+                            <label for="status" class="form-label">Trạng thái</label>
+                            <select class="form-select" id="status" name="status" required>
+                                <option value="1">Chờ xác nhận</option>
+                                <option value="2" selected>Đang chuẩn bị</option>
+                                <option value="3">Đang giao</option>
+                                <option value="4">Đã giao</option>
+                                <option value="5">Đã hủy</option>
+                            </select>
+                        </div>
+                        <!-- Nút hành động -->
+                        <button type="submit" class="btn bg_green text-white">Thêm đơn hàng</button>
+                        <a href="${pageContext.request.contextPath}/order-manager" class="btn btn-secondary">Hủy</a>
+                    </form>
+                </div>
+            </div>
         </div>
-        <form class="border p-5">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="mb-3">
-                        <label for="username" class="form-label style_18"><b>Tên liên hệ</b></label>
-                        <i class="fas fa-user ms-2"></i>
-                        <input type="text" class="form-control" id="username" name="username"
-                               placeholder="Nhập họ và tên..." required>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="mb-3">
-                        <label for="phone" class="form-label style_18"><b>Số điện thoại</b></label>
-                        <i class="fas fa-phone ms-2"></i>
-                        <input type="number" class="form-control" id="phone" name="phone"
-                               placeholder="Nhập số điện thoại..." required>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="mb-3">
-                        <label for="phone" class="form-label style_18"><b>Sản phẩm</b></label>
-                        <i class="fas fa-gift ms-2"></i>
-                        <input type="text" class="form-control" id="phone" name="phone"
-                               placeholder="Tên sản phẩm..." required>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="mb-3">
-                        <label for="phone" class="form-label style_18"><b>Số lượng</b></label>
-                        <i class="fas fa-cubes ms-2"></i>
-                        <input type="number" class="form-control" id="phone" name="phone"
-                               placeholder="Số lượng..." required>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="mb-3">
-                        <label for="phone" class="form-label style_18"><b>Thành tiền</b></label>
-                        <i class="fas fa-dollar ms-2"></i>
-                        <input type="number" class="form-control" id="phone" name="phone"
-                               placeholder="Thành tiền..." required>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="mb-3">
-                        <label for="filterDate" class="form-label "><b>Ngày đặt:</b></label>
-                        <input type="date" class="form-control" id="filterDate">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="mb-3">
-                        <label for="filterDate" class="form-label "><b>Ngày giao:</b></label>
-                        <input type="date" class="form-control" id="filterDate">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <label for="role" class="form-label"><b>Phương thức thanh toán</b></label>
-                    <select class="form-select" id="role" name="role" required>
-                        <option value="" disabled selected>Chọn phương thức thanh toán</option>
-                        <option value="1">Thanh toán khi nhận hàng</option>
-                        <option value="1">Momo</option>
-                        <option value="2">VnPay</option>
-                        <option value="2">Master Card</option>
-                        <option value="2">ZaloPay</option>
-                    </select>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="mb-3">
-                        <div>
-                            <label class="form-label"><b>Trạng thái</b></label>
-                            <i class="fas fa-toggle-on"></i>
-                        </div>
-                        <div class="form-check-inline">
-                            <input class="form-check-input" type="radio" name="status" id="active" value="1" checked>
-                            <label class="form-check-label" for="active">Đang xử lý</label>
-                        </div>
-                        <div class="form-check-inline">
-                            <input class="form-check-input" type="radio" name="status" id="active" value="1" checked>
-                            <label class="form-check-label" for="active">Đang vận chuyển</label>
-                        </div>
-                        <div class="form-check-inline">
-                            <input class="form-check-input" type="radio" name="status" id="active" value="1" checked>
-                            <label class="form-check-label" for="active">Hoàn thành</label>
-                        </div>
-                        <div class="form-check-inline">
-                            <input class="form-check-input" type="radio" name="status" id="inactive" value="0">
-                            <label class="form-check-label" for="inactive">Đã hủy</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="mb-3">
-                        <label for="note" class="form-label"><b>Ghi chú</b></label>
-                        <textarea class="form-control" id="note" name="note" rows="3"></textarea>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Repeat the pattern for other form elements -->
-
-            <button type="submit" class="btn bg_green text-white fw-bold">Thêm mới</button>
-        </form>
-
-    </div>
-    <!-- Container for demo purpose -->
+    </section>
 </main>
-<!--Main layout-->
 
-<footer class="bottom-0 w-100 text-center py-2 bg-light">
-    <p class="pt-3" style="color: rgba(0, 0, 0, 0.5); margin-left: 150px;">©2024 Group-11</p>
-</footer>
+<script src="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.bundle.min.js"></script>
+<script>
+    // Thêm sản phẩm mới
+    document.getElementById('addProduct').addEventListener('click', function() {
+        const productRow = document.querySelector('.product-row').cloneNode(true);
+        productRow.querySelector('.product-id').value = '';
+        productRow.querySelector('.product-name').value = '';
+        productRow.querySelector('.quantity').value = '1';
+        document.getElementById('productList').appendChild(productRow);
+    });
 
+    // Xóa sản phẩm
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('remove-product') && document.querySelectorAll('.product-row').length > 1) {
+            e.target.closest('.product-row').remove();
+            calculateTotal();
+        }
+    });
+
+    // Tính tổng giá (giả định giá sản phẩm lấy từ server sau)
+    function calculateTotal() {
+        let total = 0;
+        document.querySelectorAll('.quantity').forEach(input => {
+            total += input.value * 10000; // Giả định giá mỗi sản phẩm, cần thay bằng logic thực tế
+        });
+        document.getElementById('totalPrice').value = total;
+    }
+
+    // Gọi tính tổng khi thay đổi số lượng
+    document.addEventListener('input', function(e) {
+        if (e.target.classList.contains('quantity')) calculateTotal();
+    });
+</script>
 </body>
 </html>
