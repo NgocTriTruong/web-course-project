@@ -128,6 +128,84 @@
     document.addEventListener('input', function(e) {
         if (e.target.classList.contains('quantity')) calculateTotal();
     });
+
+    // Xử lý AJAX khi nhập số điện thoại
+    document.getElementById('phone').addEventListener('input', function() {
+        const phone = this.value.trim();
+        const customerNameInput = document.getElementById('customerName');
+        const contextPath = "${pageContext.request.contextPath}"; // Lấy context path từ JSP
+
+        if (phone.length >= 10) {
+            const baseUrl = window.location.origin + contextPath + "/order-add?phone=";
+            const encodedPhone = encodeURIComponent(phone);
+            const url = baseUrl + encodedPhone;
+
+            fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+                .then(response => {
+                    if (!response.ok) throw new Error('Server error: ' + response.status);
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.fullName) {
+                        customerNameInput.value = data.fullName;
+                        customerNameInput.disabled = false;
+                    } else {
+                        customerNameInput.value = '';
+                        customerNameInput.disabled = false;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    customerNameInput.value = '';
+                    customerNameInput.disabled = false;
+                });
+        } else {
+            customerNameInput.value = '';
+            customerNameInput.disabled = false;
+        }
+    });
+
+    // Xử lý AJAX khi nhập ID hoặc tên sản phẩm
+    document.addEventListener('input', function(e) {
+        if (e.target.classList.contains('product-id')) {
+            const productInput = e.target;
+            const productNameInput = productInput.closest('.product-row').querySelector('.product-name');
+            const value = productInput.value.trim();
+            const contextPath = "${pageContext.request.contextPath}";
+
+            if (value.length > 0) {
+                const url = contextPath + "/api/product?id=" + encodeURIComponent(value);
+                fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+                    .then(response => {
+                        if (!response.ok) throw new Error('Server error: ' + response.status);
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data.name && !data.error) {
+                            productNameInput.value = data.name;
+                        } else {
+                            productNameInput.value = 'Không có sản phẩm';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        productNameInput.value = 'Không có sản phẩm';
+                    });
+            } else {
+                productNameInput.value = '';
+            }
+        }
+    });
 </script>
 </body>
 </html>

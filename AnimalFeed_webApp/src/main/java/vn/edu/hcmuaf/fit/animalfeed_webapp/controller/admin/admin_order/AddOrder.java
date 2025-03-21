@@ -36,12 +36,19 @@ public class AddOrder extends HttpServlet {
         if (phone != null) { // Xử lý AJAX request để lấy thông tin khách hàng
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
-            User user = userService.getUserByPhone(phone);
             Gson gson = new Gson();
-            if (user != null) {
-                response.getWriter().write(gson.toJson(new UserResponse(user.getFullName())));
-            } else {
-                response.getWriter().write("{\"fullName\": null}");
+            try {
+                User user = userService.getUserByPhone(phone);
+                if (user != null) {
+                    response.getWriter().write(gson.toJson(new UserResponse(user.getFullName())));
+                } else {
+                    response.getWriter().write("{\"fullName\": null}");
+                }
+            } catch (Exception e) {
+                // Ghi log lỗi để kiểm tra
+                e.printStackTrace();
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                response.getWriter().write("{\"error\": \"Đã xảy ra lỗi khi lấy thông tin khách hàng: " + e.getMessage() + "\"}");
             }
         } else {
             request.getRequestDispatcher("/views/admin/orderAddition.jsp").forward(request, response);
