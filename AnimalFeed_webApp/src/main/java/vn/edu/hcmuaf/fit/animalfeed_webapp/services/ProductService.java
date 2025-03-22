@@ -130,4 +130,8 @@ public class ProductService {
     public Map<Integer, Integer> getProductSales() {
         return productDao.getProductSales();
     }
+
+    public Product getProductByName(String name) {
+        return productDao.getProductByName(name);
+    }
 }

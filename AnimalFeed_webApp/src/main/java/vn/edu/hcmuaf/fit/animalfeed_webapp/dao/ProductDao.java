@@ -442,4 +442,15 @@ public class ProductDao {
         Map<Integer, Integer> salesData = productDao.getProductSales();
         System.out.println(salesData);
     }
+
+    public Product getProductByName(String name) {
+        Jdbi jdbi = JdbiConnect.getJdbi();
+        String trimmedName = name.trim();
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT * FROM products WHERE TRIM(LOWER(name)) LIKE TRIM(LOWER(:name))")
+                        .bind("name", "%" + trimmedName + "%")
+                        .mapToBean(Product.class)
+                        .findFirst()
+                        .orElse(null));
+    }
 }

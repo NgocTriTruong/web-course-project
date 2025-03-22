@@ -59,7 +59,7 @@
           <i class="fas fa-cart-shopping fa-fw me-2 "></i><span class="h5 text">Quản lý đơn đặt hàng</span><i class="fas fa-chevron-down" style="margin-left: -1px; margin-bottom: 2px;"></i></a>
         <ul class="sidenav-collapse ">
           <li class="sidenav-item">
-            <a class="sidenav-link" href="${pageContext.request.contextPath}/order-add-admin" style="font-size: 17px;">Thêm đơn đặt hàng</a>
+            <a class="sidenav-link" href="${pageContext.request.contextPath}/add-order-management" style="font-size: 17px;">Thêm đơn đặt hàng</a>
           </li>
           <li class="sidenav-item">
             <a class="sidenav-link" href="${pageContext.request.contextPath}/order-manager" style="font-size: 17px;">Danh sách đơn đặt hàng</a>

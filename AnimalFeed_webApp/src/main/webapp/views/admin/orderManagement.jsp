@@ -43,6 +43,13 @@
         </div>
     </section>
 
+    <div class="mb-3 d-flex justify-content-end px-4">
+        <a class="btn bg_green text-white fw-bold" href="${pageContext.request.contextPath}/add-order-management">
+            <i class="far fa-square-plus"></i>
+            <span>Thêm đơn hàng</span>
+        </a>
+    </div>
+
     <div class="container px-4">
         <!-- Tìm kiếm -->
         <div class="input-group mb-4 px-4">
