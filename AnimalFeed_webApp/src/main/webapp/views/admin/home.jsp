@@ -20,8 +20,6 @@
 
     <script src="${pageContext.request.contextPath}/views/admin/assets/js/mdb.min.js"></script>
 
-    <!-- js add header -->
-     <script src="${pageContext.request.contextPath}/views/admin/assets/js/add_header.js" defer></script>
 </head>
 
 <body>
