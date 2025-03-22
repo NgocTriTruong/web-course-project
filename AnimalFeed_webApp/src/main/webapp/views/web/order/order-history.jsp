@@ -75,6 +75,15 @@
             background-color: #0056b3;
         }
     </style>
+
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    <df-messenger
+            intent="WELCOME"
+            chat-title="VinaFeed_chat"
+            agent-id="bcb3e6d9-3aac-4ea5-bfc7-87e324931264"
+            language-code="vi"
+    ></df-messenger>
+
 </head>
 <%@ include file="../layout/header.jsp" %>
 <body>
