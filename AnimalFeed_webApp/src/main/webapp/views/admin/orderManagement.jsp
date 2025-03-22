@@ -44,7 +44,7 @@
     </section>
 
     <div class="mb-3 d-flex justify-content-end px-4">
-        <a class="btn bg_green text-white fw-bold" href="${pageContext.request.contextPath}/order-add">
+        <a class="btn bg_green text-white fw-bold" href="${pageContext.request.contextPath}/add-order-management">
             <i class="far fa-square-plus"></i>
             <span>Thêm đơn hàng</span>
         </a>

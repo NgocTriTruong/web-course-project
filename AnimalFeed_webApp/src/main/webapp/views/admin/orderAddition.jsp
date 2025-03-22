@@ -69,13 +69,10 @@
             <div class="card shadow-0" style="margin-top: -100px;">
                 <div class="card-body py-5 px-5">
                     <h1 class="mb-4">Thêm đơn hàng mới</h1>
-                    <form id="addOrderForm" action="${pageContext.request.contextPath}/order-add" method="post">
-
-                        <!-- Hidden fields for address -->
-                        <input type="hidden" name="province" id="provinceHidden" value="">
-                        <input type="hidden" name="district" id="districtHidden" value="">
-                        <input type="hidden" name="ward" id="wardHidden" value="">
-                        <input type="hidden" name="addressDetails" id="addressDetailsHidden" value="">
+                    <form id="addOrderForm" action="${pageContext.request.contextPath}/add-order" method="post">
+                        <!-- Hidden fields -->
+                        <input type="hidden" name="address" id="addressHidden" value="">
+                        <input type="hidden" name="totalQuantity" id="totalQuantityHidden" value="">
 
                         <!-- Số điện thoại -->
                         <div class="mb-3">
@@ -145,7 +142,8 @@
                                 </div>
                                 <div class="col-md-2">
                                     <label class="form-label">Giá (VNĐ)</label>
-                                    <input type="number" class="form-control product-price" disabled>
+                                    <input type="number" class="form-control product-price" name="displayPrices[]" disabled>
+                                    <input type="hidden" class="product-price-hidden" name="prices[]">
                                 </div>
                                 <div class="col-md-2">
                                     <label class="form-label">Số lượng</label>
@@ -174,145 +172,25 @@
 </main>
 
 <script src="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.bundle.min.js"></script>
-<!-- Load API address script -->
 <script src="${pageContext.request.contextPath}/views/template/assets/scripts/call-api-address.js"></script>
-<!-- Custom script -->
 <script>
-    // Thêm sản phẩm mới
-    document.getElementById('addProduct').addEventListener('click', function() {
-        const productRow = document.querySelector('.product-row').cloneNode(true);
-        productRow.querySelector('.product-id').value = '';
-        productRow.querySelector('.product-name').value = '';
-        productRow.querySelector('.product-price').value = '';
-        productRow.querySelector('.quantity').value = '1';
-        document.getElementById('productList').appendChild(productRow);
-        calculateTotal();
-    });
+    console.log("JavaScript loaded"); // Log để kiểm tra script chạy
 
-    // Xóa sản phẩm
-    document.addEventListener('click', function(e) {
-        if (e.target.classList.contains('remove-product') && document.querySelectorAll('.product-row').length > 1) {
-            e.target.closest('.product-row').remove();
-            calculateTotal();
-        }
-    });
-
-    // Tính tổng giá dựa trên giá thực tế
-    function calculateTotal() {
-        let total = 0;
-        document.querySelectorAll('.product-row').forEach(row => {
-            const price = parseFloat(row.querySelector('.product-price').value) || 0;
-            const quantity = parseInt(row.querySelector('.quantity').value) || 0;
-            total += price * quantity;
-        });
-        document.getElementById('totalPrice').value = total;
+    // Hàm mở form địa chỉ
+    function openAddressForm() {
+        console.log("Opening address form");
+        document.getElementById('addressFormModal').style.display = 'block';
     }
 
-    // Gọi tính tổng khi thay đổi số lượng
-    document.addEventListener('input', function(e) {
-        if (e.target.classList.contains('quantity')) {
-            calculateTotal();
-        }
-    });
+    // Hàm đóng form địa chỉ
+    function closeAddressForm() {
+        console.log("Closing address form");
+        document.getElementById('addressFormModal').style.display = 'none';
+    }
 
-    // Xử lý AJAX khi nhập số điện thoại
-    document.getElementById('phone').addEventListener('input', function() {
-        const phone = this.value.trim();
-        const customerNameInput = document.getElementById('customerName');
-        const contextPath = "${pageContext.request.contextPath}";
-
-        if (phone.length >= 10) {
-            const url = window.location.origin + contextPath + "/order-add?phone=" + encodeURIComponent(phone);
-            fetch(url, {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/json'
-                }
-            })
-                .then(response => {
-                    if (!response.ok) throw new Error('Server error: ' + response.status);
-                    return response.json();
-                })
-                .then(data => {
-                    if (data.fullName) {
-                        customerNameInput.value = data.fullName;
-                    } else {
-                        customerNameInput.value = '';
-                    }
-                })
-                .catch(error => {
-                    console.error('Error fetching customer name:', error);
-                    customerNameInput.value = '';
-                });
-        } else {
-            customerNameInput.value = '';
-        }
-    });
-
-    // Xử lý AJAX khi nhập ID hoặc tên sản phẩm
-    document.addEventListener('input', function(e) {
-        if (e.target.classList.contains('product-id')) {
-            const productInput = e.target;
-            const productRow = productInput.closest('.product-row');
-            const productNameInput = productRow.querySelector('.product-name');
-            const productPriceInput = productRow.querySelector('.product-price');
-            const value = productInput.value.trim();
-            const contextPath = "${pageContext.request.contextPath}";
-
-            if (value.length > 0) {
-                const url = contextPath + "/api/product?id=" + encodeURIComponent(value);
-                fetch(url, {
-                    method: 'GET',
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                })
-                    .then(response => {
-                        if (!response.ok) throw new Error('Server error: ' + response.status);
-                        return response.json();
-                    })
-                    .then(data => {
-                        if (data.name && !data.error) {
-                            productNameInput.value = data.name;
-                            productPriceInput.value = data.price || '';
-                        } else {
-                            productNameInput.value = 'Không có sản phẩm';
-                            productPriceInput.value = '';
-                        }
-                        calculateTotal();
-                    })
-                    .catch(error => {
-                        console.error('Error fetching product:', error);
-                        productNameInput.value = 'Không có sản phẩm';
-                        productPriceInput.value = '';
-                        calculateTotal();
-                    });
-            } else {
-                productNameInput.value = '';
-                productPriceInput.value = '';
-                calculateTotal();
-            }
-        }
-    });
-
-    // Logic cho địa chỉ
-    document.addEventListener("DOMContentLoaded", function() {
-        console.log("DOMContentLoaded triggered - Loading provinces...");
-        loadProvinces(); // Gọi hàm từ call-api-address.js
-
-        document.getElementById('closeAddressForm').addEventListener('click', function() {
-            console.log("Closing address form");
-            closeAddressForm();
-        });
-
-        document.getElementById('saveAddressButton').addEventListener('click', function() {
-            console.log("Saving address");
-            saveAddress();
-        });
-    });
-
+    // Hàm lưu địa chỉ
     function saveAddress() {
-        console.log("Saving address...");
+        console.log("Saving address");
         const provinceSelect = document.getElementById('province');
         const districtSelect = document.getElementById('district');
         const wardSelect = document.getElementById('ward');
@@ -327,18 +205,14 @@
         const districtName = districtSelect.options[districtSelect.selectedIndex]?.text || '';
         const wardName = wardSelect.options[wardSelect.selectedIndex]?.text || '';
 
+        console.log("Province: " + provinceName + ", District: " + districtName + ", Ward: " + wardName + ", Details: " + addressDetails);
+
         if (!provinceCode || !districtCode || !wardCode ||
-            provinceName.includes('--Chọn') ||
-            districtName.includes('--Chọn') ||
-            wardName.includes('--Chọn')) {
+            provinceName.includes('--Chọn') || districtName.includes('--Chọn') || wardName.includes('--Chọn')) {
+            console.log("Validation failed: Missing province, district, or ward");
             alert('Vui lòng chọn đầy đủ Tỉnh, Huyện và Xã');
             return;
         }
-
-        document.getElementById('provinceHidden').value = provinceName;
-        document.getElementById('districtHidden').value = districtName;
-        document.getElementById('wardHidden').value = wardName;
-        document.getElementById('addressDetailsHidden').value = addressDetails;
 
         const addressParts = [];
         if (addressDetails) addressParts.push(addressDetails.trim());
@@ -347,14 +221,218 @@
         if (provinceName && !provinceName.includes('--Chọn')) addressParts.push(provinceName.trim());
 
         const fullAddress = addressParts.length > 0 ? addressParts.join(', ') : '';
-        const displayField = document.getElementById('chose_location');
-        if (displayField && fullAddress) {
-            displayField.value = fullAddress;
-            console.log("Address saved:", fullAddress);
-        }
+        console.log("Full Address: " + fullAddress);
+        document.getElementById('chose_location').value = fullAddress;
+        document.getElementById('addressHidden').value = fullAddress;
 
         closeAddressForm();
     }
+
+    // Tính tổng giá và tổng số lượng
+    function calculateTotal() {
+        console.log("Calculating total");
+        let totalPrice = 0;
+        let totalQuantity = 0;
+        document.querySelectorAll('.product-row').forEach(row => {
+            const price = parseFloat(row.querySelector('.product-price').value) || 0;
+            const quantity = parseInt(row.querySelector('.quantity').value) || 0;
+            totalPrice += price * quantity;
+            totalQuantity += quantity;
+        });
+        document.getElementById('totalPrice').value = totalPrice;
+        document.getElementById('totalQuantityHidden').value = totalQuantity;
+        console.log("Total Price: " + totalPrice + ", Total Quantity: " + totalQuantity);
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        console.log("DOM fully loaded");
+
+        // Load tỉnh
+        loadProvinces();
+
+        // Gắn sự kiện cho nút đóng form địa chỉ
+        const closeAddressFormBtn = document.getElementById('closeAddressForm');
+        if (closeAddressFormBtn) {
+            closeAddressFormBtn.addEventListener('click', closeAddressForm);
+        } else {
+            console.error("Không tìm thấy nút closeAddressForm");
+        }
+
+        // Gắn sự kiện cho nút lưu địa chỉ
+        const saveAddressBtn = document.getElementById('saveAddressButton');
+        if (saveAddressBtn) {
+            saveAddressBtn.addEventListener('click', saveAddress);
+        } else {
+            console.error("Không tìm thấy nút saveAddressButton");
+        }
+
+        // Thêm sản phẩm mới
+        const addProductBtn = document.getElementById('addProduct');
+        if (addProductBtn) {
+            addProductBtn.addEventListener('click', function() {
+                console.log("Adding new product row");
+                const productRow = document.querySelector('.product-row').cloneNode(true);
+                productRow.querySelector('.product-id').value = '';
+                productRow.querySelector('.product-name').value = '';
+                productRow.querySelector('.product-price').value = '';
+                productRow.querySelector('.quantity').value = '1';
+                document.getElementById('productList').appendChild(productRow);
+                calculateTotal();
+            });
+        } else {
+            console.error("Không tìm thấy nút addProduct");
+        }
+
+        // Xóa sản phẩm
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('remove-product') && document.querySelectorAll('.product-row').length > 1) {
+                console.log("Removing product row");
+                e.target.closest('.product-row').remove();
+                calculateTotal();
+            }
+        });
+
+        // Gọi tính tổng khi thay đổi số lượng
+        document.addEventListener('input', function(e) {
+            if (e.target.classList.contains('quantity')) {
+                console.log("Quantity changed");
+                calculateTotal();
+            }
+        });
+
+        // Xử lý AJAX khi nhập số điện thoại
+        const phoneInput = document.getElementById('phone');
+        if (phoneInput) {
+            phoneInput.addEventListener('input', function() {
+                console.log("Phone input changed");
+                const phone = this.value.trim();
+                const customerNameInput = document.getElementById('customerName');
+                const contextPath = "${pageContext.request.contextPath}";
+
+                if (phone.length >= 10) {
+                    const url = contextPath + "/add-order-management?phone=" + encodeURIComponent(phone);
+                    fetch(url, {
+                        method: 'GET',
+                        headers: { 'Accept': 'application/json' }
+                    })
+                        .then(response => {
+                            if (!response.ok) throw new Error('Server error: ' + response.status);
+                            return response.json();
+                        })
+                        .then(data => {
+                            console.log("Customer name fetched: " + data.fullName);
+                            customerNameInput.value = data.fullName || '';
+                        })
+                        .catch(error => {
+                            console.error('Error fetching customer name:', error);
+                            customerNameInput.value = '';
+                        });
+                } else {
+                    customerNameInput.value = '';
+                }
+            });
+        } else {
+            console.error("Không tìm thấy input phone");
+        }
+
+        // Xử lý AJAX khi nhập ID hoặc tên sản phẩm
+        document.addEventListener('input', function(e) {
+            if (e.target.classList.contains('product-id')) {
+                const productInput = e.target;
+                const productRow = productInput.closest('.product-row');
+                const productNameInput = productRow.querySelector('.product-name');
+                const productPriceInput = productRow.querySelector('.product-price');
+                const productPriceHiddenInput = productRow.querySelector('.product-price-hidden'); // Input ẩn
+                const value = productInput.value.trim();
+                const contextPath = "${pageContext.request.contextPath}";
+
+                if (value.length > 0) {
+                    const url = contextPath + "/api/product?id=" + encodeURIComponent(value);
+                    fetch(url, {
+                        method: 'GET',
+                        headers: { 'Accept': 'application/json' }
+                    })
+                        .then(response => {
+                            if (!response.ok) throw new Error('Server error: ' + response.status);
+                            return response.json();
+                        })
+                        .then(data => {
+                            if (data.name && !data.error) {
+                                productNameInput.value = data.name;
+                                productPriceInput.value = data.price || '';
+                                productPriceHiddenInput.value = data.price || ''; // Cập nhật input ẩn
+                                console.log("Product found: " + data.name + ", Price: " + data.price);
+                            } else {
+                                productNameInput.value = 'Không có sản phẩm';
+                                productPriceInput.value = '';
+                                productPriceHiddenInput.value = '';
+                                console.log("Product not found");
+                            }
+                            calculateTotal();
+                        })
+                        .catch(error => {
+                            console.error('Error fetching product:', error);
+                            productNameInput.value = 'Không có sản phẩm';
+                            productPriceInput.value = '';
+                            productPriceHiddenInput.value = '';
+                            calculateTotal();
+                        });
+                } else {
+                    productNameInput.value = '';
+                    productPriceInput.value = '';
+                    productPriceHiddenInput.value = '';
+                    calculateTotal();
+                }
+            }
+        });
+
+        // Xử lý submit form
+        const addOrderForm = document.getElementById('addOrderForm');
+        if (addOrderForm) {
+            console.log("Attaching submit event to form");
+            addOrderForm.addEventListener('submit', function(e) {
+                console.log("Form submit triggered");
+                const address = document.getElementById('addressHidden').value;
+                console.log("Address value: " + address);
+                if (!address) {
+                    e.preventDefault();
+                    console.log("Address is empty, preventing form submission");
+                    alert('Vui lòng nhập địa chỉ nhận hàng!');
+                    return;
+                }
+
+                // Kiểm tra các trường bắt buộc
+                const phone = document.getElementById('phone').value;
+                const customerName = document.getElementById('customerName').value;
+                const productIds = document.querySelectorAll('.product-id');
+                const quantities = document.querySelectorAll('.quantity');
+                console.log("Phone: " + phone);
+                console.log("CustomerName: " + customerName);
+                productIds.forEach((input, index) => {
+                    console.log(`ProductId[${index}]: ${input.value}`);
+                });
+                quantities.forEach((input, index) => {
+                    console.log(`Quantity[${index}]: ${input.value}`);
+                });
+
+                // Kiểm tra tính hợp lệ của form
+                if (!addOrderForm.checkValidity()) {
+                    e.preventDefault();
+                    console.log("Form validation failed");
+                    addOrderForm.reportValidity();
+                    return;
+                }
+
+                const formData = new FormData(addOrderForm);
+                console.log("Dữ liệu gửi lên:");
+                for (let [key, value] of formData.entries()) {
+                    console.log(`${key}: ${value}`);
+                }
+            });
+        } else {
+            console.error("Không tìm thấy form với id='addOrderForm'");
+        }
+    });
 </script>
 </body>
 </html>
