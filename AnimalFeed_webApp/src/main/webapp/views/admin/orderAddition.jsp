@@ -144,6 +144,7 @@
                                     <label class="form-label">Giá (VNĐ)</label>
                                     <input type="number" class="form-control product-price" name="displayPrices[]" disabled>
                                     <input type="hidden" class="product-price-hidden" name="prices[]">
+                                    <input type="hidden" class="product-base-price" value="0"> <!-- Lưu giá gốc (đã giảm) -->
                                 </div>
                                 <div class="col-md-2">
                                     <label class="form-label">Số lượng</label>
@@ -234,9 +235,11 @@
         let totalPrice = 0;
         let totalQuantity = 0;
         document.querySelectorAll('.product-row').forEach(row => {
-            const price = parseFloat(row.querySelector('.product-price').value) || 0;
+            const basePrice = parseFloat(row.querySelector('.product-base-price').value) || 0;
             const quantity = parseInt(row.querySelector('.quantity').value) || 0;
-            totalPrice += price * quantity;
+            const displayPrice = basePrice * quantity; // Giá hiển thị = giá đã giảm × số lượng
+            row.querySelector('.product-price').value = displayPrice; // Cập nhật ô giá
+            totalPrice += displayPrice;
             totalQuantity += quantity;
         });
         document.getElementById('totalPrice').value = totalPrice;
@@ -338,11 +341,14 @@
         // Xử lý AJAX khi nhập ID hoặc tên sản phẩm
         document.addEventListener('input', function(e) {
             if (e.target.classList.contains('product-id')) {
+                console.log("Product ID input changed");
                 const productInput = e.target;
                 const productRow = productInput.closest('.product-row');
                 const productNameInput = productRow.querySelector('.product-name');
                 const productPriceInput = productRow.querySelector('.product-price');
-                const productPriceHiddenInput = productRow.querySelector('.product-price-hidden'); // Input ẩn
+                const productPriceHiddenInput = productRow.querySelector('.product-price-hidden');
+                const productBasePriceInput = productRow.querySelector('.product-base-price'); // Lưu giá gốc (đã giảm)
+                const quantityInput = productRow.querySelector('.quantity');
                 const value = productInput.value.trim();
                 const contextPath = "${pageContext.request.contextPath}";
 
@@ -359,13 +365,17 @@
                         .then(data => {
                             if (data.name && !data.error) {
                                 productNameInput.value = data.name;
-                                productPriceInput.value = data.price || '';
-                                productPriceHiddenInput.value = data.price || ''; // Cập nhật input ẩn
-                                console.log("Product found: " + data.name + ", Price: " + data.price);
+                                const basePrice = data.price || 0; // Giá đã giảm từ API
+                                const quantity = parseInt(quantityInput.value) || 1;
+                                productBasePriceInput.value = basePrice; // Lưu giá gốc (đã giảm)
+                                productPriceHiddenInput.value = basePrice; // Giá gửi lên server
+                                productPriceInput.value = basePrice * quantity; // Giá hiển thị = giá đã giảm × số lượng
+                                console.log("Product found: " + data.name + ", Price (discounted): " + basePrice);
                             } else {
                                 productNameInput.value = 'Không có sản phẩm';
                                 productPriceInput.value = '';
                                 productPriceHiddenInput.value = '';
+                                productBasePriceInput.value = '0';
                                 console.log("Product not found");
                             }
                             calculateTotal();
@@ -375,14 +385,26 @@
                             productNameInput.value = 'Không có sản phẩm';
                             productPriceInput.value = '';
                             productPriceHiddenInput.value = '';
+                            productBasePriceInput.value = '0';
                             calculateTotal();
                         });
                 } else {
                     productNameInput.value = '';
                     productPriceInput.value = '';
                     productPriceHiddenInput.value = '';
+                    productBasePriceInput.value = '0';
                     calculateTotal();
                 }
+            }
+
+            // Cập nhật giá khi thay đổi số lượng
+            if (e.target.classList.contains('quantity')) {
+                console.log("Quantity changed");
+                const productRow = e.target.closest('.product-row');
+                const basePrice = parseFloat(productRow.querySelector('.product-base-price').value) || 0;
+                const quantity = parseInt(e.target.value) || 1;
+                productRow.querySelector('.product-price').value = basePrice * quantity; // Cập nhật giá hiển thị
+                calculateTotal();
             }
         });
 
