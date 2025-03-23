@@ -53,7 +53,7 @@
     <div class="container mt-4">
         <div class="row">
             <div class="col-md-12">
-                <h2>Chi tiết đơn hàng #${order.id}</h2>
+                <h2 class="mt-2">Chi tiết đơn hàng #${order.id}</h2>
 
                 <div class="order-detail-container">
                     <div class="row mb-4">
@@ -72,6 +72,7 @@
                                     </c:choose>
                                 </span>
                             </p>
+                            <p><strong>Hình thức thanh toán:</strong>${sessionScope.customerInfo.paymentMethod}</p>
                         </div>
                         <div class="col-md-6">
                             <h5>Thông tin giao hàng</h5>
@@ -109,7 +110,7 @@
                 </div>
 
                 <div class="text-center mt-4">
-                    <a href="${pageContext.request.contextPath}/order-history" class="btn btn-secondary">
+                    <a href="${pageContext.request.contextPath}/order-history" class="btn btn-secondary" style="background-color: #94b83d">
                         <i class="fas fa-arrow-left"></i> Quay lại danh sách đơn hàng
                     </a>
                 </div>

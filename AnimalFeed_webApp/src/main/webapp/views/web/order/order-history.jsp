@@ -137,7 +137,7 @@
                             <div>${order.address}</div>
                         </div>
                         <div class="col-md-2 text-end">
-                            <a href="order-detail?id=${order.id}" class="btn btn-primary btn-sm text-center">
+                            <a href="order-detail?id=${order.id}" class="btn btn-primary btn-sm text-center" style="background-color: #fcae18">
                                 <i class="fas fa-eye"></i> Xem chi tiết
                             </a>
                         </div>

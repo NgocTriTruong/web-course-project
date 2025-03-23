@@ -50,7 +50,7 @@ public class AddProductAdmin extends HttpServlet {
             // Xử lý file upload
             Part filePart = request.getPart("image");
             String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-            String uploadPath = getServletContext().getRealPath("/uploads");
+            String uploadPath = getServletContext().getRealPath("/views/template/assets/images/product/goat");
 
             File uploadDir = new File(uploadPath);
             if (!uploadDir.exists()) {
@@ -67,7 +67,7 @@ public class AddProductAdmin extends HttpServlet {
             product.setPrice(price);
             product.setDescription(description);
             product.setQuantity(quantity);
-            product.setImg("/uploads/" + fileName);
+            product.setImg("/views/template/assets/images/product/goat/" + fileName);
             product.setCreateDate(LocalDate.now());
             product.setDiscountId(discountId);
 

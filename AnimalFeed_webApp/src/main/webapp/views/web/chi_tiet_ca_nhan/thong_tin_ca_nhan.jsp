@@ -49,7 +49,6 @@
                                             ${sessionScope.user.phone}
                                         </c:when>
                                         <c:otherwise>
-                                            Khách hàng <br>
                                             Đăng nhập để xem thông tin
                                         </c:otherwise>
                                     </c:choose>
@@ -89,8 +88,13 @@
                                 </div>
                                 <div class="line_gray mt-3 mb-3"></div>
                                 <div class="lien_he d-flex">
-                                    <div class="p user_left">Thông tin liên hệ</div>
+                                    <div class="p user_left">Số điện thoại</div>
                                     <div class="user_right">${sessionScope.user.phone}</div>
+                                </div>
+                                <div class="line_gray mt-3 mb-3"></div>
+                                <div class="lien_he d-flex">
+                                    <div class="p user_left">Gmail</div>
+                                    <div class="user_right">${sessionScope.user.email}</div>
                                 </div>
                                 <div class="line_gray mt-3 mb-3"></div>
                                 <div class="button mt-4 text-white fw-bold" onclick="window.location.href='${pageContext.request.contextPath}/UpdateUserInfoServlet'">

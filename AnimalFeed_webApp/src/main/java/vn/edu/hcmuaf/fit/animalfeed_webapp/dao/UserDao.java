@@ -113,7 +113,7 @@ public class UserDao {
     //eidt user
     public void updateUserByUser(User user) {
         jdbi.useHandle(handle ->
-                handle.createUpdate("UPDATE users SET full_name = :fullName, phone = :phone WHERE id = :id")
+                handle.createUpdate("UPDATE users SET full_name = :fullName, phone = :phone, email =:email WHERE id = :id")
                         .bindBean(user)
                         .execute()
         );
