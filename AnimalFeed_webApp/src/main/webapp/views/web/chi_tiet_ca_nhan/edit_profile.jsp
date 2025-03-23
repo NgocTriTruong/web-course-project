@@ -49,7 +49,6 @@
                                         ${sessionScope.user.phone}
                                     </c:when>
                                     <c:otherwise>
-                                        Khách hàng <br>
                                         Đăng nhập để xem thông tin
                                     </c:otherwise>
                                 </c:choose>
@@ -87,7 +86,11 @@
 
                         <div class="form-floating mb-3 mt-3">
                             <input type="text" class="form-control" id="phone" name="phone" value="${not empty user ? user.phone : ''}" required>
-                            <label for="phone">Thông tin liên hệ<span class="req">*</span></label>
+                            <label for="phone">Số điện thoại<span class="req">*</span></label>
+                        </div>
+                        <div class="form-floating mb-3 mt-3">
+                            <input type="text" class="form-control" id="email" name="email" value="${not empty user ? user.email : ''}" required>
+                            <label for="email">Gmail<span class="req">*</span></label>
                         </div>
                         <div class="d-flex justify-content-center">
                             <button type="submit" class="btn btn-primary mt-4 text-white fw-bold" style="background-color: #94b83d">Lưu thay đổi</button>
