@@ -49,7 +49,6 @@
                                             ${sessionScope.user.phone}
                                         </c:when>
                                         <c:otherwise>
-                                            Khách hàng <br>
                                             Đăng nhập để xem thông tin
                                         </c:otherwise>
                                     </c:choose>

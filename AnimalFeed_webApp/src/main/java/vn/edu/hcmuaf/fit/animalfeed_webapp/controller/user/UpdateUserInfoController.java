@@ -44,6 +44,7 @@ public class UpdateUserInfoController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String fullName = request.getParameter("fullName");
         String phone = request.getParameter("phone");
+        String email = request.getParameter("email");
 
         // Kiểm tra session
         HttpSession session = request.getSession(false);
@@ -58,6 +59,7 @@ public class UpdateUserInfoController extends HttpServlet {
 
         user.setFullName(fullName);
         user.setPhone(phone);
+        user.setEmail(email);
 
         // Cập nhật thông tin user
         userService.updateUserByUser(user);
