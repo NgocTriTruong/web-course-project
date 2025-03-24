@@ -3,16 +3,13 @@ package vn.edu.hcmuaf.fit.animalfeed_webapp.dao;
 import org.jdbi.v3.core.Jdbi;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.db.JdbiConnect;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.dto.OrderDetailsWithProduct;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Order;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.OrderDetail;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class OrderDetailDao {
     private static Jdbi jdbi = JdbiConnect.getJdbi();
-
 
     public void insertOrderDetail(OrderDetail orderDetail) {
         int rowsInserted = jdbi.withHandle(handle ->
@@ -23,7 +20,7 @@ public class OrderDetailDao {
                         .bind("total_price", orderDetail.getTotalPrice())
                         .execute()
         );
-        System.out.println(rowsInserted);
+        System.out.println("Rows inserted: " + rowsInserted);
     }
 
     public ArrayList<OrderDetail> getODsByOrderId(int orderId) {
@@ -31,7 +28,6 @@ public class OrderDetailDao {
                 .bind("orderId", orderId)
                 .mapToBean(OrderDetail.class)
                 .list());
-
     }
 
     public ArrayList<OrderDetailsWithProduct> getOrderDetailsWithProductByOrderId(int orderId) {
@@ -65,5 +61,15 @@ public class OrderDetailDao {
                         return list;
                     });
         });
+    }
+
+    // Thêm phương thức deleteOrderDetailsByOrderId
+    public void deleteOrderDetailsByOrderId(int orderId) {
+        int rowsDeleted = jdbi.withHandle(handle ->
+                handle.createUpdate("DELETE FROM order_details WHERE order_id = :orderId")
+                        .bind("orderId", orderId)
+                        .execute()
+        );
+        System.out.println("Rows deleted: " + rowsDeleted);
     }
 }

@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/admin/assets/css/header.css">
 
     <script src="${pageContext.request.contextPath}/views/admin/assets/js/mdb.min.js"></script>
+    <script src="${pageContext.request.contextPath}/views/admin/assets/js/add_header.js" defer></script>
+
 
     <style>
         .address-form {
