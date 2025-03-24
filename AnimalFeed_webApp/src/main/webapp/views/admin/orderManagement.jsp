@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix = "f" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html lang="en">
@@ -20,6 +20,16 @@
 
     <script src="${pageContext.request.contextPath}/views/admin/assets/js/mdb.min.js"></script>
     <script src="${pageContext.request.contextPath}/views/admin/assets/js/add_header.js" defer></script>
+
+    <!-- Thêm CSS để làm nút bị vô hiệu hóa có màu xám -->
+    <style>
+        .btn-disabled {
+            background-color: #cccccc !important; /* Màu xám */
+            color: #666666 !important; /* Màu chữ xám */
+            cursor: not-allowed !important; /* Con trỏ không cho phép nhấn */
+            pointer-events: none; /* Ngăn mọi sự kiện nhấn */
+        }
+    </style>
 </head>
 
 <body>
@@ -100,12 +110,21 @@
                             </span>
                         </td>
                         <td>
-                            <a href="orderEdit?id=${order.id}" class="btn bg_green btn-floating" style="font-size: 16px;"
-                               title="Chỉnh sửa">
-                                <i class="far fa-pen-to-square"></i>
-                            </a>
-                            <a href="order-manager?action=view&id=${order.id}" class="btn bg_blue btn-floating"
-                               style="font-size: 16px;" title="Xem chi tiết">
+                            <!-- Nút chỉnh sửa: Chỉ hoạt động nếu trạng thái là 1 hoặc 2 -->
+                            <c:choose>
+                                <c:when test="${order.status == 1 || order.status == 2}">
+                                    <a href="orderEdit?id=${order.id}" class="btn bg_green btn-floating" style="font-size: 16px;" title="Chỉnh sửa">
+                                        <i class="far fa-pen-to-square"></i>
+                                    </a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a href="#" class="btn bg_green btn-floating btn-disabled" style="font-size: 16px;" title="Không thể chỉnh sửa">
+                                        <i class="far fa-pen-to-square"></i>
+                                    </a>
+                                </c:otherwise>
+                            </c:choose>
+                            <!-- Nút xem chi tiết: Luôn hoạt động -->
+                            <a href="order-manager?action=view&id=${order.id}" class="btn bg_blue btn-floating" style="font-size: 16px;" title="Xem chi tiết">
                                 <i class="far fa-eye"></i>
                             </a>
                         </td>
@@ -159,6 +178,13 @@
             const searchTerm = searchInput.value.trim();
             window.location.href = '${pageContext.request.contextPath}/admin/orders?action=search&searchTerm=' + encodeURIComponent(searchTerm);
         }
+
+        searchButton.addEventListener('click', performSearch);
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
     });
 </script>
 </body>
