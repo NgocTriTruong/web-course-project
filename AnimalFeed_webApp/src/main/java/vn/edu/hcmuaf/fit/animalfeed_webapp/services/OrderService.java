@@ -56,7 +56,7 @@ public class OrderService {
         return null;
     }
 
-    // Tổng đơn ặt hàng
+    // Tổng đơn đặt hàng
     public int getTotalOrder() {
         return orderDao.getTotalOrder();
     }
@@ -69,7 +69,22 @@ public class OrderService {
     // Định nghĩa một phương thức để lấy thông tin người dùng và thống kê
     public List<UserStats> getUserStats() {
         return orderDao.getUserStats();
+    }
 
+    // Cập nhật thông tin đơn hàng
+    public void updateOrder(Order order) {
+        orderDao.updateOrder(order);
+    }
+
+    // Cập nhật danh sách chi tiết đơn hàng (xóa cũ và thêm mới)
+    public void updateOrderDetails(int orderId, List<OrderDetail> orderDetails) {
+        // Xóa các chi tiết đơn hàng cũ
+        orderDetailDao.deleteOrderDetailsByOrderId(orderId);
+
+        // Thêm các chi tiết đơn hàng mới
+        for (OrderDetail detail : orderDetails) {
+            orderDetailDao.insertOrderDetail(detail);
+        }
     }
 
     public static void main(String[] args) {

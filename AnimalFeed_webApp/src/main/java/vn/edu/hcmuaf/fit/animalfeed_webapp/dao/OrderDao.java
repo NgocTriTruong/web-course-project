@@ -7,20 +7,13 @@ import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Order;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OrderDao {
     private static Jdbi jdbi = JdbiConnect.getJdbi();
 
-    // Method to insert a new user
-    public ArrayList<Order> getOrdersByUserId(int userId) throws SQLException, ClassNotFoundException {
-        return (ArrayList<Order>) jdbi.withHandle(handle -> handle.createQuery("select * from orders where user_id = :userId")
-                .bind("userId", userId)
-                .mapToBean(Order.class)
-                .list()
-        );
-    }
-
+    // Method to insert a new order
     public int insertOrder(Order order) {
         return jdbi.withHandle(handle ->
                 handle.createUpdate("INSERT INTO orders (status, address, shipper_id, total_price, total_quantity, user_id, ship_price, order_date, ship_date) VALUES (:status, :address, :shipper_id, :total_price, :total_quantity, :user_id, :ship_price, :order_date, :ship_date)")
@@ -39,7 +32,16 @@ public class OrderDao {
         );
     }
 
-    // Method to update user information
+    // Method to get orders by user ID
+    public ArrayList<Order> getOrdersByUserId(int userId) throws SQLException, ClassNotFoundException {
+        return (ArrayList<Order>) jdbi.withHandle(handle -> handle.createQuery("select * from orders where user_id = :userId")
+                .bind("userId", userId)
+                .mapToBean(Order.class)
+                .list()
+        );
+    }
+
+    // Method to update order status
     public void updateOrderStatus(int id, int newStatus) {
         int rowsUpdated = jdbi.withHandle(handle ->
                 handle.createUpdate("UPDATE orders SET status = :newStatus WHERE id = :id")
@@ -50,7 +52,7 @@ public class OrderDao {
         System.out.println(rowsUpdated);
     }
 
-    // Method to delete a user by username
+    // Method to delete an order by ID
     public void deleteOrder(int id) {
         int rowsDeleted = jdbi.withHandle(handle ->
                 handle.createUpdate("DELETE FROM orders WHERE id = :id")
@@ -60,19 +62,21 @@ public class OrderDao {
         System.out.println(rowsDeleted);
     }
 
-    // Method to list all users
+    // Method to list all orders
     public List<Order> getAllOrders() {
         return jdbi.withHandle(handle -> handle.createQuery("select * from orders").mapToBean(Order.class).list());
     }
 
+    // Method to get an order by ID
     public Order getOrderById(int orderId) {
         return jdbi.withHandle(handle -> handle.createQuery("select * from orders where id = :orderId")
                 .bind("orderId", orderId)
                 .mapToBean(Order.class)
-                .findFirst()  // This returns an Optional<Order>
-                .orElse(null));  // This returns null if no order is found
+                .findFirst()
+                .orElse(null));
     }
 
+    // Method to update shipping date
     public void updateShippingDate(int orderId, LocalDateTime now) {
         int rowsUpdated = jdbi.withHandle(handle ->
                 handle.createUpdate("UPDATE orders SET ship_date = :now WHERE id = :orderId")
@@ -83,21 +87,21 @@ public class OrderDao {
         System.out.println(rowsUpdated);
     }
 
-    //Tổng đơn đặt hàng
+    // Total number of orders
     public int getTotalOrder() {
         return jdbi.withHandle(handle -> handle.createQuery("select count(*) from orders")
                 .mapTo(int.class)
                 .one());
     }
 
-    // Tổng doanh thu
+    // Total revenue
     public int getTotalRevenue() {
         return jdbi.withHandle(handle -> handle.createQuery("select sum(total_price) from orders")
                 .mapTo(int.class)
                 .one());
     }
 
-    // Định nghĩa một phương thức để lấy thông tin người dùng và thống kê
+    // Get user statistics
     public List<UserStats> getUserStats() {
         return jdbi.withHandle(handle ->
                 handle.createQuery(
@@ -113,6 +117,24 @@ public class OrderDao {
                         .mapToBean(UserStats.class)
                         .list()
         );
+    }
+
+    // Thêm phương thức updateOrder
+    public void updateOrder(Order order) {
+        int rowsUpdated = jdbi.withHandle(handle ->
+                handle.createUpdate("""
+                        UPDATE orders
+                        SET address = :address, status = :status, total_price = :totalPrice, total_quantity = :totalQuantity
+                        WHERE id = :id
+                        """)
+                        .bind("address", order.getAddress())
+                        .bind("status", order.getStatus())
+                        .bind("totalPrice", order.getTotalPrice())
+                        .bind("totalQuantity", order.getTotalQuantity())
+                        .bind("id", order.getId())
+                        .execute()
+        );
+        System.out.println("Rows updated: " + rowsUpdated);
     }
 
     public static void main(String[] args) {
