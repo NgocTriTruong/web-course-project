@@ -252,8 +252,29 @@
             <div class="alert alert-danger">${error}</div>
         </c:if>
 
+        <!-- Kiểm tra khóa -->
+        <c:if test="${sessionScope.lockUntil != null && System.currentTimeMillis() < sessionScope.lockUntil}">
+            <div class="alert alert-danger" id="lockMessage">
+                Trang đăng ký bị khóa do nhập sai mã quá 5 lần. Vui lòng thử lại sau
+                <span id="remainingTime"></span> phút!
+            </div>
+            <script>
+                const lockUntil = ${sessionScope.lockUntil};
+                function updateRemainingTime() {
+                    const now = Date.now();
+                    const remaining = Math.max(0, Math.ceil((lockUntil - now) / 1000 / 60));
+                    document.getElementById("remainingTime").innerText = remaining;
+                    if (remaining === 0) {
+                        window.location.reload();
+                    }
+                }
+                updateRemainingTime();
+                setInterval(updateRemainingTime, 60000); // Cập nhật mỗi phút
+            </script>
+        </c:if>
+
         <!-- Form đăng ký -->
-        <form id="registrationForm" method="POST" novalidate>
+        <form id="registrationForm" method="POST" novalidate style="${sessionScope.lockUntil != null && System.currentTimeMillis() < sessionScope.lockUntil ? 'display:none;' : ''}">
             <div class="mb-3">
                 <i class="fas fa-user"></i>
                 <input class="form-control" id="id_username" type="text" name="username" maxlength="100" placeholder="Tên tài khoản *" required>
@@ -320,7 +341,6 @@
         const password2 = document.getElementById("id_password2").value;
         const recaptchaResponse = grecaptcha.getResponse();
 
-        // Validate inputs
         let isValid = true;
         if (!username) {
             document.getElementById("usernameError").style.display = "block";
@@ -368,7 +388,7 @@
                     document.getElementById("registrationForm").style.display = "none";
                     document.getElementById("verifyForm").style.display = "block";
                 } else {
-                    alert("Có lỗi khi gửi mã xác minh!");
+                    response.text().then(text => alert(text || "Có lỗi khi gửi mã xác minh!"));
                 }
             });
         }
@@ -386,7 +406,6 @@
             body: "code=" + encodeURIComponent(code)
         }).then(response => {
             if (response.ok) {
-                // Gửi yêu cầu đăng ký sau khi xác minh thành công
                 const username = sessionStorage.getItem("regUsername");
                 const email = sessionStorage.getItem("regEmail");
                 const password = sessionStorage.getItem("regPassword");
@@ -411,6 +430,9 @@
                 response.text().then(text => {
                     document.getElementById("codeError").innerText = text;
                     document.getElementById("codeError").style.display = "block";
+                    if (text.includes("khóa trong 10 phút")) {
+                        window.location.reload(); // Tải lại trang để hiển thị thông báo khóa
+                    }
                 });
             }
         });

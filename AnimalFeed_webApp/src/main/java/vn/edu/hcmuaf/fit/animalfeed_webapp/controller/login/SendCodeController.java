@@ -19,12 +19,17 @@ public class SendCodeController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("email");
         String code = generateVerificationCode();
-        HttpSession session = request.getSession();
-        session.setAttribute("verificationCode", code);
-        session.setAttribute("codeExpiration", System.currentTimeMillis() + 5 * 60 * 1000); // Hết hạn sau 5 phút
 
-        emailService.sendVerificationEmail(email, code);
-        response.setStatus(HttpServletResponse.SC_OK);
+        boolean sent = emailService.sendVerificationEmail(email, code);
+        if (sent) {
+            HttpSession session = request.getSession();
+            session.setAttribute("verificationCode", code);
+            session.setAttribute("codeExpiration", System.currentTimeMillis() + 5 * 60 * 1000); // Hết hạn sau 5 phút
+            response.setStatus(HttpServletResponse.SC_OK);
+        } else {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            response.getWriter().write("Có lỗi khi gửi mã xác minh!");
+        }
     }
 
     private String generateVerificationCode() {
