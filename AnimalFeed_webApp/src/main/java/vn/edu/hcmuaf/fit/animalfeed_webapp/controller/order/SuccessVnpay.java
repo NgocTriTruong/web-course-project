@@ -6,7 +6,9 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Order;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Payment;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.OrderService;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.services.PaymentService;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -49,6 +51,9 @@ public class SuccessVnpay extends HttpServlet {
             if (signValue.equals(vnp_SecureHash))
             {
 
+                Payment payment = new Payment();
+                PaymentService paymentService = new PaymentService();
+
                 Order order = new Order();
                 OrderService orderService = new OrderService();
                 String oderId = request.getParameter("vnp_TxnRef");
@@ -72,6 +77,7 @@ public class SuccessVnpay extends HttpServlet {
 
                                 //Here Code update PaymnentStatus = 1 into your Database
                                 order.setStatus(2);
+                                payment.setStatus(1);
                                 transSuccess = true;
                             }
                             else
@@ -82,6 +88,7 @@ public class SuccessVnpay extends HttpServlet {
                             }
                             out.print ("{\"RspCode\":\"00\",\"Message\":\"Confirm Success\"}");
                             orderService.updateOrderStatus(Integer.parseInt(oderId), order.getStatus());
+                            paymentService.updatePaymentStatus(Integer.parseInt(oderId), payment.getStatus());
                             request.setAttribute("transResult", transSuccess);
 
                             System.out.println(transSuccess);
@@ -112,7 +119,6 @@ public class SuccessVnpay extends HttpServlet {
         {
             out.print("{\"RspCode\":\"99\",\"Message\":\"Unknow error\"}");
         }
-
 
     }
 
