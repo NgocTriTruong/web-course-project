@@ -58,7 +58,7 @@
                 <div class="order-detail-container">
                     <div class="row mb-4">
                         <div class="col-md-6">
-                            <h5>Thông tin đơn hàng</h5>
+                            <h5><u>Thông tin đơn hàng:</u></h5>
                             <p><strong>Ngày đặt:</strong> ${formattedOrderDate}</p>
                             <p><strong>Trạng thái:</strong>
                                 <span class="status-badge status-${order.status}">
@@ -72,10 +72,24 @@
                                     </c:choose>
                                 </span>
                             </p>
-                            <p><strong>Hình thức thanh toán:</strong>${sessionScope.customerInfo.paymentMethod}</p>
+
+                            <p><strong>Hình thức thanh toán:</strong>
+                                <c:choose>
+                                    <c:when test="${not empty payments}">
+                                        <c:choose>
+                                            <c:when test="${payments.method eq 'COD'}">Thanh toán khi nhận hàng (COD)</c:when>
+                                            <c:when test="${payments.method eq 'VNPay'}">Thanh toán qua VNPay</c:when>
+                                            <c:otherwise>${payments.method}</c:otherwise>
+                                        </c:choose>
+                                    </c:when>
+                                    <c:otherwise>Đang cập nhật</c:otherwise>
+                                </c:choose>
+                            </p>
+
+
                         </div>
                         <div class="col-md-6">
-                            <h5>Thông tin giao hàng</h5>
+                            <h5><u>Thông tin giao hàng:</u></h5>
                             <p><strong>Địa chỉ:</strong> ${order.address}</p>
                             <p><strong>Phí vận chuyển:</strong>
                                 <fmt:formatNumber value="${order.shippingPrice}" type="currency" currencySymbol="₫"/>
@@ -83,13 +97,14 @@
                         </div>
                     </div>
 
-                    <h5>Chi tiết sản phẩm</h5>
+                    <h5><u>Chi tiết sản phẩm:</u></h5>
                     <div class="product-list">
                         <c:forEach var="detail" items="${orderDetailsWithProducts}">
                             <div class="product-item">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <h6>${detail.product.name}</h6>
+                                        <p>${detail.product.description}</p>
                                     </div>
                                     <div class="col-md-2">
                                         <p>Số lượng: ${detail.orderDetail.quantity}</p>

@@ -7,9 +7,11 @@ import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.cart.Cart;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.dto.CartItem;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Order;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.OrderDetail;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Payment;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.CartService;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.OrderService;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.services.PaymentService;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -21,6 +23,7 @@ import java.util.*;
 @WebServlet(name = "ajaxServlet", value = "/payment")
 public class ajaxServlet extends HttpServlet {
     OrderService orderService = new OrderService();
+    PaymentService paymentService = new PaymentService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -80,6 +83,16 @@ public class ajaxServlet extends HttpServlet {
         order.setShippingPrice(0.0); // Free shipping as per UI
 
         int orderId = orderService.insertOrder(order);
+
+        // Create payment
+        Payment payment = new Payment();
+        payment.setPayDate(LocalDateTime.now());
+        payment.setMethod(paymentMethod);
+        payment.setOrderId(orderId);
+        payment.setUserId(user.getId());
+        payment.setStatus(0);
+
+        paymentService.addPayment(payment);
 
         // Create order details for selected items
         for (CartItem cartItem : selectedItems) {
