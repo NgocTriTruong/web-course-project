@@ -27,6 +27,15 @@ public class RegisterController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         Boolean verified = (Boolean) session.getAttribute("verified");
+        Long lockUntil = (Long) session.getAttribute("lockUntil");
+
+        // Kiểm tra khóa
+        if (lockUntil != null && System.currentTimeMillis() < lockUntil) {
+            long remainingTime = (lockUntil - System.currentTimeMillis()) / 1000 / 60;
+            resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            resp.getWriter().write("Trang đăng ký bị khóa trong " + remainingTime + " phút!");
+            return;
+        }
 
         // Kiểm tra trạng thái xác minh
         if (verified == null || !verified) {
@@ -64,17 +73,23 @@ public class RegisterController extends HttpServlet {
         session.removeAttribute("verificationCode");
         session.removeAttribute("codeExpiration");
         session.removeAttribute("verified");
+        session.removeAttribute("wrongAttempts");
+        session.removeAttribute("lockUntil");
         resp.setStatus(HttpServletResponse.SC_OK);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        Long lockUntil = (Long) session.getAttribute("lockUntil");
+        if (lockUntil != null && System.currentTimeMillis() < lockUntil) {
+            req.setAttribute("error", "Trang đăng ký bị khóa do nhập sai mã quá 5 lần!");
+        }
         req.getRequestDispatcher("/views/web/register.jsp").forward(req, resp);
     }
 
-    // Phương thức xác thực reCAPTCHA với Google
     private boolean verifyRecaptcha(String gRecaptchaResponse) {
-        String secretKey = "6LciYeoqAAAAAB9XEXALqLD7b7H8UCZBEOy2BryL"; // Secret Key từ Google reCAPTCHA
+        String secretKey = "6LciYeoqAAAAAB9XEXALqLD7b7H8UCZBEOy2BryL";
         String url = "https://www.google.com/recaptcha/api/siteverify";
 
         try {
