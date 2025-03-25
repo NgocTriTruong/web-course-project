@@ -3,12 +3,14 @@ package vn.edu.hcmuaf.fit.animalfeed_webapp.dao;
 import org.jdbi.v3.core.Jdbi;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.db.JdbiConnect;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
-import java.util.*;
+
+import java.util.List;
+import java.util.Optional;
 
 public class UserDao {
     private static final Jdbi jdbi = JdbiConnect.getJdbi();
 
-    // Lấy user theo id
+    // Lấy user theo id (giữ nguyên)
     public User getUserById(int userId) {
         return jdbi.withHandle(handle ->
                 handle.createQuery("SELECT * FROM users WHERE id = :id")
@@ -19,18 +21,18 @@ public class UserDao {
         );
     }
 
-    // Lấy user theo số điện thoại
-    public User getUserByPhone(String phone) {
+    // Lấy user theo email (thay cho phone)
+    public User getUserByEmailDirect(String email) {
         return jdbi.withHandle(handle ->
-                handle.createQuery("SELECT * FROM users WHERE phone = :phone")
-                        .bind("phone", phone)
+                handle.createQuery("SELECT * FROM users WHERE email = :email")
+                        .bind("email", email)
                         .mapToBean(User.class)
                         .findFirst()
                         .orElse(null)
         );
     }
 
-    // Load data tất cả người dùng
+    // Load data tất cả người dùng (giữ nguyên)
     public List<User> loadUsers() {
         return jdbi.withHandle(handle ->
                 handle.createQuery("SELECT * FROM users")
@@ -39,11 +41,11 @@ public class UserDao {
         );
     }
 
-    // Đăng nhập
-    public User login(String phone, String password) {
+    // Đăng nhập (sử dụng email thay vì phone)
+    public User login(String email, String password) {
         return jdbi.withHandle(handle ->
-                handle.createQuery("SELECT * FROM users WHERE phone = :phone AND password = :password")
-                        .bind("phone", phone)
+                handle.createQuery("SELECT * FROM users WHERE email = :email AND password = :password")
+                        .bind("email", email)
                         .bind("password", password)
                         .mapToBean(User.class)
                         .findOne()
@@ -51,7 +53,7 @@ public class UserDao {
         );
     }
 
-    // Kiểm tra xem user có phải là admin hay không
+    // Kiểm tra xem user có phải là admin hay không (giữ nguyên)
     public static boolean checkIfAdmin(int userId) {
         return jdbi.withHandle(handle ->
                 handle.createQuery("SELECT role FROM users WHERE id = :userId")
@@ -62,12 +64,12 @@ public class UserDao {
         );
     }
 
-    // Thêm người dùng mới
+    // Thêm người dùng mới (cập nhật để dùng email thay vì phone)
     public void addUser(User user, int adminUserId) {
         if (checkIfAdmin(adminUserId)) {
             jdbi.useTransaction(handle -> {
-                int userId = handle.createUpdate("INSERT INTO users (full_name, phone, password, role, status, create_date, update_date) " +
-                                "VALUES (:fullName, :phone, :password, :role, :status, :createDate, :updateDate)")
+                int userId = handle.createUpdate("INSERT INTO users (full_name, email, password, role, status, create_date, update_date) " +
+                                "VALUES (:fullName, :email, :password, :role, :status, :createDate, :updateDate)")
                         .bindBean(user)
                         .executeAndReturnGeneratedKeys("id")
                         .mapTo(Integer.class)
@@ -85,7 +87,7 @@ public class UserDao {
         }
     }
 
-    // Xóa người dùng (xóa mềm)
+    // Xóa người dùng (xóa mềm - giữ nguyên)
     public void deleteUser(int userId, int adminUserId) {
         if (checkIfAdmin(adminUserId)) {
             jdbi.useTransaction(handle -> {
@@ -110,25 +112,25 @@ public class UserDao {
         }
     }
 
-    //eidt user
+    // Cập nhật thông tin người dùng (không cần phone)
     public void updateUserByUser(User user) {
         jdbi.useHandle(handle ->
-                handle.createUpdate("UPDATE users SET full_name = :fullName, phone = :phone, email =:email WHERE id = :id")
+                handle.createUpdate("UPDATE users SET full_name = :fullName, email = :email WHERE id = :id")
                         .bindBean(user)
                         .execute()
         );
     }
 
-    // Cập nhật người dùng
+    // Cập nhật người dùng (cập nhật để dùng email thay vì phone)
     public void updateUser(User user, int adminUserId) {
         if (!checkIfAdmin(adminUserId)) {
             throw new RuntimeException("User is not authorized to update.");
         }
 
         jdbi.useTransaction(handle -> {
-            int updatedRows = handle.createUpdate("UPDATE users SET full_name = :fullName, phone = :phone, role = :role, status = :status, update_date = NOW() WHERE id = :id")
+            int updatedRows = handle.createUpdate("UPDATE users SET full_name = :fullName, email = :email, role = :role, status = :status, update_date = NOW() WHERE id = :id")
                     .bind("fullName", user.getFullName())
-                    .bind("phone", user.getPhone())
+                    .bind("email", user.getEmail())
                     .bind("status", user.getStatus())
                     .bind("role", user.getRole())
                     .bind("id", user.getId())
@@ -149,34 +151,32 @@ public class UserDao {
         });
     }
 
-    // Chèn người dùng vào cơ sở dữ liệu
+    // Chèn người dùng vào cơ sở dữ liệu (cập nhật để dùng email)
     public void insertUser(User user) {
         jdbi.useHandle(handle ->
-                handle.createUpdate("INSERT INTO users (full_name, phone, email, password, role, status, create_date, update_date) " +
-                                "VALUES (:fullName, :phone, :email, :password, :role, :status, :createDate, :updateDate)")
+                handle.createUpdate("INSERT INTO users (full_name, email, password, role, status, create_date, update_date) " +
+                                "VALUES (:fullName, :email, :password, :role, :status, :createDate, :updateDate)")
                         .bindBean(user)
                         .execute()
         );
     }
 
-    // Tìm kiếm người dùng theo tên hoặc số điện thoại
+    // Tìm kiếm người dùng theo tên hoặc email (thay phone bằng email)
     public List<User> searchUsers(String searchTerm) {
         String searchQuery = "%" + searchTerm + "%";
         return jdbi.withHandle(handle ->
-                handle.createQuery("SELECT * FROM users WHERE (full_name LIKE :search OR phone LIKE :search)")
+                handle.createQuery("SELECT * FROM users WHERE (full_name LIKE :search OR email LIKE :search)")
                         .bind("search", searchQuery)
                         .mapToBean(User.class)
                         .list()
         );
     }
 
-
-    //thay đổi pass
+    // Thay đổi mật khẩu (giữ nguyên)
     public boolean updatePassword(int userId, String currentPassword, String newPassword) {
         String checkPasswordQuery = "SELECT password FROM users WHERE id = ?";
         String updatePasswordQuery = "UPDATE users SET password = ? WHERE id = ?";
 
-        // Kiểm tra mật khẩu hiện tại
         String storedPassword = jdbi.withHandle(handle ->
                 handle.createQuery(checkPasswordQuery)
                         .bind(0, userId)
@@ -184,39 +184,33 @@ public class UserDao {
                         .findOnly()
         );
 
-        // Nếu không tìm thấy mật khẩu, trả về false
         if (storedPassword == null) {
             return false;
         }
 
-        // Kiểm tra mật khẩu hiện tại
         if (storedPassword.equals(currentPassword)) {
-            // Cập nhật mật khẩu mới
             int rowsUpdated = jdbi.withHandle(handle ->
                     handle.createUpdate(updatePasswordQuery)
                             .bind(0, newPassword)
                             .bind(1, userId)
                             .execute()
             );
-
             return rowsUpdated > 0;
         }
-
-        // Nếu mật khẩu hiện tại không đúng
         return false;
     }
 
-    // Cập nhật mật khẩu theo số điện thoại
-    public void updatePasswordByPhone(String phone, String newPassword) {
-        jdbi.useHandle(handle -> {
-            handle.createUpdate("UPDATE users SET password = :password, update_date = NOW() WHERE phone = :phone")
-                    .bind("password", newPassword)
-                    .bind("phone", phone)
-                    .execute();
-        });
+    // Cập nhật mật khẩu theo email (thay cho phone)
+    public void updatePasswordByEmail(String email, String newPassword) {
+        jdbi.useHandle(handle ->
+                handle.createUpdate("UPDATE users SET password = :password, update_date = NOW() WHERE email = :email")
+                        .bind("password", newPassword)
+                        .bind("email", email)
+                        .execute()
+        );
     }
 
-    // Lấy số lượng người dùng
+    // Lấy số lượng người dùng (giữ nguyên)
     public int getTotalUser() {
         return jdbi.withHandle(handle ->
                 handle.createQuery("SELECT COUNT(*) FROM users")
@@ -225,10 +219,9 @@ public class UserDao {
         );
     }
 
-
+    // Lấy user theo phone hoặc email (cập nhật để ưu tiên email)
     public User getUserByPhoneOrEmail(String contactInfo) {
-        String query = "SELECT * FROM users WHERE phone = :contact OR email = :contact";
-
+        String query = "SELECT * FROM users WHERE email = :contact OR phone = :contact";
         return jdbi.withHandle(handle ->
                 handle.createQuery(query)
                         .bind("contact", contactInfo)
@@ -238,6 +231,7 @@ public class UserDao {
         );
     }
 
+    // Lấy user theo email (giữ nguyên)
     public Optional<User> getUserByEmail(String email) {
         return jdbi.withHandle(handle ->
                 handle.createQuery("SELECT * FROM users WHERE email = :email")
@@ -247,14 +241,13 @@ public class UserDao {
         );
     }
 
+    // Cập nhật mật khẩu theo email (giữ nguyên)
     public void updatePassword(String email, String newPassword) {
-        jdbi.useHandle(handle -> {
-            handle.createUpdate("UPDATE users SET password = :password WHERE email = :email")
-                    .bind("password", newPassword)
-                    .bind("email", email)
-                    .execute();
-        });
+        jdbi.useHandle(handle ->
+                handle.createUpdate("UPDATE users SET password = :password WHERE email = :email")
+                        .bind("password", newPassword)
+                        .bind("email", email)
+                        .execute()
+        );
     }
-
 }
-
