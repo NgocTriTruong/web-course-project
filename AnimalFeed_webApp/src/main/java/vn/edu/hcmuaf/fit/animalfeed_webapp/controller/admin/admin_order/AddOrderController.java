@@ -22,17 +22,17 @@ public class AddOrderController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String phone = request.getParameter("phone");
-        if (phone != null) { // Xử lý AJAX request để lấy thông tin khách hàng
+        String email = request.getParameter("email"); // Thay "phone" thành "email"
+        if (email != null) { // Xử lý AJAX request để lấy thông tin khách hàng
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             Gson gson = new Gson();
             try {
-                User user = userService.getUserByPhone(phone);
+                User user = userService.getUserByEmail(email); // Sử dụng getUserByEmail
                 if (user != null) {
-                    response.getWriter().write(gson.toJson(new UserResponse(user.getFullName())));
+                    response.getWriter().write(gson.toJson(new UserResponse(user.getFullName(), null))); // Không trả về phone vì không lưu được
                 } else {
-                    response.getWriter().write("{\"fullName\": null}");
+                    response.getWriter().write("{\"fullName\": null, \"phone\": null}");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -40,7 +40,7 @@ public class AddOrderController extends HttpServlet {
                 response.getWriter().write("{\"error\": \"Đã xảy ra lỗi khi lấy thông tin khách hàng: " + e.getMessage() + "\"}");
             }
         } else {
-            // Hiển thị trang JSP khi không có tham số phone
+            // Hiển thị trang JSP khi không có tham số email
             request.getRequestDispatcher("/views/admin/orderAddition.jsp").forward(request, response);
         }
     }
@@ -48,13 +48,19 @@ public class AddOrderController extends HttpServlet {
     // Class để trả về JSON response
     private static class UserResponse {
         private String fullName;
+        private String phone; // Giữ trường phone nhưng sẽ trả về null
 
-        public UserResponse(String fullName) {
+        public UserResponse(String fullName, String phone) {
             this.fullName = fullName;
+            this.phone = phone;
         }
 
         public String getFullName() {
             return fullName;
+        }
+
+        public String getPhone() {
+            return phone;
         }
     }
 }

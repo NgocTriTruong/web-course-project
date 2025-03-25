@@ -41,7 +41,7 @@ public class AddOrder extends HttpServlet {
             System.out.println("Received POST request to /add-order");
 
             // Lấy dữ liệu từ form
-            String phone = request.getParameter("phone");
+            String email = request.getParameter("email"); // Thay "phone" thành "email"
             String customerName = request.getParameter("customerName");
             String address = request.getParameter("address");
             String[] productIds = request.getParameterValues("productIds[]");
@@ -50,7 +50,7 @@ public class AddOrder extends HttpServlet {
             double totalPrice = Double.parseDouble(request.getParameter("totalPrice"));
             int totalQuantity = Integer.parseInt(request.getParameter("totalQuantity"));
 
-            System.out.println("Data received - Phone: " + phone + ", CustomerName: " + customerName + ", Address: " + address);
+            System.out.println("Data received - Email: " + email + ", CustomerName: " + customerName + ", Address: " + address);
             System.out.println("Total Price: " + totalPrice + ", Total Quantity: " + totalQuantity);
 
             // Kiểm tra dữ liệu đầu vào
@@ -60,19 +60,23 @@ public class AddOrder extends HttpServlet {
             if (address == null || address.trim().isEmpty()) {
                 throw new Exception("Địa chỉ không được để trống");
             }
+            if (email == null || email.trim().isEmpty()) {
+                throw new Exception("Email không được để trống");
+            }
 
-            // Kiểm tra số điện thoại và lấy hoặc tạo userId
+            // Kiểm tra email và lấy hoặc tạo userId
             int userId;
-            User existingUser = userService.getUserByPhone(phone);
+            User existingUser = userService.getUserByEmail(email); // Sử dụng getUserByEmail
             System.out.println("User fetched: " + (existingUser != null ? existingUser.getFullName() : "null"));
             if (existingUser != null) {
                 userId = existingUser.getId();
                 if (customerName == null || customerName.trim().isEmpty()) {
                     customerName = existingUser.getFullName();
                 }
+                // Bỏ phần cập nhật số điện thoại vì UserService không hỗ trợ
             } else {
-                userService.registerUser(customerName, phone, "defaultPassword");
-                User newUser = userService.getUserByPhone(phone);
+                userService.registerUser(customerName, email, "defaultPassword"); // Tạo user mới với email
+                User newUser = userService.getUserByEmail(email);
                 userId = newUser.getId();
                 System.out.println("New user created with ID: " + userId);
             }
