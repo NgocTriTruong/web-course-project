@@ -211,8 +211,8 @@
         <!-- Form đăng nhập -->
         <form action="<%= request.getContextPath() %>/login" method="post" id="loginForm">
             <div class="mb-3">
-                <i class="fas fa-phone"></i>
-                <input type="tel" class="form-control" id="id_phone" name="phone" placeholder="Số điện thoại" required>
+                <i class="fas fa-envelope"></i> <!-- Thay icon điện thoại bằng icon email -->
+                <input type="email" class="form-control" id="id_email" name="email" placeholder="Email (Gmail)" required>
             </div>
             <div class="mb-3">
                 <i class="fas fa-lock"></i>
@@ -220,7 +220,6 @@
             </div>
 
             <!-- Google reCAPTCHA -->
-
             <div class="g-recaptcha mb-3" data-sitekey="6LciYeoqAAAAALAiQBkhttpGondAfDMVtaUCiHGW"></div>
 
             <div class="text-center">
@@ -250,14 +249,14 @@
 
             errorDiv.style.display = 'none'; // Ẩn thông báo lỗi cũ
 
-            // Kiểm tra số điện thoại
-            const phone = form.querySelector('input[name="phone"]').value.trim();
-            if (phone === '') {
-                errorDiv.innerText = 'Vui lòng nhập số điện thoại';
+            // Kiểm tra email
+            const email = form.querySelector('input[name="email"]').value.trim();
+            if (email === '') {
+                errorDiv.innerText = 'Vui lòng nhập email';
                 errorDiv.style.display = 'block';
                 isValid = false;
-            } else if (!/^\d{10,11}$/.test(phone)) {
-                errorDiv.innerText = 'Số điện thoại không hợp lệ (10-11 số)';
+            } else if (!/^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(email)) {
+                errorDiv.innerText = 'Vui lòng nhập email Gmail hợp lệ (ví dụ: example@gmail.com)';
                 errorDiv.style.display = 'block';
                 isValid = false;
             }
