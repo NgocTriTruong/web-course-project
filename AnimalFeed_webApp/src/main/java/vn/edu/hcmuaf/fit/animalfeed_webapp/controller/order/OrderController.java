@@ -8,6 +8,7 @@ import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.dto.CartItem;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.*;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.CartService;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.OrderService;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.services.PaymentService;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -19,12 +20,14 @@ import java.util.Map;
 public class OrderController extends HttpServlet {
     private CartService cartService;
     private OrderService orderService;
+    private PaymentService paymentService;
 
     @Override
     public void init() throws ServletException {
         super.init();
         cartService = new CartService();
         orderService = new OrderService();
+        paymentService = new PaymentService();
     }
 
     @Override
@@ -94,6 +97,16 @@ public class OrderController extends HttpServlet {
 
             int orderId = orderService.insertOrder(order);
             order.setId(orderId);
+
+            // Create payment
+            Payment payment = new Payment();
+            payment.setPayDate(LocalDateTime.now());
+            payment.setMethod(paymentMethod);
+            payment.setOrderId(orderId);
+            payment.setUserId(user.getId());
+            payment.setStatus(0);
+
+            paymentService.addPayment(payment);
 
             // Create order details for selected items
             for (CartItem cartItem : selectedItems) {

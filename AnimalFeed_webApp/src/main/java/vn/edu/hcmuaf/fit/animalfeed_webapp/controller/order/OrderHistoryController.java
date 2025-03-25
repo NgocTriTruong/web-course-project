@@ -9,9 +9,11 @@ import jakarta.servlet.http.HttpSession;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.dto.OrderDetailsWithProduct;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Category;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Order;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Payment;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.CategoryService;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.OrderService;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.services.PaymentService;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -24,10 +26,12 @@ import java.util.stream.Collectors;
 @WebServlet(name = "OrderHistoryController", urlPatterns = {"/order-history", "/order-detail"})
 public class OrderHistoryController extends HttpServlet {
     private OrderService orderService = new OrderService();
+    PaymentService paymentService = new PaymentService();
+    CategoryService categoryService = new CategoryService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        CategoryService categoryService = new CategoryService();
+
         //Lay danh muc
         List<Category> categories = categoryService.getAll();
         request.setAttribute("categoriesData", categories);
@@ -136,6 +140,10 @@ public class OrderHistoryController extends HttpServlet {
                     ? order.getOrderDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))
                     : "";
             request.setAttribute("formattedOrderDate", formattedOrderDate);
+
+            //Lay danh sach phuong thuc thanh toan
+            Payment payments = paymentService.getPaymentByOrderId(order.getId());
+            request.setAttribute("payments", payments);
 
             request.setAttribute("order", order);
             request.setAttribute("orderDetailsWithProducts", orderDetailsWithProducts);

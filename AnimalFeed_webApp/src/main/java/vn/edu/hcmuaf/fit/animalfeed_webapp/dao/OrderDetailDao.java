@@ -53,6 +53,7 @@ public class OrderDetailDao {
                         Product product = new Product();
                         product.setId(row.getColumn("id", Integer.class));
                         product.setName(row.getColumn("name", String.class));
+                        product.setDescription(row.getColumn("description", String.class));
                         product.setPrice(row.getColumn("price", Double.class));
                         product.setImg(row.getColumn("img", String.class));
                         // Set other product properties as needed

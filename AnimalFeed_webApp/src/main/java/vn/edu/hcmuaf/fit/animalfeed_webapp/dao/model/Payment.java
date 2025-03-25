@@ -1,23 +1,26 @@
 package vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Payment implements Serializable {
     private int id;
-    private Date payDate;
-    private int method;
+    private LocalDateTime payDate;
+    private String method;
     private int orderId;
     private int userId;
+    private int status;
 
     public Payment() {}
 
-    public Payment(int id, Date payDate, int method, int orderId, int userId) {
+    public Payment(int id, LocalDateTime payDate, String method, int orderId, int userId, int status) {
         this.id = id;
         this.payDate = payDate;
         this.method = method;
         this.orderId = orderId;
         this.userId = userId;
+        this.status = status;
     }
 
     public int getId() {
@@ -28,19 +31,19 @@ public class Payment implements Serializable {
         this.id = id;
     }
 
-    public Date getPayDate() {
+    public LocalDateTime getPayDate() {
         return payDate;
     }
 
-    public void setPayDate(Date payDate) {
+    public void setPayDate(LocalDateTime payDate) {
         this.payDate = payDate;
     }
 
-    public int getMethod() {
+    public String getMethod() {
         return method;
     }
 
-    public void setMethod(int method) {
+    public void setMethod(String method) {
         this.method = method;
     }
 
@@ -60,6 +63,14 @@ public class Payment implements Serializable {
         this.userId = userId;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "Payment{" +
@@ -68,6 +79,7 @@ public class Payment implements Serializable {
                 ", method=" + method +
                 ", orderId=" + orderId +
                 ", userId=" + userId +
+                ", status=" + status +
                 '}';
     }
 }

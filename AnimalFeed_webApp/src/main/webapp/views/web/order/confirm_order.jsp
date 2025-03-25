@@ -149,7 +149,7 @@
                                    placeholder="Tỉnh/Thành Phố, Quận/Huyện, Phường/Xã" readonly
                                    onclick="openAddressForm()">
                             <i class="fas fa-chevron-right chose_location_right float-end"
-                               onclick="openAddressForm()"></i>
+                               onclick="openAddressForm()" style="margin-top: -24px; margin-right: 10px;"></i>
 
                             <div class="address-form" id="addressFormModal">
                                 <div class="address-form-content bg-white">
