@@ -20,7 +20,7 @@ public class CheckPhoneController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String phone = request.getParameter("phone");
-        boolean exists = userService.isPhoneExists(phone);
+        boolean exists = userService.isEmailExists(phone);
 
         response.getWriter().write(exists ? "exists" : "not_found");
     }
