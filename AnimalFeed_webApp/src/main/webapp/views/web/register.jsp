@@ -245,28 +245,29 @@
     <div class="form-section">
         <h2>Đăng Ký Tài Khoản</h2>
         <p class="text-center">Tạo tài khoản mới để bắt đầu</p>
-        <div class="success-message" id="successMessage">Đăng ký thành công!</div>
+        <div class="success-message" id="successMessage">Đăng ký thành công! Vui lòng đăng nhập.</div>
 
         <!-- Thông báo lỗi -->
         <c:if test="${not empty error}">
             <div class="alert alert-danger">${error}</div>
         </c:if>
 
-        <form action="<%= request.getContextPath() %>/register" method="POST" id="registrationForm" novalidate>
+        <!-- Form đăng ký -->
+        <form id="registrationForm" method="POST" novalidate>
             <div class="mb-3">
                 <i class="fas fa-user"></i>
                 <input class="form-control" id="id_username" type="text" name="username" maxlength="100" placeholder="Tên tài khoản *" required>
-                <div class="error-message" id="usernameError">Lỗi tên tài khoản</div>
+                <div class="error-message" id="usernameError">Vui lòng nhập tên tài khoản</div>
             </div>
             <div class="mb-3">
-                <i class="fas fa-phone"></i>
-                <input class="form-control" id="id_phone" type="tel" name="phone" maxlength="15" placeholder="Số điện thoại *" required>
-                <div class="error-message" id="phoneError">Lỗi số điện thoại</div>
+                <i class="fas fa-envelope"></i>
+                <input class="form-control" id="id_email" type="email" name="email" placeholder="Email (Gmail) *" required>
+                <div class="error-message" id="emailError">Vui lòng nhập email Gmail hợp lệ</div>
             </div>
             <div class="mb-3">
                 <i class="fas fa-lock"></i>
                 <input class="form-control" id="id_password1" type="password" name="password" maxlength="100" placeholder="Mật khẩu *" required>
-                <div class="error-message" id="password1Error">Lỗi mật khẩu</div>
+                <div class="error-message" id="password1Error">Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ cái và số</div>
             </div>
             <div class="mb-3">
                 <i class="fas fa-lock"></i>
@@ -274,14 +275,25 @@
                 <div class="error-message" id="password2Error">Mật khẩu không khớp</div>
             </div>
             <div class="mb-3">
-
                 <div class="g-recaptcha" data-sitekey="6LciYeoqAAAAALAiQBkhttpGondAfDMVtaUCiHGW"></div>
             </div>
-
             <div class="text-center">
-                <button class="btn btn-primary" type="submit">Đăng Ký</button>
+                <button class="btn btn-primary" type="button" id="sendCodeBtn">Gửi mã xác minh</button>
             </div>
         </form>
+
+        <!-- Form xác minh mã -->
+        <form id="verifyForm" style="display: none;" method="POST">
+            <div class="mb-3">
+                <i class="fas fa-key"></i>
+                <input class="form-control" id="id_code" type="text" name="code" placeholder="Nhập mã xác minh *" required>
+                <div class="error-message" id="codeError">Mã xác minh không hợp lệ</div>
+            </div>
+            <div class="text-center">
+                <button class="btn btn-primary" type="submit" id="verifyCodeBtn">Xác minh & Đăng ký</button>
+            </div>
+        </form>
+
         <a href="<%= request.getContextPath() %>/login" class="login-link">Đã có tài khoản? Đăng nhập</a>
     </div>
 </div>
@@ -297,21 +309,112 @@
     </div>
 </div>
 
-<!-- Bootstrap JS and dependencies -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3vI0Txkzl5M7G7rvB/JF9QFJzUawmGJlfyep7EJiF" crossorigin="anonymous"></script>
-<!-- Font Awesome -->
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-<script src="<%= request.getContextPath() %>/views/template/assets/scripts/register.js"></script>
-
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    document.getElementById("registrationForm").addEventListener("submit", function(event) {
-        var recaptchaResponse = grecaptcha.getResponse();
-        if (recaptchaResponse.length === 0) {
-            event.preventDefault(); // Ngăn chặn gửi form
+    document.getElementById("sendCodeBtn").addEventListener("click", function() {
+        const form = document.getElementById("registrationForm");
+        const email = document.getElementById("id_email").value;
+        const username = document.getElementById("id_username").value;
+        const password1 = document.getElementById("id_password1").value;
+        const password2 = document.getElementById("id_password2").value;
+        const recaptchaResponse = grecaptcha.getResponse();
+
+        // Validate inputs
+        let isValid = true;
+        if (!username) {
+            document.getElementById("usernameError").style.display = "block";
+            isValid = false;
+        } else {
+            document.getElementById("usernameError").style.display = "none";
+        }
+        if (!/^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(email)) {
+            document.getElementById("emailError").style.display = "block";
+            isValid = false;
+        } else {
+            document.getElementById("emailError").style.display = "none";
+        }
+        if (!password1 || password1.length < 8 || !/[a-zA-Z]/.test(password1) || !/\d/.test(password1)) {
+            document.getElementById("password1Error").style.display = "block";
+            isValid = false;
+        } else {
+            document.getElementById("password1Error").style.display = "none";
+        }
+        if (password1 !== password2) {
+            document.getElementById("password2Error").style.display = "block";
+            isValid = false;
+        } else {
+            document.getElementById("password2Error").style.display = "none";
+        }
+        if (!recaptchaResponse) {
             alert("Vui lòng xác nhận bạn không phải là robot!");
+            isValid = false;
+        }
+
+        if (isValid) {
+            const loadingModal = new bootstrap.Modal(document.getElementById("loadingModal"));
+            loadingModal.show();
+
+            fetch("<%= request.getContextPath() %>/send-code", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: "email=" + encodeURIComponent(email)
+            }).then(response => {
+                loadingModal.hide();
+                if (response.ok) {
+                    sessionStorage.setItem("regUsername", username);
+                    sessionStorage.setItem("regEmail", email);
+                    sessionStorage.setItem("regPassword", password1);
+                    document.getElementById("registrationForm").style.display = "none";
+                    document.getElementById("verifyForm").style.display = "block";
+                } else {
+                    alert("Có lỗi khi gửi mã xác minh!");
+                }
+            });
         }
     });
-</script>
 
+    document.getElementById("verifyForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        const code = document.getElementById("id_code").value;
+        const loadingModal = new bootstrap.Modal(document.getElementById("loadingModal"));
+        loadingModal.show();
+
+        fetch("<%= request.getContextPath() %>/verify-code", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: "code=" + encodeURIComponent(code)
+        }).then(response => {
+            if (response.ok) {
+                // Gửi yêu cầu đăng ký sau khi xác minh thành công
+                const username = sessionStorage.getItem("regUsername");
+                const email = sessionStorage.getItem("regEmail");
+                const password = sessionStorage.getItem("regPassword");
+                fetch("<%= request.getContextPath() %>/register", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    body: "username=" + encodeURIComponent(username) +
+                        "&email=" + encodeURIComponent(email) +
+                        "&password=" + encodeURIComponent(password) +
+                        "&g-recaptcha-response=" + grecaptcha.getResponse()
+                }).then(regResponse => {
+                    loadingModal.hide();
+                    if (regResponse.ok) {
+                        document.getElementById("successMessage").style.display = "block";
+                        setTimeout(() => window.location.href = "<%= request.getContextPath() %>/home", 2000);
+                    } else {
+                        regResponse.text().then(text => alert("Đăng ký thất bại: " + text));
+                    }
+                });
+            } else {
+                loadingModal.hide();
+                response.text().then(text => {
+                    document.getElementById("codeError").innerText = text;
+                    document.getElementById("codeError").style.display = "block";
+                });
+            }
+        });
+    });
+</script>
 </body>
 </html>
