@@ -241,7 +241,7 @@ public class UserDao {
         );
     }
 
-    // Cập nhật mật khẩu theo email (giữ nguyên)
+    // Cập nhật mật khẩu theo email
     public void updatePassword(String email, String newPassword) {
         jdbi.useHandle(handle ->
                 handle.createUpdate("UPDATE users SET password = :password WHERE email = :email")
@@ -249,5 +249,17 @@ public class UserDao {
                         .bind("email", email)
                         .execute()
         );
+    }
+
+    // Thay đổi mật khẩu
+    public boolean updatePassword1(int userId, String newPassword) {
+        String updatePasswordQuery = "UPDATE users SET password = ? WHERE id = ?";
+        int rowsUpdated = jdbi.withHandle(handle ->
+                handle.createUpdate(updatePasswordQuery)
+                        .bind(0, newPassword)
+                        .bind(1, userId)
+                        .execute()
+        );
+        return rowsUpdated > 0;
     }
 }
