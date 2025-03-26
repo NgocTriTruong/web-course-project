@@ -68,8 +68,8 @@ public class UserDao {
     public void addUser(User user, int adminUserId) {
         if (checkIfAdmin(adminUserId)) {
             jdbi.useTransaction(handle -> {
-                int userId = handle.createUpdate("INSERT INTO users (full_name, email, password, role, status, create_date, update_date) " +
-                                "VALUES (:fullName, :email, :password, :role, :status, :createDate, :updateDate)")
+                int userId = handle.createUpdate("INSERT INTO users (full_name, email, phone, password, role, status, create_date, update_date) " +
+                                "VALUES (:fullName, :email, :phone, :password, :role, :status, :createDate, :updateDate)")
                         .bindBean(user)
                         .executeAndReturnGeneratedKeys("id")
                         .mapTo(Integer.class)
@@ -115,7 +115,7 @@ public class UserDao {
     // Cập nhật thông tin người dùng (không cần phone)
     public void updateUserByUser(User user) {
         jdbi.useHandle(handle ->
-                handle.createUpdate("UPDATE users SET full_name = :fullName, email = :email WHERE id = :id")
+                handle.createUpdate("UPDATE users SET full_name = :fullName, email = :email, phone = :phone WHERE id = :id")
                         .bindBean(user)
                         .execute()
         );
@@ -128,9 +128,10 @@ public class UserDao {
         }
 
         jdbi.useTransaction(handle -> {
-            int updatedRows = handle.createUpdate("UPDATE users SET full_name = :fullName, email = :email, role = :role, status = :status, update_date = NOW() WHERE id = :id")
+            int updatedRows = handle.createUpdate("UPDATE users SET full_name = :fullName, email = :email, phone = :phone, role = :role, status = :status, update_date = NOW() WHERE id = :id")
                     .bind("fullName", user.getFullName())
                     .bind("email", user.getEmail())
+                    .bind("phone", user.getPhone()) // Thêm phone
                     .bind("status", user.getStatus())
                     .bind("role", user.getRole())
                     .bind("id", user.getId())
@@ -154,8 +155,8 @@ public class UserDao {
     // Chèn người dùng vào cơ sở dữ liệu (cập nhật để dùng email)
     public void insertUser(User user) {
         jdbi.useHandle(handle ->
-                handle.createUpdate("INSERT INTO users (full_name, email, password, role, status, create_date, update_date) " +
-                                "VALUES (:fullName, :email, :password, :role, :status, :createDate, :updateDate)")
+                handle.createUpdate("INSERT INTO users (full_name, email, phone, password, role, status, create_date, update_date) " +
+                                "VALUES (:fullName, :email, :phone, :password, :role, :status, :createDate, :updateDate)")
                         .bindBean(user)
                         .execute()
         );

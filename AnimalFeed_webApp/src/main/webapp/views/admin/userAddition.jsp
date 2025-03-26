@@ -37,15 +37,30 @@
         <%
             String success = request.getParameter("success");
             String error = request.getParameter("error");
+            String step = request.getParameter("step");
         %>
         <% if ("true".equals(success)) { %>
         <div class="alert alert-success">Thêm người dùng thành công!</div>
         <% } else if ("true".equals(error)) { %>
-        <div class="alert alert-danger">Có lỗi xảy ra. Vui lòng thử lại.</div>
+        <div class="alert alert-danger">Có lỗi xảy ra: <%= request.getAttribute("errorMessage") != null ? request.getAttribute("errorMessage") : "Vui lòng thử lại." %></div>
         <% } %>
 
-        <!-- Form thêm người dùng -->
+        <!-- Form thêm người dùng hoặc xác minh OTP -->
+        <% if ("verify".equals(step)) { %>
+        <!-- Form xác minh OTP -->
         <form action="addUser" method="POST" class="border p-5">
+            <input type="hidden" name="step" value="verify">
+            <div class="mb-3">
+                <label for="otp" class="form-label style_18"><b>Mã OTP</b></label>
+                <i class="fas fa-key ms-2"></i>
+                <input type="text" class="form-control" id="otp" name="otp" placeholder="Nhập mã OTP đã gửi đến email..." required>
+            </div>
+            <button type="submit" class="btn text-white bg_green fw-bold">Xác minh</button>
+        </form>
+        <% } else { %>
+        <!-- Form nhập thông tin người dùng -->
+        <form action="addUser" method="POST" class="border p-5">
+            <input type="hidden" name="step" value="sendOtp">
             <!-- Dòng 1 -->
             <div class="row">
                 <div class="col-md-3">
@@ -107,10 +122,10 @@
                 </div>
             </div>
 
-
             <!-- Nút submit -->
-            <button type="submit" class="btn text-white bg_green fw-bold">Thêm mới</button>
+            <button type="submit" class="btn text-white bg_green fw-bold">Gửi mã OTP</button>
         </form>
+        <% } %>
     </div>
 </main>
 
