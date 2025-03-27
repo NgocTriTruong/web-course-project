@@ -80,6 +80,11 @@
                             <label for="email" class="form-label">Email</label>
                             <input type="email" class="form-control" id="email" name="email" required>
                         </div>
+                        <!-- Số điện thoại (tùy chọn) -->
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Số điện thoại (tùy chọn)</label>
+                            <input type="text" class="form-control" id="phone" name="phone">
+                        </div>
                         <!-- Tên khách hàng -->
                         <div class="mb-3">
                             <label for="customerName" class="form-label">Tên khách hàng</label>
@@ -90,7 +95,6 @@
                             <label for="chose_location" class="form-label">Địa chỉ nhận hàng</label>
                             <input type="text" class="form-control chose_location" id="chose_location"
                                    placeholder="Tỉnh/Thành Phố, Quận/Huyện, Phường/Xã" readonly onclick="openAddressForm()">
-                            <i class="fas fa-chevron-right chose_location_right float-end" onclick="openAddressForm()"></i>
 
                             <div class="address-form" id="addressFormModal">
                                 <div class="address-form-content bg-white">
@@ -306,6 +310,7 @@
 
         // Xử lý AJAX khi nhập email
         const emailInput = document.getElementById('email');
+        const phoneInput = document.getElementById('phone');
         if (emailInput) {
             emailInput.addEventListener('input', function() {
                 console.log("Email input changed");
@@ -324,15 +329,18 @@
                             return response.json();
                         })
                         .then(data => {
-                            console.log("Customer name fetched: " + data.fullName);
+                            console.log("Customer name fetched: " + data.fullName + ", Phone: " + data.phone);
                             customerNameInput.value = data.fullName || '';
+                            phoneInput.value = data.phone || ''; // Điền số điện thoại nếu có
                         })
                         .catch(error => {
                             console.error('Error fetching customer name:', error);
                             customerNameInput.value = '';
+                            phoneInput.value = '';
                         });
                 } else {
                     customerNameInput.value = '';
+                    phoneInput.value = '';
                 }
             });
         } else {
