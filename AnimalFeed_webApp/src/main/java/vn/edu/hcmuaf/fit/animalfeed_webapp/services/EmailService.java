@@ -20,7 +20,7 @@ public class EmailService {
      */
     public boolean sendVerificationEmail(String email, String code) {
         try {
-            String subject = "Mã Xác Minh Đăng Ký Tài Khoản";
+            String subject = "Mã Xác Minh Cập Nhật Thông Tin Tài Khoản";
             String content = "<!DOCTYPE html>" +
                     "<html>" +
                     "<head>" +
@@ -35,12 +35,53 @@ public class EmailService {
                     "</head>" +
                     "<body>" +
                     "<div class='container'>" +
-                    "<h2>Mã Xác Minh Đăng Ký</h2>" +
+                    "<h2>Mã Xác Minh Cập Nhật Thông Tin</h2>" +
                     "<p>Xin chào,</p>" +
-                    "<p>Chúng tôi đã nhận được yêu cầu đăng ký tài khoản của bạn. Dưới đây là mã xác minh:</p>" +
+                    "<p>Chúng tôi đã nhận được yêu cầu cập nhật thông tin tài khoản của bạn. Dưới đây là mã xác minh:</p>" +
                     "<div class='code'>" + code + "</div>" +
-                    "<p>Mã này có hiệu lực trong <strong>5 phút</strong>. Vui lòng nhập mã vào form xác minh để hoàn tất đăng ký.</p>" +
-                    "<p>Nếu bạn không yêu cầu đăng ký, vui lòng bỏ qua email này.</p>" +
+                    "<p>Mã này có hiệu lực trong <strong>5 phút</strong>. Vui lòng nhập mã vào form xác minh để hoàn tất cập nhật.</p>" +
+                    "<p>Nếu bạn không yêu cầu cập nhật, vui lòng bỏ qua email này.</p>" +
+                    "<p>Trân trọng,<br>Đội ngũ AnimalFeed</p>" +
+                    "</div>" +
+                    "</body>" +
+                    "</html>";
+
+            sendEmail(email, subject, content);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * Gửi thông báo cập nhật thông tin thành công với chi tiết các trường đã chỉnh sửa
+     * @param email Địa chỉ email người nhận
+     * @param updatedFields Chuỗi mô tả các trường đã chỉnh sửa
+     * @return true nếu gửi thành công, false nếu có lỗi
+     */
+    public boolean sendUpdateNotification(String email, String updatedFields) {
+        try {
+            String subject = "Thông Báo Cập Nhật Thông Tin Tài Khoản";
+            String content = "<!DOCTYPE html>" +
+                    "<html>" +
+                    "<head>" +
+                    "<meta charset='UTF-8'>" +
+                    "<style>" +
+                    "body { font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; }" +
+                    ".container { border: 1px solid #ddd; border-radius: 5px; padding: 20px; }" +
+                    "h2 { color: #3366cc; }" +
+                    "ul { list-style-type: none; padding: 0; }" +
+                    "li { margin: 10px 0; }" +
+                    "</style>" +
+                    "</head>" +
+                    "<body>" +
+                    "<div class='container'>" +
+                    "<h2>Thông Báo Cập Nhật Thông Tin</h2>" +
+                    "<p>Xin chào,</p>" +
+                    "<p>Thông tin tài khoản của bạn đã được cập nhật thành công. Dưới đây là các trường đã được chỉnh sửa:</p>" +
+                    "<ul>" + updatedFields + "</ul>" +
+                    "<p>Nếu bạn không thực hiện thay đổi này, vui lòng liên hệ ngay với chúng tôi qua email này.</p>" +
                     "<p>Trân trọng,<br>Đội ngũ AnimalFeed</p>" +
                     "</div>" +
                     "</body>" +
