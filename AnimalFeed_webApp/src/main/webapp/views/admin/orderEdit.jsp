@@ -62,8 +62,8 @@
           <input type="text" class="form-control" value="${user.fullName}" disabled>
         </div>
         <div class="col-md-6">
-          <label class="form-label h5">Số điện thoại</label>
-          <input type="text" class="form-control" value="${user.phone}" disabled>
+          <label class="form-label h5">Email</label>
+          <input type="text" class="form-control" value="${user.email}" disabled> <!-- Thay phone thành email -->
         </div>
       </div>
 

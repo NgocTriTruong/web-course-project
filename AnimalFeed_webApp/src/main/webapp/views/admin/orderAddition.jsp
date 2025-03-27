@@ -22,7 +22,6 @@
     <script src="${pageContext.request.contextPath}/views/admin/assets/js/mdb.min.js"></script>
     <script src="${pageContext.request.contextPath}/views/admin/assets/js/add_header.js" defer></script>
 
-
     <style>
         .address-form {
             display: none;
@@ -76,10 +75,10 @@
                         <input type="hidden" name="address" id="addressHidden" value="">
                         <input type="hidden" name="totalQuantity" id="totalQuantityHidden" value="">
 
-                        <!-- Số điện thoại -->
+                        <!-- Email -->
                         <div class="mb-3">
-                            <label for="phone" class="form-label">Số điện thoại</label>
-                            <input type="text" class="form-control" id="phone" name="phone" required>
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
                         </div>
                         <!-- Tên khách hàng -->
                         <div class="mb-3">
@@ -119,8 +118,8 @@
                                             </select>
                                         </div>
                                         <div class="form-details">
-                                <textarea class="form-control" id="addressDetails"
-                                          placeholder="Nhập địa chỉ cụ thể (vd: Số nhà, đường)" rows="3"></textarea>
+                                            <textarea class="form-control" id="addressDetails"
+                                                      placeholder="Nhập địa chỉ cụ thể (vd: Số nhà, đường)" rows="3"></textarea>
                                         </div>
                                     </div>
                                     <div class="form-footer p-3">
@@ -146,7 +145,7 @@
                                     <label class="form-label">Giá (VNĐ)</label>
                                     <input type="number" class="form-control product-price" name="displayPrices[]" disabled>
                                     <input type="hidden" class="product-price-hidden" name="prices[]">
-                                    <input type="hidden" class="product-base-price" value="0"> <!-- Lưu giá gốc (đã giảm) -->
+                                    <input type="hidden" class="product-base-price" value="0">
                                 </div>
                                 <div class="col-md-2">
                                     <label class="form-label">Số lượng</label>
@@ -177,7 +176,7 @@
 <script src="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.bundle.min.js"></script>
 <script src="${pageContext.request.contextPath}/views/template/assets/scripts/call-api-address.js"></script>
 <script>
-    console.log("JavaScript loaded"); // Log để kiểm tra script chạy
+    console.log("JavaScript loaded");
 
     // Hàm mở form địa chỉ
     function openAddressForm() {
@@ -239,8 +238,8 @@
         document.querySelectorAll('.product-row').forEach(row => {
             const basePrice = parseFloat(row.querySelector('.product-base-price').value) || 0;
             const quantity = parseInt(row.querySelector('.quantity').value) || 0;
-            const displayPrice = basePrice * quantity; // Giá hiển thị = giá đã giảm × số lượng
-            row.querySelector('.product-price').value = displayPrice; // Cập nhật ô giá
+            const displayPrice = basePrice * quantity;
+            row.querySelector('.product-price').value = displayPrice;
             totalPrice += displayPrice;
             totalQuantity += quantity;
         });
@@ -305,17 +304,17 @@
             }
         });
 
-        // Xử lý AJAX khi nhập số điện thoại
-        const phoneInput = document.getElementById('phone');
-        if (phoneInput) {
-            phoneInput.addEventListener('input', function() {
-                console.log("Phone input changed");
-                const phone = this.value.trim();
+        // Xử lý AJAX khi nhập email
+        const emailInput = document.getElementById('email');
+        if (emailInput) {
+            emailInput.addEventListener('input', function() {
+                console.log("Email input changed");
+                const email = this.value.trim();
                 const customerNameInput = document.getElementById('customerName');
                 const contextPath = "${pageContext.request.contextPath}";
 
-                if (phone.length >= 10) {
-                    const url = contextPath + "/add-order-management?phone=" + encodeURIComponent(phone);
+                if (email.length > 0) {
+                    const url = contextPath + "/add-order-management?email=" + encodeURIComponent(email);
                     fetch(url, {
                         method: 'GET',
                         headers: { 'Accept': 'application/json' }
@@ -337,7 +336,7 @@
                 }
             });
         } else {
-            console.error("Không tìm thấy input phone");
+            console.error("Không tìm thấy input email");
         }
 
         // Xử lý AJAX khi nhập ID hoặc tên sản phẩm
@@ -349,7 +348,7 @@
                 const productNameInput = productRow.querySelector('.product-name');
                 const productPriceInput = productRow.querySelector('.product-price');
                 const productPriceHiddenInput = productRow.querySelector('.product-price-hidden');
-                const productBasePriceInput = productRow.querySelector('.product-base-price'); // Lưu giá gốc (đã giảm)
+                const productBasePriceInput = productRow.querySelector('.product-base-price');
                 const quantityInput = productRow.querySelector('.quantity');
                 const value = productInput.value.trim();
                 const contextPath = "${pageContext.request.contextPath}";
@@ -367,11 +366,11 @@
                         .then(data => {
                             if (data.name && !data.error) {
                                 productNameInput.value = data.name;
-                                const basePrice = data.price || 0; // Giá đã giảm từ API
+                                const basePrice = data.price || 0;
                                 const quantity = parseInt(quantityInput.value) || 1;
-                                productBasePriceInput.value = basePrice; // Lưu giá gốc (đã giảm)
-                                productPriceHiddenInput.value = basePrice; // Giá gửi lên server
-                                productPriceInput.value = basePrice * quantity; // Giá hiển thị = giá đã giảm × số lượng
+                                productBasePriceInput.value = basePrice;
+                                productPriceHiddenInput.value = basePrice;
+                                productPriceInput.value = basePrice * quantity;
                                 console.log("Product found: " + data.name + ", Price (discounted): " + basePrice);
                             } else {
                                 productNameInput.value = 'Không có sản phẩm';
@@ -405,7 +404,7 @@
                 const productRow = e.target.closest('.product-row');
                 const basePrice = parseFloat(productRow.querySelector('.product-base-price').value) || 0;
                 const quantity = parseInt(e.target.value) || 1;
-                productRow.querySelector('.product-price').value = basePrice * quantity; // Cập nhật giá hiển thị
+                productRow.querySelector('.product-price').value = basePrice * quantity;
                 calculateTotal();
             }
         });
@@ -426,11 +425,11 @@
                 }
 
                 // Kiểm tra các trường bắt buộc
-                const phone = document.getElementById('phone').value;
+                const email = document.getElementById('email').value;
                 const customerName = document.getElementById('customerName').value;
                 const productIds = document.querySelectorAll('.product-id');
                 const quantities = document.querySelectorAll('.quantity');
-                console.log("Phone: " + phone);
+                console.log("Email: " + email);
                 console.log("CustomerName: " + customerName);
                 productIds.forEach((input, index) => {
                     console.log(`ProductId[${index}]: ${input.value}`);
