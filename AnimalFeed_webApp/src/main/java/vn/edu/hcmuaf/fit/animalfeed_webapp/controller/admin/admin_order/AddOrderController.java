@@ -22,15 +22,15 @@ public class AddOrderController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String email = request.getParameter("email"); // Thay "phone" thành "email"
+        String email = request.getParameter("email"); // Lấy email từ request
         if (email != null) { // Xử lý AJAX request để lấy thông tin khách hàng
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             Gson gson = new Gson();
             try {
-                User user = userService.getUserByEmail(email); // Sử dụng getUserByEmail
+                User user = userService.getUserByEmail(email); // Lấy user bằng email
                 if (user != null) {
-                    response.getWriter().write(gson.toJson(new UserResponse(user.getFullName(), null))); // Không trả về phone vì không lưu được
+                    response.getWriter().write(gson.toJson(new UserResponse(user.getFullName(), user.getPhone()))); // Trả về cả số điện thoại
                 } else {
                     response.getWriter().write("{\"fullName\": null, \"phone\": null}");
                 }
@@ -48,7 +48,7 @@ public class AddOrderController extends HttpServlet {
     // Class để trả về JSON response
     private static class UserResponse {
         private String fullName;
-        private String phone; // Giữ trường phone nhưng sẽ trả về null
+        private String phone;
 
         public UserResponse(String fullName, String phone) {
             this.fullName = fullName;
