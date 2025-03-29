@@ -24,6 +24,7 @@ import java.util.*;
 public class ajaxServlet extends HttpServlet {
     OrderService orderService = new OrderService();
     PaymentService paymentService = new PaymentService();
+    CartService cartService = new CartService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -53,11 +54,21 @@ public class ajaxServlet extends HttpServlet {
 
         // Get cart data
         Cart cart = (Cart) session.getAttribute("cart");
-        if (cart == null) {
-            response.sendRedirect(request.getContextPath() + "/cart");
-            return;
+        List<CartItem> selectedItems = new ArrayList<>();
+
+        // Check if there are items in the cart or use confirmedItems from session (for Buy Now)
+        if (cart != null && !cart.getConfirmedCartItem().isEmpty()) {
+            selectedItems.addAll(cart.getConfirmedCartItem());
+        } else {
+            // For Buy Now scenario, use confirmedItems from session
+            List<CartItem> confirmedItems = (List<CartItem>) session.getAttribute("confirmedItems");
+            if (confirmedItems != null && !confirmedItems.isEmpty()) {
+                selectedItems.addAll(confirmedItems);
+            } else {
+                response.sendRedirect(request.getContextPath() + "/cart");
+                return;
+            }
         }
-        List<CartItem> selectedItems = cart.getConfirmedCartItem(); // Gets items with status = 1
 
         if (selectedItems.isEmpty()) {
             response.sendRedirect(request.getContextPath() + "/cart");
@@ -83,6 +94,7 @@ public class ajaxServlet extends HttpServlet {
         order.setShippingPrice(0.0); // Free shipping as per UI
 
         int orderId = orderService.insertOrder(order);
+        order.setId(orderId);
 
         // Create payment
         Payment payment = new Payment();
@@ -105,12 +117,16 @@ public class ajaxServlet extends HttpServlet {
 
             orderService.insertOrderDetails(orderDetail);
 
-            // Remove item from cart
-            cart.removeProduct(cartItem.getProductId());
-            // Delete from cart_details table
-            CartService cartService = new CartService();
-            cartService.deleteCD(cartItem.getProductId(), user.getId());
+            if (cart != null) {
+                cart.removeProduct(cartItem.getProductId());
+                cartService.deleteCD(cartItem.getProductId(), user.getId());
+            }
 
+        }
+
+        // Update session cart (only if cart was used)
+        if (cart != null) {
+            session.setAttribute("cart", cart);
         }
 
         // Update session cart
