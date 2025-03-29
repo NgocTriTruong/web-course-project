@@ -30,7 +30,18 @@ public class AddressController extends HttpServlet {
 
         int userId = ((User) request.getSession().getAttribute("user")).getId();
         List<Address> addressList = addressDao.getAddressesByUserId(userId);
-        System.out.println("Address list for user " + userId + ": " + addressList); // Log để kiểm tra
+        if (addressList == null || addressList.isEmpty()) {
+            System.out.println("Không có địa chỉ nào cho userId: " + userId);
+        } else {
+            System.out.println("Address list for user " + userId + ": " + addressList);
+            for (Address addr : addressList) {
+                if (addr.getId() == 0) {
+                    System.out.println("Lỗi: Address ID = 0 cho địa chỉ: " + addr);
+                } else {
+                    System.out.println("Address ID: " + addr.getId());
+                }
+            }
+        }
         request.setAttribute("addressList", addressList);
         request.getRequestDispatcher("/views/web/chi_tiet_ca_nhan/so_dia_chi.jsp").forward(request, response);
     }
