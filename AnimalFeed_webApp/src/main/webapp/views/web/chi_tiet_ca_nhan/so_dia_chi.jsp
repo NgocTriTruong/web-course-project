@@ -119,7 +119,7 @@
                                                         <p class="text-muted mb-0"><small>Ghi chú: <span id="note-text-${address.id}">Chưa có ghi chú</span></small></p>
                                                     </c:if>
                                                 </div>
-                                                <button class="btn btn-sm btn-outline-primary ms-2">
+                                                <button class="btn btn-sm btn-outline-primary ms-2" onclick="editAddress(${address.id}, '${address.province}', '${address.district}', '${address.ward}', '${address.detail}', '${address.note}')">
                                                     <i class="fas fa-edit"></i>
                                                 </button>
                                                 <button class="btn btn-sm btn-outline-danger ms-2" onclick="deleteAddress(${address.id})">
@@ -187,15 +187,31 @@
     document.addEventListener("DOMContentLoaded", function() {
         loadProvinces();
         document.getElementById('closeAddressForm').addEventListener('click', closeAddressForm);
-        document.getElementById('saveAddressButton').addEventListener('click', saveAddress);
     });
 
     function openAddressForm() {
         document.getElementById('addressFormModal').style.display = 'block';
+        resetForm(); // Reset form mỗi khi mở
     }
 
     function closeAddressForm() {
         document.getElementById('addressFormModal').style.display = 'none';
+        resetForm(); // Reset form khi đóng
+    }
+
+    function resetForm() {
+        // Reset form về trạng thái ban đầu để thêm địa chỉ mới
+        document.getElementById('province').selectedIndex = 0;
+        document.getElementById('district').innerHTML = '<option value="">--Chọn Huyện--</option>';
+        document.getElementById('ward').innerHTML = '<option value="">--Chọn Xã--</option>';
+        document.getElementById('addressDetails').value = '';
+        document.getElementById('addressNote').value = '';
+        document.querySelector('#addressFormModal .form-header h5').textContent = 'Thêm địa chỉ nhận hàng';
+
+        // Gán lại sự kiện cho nút "Lưu địa chỉ" để thêm địa chỉ mới
+        const saveButton = document.getElementById('saveAddressButton');
+        saveButton.removeEventListener('click', updateAddress); // Xóa sự kiện update nếu có
+        saveButton.addEventListener('click', saveAddress); // Gán sự kiện save
     }
 
     function saveAddress() {
@@ -240,6 +256,93 @@
         closeAddressForm();
     }
 
+    function editAddress(id, province, district, ward, detail, note) {
+        openAddressForm();
+
+        const provinceSelect = document.getElementById('province');
+        const districtSelect = document.getElementById('district');
+        const wardSelect = document.getElementById('ward');
+        const addressDetails = document.getElementById('addressDetails');
+        const addressNote = document.getElementById('addressNote');
+
+        addressDetails.value = detail || '';
+        addressNote.value = note || '';
+
+        for (let option of provinceSelect.options) {
+            if (option.text === province) {
+                option.selected = true;
+                break;
+            }
+        }
+
+        loadDistricts().then(() => {
+            for (let option of districtSelect.options) {
+                if (option.text === district) {
+                    option.selected = true;
+                    break;
+                }
+            }
+            loadWards().then(() => {
+                for (let option of wardSelect.options) {
+                    if (option.text === ward) {
+                        option.selected = true;
+                        break;
+                    }
+                }
+            });
+        });
+
+        document.querySelector('#addressFormModal .form-header h5').textContent = 'Chỉnh sửa địa chỉ nhận hàng';
+
+        // Gán sự kiện cập nhật cho nút "Lưu địa chỉ"
+        const saveButton = document.getElementById('saveAddressButton');
+        saveButton.removeEventListener('click', saveAddress); // Xóa sự kiện save nếu có
+        saveButton.addEventListener('click', function() { updateAddress(id); }); // Gán sự kiện update
+    }
+
+    function updateAddress(addressId) {
+        const province = document.getElementById('province').options[document.getElementById('province').selectedIndex].text;
+        const district = document.getElementById('district').options[document.getElementById('district').selectedIndex].text;
+        const ward = document.getElementById('ward').options[document.getElementById('ward').selectedIndex].text;
+        const addressDetails = document.getElementById('addressDetails').value.trim();
+        const addressNote = document.getElementById('addressNote').value.trim();
+
+        if (!province || province.includes('--Chọn') || !district || district.includes('--Chọn') || !ward || ward.includes('--Chọn')) {
+            alert('Vui lòng chọn đầy đủ Tỉnh, Huyện và Xã');
+            return;
+        }
+
+        const data = {
+            id: addressId,
+            province: province,
+            district: district,
+            ward: ward,
+            detail: addressDetails,
+            note: addressNote
+        };
+
+        fetch('${pageContext.request.contextPath}/update-address', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    alert('Địa chỉ đã được cập nhật thành công!');
+                    window.location.reload();
+                } else {
+                    alert('Có lỗi xảy ra, vui lòng thử lại.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Có lỗi xảy ra, vui lòng thử lại.');
+            });
+
+        closeAddressForm();
+    }
+
     function deleteAddress(addressId) {
         if (!confirm('Bạn có chắc chắn muốn xóa địa chỉ này?')) return;
 
@@ -251,7 +354,7 @@
             .then(response => response.json())
             .then(result => {
                 if (result.success) {
-                    window.location.reload(); // Reload trang để đồng bộ
+                    window.location.reload();
                 } else {
                     alert('Có lỗi xảy ra, vui lòng thử lại.');
                 }
