@@ -94,7 +94,6 @@
                 <i class="fas fa-chevron-left me-1"></i> Quay lại giỏ hàng
             </a>
             <div class="row mt-4">
-                <!-- Thêm đoạn mã này ngay sau thẻ <div class="row mt-4"> -->
                 <c:if test="${not empty error}">
                     <div class="alert alert-danger" role="alert">
                             ${error}

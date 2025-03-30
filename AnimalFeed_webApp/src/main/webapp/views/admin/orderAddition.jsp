@@ -21,22 +21,26 @@
 
     <script src="${pageContext.request.contextPath}/views/admin/assets/js/mdb.min.js"></script>
     <script src="${pageContext.request.contextPath}/views/admin/assets/js/add_header.js" defer></script>
+    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/call-api-address.js"></script>
 
     <style>
         .address-form {
             display: none;
-            position: fixed;
-            z-index: 1000;
+            position: fixed; /* Giữ form cố định trên màn hình */
+            z-index: 1000; /* Đảm bảo form nằm trên các phần tử khác */
             left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.4);
+            top: 50px;
+            width: 100%; /* Chiếm toàn bộ chiều rộng màn hình */
+            height: 100%; /* Chiếm toàn bộ chiều cao màn hình */
+            overflow: auto; /* Cho phép cuộn nếu nội dung vượt quá */
+            background-color: rgba(0, 0, 0, 0.4); /* Nền mờ */
         }
         .address-form-content {
             background-color: #fefefe;
-            margin: 15% auto;
+            position: absolute; /* Đặt vị trí tuyệt đối trong container fixed */
+            top: 50%; /* Đặt đỉnh của form ở giữa màn hình */
+            left: 50%; /* Đặt trái của form ở giữa màn hình */
+            transform: translate(-50%, -50%); /* Dịch chuyển để căn giữa hoàn toàn */
             padding: 20px;
             border: 1px solid #888;
             width: 80%;
@@ -55,6 +59,32 @@
         }
         .form-footer {
             border-top: 1px solid #e9ecef;
+        }
+        /* Đảm bảo nội dung bên dưới vẫn cuộn được */
+        body.modal-open {
+            overflow: hidden; /* Ngăn cuộn body khi form mở */
+        }
+
+        .suggestions {
+            position: absolute;
+            z-index: 1000;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .suggestions.show {
+            display: block;
+        }
+
+        .suggestions .dropdown-item {
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        .suggestions .dropdown-item:hover {
+            background-color: #f8f9fa;
         }
     </style>
 </head>
@@ -91,48 +121,54 @@
                             <input type="text" class="form-control" id="customerName" name="customerName" required>
                         </div>
                         <!-- Địa chỉ -->
-                        <div class="form-group mb-3 position-relative">
-                            <label for="chose_location" class="form-label">Địa chỉ nhận hàng</label>
-                            <input type="text" class="form-control chose_location" id="chose_location"
-                                   placeholder="Tỉnh/Thành Phố, Quận/Huyện, Phường/Xã" readonly onclick="openAddressForm()">
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Địa chỉ giao hàng</label>
+                                <input id="address" type="text" class="form-control chose_location" placeholder="Tỉnh/Thành Phố, Quận/Huyện, Phường/Xã" readonly onclick="openAddressForm()">
+                                <i class="fas fa-chevron-right chose_location_right float-end" onclick="openAddressForm()" style="margin-top: -24px; margin-right: 10px;"></i>
 
-                            <div class="address-form" id="addressFormModal">
-                                <div class="address-form-content bg-white">
-                                    <div class="form-header d-flex justify-content-between align-items-center p-3">
-                                        <h5 class="m-0">Thêm địa chỉ nhận hàng</h5>
-                                        <button type="button" id="closeAddressForm" class="btn-close">×</button>
-                                    </div>
-                                    <div class="form-container p-3">
-                                        <div class="form-item mb-3">
-                                            <label for="province" class="form-label">Chọn Tỉnh:</label>
-                                            <select id="province" class="form-select" onchange="loadDistricts()">
-                                                <option value="">--Chọn Tỉnh--</option>
-                                            </select>
+                                <div class="address-form" id="addressFormModal">
+                                    <div class="address-form-content bg-white">
+                                        <div class="form-header d-flex justify-content-between align-items-center p-3">
+                                            <h5 class="m-0">Chọn địa chỉ giao hàng</h5>
+                                            <button type="button" id="closeAddressForm" class="btn-close">×</button>
                                         </div>
-                                        <div class="form-item mb-3">
-                                            <label for="district" class="form-label">Chọn Huyện:</label>
-                                            <select id="district" class="form-select" onchange="loadWards()">
-                                                <option value="">--Chọn Huyện--</option>
-                                            </select>
+                                        <div class="form-container p-3">
+
+                                            <!-- Autocomplete cho Tỉnh -->
+                                            <div class="form-item mb-3 position-relative">
+                                                <label for="provinceInput" class="form-label">Chọn Tỉnh:</label>
+                                                <input type="text" id="provinceInput" class="form-control" placeholder="--Chọn Tỉnh--">
+                                                <div id="provinceSuggestions" class="suggestions dropdown-menu w-100" style="max-height: 200px; overflow-y: auto;"></div>
+                                                <input type="hidden" id="provinceCode" value="">
+                                            </div>
+
+                                            <!-- Autocomplete cho Huyện -->
+                                            <div class="form-item mb-3 position-relative">
+                                                <label for="districtInput" class="form-label">Chọn Huyện:</label>
+                                                <input type="text" id="districtInput" class="form-control" placeholder="--Chọn Huyện--" disabled>
+                                                <div id="districtSuggestions" class="suggestions dropdown-menu w-100" style="max-height: 200px; overflow-y: auto;"></div>
+                                                <input type="hidden" id="districtCode" value="">
+                                            </div>
+
+                                            <!-- Autocomplete cho Xã -->
+                                            <div class="form-item mb-3 position-relative">
+                                                <label for="wardInput" class="form-label">Chọn Xã:</label>
+                                                <input type="text" id="wardInput" class="form-control" placeholder="--Chọn Xã--" disabled>
+                                                <div id="wardSuggestions" class="suggestions dropdown-menu w-100" style="max-height: 200px; overflow-y: auto;"></div>
+                                                <input type="hidden" id="wardCode" value="">
+                                            </div>
+
+                                            <!-- Chi tiết địa chỉ -->
+                                            <div class="form-details">
+                                                <textarea class="form-control" id="addressDetails" placeholder="Nhập địa chỉ cụ thể (vd: Số nhà, đường)" rows="3"></textarea>
+                                            </div>
                                         </div>
-                                        <div class="form-item mb-3">
-                                            <label for="ward" class="form-label">Chọn Xã:</label>
-                                            <select id="ward" class="form-select">
-                                                <option value="">--Chọn Xã--</option>
-                                            </select>
+                                        <div class="form-footer p-3">
+                                            <button type="button" id="saveAddressButton" class="btn w-100" style="background-color: #fcae18;">Lưu địa chỉ</button>
                                         </div>
-                                        <div class="form-details">
-                                            <textarea class="form-control" id="addressDetails"
-                                                      placeholder="Nhập địa chỉ cụ thể (vd: Số nhà, đường)" rows="3"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-footer p-3">
-                                        <button type="button" id="saveAddressButton" class="btn w-100" style="background-color: #fcae18;">
-                                            Lưu địa chỉ
-                                        </button>
                                     </div>
                                 </div>
-                            </div>
+                            </input>
                         </div>
                         <!-- Danh sách sản phẩm -->
                         <div id="productList">
@@ -178,179 +214,40 @@
 </main>
 
 <script src="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.bundle.min.js"></script>
-<script src="${pageContext.request.contextPath}/views/template/assets/scripts/call-api-address.js"></script>
 <script>
-    console.log("JavaScript loaded");
-
-    // Hàm mở form địa chỉ
-    function openAddressForm() {
-        console.log("Opening address form");
-        document.getElementById('addressFormModal').style.display = 'block';
-    }
-
-    // Hàm đóng form địa chỉ
-    function closeAddressForm() {
-        console.log("Closing address form");
-        document.getElementById('addressFormModal').style.display = 'none';
-    }
-
-    // Hàm lưu địa chỉ
-    function saveAddress() {
-        console.log("Saving address");
-        const provinceSelect = document.getElementById('province');
-        const districtSelect = document.getElementById('district');
-        const wardSelect = document.getElementById('ward');
-        const addressDetailsInput = document.getElementById('addressDetails');
-
-        const provinceCode = provinceSelect.value;
-        const districtCode = districtSelect.value;
-        const wardCode = wardSelect.value;
-        const addressDetails = addressDetailsInput.value.trim();
-
-        const provinceName = provinceSelect.options[provinceSelect.selectedIndex]?.text || '';
-        const districtName = districtSelect.options[districtSelect.selectedIndex]?.text || '';
-        const wardName = wardSelect.options[wardSelect.selectedIndex]?.text || '';
-
-        console.log("Province: " + provinceName + ", District: " + districtName + ", Ward: " + wardName + ", Details: " + addressDetails);
-
-        if (!provinceCode || !districtCode || !wardCode ||
-            provinceName.includes('--Chọn') || districtName.includes('--Chọn') || wardName.includes('--Chọn')) {
-            console.log("Validation failed: Missing province, district, or ward");
-            alert('Vui lòng chọn đầy đủ Tỉnh, Huyện và Xã');
-            return;
-        }
-
-        const addressParts = [];
-        if (addressDetails) addressParts.push(addressDetails.trim());
-        if (wardName && !wardName.includes('--Chọn')) addressParts.push(wardName.trim());
-        if (districtName && !districtName.includes('--Chọn')) addressParts.push(districtName.trim());
-        if (provinceName && !provinceName.includes('--Chọn')) addressParts.push(provinceName.trim());
-
-        const fullAddress = addressParts.length > 0 ? addressParts.join(', ') : '';
-        console.log("Full Address: " + fullAddress);
-        document.getElementById('chose_location').value = fullAddress;
-        document.getElementById('addressHidden').value = fullAddress;
-
-        closeAddressForm();
-    }
-
-    // Tính tổng giá và tổng số lượng
-    function calculateTotal() {
-        console.log("Calculating total");
-        let totalPrice = 0;
-        let totalQuantity = 0;
-        document.querySelectorAll('.product-row').forEach(row => {
-            const basePrice = parseFloat(row.querySelector('.product-base-price').value) || 0;
-            const quantity = parseInt(row.querySelector('.quantity').value) || 0;
-            const displayPrice = basePrice * quantity;
-            row.querySelector('.product-price').value = displayPrice;
-            totalPrice += displayPrice;
-            totalQuantity += quantity;
-        });
-        document.getElementById('totalPrice').value = totalPrice;
-        document.getElementById('totalQuantityHidden').value = totalQuantity;
-        console.log("Total Price: " + totalPrice + ", Total Quantity: " + totalQuantity);
-    }
-
     document.addEventListener("DOMContentLoaded", function() {
-        console.log("DOM fully loaded");
+        // loadProvinces đã được gọi trong call-api-address.js
+        console.log("Waiting for provinces to load...");
+        const checkProvinces = setInterval(() => {
+            if (provincesData.length > 0) {
+                console.log("Provinces loaded:", provincesData);
+                clearInterval(checkProvinces);
+            }
+        }, 100);
 
-        // Load tỉnh
-        loadProvinces();
+        document.getElementById('closeAddressForm').addEventListener('click', closeAddressForm);
+        document.getElementById('saveAddressButton').addEventListener('click', saveAddress);
 
-        // Gắn sự kiện cho nút đóng form địa chỉ
-        const closeAddressFormBtn = document.getElementById('closeAddressForm');
-        if (closeAddressFormBtn) {
-            closeAddressFormBtn.addEventListener('click', closeAddressForm);
-        } else {
-            console.error("Không tìm thấy nút closeAddressForm");
-        }
+        document.getElementById('addProduct').addEventListener('click', function() {
+            const productRow = document.querySelector('.product-row').cloneNode(true);
+            productRow.querySelector('.product-id').value = '';
+            productRow.querySelector('.product-name').value = '';
+            productRow.querySelector('.product-price').value = '';
+            productRow.querySelector('.quantity').value = '1';
+            document.getElementById('productList').appendChild(productRow);
+            calculateTotal();
+        });
 
-        // Gắn sự kiện cho nút lưu địa chỉ
-        const saveAddressBtn = document.getElementById('saveAddressButton');
-        if (saveAddressBtn) {
-            saveAddressBtn.addEventListener('click', saveAddress);
-        } else {
-            console.error("Không tìm thấy nút saveAddressButton");
-        }
-
-        // Thêm sản phẩm mới
-        const addProductBtn = document.getElementById('addProduct');
-        if (addProductBtn) {
-            addProductBtn.addEventListener('click', function() {
-                console.log("Adding new product row");
-                const productRow = document.querySelector('.product-row').cloneNode(true);
-                productRow.querySelector('.product-id').value = '';
-                productRow.querySelector('.product-name').value = '';
-                productRow.querySelector('.product-price').value = '';
-                productRow.querySelector('.quantity').value = '1';
-                document.getElementById('productList').appendChild(productRow);
-                calculateTotal();
-            });
-        } else {
-            console.error("Không tìm thấy nút addProduct");
-        }
-
-        // Xóa sản phẩm
         document.addEventListener('click', function(e) {
             if (e.target.classList.contains('remove-product') && document.querySelectorAll('.product-row').length > 1) {
-                console.log("Removing product row");
                 e.target.closest('.product-row').remove();
                 calculateTotal();
             }
         });
 
-        // Gọi tính tổng khi thay đổi số lượng
         document.addEventListener('input', function(e) {
-            if (e.target.classList.contains('quantity')) {
-                console.log("Quantity changed");
-                calculateTotal();
-            }
-        });
-
-        // Xử lý AJAX khi nhập email
-        const emailInput = document.getElementById('email');
-        const phoneInput = document.getElementById('phone');
-        if (emailInput) {
-            emailInput.addEventListener('input', function() {
-                console.log("Email input changed");
-                const email = this.value.trim();
-                const customerNameInput = document.getElementById('customerName');
-                const contextPath = "${pageContext.request.contextPath}";
-
-                if (email.length > 0) {
-                    const url = contextPath + "/add-order-management?email=" + encodeURIComponent(email);
-                    fetch(url, {
-                        method: 'GET',
-                        headers: { 'Accept': 'application/json' }
-                    })
-                        .then(response => {
-                            if (!response.ok) throw new Error('Server error: ' + response.status);
-                            return response.json();
-                        })
-                        .then(data => {
-                            console.log("Customer name fetched: " + data.fullName + ", Phone: " + data.phone);
-                            customerNameInput.value = data.fullName || '';
-                            phoneInput.value = data.phone || ''; // Điền số điện thoại nếu có
-                        })
-                        .catch(error => {
-                            console.error('Error fetching customer name:', error);
-                            customerNameInput.value = '';
-                            phoneInput.value = '';
-                        });
-                } else {
-                    customerNameInput.value = '';
-                    phoneInput.value = '';
-                }
-            });
-        } else {
-            console.error("Không tìm thấy input email");
-        }
-
-        // Xử lý AJAX khi nhập ID hoặc tên sản phẩm
-        document.addEventListener('input', function(e) {
+            if (e.target.classList.contains('quantity')) calculateTotal();
             if (e.target.classList.contains('product-id')) {
-                console.log("Product ID input changed");
                 const productInput = e.target;
                 const productRow = productInput.closest('.product-row');
                 const productNameInput = productRow.querySelector('.product-name');
@@ -359,18 +256,10 @@
                 const productBasePriceInput = productRow.querySelector('.product-base-price');
                 const quantityInput = productRow.querySelector('.quantity');
                 const value = productInput.value.trim();
-                const contextPath = "${pageContext.request.contextPath}";
 
                 if (value.length > 0) {
-                    const url = contextPath + "/api/product?id=" + encodeURIComponent(value);
-                    fetch(url, {
-                        method: 'GET',
-                        headers: { 'Accept': 'application/json' }
-                    })
-                        .then(response => {
-                            if (!response.ok) throw new Error('Server error: ' + response.status);
-                            return response.json();
-                        })
+                    fetch("${pageContext.request.contextPath}/api/product?id=" + encodeURIComponent(value))
+                        .then(response => response.json())
                         .then(data => {
                             if (data.name && !data.error) {
                                 productNameInput.value = data.name;
@@ -379,13 +268,11 @@
                                 productBasePriceInput.value = basePrice;
                                 productPriceHiddenInput.value = basePrice;
                                 productPriceInput.value = basePrice * quantity;
-                                console.log("Product found: " + data.name + ", Price (discounted): " + basePrice);
                             } else {
                                 productNameInput.value = 'Không có sản phẩm';
                                 productPriceInput.value = '';
                                 productPriceHiddenInput.value = '';
                                 productBasePriceInput.value = '0';
-                                console.log("Product not found");
                             }
                             calculateTotal();
                         })
@@ -405,65 +292,86 @@
                     calculateTotal();
                 }
             }
+        });
 
-            // Cập nhật giá khi thay đổi số lượng
-            if (e.target.classList.contains('quantity')) {
-                console.log("Quantity changed");
-                const productRow = e.target.closest('.product-row');
-                const basePrice = parseFloat(productRow.querySelector('.product-base-price').value) || 0;
-                const quantity = parseInt(e.target.value) || 1;
-                productRow.querySelector('.product-price').value = basePrice * quantity;
-                calculateTotal();
+        document.getElementById('email').addEventListener('input', function() {
+            const email = this.value.trim();
+            const customerNameInput = document.getElementById('customerName');
+            if (email.length > 0) {
+                fetch("${pageContext.request.contextPath}/add-order-management?email=" + encodeURIComponent(email))
+                    .then(response => response.json())
+                    .then(data => {
+                        customerNameInput.value = data.fullName || '';
+                        document.getElementById('phone').value = data.phone || '';
+                    })
+                    .catch(error => {
+                        console.error('Error fetching customer name:', error);
+                        customerNameInput.value = '';
+                        document.getElementById('phone').value = '';
+                    });
+            } else {
+                customerNameInput.value = '';
+                document.getElementById('phone').value = '';
             }
         });
 
-        // Xử lý submit form
-        const addOrderForm = document.getElementById('addOrderForm');
-        if (addOrderForm) {
-            console.log("Attaching submit event to form");
-            addOrderForm.addEventListener('submit', function(e) {
-                console.log("Form submit triggered");
-                const address = document.getElementById('addressHidden').value;
-                console.log("Address value: " + address);
-                if (!address) {
-                    e.preventDefault();
-                    console.log("Address is empty, preventing form submission");
-                    alert('Vui lòng nhập địa chỉ nhận hàng!');
-                    return;
-                }
-
-                // Kiểm tra các trường bắt buộc
-                const email = document.getElementById('email').value;
-                const customerName = document.getElementById('customerName').value;
-                const productIds = document.querySelectorAll('.product-id');
-                const quantities = document.querySelectorAll('.quantity');
-                console.log("Email: " + email);
-                console.log("CustomerName: " + customerName);
-                productIds.forEach((input, index) => {
-                    console.log(`ProductId[${index}]: ${input.value}`);
-                });
-                quantities.forEach((input, index) => {
-                    console.log(`Quantity[${index}]: ${input.value}`);
-                });
-
-                // Kiểm tra tính hợp lệ của form
-                if (!addOrderForm.checkValidity()) {
-                    e.preventDefault();
-                    console.log("Form validation failed");
-                    addOrderForm.reportValidity();
-                    return;
-                }
-
-                const formData = new FormData(addOrderForm);
-                console.log("Dữ liệu gửi lên:");
-                for (let [key, value] of formData.entries()) {
-                    console.log(`${key}: ${value}`);
-                }
-            });
-        } else {
-            console.error("Không tìm thấy form với id='addOrderForm'");
-        }
+        document.getElementById('addOrderForm').addEventListener('submit', function(e) {
+            if (!document.getElementById('addressHidden').value) {
+                e.preventDefault();
+                alert('Vui lòng nhập địa chỉ nhận hàng!');
+            }
+        });
     });
+
+    function openAddressForm() {
+        document.getElementById('addressFormModal').style.display = 'block';
+        document.body.classList.add('modal-open');
+        // Reset form khi mở
+        document.getElementById('provinceInput').value = '';
+        document.getElementById('districtInput').value = '';
+        document.getElementById('districtInput').disabled = true;
+        document.getElementById('wardInput').value = '';
+        document.getElementById('wardInput').disabled = true;
+        document.getElementById('addressDetails').value = '';
+    }
+
+    function closeAddressForm() {
+        document.getElementById('addressFormModal').style.display = 'none';
+        document.body.classList.remove('modal-open');
+    }
+
+    function saveAddress() {
+        const province = document.getElementById('provinceInput').value;
+        const district = document.getElementById('districtInput').value;
+        const ward = document.getElementById('wardInput').value;
+        const addressDetails = document.getElementById('addressDetails').value.trim();
+
+        if (!province || !district || !ward) {
+            alert('Vui lòng chọn đầy đủ Tỉnh, Huyện và Xã');
+            return;
+        }
+
+        const addressParts = [addressDetails, ward, district, province].filter(Boolean);
+        const fullAddress = addressParts.join(', ');
+        document.getElementById('chose_location').value = fullAddress;
+        document.getElementById('addressHidden').value = fullAddress;
+        closeAddressForm();
+    }
+
+    function calculateTotal() {
+        let totalPrice = 0;
+        let totalQuantity = 0;
+        document.querySelectorAll('.product-row').forEach(row => {
+            const basePrice = parseFloat(row.querySelector('.product-base-price').value) || 0;
+            const quantity = parseInt(row.querySelector('.quantity').value) || 0;
+            const displayPrice = basePrice * quantity;
+            row.querySelector('.product-price').value = displayPrice;
+            totalPrice += displayPrice;
+            totalQuantity += quantity;
+        });
+        document.getElementById('totalPrice').value = totalPrice;
+        document.getElementById('totalQuantityHidden').value = totalQuantity;
+    }
 </script>
 </body>
 </html>
