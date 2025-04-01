@@ -8,7 +8,7 @@ import java.util.List;
 public class AddressService {
     static AddressDao addressDao = new AddressDao();
 
-    public List<Address> getAddressesByUserId(int id) {
+    public static List<Address> getAddressesByUserId(int id) {
         return addressDao.getAddressesByUserId(id);
     }
 }

@@ -21,7 +21,6 @@
 
     <script src="${pageContext.request.contextPath}/views/admin/assets/js/mdb.min.js"></script>
     <script src="${pageContext.request.contextPath}/views/admin/assets/js/add_header.js" defer></script>
-    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/call-api-address.js"></script>
 
     <style>
         .address-form {
@@ -123,7 +122,7 @@
                         <!-- Địa chỉ -->
                         <div class="mb-3">
                             <label for="address" class="form-label">Địa chỉ giao hàng</label>
-                                <input id="address" type="text" class="form-control chose_location" placeholder="Tỉnh/Thành Phố, Quận/Huyện, Phường/Xã" readonly onclick="openAddressForm()">
+                                <input id="address" type="text" class="form-control chose_location" value=" " placeholder="Tỉnh/Thành Phố, Quận/Huyện, Phường/Xã" readonly onclick="openAddressForm()">
                                 <i class="fas fa-chevron-right chose_location_right float-end" onclick="openAddressForm()" style="margin-top: -24px; margin-right: 10px;"></i>
 
                                 <div class="address-form" id="addressFormModal">
@@ -137,7 +136,7 @@
                                             <!-- Autocomplete cho Tỉnh -->
                                             <div class="form-item mb-3 position-relative">
                                                 <label for="provinceInput" class="form-label">Chọn Tỉnh:</label>
-                                                <input type="text" id="provinceInput" class="form-control" placeholder="--Chọn Tỉnh--">
+                                                <input type="text" id="provinceInput" value="" class="form-control" placeholder="--Chọn Tỉnh--">
                                                 <div id="provinceSuggestions" class="suggestions dropdown-menu w-100" style="max-height: 200px; overflow-y: auto;"></div>
                                                 <input type="hidden" id="provinceCode" value="">
                                             </div>
@@ -145,7 +144,7 @@
                                             <!-- Autocomplete cho Huyện -->
                                             <div class="form-item mb-3 position-relative">
                                                 <label for="districtInput" class="form-label">Chọn Huyện:</label>
-                                                <input type="text" id="districtInput" class="form-control" placeholder="--Chọn Huyện--" disabled>
+                                                <input type="text" id="districtInput" value="" class="form-control" placeholder="--Chọn Huyện--" disabled>
                                                 <div id="districtSuggestions" class="suggestions dropdown-menu w-100" style="max-height: 200px; overflow-y: auto;"></div>
                                                 <input type="hidden" id="districtCode" value="">
                                             </div>
@@ -153,7 +152,7 @@
                                             <!-- Autocomplete cho Xã -->
                                             <div class="form-item mb-3 position-relative">
                                                 <label for="wardInput" class="form-label">Chọn Xã:</label>
-                                                <input type="text" id="wardInput" class="form-control" placeholder="--Chọn Xã--" disabled>
+                                                <input type="text" id="wardInput" value="" class="form-control" placeholder="--Chọn Xã--" disabled>
                                                 <div id="wardSuggestions" class="suggestions dropdown-menu w-100" style="max-height: 200px; overflow-y: auto;"></div>
                                                 <input type="hidden" id="wardCode" value="">
                                             </div>
@@ -214,6 +213,8 @@
 </main>
 
 <script src="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/views/template/assets/scripts/call-api-address.js"></script>
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         // loadProvinces đã được gọi trong call-api-address.js
@@ -225,6 +226,7 @@
             }
         }, 100);
 
+        document.querySelector('.chose_location').addEventListener('click', openAddressForm);
         document.getElementById('closeAddressForm').addEventListener('click', closeAddressForm);
         document.getElementById('saveAddressButton').addEventListener('click', saveAddress);
 
@@ -325,36 +327,58 @@
 
     function openAddressForm() {
         document.getElementById('addressFormModal').style.display = 'block';
-        document.body.classList.add('modal-open');
-        // Reset form khi mở
-        document.getElementById('provinceInput').value = '';
-        document.getElementById('districtInput').value = '';
-        document.getElementById('districtInput').disabled = true;
-        document.getElementById('wardInput').value = '';
-        document.getElementById('wardInput').disabled = true;
-        document.getElementById('addressDetails').value = '';
+        document.body.classList.add('modal-open'); // Ngăn cuộn body
+        resetAddressFields();
     }
 
     function closeAddressForm() {
         document.getElementById('addressFormModal').style.display = 'none';
-        document.body.classList.remove('modal-open');
+        document.body.classList.remove('modal-open'); // Cho phép cuộn lại
+    }
+
+    function resetAddressFields() {
+        document.getElementById('provinceInput').selectedIndex = 0;
+        document.getElementById('districtInput').innerHTML = '<option value="">--Chọn Huyện--</option>';
+        document.getElementById('wardInput').innerHTML = '<option value="">--Chọn Xã--</option>';
+        document.getElementById('addressDetails').value = '';
     }
 
     function saveAddress() {
-        const province = document.getElementById('provinceInput').value;
-        const district = document.getElementById('districtInput').value;
-        const ward = document.getElementById('wardInput').value;
-        const addressDetails = document.getElementById('addressDetails').value.trim();
+        const provinceInput = document.getElementById('provinceInput');
+        const districtInput = document.getElementById('districtInput');
+        const wardInput = document.getElementById('wardInput');
+        const addressDetailsInput = document.getElementById('addressDetails');
 
-        if (!province || !district || !ward) {
+        if (!provinceInput || !districtInput || !wardInput || !addressDetailsInput) {
+            console.error('Required elements not found');
+            return;
+        }
+
+        const provinceName = provinceInput.value.trim();
+        const districtName = districtInput.value.trim();
+        const wardName = wardInput.value.trim();
+        const addressDetails = addressDetailsInput.value.trim();
+
+        if (!provinceName || !districtName || !wardName ||
+            provinceName.includes('--Chọn') || districtName.includes('--Chọn') || wardName.includes('--Chọn')) {
             alert('Vui lòng chọn đầy đủ Tỉnh, Huyện và Xã');
             return;
         }
 
-        const addressParts = [addressDetails, ward, district, province].filter(Boolean);
-        const fullAddress = addressParts.join(', ');
-        document.getElementById('chose_location').value = fullAddress;
+        const addressParts = [];
+        if (addressDetails) addressParts.push(addressDetails);
+        if (wardName) addressParts.push(wardName);
+        if (districtName) addressParts.push(districtName);
+        if (provinceName) addressParts.push(provinceName);
+
+        const fullAddress = addressParts.length > 0 ? addressParts.join(', ') : '';
+        const displayField = document.querySelector('.chose_location');
+        if (displayField && fullAddress) {
+            displayField.value = fullAddress;
+        }
+
         document.getElementById('addressHidden').value = fullAddress;
+
         closeAddressForm();
     }
 

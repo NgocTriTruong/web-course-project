@@ -5,11 +5,14 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.cart.Cart;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.dto.CartItem;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Address;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Category;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.services.AddressService;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.CategoryService;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.DiscountService;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.ProductService;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -48,9 +51,9 @@ public class OrderConfirmController extends HttpServlet {
                 int productId = Integer.parseInt(productIdStr);
                 int quantity = Integer.parseInt(quantityStr);
 
-                // Fetch product details (you'll need a ProductService)
-                ProductService productService = new ProductService(); // Implement this service
-                vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product product = productService.getProductById(productId);
+                // Fetch product details
+                ProductService productService = new ProductService();
+                Product product = productService.getProductById(productId);
 
                 if (product == null) {
                     response.sendRedirect(request.getContextPath() + "/cart");
@@ -108,11 +111,14 @@ public class OrderConfirmController extends HttpServlet {
             totalQuantity = cart.getTotalQuantity();
         }
 
+        List<Address> addressList = AddressService.getAddressesByUserId(user.getId());
+
         // Set attributes for the JSP
         request.setAttribute("confirmedItems", confirmedItems);
         request.setAttribute("totalPrice", totalPrice);
         request.setAttribute("totalQuantity", totalQuantity);
         request.setAttribute("customerInfo", session.getAttribute("customerInfo"));
+        request.setAttribute("addressList", addressList);
 
         // Forward to the order confirmation page
         request.getRequestDispatcher("/views/web/order/confirm_order.jsp")
