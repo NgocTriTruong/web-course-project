@@ -190,7 +190,7 @@
                                         <!-- Autocomplete cho Tỉnh -->
                                         <div class="form-item mb-3 position-relative">
                                             <label for="provinceInput" class="form-label">Chọn Tỉnh:</label>
-                                            <input type="text" id="provinceInput" class="form-control" placeholder="--Chọn Tỉnh--">
+                                            <input type="text" id="provinceInput" value="" class="form-control" placeholder="--Chọn Tỉnh--">
                                             <div id="provinceSuggestions" class="suggestions dropdown-menu w-100" style="max-height: 200px; overflow-y: auto;"></div>
                                             <input type="hidden" id="provinceCode" value="">
                                         </div>
@@ -254,6 +254,7 @@
 <%@ include file="../layout/footer.jsp" %>
 
 <script src="${pageContext.request.contextPath}/views/template/assets/scripts/call-api-address.js"></script>
+<script src="${pageContext.request.contextPath}/views/template/assets/scripts/call-api-address.js"></script>
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -276,9 +277,9 @@
 
     function resetAddressFields() {
         document.getElementById('savedAddresses').selectedIndex = 0;
-        document.getElementById('province').selectedIndex = 0;
-        document.getElementById('district').innerHTML = '<option value="">--Chọn Huyện--</option>';
-        document.getElementById('ward').innerHTML = '<option value="">--Chọn Xã--</option>';
+        document.getElementById('provinceInput').selectedIndex = 0;
+        document.getElementById('districtInput').innerHTML = '<option value="">--Chọn Huyện--</option>';
+        document.getElementById('wardInput').innerHTML = '<option value="">--Chọn Xã--</option>';
         document.getElementById('addressDetails').value = '';
     }
 
@@ -296,52 +297,32 @@
         const ward = selectedOption.getAttribute('data-ward');
         const detail = selectedOption.getAttribute('data-detail');
 
-        const provinceSelect = document.getElementById('province');
-        const districtSelect = document.getElementById('district');
-        const wardSelect = document.getElementById('ward');
+        const provinceInput = document.getElementById('provinceInput');
+        const districtInput = document.getElementById('districtInput');
+        const wardInput = document.getElementById('wardInput');
         const addressDetails = document.getElementById('addressDetails');
 
+        // Set the values directly to the input fields
+        provinceInput.value = province || '';
+        districtInput.value = district || '';
+        wardInput.value = ward || '';
         addressDetails.value = detail || '';
-
-        for (let option of provinceSelect.options) {
-            if (option.text === province) {
-                option.selected = true;
-                break;
-            }
-        }
-
-        loadDistricts().then(() => {
-            for (let option of districtSelect.options) {
-                if (option.text === district) {
-                    option.selected = true;
-                    break;
-                }
-            }
-            loadWards().then(() => {
-                for (let option of wardSelect.options) {
-                    if (option.text === ward) {
-                        option.selected = true;
-                        break;
-                    }
-                }
-            });
-        });
     }
 
     function saveAddress() {
-        const provinceSelect = document.getElementById('province');
-        const districtSelect = document.getElementById('district');
-        const wardSelect = document.getElementById('ward');
+        const provinceInput = document.getElementById('provinceInput');
+        const districtInput = document.getElementById('districtInput');
+        const wardInput = document.getElementById('wardInput');
         const addressDetailsInput = document.getElementById('addressDetails');
 
-        if (!provinceSelect || !districtSelect || !wardSelect || !addressDetailsInput) {
+        if (!provinceInput || !districtInput || !wardInput || !addressDetailsInput) {
             console.error('Required elements not found');
             return;
         }
 
-        const provinceName = provinceSelect.options[provinceSelect.selectedIndex]?.text || '';
-        const districtName = districtSelect.options[districtSelect.selectedIndex]?.text || '';
-        const wardName = wardSelect.options[wardSelect.selectedIndex]?.text || '';
+        const provinceName = provinceInput.value.trim();
+        const districtName = districtInput.value.trim();
+        const wardName = wardInput.value.trim();
         const addressDetails = addressDetailsInput.value.trim();
 
         if (!provinceName || !districtName || !wardName ||
@@ -350,6 +331,7 @@
             return;
         }
 
+        // Rest of the function remains the same
         document.getElementById('provinceHidden').value = provinceName;
         document.getElementById('districtHidden').value = districtName;
         document.getElementById('wardHidden').value = wardName;
