@@ -14,81 +14,148 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
-@MultipartConfig(maxFileSize = 1024 * 1024 * 5) // Tăng giới hạn file upload lên 5MB
+@MultipartConfig(
+        maxFileSize = 1024 * 1024 * 5,    // 5MB
+        maxRequestSize = 1024 * 1024 * 10, // 10MB
+        fileSizeThreshold = 1024 * 1024   // 1MB
+)
 @WebServlet(name = "AddProductAdmin", value = "/add-product")
 public class AddProductAdmin extends HttpServlet {
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            // Lấy danh sách danh mục và khuyến mãi
-            CategoryService categoryService = new CategoryService();
-            DiscountService discountService = new DiscountService();
+    private static final String BASE_UPLOAD_DIRECTORY = "/views/template/assets/images/product/";
+    private CategoryService categoryService;
+    private DiscountService discountService;
+    private ProductService productService;
+    private Map<Integer, String> categoryFolderMap;
 
+    @Override
+    public void init() throws ServletException {
+        categoryService = new CategoryService();
+        discountService = new DiscountService();
+        productService = new ProductService();
+
+        // Khởi tạo map ánh xạ categoryId với tên thư mục
+        categoryFolderMap = new HashMap<>();
+        for (Category category : categoryService.getAll()) {
+            String fullName = category.getName().trim();
+            String[] words = fullName.split("\\s+");
+            String lastWord = words[words.length - 1]; // Get the last word
+            categoryFolderMap.put(category.getId(), lastWord.toLowerCase());
+        }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
             List<Category> categories = categoryService.getAll();
             List<Discount> discounts = discountService.getAll();
 
             request.setAttribute("categoriesData", categories);
-            request.setAttribute("discountsData",discounts);
-
-            // Chuyển đến trang thêm sản phẩm
+            request.setAttribute("discountsData", discounts);
             request.getRequestDispatcher("views/admin/productAddition.jsp").forward(request, response);
+        } catch (Exception e) {
+            log("Error in doGet: ", e);
+            request.setAttribute("error", "Không thể tải trang thêm sản phẩm.");
+            request.getRequestDispatcher("views/admin/error.jsp").forward(request, response);
+        }
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            // Lấy thông tin từ form
-            int categoryId = Integer.parseInt(request.getParameter("category"));
-            String name = request.getParameter("name");
-            double price = Double.parseDouble(request.getParameter("price"));
-            int quantity = Integer.parseInt(request.getParameter("quantity"));
-            int discountId = Integer.parseInt(request.getParameter("discount"));
-            String description = request.getParameter("description");
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+        Integer userId = (session != null) ? (Integer) session.getAttribute("userId") : null;
 
-            // Xử lý file upload
-            Part filePart = request.getPart("image");
-            String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-            String uploadPath = getServletContext().getRealPath("/views/template/assets/images/product/goat");
-
-            File uploadDir = new File(uploadPath);
-            if (!uploadDir.exists()) {
-                uploadDir.mkdir();
-            }
-
-            String filePath = uploadPath + File.separator + fileName;
-            filePart.write(filePath);
-
-            // Tạo đối tượng Product
-            Product product = new Product();
-            product.setCat_id(categoryId);
-            product.setName(name);
-            product.setPrice(price);
-            product.setDescription(description);
-            product.setQuantity(quantity);
-            product.setImg("/views/template/assets/images/product/goat/" + fileName);
-            product.setCreateDate(LocalDate.now());
-            product.setDiscountId(discountId);
-
-            // Lấy userId từ session
-            HttpSession session = request.getSession();
-            Integer userId = (Integer) session.getAttribute("userId");
-            if (userId == null) {
-                response.sendRedirect("login.jsp");
-                return;
-            }
-
-            // Thêm sản phẩm vào database
-            ProductService productService = new ProductService();
-            productService.insertProduct(product, userId);
-
-            // Chuyển hướng về trang quản lý sản phẩm
-            response.sendRedirect("product-manager?success=true");
-        } catch (NumberFormatException e) {
-            // Xử lý lỗi dữ liệu không hợp lệ
-            request.setAttribute("error", "Dữ liệu nhập vào không hợp lệ.");
-            request.getRequestDispatcher("views/admin/productAddition.jsp").forward(request, response);
+        if (userId == null) {
+            response.sendRedirect("login.jsp");
+            return;
         }
+
+        try {
+            Product product = extractProductFromRequest(request);
+            if (product == null) {
+                throw new IllegalArgumentException("Dữ liệu không hợp lệ");
+            }
+
+            String imagePath = handleFileUpload(request, product.getCat_id());
+            product.setImg(imagePath);
+            product.setCreateDate(LocalDate.now());
+
+            productService.insertProduct(product, userId);
+            response.sendRedirect("product-manager?success=true");
+
+        } catch (IllegalArgumentException e) {
+            request.setAttribute("error", e.getMessage());
+            forwardToForm(request, response);
+        } catch (Exception e) {
+            log("Error in doPost: ", e);
+            request.setAttribute("error", "Có lỗi xảy ra khi thêm sản phẩm.");
+            forwardToForm(request, response);
+        }
+    }
+
+    private Product extractProductFromRequest(HttpServletRequest request) {
+        Product product = new Product();
+
+        try {
+            product.setCat_id(Integer.parseInt(request.getParameter("category")));
+            product.setName(validateString(request.getParameter("name"), "Tên sản phẩm"));
+            product.setPrice(Double.parseDouble(request.getParameter("price")));
+            product.setQuantity(Integer.parseInt(request.getParameter("quantity")));
+            product.setDiscountId(Integer.parseInt(request.getParameter("discount")));
+            product.setDescription(request.getParameter("description"));
+
+            if (product.getPrice() < 0 || product.getQuantity() < 0) {
+                throw new IllegalArgumentException("Giá và số lượng phải lớn hơn hoặc bằng 0");
+            }
+            return product;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Dữ liệu số không hợp lệ");
+        }
+    }
+
+    private String handleFileUpload(HttpServletRequest request, int categoryId)
+            throws IOException, ServletException {
+        Part filePart = request.getPart("image");
+        if (filePart == null || filePart.getSize() == 0) {
+            return null; // Hoặc trả về đường dẫn ảnh mặc định nếu cần
+        }
+
+        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+
+        // Xác định thư mục dựa trên categoryId
+        String categoryFolder = categoryFolderMap.getOrDefault(categoryId, "others");
+        String uploadPath = getServletContext().getRealPath("") + BASE_UPLOAD_DIRECTORY + categoryFolder;
+
+        File uploadDir = new File(uploadPath);
+        if (!uploadDir.exists()) {
+            uploadDir.mkdirs();
+        }
+
+        String finalFileName = fileName;
+        String filePath = uploadPath + File.separator + finalFileName;
+        filePart.write(filePath);
+
+        return BASE_UPLOAD_DIRECTORY + categoryFolder + "/" + finalFileName;
+    }
+
+    private String validateString(String value, String fieldName) {
+        if (value == null || value.trim().isEmpty()) {
+            throw new IllegalArgumentException(fieldName + " không được để trống");
+        }
+        return value.trim();
+    }
+
+    private void forwardToForm(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.setAttribute("categoriesData", categoryService.getAll());
+        request.setAttribute("discountsData", discountService.getAll());
+        request.getRequestDispatcher("views/admin/productAddition.jsp").forward(request, response);
     }
 }

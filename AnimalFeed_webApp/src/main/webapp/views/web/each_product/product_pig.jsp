@@ -93,7 +93,7 @@
                                 <div class="sale_badge">${discountP.percentage}% OFF</div>
                             </div>
                             <div class="product-img">
-                                <img src="${discountP.img}" alt="${discountP.name}" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}${discountP.img}" alt="${discountP.name}" height="250px" width="200px">
                             </div>
                             <div class="h5 text-h">${discountP.name}</div>
                             <div class="p mb-2 text-p">${discountP.description}</div>
@@ -150,7 +150,7 @@
                                 <div class="new_badge">New</div>
                             </div>
                             <div class="product-img">
-                                <img src="${newP.img}" alt="${newP.name}" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}${newP.img}" alt="${newP.name}" height="250px" width="200px">
                             </div>
                             <div class="h5 text-h">${newP.name}</div>
                             <div class="p mb-2 text-p">${newP.description}</div>
@@ -182,7 +182,7 @@
                     <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <a href="product-detail?pid=${bestSellP.id}" class="text-decoration-none text-dark">
                             <div class="product-img">
-                                <img src="${bestSellP.img}" alt="${bestSellP.name}" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}${bestSellP.img}" alt="${bestSellP.name}" height="250px" width="200px">
                             </div>
                             <div class="h5 text-h">${bestSellP.name}</div>
                             <div class="p mb-2 text-p">${bestSellP.description}</div>
@@ -243,7 +243,7 @@
                                 <div class="col-md-3 bg-white text-center m-3 col product_number">
                                     <a href="product-detail?pid=${p.id}" class="text-decoration-none text-dark">
                                         <div class="product-img">
-                                            <img src="${p.img}" alt="${p.name}" height="250px" width="200px">
+                                            <img src="${pageContext.request.contextPath}${p.img}" alt="${p.name}" height="250px" width="200px">
                                         </div>
                                         <div class="h5 text-h">${p.name}</div>
                                         <div class="p mb-2 text-p">${p.description}</div>
