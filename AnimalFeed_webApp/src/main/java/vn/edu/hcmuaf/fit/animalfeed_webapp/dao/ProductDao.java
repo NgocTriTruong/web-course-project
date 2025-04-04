@@ -4,6 +4,7 @@ import org.jdbi.v3.core.Jdbi;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.db.DBConnect;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.db.JdbiConnect;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.dto.ProductWithDiscountDTO;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.ActionLog;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
 
 import java.sql.ResultSet;
@@ -12,6 +13,7 @@ import java.sql.Statement;
 import java.util.*;
 
 public class ProductDao {
+    private ActionLogDao actionLogDao = new ActionLogDao();
 
     // Lấy sản phẩm có trạng thái 'active'
     public List<Product> getAll() {
@@ -105,13 +107,8 @@ public class ProductDao {
                             .executeAndReturnGeneratedKeys("id").mapTo(Integer.class).one();
 
                 // Ghi log hành động vào bảng action_log
-                handle.createUpdate("INSERT INTO action_log (user_id, action_type, entity_type, entity_id, created_at, description) VALUES (:userId, :actionType, :entityType, :entityId, CURRENT_DATE, :description)")
-                        .bind("userId", userId)
-                        .bind("actionType", "CREATE")
-                        .bind("entityType", "PRODUCT")
-                        .bind("entityId", productId)
-                        .bind("description", "User " + userId + " created product " + productId)
-                        .execute();
+                ActionLog actionLog = new ActionLog(userId, "CREATE", "PRODUCT", productId, "User " + userId + " created product " + productId, null, product.toString());
+                actionLogDao.logAction(actionLog);
             });
         }
 
@@ -119,6 +116,7 @@ public class ProductDao {
 
     //xoa product
     public void deleteProduct(int productId, int userId) {
+        Product deletedProduct = getProductByIdOfAdmin(productId);
         //kiem tra quyền admin
         boolean isAdmin = UserDao.checkIfAdmin(userId);
 
@@ -134,13 +132,9 @@ public class ProductDao {
 
                 // Ghi log hành động vào bảng action_log
                 if (updatedRows > 0) {
-                    handle.createUpdate("INSERT INTO action_log (user_id, action_type, entity_type, entity_id, created_at, description) VALUES (:userId, :actionType, :entityType, :entityId, CURRENT_DATE, :description)")
-                            .bind("userId", userId)
-                            .bind("actionType", "DELETE")
-                            .bind("entityType", "PRODUCT")
-                            .bind("entityId", productId)
-                            .bind("description", "User " + userId + " deleted product " + productId)
-                            .execute();
+                    // Ghi log hành động vào bảng action_log
+                    ActionLog actionLog = new ActionLog(userId, "DELETE", "PRODUCT", productId, "User " + userId + " deleted product " + productId, deletedProduct.toString(), null);
+                    actionLogDao.logAction(actionLog);
                 }else {
                     throw new RuntimeException("Failed to delete product with ID: " + productId);
                 }
@@ -149,7 +143,8 @@ public class ProductDao {
     }
 
     //sua product
-    public void updateProduct(Product product, int userId) {
+    public void updateProduct(int productId, Product product, int userId) {
+        Product oldProduct  = getProductByIdOfAdmin(productId);
         //kiem tra quyền admin
         boolean isAdmin = UserDao.checkIfAdmin(userId);
 
@@ -162,13 +157,9 @@ public class ProductDao {
 
                 // Ghi log hành động vào bảng action_log
                 if (updatedRows > 0) {
-                    handle.createUpdate("INSERT INTO action_log (user_id, action_type, entity_type, entity_id, created_at, description) VALUES (:userId, :actionType, :entityType, :entityId, CURRENT_DATE, :description)")
-                            .bind("userId", userId)
-                            .bind("actionType", "UPDATE")
-                            .bind("entityType", "PRODUCT")
-                            .bind("entityId", product.getId())
-                            .bind("description", "User " + userId + " updated product " + product.getId())
-                            .execute();
+                    // Ghi log hành động vào bảng action_log
+                    ActionLog actionLog = new ActionLog(userId, "UPDATE", "PRODUCT", productId, "User " + userId + " updated product " + productId, oldProduct.toString(), product.toString());
+                    actionLogDao.logAction(actionLog);
                 } else {
                     throw new RuntimeException("Failed to update product with ID: " + product.getId());
                 }

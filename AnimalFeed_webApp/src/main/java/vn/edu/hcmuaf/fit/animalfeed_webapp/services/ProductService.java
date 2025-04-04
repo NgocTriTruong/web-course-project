@@ -67,8 +67,8 @@ public class ProductService {
     }
 
     //sua product
-    public void updateProduct(Product product, int userId) {
-        productDao.updateProduct(product, userId);
+    public void updateProduct(int productId, Product product, int userId) {
+        productDao.updateProduct(productId , product, userId);
     }
 
     //cập nhật giảm giá

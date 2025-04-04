@@ -214,7 +214,7 @@ public class OrderEditController extends HttpServlet {
                     Product product = productService.getProductById(productId);
                     int quantityChange = newQuantity - oldQuantity;
                     product.setQuantity(product.getQuantity() - quantityChange);
-                    productService.updateProduct(product, oldOrder.getUserId());
+                    productService.updateProduct(productId, product, oldOrder.getUserId());
                     System.out.println("Updated product quantity for Product ID: " + productId + ", Quantity change: " + quantityChange);
                 }
 
