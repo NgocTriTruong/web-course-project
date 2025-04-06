@@ -25,7 +25,7 @@
 <%@ include file="layout/header.jsp" %>
 
 <!--Main layout-->
-<main style="padding-bottom: 100px;">
+<main class="mb-5">
 
     <section class="mb-5 text-center text-md-start">
         <div class="p-5"
@@ -87,6 +87,7 @@
                     <th>STT</th>
                     <th>Tên người dùng</th>
                     <th>Số điện thoại</th>
+                    <th>Phân quyền</th>
                     <th>Trạng thái</th>
                     <th>Thao tác</th>
                 </tr>
@@ -94,25 +95,58 @@
                 <tbody>
                 <c:forEach items="${users}" var="user" varStatus="loop">
                     <tr>
-                        <td><span class="ms-2 h6">${loop.index + 1}</span></td>
+                        <td><span class="ms-2 h6">${user.id}</span></td>
                         <td><p class="h6 mb-1 ms-1">${user.fullName}</p></td>
                         <td><span class="h6 ms-1">${user.phone}</span></td>
                         <td>
-                            <span class="badge ${user.status == 1 ? 'badge-success' : (user.status == 2 ? 'badge-dark' : 'badge-danger')}"
-                                  style="font-size: 13px;">
+                            <span class="badge rounded-pill d-inline ms-1"
+                                  style="font-size: 14px; background-color: ${user.role == 1 ? '#007bff' : '#6c757d'};">
+                                <c:choose>
+                                    <c:when test="${user.role == 0}">
+                                        Người dùng
+                                    </c:when>
+                                    <c:when test="${user.role == 1 && user.sub_role == 0}">
+                                        Super Admin
+                                    </c:when>
+                                    <c:when test="${user.role == 1 && user.sub_role == 1}">
+                                        Admin Quản lý người dùng
+                                    </c:when>
+                                    <c:when test="${user.role == 1 && user.sub_role == 2}">
+                                        Admin Quản lý sản phẩm
+                                    </c:when>
+                                    <c:when test="${user.role == 1 && user.sub_role == 3}">
+                                        Admin Quản lý đơn hàng
+                                    </c:when>
+                                    <c:when test="${user.role == 1 && user.sub_role == 4}">
+                                        Admin Quản lý shipper
+                                    </c:when>
+                                    <c:when test="${user.role == 1 && user.sub_role == 5}">
+                                        Admin Quản lý tin tức
+                                    </c:when>
+                                    <c:otherwise>
+                                        Không xác định
+                                    </c:otherwise>
+                                </c:choose>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="badge rounded-pill d-inline ms-1"
+                                  style="font-size: 14px; background-color: ${user.status == 1 ? 'green' : user.status == 2 ? 'red' : 'orange'};">
                                     ${user.status == 1 ? 'Đang hoạt động' : (user.status == 2 ? 'Đã xóa' : 'Ngừng hoạt động')}
                             </span>
                         </td>
                         <td>
-                            <c:if test="${user.status != 3}">
-                                <a href="userEdit?id=${user.id}" class="btn bg_green btn-floating"
-                                   style="font-size: 16px;">
-                                    <i class="far fa-pen-to-square"></i>
+                            <a href="userEdit?id=${user.id}" class="btn bg_green btn-floating"
+                               style="font-size: 16px;">
+                                <i class="far fa-pen-to-square"></i>
+                            </a>
+                            <c:if test="${user.status != 2}">
+                                <a href="#" onclick="deleteUser(${user.id})">
+                                    <button type="button" class="btn bg_yellow btn-floating"
+                                            style="font-size: 16px;">
+                                        <i class="far fa-trash-can"></i>
+                                    </button>
                                 </a>
-                                <button type="button" class="btn bg_yellow btn-floating"
-                                        onclick="deleteUser(${user.id})" style="font-size: 16px;">
-                                    <i class="far fa-trash-can"></i>
-                                </button>
                             </c:if>
                         </td>
                     </tr>
@@ -122,25 +156,45 @@
         </div>
 
         <!-- Phân trang -->
-        <nav aria-label="Pagination">
-            <ul class="pagination justify-content-end">
-                <c:forEach begin="1" end="${totalPages}" var="i">
-                    <li class="page-item ${i == currentPage ? 'active' : ''}">
-                        <a class="page-link" href="?page=${i}&searchTerm=${searchTerm}">${i}</a>
+        <div class="container mt-4">
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item ${currentPage > 1 ? '' : 'disabled'}">
+                        <a class="page-link" href="?page=${currentPage - 1}&searchTerm=${searchTerm}">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </a>
                     </li>
-                </c:forEach>
-            </ul>
-        </nav>
+                    <c:forEach var="i" begin="1" end="${totalPages}">
+                        <c:choose>
+                            <c:when test="${i == 1 || i == totalPages || (i >= currentPage - 2 && i <= currentPage + 2)}">
+                                <li class="page-item ${i == currentPage ? 'active' : ''}">
+                                    <a class="page-link" href="?page=${i}&searchTerm=${searchTerm}">${i}</a>
+                                </li>
+                            </c:when>
+                            <c:when test="${i == currentPage - 3 || i == currentPage + 3}">
+                                <li class="page-item disabled">
+                                    <span class="page-link">...</span>
+                                </li>
+                            </c:when>
+                        </c:choose>
+                    </c:forEach>
+                    <li class="page-item ${currentPage < totalPages ? '' : 'disabled'}">
+                        <a class="page-link" href="?page=${currentPage + 1}&searchTerm=${searchTerm}">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </div>
 </main>
 
 <!-- Footer -->
 <footer class="bottom-0 w-100 text-center py-2 bg-light">
-    <p class="pt-3" style="color: rgba(0, 0, 0, 0.5);">©2024 Group-11</p>
+    <p class="pt-3" style="color: rgba(0, 0, 0, 0.5); margin-left: 150px;">©2024 Group-11</p>
 </footer>
 
 <script>
-    // JavaScript cho thao tác xóa người dùng
     function deleteUser(userId) {
         if (confirm("Bạn có chắc chắn muốn xóa người dùng này?")) {
             window.location.href = "userManagement?action=delete&id=" + userId;
@@ -152,16 +206,12 @@
         const searchInput = document.getElementById('advanced-search-input');
         const searchButton = document.getElementById('advanced-search-button');
 
-        // Function to perform search
         function performSearch() {
             const searchTerm = searchInput.value.trim();
             window.location.href = 'userManagement?action=search&searchTerm=' + encodeURIComponent(searchTerm);
         }
 
-        // Search button click handler
         searchButton.addEventListener('click', performSearch);
-
-        // Enter key press handler
         searchInput.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 performSearch();
@@ -171,5 +221,3 @@
 </script>
 </body>
 </html>
-
-
