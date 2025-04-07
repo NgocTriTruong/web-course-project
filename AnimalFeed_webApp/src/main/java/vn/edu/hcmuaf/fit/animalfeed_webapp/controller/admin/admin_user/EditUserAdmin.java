@@ -25,10 +25,13 @@ public class EditUserAdmin extends HttpServlet {
         emailService = new EmailService();
     }
 
-    // Kiểm tra xem người dùng có phải là admin không
-    private boolean isAdmin(int userId) {
-        User user = userService.getById(userId);
-        return user != null && user.getRole() == 1;
+    // Kiểm tra xem người dùng có phải là admin và có quyền chỉnh sửa người dùng không
+    private boolean hasUserManagementPermission(HttpSession session) {
+        Integer userId = (Integer) session.getAttribute("userId");
+        if (userId == null) {
+            return false;
+        }
+        return userService.hasPermission(userId, "USER_MANAGEMENT");
     }
 
     @Override
@@ -49,12 +52,26 @@ public class EditUserAdmin extends HttpServlet {
                 return;
             }
 
+            // Kiểm tra quyền USER_MANAGEMENT
+            if (!hasUserManagementPermission(session)) {
+                session.setAttribute("error", "Bạn không có quyền truy cập trang này.");
+                response.sendRedirect("dashboard");
+                return;
+            }
+
+            // Lấy sub_role của người dùng hiện tại và lưu vào session
+            User currentUser = userService.getById(userId);
+            if (currentUser != null) {
+                session.setAttribute("subRole", currentUser.getSub_role());
+            }
+
             // Nếu có userId trong session, tiếp tục xử lý
             int id = Integer.parseInt(idStr);
             User user = userService.getById(id);
 
             if (user != null) {
                 request.setAttribute("user", user);
+                request.setAttribute("userService", userService); // Đưa userService vào request scope để JSP sử dụng
                 request.getRequestDispatcher("/views/admin/userEdit.jsp").forward(request, response);
             } else {
                 request.getSession().setAttribute("error", "Không tìm thấy người dùng.");
@@ -78,11 +95,10 @@ public class EditUserAdmin extends HttpServlet {
         if ("sendOtp".equals(step)) {
             // Bước 1: Gửi mã OTP
             try {
-                // Kiểm tra xem người dùng có phải là admin không
-                Integer userId = (Integer) session.getAttribute("userId");
-                if (userId == null || !isAdmin(userId)) {
-                    session.setAttribute("error", "Bạn không có quyền cập nhật người dùng.");
-                    response.sendRedirect("userManagement");
+                // Kiểm tra quyền USER_MANAGEMENT
+                if (!hasUserManagementPermission(session)) {
+                    session.setAttribute("error", "Bạn không có quyền chỉnh sửa người dùng.");
+                    response.sendRedirect("dashboard");
                     return;
                 }
 
@@ -92,25 +108,25 @@ public class EditUserAdmin extends HttpServlet {
                 String phone = request.getParameter("phone");
                 String email = request.getParameter("email");
                 String roleStr = request.getParameter("role");
+                String sub_roleStr = request.getParameter("sub_role");
                 String statusStr = request.getParameter("status");
 
                 // Kiểm tra nếu có tham số rỗng
                 if (idStr == null || idStr.trim().isEmpty() ||
                         fullName == null || fullName.trim().isEmpty() ||
                         phone == null || phone.trim().isEmpty() ||
-                        email == null || email.trim().isEmpty() ||
-                        roleStr == null || roleStr.trim().isEmpty() ||
-                        statusStr == null || statusStr.trim().isEmpty()) {
+                        email == null || email.trim().isEmpty()) {
                     throw new ServletException("Thiếu các trường bắt buộc.");
                 }
 
                 // Chuyển các tham số về kiểu số
                 int id = Integer.parseInt(idStr);
-                int role = Integer.parseInt(roleStr);
-                int status = Integer.parseInt(statusStr);
+                int role = (roleStr != null && !roleStr.trim().isEmpty()) ? Integer.parseInt(roleStr) : 0;
+                int sub_role = (sub_roleStr != null && !sub_roleStr.trim().isEmpty()) ? Integer.parseInt(sub_roleStr) : 0;
+                int status = (statusStr != null && !statusStr.trim().isEmpty()) ? Integer.parseInt(statusStr) : 1;
 
                 // Kiểm tra giá trị status hợp lệ
-                if (status != 1 && status != 2) {
+                if (status != 0 && status != 1) {
                     throw new IllegalArgumentException("Trạng thái không hợp lệ.");
                 }
 
@@ -120,8 +136,18 @@ public class EditUserAdmin extends HttpServlet {
                     throw new ServletException("Không tìm thấy người dùng.");
                 }
 
+                // Kiểm tra quyền chỉnh sửa role, sub_role, status
+                Integer userId = (Integer) session.getAttribute("userId");
+                User currentUser = userService.getById(userId);
+                if (currentUser.getSub_role() != 0) { // Không phải Super Admin
+                    // Giữ nguyên role, sub_role, status của người dùng hiện tại
+                    role = existingUser.getRole();
+                    sub_role = existingUser.getSub_role();
+                    status = existingUser.getStatus();
+                }
+
                 // Tạo đối tượng User mới với thông tin đã chỉnh sửa
-                User updatedUser = new User(id, fullName, existingUser.getPassword(), phone, email, status, existingUser.getCreateDate(), new Date(), role);
+                User updatedUser = new User(id, fullName, existingUser.getPassword(), phone, email, status, existingUser.getCreateDate(), new Date(), role, sub_role);
 
                 // Lưu thông tin người dùng đã chỉnh sửa, admin ID và user ID vào session
                 session.setAttribute("updatedUser", updatedUser);
@@ -191,8 +217,13 @@ public class EditUserAdmin extends HttpServlet {
                 if (originalUser.getRole() != updatedUser.getRole()) {
                     updatedFields.append("<li><strong>Vai trò:</strong> ").append(originalUser.getRole() == 1 ? "Quản trị viên" : "Người dùng").append(" → ").append(updatedUser.getRole() == 1 ? "Quản trị viên" : "Người dùng").append("</li>");
                 }
+                if (originalUser.getSub_role() != updatedUser.getSub_role()) {
+                    String originalSubRole = getSubRoleName(originalUser.getSub_role());
+                    String updatedSubRole = getSubRoleName(updatedUser.getSub_role());
+                    updatedFields.append("<li><strong>Loại quản trị viên:</strong> ").append(originalSubRole).append(" → ").append(updatedSubRole).append("</li>");
+                }
                 if (originalUser.getStatus() != updatedUser.getStatus()) {
-                    updatedFields.append("<li><strong>Trạng thái:</strong> ").append(originalUser.getStatus() == 2 ? "Đang hoạt động" : "Ngưng hoạt động").append(" → ").append(updatedUser.getStatus() == 2 ? "Đang hoạt động" : "Ngưng hoạt động").append("</li>");
+                    updatedFields.append("<li><strong>Trạng thái:</strong> ").append(originalUser.getStatus() == 1 ? "Đang hoạt động" : "Ngưng hoạt động").append(" → ").append(updatedUser.getStatus() == 1 ? "Đang hoạt động" : "Ngưng hoạt động").append("</li>");
                 }
 
                 // Gửi email thông báo cập nhật thành công
@@ -220,6 +251,19 @@ public class EditUserAdmin extends HttpServlet {
                     response.sendRedirect("userManagement");
                 }
             }
+        }
+    }
+
+    // Phương thức hỗ trợ để lấy tên sub_role
+    private String getSubRoleName(int subRole) {
+        switch (subRole) {
+            case 0: return "Super Admin";
+            case 1: return "User Admin";
+            case 2: return "Product Admin";
+            case 3: return "Order Admin";
+            case 4: return "Shipper Admin";
+            case 5: return "News Admin";
+            default: return "Unknown";
         }
     }
 }
