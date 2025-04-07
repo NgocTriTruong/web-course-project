@@ -146,7 +146,7 @@ public class AddOrder extends HttpServlet {
             for (OrderDetail detail : orderDetails) {
                 Product product = productService.getProductById(detail.getProductId());
                 product.setQuantity(product.getQuantity() - detail.getQuantity());
-                productService.updateProduct(product, userId);
+                productService.updateProduct(product.getId(), product, userId);
                 System.out.println("Updated product quantity for Product ID: " + product.getId());
             }
 

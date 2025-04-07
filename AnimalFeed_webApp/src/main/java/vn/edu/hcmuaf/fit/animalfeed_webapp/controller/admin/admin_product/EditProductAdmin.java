@@ -131,7 +131,7 @@ public class EditProductAdmin extends HttpServlet {
 
             // Thêm sản phẩm vào database
             ProductService productService = new ProductService();
-            productService.updateProduct(product, userId);
+            productService.updateProduct(productId, product, userId);
 
             // Log success và chuyển hướng
             System.out.println("Product updated successfully. Redirecting to product-manager.");

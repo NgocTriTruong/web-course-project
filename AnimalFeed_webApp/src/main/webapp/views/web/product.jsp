@@ -62,7 +62,7 @@
                           <div class="d-flex justify-content-center gap-4 ms-5">
                             <div class="card">
                               <div class="product-img">
-                                <img src="${p.img}" alt="${p.name}" height="250px" width="200px">
+                                <img src="${pageContext.request.contextPath}${p.img}" alt="${p.name}" height="250px" width="200px">
                               </div>
                               <div class="h5 text-h">${p.name}</div>
                               <div class="p mb-2 text-p">${p.description}</div>
@@ -106,7 +106,7 @@
                       <c:if test="${p.cat_id == ca.id}">
                         <div class="d-flex justify-content-center gap-4 ms-5">
                           <div class="card">
-                            <img src="${p.img}" class="card-img-top" alt="${p.name}">
+                            <img src="${pageContext.request.contextPath}${p.img}" class="card-img-top" alt="${p.name}">
                             <div class="card-body text-center">
                               <h5 class="card-title">${p.name}</h5>
                               <p class="card-text">${p.description}</p>
