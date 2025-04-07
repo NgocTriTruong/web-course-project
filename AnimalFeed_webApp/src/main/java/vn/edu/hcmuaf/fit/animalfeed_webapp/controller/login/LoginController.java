@@ -28,7 +28,7 @@ public class LoginController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String email = req.getParameter("email"); // Thay "phone" bằng "email"
+        String email = req.getParameter("email");
         String password = req.getParameter("password");
         String gRecaptchaResponse = req.getParameter("g-recaptcha-response");
 
@@ -39,13 +39,23 @@ public class LoginController extends HttpServlet {
             return;
         }
 
-        // Xác thực người dùng bằng email thay vì số điện thoại
-        User user = userService.login(email, password); // Giả sử UserService có phương thức login(email, password)
+        // Xác thực người dùng bằng email
+        User user = userService.login(email, password);
 
         if (user != null) {
+            // Kiểm tra trạng thái người dùng
+            if (user.getStatus() != 1) {
+                req.setAttribute("error", "Tài khoản của bạn đã bị ngưng hoạt động. Vui lòng liên hệ quản trị viên.");
+                req.getRequestDispatcher("/views/web/login.jsp").forward(req, resp);
+                return;
+            }
+
+            // Lưu thông tin người dùng vào session
             HttpSession session = req.getSession();
             session.setAttribute("user", user);
             session.setAttribute("userId", user.getId());
+            session.setAttribute("userFullName", user.getFullName()); // Lưu tên đầy đủ để hiển thị trên Dashboard
+            session.setAttribute("subRole", user.getSub_role()); // Lưu sub_role để phân quyền trên JSP
 
             // Chuyển hướng theo vai trò
             if (user.getRole() == 1) {

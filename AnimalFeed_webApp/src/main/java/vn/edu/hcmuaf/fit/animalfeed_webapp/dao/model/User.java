@@ -8,13 +8,14 @@ public class User implements Serializable {
     private String fullName;
     private String password;
     private String phone;
+    private String email;
     private int status;
     private Date createDate;
     private Date updateDate;
-    private int role;
-    private String email;
+    private int role; // 0: User, 1: Admin
+    private int sub_role; // 0: Super Admin, 1: User Admin, 2: Product Admin, 3: Order Admin, 4: Shipper Admin, 5: News Admin
 
-    public User(int id, String fullName, String password, String phone, String email, int status, Date createDate, Date updateDate, int role) {
+    public User(int id, String fullName, String password, String phone, String email, int status, Date createDate, Date updateDate, int role, int sub_role) {
         this.id = id;
         this.fullName = fullName;
         this.password = password;
@@ -24,10 +25,10 @@ public class User implements Serializable {
         this.createDate = createDate;
         this.updateDate = updateDate;
         this.role = role;
+        this.sub_role = sub_role;
     }
 
     public User() {
-
     }
 
     public int getId() {
@@ -102,6 +103,14 @@ public class User implements Serializable {
         this.role = role;
     }
 
+    public int getSub_role() {
+        return sub_role;
+    }
+
+    public void setSub_role(int sub_role) {
+        this.sub_role = sub_role;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -114,6 +123,7 @@ public class User implements Serializable {
                 ", createDate=" + createDate +
                 ", updateDate=" + updateDate +
                 ", role=" + role +
+                ", sub_role=" + sub_role +
                 '}';
     }
 }

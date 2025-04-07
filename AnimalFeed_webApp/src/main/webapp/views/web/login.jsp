@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -167,16 +168,34 @@
             text-decoration: underline;
         }
 
-        /* Alert thông báo lỗi */
+        /* Alert thông báo lỗi/thành công */
         .alert {
             color: #fff;
-            background: linear-gradient(90deg, #e74c3c, #c0392b);
             padding: 12px;
             border-radius: 8px;
             margin-bottom: 20px;
             font-size: 0.9rem;
-            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
-            display: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .alert-success {
+            background: linear-gradient(90deg, #2ecc71, #27ae60);
+        }
+
+        .alert-danger {
+            background: linear-gradient(90deg, #e74c3c, #c0392b);
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* reCAPTCHA */
@@ -203,16 +222,28 @@
         <h2>Đăng Nhập</h2>
         <p class="text-center">Truy cập tài khoản của bạn ngay</p>
 
-        <!-- Hiển thị thông báo lỗi nếu có -->
+        <!-- Hiển thị thông báo lỗi hoặc thành công từ session -->
+        <c:if test="${not empty sessionScope.message}">
+            <div class="alert alert-success">
+                    ${sessionScope.message}
+            </div>
+            <c:remove var="message" scope="session"/>
+        </c:if>
+        <c:if test="${not empty sessionScope.error}">
+            <div class="alert alert-danger">
+                    ${sessionScope.error}
+            </div>
+            <c:remove var="error" scope="session"/>
+        </c:if>
         <c:if test="${not empty error}">
             <div class="alert alert-danger">${error}</div>
         </c:if>
 
         <!-- Form đăng nhập -->
-        <form action="<%= request.getContextPath() %>/login" method="post" id="loginForm">
+        <form action="${pageContext.request.contextPath}/login" method="post" id="loginForm">
             <div class="mb-3">
-                <i class="fas fa-envelope"></i> <!-- Thay icon điện thoại bằng icon email -->
-                <input type="email" class="form-control" id="id_email" name="email" placeholder="Email (Gmail)" required>
+                <i class="fas fa-envelope"></i>
+                <input type="email" class="form-control" id="id_email" name="email" placeholder="Email (Gmail)" value="${param.email}" required>
             </div>
             <div class="mb-3">
                 <i class="fas fa-lock"></i>
@@ -227,10 +258,10 @@
             </div>
         </form>
 
-        <a href="<%= request.getContextPath() %>/register" class="register-link">Chưa có tài khoản? Đăng ký ngay</a>
-        <a href="<%= request.getContextPath() %>/forgot-password" class="reset_pass-link">Quên mật khẩu?</a>
+        <a href="${pageContext.request.contextPath}/register" class="register-link">Chưa có tài khoản? Đăng ký ngay</a>
+        <a href="${pageContext.request.contextPath}/forgot-password" class="reset_pass-link">Quên mật khẩu?</a>
 
-        <a href="<%= request.getContextPath() %>/login-google" class="btn btn-danger">
+        <a href="${pageContext.request.contextPath}/login-google" class="btn btn-danger">
             <i class="fab fa-google me-2"></i> Đăng nhập với Google
         </a>
     </div>
@@ -242,44 +273,48 @@
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const form = document.getElementById('loginForm');
-        const errorDiv = document.querySelector('.alert');
+        const emailInput = form.querySelector('input[name="email"]');
+        const passwordInput = form.querySelector('input[name="password"]');
 
         form.addEventListener('submit', function(event) {
             let isValid = true;
-
-            errorDiv.style.display = 'none'; // Ẩn thông báo lỗi cũ
+            let errorMessage = '';
 
             // Kiểm tra email
-            const email = form.querySelector('input[name="email"]').value.trim();
+            const email = emailInput.value.trim();
             if (email === '') {
-                errorDiv.innerText = 'Vui lòng nhập email';
-                errorDiv.style.display = 'block';
+                errorMessage = 'Vui lòng nhập email';
                 isValid = false;
             } else if (!/^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(email)) {
-                errorDiv.innerText = 'Vui lòng nhập email Gmail hợp lệ (ví dụ: example@gmail.com)';
-                errorDiv.style.display = 'block';
+                errorMessage = 'Vui lòng nhập email Gmail hợp lệ (ví dụ: example@gmail.com)';
                 isValid = false;
             }
 
             // Kiểm tra mật khẩu
-            const password = form.querySelector('input[name="password"]').value.trim();
+            const password = passwordInput.value.trim();
             if (password === '') {
-                errorDiv.innerText = 'Vui lòng nhập mật khẩu';
-                errorDiv.style.display = 'block';
+                errorMessage = 'Vui lòng nhập mật khẩu';
                 isValid = false;
             }
 
             // Kiểm tra reCAPTCHA
             const recaptchaResponse = grecaptcha.getResponse();
             if (recaptchaResponse.length === 0) {
-                errorDiv.innerText = 'Vui lòng xác minh reCAPTCHA';
-                errorDiv.style.display = 'block';
+                errorMessage = 'Vui lòng xác minh reCAPTCHA';
                 isValid = false;
             }
 
-            // Nếu có lỗi, ngăn gửi form
+            // Nếu có lỗi, hiển thị thông báo và ngăn gửi form
             if (!isValid) {
                 event.preventDefault();
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'alert alert-danger';
+                errorDiv.innerText = errorMessage;
+                const existingAlert = form.parentElement.querySelector('.alert');
+                if (existingAlert) {
+                    existingAlert.remove();
+                }
+                form.parentElement.insertBefore(errorDiv, form);
             }
         });
     });
