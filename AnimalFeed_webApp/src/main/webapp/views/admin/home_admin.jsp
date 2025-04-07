@@ -1,45 +1,69 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="../../css/admin_home.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js Library for Charts -->
-  </head>
-  <body>
-  <div class="container">
-    <aside class="sidebar">
-      <h2>Admin</h2>
-      <ul class="menu">
-        <li onclick="showSection('home')"><i class="fas fa-home"></i> Trang chủ</li>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin_home.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="container">
+  <aside class="sidebar">
+    <h2>Admin</h2>
+    <ul class="menu">
+      <li onclick="showSection('home')"><i class="fas fa-home"></i> Trang chủ</li>
+      <c:if test="${userService.hasPermission(sessionScope.userId, 'USER_MANAGEMENT')}">
         <li onclick="showSection('user-management')"><i class="fas fa-users"></i> Người dùng</li>
+      </c:if>
+      <c:if test="${userService.hasPermission(sessionScope.userId, 'PRODUCT_MANAGEMENT')}">
         <li onclick="showSection('product-management')"><i class="fas fa-cogs"></i> Sản phẩm</li>
+      </c:if>
+      <c:if test="${userService.hasPermission(sessionScope.userId, 'ORDER_MANAGEMENT')}">
         <li onclick="showSection('order-management')"><i class="fas fa-shopping-cart"></i> Đơn hàng</li>
+      </c:if>
+      <c:if test="${userService.hasPermission(sessionScope.userId, 'SHIPPER_MANAGEMENT')}">
         <li onclick="showSection('shipper-management')"><i class="fas fa-truck"></i> Shipper</li>
-        <li onclick="showSection('news-management')"><i class="fas fa-newspaper"></i>Tin tức</li>
-        <li onclick="logout()"><i class="fas fa-sign-out-alt"></i> Đăng xuất</li>
-      </ul>
-    </aside>
+      </c:if>
+      <c:if test="${userService.hasPermission(sessionScope.userId, 'NEWS_MANAGEMENT')}">
+        <li onclick="showSection('news-management')"><i class="fas fa-newspaper"></i> Tin tức</li>
+      </c:if>
+      <li onclick="logout()"><i class="fas fa-sign-out-alt"></i> Đăng xuất</li>
+    </ul>
+  </aside>
 
-    <main class="dashboard">
-      <header class="dashboard-header">
-        <p>Dashboard</p>
-        <div class="user-info">
-          <i class="far fa-frown"></i>
-          <span>Admin</span>
+  <main class="dashboard">
+    <header class="dashboard-header">
+      <p>Dashboard</p>
+      <div class="user-info">
+        <i class="far fa-frown"></i>
+        <span>${sessionScope.userFullName}</span>
+      </div>
+    </header>
+
+    <!-- Trang chủ -->
+    <section id="home" class="section active">
+      <h3>Chào mừng đến với trang Admin!</h3>
+      <p>Chọn một mục từ menu để quản lý hệ thống.</p>
+    </section>
+
+    <!-- Quản lý Người dùng -->
+    <c:if test="${userService.hasPermission(sessionScope.userId, 'USER_MANAGEMENT')}">
+      <section id="user-management" class="section">
+        <h3>Quản lý Người dùng</h3>
+        <div class="controls">
+          <input type="text" id="user-name" placeholder="Tên người dùng">
+          <button onclick="addUser()">Thêm Người dùng</button>
         </div>
-      </header>
-
-      <!-- Trang chủ -->
-      <section id="home" class="section active">
-        <h3>Chào mừng đến với trang Admin!</h3>
-        <p>Chọn một mục từ menu để quản lý hệ thống.</p>
+        <ul id="user-list"></ul>
       </section>
+    </c:if>
 
-      <!-- Quản lý Sản phẩm -->
+    <!-- Quản lý Sản phẩm -->
+    <c:if test="${userService.hasPermission(sessionScope.userId, 'PRODUCT_MANAGEMENT')}">
       <section id="product-management" class="section">
         <h3>Quản lý Sản phẩm</h3>
         <div class="controls">
@@ -74,31 +98,10 @@
         </div>
         <ul id="product-list"></ul>
       </section>
+    </c:if>
 
-      <!-- Thống kê Sản phẩm -->
-      <section id="product-statistics" class="section">
-        <h3>Thống kê Sản phẩm</h3>
-        <div class="chart-container">
-          <h4>Sản phẩm bán chạy</h4>
-          <canvas id="top-selling-chart"></canvas>
-        </div>
-        <div class="chart-container">
-          <h4>Sản phẩm mới</h4>
-          <canvas id="new-products-chart"></canvas>
-        </div>
-      </section>
-
-      <!-- Quản lý Người dùng -->
-      <section id="userManagement" class="section">
-        <h3>Quản lý Người dùng</h3>
-        <div class="controls">
-          <input type="text" id="user-name" placeholder="Tên người dùng">
-          <button onclick="addUser()">Thêm Người dùng</button>
-        </div>
-        <ul id="user-list"></ul>
-      </section>
-
-      <!-- Quản lý Đơn hàng -->
+    <!-- Quản lý Đơn hàng -->
+    <c:if test="${userService.hasPermission(sessionScope.userId, 'ORDER_MANAGEMENT')}">
       <section id="order-management" class="section">
         <h3>Quản lý Đơn hàng</h3>
         <div class="controls">
@@ -108,7 +111,7 @@
             <option value="Đang chuẩn bị hàng">Đang chuẩn bị hàng</option>
             <option value="Đang vận chuyển">Đang vận chuyển</option>
             <option value="Hoàn tất giao hàng">Hoàn tất giao hàng</option>
-            <option value="Đang chuẩn bị hàng">Đã hủy</option>
+            <option value="Đã hủy">Đã hủy</option>
           </select>
           <button onclick="addOrder()">Thêm Đơn hàng</button>
           <button onclick="fetchOrders()">Lấy Danh sách Đơn hàng</button>
@@ -127,8 +130,10 @@
           </tbody>
         </table>
       </section>
+    </c:if>
 
-      <!-- Quản lý Shipper -->
+    <!-- Quản lý Shipper -->
+    <c:if test="${userService.hasPermission(sessionScope.userId, 'SHIPPER_MANAGEMENT')}">
       <section id="shipper-management" class="section">
         <h3>Quản lý Shipper</h3>
         <div class="controls">
@@ -138,7 +143,7 @@
         <table id="shipper-table">
           <thead>
           <tr>
-            <th>Tên shipper</th>
+            <th>Tên Shipper</th>
             <th>Thao tác</th>
           </tr>
           </thead>
@@ -147,8 +152,10 @@
           </tbody>
         </table>
       </section>
+    </c:if>
 
-      <!-- Quản lý Tin tức -->
+    <!-- Quản lý Tin tức -->
+    <c:if test="${userService.hasPermission(sessionScope.userId, 'NEWS_MANAGEMENT')}">
       <section id="news-management" class="section">
         <h3>Quản lý Tin tức</h3>
         <div class="controls">
@@ -158,11 +165,10 @@
         </div>
         <ul id="news-list"></ul>
       </section>
-    </main>
-  </div>
-    </section>
+    </c:if>
+  </main>
+</div>
 
-  <script src="../../scripts/admin_home.js"></script>
-  </body>
-  </html>
-
+<script src="${pageContext.request.contextPath}/./views/template/assets/scripts/admin_home.js"></script>
+</body>
+</html>

@@ -440,3 +440,119 @@ function deleteNews(index) {
 function logout() {
     window.location.href = "/index.html"; // Thay đổi đường dẫn đến trang đăng nhập của bạn
 }
+
+// Hiển thị section dựa trên id
+function showSection(sectionId) {
+    // Ẩn tất cả các section
+    const sections = document.querySelectorAll('.section');
+    sections.forEach(section => {
+        section.classList.remove('active');
+    });
+
+    // Hiển thị section được chọn
+    const section = document.getElementById(sectionId);
+    if (section) {
+        section.classList.add('active');
+    }
+}
+
+// Đăng xuất
+function logout() {
+    if (confirm("Bạn có chắc chắn muốn đăng xuất?")) {
+        window.location.href = "/logout"; // URL đăng xuất
+    }
+}
+
+// Các hàm khác (addUser, addProduct, v.v.) giữ nguyên
+function addUser() {
+    const userName = document.getElementById('user-name').value;
+    if (userName) {
+        const userList = document.getElementById('user-list');
+        const li = document.createElement('li');
+        li.textContent = userName;
+        userList.appendChild(li);
+        document.getElementById('user-name').value = '';
+    }
+}
+
+function addProduct() {
+    const productName = document.getElementById('product-name').value;
+    if (productName) {
+        const productList = document.getElementById('product-list');
+        const li = document.createElement('li');
+        li.textContent = productName;
+        productList.appendChild(li);
+        document.getElementById('product-name').value = '';
+    }
+}
+
+function addOrder() {
+    const orderId = document.getElementById('order-id').value;
+    const customerName = document.getElementById('customer-name').value;
+    const orderStatus = document.getElementById('order-status').value;
+
+    if (orderId && customerName && orderStatus) {
+        const tbody = document.querySelector('#order-table tbody');
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${orderId}</td>
+            <td>${customerName}</td>
+            <td>${orderStatus}</td>
+            <td><button onclick="deleteRow(this)">Xóa</button></td>
+        `;
+        tbody.appendChild(row);
+        document.getElementById('order-id').value = '';
+        document.getElementById('customer-name').value = '';
+    }
+}
+
+function addShipper() {
+    const shipperName = document.getElementById('shipper-name').value;
+    if (shipperName) {
+        const tbody = document.querySelector('#shipper-table tbody');
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${shipperName}</td>
+            <td><button onclick="deleteRow(this)">Xóa</button></td>
+        `;
+        tbody.appendChild(row);
+        document.getElementById('shipper-name').value = '';
+    }
+}
+
+function addNews() {
+    const newsTitle = document.getElementById('news-title').value;
+    if (newsTitle) {
+        const newsList = document.getElementById('news-list');
+        const li = document.createElement('li');
+        li.textContent = newsTitle;
+        newsList.appendChild(li);
+        document.getElementById('news-title').value = '';
+        document.getElementById('news-content').value = '';
+    }
+}
+
+function deleteRow(button) {
+    button.parentElement.parentElement.remove();
+}
+
+function fetchOrders() {
+    // Mock dữ liệu đơn hàng
+    const orders = [
+        { id: '001', customer: 'Nguyễn Văn A', status: 'Đang chuẩn bị hàng' },
+        { id: '002', customer: 'Trần Thị B', status: 'Đang vận chuyển' }
+    ];
+
+    const tbody = document.querySelector('#order-table tbody');
+    tbody.innerHTML = '';
+    orders.forEach(order => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${order.id}</td>
+            <td>${order.customer}</td>
+            <td>${order.status}</td>
+            <td><button onclick="deleteRow(this)">Xóa</button></td>
+        `;
+        tbody.appendChild(row);
+    });
+}
