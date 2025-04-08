@@ -20,6 +20,10 @@
 
     <script src="${pageContext.request.contextPath}/views/admin/assets/js/mdb.min.js"></script>
 
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 
 <body>
@@ -153,6 +157,101 @@
             <!-- Section: Sales Performance KPIs -->
             <section class="mb-8">
                 <div class="card shadow-0">
+                    <!-- Form chọn năm và tháng -->
+                    <div class="card-body">
+                        <form id="dateFilterForm">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="yearSelect" class="form-label">Chọn năm:</label>
+                                    <select name="year" id="yearSelect" class="form-select filter-input">
+                                        <c:forEach var="y" begin="2020" end="2030">
+                                            <option value="${y}" ${y == selectedYear ? 'selected' : ''}>${y}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="monthSelect" class="form-label">Chọn tháng</label>
+                                    <select name="month" id="monthSelect" class="form-select filter-input">
+                                        <option value="0" ${selectedMonth == 0 ? 'selected' : ''}>Cả năm</option>
+                                        <c:forEach var="m" begin="1" end="12">
+                                            <option value="${m}" ${m == selectedMonth ? 'selected' : ''}>Tháng ${m}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                <div class="col-md-1">
+                                    <button type="button" id="filterBtn" class="btn btn-primary" style="margin-top: 36px">Lọc</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- biểudđồ thống kê -->
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <div class="card shadow-0 h-100">
+                                <div class="card-header border-0 p-3 doanhthu" style="margin-bottom: -10px;">
+                                    <strong class="h4">
+                                        <c:choose>
+                                            <c:when test="${selectedMonth == 0}">
+                                                Doanh thu theo tháng (Năm ${selectedYear})
+                                            </c:when>
+                                            <c:otherwise>
+                                                Doanh thu theo ngày (Tháng ${selectedMonth}/${selectedYear})
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </strong>
+                                </div>
+                                <div class="card-body" style="height: 774px;">
+                                    <canvas id="revenueChart" height="300"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-5">
+                            <div class="card shadow-0 h-100" style="margin-top: 240px;">
+                                <div class="card-header border-0 p-3 phanLoai" style="margin-left: 26px;">
+                                    <strong class="h4">
+                                        <c:choose>
+                                            <c:when test="${selectedMonth == 0}">
+                                                Phân loại đơn hàng (Năm ${selectedYear})
+                                            </c:when>
+                                            <c:otherwise>
+                                                Phân loại đơn hàng (Tháng ${selectedMonth}/${selectedYear})
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </strong>
+                                </div>
+                                <div class="card-body" style="margin-top: -109px; height: 428px; width: 437px; margin-left: 51px;">
+                                    <canvas id="orderStatusChart" height="300"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-top: -69px;">
+                        <div class="col-1"></div>
+                        <div class="col-10">
+                            <div class="card shadow-0">
+                                <div class="card-header border-0 p-3 topBan" style="margin-left: 224px;">
+                                    <strong class="h3">
+                                        <c:choose>
+                                            <c:when test="${selectedMonth == 0}">
+                                                Top 10 sản phẩm bán chạy (Năm ${selectedYear})
+                                            </c:when>
+                                            <c:otherwise>
+                                                Top 10 sản phẩm bán chạy (Tháng ${selectedMonth}/${selectedYear})
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </strong>
+                                </div>
+                                <div class="card-body" style=" margin-top: -16px;">
+                                    <canvas id="topProductsChart" height="300" style="height: 750px;width: 750px;"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-1"></div>
+                    </div>
+
                     <div class="card-header border-0 p-3 mt-2">
                         <strong class="h3">Thống kê chi tiết</strong>
                     </div>
@@ -209,6 +308,289 @@
     function exportToExcel() {
         window.location.href = "${pageContext.request.contextPath}/exportExcel";
     }
+</script>
+
+<script>
+    // Hàm khởi tạo biểu đồ
+    // Biểu đồ doanh thu theo tháng
+    $(document).ready(function() {
+        // Khởi tạo biểu đồ ban đầu
+        initRevenueChart();
+        initOrderStatusChart();
+        initTopProductsChart();
+
+        // Bắt sự kiện click nút lọc
+        $('#filterBtn').click(function() {
+            const year = $('#yearSelect').val();
+            const month = $('#monthSelect').val();
+
+            // Gọi AJAX để cập nhật dữ liệu
+            updateChartAndTitle(year, month);
+        });
+    });
+
+    function initRevenueChart() {
+        const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+        window.revenueChart = new Chart(revenueCtx, {
+            type: 'line',
+            data: {
+                labels: [
+                    <c:choose>
+                        <c:when test="${not empty monthlyRevenueLabels}">
+                            <c:forEach var="label" items="${monthlyRevenueLabels}" varStatus="loop">
+                                "${label}"${loop.last ? '' : ','}
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise></c:otherwise>
+                    </c:choose>
+                ], // Dữ liệu từ controller
+                datasets: [{
+                    label: 'Doanh thu (VND)',
+                    data: [
+                        <c:choose>
+                            <c:when test="${not empty monthlyRevenueData}">
+                                <c:forEach var="data" items="${monthlyRevenueData}" varStatus="loop">
+                                    ${data}${loop.last ? '' : ','}
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>[]</c:otherwise>
+                        </c:choose>
+                    ],
+                    backgroundColor: 'rgba(78, 115, 223, 0.05)',
+                    borderColor: 'rgba(78, 115, 223, 1)',
+                    pointBackgroundColor: 'rgba(78, 115, 223, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(78, 115, 223, 1)',
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return ' ' + context.parsed.y.toLocaleString('vi-VN') + 'đ';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return value.toLocaleString('vi-VN') + 'đ';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    // Hàm khởi tạo biểu đồ trạng thái đơn hàng
+    function initOrderStatusChart() {
+        // Biểu đồ trạng thái đơn hàng
+        const orderStatusCtx = document.getElementById('orderStatusChart').getContext('2d');
+        window.orderStatusChart = new Chart(orderStatusCtx, {
+            type: 'doughnut',
+            data: {
+                labels: [
+                    <c:choose>
+                    <c:when test="${not empty orderStatusLabels}">
+                    <c:forEach var="label" items="${orderStatusLabels}" varStatus="loop">
+                    <c:choose>
+                    <c:when test="${label == '1'}">"Đang xử lý"</c:when>
+                    <c:when test="${label == '2'}">"Đang chuẩn bị"</c:when>
+                    <c:when test="${label == '3'}">"Đang giao"</c:when>
+                    <c:when test="${label == '4'}">"Hoàn thành"</c:when>
+                    <c:when test="${label == '0'}">"Hủy"</c:when>
+                    <c:otherwise>"Trạng thái: ${label}"</c:otherwise>
+                    </c:choose>${loop.last ? '' : ','}
+                    </c:forEach>
+                    </c:when>
+                    <c:otherwise></c:otherwise>
+                    </c:choose>
+                ],
+                datasets: [{
+                    data: [
+                        <c:choose>
+                        <c:when test="${not empty orderStatusData}">
+                        <c:forEach var="data" items="${orderStatusData}" varStatus="loop">
+                        ${data}${loop.last ? '' : ','}
+                        </c:forEach>
+                        </c:when>
+                            <c:otherwise>[]</c:otherwise>
+                        </c:choose>
+                    ],
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.7)',
+                        'rgba(75, 192, 192, 0.7)',
+                        'rgba(255, 206, 86, 0.7)',
+                        'rgba(255, 99, 132, 0.7)',
+                        'rgba(153, 102, 255, 0.7)',
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(153, 102, 255, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'right'
+                    }
+                }
+            }
+        });
+    }
+
+    // Hàm khởi tạo biểu đồ top sản phẩm
+    function initTopProductsChart() {
+        // Biểu đồ top sản phẩm bán chạy
+        const topProductsCtx = document.getElementById('topProductsChart').getContext('2d');
+        window.topProductsChart = new Chart(topProductsCtx, {
+            type: 'bar',
+            data: {
+                labels: [
+                    <c:choose>
+                    <c:when test="${not empty topProductsLabels}">
+                    <c:forEach var="label" items="${topProductsLabels}" varStatus="loop">
+                    "${label}"${loop.last ? '' : ','}
+                    </c:forEach>
+                    </c:when>
+                    <c:otherwise></c:otherwise>
+                    </c:choose>
+                ],
+                datasets: [{
+                    label: 'Số lượng bán',
+                    data: [
+                        <c:choose>
+                        <c:when test="${not empty topProductsData}">
+                        <c:forEach var="data" items="${topProductsData}" varStatus="loop">
+                        ${data}${loop.last ? '' : ','}
+                        </c:forEach>
+                        </c:when>
+                            <c:otherwise>[]</c:otherwise>
+                        </c:choose>
+                    ],
+                    backgroundColor: [ // Mỗi cột một màu
+                        '#f39c12'
+                    ],
+                    borderColor: [ // Border tương ứng
+                        '#f39c12'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 5
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    function updateChartAndTitle(year, month) {
+        console.log("Before AJAX - Year:", year, "Month:", month);
+        $.ajax({
+            url: '${pageContext.request.contextPath}/dashboard',
+            type: 'GET',
+            data: {
+                year: year,
+                month: month,
+            },
+            // headers: {
+            //     'X-Requested-With': 'XMLHttpRequest'
+            // },
+            success: function(data) {
+                // Cập nhật tiêu đề
+                // updateTitle(year, month);
+                updateTitleDoanhThu(year, month);
+                updateTitlePhanLoai(year, month);
+                updateTitleTopBan(year, month);
+
+                // Cập nhật biểu đồ
+                // updateChart(data.labels, data.data);
+                // Cập nhật các biểu đồ
+                window.revenueChart.data.labels = data.monthlyRevenueLabels;
+                window.revenueChart.data.datasets[0].data = data.monthlyRevenueData;
+                window.revenueChart.update();
+
+                window.orderStatusChart.data.labels = data.orderStatusLabels.map(label => {
+                    switch(label) {
+                        case '1': return 'Đang xử lý';
+                        case '2': return 'Đang chuẩn bị';
+                        case '3': return 'Đang giao';
+                        case '4': return 'Hoàn thành';
+                        case '0': return 'Hủy';
+                        default: return 'Trạng thái: ' + label;
+                    }
+                });
+                window.orderStatusChart.data.datasets[0].data = data.orderStatusData;
+                window.orderStatusChart.update();
+
+                window.topProductsChart.data.labels = data.topProductsLabels;
+                window.topProductsChart.data.datasets[0].data = data.topProductsData;
+                window.topProductsChart.update();
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+            }
+        });
+    }
+
+    function updateTitleDoanhThu(year, month) {
+        let title;
+        if (month == 0) {
+            title = "Doanh thu theo tháng (Năm " + year + ")";
+        } else {
+            title = "Doanh thu theo ngày (Tháng " + month + "/" + year + ")";
+        }
+        $('.doanhthu strong').text(title);
+    }
+    function updateTitlePhanLoai(year, month) {
+        let title;
+        if (month == 0) {
+            title = "Phân loại đơn hàng (Năm " + year + ")";
+        } else {
+            title = "Phân loại đơn hàng (Tháng " + month + "/" + year + ")";
+        }
+        $('.phanLoai strong').text(title);
+    }
+    function updateTitleTopBan(year, month) {
+        let title;
+        if (month == 0) {
+            title = "Top 10 sản phẩm bán chạy (Năm " + year + ")";
+        } else {
+            title = "Top 10 sản phẩm bán chạy (Tháng " + month + "/" + year + ")";
+        }
+        $('.topBan strong').text(title);
+    }
+
 </script>
 
 </html>

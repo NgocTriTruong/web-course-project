@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class OrderDao {
     private static Jdbi jdbi = JdbiConnect.getJdbi();
@@ -143,5 +144,55 @@ public class OrderDao {
         for (UserStats userStat : userStats) {
             System.out.println(userStat);
         }
+    }
+
+    // Lấy doanh thu theo tháng trong năm
+    public List<Object[]> getMonthlyRevenue(int year){
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT MONTH(order_date) AS month, SUM(total_price) AS total_revenue " +
+                                "FROM orders WHERE YEAR(order_date) = :year " +
+                                "GROUP BY MONTH(order_date)")
+                        .bind("year", year)
+                        .map((rs, ctx) -> new Object[]{rs.getInt("month"), rs.getDouble("total_revenue")})
+                        .list()
+        );
+    }
+
+    // Lấy doanh thu theo ngày trong tháng
+    public List<Object[]> getMonthlyRevenueInYear(int year, int month){
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT DAY(order_date) AS day, SUM(total_price) AS total_revenue " +
+                                "FROM orders WHERE MONTH(order_date) = :month AND YEAR(order_date) = :year " +
+                                "GROUP BY DAY(order_date)")
+                        .bind("year", year)
+                        .bind("month", month)
+                        .map((rs, ctx) -> new Object[]{rs.getInt("day"), rs.getDouble("total_revenue")})
+                        .list()
+        );
+    }
+
+    //lấy thống kê trạng thái đơn hàng theo tháng
+    public List<Object[]> getOrderStatusStatsInMonthYear(int month, int year) {
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT status, COUNT(*) AS count " +
+                                "FROM orders WHERE MONTH(order_date) = :month AND YEAR(order_date) = :year " +
+                                "GROUP BY status")
+                        .bind("month", month)
+                        .bind("year", year)
+                        .map((rs, ctx) -> new Object[]{rs.getString("status"), rs.getInt("count")})
+                        .list()
+        );
+    }
+
+    //lấy thống kê trạng thái đơn hàng theo năm
+    public List<Object[]> getOrderStatusStatsInYear(int year) {
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT status, COUNT(*) AS count " +
+                                "FROM orders WHERE YEAR(order_date) = :year " +
+                                "GROUP BY status")
+                        .bind("year", year)
+                        .map((rs, ctx) -> new Object[]{rs.getString("status"), rs.getInt("count")})
+                        .list()
+        );
     }
 }
