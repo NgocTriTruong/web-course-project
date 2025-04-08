@@ -20,18 +20,21 @@
     <style>
         .address-form {
             display: none;
-            position: fixed;
-            z-index: 1000;
+            position: fixed; /* Giữ form cố định trên màn hình */
+            z-index: 1000; /* Đảm bảo form nằm trên các phần tử khác */
             left: 0;
             top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.4);
+            width: 100%; /* Chiếm toàn bộ chiều rộng màn hình */
+            height: 100%; /* Chiếm toàn bộ chiều cao màn hình */
+            overflow: auto; /* Cho phép cuộn nếu nội dung vượt quá */
+            background-color: rgba(0, 0, 0, 0.4); /* Nền mờ */
         }
         .address-form-content {
             background-color: #fefefe;
-            margin: 15% auto;
+            position: absolute; /* Đặt vị trí tuyệt đối trong container fixed */
+            top: 50%; /* Đặt đỉnh của form ở giữa màn hình */
+            left: 50%; /* Đặt trái của form ở giữa màn hình */
+            transform: translate(-50%, -50%); /* Dịch chuyển để căn giữa hoàn toàn */
             padding: 20px;
             border: 1px solid #888;
             width: 80%;
@@ -39,10 +42,44 @@
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        .form-header { border-bottom: 1px solid #e9ecef; }
-        .form-item label { margin-bottom: 0.5rem; }
-        .form-details textarea { margin-top: 1rem; }
-        .form-footer { border-top: 1px solid #e9ecef; }
+        .form-header {
+            border-bottom: 1px solid #e9ecef;
+        }
+        .form-item label {
+            margin-bottom: 0.5rem;
+        }
+        .form-details textarea {
+            margin-top: 1rem;
+        }
+        .form-footer {
+            border-top: 1px solid #e9ecef;
+        }
+        /* Đảm bảo nội dung bên dưới vẫn cuộn được */
+        body.modal-open {
+            overflow: hidden; /* Ngăn cuộn body khi form mở */
+        }
+
+        .suggestions {
+            position: absolute;
+            z-index: 1000;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .suggestions.show {
+            display: block;
+        }
+
+        .suggestions .dropdown-item {
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        .suggestions .dropdown-item:hover {
+            background-color: #f8f9fa;
+        }
     </style>
 
     <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
@@ -57,7 +94,6 @@
                 <i class="fas fa-chevron-left me-1"></i> Quay lại giỏ hàng
             </a>
             <div class="row mt-4">
-                <!-- Thêm đoạn mã này ngay sau thẻ <div class="row mt-4"> -->
                 <c:if test="${not empty error}">
                     <div class="alert alert-danger" role="alert">
                             ${error}
@@ -150,24 +186,32 @@
                                                 </c:forEach>
                                             </select>
                                         </div>
-                                        <div class="form-item mb-3">
-                                            <label for="province" class="form-label">Chọn Tỉnh:</label>
-                                            <select id="province" class="form-select" onchange="loadDistricts()">
-                                                <option value="">--Chọn Tỉnh--</option>
-                                            </select>
+
+                                        <!-- Autocomplete cho Tỉnh -->
+                                        <div class="form-item mb-3 position-relative">
+                                            <label for="provinceInput" class="form-label">Chọn Tỉnh:</label>
+                                            <input type="text" id="provinceInput" value="" class="form-control" placeholder="--Chọn Tỉnh--">
+                                            <div id="provinceSuggestions" class="suggestions dropdown-menu w-100" style="max-height: 200px; overflow-y: auto;"></div>
+                                            <input type="hidden" id="provinceCode" value="">
                                         </div>
-                                        <div class="form-item mb-3">
-                                            <label for="district" class="form-label">Chọn Huyện:</label>
-                                            <select id="district" class="form-select" onchange="loadWards()">
-                                                <option value="">--Chọn Huyện--</option>
-                                            </select>
+
+                                        <!-- Autocomplete cho Huyện -->
+                                        <div class="form-item mb-3 position-relative">
+                                            <label for="districtInput" class="form-label">Chọn Huyện:</label>
+                                            <input type="text" id="districtInput" class="form-control" placeholder="--Chọn Huyện--" disabled>
+                                            <div id="districtSuggestions" class="suggestions dropdown-menu w-100" style="max-height: 200px; overflow-y: auto;"></div>
+                                            <input type="hidden" id="districtCode" value="">
                                         </div>
-                                        <div class="form-item mb-3">
-                                            <label for="ward" class="form-label">Chọn Xã:</label>
-                                            <select id="ward" class="form-select">
-                                                <option value="">--Chọn Xã--</option>
-                                            </select>
+
+                                        <!-- Autocomplete cho Xã -->
+                                        <div class="form-item mb-3 position-relative">
+                                            <label for="wardInput" class="form-label">Chọn Xã:</label>
+                                            <input type="text" id="wardInput" class="form-control" placeholder="--Chọn Xã--" disabled>
+                                            <div id="wardSuggestions" class="suggestions dropdown-menu w-100" style="max-height: 200px; overflow-y: auto;"></div>
+                                            <input type="hidden" id="wardCode" value="">
                                         </div>
+
+                                        <!-- Chi tiết địa chỉ -->
                                         <div class="form-details">
                                             <textarea class="form-control" id="addressDetails" placeholder="Nhập địa chỉ cụ thể (vd: Số nhà, đường)" rows="3"></textarea>
                                         </div>
@@ -210,6 +254,7 @@
 <%@ include file="../layout/footer.jsp" %>
 
 <script src="${pageContext.request.contextPath}/views/template/assets/scripts/call-api-address.js"></script>
+<script src="${pageContext.request.contextPath}/views/template/assets/scripts/call-api-address.js"></script>
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -221,18 +266,20 @@
 
     function openAddressForm() {
         document.getElementById('addressFormModal').style.display = 'block';
+        document.body.classList.add('modal-open'); // Ngăn cuộn body
         resetAddressFields();
     }
 
     function closeAddressForm() {
         document.getElementById('addressFormModal').style.display = 'none';
+        document.body.classList.remove('modal-open'); // Cho phép cuộn lại
     }
 
     function resetAddressFields() {
         document.getElementById('savedAddresses').selectedIndex = 0;
-        document.getElementById('province').selectedIndex = 0;
-        document.getElementById('district').innerHTML = '<option value="">--Chọn Huyện--</option>';
-        document.getElementById('ward').innerHTML = '<option value="">--Chọn Xã--</option>';
+        document.getElementById('provinceInput').selectedIndex = 0;
+        document.getElementById('districtInput').innerHTML = '<option value="">--Chọn Huyện--</option>';
+        document.getElementById('wardInput').innerHTML = '<option value="">--Chọn Xã--</option>';
         document.getElementById('addressDetails').value = '';
     }
 
@@ -250,52 +297,32 @@
         const ward = selectedOption.getAttribute('data-ward');
         const detail = selectedOption.getAttribute('data-detail');
 
-        const provinceSelect = document.getElementById('province');
-        const districtSelect = document.getElementById('district');
-        const wardSelect = document.getElementById('ward');
+        const provinceInput = document.getElementById('provinceInput');
+        const districtInput = document.getElementById('districtInput');
+        const wardInput = document.getElementById('wardInput');
         const addressDetails = document.getElementById('addressDetails');
 
+        // Set the values directly to the input fields
+        provinceInput.value = province || '';
+        districtInput.value = district || '';
+        wardInput.value = ward || '';
         addressDetails.value = detail || '';
-
-        for (let option of provinceSelect.options) {
-            if (option.text === province) {
-                option.selected = true;
-                break;
-            }
-        }
-
-        loadDistricts().then(() => {
-            for (let option of districtSelect.options) {
-                if (option.text === district) {
-                    option.selected = true;
-                    break;
-                }
-            }
-            loadWards().then(() => {
-                for (let option of wardSelect.options) {
-                    if (option.text === ward) {
-                        option.selected = true;
-                        break;
-                    }
-                }
-            });
-        });
     }
 
     function saveAddress() {
-        const provinceSelect = document.getElementById('province');
-        const districtSelect = document.getElementById('district');
-        const wardSelect = document.getElementById('ward');
+        const provinceInput = document.getElementById('provinceInput');
+        const districtInput = document.getElementById('districtInput');
+        const wardInput = document.getElementById('wardInput');
         const addressDetailsInput = document.getElementById('addressDetails');
 
-        if (!provinceSelect || !districtSelect || !wardSelect || !addressDetailsInput) {
+        if (!provinceInput || !districtInput || !wardInput || !addressDetailsInput) {
             console.error('Required elements not found');
             return;
         }
 
-        const provinceName = provinceSelect.options[provinceSelect.selectedIndex]?.text || '';
-        const districtName = districtSelect.options[districtSelect.selectedIndex]?.text || '';
-        const wardName = wardSelect.options[wardSelect.selectedIndex]?.text || '';
+        const provinceName = provinceInput.value.trim();
+        const districtName = districtInput.value.trim();
+        const wardName = wardInput.value.trim();
         const addressDetails = addressDetailsInput.value.trim();
 
         if (!provinceName || !districtName || !wardName ||
@@ -304,6 +331,7 @@
             return;
         }
 
+        // Rest of the function remains the same
         document.getElementById('provinceHidden').value = provinceName;
         document.getElementById('districtHidden').value = districtName;
         document.getElementById('wardHidden').value = wardName;

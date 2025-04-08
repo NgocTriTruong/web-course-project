@@ -96,30 +96,48 @@
 
                     <!-- Dòng 2 -->
                     <div class="row">
-                        <div class="col-md-4">
-                            <label for="role" class="form-label style_18"><b>Vai trò</b></label>
-                            <i class="fas fa-user-tag ms-2"></i>
-                            <select class="form-select" id="role" name="role" required>
-                                <option value="1" ${user.role == 1 ? 'selected' : ''}>Quản trị viên</option>
-                                <option value="0" ${user.role == 0 ? 'selected' : ''}>Người dùng</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4 mt-3">
-                            <div class="mb-3">
-                                <div>
-                                    <label class="form-label style_18"><b>Trạng thái</b></label>
-                                    <i class="fas fa-toggle-on ms-2"></i>
-                                </div>
-                                <div class="form-check-inline">
-                                    <input class="form-check-input" type="radio" name="status" id="active" value="1" ${user.status == 1 ? 'checked' : ''}>
-                                    <label class="form-check-label" for="active">Đang hoạt động</label>
-                                </div>
-                                <div class="form-check-inline">
-                                    <input class="form-check-input" type="radio" name="status" id="inactive" value="0" ${user.status == 0 ? 'checked' : ''}>
-                                    <label class="form-check-label" for="inactive">Ngưng hoạt động</label>
+                        <!-- Chỉ hiển thị trường "Vai trò" và "Sub Role" nếu người dùng là Super Admin (sub_role = 0) -->
+                        <c:if test="${userService.hasPermission(sessionScope.userId, 'USER_MANAGEMENT') && sessionScope.subRole == 0}">
+                            <div class="col-md-4">
+                                <label for="role" class="form-label style_18"><b>Vai trò</b></label>
+                                <i class="fas fa-user-tag ms-2"></i>
+                                <select class="form-select" id="role" name="role" required>
+                                    <option value="1" ${user.role == 1 ? 'selected' : ''}>Quản trị viên</option>
+                                    <option value="0" ${user.role == 0 ? 'selected' : ''}>Người dùng</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="sub_role" class="form-label style_18"><b>Loại quản trị viên</b></label>
+                                <i class="fas fa-user-shield ms-2"></i>
+                                <select class="form-select" id="sub_role" name="sub_role" required>
+                                    <option value="0" ${user.sub_role == 0 ? 'selected' : ''}>Super Admin</option>
+                                    <option value="1" ${user.sub_role == 1 ? 'selected' : ''}>User Admin</option>
+                                    <option value="2" ${user.sub_role == 2 ? 'selected' : ''}>Product Admin</option>
+                                    <option value="3" ${user.sub_role == 3 ? 'selected' : ''}>Order Admin</option>
+                                    <option value="4" ${user.sub_role == 4 ? 'selected' : ''}>Shipper Admin</option>
+                                    <option value="5" ${user.sub_role == 5 ? 'selected' : ''}>News Admin</option>
+                                </select>
+                            </div>
+                        </c:if>
+                        <!-- Chỉ hiển thị trường "Trạng thái" nếu người dùng là Super Admin (sub_role = 0) -->
+                        <c:if test="${userService.hasPermission(sessionScope.userId, 'USER_MANAGEMENT') && sessionScope.subRole == 0}">
+                            <div class="col-md-4 mt-3">
+                                <div class="mb-3">
+                                    <div>
+                                        <label class="form-label style_18"><b>Trạng thái</b></label>
+                                        <i class="fas fa-toggle-on ms-2"></i>
+                                    </div>
+                                    <div class="form-check-inline">
+                                        <input class="form-check-input" type="radio" name="status" id="active" value="1" ${user.status == 1 ? 'checked' : ''}>
+                                        <label class="form-check-label" for="active">Đang hoạt động</label>
+                                    </div>
+                                    <div class="form-check-inline">
+                                        <input class="form-check-input" type="radio" name="status" id="inactive" value="0" ${user.status == 0 ? 'checked' : ''}>
+                                        <label class="form-check-label" for="inactive">Ngưng hoạt động</label>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </c:if>
                     </div>
 
                     <!-- Nút submit -->

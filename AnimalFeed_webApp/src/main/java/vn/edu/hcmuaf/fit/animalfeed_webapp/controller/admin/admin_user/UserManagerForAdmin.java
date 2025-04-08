@@ -15,10 +15,11 @@ import java.util.List;
 @WebServlet(value = "/userManagement")
 public class UserManagerForAdmin extends HttpServlet {
     private UserService userService;
+    private static final int PAGE_SIZE = 10;
 
     @Override
     public void init() throws ServletException {
-        userService = new UserService(); // Sử dụng UserService
+        userService = UserService.getInstance();
     }
 
     private int getAdminUserIdFromSession(HttpServletRequest request) throws ServletException {
@@ -33,6 +34,7 @@ public class UserManagerForAdmin extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         String searchTerm = request.getParameter("searchTerm");
+        int page = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
 
         if (action == null) {
             action = "";
@@ -46,17 +48,27 @@ public class UserManagerForAdmin extends HttpServlet {
                 handleEdit(request, response);
                 break;
             case "search":
-                handleSearch(request, response);
+                handleSearch(request, response, page);
                 break;
             default:
                 List<User> users;
+                int totalUsers;
                 if (searchTerm != null && !searchTerm.trim().isEmpty()) {
                     users = userService.searchUsers(searchTerm);
+                    totalUsers = users.size();
                     request.setAttribute("searchTerm", searchTerm);
                 } else {
                     users = userService.getAllUsers();
+                    totalUsers = users.size();
                 }
+                int totalPages = (int) Math.ceil((double) totalUsers / PAGE_SIZE);
+                int start = (page - 1) * PAGE_SIZE;
+                int end = Math.min(start + PAGE_SIZE, totalUsers);
+                users = users.subList(start, end);
+
                 request.setAttribute("users", users);
+                request.setAttribute("totalPages", totalPages);
+                request.setAttribute("currentPage", page);
                 request.getRequestDispatcher("/views/admin/userManagement.jsp").forward(request, response);
                 break;
         }
@@ -64,29 +76,13 @@ public class UserManagerForAdmin extends HttpServlet {
 
     private void handleDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-            // Lấy thông tin admin từ session
-//            int adminUserId = getAdminUserIdFromSession(request);
-            Integer adminUserId = (Integer) request.getSession().getAttribute("userId");
-            System.out.println("Admin User ID from session: " + adminUserId); // In ra log để kiểm tra
-            if (adminUserId == null) {
-                throw new RuntimeException("Chưa đăng nhập hoặc không có quyền truy cập.");
-            }
-
-
-            // Lấy ID người dùng cần xóa
+            int adminUserId = getAdminUserIdFromSession(request);
             int userId = Integer.parseInt(request.getParameter("id"));
-
-            // Gọi service để xóa người dùng
             userService.deleteUser(userId, adminUserId);
-
-            // Thêm thông báo thành công
             request.getSession().setAttribute("message", "Xóa người dùng thành công.");
         } catch (Exception e) {
-            // Thêm thông báo lỗi
             request.getSession().setAttribute("error", "Lỗi khi xóa người dùng: " + e.getMessage());
         }
-
-        // Chuyển hướng lại trang quản lý người dùng
         response.sendRedirect("userManagement");
     }
 
@@ -96,7 +92,7 @@ public class UserManagerForAdmin extends HttpServlet {
             User user = userService.getById(userId);
             if (user != null) {
                 request.setAttribute("user", user);
-                request.getRequestDispatcher("userEdit").forward(request, response);
+                request.getRequestDispatcher("/views/admin/userEdit.jsp").forward(request, response);
                 return;
             }
             response.sendRedirect("userManagement?error=not_found");
@@ -105,7 +101,7 @@ public class UserManagerForAdmin extends HttpServlet {
         }
     }
 
-    private void handleSearch(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void handleSearch(HttpServletRequest request, HttpServletResponse response, int page) throws ServletException, IOException {
         String searchTerm = request.getParameter("searchTerm");
         List<User> users;
 
@@ -115,11 +111,18 @@ public class UserManagerForAdmin extends HttpServlet {
             users = userService.getAllUsers();
         }
 
+        int totalUsers = users.size();
+        int totalPages = (int) Math.ceil((double) totalUsers / PAGE_SIZE);
+        int start = (page - 1) * PAGE_SIZE;
+        int end = Math.min(start + PAGE_SIZE, totalUsers);
+        users = users.subList(start, end);
+
         request.setAttribute("users", users);
         request.setAttribute("searchTerm", searchTerm);
+        request.setAttribute("totalPages", totalPages);
+        request.setAttribute("currentPage", page);
         request.getRequestDispatcher("/views/admin/userManagement.jsp").forward(request, response);
     }
-
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -139,9 +142,10 @@ public class UserManagerForAdmin extends HttpServlet {
             User newUser = new User();
             newUser.setFullName(request.getParameter("fullName"));
             newUser.setPhone(request.getParameter("phone"));
-            newUser.setPassword(request.getParameter("password"));  // Không mã hóa mật khẩu
+            newUser.setPassword(request.getParameter("password"));
             newUser.setStatus(Integer.parseInt(request.getParameter("status")));
             newUser.setRole(Integer.parseInt(request.getParameter("role")));
+            newUser.setSub_role(Integer.parseInt(request.getParameter("sub_role")));
             newUser.setCreateDate(new Date());
             newUser.setUpdateDate(new Date());
 
@@ -160,15 +164,18 @@ public class UserManagerForAdmin extends HttpServlet {
             updatedUser.setId(userId);
             updatedUser.setFullName(request.getParameter("fullName"));
             updatedUser.setPhone(request.getParameter("phone"));
-            updatedUser.setPassword(request.getParameter("password"));  // Không mã hóa mật khẩu
+            updatedUser.setPassword(request.getParameter("password"));
             updatedUser.setStatus(Integer.parseInt(request.getParameter("status")));
             updatedUser.setRole(Integer.parseInt(request.getParameter("role")));
+            updatedUser.setSub_role(Integer.parseInt(request.getParameter("sub_role")));
             updatedUser.setUpdateDate(new Date());
 
             int adminUserId = getAdminUserIdFromSession(request);
             userService.updateUser(updatedUser, adminUserId);
-            response.sendRedirect("userManagement?message=update_success");
+            request.getSession().setAttribute("message", "Cập nhật người dùng thành công.");
+            response.sendRedirect("userManagement");
         } catch (Exception e) {
+            request.getSession().setAttribute("error", "Lỗi khi cập nhật người dùng: " + e.getMessage());
             response.sendRedirect("userManagement?error=" + e.getMessage());
         }
     }
