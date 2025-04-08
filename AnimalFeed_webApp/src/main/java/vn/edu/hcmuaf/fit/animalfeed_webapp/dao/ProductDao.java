@@ -444,4 +444,47 @@ public class ProductDao {
                         .findFirst()
                         .orElse(null));
     }
+
+    // Lấy danh sách sản phẩm bán chạy nhất trong năm
+    public List<Object[]> getTopSellingProductsInYear(int limit, int year) {
+        Jdbi jdbi = JdbiConnect.getJdbi();
+        return jdbi.withHandle(handle ->
+                handle.createQuery("""
+                        SELECT p.id, p.name, SUM(od.quantity) AS total_quantity
+                        FROM products p
+                        JOIN order_details od ON p.id = od.product_id
+                        JOIN orders o ON od.order_id = o.id
+                        WHERE YEAR(o.order_date) = :year
+                        GROUP BY p.id, p.name
+                        ORDER BY total_quantity DESC
+                        LIMIT :limit
+                    """)
+                        .bind("year", year)
+                        .bind("limit", limit)
+                        .map((rs, ctx) -> new Object[]{rs.getInt("id"), rs.getString("name"), rs.getInt("total_quantity")})
+                        .list()
+        );
+    }
+
+    // Lấy danh sách sản phẩm bán chạy nhất trong tháng
+    public List<Object[]> getTopSellingProducts(int limit, int year, int month){
+        Jdbi jdbi = JdbiConnect.getJdbi();
+        return jdbi.withHandle(handle ->
+                handle.createQuery("""
+                        SELECT p.id, p.name, SUM(od.quantity) AS total_quantity
+                        FROM products p
+                        JOIN order_details od ON p.id = od.product_id
+                        JOIN orders o ON od.order_id = o.id
+                        WHERE YEAR(o.order_date) = :year AND MONTH(o.order_date) = :month
+                        GROUP BY p.id, p.name
+                        ORDER BY total_quantity DESC
+                        LIMIT :limit
+                    """)
+                        .bind("year", year)
+                        .bind("month", month)
+                        .bind("limit", limit)
+                        .map((rs, ctx) -> new Object[]{rs.getInt("id"), rs.getString("name"), rs.getInt("total_quantity")})
+                        .list()
+        );
+    }
 }
