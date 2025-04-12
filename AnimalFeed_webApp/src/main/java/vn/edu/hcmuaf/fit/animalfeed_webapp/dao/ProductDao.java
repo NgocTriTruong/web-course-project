@@ -189,21 +189,22 @@ public class ProductDao {
     public List<ProductWithDiscountDTO> getDiscountProduct() {
         Jdbi jdbi = JdbiConnect.getJdbi();
         String query = """
-                SELECT p.id, p.img, p.name, p.description, p.price, d.percentage, ROUND(p.price * (1 - d.percentage / 100), 2) AS discountedPrice
-                FROM products p
-                JOIN discounts d ON p.discount_id = d.id
-                WHERE p.discount_id != 1 and p.status = '1'
-                """;
+            SELECT p.id, p.img, p.name, p.description, p.price, p.quantity, p.status, d.percentage, ROUND(p.price * (1 - d.percentage / 100), 2) AS discountedPrice
+            FROM products p
+            JOIN discounts d ON p.discount_id = d.id
+            WHERE p.discount_id != 1 AND p.status = '1'
+            """;
         return jdbi.withHandle(handle ->
                 handle.createQuery(query)
-                        .mapToBean(ProductWithDiscountDTO.class).list());
+                        .mapToBean(ProductWithDiscountDTO.class)
+                        .list());
     }
 
     // Phân trang sản phẩm giảm giá
     public List<ProductWithDiscountDTO> getProductByPageOfDiscount(int page, int id) {
         Jdbi jdbi = JdbiConnect.getJdbi();
         String query = """
-            SELECT p.id, p.img, p.name, p.description, p.price, d.percentage, ROUND(p.price * (1 - d.percentage / 100), 2) AS discountedPrice
+            SELECT p.id, p.img, p.name, p.description, p.price, p.quantity, p.status, d.percentage, ROUND(p.price * (1 - d.percentage / 100), 2) AS discountedPrice
             FROM products p
             JOIN discounts d ON p.discount_id = d.id
             WHERE p.cat_id = :id AND p.discount_id != :discountId
@@ -213,10 +214,10 @@ public class ProductDao {
         return jdbi.withHandle(handle ->
                 handle.createQuery(query)
                         .bind("id", id)
-                        .bind("discountId", 1)  // Trả về các sản phẩm có discount khác 1
+                        .bind("discountId", 1)
                         .bind("start", (page - 1) * 12)
                         .bind("end", 12)
-                        .mapToBean(ProductWithDiscountDTO.class)  // Ánh xạ kết quả vào ProductWithDiscountDTO
+                        .mapToBean(ProductWithDiscountDTO.class)
                         .list());
     }
 
