@@ -95,28 +95,37 @@
                         <div class="p">2.341</div>
                     </div>
                     <div class="button d-flex mt-3">
-                        <form action="${pageContext.request.contextPath}/add-cart" method="GET" style="display: inline;">
-                            <input type="hidden" name="productId" value="${product.id}">
-                            <input type="hidden" name="quantity" value="${param.quantity != null ? param.quantity : 1}">
-                            <button type="submit" class="btn_h order d-flex justify-content-center" style="border: none;">
-                                <div style="padding-top: 3px;">
-                                    <i class="fa-solid fa-cart-plus"></i>
+                        <c:choose>
+                            <c:when test="${product.quantity == 0}">
+                                <!-- Hiển thị thông báo "Đã hết hàng" nếu quantity = 0 -->
+                                <div class="h5 text-danger fw-bold">Đã hết hàng</div>
+                            </c:when>
+                            <c:otherwise>
+                                <!-- Hiển thị nút "Thêm vào giỏ hàng" và "Mua ngay" nếu còn hàng -->
+                                <form action="${pageContext.request.contextPath}/add-cart" method="GET" style="display: inline;">
+                                    <input type="hidden" name="productId" value="${product.id}">
+                                    <input type="hidden" name="quantity" value="${param.quantity != null ? param.quantity : 1}">
+                                    <button type="submit" class="btn_h order d-flex justify-content-center" style="border: none;">
+                                        <div style="padding-top: 3px;">
+                                            <i class="fa-solid fa-cart-plus"></i>
+                                        </div>
+                                        <div class="h5 text_order">Thêm vào giỏ hàng</div>
+                                    </button>
+                                </form>
+                                <form action="${pageContext.request.contextPath}/order-confirm" method="GET" style="display: inline;">
+                                    <input type="hidden" name="productId" value="${product.id}">
+                                    <input type="hidden" name="quantity" value="${param.quantity != null ? param.quantity : 1}">
+                                    <button type="submit" class="btn_h call d-flex justify-content-center w-100" style="border: none;">
+                                        <div class="h5 text_call">Mua ngay</div>
+                                    </button>
+                                </form>
+                                <div class="quantity-input ms-3">
+                                    <input type="number" name="quantity" value="1" min="1" max="${product.quantity}"
+                                           class="form-control h-100"
+                                           onchange="updateQuantity(this.value)">
                                 </div>
-                                <div class="h5 text_order">Thêm vào giỏ hàng</div>
-                            </button>
-                        </form>
-                        <form action="${pageContext.request.contextPath}/order-confirm" method="GET" style="display: inline;">
-                            <input type="hidden" name="productId" value="${product.id}">
-                            <input type="hidden" name="quantity" value="${param.quantity != null ? param.quantity : 1}">
-                            <button type="submit" class="btn_h call d-flex justify-content-center w-100" style="border: none;">
-                                <div class="h5 text_call">Mua ngay</div>
-                            </button>
-                        </form>
-                        <div class="quantity-input ms-3">
-                            <input type="number" name="quantity" value="1" min="1" max="500"
-                                   class="form-control h-100"
-                                   onchange="updateQuantity(this.value)">
-                        </div>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                     <div class="share d-flex mt-4">
                         <div class="p text-start me-4">Liên hệ:</div>
@@ -341,10 +350,23 @@
 
 <script>
     function updateQuantity(value) {
-        document.querySelector('input[name="quantity"]').value = value;
-        document.querySelector('form[action$="/add-cart"] input[name="quantity"]').value = value;
-        document.querySelector('form[action$="/order-confirm"] input[name="quantity"]').value = value;
-        console.log("Số lượng đã chọn: " + value);
+        const maxQuantity = ${product.quantity}; // Lấy số lượng tối đa từ product.quantity
+        let quantityInput = document.querySelector('input[name="quantity"]');
+
+        // Kiểm tra nếu giá trị vượt quá max
+        if (parseInt(value) > maxQuantity) {
+            quantityInput.value = maxQuantity; // Đặt lại giá trị thành max
+            alert("Số lượng tối đa có thể chọn là " + maxQuantity);
+        } else if (parseInt(value) < 1) {
+            quantityInput.value = 1; // Đảm bảo giá trị không nhỏ hơn 1
+        } else {
+            quantityInput.value = value; // Cập nhật giá trị nếu hợp lệ
+        }
+
+        // Cập nhật giá trị quantity trong các form
+        document.querySelector('form[action$="/add-cart"] input[name="quantity"]').value = quantityInput.value;
+        document.querySelector('form[action$="/order-confirm"] input[name="quantity"]').value = quantityInput.value;
+        console.log("Số lượng đã chọn: " + quantityInput.value);
     }
 </script>
 
