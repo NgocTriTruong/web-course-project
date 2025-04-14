@@ -1,6 +1,6 @@
 package vn.edu.hcmuaf.fit.animalfeed_webapp.services;
 
-import org.mindrot.jbcrypt.BCrypt; // Thêm import cho BCrypt
+import org.mindrot.jbcrypt.BCrypt;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.UserDao;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
 
@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public class UserService {
 
-    private static final UserService instance = new UserService(); // Singleton
+    private static final UserService instance = new UserService();
     private final UserDao userDao;
 
     public UserService() {
@@ -21,23 +21,22 @@ public class UserService {
         return instance;
     }
 
-    // Phương thức login (sử dụng email và kiểm tra mật khẩu đã mã hóa)
+    // Phương thức login
     public User login(String email, String password) {
         if (email == null || password == null) {
             throw new IllegalArgumentException("Email và mật khẩu không được để trống.");
         }
-        User user = userDao.getUserByEmailDirect(email); // Lấy user từ email
+        User user = userDao.getUserByEmailDirect(email);
         if (user == null) {
             throw new RuntimeException("Email không tồn tại.");
         }
-        // So sánh mật khẩu người dùng nhập với mật khẩu đã mã hóa
         if (!BCrypt.checkpw(password, user.getPassword())) {
             throw new RuntimeException("Mật khẩu không đúng.");
         }
         return user;
     }
 
-    // Đăng nhập bằng Google (giữ nguyên)
+    // Đăng nhập bằng Google
     public User loginWithGoogle(String email) {
         Optional<User> optionalUser = userDao.getUserByEmail(email);
         if (!optionalUser.isPresent()) {
@@ -56,7 +55,7 @@ public class UserService {
         return password != null && confirmPassword != null && password.equals(confirmPassword);
     }
 
-    // Tạo và lưu người dùng mới (mã hóa mật khẩu trước khi lưu)
+    // Tạo và lưu người dùng mới
     public void registerUser(String fullName, String email, String password) {
         if (isEmailExists(email)) {
             throw new IllegalArgumentException("Email đã tồn tại!");
@@ -67,18 +66,19 @@ public class UserService {
         User newUser = new User();
         newUser.setFullName(fullName);
         newUser.setEmail(email);
-        // Mã hóa mật khẩu trước khi lưu
         String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
         newUser.setPassword(hashedPassword);
-        newUser.setRole(0); // Mặc định là user (role = 0)
-        newUser.setStatus(1); // Mặc định là active (status = 1)
+        newUser.setRole(0); // Mặc định là user
+        newUser.setSub_role(0); // Mặc định sub_role = 0
+        newUser.setStatus(1); // Mặc định là active
         newUser.setCreateDate(new Date());
         newUser.setUpdateDate(new Date());
         userDao.insertUser(newUser);
     }
 
-    // Đăng ký người dùng qua Google (giữ nguyên)
+    // Đăng ký người dùng qua Google
     public void registerUserWithGoogle(User user) {
+        user.setSub_role(0); // Mặc định sub_role = 0
         userDao.insertUser(user);
     }
 
@@ -95,9 +95,12 @@ public class UserService {
                 password.matches(".*\\d.*");
     }
 
-    // Thêm người dùng mới (với quyền admin)
+    // Thêm người dùng mới
     public void addUser(User user, int adminUserId) {
-        // Mã hóa mật khẩu nếu có
+        User adminUser = userDao.getUserById(adminUserId);
+        if (adminUser == null || adminUser.getRole() != 1 || !hasPermission(adminUserId, "USER_MANAGEMENT")) {
+            throw new RuntimeException("Chỉ super admin mới có quyền thêm người dùng.");
+        }
         if (user.getPassword() != null) {
             String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
             user.setPassword(hashedPassword);
@@ -113,7 +116,7 @@ public class UserService {
     // Cập nhật thông tin người dùng (với quyền admin)
     public boolean updateUser(User user, int adminUserId) {
         User adminUser = userDao.getUserById(adminUserId);
-        if (adminUser == null || adminUser.getRole() != 1) {
+        if (adminUser == null || adminUser.getRole() != 1 || !hasPermission(adminUserId, "USER_MANAGEMENT")) {
             return false;
         }
         try {
@@ -124,10 +127,10 @@ public class UserService {
         }
     }
 
-    // Xóa người dùng (với quyền admin)
+    // Xóa người dùng
     public boolean deleteUser(int userId, int adminUserId) {
         User adminUser = userDao.getUserById(adminUserId);
-        if (adminUser == null || adminUser.getRole() != 1) {
+        if (adminUser == null || adminUser.getRole() != 1 || !hasPermission(adminUserId, "USER_MANAGEMENT")) {
             return false;
         }
         try {
@@ -145,7 +148,7 @@ public class UserService {
         }
     }
 
-    // Thay đổi mật khẩu (kiểm tra mật khẩu hiện tại và mã hóa mật khẩu mới)
+    // Thay đổi mật khẩu
     public boolean updatePassword(int userId, String currentPassword, String newPassword) {
         if (!isPasswordStrong(newPassword)) {
             throw new IllegalArgumentException("Mật khẩu mới không đủ mạnh.");
@@ -154,13 +157,11 @@ public class UserService {
         if (user == null) {
             return false;
         }
-        // Kiểm tra mật khẩu hiện tại
         if (!BCrypt.checkpw(currentPassword, user.getPassword())) {
             return false;
         }
-        // Mã hóa mật khẩu mới
         String hashedNewPassword = BCrypt.hashpw(newPassword, BCrypt.gensalt());
-        return userDao.updatePassword1(userId,hashedNewPassword);
+        return userDao.updatePassword1(userId, hashedNewPassword);
     }
 
     // Lấy tất cả người dùng
@@ -222,11 +223,40 @@ public class UserService {
         return userDao.getUserById(userId);
     }
 
+    public boolean hasPermission(int userId, String permission) {
+        User user = getUserById(userId);
+        System.out.println("Checking permission for userId: " + userId + ", permission: " + permission);
+        if (user == null || user.getRole() != 1) {
+            System.out.println("User is null or not an admin: " + (user == null ? "null" : "role=" + user.getRole()));
+            return false;
+        }
+        System.out.println("User Role: " + user.getRole() + ", Sub Role: " + user.getSub_role());
+        if (user.getSub_role() == 0) {
+            System.out.println("Super Admin has all permissions");
+            return true;
+        }
+        switch (permission) {
+            case "USER_MANAGEMENT":
+                boolean hasUserManagement = user.getSub_role() == 1;
+                System.out.println("Has USER_MANAGEMENT permission: " + hasUserManagement);
+                return hasUserManagement;
+            case "PRODUCT_MANAGEMENT":
+                return user.getSub_role() == 2;
+            case "ORDER_MANAGEMENT":
+                return user.getSub_role() == 3;
+            case "SHIPPER_MANAGEMENT":
+                return user.getSub_role() == 4;
+            case "NEWS_MANAGEMENT":
+                return user.getSub_role() == 5;
+            default:
+                return false;
+        }
+    }
     public void hashExistingPasswords() {
         List<User> users = getAllUsers();
         for (User user : users) {
             String plainPassword = user.getPassword();
-            if (!plainPassword.startsWith("$2a$")) { // Kiểm tra nếu mật khẩu chưa được mã hóa
+            if (!plainPassword.startsWith("$2a$")) {
                 String hashedPassword = BCrypt.hashpw(plainPassword, BCrypt.gensalt());
                 userDao.updatePassword1(user.getId(), hashedPassword);
             }

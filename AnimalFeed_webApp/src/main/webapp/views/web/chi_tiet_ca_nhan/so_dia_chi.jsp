@@ -31,7 +31,10 @@
         }
         .address-form-content {
             background-color: #fefefe;
-            margin: 15% auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             padding: 20px;
             border: 1px solid #888;
             width: 80%;
@@ -41,6 +44,27 @@
         }
         .form-header { border-bottom: 1px solid #e9ecef; }
         .form-footer { border-top: 1px solid #e9ecef; }
+        .suggestions {
+            position: absolute;
+            z-index: 1000;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            display: none;
+        }
+        .suggestions.show {
+            display: block;
+        }
+        .suggestions .dropdown-item {
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+        .suggestions .dropdown-item:hover {
+            background-color: #f8f9fa;
+        }
+        body.modal-open {
+            overflow: hidden;
+        }
     </style>
 
     <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/add_layout.js" defer></script>
@@ -142,23 +166,26 @@
                                 <button type="button" id="closeAddressForm" class="btn-close">×</button>
                             </div>
                             <div class="form-container p-3">
-                                <div class="form-item mb-3">
-                                    <label for="province" class="form-label">Chọn Tỉnh:</label>
-                                    <select id="province" class="form-select" onchange="loadDistricts()">
-                                        <option value="">--Chọn Tỉnh--</option>
-                                    </select>
+                                <!-- Autocomplete cho Tỉnh -->
+                                <div class="form-item mb-3 position-relative">
+                                    <label for="provinceInput" class="form-label">Chọn Tỉnh:</label>
+                                    <input type="text" id="provinceInput" class="form-control" placeholder="--Chọn Tỉnh--">
+                                    <div id="provinceSuggestions" class="suggestions dropdown-menu w-100" style="max-height: 200px; overflow-y: auto;"></div>
+                                    <input type="hidden" id="provinceCode" value="">
                                 </div>
-                                <div class="form-item mb-3">
-                                    <label for="district" class="form-label">Chọn Huyện:</label>
-                                    <select id="district" class="form-select" onchange="loadWards()">
-                                        <option value="">--Chọn Huyện--</option>
-                                    </select>
+                                <!-- Autocomplete cho Huyện -->
+                                <div class="form-item mb-3 position-relative">
+                                    <label for="districtInput" class="form-label">Chọn Huyện:</label>
+                                    <input type="text" id="districtInput" class="form-control" placeholder="--Chọn Huyện--" disabled>
+                                    <div id="districtSuggestions" class="suggestions dropdown-menu w-100" style="max-height: 200px; overflow-y: auto;"></div>
+                                    <input type="hidden" id="districtCode" value="">
                                 </div>
-                                <div class="form-item mb-3">
-                                    <label for="ward" class="form-label">Chọn Xã:</label>
-                                    <select id="ward" class="form-select">
-                                        <option value="">--Chọn Xã--</option>
-                                    </select>
+                                <!-- Autocomplete cho Xã -->
+                                <div class="form-item mb-3 position-relative">
+                                    <label for="wardInput" class="form-label">Chọn Xã:</label>
+                                    <input type="text" id="wardInput" class="form-control" placeholder="--Chọn Xã--" disabled>
+                                    <div id="wardSuggestions" class="suggestions dropdown-menu w-100" style="max-height: 200px; overflow-y: auto;"></div>
+                                    <input type="hidden" id="wardCode" value="">
                                 </div>
                                 <div class="form-details mb-3">
                                     <label for="addressDetails" class="form-label">Địa chỉ cụ thể:</label>
@@ -185,43 +212,52 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        loadProvinces();
+        // loadProvinces() đã được gọi trong call-api-address.js, chỉ cần kiểm tra kết quả
+        console.log("Waiting for provinces to load...");
+        const checkProvinces = setInterval(() => {
+            if (provincesData.length > 0) {
+                console.log("Provinces loaded:", provincesData);
+                clearInterval(checkProvinces);
+            }
+        }, 100);
+
         document.getElementById('closeAddressForm').addEventListener('click', closeAddressForm);
     });
 
     function openAddressForm() {
         document.getElementById('addressFormModal').style.display = 'block';
-        resetForm(); // Reset form mỗi khi mở
+        document.body.classList.add('modal-open');
+        resetForm();
     }
 
     function closeAddressForm() {
         document.getElementById('addressFormModal').style.display = 'none';
-        resetForm(); // Reset form khi đóng
+        document.body.classList.remove('modal-open');
+        resetForm();
     }
 
     function resetForm() {
-        // Reset form về trạng thái ban đầu để thêm địa chỉ mới
-        document.getElementById('province').selectedIndex = 0;
-        document.getElementById('district').innerHTML = '<option value="">--Chọn Huyện--</option>';
-        document.getElementById('ward').innerHTML = '<option value="">--Chọn Xã--</option>';
+        document.getElementById('provinceInput').value = '';
+        document.getElementById('districtInput').value = '';
+        document.getElementById('districtInput').disabled = true;
+        document.getElementById('wardInput').value = '';
+        document.getElementById('wardInput').disabled = true;
         document.getElementById('addressDetails').value = '';
         document.getElementById('addressNote').value = '';
         document.querySelector('#addressFormModal .form-header h5').textContent = 'Thêm địa chỉ nhận hàng';
-
-        // Gán lại sự kiện cho nút "Lưu địa chỉ" để thêm địa chỉ mới
         const saveButton = document.getElementById('saveAddressButton');
-        saveButton.removeEventListener('click', updateAddress); // Xóa sự kiện update nếu có
-        saveButton.addEventListener('click', saveAddress); // Gán sự kiện save
+        saveButton.removeEventListener('click', updateAddress);
+        saveButton.addEventListener('click', saveAddress);
     }
 
     function saveAddress() {
-        const province = document.getElementById('province').options[document.getElementById('province').selectedIndex].text;
-        const district = document.getElementById('district').options[document.getElementById('district').selectedIndex].text;
-        const ward = document.getElementById('ward').options[document.getElementById('ward').selectedIndex].text;
+        const province = document.getElementById('provinceInput').value;
+        const district = document.getElementById('districtInput').value;
+        const ward = document.getElementById('wardInput').value;
         const addressDetails = document.getElementById('addressDetails').value.trim();
         const addressNote = document.getElementById('addressNote').value.trim();
 
-        if (!province || province.includes('--Chọn') || !district || district.includes('--Chọn') || !ward || ward.includes('--Chọn')) {
+        if (!province || !district || !ward) {
             alert('Vui lòng chọn đầy đủ Tỉnh, Huyện và Xã');
             return;
         }
@@ -258,56 +294,36 @@
 
     function editAddress(id, province, district, ward, detail, note) {
         openAddressForm();
-
-        const provinceSelect = document.getElementById('province');
-        const districtSelect = document.getElementById('district');
-        const wardSelect = document.getElementById('ward');
-        const addressDetails = document.getElementById('addressDetails');
-        const addressNote = document.getElementById('addressNote');
-
-        addressDetails.value = detail || '';
-        addressNote.value = note || '';
-
-        for (let option of provinceSelect.options) {
-            if (option.text === province) {
-                option.selected = true;
-                break;
-            }
-        }
-
-        loadDistricts().then(() => {
-            for (let option of districtSelect.options) {
-                if (option.text === district) {
-                    option.selected = true;
-                    break;
-                }
-            }
-            loadWards().then(() => {
-                for (let option of wardSelect.options) {
-                    if (option.text === ward) {
-                        option.selected = true;
-                        break;
-                    }
-                }
-            });
-        });
-
+        document.getElementById('provinceInput').value = province;
+        document.getElementById('districtInput').value = district;
+        document.getElementById('districtInput').disabled = false;
+        document.getElementById('wardInput').value = ward;
+        document.getElementById('wardInput').disabled = false;
+        document.getElementById('addressDetails').value = detail || '';
+        document.getElementById('addressNote').value = note || '';
         document.querySelector('#addressFormModal .form-header h5').textContent = 'Chỉnh sửa địa chỉ nhận hàng';
-
-        // Gán sự kiện cập nhật cho nút "Lưu địa chỉ"
         const saveButton = document.getElementById('saveAddressButton');
-        saveButton.removeEventListener('click', saveAddress); // Xóa sự kiện save nếu có
-        saveButton.addEventListener('click', function() { updateAddress(id); }); // Gán sự kiện update
+        saveButton.removeEventListener('click', saveAddress);
+        saveButton.addEventListener('click', function() { updateAddress(id); });
+
+        // Tải lại dữ liệu cho autocomplete khi chỉnh sửa
+        const selectedProvince = provincesData.find(p => p.name === province);
+        if (selectedProvince) {
+            loadDistricts(selectedProvince.code).then(() => {
+                const selectedDistrict = districtsData.find(d => d.name === district);
+                if (selectedDistrict) loadWards(selectedDistrict.code);
+            });
+        }
     }
 
     function updateAddress(addressId) {
-        const province = document.getElementById('province').options[document.getElementById('province').selectedIndex].text;
-        const district = document.getElementById('district').options[document.getElementById('district').selectedIndex].text;
-        const ward = document.getElementById('ward').options[document.getElementById('ward').selectedIndex].text;
+        const province = document.getElementById('provinceInput').value;
+        const district = document.getElementById('districtInput').value;
+        const ward = document.getElementById('wardInput').value;
         const addressDetails = document.getElementById('addressDetails').value.trim();
         const addressNote = document.getElementById('addressNote').value.trim();
 
-        if (!province || province.includes('--Chọn') || !district || district.includes('--Chọn') || !ward || ward.includes('--Chọn')) {
+        if (!province || !district || !ward) {
             alert('Vui lòng chọn đầy đủ Tỉnh, Huyện và Xã');
             return;
         }
