@@ -11,15 +11,18 @@ public class ActionLog implements Serializable {
     private int entity_id;
     private Date created_at;        //Thời điểm thực hiện hành động
     private String description;     //Mô tả hành động
+    private String before_data;   //Dữ liệu trước khi thực hiện hành động
+    private String after_data;    //Dữ liệu sau khi thực hiện hành động
 
-    public ActionLog(int id, int user_id, String action_type, String entity_type, int entity_id, Date created_at, String description) {
-        this.id = id;
+    public ActionLog(int user_id, String action_type, String entity_type, int entity_id, String description, String before_data, String after_data) {
         this.user_id = user_id;
         this.action_type = action_type;
         this.entity_type = entity_type;
         this.entity_id = entity_id;
-        this.created_at = created_at;
+        this.created_at = new Date();;
         this.description = description;
+        this.before_data = before_data;
+        this.after_data = after_data;
     }
 
     public ActionLog() {}
@@ -80,6 +83,22 @@ public class ActionLog implements Serializable {
         this.description = description;
     }
 
+    public String getBefore_data() {
+        return before_data;
+    }
+
+    public void setBefore_data(String before_data) {
+        this.before_data = before_data;
+    }
+
+    public String getAfter_data() {
+        return after_data;
+    }
+
+    public void setAfter_data(String after_data) {
+        this.after_data = after_data;
+    }
+
     @Override
     public String toString() {
         return "ActionLog{" +
@@ -90,6 +109,8 @@ public class ActionLog implements Serializable {
                 ", entity_id=" + entity_id +
                 ", created_at=" + created_at +
                 ", description='" + description + '\'' +
+                ", before_data='" + before_data + '\'' +
+                ", after_data='" + after_data + '\'' +
                 '}';
     }
 }

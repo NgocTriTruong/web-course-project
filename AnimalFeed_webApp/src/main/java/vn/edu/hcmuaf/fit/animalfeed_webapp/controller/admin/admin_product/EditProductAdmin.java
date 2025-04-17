@@ -181,6 +181,22 @@ public class EditProductAdmin extends HttpServlet {
             // Cập nhật sản phẩm
             productService.updateProduct(product, userId);
 
+            System.out.println("Updated product object: " + product);
+
+            // Lấy userId từ session
+            HttpSession session = request.getSession();
+            Integer userId = (Integer) session.getAttribute("userId");
+            if (userId == null) {
+                System.out.println("User not logged in. Redirecting to login.");
+                response.sendRedirect("login");
+                return;
+            }
+            System.out.println("User ID: " + userId);
+
+            // Thêm sản phẩm vào database
+            ProductService productService = new ProductService();
+            productService.updateProduct(productId, product, userId);
+
             // Chuyển hướng thành công
             session.setAttribute("message", "Cập nhật sản phẩm thành công!");
             response.sendRedirect("product-manager");

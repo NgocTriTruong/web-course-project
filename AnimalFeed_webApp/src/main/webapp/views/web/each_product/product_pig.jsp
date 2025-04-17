@@ -85,29 +85,37 @@
             <div id="sale-products">
                 <div class="row">
                     <c:choose>
-                    <c:when test="${not empty discountProducts}">
-                    <c:forEach var="discountP" items="${discountProducts}">
-                    <div class="col-md-3 bg-light text-center m-3 col product_number">
-                        <a href="product-detail?pid=${discountP.id}" class="text-decoration-none text-dark">
-                            <div class="sale_all">
-                                <div class="sale_badge">${discountP.percentage}% OFF</div>
-                            </div>
-                            <div class="product-img">
-                                <img src="${pageContext.request.contextPath}${discountP.img}" alt="${discountP.name}" height="250px" width="200px">
-                            </div>
-                            <div class="h5 text-h">${discountP.name}</div>
-                            <div class="p mb-2 text-p">${discountP.description}</div>
-                            <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;"><del> <f:formatNumber value="${discountP.price}"/> <u>đ</u></del><span style="color: red; font-size: 14px; margin-left: 5px;">-${discountP.percentage}%</span></div>
-                            <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;"><f:formatNumber value="${discountP.discountedPrice}"/> <u>đ</u></div>
-                            <div class="p text-start ms-3">Đã bán <c:out value="${salesData[discountP.id] != null ? salesData[discountP.id] : 0}" /> sản phẩm</div>
-                            <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                                <i class="fa-solid fa-truck mt-1"></i>
-                                <p class="ms-2">2 -4 ngày</p>
-                            </div>
-                        </a>
-                    </div>
-                    </c:forEach>
-                    </c:when>
+                        <c:when test="${not empty discountProducts}">
+                            <c:forEach var="discountP" items="${discountProducts}">
+                                <div class="col-md-3 bg-light text-center m-3 col product_number">
+                                    <a href="product-detail?pid=${discountP.id}" class="text-decoration-none text-dark">
+                                        <div class="sale_all">
+                                            <div class="sale_badge">${discountP.percentage}% OFF</div>
+                                        </div>
+                                        <div class="product-img">
+                                            <img src="${pageContext.request.contextPath}${discountP.img}" alt="${discountP.name}" height="250px" width="200px" style="${discountP.status == 0 ? 'opacity: 0.5;' : ''}">
+                                        </div>
+                                        <div class="h5 text-h">${discountP.name}</div>
+                                        <div class="p mb-2 text-p">${discountP.description}</div>
+                                        <div class="p text-start ms-3 text-secondary price_sale" style="font-size: 18px;">
+                                            <del><f:formatNumber value="${discountP.price}"/> <u>đ</u></del>
+                                            <span style="color: red; font-size: 14px; margin-left: 5px;">-${discountP.percentage}%</span>
+                                        </div>
+                                        <div class="h4 text-start ms-3" style="color: red; margin-top: -2px;">
+                                            <f:formatNumber value="${discountP.discountedPrice}"/> <u>đ</u>
+                                        </div>
+                                        <c:if test="${discountP.status == 0}">
+                                            <div class="p text-start ms-3 text-danger fw-bold">Đã hết hàng</div>
+                                        </c:if>
+                                        <div class="p text-start ms-3">Đã bán <c:out value="${salesData[discountP.id] != null ? salesData[discountP.id] : 0}" /> sản phẩm</div>
+                                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
+                                            <i class="fa-solid fa-truck mt-1"></i>
+                                            <p class="ms-2">2 -4 ngày</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </c:forEach>
+                        </c:when>
                         <c:otherwise>
                             <div class="col-12 text-center mt-5">
                                 <p class="text-muted h5">Không có sản phẩm nào trong danh mục này.</p>
@@ -115,6 +123,7 @@
                         </c:otherwise>
                     </c:choose>
                 </div>
+                <!-- Pagination cho sản phẩm giảm giá -->
                 <div class="container mt-4">
                     <nav aria-label="Discount products pagination">
                         <ul class="pagination justify-content-center">
@@ -138,32 +147,37 @@
                 </div>
             </div>
 
-            <!-- New -->
+            <!-- New (Sản phẩm Mới) -->
             <div id="new-products" style="display: none;">
                 <div class="row">
                     <c:choose>
-                    <c:when test="${not empty newProducts}">
-                    <c:forEach var="newP" items="${newProducts}">
-                    <div class="col-md-3 bg-light text-center m-3 col product_number">
-                        <a href="product-detail?pid=${newP.id}" class="text-decoration-none text-dark">
-                            <div class="sale_all">
-                                <div class="new_badge">New</div>
-                            </div>
-                            <div class="product-img">
-                                <img src="${pageContext.request.contextPath}${newP.img}" alt="${newP.name}" height="250px" width="200px">
-                            </div>
-                            <div class="h5 text-h">${newP.name}</div>
-                            <div class="p mb-2 text-p">${newP.description}</div>
-                            <div class="h4 text-start ms-3" style="color: red;"><f:formatNumber value="${newP.price}"/> <u>đ</u></div>
-                            <div class="p text-start ms-3">Đã bán <c:out value="${salesData[newP.id] != null ? salesData[newP.id] : 0}" /> sản phẩm</div>
-                            <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                                <i class="fa-solid fa-truck mt-1"></i>
-                                <p class="ms-2">2 -4 ngày</p>
-                            </div>
-                        </a>
-                    </div>
-                    </c:forEach>
-                    </c:when>
+                        <c:when test="${not empty newProducts}">
+                            <c:forEach var="newP" items="${newProducts}">
+                                <div class="col-md-3 bg-light text-center m-3 col product_number">
+                                    <a href="product-detail?pid=${newP.id}" class="text-decoration-none text-dark">
+                                        <div class="sale_all">
+                                            <div class="new_badge">New</div>
+                                        </div>
+                                        <div class="product-img">
+                                            <img src="${pageContext.request.contextPath}${newP.img}" alt="${newP.name}" height="250px" width="200px" style="${newP.status == 0 ? 'opacity: 0.5;' : ''}">
+                                        </div>
+                                        <div class="h5 text-h">${newP.name}</div>
+                                        <div class="p mb-2 text-p">${newP.description}</div>
+                                        <div class="h4 text-start ms-3" style="color: red;">
+                                            <f:formatNumber value="${newP.price}"/> <u>đ</u>
+                                        </div>
+                                        <c:if test="${newP.status == 0}">
+                                            <div class="p text-start ms-3 text-danger fw-bold">Đã hết hàng</div>
+                                        </c:if>
+                                        <div class="p text-start ms-3">Đã bán <c:out value="${salesData[newP.id] != null ? salesData[newP.id] : 0}" /> sản phẩm</div>
+                                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
+                                            <i class="fa-solid fa-truck mt-1"></i>
+                                            <p class="ms-2">2 -4 ngày</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </c:forEach>
+                        </c:when>
                         <c:otherwise>
                             <div class="col-12 text-center mt-5">
                                 <p class="text-muted h5">Không có sản phẩm nào trong danh mục này.</p>
@@ -173,29 +187,34 @@
                 </div>
             </div>
 
-            <!-- Ban chay -->
+            <!-- Best Selling (Sản phẩm Bán chạy) -->
             <div id="best-products" style="display: none;">
                 <div class="row">
                     <c:choose>
-                    <c:when test="${not empty bestSellingProducts}">
-                    <c:forEach var="bestSellP" items="${bestSellingProducts}">
-                    <div class="col-md-3 bg-light text-center m-3 col product_number">
-                        <a href="product-detail?pid=${bestSellP.id}" class="text-decoration-none text-dark">
-                            <div class="product-img">
-                                <img src="${pageContext.request.contextPath}${bestSellP.img}" alt="${bestSellP.name}" height="250px" width="200px">
-                            </div>
-                            <div class="h5 text-h">${bestSellP.name}</div>
-                            <div class="p mb-2 text-p">${bestSellP.description}</div>
-                            <div class="h4 text-start ms-3" style="color: red;"><f:formatNumber value="${bestSellP.price}"/> <u>đ</u></div>
-                            <div class="p text-start ms-3">Đã bán <c:out value="${salesData[bestSellP.id] != null ? salesData[bestSellP.id] : 0}" /> sản phẩm</div>
-                            <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
-                                <i class="fa-solid fa-truck mt-1"></i>
-                                <p class="ms-2">2 -4 ngày</p>
-                            </div>
-                        </a>
-                    </div>
-                    </c:forEach>
-                    </c:when>
+                        <c:when test="${not empty bestSellingProducts}">
+                            <c:forEach var="bestSellP" items="${bestSellingProducts}">
+                                <div class="col-md-3 bg-light text-center m-3 col product_number">
+                                    <a href="product-detail?pid=${bestSellP.id}" class="text-decoration-none text-dark">
+                                        <div class="product-img">
+                                            <img src="${pageContext.request.contextPath}${bestSellP.img}" alt="${bestSellP.name}" height="250px" width="200px" style="${bestSellP.status == 0 ? 'opacity: 0.5;' : ''}">
+                                        </div>
+                                        <div class="h5 text-h">${bestSellP.name}</div>
+                                        <div class="p mb-2 text-p">${bestSellP.description}</div>
+                                        <div class="h4 text-start ms-3" style="color: red;">
+                                            <f:formatNumber value="${bestSellP.price}"/> <u>đ</u>
+                                        </div>
+                                        <c:if test="${bestSellP.status == 0}">
+                                            <div class="p text-start ms-3 text-danger fw-bold">Đã hết hàng</div>
+                                        </c:if>
+                                        <div class="p text-start ms-3">Đã bán <c:out value="${salesData[bestSellP.id] != null ? salesData[bestSellP.id] : 0}" /> sản phẩm</div>
+                                        <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
+                                            <i class="fa-solid fa-truck mt-1"></i>
+                                            <p class="ms-2">2 -4 ngày</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </c:forEach>
+                        </c:when>
                         <c:otherwise>
                             <div class="col-12 text-center mt-5">
                                 <p class="text-muted h5">Không có sản phẩm nào trong danh mục này.</p>
@@ -243,13 +262,16 @@
                                 <div class="col-md-3 bg-white text-center m-3 col product_number">
                                     <a href="product-detail?pid=${p.id}" class="text-decoration-none text-dark">
                                         <div class="product-img">
-                                            <img src="${pageContext.request.contextPath}${p.img}" alt="${p.name}" height="250px" width="200px">
+                                            <img src="${pageContext.request.contextPath}${p.img}" alt="${p.name}" height="250px" width="200px" style="${p.status == 0 ? 'opacity: 0.5;' : ''}">
                                         </div>
                                         <div class="h5 text-h">${p.name}</div>
                                         <div class="p mb-2 text-p">${p.description}</div>
                                         <div class="h4 text-start ms-3" style="color: red;">
                                             <f:formatNumber value="${p.price}"/> <u>đ</u>
                                         </div>
+                                        <c:if test="${p.status == 0}">
+                                            <div class="p text-start ms-3 text-danger fw-bold">Đã hết hàng</div>
+                                        </c:if>
                                         <div class="p text-start ms-3">Đã bán <c:out value="${salesData[p.id] != null ? salesData[p.id] : 0}" /> sản phẩm</div>
                                         <div class="d-flex text-start ms-3 mt-2" style="color: #198754;">
                                             <i class="fa-solid fa-truck mt-1"></i>

@@ -4,6 +4,7 @@ import org.jdbi.v3.core.Jdbi;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.db.DBConnect;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.db.JdbiConnect;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.dto.ProductWithDiscountDTO;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.ActionLog;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
 
 import java.sql.ResultSet;
@@ -12,6 +13,7 @@ import java.sql.Statement;
 import java.util.*;
 
 public class ProductDao {
+    private ActionLogDao actionLogDao = new ActionLogDao();
 
     // Lấy sản phẩm có trạng thái 'active'
     public List<Product> getAll() {
@@ -105,13 +107,8 @@ public class ProductDao {
                             .executeAndReturnGeneratedKeys("id").mapTo(Integer.class).one();
 
                 // Ghi log hành động vào bảng action_log
-                handle.createUpdate("INSERT INTO action_log (user_id, action_type, entity_type, entity_id, created_at, description) VALUES (:userId, :actionType, :entityType, :entityId, CURRENT_DATE, :description)")
-                        .bind("userId", userId)
-                        .bind("actionType", "CREATE")
-                        .bind("entityType", "PRODUCT")
-                        .bind("entityId", productId)
-                        .bind("description", "User " + userId + " created product " + productId)
-                        .execute();
+                ActionLog actionLog = new ActionLog(userId, "CREATE", "PRODUCT", productId, "User " + userId + " created product " + productId, null, product.toString());
+                actionLogDao.logAction(actionLog);
             });
         }
 
@@ -119,6 +116,7 @@ public class ProductDao {
 
     //xoa product
     public void deleteProduct(int productId, int userId) {
+        Product deletedProduct = getProductByIdOfAdmin(productId);
         //kiem tra quyền admin
         boolean isAdmin = UserDao.checkIfAdmin(userId);
 
@@ -134,13 +132,9 @@ public class ProductDao {
 
                 // Ghi log hành động vào bảng action_log
                 if (updatedRows > 0) {
-                    handle.createUpdate("INSERT INTO action_log (user_id, action_type, entity_type, entity_id, created_at, description) VALUES (:userId, :actionType, :entityType, :entityId, CURRENT_DATE, :description)")
-                            .bind("userId", userId)
-                            .bind("actionType", "DELETE")
-                            .bind("entityType", "PRODUCT")
-                            .bind("entityId", productId)
-                            .bind("description", "User " + userId + " deleted product " + productId)
-                            .execute();
+                    // Ghi log hành động vào bảng action_log
+                    ActionLog actionLog = new ActionLog(userId, "DELETE", "PRODUCT", productId, "User " + userId + " deleted product " + productId, deletedProduct.toString(), null);
+                    actionLogDao.logAction(actionLog);
                 }else {
                     throw new RuntimeException("Failed to delete product with ID: " + productId);
                 }
@@ -149,7 +143,8 @@ public class ProductDao {
     }
 
     //sua product
-    public void updateProduct(Product product, int userId) {
+    public void updateProduct(int productId, Product product, int userId) {
+        Product oldProduct  = getProductByIdOfAdmin(productId);
         //kiem tra quyền admin
         boolean isAdmin = UserDao.checkIfAdmin(userId);
 
@@ -162,13 +157,9 @@ public class ProductDao {
 
                 // Ghi log hành động vào bảng action_log
                 if (updatedRows > 0) {
-                    handle.createUpdate("INSERT INTO action_log (user_id, action_type, entity_type, entity_id, created_at, description) VALUES (:userId, :actionType, :entityType, :entityId, CURRENT_DATE, :description)")
-                            .bind("userId", userId)
-                            .bind("actionType", "UPDATE")
-                            .bind("entityType", "PRODUCT")
-                            .bind("entityId", product.getId())
-                            .bind("description", "User " + userId + " updated product " + product.getId())
-                            .execute();
+                    // Ghi log hành động vào bảng action_log
+                    ActionLog actionLog = new ActionLog(userId, "UPDATE", "PRODUCT", productId, "User " + userId + " updated product " + productId, oldProduct.toString(), product.toString());
+                    actionLogDao.logAction(actionLog);
                 } else {
                     throw new RuntimeException("Failed to update product with ID: " + product.getId());
                 }
@@ -198,21 +189,22 @@ public class ProductDao {
     public List<ProductWithDiscountDTO> getDiscountProduct() {
         Jdbi jdbi = JdbiConnect.getJdbi();
         String query = """
-                SELECT p.id, p.img, p.name, p.description, p.price, d.percentage, ROUND(p.price * (1 - d.percentage / 100), 2) AS discountedPrice
-                FROM products p
-                JOIN discounts d ON p.discount_id = d.id
-                WHERE p.discount_id != 1 and p.status = '1'
-                """;
+            SELECT p.id, p.img, p.name, p.description, p.price, p.quantity, p.status, d.percentage, ROUND(p.price * (1 - d.percentage / 100), 2) AS discountedPrice
+            FROM products p
+            JOIN discounts d ON p.discount_id = d.id
+            WHERE p.discount_id != 1 AND p.status = '1'
+            """;
         return jdbi.withHandle(handle ->
                 handle.createQuery(query)
-                        .mapToBean(ProductWithDiscountDTO.class).list());
+                        .mapToBean(ProductWithDiscountDTO.class)
+                        .list());
     }
 
     // Phân trang sản phẩm giảm giá
     public List<ProductWithDiscountDTO> getProductByPageOfDiscount(int page, int id) {
         Jdbi jdbi = JdbiConnect.getJdbi();
         String query = """
-            SELECT p.id, p.img, p.name, p.description, p.price, d.percentage, ROUND(p.price * (1 - d.percentage / 100), 2) AS discountedPrice
+            SELECT p.id, p.img, p.name, p.description, p.price, p.quantity, p.status, d.percentage, ROUND(p.price * (1 - d.percentage / 100), 2) AS discountedPrice
             FROM products p
             JOIN discounts d ON p.discount_id = d.id
             WHERE p.cat_id = :id AND p.discount_id != :discountId
@@ -222,10 +214,10 @@ public class ProductDao {
         return jdbi.withHandle(handle ->
                 handle.createQuery(query)
                         .bind("id", id)
-                        .bind("discountId", 1)  // Trả về các sản phẩm có discount khác 1
+                        .bind("discountId", 1)
                         .bind("start", (page - 1) * 12)
                         .bind("end", 12)
-                        .mapToBean(ProductWithDiscountDTO.class)  // Ánh xạ kết quả vào ProductWithDiscountDTO
+                        .mapToBean(ProductWithDiscountDTO.class)
                         .list());
     }
 
@@ -452,5 +444,48 @@ public class ProductDao {
                         .mapToBean(Product.class)
                         .findFirst()
                         .orElse(null));
+    }
+
+    // Lấy danh sách sản phẩm bán chạy nhất trong năm
+    public List<Object[]> getTopSellingProductsInYear(int limit, int year) {
+        Jdbi jdbi = JdbiConnect.getJdbi();
+        return jdbi.withHandle(handle ->
+                handle.createQuery("""
+                        SELECT p.id, p.name, SUM(od.quantity) AS total_quantity
+                        FROM products p
+                        JOIN order_details od ON p.id = od.product_id
+                        JOIN orders o ON od.order_id = o.id
+                        WHERE YEAR(o.order_date) = :year
+                        GROUP BY p.id, p.name
+                        ORDER BY total_quantity DESC
+                        LIMIT :limit
+                    """)
+                        .bind("year", year)
+                        .bind("limit", limit)
+                        .map((rs, ctx) -> new Object[]{rs.getInt("id"), rs.getString("name"), rs.getInt("total_quantity")})
+                        .list()
+        );
+    }
+
+    // Lấy danh sách sản phẩm bán chạy nhất trong tháng
+    public List<Object[]> getTopSellingProducts(int limit, int year, int month){
+        Jdbi jdbi = JdbiConnect.getJdbi();
+        return jdbi.withHandle(handle ->
+                handle.createQuery("""
+                        SELECT p.id, p.name, SUM(od.quantity) AS total_quantity
+                        FROM products p
+                        JOIN order_details od ON p.id = od.product_id
+                        JOIN orders o ON od.order_id = o.id
+                        WHERE YEAR(o.order_date) = :year AND MONTH(o.order_date) = :month
+                        GROUP BY p.id, p.name
+                        ORDER BY total_quantity DESC
+                        LIMIT :limit
+                    """)
+                        .bind("year", year)
+                        .bind("month", month)
+                        .bind("limit", limit)
+                        .map((rs, ctx) -> new Object[]{rs.getInt("id"), rs.getString("name"), rs.getInt("total_quantity")})
+                        .list()
+        );
     }
 }

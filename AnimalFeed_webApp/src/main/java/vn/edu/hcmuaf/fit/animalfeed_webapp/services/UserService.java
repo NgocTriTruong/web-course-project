@@ -262,4 +262,18 @@ public class UserService {
             }
         }
     }
+
+    //Đăng ký người dùng qua Facebook
+    public void registerUserWithFacebook(User user) {
+        userDao.insertUser(user);
+    }
+
+    //Đăng nhập bằng Facebook
+    public User loginWithFacebook(String email) {
+        Optional<User> optionalUser = userDao.getUserByEmail(email);
+        if (!optionalUser.isPresent()) {
+            throw new RuntimeException("Không tìm thấy tài khoản với email " + email);
+        }
+        return optionalUser.get();
+    }
 }
