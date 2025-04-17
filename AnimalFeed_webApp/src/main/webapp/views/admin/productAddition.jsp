@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix = "f" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html lang="en">
 
@@ -19,11 +19,9 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/admin/assets/css/header.css">
 
     <script src="${pageContext.request.contextPath}/views/admin/assets/js/mdb.min.js"></script>
-
 </head>
 
 <body>
-<!-- Start your project here-->
 <!--Main Navigation-->
 <%@ include file="layout/header.jsp" %>
 
@@ -33,6 +31,18 @@
         <a href="product-manager" class="btn btn-link mb-2 text_green" style="font-size: 16px;">
             <i class="fas fa-angle-left"></i> Quay lại
         </a>
+
+        <!-- Hiển thị thông báo lỗi nếu có -->
+        <div class="container">
+            <% String error = (String) session.getAttribute("error");
+                if (error != null) { %>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <%= error %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <% session.removeAttribute("error"); %>
+            <% } %>
+        </div>
 
         <div class="mb-3 bg_green p-2 bg_green">
             <span class="text-white h5">Thông tin sản phẩm</span>
@@ -81,7 +91,6 @@
                         </c:forEach>
                     </select>
                 </div>
-
             </div>
 
             <!-- Mô tả và Hình ảnh -->
@@ -112,11 +121,9 @@
 </main>
 <!--Main layout-->
 
-
 <footer class="bottom-0 w-100 text-center py-2 bg-light">
     <p class="pt-3" style="color: rgba(0, 0, 0, 0.5); margin-left: 150px;">©2024 Group-11</p>
-</footer><footer></footer>
+</footer>
 
 </body>
-
 </html>
