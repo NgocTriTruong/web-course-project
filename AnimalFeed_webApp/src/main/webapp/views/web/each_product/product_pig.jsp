@@ -32,7 +32,9 @@
     <!-- scrollToTopBtn -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/scrollToTopBtn.css">
     <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/scrollToTopBtn.js" defer></script>
-    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/search.js" defer></script>
+    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/search.js" defer></script
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <%@ include file="../layout/header.jsp" %>
@@ -142,8 +144,8 @@
             <div id="new-products" style="display: none;">
                 <div class="row">
                     <c:choose>
-                    <c:when test="${not empty newProducts}">
-                    <c:forEach var="newP" items="${newProducts}">
+                    <c:when test="${not empty newProductsPage}">
+                    <c:forEach var="newP" items="${newProductsPage}">
                     <div class="col-md-3 bg-light text-center m-3 col product_number">
                         <a href="product-detail?pid=${newP.id}" class="text-decoration-none text-dark">
                             <div class="sale_all">
@@ -170,6 +172,27 @@
                             </div>
                         </c:otherwise>
                     </c:choose>
+                </div>
+                <div class="container mt-4">
+                    <nav aria-label="Discount products pagination">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item ${newPage > 1 ? '' : 'disabled'}">
+                                <a class="page-link" href="?categoryId=${selectedCategoryId}&newPage=${newPage - 1}#new-products">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </a>
+                            </li>
+                            <c:forEach var="i" begin="1" end="${endNewPage}">
+                                <li class="page-item ${i == newPage ? 'active' : ''}">
+                                    <a class="page-link" href="?categoryId=${selectedCategoryId}&newPage=${i}#new-products">${i}</a>
+                                </li>
+                            </c:forEach>
+                            <li class="page-item ${newPage < endNewPage ? '' : 'disabled'}">
+                                <a class="page-link" href="?categoryId=${selectedCategoryId}&newPage=${newPage + 1}#new-products">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
 
@@ -202,6 +225,27 @@
                             </div>
                         </c:otherwise>
                     </c:choose>
+                </div>
+                <div class="container mt-4">
+                    <nav aria-label="Discount products pagination">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item ${sellingPage > 1 ? '' : 'disabled'}">
+                                <a class="page-link" href="?categoryId=${selectedCategoryId}&sellingPage=${sellingPage - 1}#best-products">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </a>
+                            </li>
+                            <c:forEach var="i" begin="1" end="${endSellingPage}">
+                                <li class="page-item ${i == sellingPage ? 'active' : ''}">
+                                    <a class="page-link" href="?categoryId=${selectedCategoryId}&sellingPage=${i}#best-products">${i}</a>
+                                </li>
+                            </c:forEach>
+                            <li class="page-item ${sellingPage < endSellingPage ? '' : 'disabled'}">
+                                <a class="page-link" href="?categoryId=${selectedCategoryId}&sellingPage=${sellingPage + 1}#best-products">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
@@ -270,7 +314,7 @@
         </div>
 
         <!-- Pagination -->
-        <div class="container mt-4">
+        <div class="container mt-4" id="productAll">
             <nav aria-label="Page navigation">
                 <ul class="pagination justify-content-center">
                     <li class="page-item ${currentPage > 1 ? '' : 'disabled'}">
@@ -386,6 +430,9 @@
 
     <!-- Script -->
     <script src="${pageContext.request.contextPath}/views/template/assets/scripts/product/transferProduct.js" defer></script>
+
+<%-- JavaScript xử lý AJAX pagination --%>
+<script src="${pageContext.request.contextPath}/views/template/assets/scripts/product/ajax_product.js" defer></script>
 
 </body>
 </html>

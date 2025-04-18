@@ -111,7 +111,7 @@
                             <c:forEach var="item" items="${confirmedItems}">
                                 <div class="cart-item bg-white">
                                     <div class="d-flex align-items-center">
-                                        <img src="${item.img}" alt="${item.name}" class="me-3" width="150px" height="150px">
+                                        <img src="${pageContext.request.contextPath}${item.img}" alt="${item.name}" class="me-3" width="150px" height="150px">
                                         <div class="" style="width: 100%;">
                                             <div class="float-start cart-item-text">
                                                 <h6 class="mt-3" style="font-size: 18px;">${item.name}</h6>

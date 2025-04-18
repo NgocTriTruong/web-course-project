@@ -120,7 +120,7 @@
       <div class="container home_icon">
         <ul class="d-flex">
           <li>
-            <a href="${pageContext.request.contextPath}iews/template/assets/html/each_product/product_pig.html">
+            <a href="${pageContext.request.contextPath}/list-product?categoryId=1">
               <div class="home_sp_icon">
                 <img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-pig.png" alt="Thức ăn cho heo" width="70px" height="70px">
               </div>
@@ -130,7 +130,7 @@
             </a>
           </li>
           <li>
-            <a href="${pageContext.request.contextPath}iews/template/assets/html/each_product/product_chicken.html">
+            <a href="${pageContext.request.contextPath}/list-product?categoryId=2">
               <div class="home_sp_icon">
                 <img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-chicken.png" alt="Thức ăn cho gà" width="70px" height="70px">
               </div>
@@ -140,7 +140,7 @@
             </a>
           </li>
           <li>
-            <a href="${pageContext.request.contextPath}iews/template/assets/html/each_product/product_duck.html">
+            <a href="${pageContext.request.contextPath}/list-product?categoryId=3">
               <div class="home_sp_icon">
                 <img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-duck.png" alt="Thức ăn cho vịt" width="70px" height="70px">
               </div>
@@ -150,7 +150,7 @@
             </a>
           </li>
           <li>
-            <a href="${pageContext.request.contextPath}iews/template/assets/html/each_product/product_cow.html">
+            <a href="${pageContext.request.contextPath}/list-product?categoryId=4">
               <div class="home_sp_icon">
                 <img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-cow.png" alt="Thức ăn cho bò" width="70px" height="70px">
               </div>
@@ -160,7 +160,7 @@
             </a>
           </li>
           <li>
-            <a href="${pageContext.request.contextPath}iews/template/assets/html/each_product/product_shirmp.html">
+            <a href="${pageContext.request.contextPath}/list-product?categoryId=5">
               <div class="home_sp_icon">
                 <img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-shrimp.png" alt="Thức ăn cho tôm" width="70px" height="70px">
               </div>
@@ -170,7 +170,7 @@
             </a>
           </li>
           <li>
-            <a href="${pageContext.request.contextPath}iews/template/assets/html/each_product/product_fish.html">
+            <a href="${pageContext.request.contextPath}/list-product?categoryId=6">
               <div class="home_sp_icon">
                 <img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-fish.png" alt="Thức ăn cho cá" width="70px" height="70px">
               </div>
@@ -180,7 +180,7 @@
             </a>
           </li>
           <li>
-            <a href="${pageContext.request.contextPath}iews/template/assets/html/each_product/product_goat.html">
+            <a href="${pageContext.request.contextPath}/list-product?categoryId=7">
               <div class="home_sp_icon">
                 <img src="${pageContext.request.contextPath}/views/template/assets/images/represent-images/icon-goat.png" alt="Thức ăn cho dê" width="70px" height="70px">
               </div>
@@ -199,85 +199,85 @@
           <div id="slide-product-pig" class="list-products active">
             <div class="item">
               <div class="image-section">
-                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/pig/48A.png" alt="Product">
+                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/heo/48A.png" alt="Product">
               </div>
               <div class="info-section">
                 <div class="info">
                   <h2>VINA 48A</h2>
                   <p>Dùng cho heo con từ 05 ngày tuổi đến 35 ngày tuổi</p>
-                  <a href="${pageContext.request.contextPath}iews/template/assets/html/each_product/product_details/hy340.html"><button>XEM CHI TIẾT</button></a>
+                  <a href="${pageContext.request.contextPath}/views/template/assets/html/each_product/product_details/hy340.html"><button>XEM CHI TIẾT</button></a>
                 </div>
               </div>
             </div>
             <div class="item">
               <div class="image-section">
-                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/chicken/200.png" alt="Product">
+                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/gà/200.png" alt="Product">
               </div>
               <div class="info-section">
                 <div class="info">
                   <h2>VINA 200</h2>
                   <p>Dùng cho gà thịt từ 1 ngày tuổi đến khi xuất bán</p>
-                  <a href="${pageContext.request.contextPath}iews/template/assets/html/each_product/product_details/hy340.html"><button>XEM CHI TIẾT</button></a>
+                  <a href="${pageContext.request.contextPath}/views/template/assets/html/each_product/product_details/hy340.html"><button>XEM CHI TIẾT</button></a>
                 </div>
               </div>
             </div>
             <div class="item">
               <div class="image-section">
-                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/duck/320.png" alt="Product">
+                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/vịt/320.png" alt="Product">
               </div>
               <div class="info-section">
                 <div class="info">
                   <h2>VINA 320</h2>
                   <p>Dùng cho vịt siêu thịt từ 1 đến 21 ngày tuổi</p>
-                  <a href="${pageContext.request.contextPath}iews/template/assets/html/each_product/product_details/hy340.html"><button>XEM CHI TIẾT</button></a>
+                  <a href="${pageContext.request.contextPath}/views/template/assets/html/each_product/product_details/hy340.html"><button>XEM CHI TIẾT</button></a>
                 </div>
               </div>
             </div>
             <div class="item">
               <div class="image-section">
-                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/cow/222_1.png" alt="Product">
+                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/bò/222_1.png" alt="Product">
               </div>
               <div class="info-section">
                 <div class="info">
                   <h2>HAPPY 222</h2>
                   <p>Dùng cho bò sữa</p>
-                  <a href="${pageContext.request.contextPath}iews/template/assets/html/each_product/product_details/hy340.html"><button>XEM CHI TIẾT</button></a>
+                  <a href="${pageContext.request.contextPath}/views/template/assets/html/each_product/product_details/hy340.html"><button>XEM CHI TIẾT</button></a>
                 </div>
               </div>
             </div>
             <div class="item">
               <div class="image-section">
-                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/shrimp/img1.png" alt="Product">
+                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/tôm/img1.png" alt="Product">
               </div>
               <div class="info-section">
                 <div class="info">
                   <h2>BEIKESU</h2>
                   <p>Dùng trong giai đoạn nuôi gièo</p>
-                  <a href="${pageContext.request.contextPath}iews/template/assets/html/each_product/product_details/hy340.html"><button>XEM CHI TIẾT</button></a>
+                  <a href="${pageContext.request.contextPath}/views/template/assets/html/each_product/product_details/hy340.html"><button>XEM CHI TIẾT</button></a>
                 </div>
               </div>
             </div>
             <div class="item">
               <div class="image-section">
-                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/fish/img_1.png" alt="Product">
+                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/cá/img_1.png" alt="Product">
               </div>
               <div class="info-section">
                 <div class="info">
                   <h2>VINA 7030</h2>
                   <p>Dùng cho cá rô phi, điêu hồng từ 20gr đến 200gr</p>
-                  <a href="${pageContext.request.contextPath}iews/template/assets/html/each_product/product_details/hy340.html"><button>XEM CHI TIẾT</button></a>
+                  <a href="${pageContext.request.contextPath}/views/template/assets/html/each_product/product_details/hy340.html"><button>XEM CHI TIẾT</button></a>
                 </div>
               </div>
             </div>
             <div class="item">
               <div class="image-section">
-                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/goat/a35-s---25kg---27.03.23.png" alt="Product">
+                <img src="${pageContext.request.contextPath}/views/template/assets/images/product/dê/a35-s---25kg---27.03.23.png" alt="Product">
               </div>
               <div class="info-section">
                 <div class="info">
                   <h2>ANOVA 35S</h2>
                   <p>Dùng cho dê thịt, dê vỗ béo</p>
-                  <a href="${pageContext.request.contextPath}iews/template/assets/html/each_product/product_details/hy340.html"><button>XEM CHI TIẾT</button></a>
+                  <a href="${pageContext.request.contextPath}/views/template/assets/html/each_product/product_details/hy340.html"><button>XEM CHI TIẾT</button></a>
                 </div>
               </div>
             </div>

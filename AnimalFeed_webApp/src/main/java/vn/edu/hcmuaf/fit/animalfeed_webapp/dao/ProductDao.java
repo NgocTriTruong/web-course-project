@@ -69,6 +69,34 @@ public class ProductDao {
                         .mapToBean(Product.class).list());
     }
 
+    // Lay product theo id danh muc -sản phẩm mới
+    public List<Product> getByCatIdOfNewProduct(int categoryId) {
+        Jdbi jdbi = JdbiConnect.getJdbi();
+        return jdbi.withHandle(handle ->
+                handle.createQuery("select * from products where cat_id = :categoryId and status = :status and create_date >= DATE_SUB(CURDATE(), INTERVAL 10 DAY)")
+                        .bind("categoryId", categoryId)
+                        .bind("status", "1")  // Lấy sản phẩm có trạng thái 'active'
+                        .mapToBean(Product.class).list());
+    }
+
+    // Lay product theo id danh muc -top 10 sản phẩm bán chạy
+    public List<Product> getByCatIdOfBestSelling(int categoryId) {
+        Jdbi jdbi = JdbiConnect.getJdbi();
+        return jdbi.withHandle(handle ->
+                handle.createQuery("""
+                        SELECT p.*
+                        FROM products p
+                        JOIN order_details od ON p.id = od.product_id
+                        WHERE p.cat_id = :categoryId AND p.status = :status
+                        GROUP BY p.id
+                        ORDER BY SUM(od.quantity) DESC
+                        LIMIT 10
+                    """)
+                        .bind("categoryId", categoryId)
+                        .bind("status", "1")  // Lấy sản phẩm có trạng thái 'active'
+                        .mapToBean(Product.class).list());
+    }
+
     //Dem so luong product active trong db
     public int getTotalProduct() {
         Jdbi jdbi = JdbiConnect.getJdbi();
@@ -214,12 +242,11 @@ public class ProductDao {
                 handle.createQuery(query)
                         .bind("id", id)
                         .bind("discountId", 1)  // Trả về các sản phẩm có discount khác 1
-                        .bind("start", (page - 1) * 12)
-                        .bind("end", 12)
+                        .bind("start", (page - 1) * 8)
+                        .bind("end", 8)
                         .mapToBean(ProductWithDiscountDTO.class)  // Ánh xạ kết quả vào ProductWithDiscountDTO
                         .list());
     }
-
 
     //Hiển thị sản phẩm mới nhất
     public List<Product> getNewProduct(int id) {
@@ -228,6 +255,19 @@ public class ProductDao {
                 handle.createQuery("select * from products where status = :status and cat_id = :id and create_date >= DATE_SUB(CURDATE(), INTERVAL 10 DAY) ORDER BY create_date DESC")
                         .bind("status", "1")  // Lấy sản phẩm có trạng thái 'active'
                         .bind("id", id)
+                        .mapToBean(Product.class).list());
+    }
+
+    // Phân trang sản phẩm mới nhất
+    public List<Product> getProductByPageOfNewProduct(int page, int id) {
+        Jdbi jdbi = JdbiConnect.getJdbi();
+        return jdbi.withHandle(handle ->
+                handle.createQuery("select * from products where status = :status and cat_id = :id and discount_id != :discountId and create_date >= DATE_SUB(CURDATE(), INTERVAL 10 DAY) ORDER BY create_date DESC limit :end offset :start")
+                        .bind("status", "1")  // Lấy sản phẩm có trạng thái 'active'
+                        .bind("discountId", 1)  // Lấy sản phẩm không giảm giá
+                        .bind("id", id)
+                        .bind("start", (page - 1) * 8)
+                        .bind("end", 8)
                         .mapToBean(Product.class).list());
     }
 
@@ -247,6 +287,27 @@ public class ProductDao {
             """)
                         .bind("status", "1")  // Lọc sản phẩm có trạng thái 'active'
                         .bind("categoryId", categoryId)
+                        .mapToBean(Product.class).list());
+    }
+
+    // Phân trang top 10 sản phẩm bán chạy nhất
+    public List<Product> getProductByPageOfBestSelling(int page, int categoryId) {
+        Jdbi jdbi = JdbiConnect.getJdbi();
+        return jdbi.withHandle(handle ->
+                handle.createQuery("""
+                        SELECT p.*
+                        FROM products p
+                        JOIN order_details od ON p.id = od.product_id
+                        WHERE p.status = :status
+                        AND p.cat_id = :categoryId
+                        GROUP BY p.id
+                        ORDER BY SUM(od.quantity) DESC
+                        LIMIT :end OFFSET :start
+                    """)
+                        .bind("status", "1")  // Lọc sản phẩm có trạng thái 'active'
+                        .bind("categoryId", categoryId)
+                        .bind("start", (page - 1) * 8)
+                        .bind("end", 8)
                         .mapToBean(Product.class).list());
     }
 
