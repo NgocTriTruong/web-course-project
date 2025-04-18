@@ -25,7 +25,6 @@ public class OrderConfirmController extends HttpServlet {
             throws ServletException, IOException {
 
         CategoryService categoryService = new CategoryService();
-        //Lay danh muc
         List<Category> categories = categoryService.getAll();
         request.setAttribute("categoriesData", categories);
 
@@ -38,13 +37,17 @@ public class OrderConfirmController extends HttpServlet {
             return;
         }
 
+        // Truyền thông tin người dùng sang JSP
+        request.setAttribute("userFullName", user.getFullName());
+        request.setAttribute("userPhone", user.getPhone());
+        request.setAttribute("userEmail", user.getEmail());
+
         String productIdStr = request.getParameter("productId");
         String quantityStr = request.getParameter("quantity");
 
-        // Try to get confirmed items from session (for Buy Now)
-        List<CartItem> confirmedItems = (List<CartItem>) session.getAttribute("confirmedItems");
-        Double totalPrice = (Double) session.getAttribute("totalPrice");
-        Integer totalQuantity = (Integer) session.getAttribute("totalQuantity");
+        List<CartItem> confirmedItems;
+        Double totalPrice;
+        Integer totalQuantity;
 
         if (productIdStr != null && quantityStr != null) {
             try {
@@ -84,7 +87,6 @@ public class OrderConfirmController extends HttpServlet {
                 totalPrice = unitPrice * quantity;
                 totalQuantity = quantity;
 
-                // Store in session for the confirmation page
                 session.setAttribute("confirmedItems", confirmedItems);
                 session.setAttribute("totalPrice", totalPrice);
                 session.setAttribute("totalQuantity", totalQuantity);
@@ -113,14 +115,12 @@ public class OrderConfirmController extends HttpServlet {
 
         List<Address> addressList = AddressService.getAddressesByUserId(user.getId());
 
-        // Set attributes for the JSP
         request.setAttribute("confirmedItems", confirmedItems);
         request.setAttribute("totalPrice", totalPrice);
         request.setAttribute("totalQuantity", totalQuantity);
         request.setAttribute("customerInfo", session.getAttribute("customerInfo"));
         request.setAttribute("addressList", addressList);
 
-        // Forward to the order confirmation page
         request.getRequestDispatcher("/views/web/order/confirm_order.jsp")
                 .forward(request, response);
     }

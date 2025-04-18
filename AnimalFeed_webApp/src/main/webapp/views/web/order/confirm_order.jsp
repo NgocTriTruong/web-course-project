@@ -133,13 +133,16 @@
                         <div class="bg-white pt-2 order">
                             <h5 class="mt-2 ms-4">Người đặt hàng</h5>
                             <div class="form-group m-3">
-                                <input type="text" name="fullName" class="form-control" placeholder="Họ và tên *" required>
+                                <input type="text" name="fullName" class="form-control" placeholder="Họ và tên *"
+                                       value="${userFullName}" required>
                             </div>
                             <div class="form-group m-3">
-                                <input type="text" name="phone" class="form-control" placeholder="Số điện thoại *" required>
+                                <input type="text" name="phone" class="form-control" placeholder="Số điện thoại *"
+                                       value="${userPhone}" required>
                             </div>
                             <div class="form-group m-3 pb-3">
-                                <input type="email" name="email" class="form-control" placeholder="Email (Không bắt buộc)">
+                                <input type="email" name="email" class="form-control" placeholder="Email (Không bắt buộc)"
+                                       value="${userEmail}">
                             </div>
                         </div>
 

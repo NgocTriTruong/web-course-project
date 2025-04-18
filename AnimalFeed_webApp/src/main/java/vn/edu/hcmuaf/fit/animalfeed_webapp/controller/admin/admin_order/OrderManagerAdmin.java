@@ -10,6 +10,7 @@ import vn.edu.hcmuaf.fit.animalfeed_webapp.services.OrderService;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @WebServlet(name = "OrderManagerAdmin", value = "/order-manager")
@@ -65,6 +66,22 @@ public class OrderManagerAdmin extends HttpServlet {
             if (allOrders == null) {
                 allOrders = new ArrayList<>(); // Create empty list if null
             }
+
+            // Sắp xếp đơn hàng theo trạng thái và ngày đặt hàng
+            allOrders.sort((o1, o2) -> {
+                // Định nghĩa thứ tự ưu tiên trạng thái
+                List<Integer> statusOrder = Arrays.asList(1, 2, 3, 4, 0);
+                int index1 = statusOrder.indexOf(o1.getStatus());
+                int index2 = statusOrder.indexOf(o2.getStatus());
+
+                // So sánh trạng thái
+                if (index1 != index2) {
+                    return Integer.compare(index1, index2);
+                }
+
+                // Nếu trạng thái giống nhau, so sánh ngày đặt hàng từ mới đến cũ
+                return o2.getOrderDate().compareTo(o1.getOrderDate());
+            });
 
             // Get page parameter with validation
             int page = 1;
