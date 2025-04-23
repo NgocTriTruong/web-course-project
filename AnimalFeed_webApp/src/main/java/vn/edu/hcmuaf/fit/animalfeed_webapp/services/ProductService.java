@@ -162,4 +162,9 @@ public class ProductService {
 
         return topSellingProducts;
     }
+
+    // Lấy số lượng tồn kho hiện tại của sản phẩm
+    public int getInventoryQuantity(int productId) {
+        return productDao.getInventoryQuantity(productId);
+    }
 }
