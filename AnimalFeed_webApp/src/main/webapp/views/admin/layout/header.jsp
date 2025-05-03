@@ -111,6 +111,15 @@
           </li>
         </ul>
       </li>
+      <li class="sidenav-item">
+        <a class="sidenav-link" href="${pageContext.request.contextPath}/issueManagement">
+          <i class="fas fa-handshake fa-fw me-2 "></i><span class="h5 text">Sự cố sản phẩm</span><i class="fas fa-chevron-down" style="margin-left: 30px;"></i></a>
+        <ul class="sidenav-collapse ">
+          <li class="sidenav-item">
+            <a class="sidenav-link" href="${pageContext.request.contextPath}/add-issue" style="font-size: 17px;">Thêm báo cáo sự cố</a>
+          </li>
+        </ul>
+      </li>
     </ul>
   </nav>
   <!-- Sidenav -->

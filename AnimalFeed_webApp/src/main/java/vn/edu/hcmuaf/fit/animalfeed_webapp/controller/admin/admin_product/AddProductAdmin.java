@@ -9,6 +9,7 @@ import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.CategoryService;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.DiscountService;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.ProductService;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.services.UserService;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,7 +18,6 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 @MultipartConfig(
         maxFileSize = 1024 * 1024 * 5,    // 5MB
@@ -31,6 +31,7 @@ public class AddProductAdmin extends HttpServlet {
     private CategoryService categoryService;
     private DiscountService discountService;
     private ProductService productService;
+    private UserService userService; // Thêm UserService để kiểm tra quyền
     private Map<Integer, String> categoryFolderMap;
 
     @Override
@@ -38,6 +39,7 @@ public class AddProductAdmin extends HttpServlet {
         categoryService = new CategoryService();
         discountService = new DiscountService();
         productService = new ProductService();
+        userService = UserService.getInstance(); // Khởi tạo UserService
 
         // Khởi tạo map ánh xạ categoryId với tên thư mục
         categoryFolderMap = new HashMap<>();
@@ -49,9 +51,25 @@ public class AddProductAdmin extends HttpServlet {
         }
     }
 
+    // Kiểm tra quyền PRODUCT_MANAGEMENT
+    private boolean hasProductManagementPermission(HttpSession session) {
+        Integer userId = (Integer) session.getAttribute("userId");
+        if (userId == null) {
+            return false;
+        }
+        return userService.hasPermission(userId, "PRODUCT_MANAGEMENT");
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+        if (session == null || !hasProductManagementPermission(session)) {
+            session.setAttribute("error", "Bạn không có quyền truy cập trang này.");
+            response.sendRedirect("product-manager");
+            return;
+        }
+
         try {
             List<Category> categories = categoryService.getAll();
             List<Discount> discounts = discountService.getAll();
@@ -74,6 +92,12 @@ public class AddProductAdmin extends HttpServlet {
 
         if (userId == null) {
             response.sendRedirect("login.jsp");
+            return;
+        }
+
+        if (!hasProductManagementPermission(session)) {
+            session.setAttribute("error", "Bạn không có quyền thực hiện thao tác này.");
+            response.sendRedirect("product-manager");
             return;
         }
 
