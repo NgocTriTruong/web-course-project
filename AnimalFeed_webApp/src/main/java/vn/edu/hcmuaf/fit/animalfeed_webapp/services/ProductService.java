@@ -46,6 +46,17 @@ public class ProductService {
         return productDao.getByCatIdOfDiscount(categoryId);
     }
 
+
+    // Lay product theo id danh muc - sản phẩm bán chạy
+    public List<Product> getByCatIdOfBestSelling(int categoryId) {
+        return productDao.getByCatIdOfBestSelling(categoryId);
+    }
+
+    //Lay product theo id danh muc - sản phẩm mới
+    public List<Product> getByCatIdOfNewProduct(int categoryId) {
+        return productDao.getByCatIdOfNewProduct(categoryId);
+    }
+
     // Đếm số lượng product trong db
     public int getTotalProduct() {
         return productDao.getTotalProduct();
@@ -109,12 +120,22 @@ public class ProductService {
         return productDao.getNewProduct(id);
     }
 
-    // Hiển thị sản phẩm bán chạy nhất
+    //Phân trang sản phẩm mới
+    public List<Product> getProductByPageOfNewProduct(int page, int id) {
+        return productDao.getProductByPageOfNewProduct(page, id);
+    }
+
+    //hiển thị sản phẩm bán chạy nhất
     public List<Product> getBestSellingProducts(int id) {
         return productDao.getBestSellingProducts(id);
     }
 
-    // Lọc sản phẩm theo Brand
+    //Phân trang sản phẩm bán chạy
+    public List<Product> getProductByPageOfBestSelling(int page, int id) {
+        return productDao.getProductByPageOfBestSelling(page, id);
+    }
+
+    //Loc sản phẩm theo Brand
     public List<Product> getProductByBrand(String brand) {
         return productDao.getProductByBrand(brand);
     }

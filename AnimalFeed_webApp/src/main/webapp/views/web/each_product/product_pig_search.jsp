@@ -74,7 +74,7 @@
               <div class="col-md-3 bg-white text-center m-3 col product_number">
                 <a href="product-detail?pid=${p.id}" class="text-decoration-none text-dark">
                   <div class="product-img">
-                    <img src="${p.img}" alt="${p.name}" height="250px" width="200px">
+                    <img src="${pageContext.request.contextPath}${p.img}" alt="${p.name}" height="250px" width="200px">
                   </div>
                   <div class="h5 text-h">${p.name}</div>
                   <div class="p mb-2 text-p">${p.description}</div>

@@ -33,6 +33,9 @@ public class ListProductController extends HttpServlet {
         String sellingPageParam = request.getParameter("sellingPage");
         String newPageParam = request.getParameter("newPage");
 
+        // Check if it's an AJAX request
+        boolean isAjaxRequest = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
+
         // Xử lý phân trang cho tất cả sản phẩm
         int page = (pageParam != null && !pageParam.isEmpty()) ? Integer.parseInt(pageParam) : 1;
         int categoryId = (catId != null && !catId.isEmpty()) ? Integer.parseInt(catId) : 0;
@@ -47,9 +50,27 @@ public class ListProductController extends HttpServlet {
         int discountPage = (discountPageParam != null && !discountPageParam.isEmpty()) ?
                 Integer.parseInt(discountPageParam) : 1;
         int countDiscountPro = productService.getByCatIdOfDiscount(categoryId).size();
-        int endDiscountPage = countDiscountPro / 12;
-        if(countDiscountPro % 12 != 0){
+        int endDiscountPage = countDiscountPro / 8;
+        if(countDiscountPro % 8 != 0){
             endDiscountPage++;
+        }
+
+        // Xử lý phân trang cho sản phẩm bán chạy
+        int sellingPage = (sellingPageParam != null && !sellingPageParam.isEmpty()) ?
+                Integer.parseInt(sellingPageParam) : 1;
+        int countSellingPro = productService.getByCatIdOfBestSelling(categoryId).size();
+        int endSellingPage = countSellingPro / 8;
+        if(countSellingPro % 8 != 0){
+            endSellingPage++;
+        }
+
+        // Xử lý phân trang cho sản phẩm mới
+        int newPage = (newPageParam != null && !newPageParam.isEmpty()) ?
+                Integer.parseInt(newPageParam) : 1;
+        int countNewPro = productService.getByCatIdOfNewProduct(categoryId).size();
+        int endNewPage = countNewPro / 8;
+        if(countNewPro % 8 != 0){
+            endNewPage++;
         }
 
         // Lay danh sach san pham theo trang
@@ -60,6 +81,12 @@ public class ListProductController extends HttpServlet {
 
         //Hiển thị sản phẩm giảm giá theo trang
         List<ProductWithDiscountDTO> discountProducts  = productService.getProductByPageOfDiscount(discountPage, categoryId);
+
+        //Lấy danh sách sản phẩm bán chạy theo trang
+        List<Product> bestSellingProducts = productService.getProductByPageOfBestSelling(sellingPage, categoryId);
+
+        //Lấy danh sách sản phẩm mới theo trang
+        List<Product> newProductsPage = productService.getProductByPageOfNewProduct(newPage, categoryId);
 
         //hien thi san pham moi
         List<Product> newProducts = productService.getNewProduct(categoryId);
@@ -75,15 +102,25 @@ public class ListProductController extends HttpServlet {
         request.setAttribute("selectedCategoryId", catId);
         request.setAttribute("currentPage", page);
         request.setAttribute("endPage", endPage);
+
+
         request.setAttribute("discountPage", discountPage);
         request.setAttribute("endDiscountPage", endDiscountPage);
         request.setAttribute("discountProducts", discountProducts);
 
+        request.setAttribute("sellingPage", sellingPage);
+        request.setAttribute("endSellingPage", endSellingPage);
+        request.setAttribute("bestSellingProducts", bestSellingProducts);
+
+        request.setAttribute("newPage", newPage);
+        request.setAttribute("endNewPage", endNewPage);
+        request.setAttribute("newProductsPage", newProductsPage);
 
         //hien thi san pham moi
-        request.setAttribute("newProducts", newProducts);
+//        request.setAttribute("newProducts", newProducts);
+
         //hiển thị sản phẩm bán chạy
-        request.setAttribute("bestSellingProducts", getBestSellingProducts);
+//        request.setAttribute("bestSellingProducts", getBestSellingProducts);
 
         request.getRequestDispatcher("views/web/each_product/product_pig.jsp").forward(request, response);
     }
