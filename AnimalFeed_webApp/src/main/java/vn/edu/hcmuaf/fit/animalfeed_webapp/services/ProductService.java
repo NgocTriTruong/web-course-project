@@ -4,6 +4,7 @@ import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.ProductDao;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.dto.ProductWithDiscountDTO;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -58,7 +59,6 @@ public class ProductService {
 
     // Thêm product
     public void insertProduct(Product product, int userId) {
-        // Kiểm tra quyền PRODUCT_MANAGEMENT
         if (!userService.hasPermission(userId, "PRODUCT_MANAGEMENT")) {
             throw new RuntimeException("Bạn không có quyền thực hiện thao tác này.");
         }
@@ -74,20 +74,16 @@ public class ProductService {
         productDao.deleteProduct(productID, userId);
     }
 
-
     // Sửa product
-    public void updateProduct(Product product, int userId) {
+// Sửa product
+    public void updateProduct(int productId, Product product, int userId) {
         // Kiểm tra quyền PRODUCT_MANAGEMENT
         if (!userService.hasPermission(userId, "PRODUCT_MANAGEMENT")) {
             throw new RuntimeException("Bạn không có quyền thực hiện thao tác này.");
         }
-        productDao.updateProduct(product, userId);
-
-    //sua product
-    public void updateProduct(int productId, Product product, int userId) {
-        productDao.updateProduct(productId , product, userId);
-
+        productDao.updateProduct(productId, product, userId);
     }
+
 
     // Cập nhật giảm giá
     public void updateDiscount() {
@@ -109,9 +105,32 @@ public class ProductService {
         return productDao.getNewProduct(id);
     }
 
-    // Hiển thị sản phẩm bán chạy nhất
-    public List<Product> getBestSellingProducts(int id) {
-        return productDao.getBestSellingProducts(id);
+    // Lấy danh sách sản phẩm bán chạy nhất
+    public Map<String, Integer> getTopSellingProductsInYear(int limit, int year) {
+        List<Object[]> results = productDao.getTopSellingProductsInYear(limit, year);
+        Map<String, Integer> topSellingProducts = new LinkedHashMap<>();
+
+        for (Object[] result : results) {
+            String productName = (String) result[1];
+            int quantitySold = ((Number) result[2]).intValue();
+            topSellingProducts.put(productName, quantitySold);
+        }
+
+        return topSellingProducts;
+    }
+
+    // Lấy danh sách sản phẩm bán chạy nhất theo tháng
+    public Map<String, Integer> getTopSellingProducts(int limit, int year, int month) {
+        List<Object[]> results = productDao.getTopSellingProducts(limit, year, month);
+        Map<String, Integer> topSellingProducts = new LinkedHashMap<>();
+
+        for (Object[] result : results) {
+            String productName = (String) result[1];
+            int quantitySold = ((Number) result[2]).intValue();
+            topSellingProducts.put(productName, quantitySold);
+        }
+
+        return topSellingProducts;
     }
 
     // Lọc sản phẩm theo Brand
@@ -152,39 +171,29 @@ public class ProductService {
     public Product getProductByName(String name) {
         return productDao.getProductByName(name);
     }
-
-}
-
-    // Lấy danh sách sản phẩm bán chạy nhất
-    public Map<String, Integer> getTopSellingProductsInYear(int limit, int year) {
-        List<Object[]> results = productDao.getTopSellingProductsInYear(limit, year);
-        Map<String, Integer> topSellingProducts = new LinkedHashMap<>();
-
-        for (Object[] result : results) {
-            String productName = (String) result[1];
-            int quantitySold = ((Number) result[2]).intValue();
-            topSellingProducts.put(productName, quantitySold);
-        }
-
-        return topSellingProducts;
-    }
-
-    // Lấy danh sách sản phẩm bán chạy nhất theo tháng
-    public Map<String, Integer> getTopSellingProducts(int limit, int year, int month) {
-        List<Object[]> results = productDao.getTopSellingProducts(limit, year, month);
-        Map<String, Integer> topSellingProducts = new LinkedHashMap<>();
-
-        for (Object[] result : results) {
-            String productName = (String) result[1];
-            int quantitySold = ((Number) result[2]).intValue();
-            topSellingProducts.put(productName, quantitySold);
-        }
-
-        return topSellingProducts;
-    }
-
     // Lấy số lượng tồn kho hiện tại của sản phẩm
     public int getInventoryQuantity(int productId) {
         return productDao.getInventoryQuantity(productId);
+    }
+
+    //Lấy danh sách sản phẩm bán chạy theo trang
+    public List<Product> getProductByPageOfBestSelling(int page, int categoryId) {
+        return productDao.getProductByPageOfBestSelling(page, categoryId);
+    }
+
+    public List<Product> getByCatIdOfBestSelling(int categoryId) {
+        return productDao.getByCatIdOfBestSelling(categoryId);
+    }
+
+    public List<Product> getProductByPageOfNewProduct(int page, int categoryId) {
+        return productDao.getProductByPageOfNewProduct(page, categoryId);
+    }
+
+    public List<Product> getByCatIdOfNewProduct(int categoryId) {
+        return productDao.getByCatIdOfNewProduct(categoryId);
+    }
+
+    public List<Product> getBestSellingProducts(int categoryId) {
+        return productDao.getBestSellingProducts(categoryId);
     }
 }
