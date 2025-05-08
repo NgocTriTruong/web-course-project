@@ -47,7 +47,7 @@
             <div class="row">
                 <jsp:useBean id="product" class="vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product" scope="request" />
                 <div class="col-md-4">
-                    <img src="${product.img}" alt="${product.name}" width="350px" height="100%"
+                    <img src="${pageContext.request.contextPath}${product.img}" alt="${product.name}" width="350px" height="100%"
                          style="object-fit: cover;">
                 </div>
                 <div class="col-md-1"></div>
@@ -236,7 +236,7 @@
                                 <div class="product-card mx-2">
                                     <a href="product-detail?pid=${related.id}" class="text-decoration-none text-dark">
                                         <div class="product-img">
-                                            <img src="${related.img}" alt="${related.name}" height="250px" width="200px">
+                                            <img src="${pageContext.request.contextPath}${related.img}" alt="${related.name}" height="250px" width="200px">
                                         </div>
                                         <div class="h5 text-h">${related.name}</div>
                                         <div class="p pb-2 text-p">${related.description}</div>
