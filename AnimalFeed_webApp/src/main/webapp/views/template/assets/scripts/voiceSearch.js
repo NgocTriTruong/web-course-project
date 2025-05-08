@@ -4,7 +4,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
     if (!SpeechRecognition) {
-        console.error("Trình duyệt của bạn không hỗ trợ nhận dạng giọng nói");
+        // Hiển thị thông báo cho người dùng
+        alert("Xin lỗi, trình duyệt của bạn không hỗ trợ nhận dạng giọng nói. Vui lòng dùng Chrome hoặc Edge mới nhất.");
+        console.error("Trình duyệt không hỗ trợ Web Speech API");
+        // Ẩn nút microphone để tránh nhầm lẫn
+        voiceSearchButton.style.display = 'none';
         return;
     }
 
