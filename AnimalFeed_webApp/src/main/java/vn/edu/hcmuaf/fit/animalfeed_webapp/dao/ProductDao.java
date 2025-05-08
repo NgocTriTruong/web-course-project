@@ -550,4 +550,15 @@ public class ProductDao {
                         .list()
         );
     }
+
+    // Lấy số lượng tồn kho hiện tại của sản phẩm
+    public int getInventoryQuantity(int productId) {
+        Jdbi jdbi = JdbiConnect.getJdbi();
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT COALESCE(SUM(quantity), 0) FROM inventory_transactions WHERE product_id = :productId")
+                        .bind("productId", productId)
+                        .mapTo(Integer.class)
+                        .findOne()
+                        .orElse(0));
+    }
 }
