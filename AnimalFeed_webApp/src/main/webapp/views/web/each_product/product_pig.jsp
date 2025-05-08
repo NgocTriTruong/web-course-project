@@ -32,7 +32,8 @@
     <!-- scrollToTopBtn -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/scrollToTopBtn.css">
     <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/scrollToTopBtn.js" defer></script>
-    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/search.js" defer></script
+    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/search.js" defer></script>
+    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/voiceSearch.js" defer></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>

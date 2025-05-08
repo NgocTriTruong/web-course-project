@@ -34,6 +34,7 @@
   <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/scrollToTopBtn.js" defer></script>
 
   <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/search.js" defer></script>
+  <script src="${pageContext.request.contextPath}/views/template/assets/scripts/voiceSearch.js" defer></script>
 </head>
 <body>
 <%@ include file="../layout/header.jsp" %>

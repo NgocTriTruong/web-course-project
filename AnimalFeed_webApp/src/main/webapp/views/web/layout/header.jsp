@@ -126,7 +126,12 @@
             <!-- Form tìm kiếm ẩn -->
             <li id="search-form-container" style="display: none; position: absolute; top: 50px; right: 20px; background: white; border: 1px solid #ddd; padding: 10px; border-radius: 10px; margin-right: 133px; margin-top: 19px; width: 324px; z-index: 9999;">
               <form method="get" action="product-list-search">
-                <input type="text" name="description" placeholder="Tìm kiếm theo mô tả" style="display: block; margin-bottom: 10px; width: 100%; height: 42px;    padding-left: 5px;" />
+                <div style="display: flex; margin-bottom: 10px;">
+                  <input type="text" name="description" placeholder="Tìm kiếm theo mô tả" style="flex: 1; margin-right: 5px; height: 42px; padding-left: 5px;" />
+                  <button type="button" class="voice-search-btn" title="Tìm kiếm bằng giọng nói">
+                    <i class="fa-solid fa-microphone"></i>
+                  </button>
+                </div>
                 <input type="number" name="minPrice" placeholder="Giá tối thiểu" style="display: block; margin-bottom: 10px; width: 100%; height: 42px;    padding-left: 5px;" />
                 <input type="number" name="maxPrice" placeholder="Giá tối đa" style="display: block; margin-bottom: 10px; width: 100%; height: 42px;    padding-left: 5px;" />
                 <button type="submit" style="width: 100%;">Tìm kiếm</button>
