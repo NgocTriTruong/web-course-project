@@ -226,8 +226,8 @@ public class UserService {
     public boolean hasPermission(int userId, String permission) {
         User user = getUserById(userId);
         System.out.println("Checking permission for userId: " + userId + ", permission: " + permission);
-        if (user == null || user.getRole() != 1) {
-            System.out.println("User is null or not an admin: " + (user == null ? "null" : "role=" + user.getRole()));
+        if (user == null) {
+            System.out.println("User is null");
             return false;
         }
         System.out.println("User Role: " + user.getRole() + ", Sub Role: " + user.getSub_role());
@@ -241,7 +241,9 @@ public class UserService {
                 System.out.println("Has USER_MANAGEMENT permission: " + hasUserManagement);
                 return hasUserManagement;
             case "PRODUCT_MANAGEMENT":
-                return user.getSub_role() == 2;
+                boolean hasProductManagement = user.getSub_role() == 2;
+                System.out.println("Has PRODUCT_MANAGEMENT permission: " + hasProductManagement);
+                return hasProductManagement;
             case "ORDER_MANAGEMENT":
                 return user.getSub_role() == 3;
             case "SHIPPER_MANAGEMENT":
