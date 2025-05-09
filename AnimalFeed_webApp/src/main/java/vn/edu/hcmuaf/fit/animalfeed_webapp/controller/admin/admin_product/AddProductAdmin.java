@@ -23,7 +23,7 @@ import java.util.Map;
 @MultipartConfig(
         maxFileSize = 1024 * 1024 * 5,    // 5MB
         maxRequestSize = 1024 * 1024 * 10, // 10MB
-        fileSizeThreshold = 1024 * 1024    // 1MB
+        fileSizeThreshold = 1024 * 1024   // 1MB
 )
 @WebServlet(name = "AddProductAdmin", value = "/add-product")
 public class AddProductAdmin extends HttpServlet {
@@ -32,7 +32,7 @@ public class AddProductAdmin extends HttpServlet {
     private CategoryService categoryService;
     private DiscountService discountService;
     private ProductService productService;
-    private UserService userService;
+    private UserService userService; // Thêm UserService để kiểm tra quyền
     private Map<Integer, String> categoryFolderMap;
 
     @Override
@@ -40,12 +40,14 @@ public class AddProductAdmin extends HttpServlet {
         categoryService = new CategoryService();
         discountService = new DiscountService();
         productService = new ProductService();
-        userService = UserService.getInstance();
+        userService = UserService.getInstance(); // Khởi tạo UserService
+
+        // Khởi tạo map ánh xạ categoryId với tên thư mục
         categoryFolderMap = new HashMap<>();
         for (Category category : categoryService.getAll()) {
             String fullName = category.getName().trim();
             String[] words = fullName.split("\\s+");
-            String lastWord = words[words.length - 1];
+            String lastWord = words[words.length - 1]; // Get the last word
             categoryFolderMap.put(category.getId(), lastWord.toLowerCase());
         }
     }

@@ -124,9 +124,9 @@ public class ProductDao {
         boolean isAdmin = UserDao.checkIfAdmin(userId);
         if (isAdmin) {
             Jdbi jdbi = JdbiConnect.getJdbi();
+            // Thực hiện thêm sản phẩm và ghi log
             jdbi.useTransaction(handle -> {
-                int productId = handle.createUpdate("INSERT INTO products (cat_id, name, price, description, quantity, img, create_date, discount_id) "
-                                + "VALUES (:cat_id, :name, :price, :description, :quantity, :img, :createDate, :discountId)")
+                int productId = handle.createUpdate("INSERT INTO products (cat_id, name, price, description, quantity, img, create_date, discount_id) " + "VALUES (:cat_id, :name, :price, :description, :quantity, :img, :createDate, :discountId)")
                         .bindBean(product)
                         .executeAndReturnGeneratedKeys("id").mapTo(Integer.class).one();
 

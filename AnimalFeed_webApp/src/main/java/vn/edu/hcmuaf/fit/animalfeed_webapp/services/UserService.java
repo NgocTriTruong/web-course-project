@@ -254,7 +254,6 @@ public class UserService {
                 return false;
         }
     }
-
     public void hashExistingPasswords() {
         List<User> users = getAllUsers();
         for (User user : users) {

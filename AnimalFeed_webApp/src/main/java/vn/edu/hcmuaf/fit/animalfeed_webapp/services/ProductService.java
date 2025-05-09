@@ -70,6 +70,7 @@ public class ProductService {
 
     // Thêm product
     public void insertProduct(Product product, int userId) {
+        // Kiểm tra quyền PRODUCT_MANAGEMENT
         if (!userService.hasPermission(userId, "PRODUCT_MANAGEMENT")) {
             throw new RuntimeException("Bạn không có quyền thực hiện thao tác này.");
         }
@@ -86,7 +87,6 @@ public class ProductService {
     }
 
     // Sửa product
-// Sửa product
     public void updateProduct(int productId, Product product, int userId) {
         // Kiểm tra quyền PRODUCT_MANAGEMENT
         if (!userService.hasPermission(userId, "PRODUCT_MANAGEMENT")) {
@@ -94,7 +94,6 @@ public class ProductService {
         }
         productDao.updateProduct(productId, product, userId);
     }
-
 
     // Cập nhật giảm giá
     public void updateDiscount() {
@@ -142,6 +141,7 @@ public class ProductService {
         }
 
         return topSellingProducts;
+    }
 
     //Phân trang sản phẩm mới
     public List<Product> getProductByPageOfNewProduct(int page, int id) {
@@ -151,7 +151,6 @@ public class ProductService {
     //hiển thị sản phẩm bán chạy nhất
     public List<Product> getBestSellingProducts(int id) {
         return productDao.getBestSellingProducts(id);
-
     }
 
     //Phân trang sản phẩm bán chạy
@@ -200,26 +199,5 @@ public class ProductService {
     // Lấy số lượng tồn kho hiện tại của sản phẩm
     public int getInventoryQuantity(int productId) {
         return productDao.getInventoryQuantity(productId);
-    }
-
-    //Lấy danh sách sản phẩm bán chạy theo trang
-    public List<Product> getProductByPageOfBestSelling(int page, int categoryId) {
-        return productDao.getProductByPageOfBestSelling(page, categoryId);
-    }
-
-    public List<Product> getByCatIdOfBestSelling(int categoryId) {
-        return productDao.getByCatIdOfBestSelling(categoryId);
-    }
-
-    public List<Product> getProductByPageOfNewProduct(int page, int categoryId) {
-        return productDao.getProductByPageOfNewProduct(page, categoryId);
-    }
-
-    public List<Product> getByCatIdOfNewProduct(int categoryId) {
-        return productDao.getByCatIdOfNewProduct(categoryId);
-    }
-
-    public List<Product> getBestSellingProducts(int categoryId) {
-        return productDao.getBestSellingProducts(categoryId);
     }
 }
