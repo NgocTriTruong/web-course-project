@@ -37,6 +37,7 @@ public class CartDetailDao {
                     product.setPrice(rs.getDouble("price"));
                     product.setDescription(rs.getString("description"));
                     product.setDiscountId(rs.getInt("discount_id"));
+                    item.setProduct(product);
 
                     DiscountDao discountDao = new DiscountDao();
                     item.setUnitPrice((product.getDiscountId() > 1)
