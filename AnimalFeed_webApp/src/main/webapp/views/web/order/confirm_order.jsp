@@ -15,8 +15,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/themify-icons/themify-icons.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
 
-    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/confirm_login.js"></script>
-
     <style>
         .address-form {
             display: none;
@@ -80,6 +78,12 @@
         .suggestions .dropdown-item:hover {
             background-color: #f8f9fa;
         }
+
+        .sticky-sidebar {
+            position: sticky;
+            top: 100px;
+            align-self: flex-start;
+        }
     </style>
 
     <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
@@ -103,272 +107,200 @@
                     <input type="hidden" name="province" id="provinceHidden" value="">
                     <input type="hidden" name="district" id="districtHidden" value="">
                     <input type="hidden" name="ward" id="wardHidden" value="">
+                    <input type="hidden" name="wardCode" id="wardCodeHidden" value="">
                     <input type="hidden" name="addressDetails" id="addressDetailsHidden" value="">
-                    <!-- Order Item Details -->
-                    <div class="col-md-8 pb-4">
-                        <div class="bg-white pt-3 order">
-                            <h6 class="mt-2 ms-4">Sản phẩm trong đơn (${confirmedItems.size()})</h6>
-                            <c:forEach var="item" items="${confirmedItems}">
-                                <div class="cart-item bg-white">
-                                    <div class="d-flex align-items-center">
-                                        <img src="${pageContext.request.contextPath}${item.img}" alt="${item.name}" class="me-3" width="150px" height="150px">
-                                        <div class="" style="width: 100%;">
-                                            <div class="float-start cart-item-text">
-                                                <h6 class="mt-3" style="font-size: 18px;">${item.name}</h6>
-                                                <h6 class="text-p text-center">Mã SP: ${item.productId}</h6>
-                                                <p>Số lượng: ${item.quantity}</p>
+
+                    <div class="row">
+                        <!-- Order Item Details -->
+                        <div class="col-md-8 pb-4">
+                            <div class="bg-white pt-3 order">
+                                <h6 class="mt-2 ms-4">Sản phẩm trong đơn (${confirmedItems.size()})</h6>
+                                <c:forEach var="item" items="${confirmedItems}">
+                                    <div class="cart-item bg-white">
+                                        <div class="d-flex align-items-center">
+                                            <img src="${pageContext.request.contextPath}${item.img}" alt="${item.name}" class="me-3" width="150px" height="150px">
+                                            <div class="" style="width: 100%;">
+                                                <div class="float-start cart-item-text">
+                                                    <h6 class="mt-3" style="font-size: 18px;">${item.name}</h6>
+                                                    <h6 class="text-p text-center">Mã SP: ${item.productId}</h6>
+                                                    <p>Số lượng: ${item.quantity}</p>
+                                                </div>
+                                                <div class="float-end">
+                                                    <p class="price mt-4 me-3">
+                                                        <fmt:formatNumber value="${item.total}" pattern="#,###.###"/> đ
+                                                    </p>
+                                                </div>
                                             </div>
-                                            <div class="float-end">
-                                                <p class="price mt-4 me-3">
-                                                    <fmt:formatNumber value="${item.total}" pattern="#,###.###"/> đ
-                                                </p>
+                                        </div>
+                                    </div>
+                                    <div class="line-gray"></div>
+                                </c:forEach>
+                            </div>
+
+                            <div class="bg-white pt-2 order">
+                                <h5 class="mt-2 ms-4 mb-3">Thông tin người đặt hàng</h5>
+                                <div class="form-group mx-3 mb-3">
+                                    <label for="fullName" class="form-label">Họ và tên <span class="text-danger">*</span></label>
+                                    <input type="text" id="fullName" name="fullName" class="form-control"
+                                           placeholder="Nhập họ và tên người nhận hàng"
+                                           value="${userFullName}" required>
+                                    <div id="fullNameError" class="error-message"></div>
+                                </div>
+                                <div class="form-group mx-3 mb-3">
+                                    <label for="phone" class="form-label">Số điện thoại <span class="text-danger">*</span></label>
+                                    <input type="text" id="phone" name="phone" class="form-control"
+                                           placeholder="Nhập số điện thoại liên hệ"
+                                           value="${userPhone}" required>
+                                    <div id="phoneError" class="error-message"></div>
+                                </div>
+                                <div class="form-group mx-3 pb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" id="email" name="email" class="form-control"
+                                           placeholder="Nhập email (không bắt buộc)"
+                                           value="${userEmail}">
+                                </div>
+                            </div>
+
+                            <div class="bg-white pt-2 order pb-3 mt-2">
+                                <h5 class="mt-2 ms-4">Hình thức nhận hàng</h5>
+                                <div class="d-flex">
+                                    <div class="form-check ms-2">
+                                        <input type="radio" class="form-check-input" id="delivery" name="deliveryMethod" value="delivery" checked>
+                                        <label class="form-check-label" for="delivery">Giao hàng tận nơi</label>
+                                    </div>
+                                    <div class="form-check ms-3">
+                                        <input type="radio" class="form-check-input" id="storePickup" name="deliveryMethod" value="pickup">
+                                        <label class="form-check-label" for="storePickup">Nhận tại cửa hàng</label>
+                                    </div>
+                                </div>
+                                <div class="form-group m-3 position-relative">
+                                    <input type="text" class="form-control chose_location" placeholder="Tỉnh/Thành Phố, Quận/Huyện, Phường/Xã" readonly onclick="openAddressForm()">
+                                    <i class="fas fa-chevron-right chose_location_right float-end" onclick="openAddressForm()" style="margin-top: -24px; margin-right: 10px;"></i>
+
+                                    <div class="address-form" id="addressFormModal">
+                                        <div class="address-form-content bg-white">
+                                            <div class="form-header d-flex justify-content-between align-items-center p-3">
+                                                <h5 class="m-0">Chọn địa chỉ giao hàng</h5>
+                                                <button type="button" id="closeAddressForm" class="btn-close">×</button>
+                                            </div>
+                                            <div class="form-container p-3">
+                                                <!-- Dropdown chọn địa chỉ đã lưu -->
+                                                <div class="form-item mb-3">
+                                                    <label for="savedAddresses" class="form-label">Chọn địa chỉ đã lưu:</label>
+                                                    <select id="savedAddresses" class="form-select" onchange="fillAddressFromSaved()">
+                                                        <option value="">--Chọn địa chỉ đã lưu hoặc nhập mới--</option>
+                                                        <c:if test="${empty addressList}">
+                                                            <option value="" disabled>Không có địa chỉ đã lưu</option>
+                                                        </c:if>
+                                                        <c:forEach var="address" items="${addressList}">
+                                                            <option value="${address.id}"
+                                                                    data-province="${address.province}"
+                                                                    data-district="${address.district}"
+                                                                    data-ward="${address.ward}"
+                                                                    data-detail="${address.detail}">
+                                                                    ${address.detail}, ${address.ward}, ${address.district}, ${address.province}
+                                                            </option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+
+                                                <!-- Autocomplete cho Tỉnh -->
+                                                <div class="form-item mb-3 position-relative">
+                                                    <label for="provinceInput" class="form-label">Chọn Tỉnh:</label>
+                                                    <input type="text" id="provinceInput" value="" class="form-control" placeholder="--Chọn Tỉnh--">
+                                                    <div id="provinceSuggestions" class="suggestions dropdown-menu w-100" style="max-height: 200px; overflow-y: auto;"></div>
+                                                    <input type="hidden" id="provinceCode" value="">
+                                                </div>
+
+                                                <!-- Autocomplete cho Huyện -->
+                                                <div class="form-item mb-3 position-relative">
+                                                    <label for="districtInput" class="form-label">Chọn Huyện:</label>
+                                                    <input type="text" id="districtInput" class="form-control" placeholder="--Chọn Huyện--" disabled>
+                                                    <div id="districtSuggestions" class="suggestions dropdown-menu w-100" style="max-height: 200px; overflow-y: auto;"></div>
+                                                    <input type="hidden" id="districtCode" value="">
+                                                </div>
+
+                                                <!-- Autocomplete cho Xã -->
+                                                <div class="form-item mb-3 position-relative">
+                                                    <label for="wardInput" class="form-label">Chọn Xã:</label>
+                                                    <input type="text" id="wardInput" class="form-control" placeholder="--Chọn Xã--" disabled>
+                                                    <div id="wardSuggestions" class="suggestions dropdown-menu w-100" style="max-height: 200px; overflow-y: auto;"></div>
+                                                    <input type="hidden" id="wardCode" value="">
+                                                </div>
+
+                                                <!-- Chi tiết địa chỉ -->
+                                                <div class="form-details">
+                                                    <textarea class="form-control" id="addressDetails" placeholder="Nhập địa chỉ cụ thể (vd: Số nhà, đường)" rows="3"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-footer p-3">
+                                                <button type="button" id="saveAddressButton" class="btn w-100" style="background-color: #fcae18;">Lưu địa chỉ</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="line-gray"></div>
-                            </c:forEach>
-                        </div>
-
-                        <div class="bg-white pt-2 order">
-                            <h5 class="mt-2 ms-4">Người đặt hàng</h5>
-                            <div class="form-group m-3">
-                                <input type="text" name="fullName" class="form-control" placeholder="Họ và tên *"
-                                       value="${userFullName}" required>
-                            </div>
-                            <div class="form-group m-3">
-                                <input type="text" name="phone" class="form-control" placeholder="Số điện thoại *"
-                                       value="${userPhone}" required>
-                            </div>
-                            <div class="form-group m-3 pb-3">
-                                <input type="email" name="email" class="form-control" placeholder="Email (Không bắt buộc)"
-                                       value="${userEmail}">
-                            </div>
-                        </div>
-
-                        <div class="bg-white pt-2 order">
-                            <h5 class="mt-2 ms-4">Hình thức nhận hàng</h5>
-                            <div class="d-flex">
-                                <div class="form-check ms-2">
-                                    <input type="radio" class="form-check-input" id="delivery" name="deliveryMethod" value="delivery" checked>
-                                    <label class="form-check-label" for="delivery">Giao hàng tận nơi</label>
-                                </div>
-                                <div class="form-check ms-3">
-                                    <input type="radio" class="form-check-input" id="storePickup" name="deliveryMethod" value="pickup">
-                                    <label class="form-check-label" for="storePickup">Nhận tại cửa hàng</label>
+                                <div class="form-group m-3 pb-3">
+                                    <textarea name="note" class="form-control" placeholder="Ghi chú (VD: Hãy gọi tôi khi chuẩn bị hàng xong)" style="height: 100px;"></textarea>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group m-3 position-relative">
-                            <input type="text" class="form-control chose_location" placeholder="Tỉnh/Thành Phố, Quận/Huyện, Phường/Xã" readonly onclick="openAddressForm()">
-                            <i class="fas fa-chevron-right chose_location_right float-end" onclick="openAddressForm()" style="margin-top: -24px; margin-right: 10px;"></i>
 
-                            <div class="address-form" id="addressFormModal">
-                                <div class="address-form-content bg-white">
-                                    <div class="form-header d-flex justify-content-between align-items-center p-3">
-                                        <h5 class="m-0">Chọn địa chỉ giao hàng</h5>
-                                        <button type="button" id="closeAddressForm" class="btn-close">×</button>
-                                    </div>
-                                    <div class="form-container p-3">
-                                        <!-- Dropdown chọn địa chỉ đã lưu -->
-                                        <div class="form-item mb-3">
-                                            <label for="savedAddresses" class="form-label">Chọn địa chỉ đã lưu:</label>
-                                            <select id="savedAddresses" class="form-select" onchange="fillAddressFromSaved()">
-                                                <option value="">--Chọn địa chỉ đã lưu hoặc nhập mới--</option>
-                                                <c:if test="${empty addressList}">
-                                                    <option value="" disabled>Không có địa chỉ đã lưu</option>
-                                                </c:if>
-                                                <c:forEach var="address" items="${addressList}">
-                                                    <option value="${address.id}"
-                                                            data-province="${address.province}"
-                                                            data-district="${address.district}"
-                                                            data-ward="${address.ward}"
-                                                            data-detail="${address.detail}">
-                                                            ${address.detail}, ${address.ward}, ${address.district}, ${address.province}
-                                                    </option>
-                                                </c:forEach>
-                                            </select>
-                                        </div>
-
-                                        <!-- Autocomplete cho Tỉnh -->
-                                        <div class="form-item mb-3 position-relative">
-                                            <label for="provinceInput" class="form-label">Chọn Tỉnh:</label>
-                                            <input type="text" id="provinceInput" value="" class="form-control" placeholder="--Chọn Tỉnh--">
-                                            <div id="provinceSuggestions" class="suggestions dropdown-menu w-100" style="max-height: 200px; overflow-y: auto;"></div>
-                                            <input type="hidden" id="provinceCode" value="">
-                                        </div>
-
-                                        <!-- Autocomplete cho Huyện -->
-                                        <div class="form-item mb-3 position-relative">
-                                            <label for="districtInput" class="form-label">Chọn Huyện:</label>
-                                            <input type="text" id="districtInput" class="form-control" placeholder="--Chọn Huyện--" disabled>
-                                            <div id="districtSuggestions" class="suggestions dropdown-menu w-100" style="max-height: 200px; overflow-y: auto;"></div>
-                                            <input type="hidden" id="districtCode" value="">
-                                        </div>
-
-                                        <!-- Autocomplete cho Xã -->
-                                        <div class="form-item mb-3 position-relative">
-                                            <label for="wardInput" class="form-label">Chọn Xã:</label>
-                                            <input type="text" id="wardInput" class="form-control" placeholder="--Chọn Xã--" disabled>
-                                            <div id="wardSuggestions" class="suggestions dropdown-menu w-100" style="max-height: 200px; overflow-y: auto;"></div>
-                                            <input type="hidden" id="wardCode" value="">
-                                        </div>
-
-                                        <!-- Chi tiết địa chỉ -->
-                                        <div class="form-details">
-                                            <textarea class="form-control" id="addressDetails" placeholder="Nhập địa chỉ cụ thể (vd: Số nhà, đường)" rows="3"></textarea>
+                        <!-- Cột bên phải - Thanh toán và tổng tiền -->
+                        <div class="col-md-4 pb-4 sticky-sidebar">
+                            <!-- Phương thức thanh toán -->
+                            <div class="bg-white pt-3 order rounded shadow-sm mb-3">
+                                <h5 class="mt-2 ms-4 mb-3">Phương thức thanh toán</h5>
+                                <div class="mx-3 mb-3 pb-3">
+                                    <div class="payment-option mb-4">
+                                        <div class="form-check d-flex align-items-center">
+                                            <input type="radio" class="form-check-input me-2" id="vnpay" name="paymentMethod" value="VNPAY" checked>
+                                            <img src="${pageContext.request.contextPath}/views/template/assets/images/payment/vnpay.jpg" alt="VNPAY" width="40" height="40" class="me-2">
+                                            <label class="form-check-label" for="vnpay">
+                                                <div>Thanh toán qua VNPAY</div>
+                                                <small class="text-muted">Thẻ ATM nội địa/Internet Banking</small>
+                                            </label>
                                         </div>
                                     </div>
-                                    <div class="form-footer p-3">
-                                        <button type="button" id="saveAddressButton" class="btn w-100" style="background-color: #fcae18;">Lưu địa chỉ</button>
+                                    <div class="payment-option mb-2">
+                                        <div class="form-check d-flex align-items-center">
+                                            <input type="radio" class="form-check-input me-2" id="cod" name="paymentMethod" value="COD">
+                                            <img src="${pageContext.request.contextPath}/views/template/assets/images/payment/cod.jpg" alt="COD" width="40" height="40" class="me-2">
+                                            <label class="form-check-label" for="cod">
+                                                <div>Thanh toán khi nhận hàng (COD)</div>
+                                                <small class="text-muted">Trả tiền mặt khi nhận hàng</small>
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group m-3 pb-3">
-                            <textarea name="note" class="form-control" placeholder="Ghi chú (VD: Hãy gọi tôi khi chuẩn bị hàng xong)" style="height: 100px;"></textarea>
-                        </div>
-                    </div>
 
-                    <div class="bg-white pt-2 order">
-                        <h5 class="mt-2 ms-4">Phương thức thanh toán</h5>
-                        <div class="form-check ms-4 mt-4 d-flex">
-                            <input type="radio" class="form-check-input me-2" id="cod" name="paymentMethod" value="COD">
-                            <img src="${pageContext.request.contextPath}/views/template/assets/images/payment/cod.jpg" alt="" width="40px" height="40px" style="margin-top: -7px;">
-                            <label class="form-check-label ms-2" for="cod">Thanh toán khi nhận hàng</label>
+                            <!-- Tổng thanh toán -->
+                            <div class="bg-white p-3 order rounded shadow-sm">
+                                <h5 class="mb-3">Tổng thanh toán</h5>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Tổng tiền hàng:</span>
+                                    <span class="fw-bold"><fmt:formatNumber value="${sessionScope.cart.totalPrice}" pattern="#,###.###"/> đ</span>
+                                </div>
+                                <input type="hidden" id="cartTotalPrice" value="${sessionScope.cart.totalPrice}">
+                                <hr>
+                                <div class="d-flex justify-content-between mb-3">
+                                    <span class="fw-bold">Thành tiền:</span>
+                                    <span class="fw-bold price" id="totalPayment"><fmt:formatNumber value="${totalAmount}" pattern="#,###.###"/> đ</span>
+                                </div>
+                                <div class="cart-summary bg-white p-3">
+                                    <button type="submit" id="submitOrder" class="btn w-100 mt-3 fw-bold" style="background-color: #fcae18; font-size: 17px;">Đặt hàng</button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-check ms-4 mt-5 d-flex">
-                            <input type="radio" class="form-check-input me-2" id="vnpay" name="paymentMethod" value="VNPAY" checked>
-                            <img src="${pageContext.request.contextPath}/views/template/assets/images/payment/vnpay.jpg" alt="" width="40px" height="40px" style="margin-top: -7px;">
-                            <label class="form-check-label ms-2" for="vnpay">Thanh toán bằng thẻ ATM nội địa (Qua VNPay)</label>
-                        </div>
-                    </div>
-
-                    <div class="cart-summary bg-white p-3">
-                        <button type="submit" class="btn w-100 mt-3 fw-bold" style="background-color: #fcae18; font-size: 17px;">Đặt hàng</button>
                     </div>
                 </form>
             </div>
-
         </div>
     </div>
 </main>
 <%@ include file="../layout/near_footer.jsp" %>
 <%@ include file="../layout/footer.jsp" %>
 
-<script src="${pageContext.request.contextPath}/views/template/assets/scripts/call-api-address.js"></script>
-<script src="${pageContext.request.contextPath}/views/template/assets/scripts/call-api-address.js"></script>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        loadProvinces();
-        document.querySelector('.chose_location').addEventListener('click', openAddressForm);
-        document.getElementById('closeAddressForm').addEventListener('click', closeAddressForm);
-        document.getElementById('saveAddressButton').addEventListener('click', saveAddress);
-    });
-
-    function openAddressForm() {
-        document.getElementById('addressFormModal').style.display = 'block';
-        document.body.classList.add('modal-open'); // Ngăn cuộn body
-        resetAddressFields();
-    }
-
-    function closeAddressForm() {
-        document.getElementById('addressFormModal').style.display = 'none';
-        document.body.classList.remove('modal-open'); // Cho phép cuộn lại
-    }
-
-    function resetAddressFields() {
-        document.getElementById('savedAddresses').selectedIndex = 0;
-        document.getElementById('provinceInput').selectedIndex = 0;
-        document.getElementById('districtInput').innerHTML = '<option value="">--Chọn Huyện--</option>';
-        document.getElementById('wardInput').innerHTML = '<option value="">--Chọn Xã--</option>';
-        document.getElementById('addressDetails').value = '';
-    }
-
-    function fillAddressFromSaved() {
-        const savedAddresses = document.getElementById('savedAddresses');
-        const selectedOption = savedAddresses.options[savedAddresses.selectedIndex];
-
-        if (selectedOption.value === "") {
-            resetAddressFields();
-            return;
-        }
-
-        const province = selectedOption.getAttribute('data-province');
-        const district = selectedOption.getAttribute('data-district');
-        const ward = selectedOption.getAttribute('data-ward');
-        const detail = selectedOption.getAttribute('data-detail');
-
-        const provinceInput = document.getElementById('provinceInput');
-        const districtInput = document.getElementById('districtInput');
-        const wardInput = document.getElementById('wardInput');
-        const addressDetails = document.getElementById('addressDetails');
-
-        // Set the values directly to the input fields
-        provinceInput.value = province || '';
-        districtInput.value = district || '';
-        wardInput.value = ward || '';
-        addressDetails.value = detail || '';
-    }
-
-    function saveAddress() {
-        const provinceInput = document.getElementById('provinceInput');
-        const districtInput = document.getElementById('districtInput');
-        const wardInput = document.getElementById('wardInput');
-        const addressDetailsInput = document.getElementById('addressDetails');
-
-        if (!provinceInput || !districtInput || !wardInput || !addressDetailsInput) {
-            console.error('Required elements not found');
-            return;
-        }
-
-        const provinceName = provinceInput.value.trim();
-        const districtName = districtInput.value.trim();
-        const wardName = wardInput.value.trim();
-        const addressDetails = addressDetailsInput.value.trim();
-
-        if (!provinceName || !districtName || !wardName ||
-            provinceName.includes('--Chọn') || districtName.includes('--Chọn') || wardName.includes('--Chọn')) {
-            alert('Vui lòng chọn đầy đủ Tỉnh, Huyện và Xã');
-            return;
-        }
-
-        // Rest of the function remains the same
-        document.getElementById('provinceHidden').value = provinceName;
-        document.getElementById('districtHidden').value = districtName;
-        document.getElementById('wardHidden').value = wardName;
-        document.getElementById('addressDetailsHidden').value = addressDetails;
-
-        const addressParts = [];
-        if (addressDetails) addressParts.push(addressDetails);
-        if (wardName) addressParts.push(wardName);
-        if (districtName) addressParts.push(districtName);
-        if (provinceName) addressParts.push(provinceName);
-
-        const fullAddress = addressParts.length > 0 ? addressParts.join(', ') : '';
-        const displayField = document.querySelector('.chose_location');
-        if (displayField && fullAddress) {
-            displayField.value = fullAddress;
-        }
-
-        closeAddressForm();
-    }
-</script>
-
-<script>
-    document.getElementById("orderForm").addEventListener("submit", function (event) {
-        event.preventDefault();
-        let paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
-        if (confirm("Bạn có chắc chắn muốn đặt hàng không?")) {
-            if (paymentMethod === "COD") {
-                this.submit();
-            } else if (paymentMethod === "VNPAY") {
-                this.action = "${pageContext.request.contextPath}/payment";
-                this.submit();
-            }
-        }
-    });
-</script>
+<script src="${pageContext.request.contextPath}/views/template/assets/scripts/api_ghn/api_ghn_confirm_order.js"></script>
 </body>
 </html>
