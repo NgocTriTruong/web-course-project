@@ -91,7 +91,10 @@ public class ajaxServlet extends HttpServlet {
         order.setTotalPrice(totalPrice);
         order.setTotalQuantity(totalQuantity);
         order.setOrderDate(LocalDateTime.now());
-        order.setShippingPrice(0.0); // Free shipping as per UI
+
+        double shippingFee = Double.parseDouble(request.getParameter("shippingFee"));
+        order.setShippingPrice(shippingFee);
+        order.setTotalPrice(totalPrice + shippingFee);
 
         int orderId = orderService.insertOrder(order);
         order.setId(orderId);
