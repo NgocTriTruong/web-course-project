@@ -43,6 +43,138 @@ public class GHNService {
         throw new IOException("Không tìm thấy ProvinceID cho " + provinceName);
     }
 
+    // Tính phí vận chuyển
+    public double calculateShippingFee(int fromDistrictId, int toDistrictId, String toWardCode, int weight) throws IOException {
+        // Kiểm tra dữ liệu đầu vào
+        if (fromDistrictId <= 0 || toDistrictId <= 0 || toWardCode == null || toWardCode.isEmpty()) {
+            throw new IOException("Invalid input: fromDistrictId=" + fromDistrictId + ", toDistrictId=" + toDistrictId + ", toWardCode=" + toWardCode);
+        }
+
+        System.out.println("Calculating shipping fee with weight: " + weight + " grams");
+
+        // Lấy danh sách dịch vụ khả dụng
+        JSONArray services = getAvailableServices(fromDistrictId, toDistrictId);
+        if (services.length() == 0) {
+            throw new IOException("No available services for the selected districts");
+        }
+
+        // Tìm dịch vụ xe tải
+        int serviceId = -1;
+        for (int i = 0; i < services.length(); i++) {
+            JSONObject service = services.getJSONObject(i);
+            String shortName = service.getString("short_name").toLowerCase();
+            if (shortName.contains("truck") || shortName.contains("xe tải") || shortName.contains("heavy")) {
+                serviceId = service.getInt("service_id");
+                break;
+            }
+        }
+        if (serviceId == -1) {
+            // Nếu không tìm thấy dịch vụ xe tải, chọn dịch vụ đầu tiên
+            serviceId = services.getJSONObject(0).getInt("service_id");
+            System.out.println("Warning: No truck service found, using default service_id: " + serviceId);
+        }
+
+        URL url = new URL(BASE_URL + "/v2/shipping-order/fee");
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("POST");
+        conn.setRequestProperty("Content-Type", "application/json");
+        conn.setRequestProperty("Token", TOKEN);
+        conn.setDoOutput(true);
+
+        // Tạo request body
+        JSONObject requestBody = new JSONObject();
+        requestBody.put("from_district_id", fromDistrictId);
+        requestBody.put("to_district_id", toDistrictId);
+        requestBody.put("to_ward_code", toWardCode);
+        requestBody.put("weight", weight);
+        requestBody.put("service_id", serviceId);
+        requestBody.put("length", 50); // Kích thước mỗi bao
+        requestBody.put("width", 30);
+        requestBody.put("height", 20);
+
+        // Ghi log request body để gỡ lỗi
+        System.out.println("GHN Shipping Fee Request: " + requestBody.toString());
+
+        try (OutputStream os = conn.getOutputStream()) {
+            byte[] input = requestBody.toString().getBytes("utf-8");
+            os.write(input, 0, input.length);
+        }
+
+        int responseCode = conn.getResponseCode();
+        if (responseCode != 200) {
+            // Đọc thông báo lỗi từ API
+            BufferedReader errorReader = new BufferedReader(new InputStreamReader(conn.getErrorStream(), "utf-8"));
+            StringBuilder errorResponse = new StringBuilder();
+            String errorLine;
+            while ((errorLine = errorReader.readLine()) != null) {
+                errorResponse.append(errorLine.trim());
+            }
+            errorReader.close();
+            throw new IOException("HTTP " + responseCode + ": " + errorResponse.toString());
+        }
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+        StringBuilder response = new StringBuilder();
+        String responseLine;
+        while ((responseLine = br.readLine()) != null) {
+            response.append(responseLine.trim());
+        }
+        br.close();
+
+        JSONObject jsonResponse = new JSONObject(response.toString());
+        if (jsonResponse.getInt("code") == 200) {
+            JSONObject data = jsonResponse.getJSONObject("data");
+            return data.getDouble("total");
+        } else {
+            throw new IOException("Error calculating shipping fee: " + jsonResponse.getString("message"));
+        }
+    }
+
+    // Lấy danh sách dịch vụ khả dụng
+    private JSONArray getAvailableServices(int fromDistrictId, int toDistrictId) throws IOException {
+        URL url = new URL(BASE_URL + "/v2/shipping-order/available-services");
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("POST");
+        conn.setRequestProperty("Content-Type", "application/json");
+        conn.setRequestProperty("Token", TOKEN);
+        conn.setDoOutput(true);
+
+        JSONObject requestBody = new JSONObject();
+        requestBody.put("shop_id", SHOP_ID);
+        requestBody.put("from_district", fromDistrictId);
+        requestBody.put("to_district", toDistrictId);
+
+        try (OutputStream os = conn.getOutputStream()) {
+            byte[] input = requestBody.toString().getBytes(StandardCharsets.UTF_8);
+            os.write(input, 0, input.length);
+        }
+
+        int responseCode = conn.getResponseCode();
+        if (responseCode != 200) {
+            BufferedReader errorReader = new BufferedReader(new InputStreamReader(conn.getErrorStream(), StandardCharsets.UTF_8));
+            StringBuilder errorResponse = new StringBuilder();
+            String errorLine;
+            while ((errorLine = errorReader.readLine()) != null) {
+                errorResponse.append(errorLine.trim());
+            }
+            throw new IOException("HTTP " + responseCode + ": " + errorResponse.toString());
+        }
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
+        StringBuilder response = new StringBuilder();
+        String responseLine;
+        while ((responseLine = br.readLine()) != null) {
+            response.append(responseLine.trim());
+        }
+
+        JSONObject jsonResponse = new JSONObject(response.toString());
+        if (jsonResponse.getInt("code") == 200) {
+            return jsonResponse.getJSONArray("data");
+        } else {
+            throw new IOException("Error fetching available services: " + jsonResponse.getString("message"));
+        }
+    }
+
     // Lấy danh sách tỉnh thành
     public JSONArray getProvinces() throws IOException {
         URL url = new URL(BASE_URL + "/master-data/province");
