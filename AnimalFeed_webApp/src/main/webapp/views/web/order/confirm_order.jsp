@@ -109,6 +109,7 @@
                     <input type="hidden" name="ward" id="wardHidden" value="">
                     <input type="hidden" name="wardCode" id="wardCodeHidden" value="">
                     <input type="hidden" name="addressDetails" id="addressDetailsHidden" value="">
+                    <input type="hidden" name="shippingFee" id="shippingFeeHidden" value="0">
 
                     <div class="row">
                         <!-- Order Item Details -->
@@ -282,6 +283,10 @@
                                     <span class="fw-bold"><fmt:formatNumber value="${sessionScope.cart.totalPrice}" pattern="#,###.###"/> đ</span>
                                 </div>
                                 <input type="hidden" id="cartTotalPrice" value="${sessionScope.cart.totalPrice}">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Phí vận chuyển:</span>
+                                    <span id="summaryShippingFee">0 đ</span>
+                                </div>
                                 <hr>
                                 <div class="d-flex justify-content-between mb-3">
                                     <span class="fw-bold">Thành tiền:</span>

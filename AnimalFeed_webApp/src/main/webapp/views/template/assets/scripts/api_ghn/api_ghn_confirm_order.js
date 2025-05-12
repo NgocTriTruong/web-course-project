@@ -227,6 +227,46 @@ function setupWardAutocomplete() {
     wardInput.addEventListener('blur', () => setTimeout(() => suggestions.classList.remove('show'), 200));
 }
 
+//tinh phí vận chuyển
+async function calculateShippingFee() {
+    const province = document.getElementById('provinceInput').value;
+    const district = document.getElementById('districtInput').value;
+    const ward = document.getElementById('wardInput').value;
+    const wardCode = document.getElementById('wardCode').value;
+
+    if (!province || !district || !ward || !wardCode) {
+        alert("Vui lòng chọn đầy đủ địa chỉ giao hàng.");
+        return;
+    }
+
+    try {
+        const response = await fetch(`${window.location.origin}/AnimalFeed_webApp/calculate-shipping-fee`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ province, district, ward, wardCode })
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        if (data.success) {
+            document.getElementById('summaryShippingFee').textContent = `${data.shippingFee.toLocaleString()} đ`;
+            document.getElementById('shippingFeeHidden').value = data.shippingFee;
+
+            const cartTotalPrice = parseFloat(document.getElementById('cartTotalPrice')?.value || 0);
+            const totalPayment = cartTotalPrice + data.shippingFee;
+            document.getElementById('totalPayment').textContent = `${totalPayment.toLocaleString()} đ`;
+        } else {
+            alert("Không thể tính phí vận chuyển: " + data.message);
+        }
+    } catch (error) {
+        console.error("Error calculating shipping fee:", error);
+        alert("Lỗi khi tính phí vận chuyển.");
+    }
+}
+
 //hiển thị modal địa chỉ
 function openAddressForm() {
     document.getElementById('addressFormModal').style.display = 'block';
