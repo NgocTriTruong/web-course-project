@@ -7,10 +7,15 @@ import java.util.List;
 
 public class CategoryService {
     static CategoryDao categoryDao = new CategoryDao();
+    private final UserService userService = UserService.getInstance(); // Thêm UserService để kiểm tra quyền
 
     //Them danh muc
-    public void insertCategory(Category category) {
-        categoryDao.insertCategory(category);
+    public void insertCategory(Category category, int userId) {
+        // Kiểm tra quyền PRODUCT_MANAGEMENT
+        if (!userService.hasPermission(userId, "CATEGORY_MANAGEMENT")) {
+            throw new RuntimeException("Bạn không có quyền thực hiện thao tác này.");
+        }
+        categoryDao.insertCategory(category, userId);
     }
 
     //Sua danh muc
