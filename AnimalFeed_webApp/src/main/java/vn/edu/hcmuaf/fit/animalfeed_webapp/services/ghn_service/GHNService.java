@@ -13,7 +13,7 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.dto.CartItem;
-//import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Shop;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Shop;
 
 public class GHNService {
     private static final String BASE_URL = "https://dev-online-gateway.ghn.vn/shiip/public-api";
