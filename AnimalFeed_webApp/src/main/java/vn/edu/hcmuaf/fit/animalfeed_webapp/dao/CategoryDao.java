@@ -6,6 +6,7 @@ import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.ActionLog;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Category;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -39,21 +40,76 @@ public class CategoryDao {
     }
 
     // Sửa danh mục
-    public void updateCategoryStatus(Category category) {
-        jdbi.useHandle(handle ->
-                handle.createUpdate("UPDATE categories SET name = :name, img = :img, status = :status WHERE id = :id")
-                        .bindBean(category)
-                        .execute()
-        );
+    public void updateCategoryStatus(Category category, int userId) {
+        jdbi.useTransaction(handle -> {
+            // Lấy dữ liệu trước khi chỉnh sửa
+            Category oldCategory = getCategoryById(category.getId());
+            if (oldCategory == null) {
+                throw new IllegalArgumentException("Danh mục không tồn tại.");
+            }
+
+            String beforeData = oldCategory.toString();
+
+            // Cập nhật danh mục
+            handle.createUpdate("UPDATE categories SET name = :name, img = :img, status = :status WHERE id = :id")
+                    .bindBean(category)
+                    .execute();
+
+            // Ghi log
+            ActionLog actionLog = new ActionLog();
+            actionLog.setUser_id(userId);
+            actionLog.setAction_type("UPDATE");
+            actionLog.setEntity_type("CATEGORY");
+            actionLog.setEntity_id(category.getId());
+            actionLog.setCreated_at(new Date());
+            actionLog.setDescription("User " + userId + " updated category " + category.getName());
+            actionLog.setBefore_data(beforeData);
+            actionLog.setAfter_data(category.toString());
+            actionLogDao.logAction(actionLog);
+        });
     }
 
     // Xóa danh mục
-    public void deleteCategory(int id) {
-        jdbi.withHandle(handle ->
-                handle.createUpdate("DELETE FROM categories WHERE id = :id")
-                        .bind("id", id)
-                        .execute()
-        );
+    public void deleteCategory(int id, int userId) {
+        // Lấy thông tin danh mục trước khi xóa
+        Category deletedCategory = getCategoryById(id);
+
+        // Kiểm tra quyền admin
+        boolean isAdmin = UserDao.checkIfAdmin(userId);
+
+        if (!isAdmin) {
+            throw new SecurityException("User " + userId + " không có quyền xóa danh mục");
+        }
+
+        if (deletedCategory == null) {
+            throw new IllegalArgumentException("Danh mục không tồn tại.");
+        }
+
+        // Thực hiện xóa mềm danh mục và ghi log
+        Jdbi jdbi = JdbiConnect.getJdbi();
+        jdbi.useTransaction(handle -> {
+            // Cập nhật trạng thái danh mục thành 'deleted' (status = 0)
+            int updatedRows = handle.createUpdate("UPDATE categories SET status = :status WHERE id = :id")
+                    .bind("status", 0) // Trạng thái 'deleted'
+                    .bind("id", id)
+                    .execute();
+
+            // Ghi log hành động nếu xóa thành công
+            if (updatedRows > 0) {
+                ActionLog actionLog = new ActionLog(
+                        userId,
+                        "DELETE",
+                        "CATEGORY",
+                        id,
+                        "User " + userId + " deleted category " + deletedCategory.getName(),
+                        deletedCategory.toString(),
+                        null
+                );
+                actionLogDao.logAction(actionLog);
+            } else {
+                throw new RuntimeException("Không thể xóa danh mục với ID: " + id);
+            }
+        });
     }
 
     public List<Category> getAll() {

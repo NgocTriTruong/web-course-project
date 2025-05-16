@@ -19,13 +19,21 @@ public class CategoryService {
     }
 
     //Sua danh muc
-    public void updateCategoryStatus(Category category) {
-        categoryDao.updateCategoryStatus(category);
+    public void updateCategoryStatus(Category category, int userId) {
+        // Kiểm tra quyền CATEGORY_MANAGEMENT
+        if (!userService.hasPermission(userId, "CATEGORY_MANAGEMENT")) {
+            throw new RuntimeException("Bạn không có quyền thực hiện thao tác này.");
+        }
+        categoryDao.updateCategoryStatus(category, userId);
     }
 
     //Xoa danh muc
-    public void deleteCategory(int id) {
-        categoryDao.deleteCategory(id);
+    public void deleteCategory(int id, int userId) {
+        // Kiểm tra quyền CATEGORY_MANAGEMENT
+        if (!userService.hasPermission(userId, "CATEGORY_MANAGEMENT")) {
+            throw new RuntimeException("Bạn không có quyền thực hiện thao tác này.");
+        }
+        categoryDao.deleteCategory(id, userId);
     }
 
     //Lay danh muc theo id
