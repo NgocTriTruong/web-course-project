@@ -3,16 +3,13 @@ package vn.edu.hcmuaf.fit.animalfeed_webapp.controller.admin.category_management
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Category;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.CategoryService;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.UserService;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.stream.Collectors;
 
-@WebServlet(name = "CategoryManagementAdmin", value = "/category-management-admin")
-public class CategoryManagementAdmin extends HttpServlet {
+@WebServlet(name = "DeleteCategory", value = "/delete-category")
+public class DeleteCategory extends HttpServlet {
 
     private CategoryService categoryService;
     private UserService userService;
@@ -43,28 +40,34 @@ public class CategoryManagementAdmin extends HttpServlet {
         }
 
         if (!hasCategoryManagementPermission(session)) {
-            session.setAttribute("error", "Bạn không có quyền truy cập trang này (yêu cầu quyền CATEGORY_MANAGEMENT).");
-            response.sendRedirect(request.getContextPath() + "/"); // Chuyển về trang chính
+            session.setAttribute("error", "Bạn không có quyền xóa danh mục (yêu cầu quyền CATEGORY_MANAGEMENT).");
+            response.sendRedirect(request.getContextPath() + "/category-management-admin");
             return;
         }
 
-        String action = request.getParameter("action");
-        String searchTerm = request.getParameter("searchTerm");
+        Integer userId = (Integer) session.getAttribute("userId");
+        String categoryIdStr = request.getParameter("categoryId");
 
-        List<Category> categories = categoryService.getAll();
-        if ("search".equals(action) && searchTerm != null && !searchTerm.trim().isEmpty()) {
-            categories = categories.stream()
-                    .filter(c -> c.getName().toLowerCase().contains(searchTerm.toLowerCase()))
-                    .collect(Collectors.toList());
+        try {
+            if (categoryIdStr == null || categoryIdStr.trim().isEmpty()) {
+                throw new IllegalArgumentException("ID danh mục không hợp lệ.");
+            }
+
+            int categoryId = Integer.parseInt(categoryIdStr);
+            categoryService.deleteCategory(categoryId, userId);
+
+            session.setAttribute("message", "Xóa danh mục thành công!");
+        } catch (IllegalArgumentException e) {
+            session.setAttribute("error", e.getMessage());
+        } catch (Exception e) {
+            session.setAttribute("error", "Có lỗi xảy ra khi xóa danh mục: " + e.getMessage());
         }
 
-        request.setAttribute("categories", categories);
-        request.getRequestDispatcher("views/admin/categoryManagement.jsp").forward(request, response);
+        response.sendRedirect(request.getContextPath() + "/category-management-admin");
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //Chuển hướng về doGet()
         doGet(request, response);
     }
 }

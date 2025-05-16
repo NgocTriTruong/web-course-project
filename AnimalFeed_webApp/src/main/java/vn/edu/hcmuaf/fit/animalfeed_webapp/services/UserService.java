@@ -244,8 +244,10 @@ public class UserService {
                 boolean hasProductManagement = user.getSub_role() == 2;
                 System.out.println("Has PRODUCT_MANAGEMENT permission: " + hasProductManagement);
                 return hasProductManagement;
-            case "ORDER_MANAGEMENT":
-                return user.getSub_role() == 3;
+            case "CATEGORY_MANAGEMENT":
+                boolean hasCategoryManagement = user.getSub_role() == 3;
+                System.out.println("Has CATEGORY_MANAGEMENT permission: " + hasCategoryManagement);
+                return hasCategoryManagement;
             case "SHIPPER_MANAGEMENT":
                 return user.getSub_role() == 4;
             case "NEWS_MANAGEMENT":
