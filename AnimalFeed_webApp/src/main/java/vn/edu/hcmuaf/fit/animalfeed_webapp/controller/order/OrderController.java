@@ -37,6 +37,7 @@ public class OrderController extends HttpServlet {
 
         // Check if user is logged in
         if (user == null) {
+            session.setAttribute("error", "Vui lòng đăng nhập để đặt hàng.");
             response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
@@ -64,12 +65,14 @@ public class OrderController extends HttpServlet {
                 if (confirmedItems != null && !confirmedItems.isEmpty()) {
                     selectedItems.addAll(confirmedItems);
                 } else {
+                    session.setAttribute("error", "Giỏ hàng trống. Vui lòng thêm sản phẩm trước khi đặt hàng.");
                     response.sendRedirect(request.getContextPath() + "/cart");
                     return;
                 }
             }
 
             if (selectedItems.isEmpty()) {
+                session.setAttribute("error", "Không có sản phẩm nào được chọn để đặt hàng.");
                 response.sendRedirect(request.getContextPath() + "/cart");
                 return;
             }
@@ -82,8 +85,6 @@ public class OrderController extends HttpServlet {
             int totalQuantity = selectedItems.stream()
                     .mapToInt(CartItem::getQuantity)
                     .sum();
-
-            System.out.println("Address: " + address);
 
             // Create order
             Order order = new Order();
@@ -98,6 +99,7 @@ public class OrderController extends HttpServlet {
             order.setShippingPrice(shippingFee);
             order.setTotalPrice(totalPrice + shippingFee);
 
+            // Insert order (use customer version without adminUserId)
             int orderId = orderService.insertOrder(order);
             order.setId(orderId);
 
@@ -119,6 +121,7 @@ public class OrderController extends HttpServlet {
                 orderDetail.setQuantity(cartItem.getQuantity());
                 orderDetail.setTotalPrice(cartItem.getTotal());
 
+                // Insert order detail (use customer version without adminUserId)
                 orderService.insertOrderDetails(orderDetail);
 
                 // For cart items, remove them from the cart and database
@@ -149,12 +152,15 @@ public class OrderController extends HttpServlet {
             // Clear confirmedItems after order creation (for Buy Now)
             session.removeAttribute("confirmedItems");
 
+            // Set success message
+            session.setAttribute("message", "Đơn hàng đã được tạo thành công với mã #" + orderId + "!");
+
             // Redirect to order success page
             response.sendRedirect(request.getContextPath() + "/order-success");
 
         } catch (Exception e) {
             e.printStackTrace();
-            request.setAttribute("error", "An error occurred while processing your order");
+            session.setAttribute("error", "Đã xảy ra lỗi khi xử lý đơn hàng của bạn: " + e.getMessage());
             request.getRequestDispatcher("/views/web/order/confirm_order.jsp")
                     .forward(request, response);
         }
@@ -172,6 +178,6 @@ public class OrderController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // No changes needed for doGet unless you want to support GET requests
+        response.sendRedirect(request.getContextPath() + "/cart");
     }
 }
