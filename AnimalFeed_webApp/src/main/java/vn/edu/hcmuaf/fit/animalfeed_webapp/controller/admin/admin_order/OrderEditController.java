@@ -33,7 +33,7 @@ public class OrderEditController extends HttpServlet {
     @Override
     public void init() throws ServletException {
         orderService = new OrderService();
-        userService = new UserService();
+        userService = UserService.getInstance();
         productService = new ProductService();
         productWithDiscountDao = new ProductWithDiscountDao();
     }
@@ -41,6 +41,21 @@ public class OrderEditController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
+            // Lấy userId từ session
+            Integer userId = (Integer) request.getSession().getAttribute("userId");
+            if (userId == null) {
+                request.getSession().setAttribute("error", "Vui lòng đăng nhập để thực hiện thao tác này.");
+                response.sendRedirect(request.getContextPath() + "/login");
+                return;
+            }
+
+            // Kiểm tra quyền ORDER_MANAGEMENT
+            if (!userService.hasPermission(userId, "ORDER_MANAGEMENT")) {
+                request.getSession().setAttribute("error", "Bạn không có quyền chỉnh sửa đơn hàng (yêu cầu quyền ORDER_MANAGEMENT).");
+                response.sendRedirect(request.getContextPath() + "/order-manager");
+                return;
+            }
+
             // Lấy orderId từ tham số
             String orderIdStr = request.getParameter("id");
             if (orderIdStr == null || orderIdStr.trim().isEmpty()) {
@@ -82,6 +97,21 @@ public class OrderEditController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
+            // Lấy userId từ session
+            Integer userId = (Integer) request.getSession().getAttribute("userId");
+            if (userId == null) {
+                request.getSession().setAttribute("error", "Vui lòng đăng nhập để thực hiện thao tác này.");
+                response.sendRedirect(request.getContextPath() + "/login");
+                return;
+            }
+
+            // Kiểm tra quyền ORDER_MANAGEMENT
+            if (!userService.hasPermission(userId, "ORDER_MANAGEMENT")) {
+                request.getSession().setAttribute("error", "Bạn không có quyền chỉnh sửa đơn hàng (yêu cầu quyền ORDER_MANAGEMENT).");
+                response.sendRedirect(request.getContextPath() + "/order-manager");
+                return;
+            }
+
             // Lấy dữ liệu từ form
             int orderId = Integer.parseInt(request.getParameter("orderId"));
             String address = request.getParameter("address");
@@ -191,13 +221,13 @@ public class OrderEditController extends HttpServlet {
                 newOrder.setShippingDate(oldOrder.getShippingDate());
 
                 // Tạo đơn hàng mới
-                int newOrderId = orderService.insertOrder(newOrder);
+                int newOrderId = orderService.insertOrder(newOrder, userId);
                 System.out.println("Created new order with ID: " + newOrderId);
 
                 // Thêm chi tiết đơn hàng mới
                 for (OrderDetail detail : newOrderDetails) {
                     detail.setOrderId(newOrderId);
-                    orderService.insertOrderDetails(detail);
+                    orderService.insertOrderDetails(detail, userId);
                     System.out.println("Inserted OrderDetail for Product ID: " + detail.getProductId());
                 }
 
@@ -214,7 +244,7 @@ public class OrderEditController extends HttpServlet {
                     Product product = productService.getProductById(productId);
                     int quantityChange = newQuantity - oldQuantity;
                     product.setQuantity(product.getQuantity() - quantityChange);
-                    productService.updateProduct(productId, product, oldOrder.getUserId());
+                    productService.updateProduct(productId, product, userId);
                     System.out.println("Updated product quantity for Product ID: " + productId + ", Quantity change: " + quantityChange);
                 }
 

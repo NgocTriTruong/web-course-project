@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.*;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Order;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.OrderDetail;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.OrderService;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.services.UserService;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -16,14 +17,16 @@ import java.util.List;
 @WebServlet(name = "OrderManagerAdmin", value = "/order-manager")
 public class OrderManagerAdmin extends HttpServlet {
     private OrderService orderService;
+    private UserService userService;
 
     @Override
     public void init() throws ServletException {
         super.init();
         try {
             orderService = new OrderService();
+            userService = UserService.getInstance();
         } catch (Exception e) {
-            throw new ServletException("Error initializing OrderService", e);
+            throw new ServletException("Error initializing services", e);
         }
     }
 
@@ -31,6 +34,21 @@ public class OrderManagerAdmin extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            // Lấy userId từ session
+            Integer userId = (Integer) request.getSession().getAttribute("userId");
+            if (userId == null) {
+                request.getSession().setAttribute("error", "Vui lòng đăng nhập để thực hiện thao tác này.");
+                response.sendRedirect(request.getContextPath() + "/login");
+                return;
+            }
+
+            // Kiểm tra quyền ORDER_MANAGEMENT
+            if (!userService.hasPermission(userId, "ORDER_MANAGEMENT")) {
+                request.getSession().setAttribute("error", "Bạn không có quyền truy cập quản lý đơn hàng (yêu cầu quyền ORDER_MANAGEMENT).");
+                response.sendRedirect(request.getContextPath() + "/home");
+                return;
+            }
+
             String action = request.getParameter("action");
 
             if (action == null) {
@@ -167,9 +185,9 @@ public class OrderManagerAdmin extends HttpServlet {
                     return;
                 }
             }
-            response.sendRedirect("orders");
+            response.sendRedirect("order-manager");
         } catch (SQLException | ClassNotFoundException e) {
-            throw new ServletException("Error retrieving order details", e);
+            throw new ServletException("Lỗi khi lấy chi tiết đơn hàng", e);
         }
     }
 
