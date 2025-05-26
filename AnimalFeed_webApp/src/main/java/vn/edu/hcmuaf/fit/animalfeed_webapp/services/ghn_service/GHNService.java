@@ -19,9 +19,15 @@ public class GHNService {
     private static final String BASE_URL = "https://dev-online-gateway.ghn.vn/shiip/public-api";
     private static final String TOKEN = "61680476-2db9-11f0-9b81-222185cb68c8";
     private static final int SHOP_ID = 196542;
+    private static final String SHOP_NAME = "VINAFEED";
+    private static final String SHOP_ADDRESS = "22, Hiệp Bình Phước, Thủ Đức, Hồ Chí Minh, Vietnam";
 
     public String getCurrentShopId() {
         return String.valueOf(SHOP_ID);
+    }
+
+    public Shop getCurrentShop() {
+        return new Shop(SHOP_ID, SHOP_NAME, SHOP_ADDRESS, "Thủ Đức", "Hồ Chí Minh");
     }
 
     // chuyển tên tỉnh thành id
@@ -32,9 +38,7 @@ public class GHNService {
         for (int i = 0; i < provinces.length(); i++) {
             JSONObject province = provinces.getJSONObject(i);
             String apiProvinceName = normalizeName(province.getString("ProvinceName"));
-            if (apiProvinceName.equals(normalizedProvinceName) ||
-                    apiProvinceName.contains(normalizedProvinceName) ||
-                    normalizedProvinceName.contains(apiProvinceName)) {
+            if (apiProvinceName.equals(normalizedProvinceName)) {
                 int provinceId = province.getInt("ProvinceID");
                 System.out.println("Tìm thấy ProvinceID: " + provinceId + " cho " + province.getString("ProvinceName"));
                 return provinceId;
@@ -175,6 +179,114 @@ public class GHNService {
         }
     }
 
+    // Tạo đơn hàng
+    public String createShippingOrder(
+            String customerName, String customerPhone, String toAddress,
+            String toWardCode, int toDistrictId, String toWardName,
+            String toDistrictName, String toProvinceName, int toProvinceId,
+            List<CartItem> items, String paymentMethod
+    ) throws IOException {
+        Shop currentShop = getCurrentShop(); // Đảm bảo currentShop được khởi tạo đúng
+
+        URL url = new URL(BASE_URL + "/v2/shipping-order/create");
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("POST");
+        conn.setRequestProperty("Content-Type", "application/json");
+        conn.setRequestProperty("Token", TOKEN);
+        conn.setRequestProperty("ShopId", getCurrentShopId());
+        conn.setDoOutput(true);
+
+        // Tính tổng trọng lượng
+        int totalWeight = 0;
+        for (CartItem item : items) {
+            totalWeight += item.getQuantity() * 25000; // 25kg mỗi bao
+        }
+
+        JSONObject requestBody = new JSONObject();
+        requestBody.put("payment_type_id", 2);
+        requestBody.put("note", "Đơn hàng thức ăn chăn nuôi");
+        requestBody.put("required_note", "KHONGCHOXEMHANG");
+        requestBody.put("return_phone", "0987654321");
+        requestBody.put("return_address", currentShop.getAddress());
+        requestBody.put("return_district_id", JSONObject.NULL);
+        requestBody.put("return_ward_code", "");
+        requestBody.put("client_order_code", "DH" + System.currentTimeMillis());
+        requestBody.put("from_name", currentShop.getName());
+        requestBody.put("from_phone", "0919361160");
+        requestBody.put("from_address", currentShop.getAddress());
+        requestBody.put("from_ward_name", "Hiệp Bình Phước");
+        requestBody.put("from_district_name", "Thủ Đức");
+        requestBody.put("from_province_name", "Hồ Chí Minh");
+        requestBody.put("to_name", customerName);
+        requestBody.put("to_phone", customerPhone);
+        requestBody.put("to_address", toAddress);
+        requestBody.put("to_ward_code", toWardCode);
+        requestBody.put("to_district_id", toDistrictId);
+        requestBody.put("to_ward_name", toWardName);
+        requestBody.put("to_district_name", toDistrictName);
+        requestBody.put("to_province_name", toProvinceName);
+        requestBody.put("to_province_id", toProvinceId);
+        requestBody.put("weight", totalWeight); // Tổng trọng lượng
+        requestBody.put("length", 50);
+        requestBody.put("width", 30);
+        requestBody.put("height", 20);
+        requestBody.put("pick_station_id", 1444);
+        requestBody.put("deliver_station_id", JSONObject.NULL);
+        requestBody.put("service_type_id", 5);
+        requestBody.put("pickup_time", System.currentTimeMillis() / 1000);
+        requestBody.put("pick_shift", new JSONArray().put(2));
+        requestBody.put("cod_amount", "VNPAY".equals(paymentMethod) ? 0 : calculateTotalPrice(items)); // Thu hộ cho COD
+
+        JSONArray itemsArray = new JSONArray();
+        for (CartItem item : items) {
+            JSONObject itemObj = new JSONObject();
+            itemObj.put("name", item.getName());
+            itemObj.put("quantity", item.getQuantity());
+            itemObj.put("weight", item.getQuantity() * 25000); // 25kg mỗi bao
+            itemObj.put("length", 50);
+            itemObj.put("width", 30);
+            itemObj.put("height", 20);
+            itemObj.put("category", new JSONObject().put("level1", "Thức ăn chăn nuôi"));
+            itemsArray.put(itemObj);
+        }
+        requestBody.put("items", itemsArray);
+
+        try (OutputStream os = conn.getOutputStream()) {
+            byte[] input = requestBody.toString().getBytes("utf-8");
+            os.write(input, 0, input.length);
+        }
+
+        int responseCode = conn.getResponseCode();
+        if (responseCode != 200) {
+            BufferedReader errorReader = new BufferedReader(new InputStreamReader(conn.getErrorStream(), "utf-8"));
+            StringBuilder errorResponse = new StringBuilder();
+            String errorLine;
+            while ((errorLine = errorReader.readLine()) != null) {
+                errorResponse.append(errorLine.trim());
+            }
+            throw new IOException("HTTP " + responseCode + ": " + errorResponse.toString());
+        }
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+        StringBuilder response = new StringBuilder();
+        String responseLine;
+        while ((responseLine = br.readLine()) != null) {
+            response.append(responseLine.trim());
+        }
+
+        JSONObject jsonResponse = new JSONObject(response.toString());
+        if (jsonResponse.getInt("code") == 200) {
+            JSONObject data = jsonResponse.getJSONObject("data");
+            return data.getString("order_code");
+        } else {
+            throw new IOException("Error creating shipping order: " + jsonResponse.getString("message"));
+        }
+    }
+
+    private double calculateTotalPrice(List<CartItem> items) {
+        return items.stream().mapToDouble(item -> item.getTotal()).sum();
+    }
+
     // Lấy danh sách tỉnh thành
     public JSONArray getProvinces() throws IOException {
         URL url = new URL(BASE_URL + "/master-data/province");
@@ -226,16 +338,42 @@ public class GHNService {
             os.write(input, 0, input.length);
         }
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+        int responseCode = conn.getResponseCode();
+        BufferedReader br;
         StringBuilder response = new StringBuilder();
+
+        if (responseCode != 200) {
+            br = new BufferedReader(new InputStreamReader(conn.getErrorStream(), StandardCharsets.UTF_8));
+            String errorLine;
+            while ((errorLine = br.readLine()) != null) {
+                response.append(errorLine.trim());
+            }
+            throw new IOException("HTTP " + responseCode + ": " + response.toString());
+        }
+
+        br = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
         String responseLine;
         while ((responseLine = br.readLine()) != null) {
             response.append(responseLine.trim());
         }
+        br.close();
+
+        // In response để debug
+        System.out.println("District API Response: " + response.toString());
 
         JSONObject jsonResponse = new JSONObject(response.toString());
         if (jsonResponse.getInt("code") == 200) {
-            return jsonResponse.getJSONArray("data");
+            // Kiểm tra xem "data" có phải là JSONArray không
+            if (jsonResponse.has("data") && !jsonResponse.isNull("data")) {
+                Object data = jsonResponse.get("data");
+                if (data instanceof JSONArray) {
+                    return (JSONArray) data;
+                } else {
+                    throw new IOException("Expected JSONArray for 'data', but got: " + data.getClass().getSimpleName());
+                }
+            } else {
+                throw new IOException("No 'data' field in response or 'data' is null");
+            }
         } else {
             throw new IOException("Error getting districts: " + jsonResponse.getString("message"));
         }
@@ -289,6 +427,34 @@ public class GHNService {
             }
         }
         throw new IOException("Không tìm thấy DistrictID cho " + districtName);
+    }
+
+    // Chuyển tên phường xã thành wardCode
+    public String getWardCodeByName(String wardName, int districtId) throws IOException {
+        JSONArray wards = getWards(districtId);
+        String normalizedWardName = normalizeName(wardName);
+        System.out.println("Tìm WardCode cho: " + wardName + " (normalized: " + normalizedWardName + ")");
+        for (int i = 0; i < wards.length(); i++) {
+            JSONObject ward = wards.getJSONObject(i);
+            String wardNameFromApi = normalizeName(ward.getString("WardName"));
+            if (wardNameFromApi.equals(normalizedWardName)) {
+                String wardCode = ward.getString("WardCode");
+                System.out.println("Tìm thấy WardCode: " + wardCode + " cho " + ward.getString("WardName"));
+                return wardCode;
+            }
+        }
+        throw new IOException("Không tìm thấy WardCode cho " + wardName);
+    }
+
+    private String getDistrictName(int districtId) throws IOException {
+        JSONArray districts = getDistricts(getProvinceIdByName("Hồ Chí Minh"));
+        for (int i = 0; i < districts.length(); i++) {
+            JSONObject district = districts.getJSONObject(i);
+            if (district.getInt("DistrictID") == districtId) {
+                return district.getString("DistrictName");
+            }
+        }
+        return "Unknown";
     }
 
     // Chuyển đổi tên thành phố, tỉnh, huyện, phường thành tên chuẩn

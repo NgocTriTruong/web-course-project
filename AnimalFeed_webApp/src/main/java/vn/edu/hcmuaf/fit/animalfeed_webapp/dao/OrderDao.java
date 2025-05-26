@@ -17,7 +17,7 @@ public class OrderDao {
     // Method to insert a new order
     public int insertOrder(Order order) {
         return jdbi.withHandle(handle ->
-                handle.createUpdate("INSERT INTO orders (status, address, shipper_id, total_price, total_quantity, user_id, ship_price, order_date, ship_date) VALUES (:status, :address, :shipper_id, :total_price, :total_quantity, :user_id, :ship_price, :order_date, :ship_date)")
+                handle.createUpdate("INSERT INTO orders (status, address, shipper_id, total_price, total_quantity, user_id, ship_price, order_date, ship_date, shipping_code) VALUES (:status, :address, :shipper_id, :total_price, :total_quantity, :user_id, :ship_price, :order_date, :ship_date, :shipping_code)")
                         .bind("status", order.getStatus())
                         .bind("address", order.getAddress())
                         .bind("shipper_id", order.getShipperId())
@@ -27,6 +27,7 @@ public class OrderDao {
                         .bind("ship_price", order.getShippingPrice())
                         .bind("order_date", order.getOrderDate())
                         .bind("ship_date", order.getShippingDate())
+                        .bind("shipping_code", order.getShippingCode())
                         .executeAndReturnGeneratedKeys("id")
                         .mapTo(int.class)
                         .one()
