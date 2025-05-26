@@ -97,13 +97,15 @@ public class OrderController extends HttpServlet {
                 if (confirmedItems != null && !confirmedItems.isEmpty()) {
                     selectedItems.addAll(confirmedItems);
                 } else {
-                    response.sendRedirect(request.getContextPath() + "/checkout?error=Giỏ hàng trống");
+                    session.setAttribute("error", "Giỏ hàng trống. Vui lòng thêm sản phẩm trước khi đặt hàng.");
+                    response.sendRedirect(request.getContextPath() + "/cart");
                     return;
                 }
             }
 
             if (selectedItems.isEmpty()) {
-                response.sendRedirect(request.getContextPath() + "/checkout?error=Giỏ hàng trống");
+                session.setAttribute("error", "Không có sản phẩm nào được chọn để đặt hàng.");
+                response.sendRedirect(request.getContextPath() + "/cart");
                 return;
             }
 
@@ -255,6 +257,9 @@ public class OrderController extends HttpServlet {
             // Clear confirmedItems after order creation (for Buy Now)
             session.removeAttribute("confirmedItems");
 
+            // Set success message
+            session.setAttribute("message", "Đơn hàng đã được tạo thành công với mã #" + orderId + "!");
+
             // Redirect to order success page
             if ("VNPAY".equals(paymentMethod)) {
                 response.sendRedirect(request.getContextPath() + "/payment?orderId=" + orderId);
@@ -281,5 +286,6 @@ public class OrderController extends HttpServlet {
                 ward != null && !ward.trim().isEmpty() ? ward : "Không xác định",
                 district != null && !district.trim().isEmpty() ? district : "Không xác định",
                 province != null && !province.trim().isEmpty() ? province : "Không xác định");
+
     }
 }

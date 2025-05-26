@@ -121,25 +121,19 @@ public class ProductDao {
 
     //Them product
     public void insertProduct(Product product, int userId) {
-        //kiem tra quyền admin
         boolean isAdmin = UserDao.checkIfAdmin(userId);
-
-        if(isAdmin) {
+        if (isAdmin) {
             Jdbi jdbi = JdbiConnect.getJdbi();
             // Thực hiện thêm sản phẩm và ghi log
-            jdbi.useTransaction(handle ->{
+            jdbi.useTransaction(handle -> {
+                int productId = handle.createUpdate("INSERT INTO products (cat_id, name, price, description, quantity, img, create_date, discount_id) " + "VALUES (:cat_id, :name, :price, :description, :quantity, :img, :createDate, :discountId)")
+                        .bindBean(product)
+                        .executeAndReturnGeneratedKeys("id").mapTo(Integer.class).one();
 
-                    int productId = handle.createUpdate("INSERT INTO products (cat_id, name, price, description, quantity, img, create_date, discount_id) "
-                            + "VALUES (:cat_id, :name, :price, :description, :quantity, :img, :createDate, :discountId)")
-                            .bindBean(product)
-                            .executeAndReturnGeneratedKeys("id").mapTo(Integer.class).one();
-
-                // Ghi log hành động vào bảng action_log
                 ActionLog actionLog = new ActionLog(userId, "CREATE", "PRODUCT", productId, "User " + userId + " created product " + productId, null, product.toString());
                 actionLogDao.logAction(actionLog);
             });
         }
-
     }
 
     //xoa product

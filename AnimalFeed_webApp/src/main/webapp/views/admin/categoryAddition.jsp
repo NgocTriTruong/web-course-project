@@ -19,7 +19,7 @@
     <script src="${pageContext.request.contextPath}/views/admin/assets/js/mdb.min.js"></script>
 
     <!-- js add header -->
-     <script src="${pageContext.request.contextPath}/views/admin/assets/js/add_header.js" defer></script>
+    <script src="${pageContext.request.contextPath}/views/admin/assets/js/add_header.js" defer></script>
 </head>
 
 <body>
@@ -29,14 +29,20 @@
 <!--Main layout-->
 <main class="mb-5" style="margin-top: 100px;">
     <!-- Container for demo purpose -->
-    <div class="container px-4 ">
-        <a href="categoryManagement.jsp" class="btn btn-link mb-2 text_green" style="font-size: 16px;">
+    <div class="container px-4">
+        <a href="${pageContext.request.contextPath}/category-management-admin" class="btn btn-link mb-2 text_green" style="font-size: 16px;">
             <i class="fas fa-angle-left"></i> Quay lại
         </a>
         <div class="mb-3 bg_green p-2">
             <span class="text-white h5">Thông tin loại sản phẩm</span>
         </div>
-        <form class="border p-5">
+        <% String error = (String) request.getAttribute("error"); %>
+        <% if (error != null) { %>
+        <div class="alert alert-danger" role="alert">
+            <%= error %>
+        </div>
+        <% } %>
+        <form class="border p-5" action="${pageContext.request.contextPath}/category-addition-admin" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-4">
                     <label for="category" class="form-label style_18"><b>Loại sản phẩm</b></label>
@@ -67,12 +73,9 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-            <!-- Repeat the pattern for other form elements -->
             <button type="submit" class="btn bg_green text-white fw-bold">Thêm mới</button>
         </form>
-
     </div>
     <!-- Container for demo purpose -->
 </main>
