@@ -3,24 +3,21 @@ package vn.edu.hcmuaf.fit.animalfeed_webapp.controller.admin.category_management
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.ActionLog;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Category;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.CategoryService;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.UserService;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.ActionLogDao;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.Date;
 
 @MultipartConfig(
         maxFileSize = 1024 * 1024 * 5,    // 5MB
         maxRequestSize = 1024 * 1024 * 10, // 10MB
         fileSizeThreshold = 1024 * 1024    // 1MB
 )
-@WebServlet(name = "CategoryAdditionAdmin", value = "/category-addition-admin")
-public class CategoryAdditionAdmin extends HttpServlet {
+@WebServlet(name = "EditCategory", value = "/edit-category")
+public class EditCategory extends HttpServlet {
 
     private static final String BASE_UPLOAD_DIRECTORY = "/views/template/assets/images/category/";
     private CategoryService categoryService;
@@ -34,26 +31,17 @@ public class CategoryAdditionAdmin extends HttpServlet {
 
     private boolean hasCategoryManagementPermission(HttpSession session) {
         Integer userId = (Integer) session.getAttribute("userId");
-        System.out.println("Checking permission for userId: " + userId + ", Session: " + session);
         if (userId == null) {
-            System.out.println("UserId is null in session");
             return false;
         }
-        boolean hasPermission = userService.hasPermission(userId, "CATEGORY_MANAGEMENT");
-        System.out.println("User Role: " + (userService.getUserById(userId) != null ? userService.getUserById(userId).getRole() : "null")
-                + ", Sub Role: " + (userService.getUserById(userId) != null ? userService.getUserById(userId).getSub_role() : "null")
-                + ", Has CATEGORY_MANAGEMENT permission: " + hasPermission);
-        return hasPermission;
+        return userService.hasPermission(userId, "CATEGORY_MANAGEMENT");
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
-        System.out.println("doGet - Session: " + session + ", userId: " + session.getAttribute("userId")
-                + ", Session Attributes: " + (session != null ? session.getAttributeNames().toString() : "null"));
 
         if (session == null || session.getAttribute("userId") == null) {
-            System.out.println("Session or userId is null, redirecting to login");
             session = request.getSession(true);
             session.setAttribute("error", "Vui lòng đăng nhập để truy cập.");
             response.sendRedirect(request.getContextPath() + "/login");
@@ -61,13 +49,28 @@ public class CategoryAdditionAdmin extends HttpServlet {
         }
 
         if (!hasCategoryManagementPermission(session)) {
-            System.out.println("No permission, redirecting to category-management-admin");
-            session.setAttribute("error", "Bạn không có quyền truy cập trang này (yêu cầu quyền CATEGORY_MANAGEMENT).");
+            session.setAttribute("error", "Bạn không có quyền chỉnh sửa danh mục (yêu cầu quyền CATEGORY_MANAGEMENT).");
             response.sendRedirect(request.getContextPath() + "/category-management-admin");
             return;
         }
 
-        request.getRequestDispatcher("views/admin/categoryAddition.jsp").forward(request, response);
+        String categoryIdStr = request.getParameter("categoryId");
+        if (categoryIdStr == null || categoryIdStr.trim().isEmpty()) {
+            session.setAttribute("error", "Không tìm thấy danh mục để chỉnh sửa.");
+            response.sendRedirect(request.getContextPath() + "/category-management-admin");
+            return;
+        }
+
+        int categoryId = Integer.parseInt(categoryIdStr);
+        Category category = categoryService.getCategoryById(categoryId);
+        if (category == null) {
+            session.setAttribute("error", "Danh mục không tồn tại.");
+            response.sendRedirect(request.getContextPath() + "/category-management-admin");
+            return;
+        }
+
+        request.setAttribute("category", category);
+        request.getRequestDispatcher("/views/admin/categoryEdit.jsp").forward(request, response);
     }
 
     @Override
@@ -88,55 +91,53 @@ public class CategoryAdditionAdmin extends HttpServlet {
 
         Integer userId = (Integer) session.getAttribute("userId");
         try {
+            String categoryIdStr = request.getParameter("categoryId");
             String name = request.getParameter("category");
             String statusStr = request.getParameter("status");
 
+            if (categoryIdStr == null || categoryIdStr.trim().isEmpty()) {
+                throw new IllegalArgumentException("ID danh mục không hợp lệ.");
+            }
             if (name == null || name.trim().isEmpty()) {
                 throw new IllegalArgumentException("Tên danh mục không được để trống.");
             }
 
+            int categoryId = Integer.parseInt(categoryIdStr);
             int status = (statusStr != null && !statusStr.trim().isEmpty()) ? Integer.parseInt(statusStr) : 1;
             if (status != 0 && status != 1) {
                 throw new IllegalArgumentException("Trạng thái không hợp lệ.");
             }
 
-            Category category = new Category();
+            Category category = categoryService.getCategoryById(categoryId);
+            if (category == null) {
+                throw new IllegalArgumentException("Danh mục không tồn tại.");
+            }
+
             category.setName(name.trim());
             category.setStatus(status);
 
             String imagePath = handleFileUpload(request);
-            category.setImg(imagePath != null ? imagePath : "/views/template/assets/images/category/default.jpg");
+            if (imagePath != null) {
+                category.setImg(imagePath);
+            }
 
-            categoryService.insertCategory(category, userId);
+            categoryService.updateCategoryStatus(category, userId);
 
-            // Ghi log hành động
-            ActionLog actionLog = new ActionLog();
-            actionLog.setUser_id(userId);
-            actionLog.setAction_type("CREATE");
-            actionLog.setEntity_type("CATEGORY");
-            actionLog.setEntity_id(category.getId()); // Giả định category.getId() được gán sau khi insert
-            actionLog.setCreated_at(new Date());
-            actionLog.setDescription("User " + userId + " created category " + name);
-            actionLog.setBefore_data("null");
-            actionLog.setAfter_data(category.toString());
-            ActionLogDao.logAction(actionLog);
-
-            session.setAttribute("message", "Thêm danh mục thành công!");
+            session.setAttribute("message", "Chỉnh sửa danh mục thành công!");
             response.sendRedirect(request.getContextPath() + "/category-management-admin");
         } catch (IllegalArgumentException e) {
             session.setAttribute("error", e.getMessage());
-            response.sendRedirect(request.getContextPath() + "/category-addition-admin");
+            response.sendRedirect(request.getContextPath() + "/edit-category?categoryId=" + request.getParameter("categoryId"));
         } catch (Exception e) {
-            System.out.println("Error in doPost: " + e.getMessage());
-            session.setAttribute("error", "Có lỗi xảy ra khi thêm danh mục: " + e.getMessage());
-            response.sendRedirect(request.getContextPath() + "/category-addition-admin");
+            session.setAttribute("error", "Có lỗi xảy ra khi chỉnh sửa danh mục: " + e.getMessage());
+            response.sendRedirect(request.getContextPath() + "/edit-category?categoryId=" + request.getParameter("categoryId"));
         }
     }
 
     private String handleFileUpload(HttpServletRequest request) throws IOException, ServletException {
         Part filePart = request.getPart("avatar");
         if (filePart == null || filePart.getSize() == 0) {
-            return null; // Sử dụng ảnh mặc định nếu không có file
+            return null; // Không cập nhật ảnh nếu không có file
         }
 
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();

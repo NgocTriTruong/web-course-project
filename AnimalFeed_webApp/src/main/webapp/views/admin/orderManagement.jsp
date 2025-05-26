@@ -61,6 +61,15 @@
     </div>
 
     <div class="container px-4">
+        <!-- Hiển thị thông báo thành công từ session -->
+        <c:if test="${not empty sessionScope.message}">
+            <div class="alert alert-success alert-dismissible fade show" role="alert" id="successAlert">
+                    ${sessionScope.message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <% session.removeAttribute("message"); %>
+        </c:if>
+
         <!-- Tìm kiếm -->
         <div class="input-group mb-4 px-4">
             <input type="text" class="form-control" id="advanced-search-input"
@@ -140,7 +149,7 @@
                 <c:if test="${currentPage > 1}">
                     <li class="page-item">
                         <a class="page-link" href="${pageContext.request.contextPath}/admin/orders?page=${currentPage-1}${not empty searchTerm ? '&searchTerm='.concat(searchTerm) : ''}" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
+                            <span aria-hidden="true">«</span>
                         </a>
                     </li>
                 </c:if>
@@ -154,7 +163,7 @@
                 <c:if test="${currentPage < endPage}">
                     <li class="page-item">
                         <a class="page-link" href="?page=${currentPage+1}${not empty searchTerm ? '&searchTerm='.concat(searchTerm) : ''}" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
+                            <span aria-hidden="true">»</span>
                         </a>
                     </li>
                 </c:if>
@@ -185,6 +194,15 @@
                 performSearch();
             }
         });
+
+        // Tự động đóng alert sau 5 giây
+        const alertElement = document.getElementById('successAlert');
+        if (alertElement) {
+            setTimeout(function() {
+                const bsAlert = new bootstrap.Alert(alertElement);
+                bsAlert.close();
+            }, 5000); // 5000ms = 5 giây
+        }
     });
 </script>
 </body>

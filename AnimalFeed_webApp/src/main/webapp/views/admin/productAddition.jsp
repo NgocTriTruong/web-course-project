@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/admin/assets/css/mdb.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/admin/assets/css/home.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/admin/assets/css/header.css">
-
     <script src="${pageContext.request.contextPath}/views/admin/assets/js/mdb.min.js"></script>
 </head>
 
@@ -28,11 +27,11 @@
 <!--Main layout-->
 <main class="mb-5" style="margin-top: 100px;">
     <div class="container px-4">
-        <a href="product-manager" class="btn btn-link mb-2 text_green" style="font-size: 16px;">
+        <a href="${pageContext.request.contextPath}/product-manager" class="btn btn-link mb-2 text_green" style="font-size: 16px;">
             <i class="fas fa-angle-left"></i> Quay lại
         </a>
 
-        <!-- Hiển thị thông báo lỗi nếu có -->
+        <!-- Hiển thị thông báo lỗi hoặc thành công nếu có -->
         <div class="container">
             <% String error = (String) session.getAttribute("error");
                 if (error != null) { %>
@@ -42,20 +41,30 @@
             </div>
             <% session.removeAttribute("error"); %>
             <% } %>
+
+            <% String message = (String) session.getAttribute("message");
+                if (message != null) { %>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <%= message %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <% session.removeAttribute("message"); %>
+            <% } %>
         </div>
 
-        <div class="mb-3 bg_green p-2 bg_green">
+        <div class="mb-3 bg_green p-2">
             <span class="text-white h5">Thông tin sản phẩm</span>
         </div>
 
-        <form action="add-product" method="post" class="border p-5" enctype="multipart/form-data">
+        <form action="${pageContext.request.contextPath}/add-product" method="post" class="border p-5" enctype="multipart/form-data">
             <!-- Thông tin cơ bản -->
             <div class="row mb-3">
                 <div class="col-md-4">
                     <label for="category" class="form-label style_18"><b>Loại sản phẩm</b></label>
                     <i class="fas fa-bars ms-2"></i>
                     <select class="form-select" id="category" name="category" required>
-                        <c:forEach var="ca" items="${categoriesData}" >
+                        <option value="">Chọn loại sản phẩm</option>
+                        <c:forEach var="ca" items="${categoriesData}">
                             <option value="${ca.id}">${ca.name}</option>
                         </c:forEach>
                     </select>
@@ -64,30 +73,30 @@
                 <div class="col-md-4">
                     <label for="name" class="form-label style_18"><b>Tên sản phẩm</b></label>
                     <i class="fas fa-gift ms-2"></i>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Nhập tên sản phẩm..."
-                           required>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Nhập tên sản phẩm..." required>
                 </div>
 
                 <div class="col-md-4">
                     <label for="price" class="form-label style_18"><b>Giá tiền</b></label>
                     <i class="fas fa-dollar ms-2"></i>
-                    <input type="number" class="form-control" id="price" name="price" placeholder="VNĐ..." required>
+                    <input type="number" class="form-control" id="price" name="price" placeholder="Nhập giá (VNĐ)..." step="0.01" min="0" required>
                 </div>
             </div>
 
-            <!-- Khuyến mãi và Trạng thái -->
+            <!-- Khuyến mãi và Số lượng -->
             <div class="row mb-3">
                 <div class="col-md-4">
                     <label for="quantity" class="form-label style_18"><b>Số lượng</b></label>
                     <i class="fas fa-cubes ms-2"></i>
-                    <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Bao..." required>
+                    <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Nhập số lượng (bao)..." min="0" required>
                 </div>
                 <div class="col-md-4">
                     <label for="discount" class="form-label style_18"><b>Khuyến mãi</b></label>
                     <i class="fas fa-percent ms-2"></i>
                     <select class="form-select" id="discount" name="discount" required>
-                        <c:forEach var="dis" items="${discountsData}" >
-                            <option value="${dis.id}">${dis.percentage}</option>
+                        <option value="">Chọn khuyến mãi</option>
+                        <c:forEach var="dis" items="${discountsData}">
+                            <option value="${dis.id}">${dis.percentage}%</option>
                         </c:forEach>
                     </select>
                 </div>
@@ -97,15 +106,14 @@
             <div class="row mb-3">
                 <div class="col-md-4">
                     <label class="form-label style_18"><b>Mô tả</b></label>
-                    <textarea class="form-control" id="description" name="description" rows="7"
-                              placeholder="Mô tả..."></textarea>
+                    <textarea class="form-control" id="description" name="description" rows="7" placeholder="Nhập mô tả..."></textarea>
                 </div>
 
                 <div class="col-md-4">
                     <label for="image" class="form-label style_18"><b>Hình ảnh</b></label>
                     <i class="fas fa-image ms-2"></i>
                     <div class="file-upload-wrapper">
-                        <input id="image" type="file" class="form-control" name="image">
+                        <input id="image" type="file" class="form-control" name="image" accept="image/*" required>
                     </div>
                 </div>
             </div>
