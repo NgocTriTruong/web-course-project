@@ -202,7 +202,7 @@ public class OrderEditController extends HttpServlet {
                 }
 
                 // Đặt trạng thái đơn hàng cũ thành "Đã hủy"
-                orderService.updateOrderStatus(orderId, 5);
+                orderService.updateOrderStatus(orderId, 0);
                 System.out.println("Set old order ID " + orderId + " to status 'Đã hủy'");
 
                 // Cập nhật số lượng tồn kho

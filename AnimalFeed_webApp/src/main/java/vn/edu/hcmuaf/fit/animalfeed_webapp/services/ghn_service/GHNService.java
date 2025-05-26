@@ -287,6 +287,85 @@ public class GHNService {
         return items.stream().mapToDouble(item -> item.getTotal()).sum();
     }
 
+    // Hủy đơn hàng
+    public void cancelOrder(String orderCode) throws IOException {
+        if (orderCode == null) return;
+
+        URL url = new URL(BASE_URL + "/v2/switch-status/cancel");
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("POST");
+        conn.setRequestProperty("Content-Type", "application/json");
+        conn.setRequestProperty("Token", TOKEN);
+        conn.setRequestProperty("ShopId", getCurrentShopId());
+        conn.setDoOutput(true);
+
+        JSONObject requestBody = new JSONObject();
+        requestBody.put("order_codes", new JSONArray().put(orderCode));
+
+        try (OutputStream os = conn.getOutputStream()) {
+            byte[] input = requestBody.toString().getBytes("utf-8");
+            os.write(input, 0, input.length);
+        }
+
+        int responseCode = conn.getResponseCode();
+        if (responseCode != 200) {
+            BufferedReader errorReader = new BufferedReader(new InputStreamReader(conn.getErrorStream(), "utf-8"));
+            StringBuilder errorResponse = new StringBuilder();
+            String errorLine;
+            while ((errorLine = errorReader.readLine()) != null) {
+                errorResponse.append(errorLine.trim());
+            }
+            throw new IOException("HTTP " + responseCode + ": " + errorResponse.toString());
+        }
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+        StringBuilder response = new StringBuilder();
+        String responseLine;
+        while ((responseLine = br.readLine()) != null) {
+            response.append(responseLine.trim());
+        }
+
+        JSONObject jsonResponse = new JSONObject(response.toString());
+        if (jsonResponse.getInt("code") != 200) {
+            throw new IOException("Error cancelling order: " + jsonResponse.getString("message"));
+        }
+    }
+
+    // Lấy thông tin đơn hàng
+    public String getOrderStatus(String orderCode) throws IOException {
+        if (orderCode == null) return "N/A";
+
+        URL url = new URL(BASE_URL + "/v2/shipping-order/detail");
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("POST");
+        conn.setRequestProperty("Content-Type", "application/json");
+        conn.setRequestProperty("Token", TOKEN);
+        conn.setDoOutput(true);
+
+        JSONObject requestBody = new JSONObject();
+        requestBody.put("order_code", orderCode);
+
+        try (OutputStream os = conn.getOutputStream()) {
+            byte[] input = requestBody.toString().getBytes("utf-8");
+            os.write(input, 0, input.length);
+        }
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+        StringBuilder response = new StringBuilder();
+        String responseLine;
+        while ((responseLine = br.readLine()) != null) {
+            response.append(responseLine.trim());
+        }
+
+        JSONObject jsonResponse = new JSONObject(response.toString());
+        if (jsonResponse.getInt("code") == 200) {
+            JSONObject data = jsonResponse.getJSONObject("data");
+            return data.getString("status");
+        } else {
+            throw new IOException("Error getting order status: " + jsonResponse.getString("message"));
+        }
+    }
+
     // Lấy danh sách tỉnh thành
     public JSONArray getProvinces() throws IOException {
         URL url = new URL(BASE_URL + "/master-data/province");
@@ -480,14 +559,79 @@ public class GHNService {
 
     public static void main(String[] args) {
         GHNService ghnService = new GHNService();
-        //test getProvinces
+
         try {
-            JSONArray provinces = ghnService.getProvinces();
-            for (int i = 0; i < provinces.length(); i++) {
-                JSONObject province = provinces.getJSONObject(i);
-                System.out.println("Province ID: " + province.getInt("ProvinceID") + ", Name: " + province.getString("ProvinceName"));
-            }
+            // 1. Lấy thông tin địa chỉ giao hàng
+            String provinceName = "Hà Nội";
+            String districtName = "Cầu Giấy";
+            String wardName = "Dịch Vọng";
+            String toAddress = "123 Đường Xuân Thủy, Cầu Giấy, Hà Nội";
+            String customerName = "Nguyễn Văn A";
+            String customerPhone = "0987654321";
+            String paymentMethod = "COD"; // Hoặc "VNPAY"
+
+            // 2. Lấy ProvinceID, DistrictID, WardCode
+            int provinceId = ghnService.getProvinceIdByName(provinceName);
+            int districtId = ghnService.getDistrictIdByName(districtName, provinceId);
+            String wardCode = ghnService.getWardCodeByName(wardName, districtId);
+
+            // 3. Tạo danh sách CartItem mẫu
+            List<CartItem> cartItems = new ArrayList<>();
+            // CartItem 1: 2 bao thức ăn A, giá 250k/bao
+            CartItem item1 = new CartItem();
+            item1.setId(1);
+            item1.setUserId(1);
+            item1.setProductId(101);
+            item1.setName("Thức ăn chăn nuôi A");
+            item1.setQuantity(2);
+            item1.setPrice(250000);
+            item1.setTotal(250000 * 2); // 500k
+            item1.setStatus(1);
+            item1.setImg("image_a.jpg");
+            item1.setUnitPrice(250000);
+            item1.setDesc("Thức ăn chăn nuôi chất lượng cao");
+
+            // CartItem 2: 1 bao thức ăn B, giá 300k/bao
+            CartItem item2 = new CartItem();
+            item2.setId(2);
+            item2.setUserId(1);
+            item2.setProductId(102);
+            item2.setName("Thức ăn chăn nuôi B");
+            item2.setQuantity(1);
+            item2.setPrice(300000);
+            item2.setTotal(300000 * 1); // 300k
+            item2.setStatus(1);
+            item2.setImg("image_b.jpg");
+            item2.setUnitPrice(300000);
+            item2.setDesc("Thức ăn chăn nuôi hữu cơ");
+
+            cartItems.add(item1);
+            cartItems.add(item2);
+
+            // 4. Gọi hàm createShippingOrder
+            String orderCode = ghnService.createShippingOrder(
+                    customerName,
+                    customerPhone,
+                    toAddress,
+                    wardCode,
+                    districtId,
+                    wardName,
+                    districtName,
+                    provinceName,
+                    provinceId,
+                    cartItems,
+                    paymentMethod
+            );
+
+            // 5. In kết quả
+            System.out.println("Tạo đơn hàng thành công! Order Code: " + orderCode);
+
+            // 6. (Tùy chọn) Kiểm tra trạng thái đơn hàng
+            String orderStatus = ghnService.getOrderStatus(orderCode);
+            System.out.println("Trạng thái đơn hàng: " + orderStatus);
+
         } catch (IOException e) {
+            System.err.println("Lỗi khi tạo đơn hàng: " + e.getMessage());
             e.printStackTrace();
         }
     }
