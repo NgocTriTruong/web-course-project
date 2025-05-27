@@ -17,66 +17,10 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/layout/footer.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/themify-icons/themify-icons.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/assets/css/chi_tiet_ca_nhan/personal_order.css">
 
-    <style>
-        .od_me {
-            text-decoration: none;
-            color: #333;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .od_me:hover {
-            background-color: #f8f9fa;
-            color: #007bff;
-        }
-
-        .od_me.active {
-            color: #007bff;
-            border-bottom: 2px solid #007bff;
-            font-weight: bold;
-        }
-
-        .order-item {
-            border: 1px solid #ddd;
-            margin-bottom: 20px;
-            padding: 15px;
-            border-radius: 8px;
-            background-color: white;
-        }
-        .order-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
-        }
-        .order-status {
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-weight: bold;
-        }
-
-        .detail-btn {
-            width: 100%;
-            height: 40px;
-            text-align: center;
-        }
-
-        .detail-btn i {
-            margin: 5px auto;
-        }
-
-        .status-1 { background-color: #fff3cd; color: #856404; }
-        .status-2 { background-color: #cce5ff; color: #004085; }
-        .status-3 { background-color: #d4edda; color: #155724; }
-        .status-4 { background-color: #c3e6cb; color: #155724; }
-        .status-0 { background-color: #f8d7da; color: #721c24; }
-    </style>
-
-    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/add_layout.js" defer></script>
-    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/confirm_login.js" defer></script>
+<%--    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/add_layout.js" defer></script>--%>
+<%--    <script src="${pageContext.request.contextPath}/views/template/assets/scripts/confirm_login.js" defer></script>--%>
 
     <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
     <df-messenger
@@ -157,6 +101,8 @@
                                     <div class="order-header">
                                         <div>
                                             <span class="fw-bold">Mã đơn hàng: #${order.id}</span>
+                                            <br>
+                                            <span class="text-muted">Mã GHN: ${fn:escapeXml(order.shippingCode)}</span>
                                         </div>
                                         <div class="order-status status-${order.status}">
                                             <c:choose>
@@ -186,11 +132,11 @@
                                             <div>${order.address}</div>
                                         </div>
                                         <div class="col-md-2 text-end">
-                                            <a href="order-detail?id=${order.id}" class="detail-btn btn btn-primary btn-sm text-center">
+                                            <a href="order-detail?id=${order.id}" class="detail-btn btn btn-primary btn-sm text-center" style="background-color: #fcae18">
                                                 <i class="fas fa-eye"></i> Xem chi tiết
                                             </a>
                                             <c:if test="${order.status == 1 || order.status == 2}">
-                                                <button onclick="confirmCancelOrder(${order.id})" class="detail-btn btn btn-danger btn-sm text-center">
+                                                <button class="btn btn-cancel-order" data-ghn-code="${order.shippingCode}" data-order-id="${order.id}">
                                                     <i class="fas fa-times"></i> Hủy đơn
                                                 </button>
                                             </c:if>
@@ -221,13 +167,14 @@
 <%@ include file="../layout/near_footer.jsp" %>
 <%@ include file="../layout/footer.jsp" %>
 
-<script>
-    function confirmCancelOrder(orderId) {
-        if (confirm('Bạn có chắc chắn muốn hủy đơn hàng này không?')) {
-            window.location.href = '${pageContext.request.contextPath}/cancel-order?id=' + orderId;
-        }
-    }
-</script>
+<script src="${pageContext.request.contextPath}/views/template/assets/scripts/api_ghn/order_history.js"></script>
+<%--<script>--%>
+<%--    function confirmCancelOrder(orderId) {--%>
+<%--        if (confirm('Bạn có chắc chắn muốn hủy đơn hàng này không?')) {--%>
+<%--            window.location.href = '${pageContext.request.contextPath}/cancel-order?id=' + orderId;--%>
+<%--        }--%>
+<%--    }--%>
+<%--</script>--%>
 
 </body>
 </html>

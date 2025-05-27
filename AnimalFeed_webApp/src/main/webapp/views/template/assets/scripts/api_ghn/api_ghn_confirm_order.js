@@ -355,7 +355,15 @@ document.getElementById("orderForm").addEventListener("submit", function (event)
     event.preventDefault();
     let paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
     if (confirm("Bạn có chắc chắn muốn đặt hàng không?")) {
+        // Thêm hidden input để lưu paymentMethod
+        let hiddenInput = document.createElement("input");
+        hiddenInput.type = "hidden";
+        hiddenInput.name = "paymentMethod";
+        hiddenInput.value = paymentMethod;
+        this.appendChild(hiddenInput);
+
         if (paymentMethod === "COD") {
+            this.action = `${window.location.origin}/AnimalFeed_webApp/create-order`;
             this.submit();
         } else if (paymentMethod === "VNPAY") {
             this.action = `${window.location.origin}/AnimalFeed_webApp/payment`;

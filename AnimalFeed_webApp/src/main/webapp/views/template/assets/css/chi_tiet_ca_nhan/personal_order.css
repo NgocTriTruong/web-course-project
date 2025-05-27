@@ -1,0 +1,69 @@
+.od_me {
+    text-decoration: none;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.od_me:hover {
+    background-color: #f8f9fa;
+    color: #007bff;
+}
+
+.od_me.active {
+    color: #007bff;
+    border-bottom: 2px solid #007bff;
+    font-weight: bold;
+}
+
+.order-item {
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: white;
+}
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+.order-status {
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.detail-btn {
+    width: 100%;
+    height: 40px;
+    text-align: center;
+}
+
+.detail-btn i {
+    margin: 5px auto;
+}
+
+.status-1 { background-color: #fff3cd; color: #856404; }
+.status-2 { background-color: #cce5ff; color: #004085; }
+.status-3 { background-color: #d4edda; color: #155724; }
+.status-4 { background-color: #c3e6cb; color: #155724; }
+.status-0 { background-color: #f8d7da; color: #721c24; }
+
+.btn-cancel-order {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    margin-top: 6px;
+    width: 73px;
+    height: 31px;
+    font-size: 10px;
+    margin-right: 15px;
+}
+
+.btn-cancel-order:hover {
+    background-color: #c82333;
+}
