@@ -249,7 +249,7 @@ public class UserService {
                 System.out.println("Has CATEGORY_MANAGEMENT permission: " + hasCategoryManagement);
                 return hasCategoryManagement;
             case "ORDER_MANAGEMENT":
-                boolean hasOrderManagement = user.getSub_role() == 3;
+                boolean hasOrderManagement = user.getSub_role() == 4;
                 System.out.println("Has ORDER_MANAGEMENT permission: " + hasOrderManagement);
                 return hasOrderManagement;
             case "NEWS_MANAGEMENT":
