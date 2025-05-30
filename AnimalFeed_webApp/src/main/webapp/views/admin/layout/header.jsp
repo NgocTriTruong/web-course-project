@@ -107,7 +107,7 @@
             <a class="sidenav-link" href="${pageContext.request.contextPath}/job-addtion-admin" style="font-size: 17px;">Thêm công việc</a>
           </li>
           <li class="sidenav-item">
-            <a class="sidenav-link" href="${pageContext.request.contextPath}/job-addtion-admin" style="font-size: 17px;">Danh sách tuyển dụng</a>
+            <a class="sidenav-link" href="${pageContext.request.contextPath}/job-managemet-admin" style="font-size: 17px;">Danh sách tuyển dụng</a>
           </li>
         </ul>
       </li>
