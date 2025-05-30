@@ -142,7 +142,7 @@ public class UpdateOrderStatusController extends HttpServlet {
                 return "Đang giao hàng";
             case 4:
                 return "Đã giao hàng";
-            case 5:
+            case 0:
                 return "Đã hủy";
             default:
                 return "Không xác định";
