@@ -6,7 +6,6 @@ import jakarta.servlet.annotation.*;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Post;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.PostService;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.UserService;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -38,7 +37,7 @@ public class PostAdd extends HttpServlet {
 
         if (!userService.hasPermission(userId, "NEWS_MANAGEMENT")) {
             request.getSession().setAttribute("error", "Bạn không có quyền NEWS_MANAGEMENT để thêm tin tức.");
-            response.sendRedirect(request.getContextPath() + "/home");
+            response.sendRedirect(request.getContextPath() + "/dashboard");
             return false;
         }
 
