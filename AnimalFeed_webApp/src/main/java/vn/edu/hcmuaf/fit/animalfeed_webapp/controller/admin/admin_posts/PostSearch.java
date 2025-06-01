@@ -29,7 +29,7 @@ public class PostSearch extends HttpServlet {
         try {
             Integer userId = (Integer) request.getSession().getAttribute("userId");
             if (userId == null || !userService.hasPermission(userId, "NEWS_MANAGEMENT")) {
-                response.sendRedirect(request.getContextPath() + "/home");
+                response.sendRedirect(request.getContextPath() + "/dashboard");
                 return;
             }
 
