@@ -20,7 +20,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/views/admin/assets/css/header.css">
 
     <script src="${pageContext.request.contextPath}/views/admin/assets/js/mdb.min.js"></script>
-
     <!-- js add header -->
     <script src="${pageContext.request.contextPath}/views/admin/assets/js/add_header.js" defer></script>
 </head>
@@ -58,8 +57,17 @@
 
     <!-- Container for demo purpose -->
     <div class="container px-4">
+        <!-- Hiển thị thông báo thành công từ session -->
+        <c:if test="${not empty sessionScope.message}">
+            <div class="alert alert-success alert-dismissible fade show" role="alert" id="successAlert">
+                    ${sessionScope.message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <% session.removeAttribute("message"); %>
+        </c:if>
+
         <div class="mb-3 d-flex justify-content-end px-4">
-            <a class="btn bg_green text-white fw-bold" href="${pageContext.request.contextPath}/admin/posts/add">
+            <a class="btn bg_green text-white fw-bold" href="${pageContext.request.contextPath}/post-add">
                 <i class="far fa-square-plus"></i>
                 <span>Thêm bài viết</span>
             </a>
@@ -83,7 +91,7 @@
                     <th>STT</th>
                     <th>Tiêu đề</th>
                     <th>Mô tả</th>
-                    <th>Thời gian tạo</th>  <!-- Không có cột Người tạo -->
+                    <th>Thời gian tạo</th>
                     <th>Trạng thái</th>
                     <th>Hành động</th>
                 </tr>
@@ -106,33 +114,36 @@
                                 <td>
                                     <span>${post.content}</span>
                                 </td>
-                                <td>  <!-- Chuyển thời gian tạo lên đây -->
+                                <td>
                                     <span class="h6 ms-2">
-                        <fmt:formatDate value="${post.createDate}" pattern="dd/MM/yyyy"/>
-                    </span>
+                                        <fmt:formatDate value="${post.createDate}" pattern="dd/MM/yyyy"/>
+                                    </span>
                                 </td>
                                 <td>
-                    <span class="badge badge-success rounded-pill d-inline ms-2"
-                          style="font-size: 13px;">
-                            ${post.status == 1 ? 'Hiển thị' : 'Ẩn'}
-                    </span>
+                                    <span class="badge badge-success rounded-pill d-inline ms-2"
+                                          style="font-size: 13px;">
+                                            ${post.status == 1 ? 'Hiển thị' : 'Ẩn'}
+                                    </span>
                                 </td>
                                 <td>
                                     <a href="${pageContext.request.contextPath}/post-edit?id=${post.id}"
                                        class="btn bg_green btn-floating">
                                         <i class="far fa-pen-to-square"></i>
                                     </a>
-                                    <button type="button" class="btn bg_yellow btn-floating"
-                                            onclick="deletePost(${post.id})">
-                                        <i class="far fa-trash-can"></i>
-                                    </button>
+                                    <form action="${pageContext.request.contextPath}/post-delete" method="post" style="display: inline;"
+                                          onsubmit="return confirm('Bạn có chắc chắn muốn xóa bài viết này?');">
+                                        <input type="hidden" name="id" value="${post.id}">
+                                        <button type="submit" class="btn bg_yellow btn-floating">
+                                            <i class="far fa-trash-can"></i>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         </c:forEach>
                     </c:when>
                     <c:otherwise>
                         <tr>
-                            <td colspan="6" class="text-center">Không có bài viết nào</td> <!-- Sửa colspan từ 7 thành 6 -->
+                            <td colspan="6" class="text-center">Không có bài viết nào</td>
                         </tr>
                     </c:otherwise>
                 </c:choose>
@@ -148,11 +159,16 @@
 </footer>
 
 <script>
-    function deletePost(postId) {
-        if (confirm('Bạn có chắc chắn muốn xóa bài viết này?')) {
-            window.location.href = '${pageContext.request.contextPath}/admin/posts?action=delete&id=' + postId;
+    // Tự động đóng alert sau 5 giây
+    document.addEventListener('DOMContentLoaded', function() {
+        const alertElement = document.getElementById('successAlert');
+        if (alertElement) {
+            setTimeout(function() {
+                const bsAlert = new bootstrap.Alert(alertElement);
+                bsAlert.close();
+            }, 5000); // 5000ms = 5 giây
         }
-    }
+    });
 </script>
 </body>
 </html>

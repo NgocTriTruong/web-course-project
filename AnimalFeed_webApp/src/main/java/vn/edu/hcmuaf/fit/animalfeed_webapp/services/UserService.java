@@ -1,6 +1,7 @@
 package vn.edu.hcmuaf.fit.animalfeed_webapp.services;
 
 import org.mindrot.jbcrypt.BCrypt;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.PostDao;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.UserDao;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
 
@@ -253,7 +254,8 @@ public class UserService {
                 System.out.println("Has ORDER_MANAGEMENT permission: " + hasOrderManagement);
                 return hasOrderManagement;
             case "NEWS_MANAGEMENT":
-                return user.getSub_role() == 5;
+                boolean hasNewsManagement = user.getSub_role() == 5;
+                System.out.println("Has NEWS_MANAGEMENT permission: " + hasNewsManagement);
             default:
                 return false;
         }
@@ -281,5 +283,9 @@ public class UserService {
             throw new RuntimeException("Không tìm thấy tài khoản với email " + email);
         }
         return optionalUser.get();
+    }
+
+    public boolean isAdmin(int userId) {
+        return PostDao.checkIfAdmin(userId); // Sử dụng phương thức từ PostDao
     }
 }

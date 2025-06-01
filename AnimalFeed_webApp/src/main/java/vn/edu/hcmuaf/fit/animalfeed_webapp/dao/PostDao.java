@@ -4,6 +4,7 @@ import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.mapper.RowMapper;
 import org.jdbi.v3.core.statement.StatementContext;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.db.JdbiConnect;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.ActionLog;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Post;
 
 import java.sql.ResultSet;
@@ -13,9 +14,10 @@ import java.util.Optional;
 
 public class PostDao {
     private static final Jdbi jdbi = JdbiConnect.getJdbi();
+    private static final ActionLogDao actionLogDao = new ActionLogDao(); // Giả định ActionLogDao đã được định nghĩa
 
     public List<Post> getAllPosts() {
-        String query = "SELECT * FROM posts ORDER BY create_date DESC";
+        String query = "SELECT * FROM posts WHERE status = 1 ORDER BY create_date DESC";
 
         return jdbi.withHandle(handle ->
                 handle.createQuery(query)
@@ -25,7 +27,7 @@ public class PostDao {
     }
 
     public Optional<Post> getPostById(int id) {
-        String query = "SELECT * FROM posts WHERE id = :id";
+        String query = "SELECT * FROM posts WHERE id = :id AND status = 1";
 
         return jdbi.withHandle(handle ->
                 handle.createQuery(query)
@@ -72,23 +74,99 @@ public class PostDao {
                         .bind("content", post.getContent())
                         .bind("img", post.getImg())
                         .bind("userId", post.getUserId())
-                        .bind("status", post.getStatus())
+                        .bind("status", 1) // Trạng thái active
                         .executeAndReturnGeneratedKeys("id")
                         .mapTo(Integer.class)
                         .one();
 
-                // Ghi lại hành động vào bảng action_log
-                handle.createUpdate("INSERT INTO action_log (user_id, action_type, entity_type, entity_id, created_at, description) " +
-                                "VALUES (:userId, :actionType, :entityType, :entityId, CURRENT_DATE, :description)")
-                        .bind("userId", adminUserId)
-                        .bind("actionType", "CREATE")
-                        .bind("entityType", "POST")
-                        .bind("entityId", postId)
-                        .bind("description", "Admin user " + adminUserId + " created post " + postId)
-                        .execute();
+                // Ghi log hành động vào bảng action_log
+                ActionLog actionLog = new ActionLog(
+                        adminUserId, "CREATE", "POST", postId,
+                        "User " + adminUserId + " created post " + postId,
+                        post.toString(), null
+                );
+                actionLogDao.logAction(actionLog);
             });
         } else {
             throw new IllegalArgumentException("User with ID " + adminUserId + " is not authorized to add posts.");
         }
+    }
+
+    // Xóa bài viết (xóa mềm)
+    public void deletePost(int postId, int adminUserId) {
+        if (checkIfAdmin(adminUserId)) {
+            Post deletedPost = getPostById(postId).orElse(null);
+            if (deletedPost == null) {
+                throw new IllegalArgumentException("Post with ID " + postId + " does not exist.");
+            }
+
+            jdbi.useTransaction(handle -> {
+                // Cập nhật trạng thái sản phẩm thành 'deleted' (status = 0)
+                int updatedRows = handle.createUpdate("UPDATE posts SET status = :status WHERE id = :productId")
+                        .bind("status", 0) // Trạng thái 'deleted'
+                        .bind("productId", postId)
+                        .execute();
+
+                if (updatedRows > 0) {
+                    // Ghi log hành động vào bảng action_log
+                    ActionLog actionLog = new ActionLog(
+                            adminUserId, "DELETE", "POST", postId,
+                            "User " + adminUserId + " deleted post " + postId,
+                            deletedPost.toString(), null
+                    );
+                    actionLogDao.logAction(actionLog);
+                } else {
+                    throw new RuntimeException("Failed to delete post with ID: " + postId);
+                }
+            });
+        } else {
+            throw new IllegalArgumentException("User with ID " + adminUserId + " is not authorized to delete posts.");
+        }
+    }
+
+    // Sửa bài viết
+    public void updatePost(Post post, int adminUserId) {
+        if (checkIfAdmin(adminUserId)) {
+            Post existingPost = getPostById(post.getId()).orElse(null);
+            if (existingPost == null) {
+                throw new IllegalArgumentException("Post with ID " + post.getId() + " does not exist.");
+            }
+
+            jdbi.useTransaction(handle -> {
+                // Cập nhật thông tin bài viết
+                int updatedRows = handle.createUpdate("UPDATE posts SET title = :title, content = :content, img = :img, status = :status WHERE id = :id")
+                        .bind("id", post.getId())
+                        .bind("title", post.getTitle())
+                        .bind("content", post.getContent())
+                        .bind("img", post.getImg())
+                        .bind("status", post.getStatus())
+                        .execute();
+
+                if (updatedRows > 0) {
+                    // Ghi log hành động vào bảng action_log
+                    ActionLog actionLog = new ActionLog(
+                            adminUserId, "UPDATE", "POST", post.getId(),
+                            "User " + adminUserId + " updated post " + post.getId(),
+                            existingPost.toString(), post.toString()
+                    );
+                    actionLogDao.logAction(actionLog);
+                } else {
+                    throw new RuntimeException("Failed to update post with ID: " + post.getId());
+                }
+            });
+        } else {
+            throw new IllegalArgumentException("User with ID " + adminUserId + " is not authorized to update posts.");
+        }
+    }
+
+    //search post
+    public List<Post> searchPosts(String keyword) {
+        String query = "SELECT * FROM posts WHERE status = 1 AND (title LIKE :keyword OR content LIKE :keyword) ORDER BY create_date DESC";
+        return jdbi.withHandle(handle ->
+                handle.createQuery(query)
+                        .bind("keyword", "%" + keyword + "%")
+                        .map(new PostMapper())
+                        .list()
+        );
     }
 }
