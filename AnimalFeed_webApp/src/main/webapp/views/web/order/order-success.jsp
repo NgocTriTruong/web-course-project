@@ -126,9 +126,16 @@
         </div>
 
         <div class="total-section">
+            <p style="display: flex">
+                <h5>Phí vận chuyển: </h5>
+                <fmt:formatNumber value="${sessionScope.successOrder.shippingPrice}" type="currency" currencySymbol="₫"/>
+            </p>
+        </div>
+
+        <div class="total-section">
             <p>
                 <strong>Tổng thanh toán: </strong>
-                <fmt:formatNumber value="${sessionScope.successOrder.totalPrice}" type="currency" currencySymbol="₫"/>
+                <fmt:formatNumber value="${sessionScope.successOrder.totalPrice + sessionScope.successOrder.shippingPrice}" type="currency" currencySymbol="₫"/>
             </p>
         </div>
     </div>
