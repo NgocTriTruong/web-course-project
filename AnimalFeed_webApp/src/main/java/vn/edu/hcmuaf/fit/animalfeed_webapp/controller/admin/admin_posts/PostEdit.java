@@ -35,7 +35,7 @@ public class PostEdit extends HttpServlet {
         Integer userId = (Integer) request.getSession().getAttribute("userId");
         if (userId == null || !userService.hasPermission(userId, "NEWS_MANAGEMENT")) {
             request.getSession().setAttribute("error", "Vui lòng đăng nhập và có quyền NEWS_MANAGEMENT để chỉnh sửa bài viết.");
-            response.sendRedirect(request.getContextPath() + "/home");
+            response.sendRedirect(request.getContextPath() + "/dashboard");
             return null;
         }
 
