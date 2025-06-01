@@ -135,8 +135,8 @@
         </div>
 
         <div class="total-section">
-            <p style="display: flex">
-                <h5>Phí vận chuyển: </h5>
+            <p>
+                <span>Phí vận chuyển: </span>
                 <fmt:formatNumber value="${sessionScope.successOrder.shippingPrice}" type="currency" currencySymbol="₫"/>
             </p>
         </div>
