@@ -254,6 +254,8 @@ public class UserService {
                 return hasOrderManagement;
             case "NEWS_MANAGEMENT":
                 return user.getSub_role() == 5;
+            case "JOB_MANAGEMENT":
+                return user.getSub_role() == 6;
             default:
                 return false;
         }
@@ -281,5 +283,10 @@ public class UserService {
             throw new RuntimeException("Không tìm thấy tài khoản với email " + email);
         }
         return optionalUser.get();
+    }
+
+    //kiểm tra xem người dùng có phải là admin hay không
+    public boolean checkIfAdmin(int userId) {
+        return userDao.checkIfAdmin(userId);
     }
 }
