@@ -55,7 +55,7 @@
         <a href="<%= request.getContextPath() %>/login-google" class="btn btn-danger">
             <i class="fab fa-google me-2"></i> Đăng nhập với Google
         </a>
-        <a href="https://www.facebook.com/v22.0/dialog/oauth?client_id=10059135720792572&redirect_uri=http://localhost:8080/AnimalFeed_webApp/login-facebook" class="btn btn-info">
+        <a href="https://www.facebook.com/v22.0/dialog/oauth?client_id=10059135720792572&redirect_uri=https://animalsfeeds.online/login-facebook" class="btn btn-info">
             <i class="fab fa-facebook me-2"></i> Đăng nhập với Facebook
         </a>
     </div>

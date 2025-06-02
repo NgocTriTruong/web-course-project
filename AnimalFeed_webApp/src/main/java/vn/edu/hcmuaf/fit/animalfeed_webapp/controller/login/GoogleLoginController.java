@@ -23,7 +23,7 @@ public class GoogleLoginController extends HttpServlet {
 
     private static final String CLIENT_ID = "302393049408-s9uh3l3rrqvo83d2s5gfa0khba6h8q0p.apps.googleusercontent.com";
     private static final String CLIENT_SECRET = "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";
-    private static final String REDIRECT_URI = "http://localhost:8080/AnimalFeed_webApp/login-google";
+    private static final String REDIRECT_URI = "https://animalsfeeds.online/login-google";
     private static final String AUTH_ENDPOINT = "https://accounts.google.com/o/oauth2/v2/auth";
     private static final String TOKEN_ENDPOINT = "https://oauth2.googleapis.com/token";
     private static final String USERINFO_ENDPOINT = "https://www.googleapis.com/oauth2/v2/userinfo";

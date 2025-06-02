@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
 //load provinces
 async function loadProvinces() {
     try {
-        const response = await fetch(`${window.location.origin}/AnimalFeed_webApp/api/ghn/provinces`, {
+        const response = await fetch(`${window.location.origin}/api/ghn/provinces`, {
             headers: { 'Content-Type': 'application/json' }
         });
 
@@ -100,7 +100,7 @@ async function loadDistricts(provinceId) {
     districtInput.disabled = false;
     districtInput.value = '';
     try {
-        const response = await fetch(`${window.location.origin}/AnimalFeed_webApp/api/ghn/districts`, {
+        const response = await fetch(`${window.location.origin}/api/ghn/districts`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ province_id: provinceId })
@@ -167,7 +167,7 @@ async function loadWards(districtId) {
     wardInput.disabled = false;
     wardInput.value = '';
     try {
-        const response = await fetch(`${window.location.origin}/AnimalFeed_webApp/api/ghn/wards`, {
+        const response = await fetch(`${window.location.origin}/api/ghn/wards`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ district_id: districtId })
@@ -240,7 +240,7 @@ async function calculateShippingFee() {
     }
 
     try {
-        const response = await fetch(`${window.location.origin}/AnimalFeed_webApp/calculate-shipping-fee`, {
+        const response = await fetch(`${window.location.origin}/calculate-shipping-fee`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ province, district, ward, wardCode })
@@ -363,10 +363,10 @@ document.getElementById("orderForm").addEventListener("submit", function (event)
         this.appendChild(hiddenInput);
 
         if (paymentMethod === "COD") {
-            this.action = `${window.location.origin}/AnimalFeed_webApp/create-order`;
+            this.action = `${window.location.origin}/create-order`;
             this.submit();
         } else if (paymentMethod === "VNPAY") {
-            this.action = `${window.location.origin}/AnimalFeed_webApp/payment`;
+            this.action = `${window.location.origin}/payment`;
             this.submit();
         }
     }

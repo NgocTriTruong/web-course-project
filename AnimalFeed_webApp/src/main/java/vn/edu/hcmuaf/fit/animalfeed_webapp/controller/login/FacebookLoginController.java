@@ -24,7 +24,7 @@ public class FacebookLoginController extends HttpServlet {
 
     private static final String CLIENT_ID = "10059135720792572";
     private static final String CLIENT_SECRET = "fca909fc5fd0f6bf1b42a8a3c5f75cb1";
-    private static final String REDIRECT_URI = "http://localhost:8080/AnimalFeed_webApp/login-facebook";
+    private static final String REDIRECT_URI = "https://animalsfeeds.online/login-facebook";
     private static final String AUTH_ENDPOINT = "https://www.facebook.com/v22.0/dialog/oauth";  // URL xác thực
     private static final String TOKEN_ENDPOINT = "https://graph.facebook.com/v22.0/oauth/access_token";  // URL lấy access token
     private static final String USERINFO_ENDPOINT = "https://graph.facebook.com/v22.0/me";

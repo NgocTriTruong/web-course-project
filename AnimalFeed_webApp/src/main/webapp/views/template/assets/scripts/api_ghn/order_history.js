@@ -37,7 +37,7 @@ document.querySelectorAll('.btn-cancel-order').forEach(button => {
             const orderId = button.getAttribute('data-order-id');
             console.log(`Clicked cancel order for order ${orderId}, GHN code: ${ghnOrderCode}`);
             try {
-                const response = await fetch(`${window.location.origin}/AnimalFeed_webApp/cancel-order-ghn`, {
+                const response = await fetch(`${window.location.origin}/cancel-order-ghn`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ ghnOrderCode, orderId })
