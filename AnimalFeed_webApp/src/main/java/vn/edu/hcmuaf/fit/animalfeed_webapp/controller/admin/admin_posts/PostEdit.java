@@ -23,7 +23,7 @@ import java.nio.file.Paths;
 public class PostEdit extends HttpServlet {
     private PostService postService;
     private UserService userService;
-    private static final String UPLOAD_DIRECTORY = "/views/template/assets/images/product/vịt";
+    private static final String UPLOAD_DIRECTORY = "/views/template/assets/images/news";
 
     @Override
     public void init() throws ServletException {

@@ -39,7 +39,7 @@ public class PostManager extends HttpServlet {
 
             if (!userService.hasPermission(userId, "NEWS_MANAGEMENT")) {
                 request.getSession().setAttribute("error", "Bạn không có quyền xem danh sách tin tức (yêu cầu quyền NEWS_MANAGEMENT).");
-                response.sendRedirect(request.getContextPath() + "/home");
+                response.sendRedirect(request.getContextPath() + "/dashboard");
                 return;
             }
 
@@ -77,7 +77,7 @@ public class PostManager extends HttpServlet {
 
             if (!userService.hasPermission(userId, "NEWS_MANAGEMENT")) {
                 request.getSession().setAttribute("error", "Bạn không có quyền truy cập (yêu cầu quyền NEWS_MANAGEMENT).");
-                response.sendRedirect(request.getContextPath() + "/home");
+                response.sendRedirect(request.getContextPath() + "/dashboard");
                 return;
             }
 

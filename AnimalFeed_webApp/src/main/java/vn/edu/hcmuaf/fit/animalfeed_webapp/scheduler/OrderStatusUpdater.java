@@ -25,7 +25,6 @@ public class OrderStatusUpdater implements ServletContextListener {
         orderService = new OrderService();
 
         // Run the status update check every 30 minutes
-        scheduler.scheduleAtFixedRate(this::updateOrderStatuses, 0, 10, TimeUnit.SECONDS);
     }
 
     @Override

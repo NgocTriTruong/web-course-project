@@ -7,14 +7,16 @@ public class JobManager implements Serializable {
     private String location;
     private String phone;
     private String job_position;
+    private int status;
 
     public JobManager() {}
 
-    public JobManager(int id, String location, String phone, String job_position) {
+    public JobManager(int id, String location, String phone, String job_position, int status) {
         this.id = id;
         this.location = location;
         this.phone = phone;
         this.job_position = job_position;
+        this.status = status;
     }
 
     public int getId() {
@@ -49,6 +51,14 @@ public class JobManager implements Serializable {
         this.job_position = job_position;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
 
     @Override
     public String toString() {
@@ -57,6 +67,7 @@ public class JobManager implements Serializable {
                 ", location='" + location + '\'' +
                 ", phone='" + phone + '\'' +
                 ", job_position='" + job_position + '\'' +
+                ", status=" + status +
                 '}';
     }
 }

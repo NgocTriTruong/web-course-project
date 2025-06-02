@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,17 +60,18 @@
     <!-- Container for demo purpose -->
     <div class="container px-4 ">
         <div class="mb-3 d-flex justify-content-end px-4">
-            <a class="btn bg_green text-white fw-bold" href="jobAddtion.jsp">
+            <a class="btn bg_green text-white fw-bold" href="${pageContext.request.contextPath}/job-addtion-admin">
                 <i class="far fa-square-plus"></i>
                 <span>Thêm công việc</span>
             </a>
         </div>
         <div class="input-group mb-4 px-4">
-            <input type="text" class="form-control" id="advanced-search-input"
-                   placeholder=""/>
-            <button class="btn bg_green" id="advanced-search-button" type="button">
-                <i class="fa fa-search"></i>
-            </button>
+            <form action="${pageContext.request.contextPath}/job-managemet-admin" method="get" class="input-group mb-4 px-4">
+                <input type="text" class="form-control" id="advanced-search-input" name="keyword" placeholder="Tìm kiếm công việc..."/>
+                <button class="btn bg_green" id="advanced-search-button" type="submit">
+                    <i class="fa fa-search"></i>
+                </button>
+            </form>
         </div>
         <table class="table align-middle mb-0 bg-white">
             <thead class="bg-light">
@@ -76,95 +80,61 @@
                 <th>Vị trí công việc</th>
                 <th>Nơi làm việc</th>
                 <th>Số điện thoại liên hệ</th>
+                <th>Trạng thái</th>
                 <th>Hành động</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>
-                    <span class="ms-2 h6">1</span>
-                </td>
-                <td>
-                    <div class="">
-                        <p class="h6 fw-bold mb-1">TUYỂN DỤNG NHÂN VIÊN PHÒNG KINH DOANH</p>
-                    </div>
-                </td>
-                <td>
-                    <div class="">
-                        <p class="h6 fw-bold mb-1">Tỉnh Hà Nam</p>
-                    </div>
-                </td>
-                <td>
-                    <div class="ms-1">
-                        <p class="h6 mb-1">0797534971</p>
-                    </div>
-                </td>
-                <td>
-                    <a href="jobAddition.jsp" class="btn bg_green btn-floating" style="font-size: 16px;">
-                        <i class="far fa-pen-to-square"></i>
-                    </a>
-                    <button type="button" class="btn bg_yellow btn-floating" style="font-size: 16px;">
-                        <i class="far fa-trash-can"></i>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span class="ms-2 h6">2</span>
-                </td>
-                <td>
-                    <div class="">
-                        <p class="h6 fw-bold mb-1">TUYỂN DỤNG NHÂN VIÊN PHÒNG KINH DOANH</p>
-                    </div>
-                </td>
-                <td>
-                    <div class="">
-                        <p class="h6 fw-bold mb-1">Tỉnh Hà Nam</p>
-                    </div>
-                </td>
-                <td>
-                    <div class="ms-1">
-                        <p class="h6 mb-1">0797534971</p>
-                    </div>
-                </td>
-                <td>
-                    <a href="jobAddition.jsp" class="btn bg_green btn-floating" style="font-size: 16px;">
-                        <i class="far fa-pen-to-square"></i>
-                    </a>
-                    <button type="button" class="btn bg_yellow btn-floating" style="font-size: 16px;">
-                        <i class="far fa-trash-can"></i>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span class="ms-2 h6">3</span>
-                </td>
-                <td>
-                    <div class="">
-                        <p class="h6 fw-bold mb-1">TUYỂN DỤNG NHÂN VIÊN PHÒNG KINH DOANH</p>
-                    </div>
-                </td>
-                <td>
-                    <div class="">
-                        <p class="h6 fw-bold mb-1">Tỉnh Hà Nam</p>
-                    </div>
-                </td>
-                <td>
-                    <div class="ms-1">
-                        <p class="h6 mb-1">0797534971</p>
-                    </div>
-                </td>
-                <td>
-                    <a href="jobAddition.jsp" class="btn bg_green btn-floating" style="font-size: 16px;">
-                        <i class="far fa-pen-to-square"></i>
-                    </a>
-                    <button type="button" class="btn bg_yellow btn-floating" style="font-size: 16px;">
-                        <i class="far fa-trash-can"></i>
-                    </button>
-                </td>
-            </tr>
-
+            <c:choose>
+                <c:when test="${empty jobs}">
+                    <tr>
+                        <td colspan="4" class="no-data">Không có danh mục nào để hiển thị.</td>
+                    </tr>
+                </c:when>
+                <c:otherwise>
+                    <c:forEach var="jobs" items="${jobs}" varStatus="status">
+                        <tr>
+                            <td><span class="ms-2 h6">${status.count}</span></td>
+                            <td>
+                                <div class="">
+                                    <p class="h6 mb-1">${jobs.job_position}</p>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="">
+                                    <p class="h6 mb-1">${jobs.location}</p>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="">
+                                    <p class="h6 mb-1">${jobs.phone}</p>
+                                </div>
+                            </td>
+                            <td>
+                            <span class="badge rounded-pill d-inline ms-1" style="font-size: 14px; background-color: ${jobs.status == 1 ? 'green' : jobs.status == 2 ? 'orange' : 'red'};">
+                                <c:choose>
+                                    <c:when test="${jobs.status == 1}">Hoạt động</c:when>
+                                    <c:when test="${jobs.status == 2}">Ngưng hoạt động</c:when>
+                                    <c:otherwise>Đã xóa</c:otherwise>
+                                </c:choose>
+                            </span>
+                            </td>
+                            <td>
+                                <a href="${pageContext.request.contextPath}/edit-job-admin?jobId=${jobs.id}" class="btn btn-success btn-floating" style="font-size: 16px;" title="Chỉnh sửa">
+                                    <i class="far fa-pen-to-square"></i>
+                                </a>
+                                <c:if test="${jobs.status != 0}">
+                                    <a href="#" onclick="showMessConfirmJob(${jobs.id})">
+                                        <button type="button" class="btn bg_yellow btn-floating" style="font-size: 16px;" >
+                                            <i class="far fa-trash-can"></i>
+                                        </button>
+                                    </a>
+                                </c:if>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </c:otherwise>
+            </c:choose>
             </tbody>
         </table>
 
@@ -176,6 +146,15 @@
 <footer class="bottom-0 w-100 text-center py-2 bg-light">
     <p class="pt-3" style="color: rgba(0, 0, 0, 0.5); margin-left: 150px;">©2024 Group-11</p>
 </footer>
+
+<script>
+    function showMessConfirmJob(id) {
+        var option = confirm("Bạn có chắc chắn muốn xóa?");
+        if(option === true) {
+            window.location.href = "delete-job-admin?jobId=" + id;
+        }
+    }
+</script>
 
 </body>
 </html>
