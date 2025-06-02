@@ -17,20 +17,36 @@ public class AddOrderController extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        userService = new UserService();
+        userService = UserService.getInstance();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String email = request.getParameter("email"); // Lấy email từ request
+        String email = request.getParameter("email");
+
+        // Lấy userId từ session
+        Integer userId = (Integer) request.getSession().getAttribute("userId");
+        if (userId == null) {
+            request.getSession().setAttribute("error", "Vui lòng đăng nhập để truy cập.");
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }
+
+        // Kiểm tra quyền ORDER_MANAGEMENT
+        if (!userService.hasPermission(userId, "ORDER_MANAGEMENT")) {
+            request.getSession().setAttribute("error", "Bạn không có quyền truy cập trang thêm đơn hàng (yêu cầu quyền ORDER_MANAGEMENT).");
+            response.sendRedirect(request.getContextPath() + "/order-manager");
+            return;
+        }
+
         if (email != null) { // Xử lý AJAX request để lấy thông tin khách hàng
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             Gson gson = new Gson();
             try {
-                User user = userService.getUserByEmail(email); // Lấy user bằng email
+                User user = userService.getUserByEmail(email);
                 if (user != null) {
-                    response.getWriter().write(gson.toJson(new UserResponse(user.getFullName(), user.getPhone()))); // Trả về cả số điện thoại
+                    response.getWriter().write(gson.toJson(new UserResponse(user.getFullName(), user.getPhone())));
                 } else {
                     response.getWriter().write("{\"fullName\": null, \"phone\": null}");
                 }

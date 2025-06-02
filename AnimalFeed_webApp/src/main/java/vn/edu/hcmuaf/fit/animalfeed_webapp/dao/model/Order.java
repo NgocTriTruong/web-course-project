@@ -15,6 +15,7 @@ public class Order implements Serializable {
     private double shippingPrice;
     private LocalDateTime orderDate;
     private Date shippingDate;
+    private String shippingCode;
 
     public Order() {}
 
@@ -111,6 +112,14 @@ public class Order implements Serializable {
         this.shippingDate = shippingDate;
     }
 
+    public String getShippingCode() {
+        return shippingCode;
+    }
+
+    public void setShippingCode(String shippingCode) {
+        this.shippingCode = shippingCode;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
@@ -124,6 +133,7 @@ public class Order implements Serializable {
                 ", shippingPrice=" + shippingPrice +
                 ", orderDate=" + orderDate +
                 ", shippingDate=" + shippingDate +
+                ", shippingCode='" + shippingCode + '\'' +
                 '}';
     }
 }

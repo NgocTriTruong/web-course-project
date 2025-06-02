@@ -30,7 +30,7 @@ public class AddOrder extends HttpServlet {
     @Override
     public void init() throws ServletException {
         orderService = new OrderService();
-        userService = new UserService();
+        userService = UserService.getInstance();
         productService = new ProductService();
         productWithDiscountDao = new ProductWithDiscountDao();
     }
@@ -40,8 +40,23 @@ public class AddOrder extends HttpServlet {
         try {
             System.out.println("Received POST request to /add-order");
 
+            // Lấy userId từ session
+            Integer userId = (Integer) request.getSession().getAttribute("userId");
+            if (userId == null) {
+                request.getSession().setAttribute("error", "Vui lòng đăng nhập để thực hiện thao tác này.");
+                response.sendRedirect(request.getContextPath() + "/login");
+                return;
+            }
+
+            // Kiểm tra quyền ORDER_MANAGEMENT
+            if (!userService.hasPermission(userId, "ORDER_MANAGEMENT")) {
+                request.getSession().setAttribute("error", "Bạn không có quyền thêm đơn hàng (yêu cầu quyền ORDER_MANAGEMENT).");
+                response.sendRedirect(request.getContextPath() + "/order-manager");
+                return;
+            }
+
             // Lấy dữ liệu từ form
-            String email = request.getParameter("email"); // Thay "phone" thành "email"
+            String email = request.getParameter("email");
             String customerName = request.getParameter("customerName");
             String address = request.getParameter("address");
             String[] productIds = request.getParameterValues("productIds[]");
@@ -65,25 +80,24 @@ public class AddOrder extends HttpServlet {
             }
 
             // Kiểm tra email và lấy hoặc tạo userId
-            int userId;
-            User existingUser = userService.getUserByEmail(email); // Sử dụng getUserByEmail
+            int orderUserId;
+            User existingUser = userService.getUserByEmail(email);
             System.out.println("User fetched: " + (existingUser != null ? existingUser.getFullName() : "null"));
             if (existingUser != null) {
-                userId = existingUser.getId();
+                orderUserId = existingUser.getId();
                 if (customerName == null || customerName.trim().isEmpty()) {
                     customerName = existingUser.getFullName();
                 }
-                // Bỏ phần cập nhật số điện thoại vì UserService không hỗ trợ
             } else {
-                userService.registerUser(customerName, email, "defaultPassword"); // Tạo user mới với email
+                userService.registerUser(customerName, email, "defaultPassword");
                 User newUser = userService.getUserByEmail(email);
-                userId = newUser.getId();
-                System.out.println("New user created with ID: " + userId);
+                orderUserId = newUser.getId();
+                System.out.println("New user created with ID: " + orderUserId);
             }
 
             // Tạo đối tượng Order
             Order order = new Order();
-            order.setUserId(userId);
+            order.setUserId(orderUserId);
             order.setAddress(address);
             order.setStatus(1);
             order.setOrderDate(LocalDateTime.now());
@@ -101,7 +115,7 @@ public class AddOrder extends HttpServlet {
             for (int i = 0; i < productIds.length; i++) {
                 int productId = Integer.parseInt(productIds[i]);
                 int quantity = Integer.parseInt(quantities[i]);
-                double price = Double.parseDouble(prices[i]); // Giá đã giảm từ form
+                double price = Double.parseDouble(prices[i]);
 
                 Product product = productService.getProductById(productId);
                 if (product == null) {
@@ -112,10 +126,10 @@ public class AddOrder extends HttpServlet {
                 }
 
                 // Kiểm tra giá đã giảm
-                double finalPrice = product.getPrice(); // Giá gốc
+                double finalPrice = product.getPrice();
                 for (ProductWithDiscountDTO discountedProduct : discountedProducts) {
                     if (discountedProduct.getId() == productId) {
-                        finalPrice = discountedProduct.getDiscountedPrice(); // Giá đã giảm
+                        finalPrice = discountedProduct.getDiscountedPrice();
                         System.out.println("Discount applied for Product ID " + productId + ". Original Price: " + product.getPrice() + ", Discounted Price: " + finalPrice);
                         break;
                     }
@@ -128,17 +142,17 @@ public class AddOrder extends HttpServlet {
                 OrderDetail detail = new OrderDetail();
                 detail.setProductId(productId);
                 detail.setQuantity(quantity);
-                detail.setTotalPrice(price * quantity); // Sử dụng giá đã giảm từ form
+                detail.setTotalPrice(price * quantity);
                 orderDetails.add(detail);
             }
 
             // Lưu Order và lấy ID
-            int orderId = orderService.insertOrder(order);
+            int orderId = orderService.insertOrder(order, userId);
             System.out.println("Order inserted with ID: " + orderId);
 
             for (OrderDetail detail : orderDetails) {
                 detail.setOrderId(orderId);
-                orderService.insertOrderDetails(detail);
+                orderService.insertOrderDetails(detail, userId);
                 System.out.println("Inserted OrderDetail for Product ID: " + detail.getProductId());
             }
 
@@ -157,8 +171,8 @@ public class AddOrder extends HttpServlet {
         } catch (Exception e) {
             System.err.println("Error in AddOrder: " + e.getMessage());
             e.printStackTrace();
-            request.setAttribute("errorMessage", e.getMessage());
-            request.getRequestDispatcher("/views/admin/orderAddition.jsp").forward(request, response);
+            request.getSession().setAttribute("error", e.getMessage());
+            response.sendRedirect(request.getContextPath() + "/add-order-management");
         }
     }
 }

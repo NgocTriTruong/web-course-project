@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -54,6 +55,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h2 class="mt-2">Chi tiết đơn hàng #${order.id}</h2>
+                <h5 class="text-muted">Mã GHN: ${fn:escapeXml(order.shippingCode)}</h5>
 
                 <div class="order-detail-container">
                     <div class="row mb-4">
@@ -102,9 +104,9 @@
                         <c:forEach var="detail" items="${orderDetailsWithProducts}">
                             <div class="product-item">
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <h6>${detail.product.name}</h6>
-                                        <p>${detail.product.description}</p>
+                                    <div class="col-md-6 d-flex">
+                                        <strong>${detail.product.name}</strong>
+                                        <p class="ms-3">${detail.product.description}</p>
                                     </div>
                                     <div class="col-md-2">
                                         <p>Số lượng: ${detail.orderDetail.quantity}</p>

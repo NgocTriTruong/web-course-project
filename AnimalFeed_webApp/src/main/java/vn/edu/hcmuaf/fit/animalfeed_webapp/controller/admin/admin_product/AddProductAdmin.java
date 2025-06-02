@@ -6,9 +6,11 @@ import jakarta.servlet.annotation.*;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Category;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Discount;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.CategoryService;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.DiscountService;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.ProductService;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.services.UserService;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,7 +19,6 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 @MultipartConfig(
         maxFileSize = 1024 * 1024 * 5,    // 5MB
@@ -31,6 +32,7 @@ public class AddProductAdmin extends HttpServlet {
     private CategoryService categoryService;
     private DiscountService discountService;
     private ProductService productService;
+    private UserService userService; // Thêm UserService để kiểm tra quyền
     private Map<Integer, String> categoryFolderMap;
 
     @Override
@@ -38,6 +40,7 @@ public class AddProductAdmin extends HttpServlet {
         categoryService = new CategoryService();
         discountService = new DiscountService();
         productService = new ProductService();
+        userService = UserService.getInstance(); // Khởi tạo UserService
 
         // Khởi tạo map ánh xạ categoryId với tên thư mục
         categoryFolderMap = new HashMap<>();
@@ -49,31 +52,92 @@ public class AddProductAdmin extends HttpServlet {
         }
     }
 
+    private boolean hasProductManagementPermission(HttpSession session) {
+        Integer userId = (Integer) session.getAttribute("userId");
+        System.out.println("Checking permission for userId: " + userId + ", Session: " + session);
+        if (userId == null) {
+            System.out.println("UserId is null in session");
+            return false;
+        }
+        boolean hasPermission = userService.hasPermission(userId, "PRODUCT_MANAGEMENT");
+        System.out.println("User Role: " + (userService.getById(userId) != null ? userService.getById(userId).getRole() : "null")
+                + ", Sub Role: " + (userService.getById(userId) != null ? userService.getById(userId).getSub_role() : "null")
+                + ", Has PRODUCT_MANAGEMENT permission: " + hasPermission);
+        return hasPermission;
+    }
+
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+        System.out.println("doGet - Session: " + session + ", userId: " + session.getAttribute("userId")
+                + ", Session Attributes: " + session.getAttributeNames().toString());
+
+        if (session == null || session.getAttribute("userId") == null) {
+            System.out.println("Session or userId is null, redirecting to login");
+            session.setAttribute("error", "Vui lòng đăng nhập để truy cập.");
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }
+
+        if (!hasProductManagementPermission(session)) {
+            System.out.println("No permission, redirecting to product-manager");
+            session.setAttribute("error", "Bạn không có quyền truy cập trang này (yêu cầu quyền PRODUCT_MANAGEMENT).");
+            response.sendRedirect(request.getContextPath() + "/product-manager");
+            return;
+        }
+
+        Integer userId = (Integer) session.getAttribute("userId");
+        User currentUser = userService.getById(userId);
+        if (currentUser != null) {
+            System.out.println("Current User ID: " + userId + ", Role: " + currentUser.getRole() + ", Sub Role: " + currentUser.getSub_role());
+            session.setAttribute("subRole", currentUser.getSub_role()); // Đồng bộ với AddUser
+        } else {
+            System.out.println("Current User is null for userId: " + userId);
+            session.setAttribute("error", "Không tìm thấy thông tin người dùng. Vui lòng đăng nhập lại.");
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }
+
         try {
             List<Category> categories = categoryService.getAll();
             List<Discount> discounts = discountService.getAll();
 
+            if (categories == null || categories.isEmpty() || discounts == null || discounts.isEmpty()) {
+                throw new ServletException("Không thể tải dữ liệu danh mục hoặc khuyến mãi.");
+            }
+
             request.setAttribute("categoriesData", categories);
             request.setAttribute("discountsData", discounts);
-            request.getRequestDispatcher("views/admin/productAddition.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/admin/productAddition.jsp").forward(request, response);
         } catch (Exception e) {
-            log("Error in doGet: ", e);
-            request.setAttribute("error", "Không thể tải trang thêm sản phẩm.");
-            request.getRequestDispatcher("views/admin/error.jsp").forward(request, response);
+            System.out.println("Error in doGet: " + e.getMessage());
+            session.setAttribute("error", "Không thể tải trang thêm sản phẩm: " + e.getMessage());
+            response.sendRedirect(request.getContextPath() + "/product-manager");
         }
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8"); // Đồng bộ với AddUser
         HttpSession session = request.getSession(false);
-        Integer userId = (session != null) ? (Integer) session.getAttribute("userId") : null;
 
-        if (userId == null) {
-            response.sendRedirect("login.jsp");
+        if (session == null || session.getAttribute("userId") == null) {
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }
+
+        if (!hasProductManagementPermission(session)) {
+            session.setAttribute("error", "Bạn không có quyền thực hiện thao tác này.");
+            response.sendRedirect(request.getContextPath() + "/product-manager");
+            return;
+        }
+
+        Integer userId = (Integer) session.getAttribute("userId");
+        User currentUser = userService.getById(userId);
+        if (currentUser == null) {
+            System.out.println("Current User is null for userId: " + userId);
+            session.setAttribute("error", "Không tìm thấy thông tin người dùng. Vui lòng đăng nhập lại.");
+            response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
 
@@ -84,25 +148,29 @@ public class AddProductAdmin extends HttpServlet {
             }
 
             String imagePath = handleFileUpload(request, product.getCat_id());
-            product.setImg(imagePath);
+            product.setImg(imagePath != null ? imagePath : "/views/template/assets/images/product/default.jpg");
             product.setCreateDate(LocalDate.now());
+            product.setStatus(1); // Đặt trạng thái mặc định là active
 
             productService.insertProduct(product, userId);
-            response.sendRedirect("product-manager?success=true");
+            session.setAttribute("message", "Thêm sản phẩm thành công.");
+            response.sendRedirect(request.getContextPath() + "/product-manager");
 
         } catch (IllegalArgumentException e) {
-            request.setAttribute("error", e.getMessage());
+            session.setAttribute("error", e.getMessage());
+            forwardToForm(request, response);
+        } catch (RuntimeException e) {
+            session.setAttribute("error", "Lỗi khi thêm sản phẩm: " + e.getMessage());
             forwardToForm(request, response);
         } catch (Exception e) {
-            log("Error in doPost: ", e);
-            request.setAttribute("error", "Có lỗi xảy ra khi thêm sản phẩm.");
+            System.out.println("Error in doPost: " + e.getMessage());
+            session.setAttribute("error", "Có lỗi xảy ra khi thêm sản phẩm: " + e.getMessage());
             forwardToForm(request, response);
         }
     }
 
     private Product extractProductFromRequest(HttpServletRequest request) {
         Product product = new Product();
-
         try {
             product.setCat_id(Integer.parseInt(request.getParameter("category")));
             product.setName(validateString(request.getParameter("name"), "Tên sản phẩm"));
@@ -116,7 +184,7 @@ public class AddProductAdmin extends HttpServlet {
             }
             return product;
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Dữ liệu số không hợp lệ");
+            throw new IllegalArgumentException("Dữ liệu số không hợp lệ: " + e.getMessage());
         }
     }
 
@@ -124,12 +192,10 @@ public class AddProductAdmin extends HttpServlet {
             throws IOException, ServletException {
         Part filePart = request.getPart("image");
         if (filePart == null || filePart.getSize() == 0) {
-            return null; // Hoặc trả về đường dẫn ảnh mặc định nếu cần
+            return "/views/template/assets/images/product/default.jpg"; // Ảnh mặc định
         }
 
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-
-        // Xác định thư mục dựa trên categoryId
         String categoryFolder = categoryFolderMap.getOrDefault(categoryId, "others");
         String uploadPath = getServletContext().getRealPath("") + BASE_UPLOAD_DIRECTORY + categoryFolder;
 
@@ -138,7 +204,7 @@ public class AddProductAdmin extends HttpServlet {
             uploadDir.mkdirs();
         }
 
-        String finalFileName = fileName;
+        String finalFileName = System.currentTimeMillis() + "_" + fileName; // Tránh trùng lặp tên file
         String filePath = uploadPath + File.separator + finalFileName;
         filePart.write(filePath);
 
@@ -156,6 +222,6 @@ public class AddProductAdmin extends HttpServlet {
             throws ServletException, IOException {
         request.setAttribute("categoriesData", categoryService.getAll());
         request.setAttribute("discountsData", discountService.getAll());
-        request.getRequestDispatcher("views/admin/productAddition.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/admin/productAddition.jsp").forward(request, response);
     }
 }

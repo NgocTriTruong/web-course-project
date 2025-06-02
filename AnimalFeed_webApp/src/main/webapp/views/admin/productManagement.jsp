@@ -40,22 +40,42 @@
                                 );">
         </div>
         <!-- Background gradient -->
-    
+
         <div class="container px-4">
-          <div class="card shadow-0" style="
+            <div class="card shadow-0" style="
                                             margin-top: -100px;
                                             ">
-            <div class="card-body py-5 px-5">
-              <div class="row gx-lg-4 align-items-center">
-                <div class="col-lg-6 mb-4 mb-lg-0 text-center text-lg-start">
-                  <h1 class="">Quản lý sản phẩm</h1>
+                <div class="card-body py-5 px-5">
+                    <div class="row gx-lg-4 align-items-center">
+                        <div class="col-lg-6 mb-4 mb-lg-0 text-center text-lg-start">
+                            <h1 class="">Quản lý sản phẩm</h1>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </section>
+    </section>
 
+    <!-- Hiển thị thông báo lỗi hoặc thành công nếu có -->
+    <div class="container px-4">
+        <% String error = (String) session.getAttribute("error");
+            if (error != null) { %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <%= error %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <% session.removeAttribute("error"); %>
+        <% } %>
+
+        <% String message = (String) session.getAttribute("message");
+            if (message != null) { %>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <%= message %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <% session.removeAttribute("message"); %>
+        <% } %>
+    </div>
 
     <!-- Container for demo purpose -->
     <div class="container px-4 ">
@@ -142,11 +162,11 @@
                                 <i class="far fa-pen-to-square"></i>
                             </a>
                             <c:if test="${p.status != 0}">
-                            <a href="#" onclick="showMessConfirm(${p.id})">
-                                <button type="button" class="btn bg_yellow btn-floating" style="font-size: 16px;" >
-                                    <i class="far fa-trash-can"></i>
-                                </button>
-                            </a>
+                                <a href="#" onclick="showMessConfirm(${p.id})">
+                                    <button type="button" class="btn bg_yellow btn-floating" style="font-size: 16px;" >
+                                        <i class="far fa-trash-can"></i>
+                                    </button>
+                                </a>
                             </c:if>
                         </td>
                     </tr>

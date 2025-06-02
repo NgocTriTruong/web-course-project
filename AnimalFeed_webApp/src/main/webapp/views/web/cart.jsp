@@ -55,7 +55,7 @@
                         <div class="cart-item bg-white p-3 mb-3" data-product-id="${item.productId}" data-status="${item.status}">
                             <div class="d-flex align-items-center">
                                 <input type="checkbox" class="me-3 item-checkbox">
-                                <img src="${item.img}" alt="${item.name}" class="me-3" width="150px" height="150px">
+                                <img src="${pageContext.request.contextPath}${item.img}" alt="${item.name}" class="me-3" width="150px" height="150px">
                                 <div>
                                     <h5>${item.name}</h5>
                                     <h6>${item.desc}</h6>

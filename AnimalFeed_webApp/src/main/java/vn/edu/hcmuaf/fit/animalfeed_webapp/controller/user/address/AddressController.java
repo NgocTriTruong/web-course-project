@@ -2,6 +2,7 @@ package vn.edu.hcmuaf.fit.animalfeed_webapp.controller.user.address;
 
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.AddressDao;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Address;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Category;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
 
 import jakarta.servlet.ServletException;
@@ -9,6 +10,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.services.CategoryService;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -42,6 +45,11 @@ public class AddressController extends HttpServlet {
                 }
             }
         }
+
+        CategoryService categoryService = new CategoryService();
+        List<Category> categories = categoryService.getAll();
+
+        request.setAttribute("categoriesData", categories);
         request.setAttribute("addressList", addressList);
         request.getRequestDispatcher("/views/web/chi_tiet_ca_nhan/so_dia_chi.jsp").forward(request, response);
     }

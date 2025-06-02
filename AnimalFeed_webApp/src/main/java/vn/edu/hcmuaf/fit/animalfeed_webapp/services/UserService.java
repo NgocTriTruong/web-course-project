@@ -226,8 +226,8 @@ public class UserService {
     public boolean hasPermission(int userId, String permission) {
         User user = getUserById(userId);
         System.out.println("Checking permission for userId: " + userId + ", permission: " + permission);
-        if (user == null || user.getRole() != 1) {
-            System.out.println("User is null or not an admin: " + (user == null ? "null" : "role=" + user.getRole()));
+        if (user == null) {
+            System.out.println("User is null");
             return false;
         }
         System.out.println("User Role: " + user.getRole() + ", Sub Role: " + user.getSub_role());
@@ -241,13 +241,21 @@ public class UserService {
                 System.out.println("Has USER_MANAGEMENT permission: " + hasUserManagement);
                 return hasUserManagement;
             case "PRODUCT_MANAGEMENT":
-                return user.getSub_role() == 2;
+                boolean hasProductManagement = user.getSub_role() == 2;
+                System.out.println("Has PRODUCT_MANAGEMENT permission: " + hasProductManagement);
+                return hasProductManagement;
+            case "CATEGORY_MANAGEMENT":
+                boolean hasCategoryManagement = user.getSub_role() == 3;
+                System.out.println("Has CATEGORY_MANAGEMENT permission: " + hasCategoryManagement);
+                return hasCategoryManagement;
             case "ORDER_MANAGEMENT":
-                return user.getSub_role() == 3;
-            case "SHIPPER_MANAGEMENT":
-                return user.getSub_role() == 4;
+                boolean hasOrderManagement = user.getSub_role() == 3;
+                System.out.println("Has ORDER_MANAGEMENT permission: " + hasOrderManagement);
+                return hasOrderManagement;
             case "NEWS_MANAGEMENT":
                 return user.getSub_role() == 5;
+            case "JOB_MANAGEMENT":
+                return user.getSub_role() == 6;
             default:
                 return false;
         }
@@ -275,5 +283,10 @@ public class UserService {
             throw new RuntimeException("Không tìm thấy tài khoản với email " + email);
         }
         return optionalUser.get();
+    }
+
+    //kiểm tra xem người dùng có phải là admin hay không
+    public boolean checkIfAdmin(int userId) {
+        return userDao.checkIfAdmin(userId);
     }
 }
