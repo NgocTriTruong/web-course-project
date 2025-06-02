@@ -168,9 +168,9 @@ public class OrderController extends HttpServlet {
             // Create order
             Order order = new Order();
             order.setUserId(user.getId());
-            order.setStatus(0); // Initial order status (e.g., Pending)
+            order.setStatus(1); // Initial order status (e.g., Pending)
             order.setAddress(address);
-            order.setTotalPrice(totalPrice + shippingFee);
+            order.setTotalPrice(totalPrice);
             order.setTotalQuantity(totalQuantity);
             order.setOrderDate(LocalDateTime.now());
             order.setShippingPrice(shippingFee);
@@ -196,7 +196,7 @@ public class OrderController extends HttpServlet {
             payment.setMethod(paymentMethod);
             payment.setOrderId(orderId);
             payment.setUserId(user.getId());
-            payment.setStatus("VNPAY".equals(paymentMethod) ? 0 : 1); // 0 for pending VNPAY, 1 for COD
+            payment.setStatus("VNPAY".equals(paymentMethod) ? 1 : 0); // 0 for pending VNPAY, 1 for COD
 
             try {
                 paymentService.addPayment(payment);

@@ -284,14 +284,15 @@
                                 <h5 class="mb-3">Tổng thanh toán</h5>
                                 <div class="d-flex justify-content-between mb-2">
                                     <span>Tổng tiền hàng:</span>
-                                    <span class="fw-bold"><fmt:formatNumber value="${sessionScope.cart.totalPrice}" pattern="#,###.###"/> đ</span>
+                                    <span class="fw-bold"><fmt:formatNumber value="${totalPrice}" pattern="#,###.###"/> đ</span>
                                 </div>
-                                <input type="hidden" id="cartTotalPrice" value="${sessionScope.cart.totalPrice}">
+                                <input type="hidden" id="cartTotalPrice" value="${totalPrice}">
                                 <div class="d-flex justify-content-between mb-2">
                                     <span>Phí vận chuyển:</span>
                                     <span id="summaryShippingFee">0 đ</span>
                                 </div>
                                 <hr>
+                                <c:set var="totalAmount" value="${totalPrice}" />
                                 <div class="d-flex justify-content-between mb-3">
                                     <span class="fw-bold">Thành tiền:</span>
                                     <span class="fw-bold price" id="totalPayment"><fmt:formatNumber value="${totalAmount}" pattern="#,###.###"/> đ</span>
