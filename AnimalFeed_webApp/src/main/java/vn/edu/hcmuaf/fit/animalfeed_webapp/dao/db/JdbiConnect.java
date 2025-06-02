@@ -26,6 +26,10 @@ public class JdbiConnect {
         try {
             ds.setUseCompression(true);
             ds.setAutoReconnect(true);
+            // Bật SSL (Aiven yêu cầu)
+            ds.setUseSSL(true);
+            ds.setRequireSSL(true);
+            ds.setVerifyServerCertificate(false); // Aiven không yêu cầu cert cụ thể
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
