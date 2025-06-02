@@ -4,14 +4,14 @@ package vn.edu.hcmuaf.fit.animalfeed_webapp.controller.admin.admin_job;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.JobManager;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.services.*;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.services.CategoryService;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.services.JobManagerService;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.services.UserService;
 
 import java.io.IOException;
-import java.util.List;
 
-@WebServlet(name = "JobManagemet", value = "/job-managemet-admin")
-public class JobManagemet extends HttpServlet {
+@WebServlet(name = "DeleteJob", value = "/delete-job-admin")
+public class DeleteJob extends HttpServlet {
     private JobManagerService jobManagerService;
     private UserService userService;
 
@@ -34,10 +34,10 @@ public class JobManagemet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
 
-        if (session == null || session.getAttribute("userId") == null) {
-            session = request.getSession(true);
-            session.setAttribute("error", "Vui lòng đăng nhập để truy cập.");
-            response.sendRedirect(request.getContextPath() + "/login");
+        Integer userId = (session != null) ? (Integer) session.getAttribute("userId") : null;
+
+        if (userId == null) {
+            response.sendRedirect("login");
             return;
         }
 
@@ -52,17 +52,23 @@ public class JobManagemet extends HttpServlet {
             return;
         }
 
-        String keyword = request.getParameter("keyword");
-        List<JobManager> jobs;
+        String jobIdStr = request.getParameter("jobId");
 
-        if (keyword != null && !keyword.trim().isEmpty()) {
-            jobs = jobManagerService.searchJobs(keyword);
-        } else {
-            jobs = jobManagerService.getAllJobs();
+        try {
+            if (jobIdStr == null || jobIdStr.trim().isEmpty()) {
+                throw new IllegalArgumentException("ID công việc không hợp lệ.");
+            }
+
+            int jobId = Integer.parseInt(jobIdStr);
+            jobManagerService.deleteJob(jobId, userId);
+            session.setAttribute("message", "Xóa công việc thành công!");
+        } catch (IllegalArgumentException e) {
+            session.setAttribute("error", e.getMessage());
+        } catch (Exception e) {
+            session.setAttribute("error", "Có lỗi xảy ra khi xóa công việc: " + e.getMessage());
         }
-        request.setAttribute("jobs", jobs);
 
-        request.getRequestDispatcher("views/admin/jobManagemet.jsp").forward(request, response);
+        response.sendRedirect(request.getContextPath() + "/job-managemet-admin");
     }
 
     @Override

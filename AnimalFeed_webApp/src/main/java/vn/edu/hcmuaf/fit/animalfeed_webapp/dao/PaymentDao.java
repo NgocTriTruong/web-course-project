@@ -58,7 +58,8 @@ public class PaymentDao {
                 return handle.createQuery("SELECT * FROM payments WHERE order_id = :orderId")
                         .bind("orderId", orderId)
                         .mapToBean(Payment.class)
-                        .findOnly();
+                        .findFirst() // Trả về Optional<Payment>
+                        .orElse(null); // Trả về null nếu không tìm thấy
             });
         } catch (Exception e) {
             e.printStackTrace();

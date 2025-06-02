@@ -142,7 +142,7 @@ public class OrderHistoryController extends HttpServlet {
             request.setAttribute("formattedOrderDate", formattedOrderDate);
 
             //Lay danh sach phuong thuc thanh toan
-            Payment payments = paymentService.getPaymentByOrderId(order.getId());
+            Payment payments = paymentService.getPaymentByOrderId(orderIdInt);
             request.setAttribute("payments", payments);
 
             request.setAttribute("order", order);

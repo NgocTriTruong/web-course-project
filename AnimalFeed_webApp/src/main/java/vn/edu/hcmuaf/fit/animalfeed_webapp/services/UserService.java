@@ -256,6 +256,9 @@ public class UserService {
             case "NEWS_MANAGEMENT":
                 boolean hasNewsManagement = user.getSub_role() == 5;
                 System.out.println("Has NEWS_MANAGEMENT permission: " + hasNewsManagement);
+                return user.getSub_role() == 5;
+            case "JOB_MANAGEMENT":
+                return user.getSub_role() == 6;
             default:
                 return false;
         }
@@ -287,5 +290,8 @@ public class UserService {
 
     public boolean isAdmin(int userId) {
         return PostDao.checkIfAdmin(userId); // Sử dụng phương thức từ PostDao
+    //kiểm tra xem người dùng có phải là admin hay không
+    public boolean checkIfAdmin(int userId) {
+        return userDao.checkIfAdmin(userId);
     }
 }
