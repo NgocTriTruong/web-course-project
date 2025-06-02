@@ -19,7 +19,7 @@
     <script src="${pageContext.request.contextPath}/views/admin/assets/js/mdb.min.js"></script>
 
     <!-- js add header -->
-     <script src="${pageContext.request.contextPath}/views/admin/assets/js/add_header.js" defer></script>
+    <script src="${pageContext.request.contextPath}/views/admin/assets/js/add_header.js" defer></script>
 </head>
 
 <body>
@@ -32,23 +32,22 @@
 <!--Main layout-->
 <main class="mb-5" style="margin-top: 100px;">
 
-
     <!-- Container for demo purpose -->
     <div class="container px-4 ">
-        <a href="postManagement.jsp" class="btn btn-link mb-2 text_green" style="font-size: 16px;">
+        <a href="${pageContext.request.contextPath}/post-management" class="btn btn-link mb-2 text_green" style="font-size: 16px;">
             <i class="fas fa-angle-left"></i> Quay lại
         </a>
         <div class="mb-3 bg_green p-2">
             <span class="text-white h5">Thông tin bài viết</span>
         </div>
-        <form class="border p-5">
+        <form action="${pageContext.request.contextPath}/post-add" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-4">
                     <div class="mb-3">
                         <label for="username" class="form-label style_18"><b>Tiêu đề</b></label>
                         <i class="fas fa-pen-to-square ms-2"></i>
                         <input type="text" class="form-control" id="username" name="username"
-                               placeholder="Nhập tiêu đề..." required>
+                               placeholder="Nhập tiêu đề..." value="${param.username}" required>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -56,7 +55,7 @@
                         <label for="fullname" class="form-label style_18"><b>Người tạo</b></label>
                         <i class="fas fa-user ms-2"></i>
                         <input type="text" class="form-control" id="fullname" name="fullname"
-                               placeholder="Nhập người tạo..." required>
+                               placeholder="Nhập người tạo..." value="${param.fullname}" required>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -66,12 +65,12 @@
                             <i class="fas fa-toggle-on ms-2"></i>
                         </div>
                         <div class="form-check-inline">
-                            <input class="form-check-input" type="radio" name="status" id="active" value="1" checked>
+                            <input class="form-check-input" type="radio" name="status" id="active" value="1" ${param.status == '1' || param.status == null ? 'checked' : ''}>
                             <label class="form-check-label" for="active">Hiển thị</label>
                         </div>
                         <div class="form-check-inline">
-                            <input class="form-check-input" type="radio" name="status" id="inactive" value="0">
-                            <label class="form-check-label" for="inactive">ẩn</label>
+                            <input class="form-check-input" type="radio" name="status" id="inactive" value="0" ${param.status == '0' ? 'checked' : ''}>
+                            <label class="form-check-label" for="inactive">Ẩn</label>
                         </div>
                     </div>
                 </div>
@@ -87,18 +86,17 @@
                 <div class="mb-3">
                     <label for="shortDescription" class="form-label style_18"><b>Mô tả ngắn</b></label>
                     <input type="text" class="form-control" id="shortDescription" name="shortDescription"
-                           placeholder="Nhập mô tả ngắn..." required>
+                           placeholder="Nhập mô tả ngắn..." value="${param.shortDescription}" required>
                 </div>
                 <div class="mb-3">
                     <label for="content" class="form-label style_18"><b>Nội dung</b></label>
                     <textarea class="form-control" id="content" name="content" rows="10"
-                              placeholder="Nhập nội dung..." required></textarea>
+                              placeholder="Nhập nội dung..." required>${param.content}</textarea>
                 </div>
             </div>
 
             <button type="submit" class="btn bg_green fw-bold text-white">Thêm mới</button>
         </form>
-
     </div>
     <!-- Container for demo purpose -->
 </main>

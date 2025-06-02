@@ -1,6 +1,7 @@
 package vn.edu.hcmuaf.fit.animalfeed_webapp.services;
 
 import org.mindrot.jbcrypt.BCrypt;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.PostDao;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.UserDao;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
 
@@ -253,6 +254,8 @@ public class UserService {
                 System.out.println("Has ORDER_MANAGEMENT permission: " + hasOrderManagement);
                 return hasOrderManagement;
             case "NEWS_MANAGEMENT":
+                boolean hasNewsManagement = user.getSub_role() == 5;
+                System.out.println("Has NEWS_MANAGEMENT permission: " + hasNewsManagement);
                 return user.getSub_role() == 5;
             case "JOB_MANAGEMENT":
                 return user.getSub_role() == 6;
@@ -285,6 +288,8 @@ public class UserService {
         return optionalUser.get();
     }
 
+    public boolean isAdmin(int userId) {
+        return PostDao.checkIfAdmin(userId); // Sử dụng phương thức từ PostDao
     //kiểm tra xem người dùng có phải là admin hay không
     public boolean checkIfAdmin(int userId) {
         return userDao.checkIfAdmin(userId);

@@ -76,7 +76,7 @@
         </ul>
       </li>
       <li class="sidenav-item">
-        <a class="sidenav-link" href="${pageContext.request.contextPath}/post-admin">
+        <a class="sidenav-link" href="${pageContext.request.contextPath}/post-management">
           <i class="fas fa-blog fa-fw me-2 "></i><span class="h5 text">Quản lý trang tin tức</span><i class="fas fa-chevron-down" style="margin-left: 10px;"></i></a>
         <ul class="sidenav-collapse ">
           <li class="sidenav-item">
