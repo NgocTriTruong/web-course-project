@@ -28,7 +28,6 @@ public class PostDao {
 
     public Optional<Post> getPostById(int id) {
         String query = "SELECT * FROM posts WHERE id = :id AND status = 1";
-
         return jdbi.withHandle(handle ->
                 handle.createQuery(query)
                         .bind("id", id)
@@ -169,4 +168,26 @@ public class PostDao {
                         .list()
         );
     }
+    //lấy tổng post
+    public int getTotalPosts() {
+        String query = "SELECT COUNT(*) FROM posts WHERE status = 1";
+        return jdbi.withHandle(handle ->
+                handle.createQuery(query)
+                        .mapTo(Integer.class)
+                        .one()
+        );
+    }
+
+    //lấy theo số lượng post
+    public List<Post> getPostsWithPagination(int offset, int pageSize) {
+        String query = "SELECT * FROM posts WHERE status = 1 ORDER BY create_date DESC LIMIT :limit OFFSET :offset";
+        return jdbi.withHandle(handle ->
+                handle.createQuery(query)
+                        .bind("limit", pageSize)
+                        .bind("offset", offset)
+                        .map(new PostMapper())
+                        .list()
+        );
+    }
+
 }

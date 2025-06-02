@@ -284,8 +284,4 @@ public class UserService {
         }
         return optionalUser.get();
     }
-
-    public boolean isAdmin(int userId) {
-        return PostDao.checkIfAdmin(userId); // Sử dụng phương thức từ PostDao
-    }
 }
