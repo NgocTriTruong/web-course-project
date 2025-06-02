@@ -91,7 +91,7 @@
                                 <input type="password" class="form-control" id="current-password" placeholder="Nhập mật khẩu hiện tại" name="currentPassword" required autocomplete="off">
                                 <label for="current-password">Nhập mật khẩu hiện tại<span class="req">*</span></label>
                             </div>
-                            <p class="login_forgot" style="text-align: end; margin-top: -10px;"><a href="#" style="color: red;">Quên mật khẩu?</a></p>
+                            <p class="login_forgot" style="text-align: end; margin-top: -10px;"><a href="<%= request.getContextPath() %>/forgot-password" style="color: red;">Quên mật khẩu?</a></p>
                             <div class="line_gray mt-3 mb-3"></div>
                             <div class="form-floating mb-3 mt-3">
                                 <input type="password" class="form-control" id="new-password" placeholder="Nhập mật khẩu mới" name="newPassword" required autocomplete="off">
