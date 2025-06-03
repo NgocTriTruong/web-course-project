@@ -1,6 +1,0 @@
-target/*
-!target/AnimalFeed_webApp-1.0-SNAPSHOT.war
-.git
-.gitignore
-__pycache__/
-*.log
