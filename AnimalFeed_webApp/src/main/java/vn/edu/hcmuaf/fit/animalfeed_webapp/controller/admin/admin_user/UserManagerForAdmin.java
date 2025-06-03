@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.UserService;
 
@@ -22,16 +23,23 @@ public class UserManagerForAdmin extends HttpServlet {
         userService = UserService.getInstance();
     }
 
-    private int getAdminUserIdFromSession(HttpServletRequest request) throws ServletException {
-        Integer adminUserId = (Integer) request.getSession().getAttribute("adminUserId");
-        if (adminUserId == null) {
-            throw new ServletException("Admin không có quyền truy cập hoặc chưa đăng nhập.");
+    private int getUserIdFromSession(HttpServletRequest request) throws ServletException {
+        HttpSession session = request.getSession(false);
+        Integer userId = (session != null) ? (Integer) session.getAttribute("userId") : null;
+        if (userId == null) {
+            throw new ServletException("Người dùng không có quyền truy cập hoặc chưa đăng nhập.");
         }
-        return adminUserId;
+        return userId;
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("UserManagerForAdmin: Processing request for /userManagement");
+        if (response.isCommitted()) {
+            System.out.println("UserManagerForAdmin: Response already committed, cannot forward");
+            return;
+        }
+
         String action = request.getParameter("action");
         String searchTerm = request.getParameter("searchTerm");
         int page = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
@@ -40,45 +48,59 @@ public class UserManagerForAdmin extends HttpServlet {
             action = "";
         }
 
-        switch (action) {
-            case "delete":
-                handleDelete(request, response);
-                break;
-            case "edit":
-                handleEdit(request, response);
-                break;
-            case "search":
-                handleSearch(request, response, page);
-                break;
-            default:
-                List<User> users;
-                int totalUsers;
-                if (searchTerm != null && !searchTerm.trim().isEmpty()) {
-                    users = userService.searchUsers(searchTerm);
-                    totalUsers = users.size();
-                    request.setAttribute("searchTerm", searchTerm);
-                } else {
-                    users = userService.getAllUsers();
-                    totalUsers = users.size();
-                }
-                int totalPages = (int) Math.ceil((double) totalUsers / PAGE_SIZE);
-                int start = (page - 1) * PAGE_SIZE;
-                int end = Math.min(start + PAGE_SIZE, totalUsers);
-                users = users.subList(start, end);
+        try {
+            switch (action) {
+                case "delete":
+                    handleDelete(request, response);
+                    return;
+                case "edit":
+                    handleEdit(request, response);
+                    return;
+                case "search":
+                    handleSearch(request, response, page);
+                    return;
+                default:
+                    List<User> users;
+                    int totalUsers;
+                    if (searchTerm != null && !searchTerm.trim().isEmpty()) {
+                        users = userService.searchUsers(searchTerm);
+                        totalUsers = users.size();
+                        request.setAttribute("searchTerm", searchTerm);
+                    } else {
+                        users = userService.getAllUsers();
+                        totalUsers = users.size();
+                    }
+                    int totalPages = (int) Math.ceil((double) totalUsers / PAGE_SIZE);
+                    int start = (page - 1) * PAGE_SIZE;
+                    int end = Math.min(start + PAGE_SIZE, totalUsers);
+                    users = users.subList(start, end);
 
-                request.setAttribute("users", users);
-                request.setAttribute("totalPages", totalPages);
-                request.setAttribute("currentPage", page);
-                request.getRequestDispatcher("/views/admin/userManagement.jsp").forward(request, response);
-                break;
+                    request.setAttribute("users", users);
+                    request.setAttribute("totalPages", totalPages);
+                    request.setAttribute("currentPage", page);
+                    request.setAttribute("userService", userService);
+
+                    if (response.isCommitted()) {
+                        System.out.println("UserManagerForAdmin: Response already committed before forwarding");
+                        return;
+                    }
+
+                    System.out.println("UserManagerForAdmin: Forwarding to /views/admin/userManagement.jsp");
+                    request.getRequestDispatcher("/views/admin/userManagement.jsp").forward(request, response);
+                    break;
+            }
+        } catch (Exception e) {
+            System.out.println("UserManagerForAdmin: Error processing request: " + e.getMessage());
+            request.getSession().setAttribute("error", "Lỗi: " + e.getMessage());
+            response.sendRedirect("userManagement");
         }
     }
 
-    private void handleDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void handleDelete(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try {
-            int adminUserId = getAdminUserIdFromSession(request);
-            int userId = Integer.parseInt(request.getParameter("id"));
-            userService.deleteUser(userId, adminUserId);
+            int userId = getUserIdFromSession(request);
+            int targetUserId = Integer.parseInt(request.getParameter("id"));
+            userService.deleteUser(targetUserId, userId);
             request.getSession().setAttribute("message", "Xóa người dùng thành công.");
         } catch (Exception e) {
             request.getSession().setAttribute("error", "Lỗi khi xóa người dùng: " + e.getMessage());
@@ -88,16 +110,18 @@ public class UserManagerForAdmin extends HttpServlet {
 
     private void handleEdit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            int userId = Integer.parseInt(request.getParameter("id"));
-            User user = userService.getById(userId);
+            int targetUserId = Integer.parseInt(request.getParameter("id"));
+            User user = userService.getById(targetUserId);
             if (user != null) {
                 request.setAttribute("user", user);
                 request.getRequestDispatcher("/views/admin/userEdit.jsp").forward(request, response);
-                return;
+            } else {
+                request.getSession().setAttribute("error", "Không tìm thấy người dùng.");
+                response.sendRedirect("userManagement");
             }
-            response.sendRedirect("userManagement?error=not_found");
         } catch (Exception e) {
-            response.sendRedirect("userManagement?error=" + e.getMessage());
+            request.getSession().setAttribute("error", "Lỗi: " + e.getMessage());
+            response.sendRedirect("userManagement");
         }
     }
 
@@ -121,23 +145,43 @@ public class UserManagerForAdmin extends HttpServlet {
         request.setAttribute("searchTerm", searchTerm);
         request.setAttribute("totalPages", totalPages);
         request.setAttribute("currentPage", page);
+        request.setAttribute("userService", userService);
+
+        if (response.isCommitted()) {
+            System.out.println("UserManagerForAdmin: Response already committed before forwarding in handleSearch");
+            return;
+        }
+
+        System.out.println("UserManagerForAdmin: Forwarding to /views/admin/userManagement.jsp (search)");
         request.getRequestDispatcher("/views/admin/userManagement.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("UserManagerForAdmin: Processing POST request for /userManagement");
+        if (response.isCommitted()) {
+            System.out.println("UserManagerForAdmin: Response already committed in doPost");
+            return;
+        }
+
         String action = request.getParameter("action");
 
-        if ("add".equals(action)) {
-            handleAdd(request, response);
-        } else if ("update".equals(action)) {
-            handleUpdate(request, response);
-        } else {
-            response.sendRedirect("userManagement?error=invalid_action");
+        try {
+            if ("add".equals(action)) {
+                handleAdd(request, response);
+            } else if ("update".equals(action)) {
+                handleUpdate(request, response);
+            } else {
+                response.sendRedirect("userManagement?error=invalid_action");
+            }
+        } catch (Exception e) {
+            System.out.println("UserManagerForAdmin: Error processing POST request: " + e.getMessage());
+            request.getSession().setAttribute("error", "Lỗi: " + e.getMessage());
+            response.sendRedirect("userManagement");
         }
     }
 
-    private void handleAdd(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void handleAdd(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try {
             User newUser = new User();
             newUser.setFullName(request.getParameter("fullName"));
@@ -149,34 +193,42 @@ public class UserManagerForAdmin extends HttpServlet {
             newUser.setCreateDate(new Date());
             newUser.setUpdateDate(new Date());
 
-            int adminUserId = getAdminUserIdFromSession(request);
-            userService.addUser(newUser, adminUserId);
-            response.sendRedirect("userManagement?message=add_success");
+            int userId = getUserIdFromSession(request);
+            userService.addUser(newUser, userId);
+            request.getSession().setAttribute("message", "Thêm người dùng thành công.");
+            response.sendRedirect("userManagement");
         } catch (Exception e) {
-            response.sendRedirect("userManagement?error=" + e.getMessage());
+            request.getSession().setAttribute("error", "Lỗi khi thêm người dùng: " + e.getMessage());
+            response.sendRedirect("userManagement");
         }
     }
 
-    private void handleUpdate(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void handleUpdate(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         try {
-            int userId = Integer.parseInt(request.getParameter("id"));
-            User updatedUser = new User();
-            updatedUser.setId(userId);
+            int targetUserId = Integer.parseInt(request.getParameter("id"));
+            User updatedUser = userService.getById(targetUserId);
+            if (updatedUser == null) {
+                throw new ServletException("Không tìm thấy người dùng để cập nhật.");
+            }
+
             updatedUser.setFullName(request.getParameter("fullName"));
             updatedUser.setPhone(request.getParameter("phone"));
-            updatedUser.setPassword(request.getParameter("password"));
+            String password = request.getParameter("password");
+            if (password != null && !password.trim().isEmpty()) {
+                updatedUser.setPassword(password);
+            }
             updatedUser.setStatus(Integer.parseInt(request.getParameter("status")));
             updatedUser.setRole(Integer.parseInt(request.getParameter("role")));
             updatedUser.setSub_role(Integer.parseInt(request.getParameter("sub_role")));
             updatedUser.setUpdateDate(new Date());
 
-            int adminUserId = getAdminUserIdFromSession(request);
-            userService.updateUser(updatedUser, adminUserId);
+            int userId = getUserIdFromSession(request);
+            userService.updateUser(updatedUser, userId);
             request.getSession().setAttribute("message", "Cập nhật người dùng thành công.");
             response.sendRedirect("userManagement");
         } catch (Exception e) {
             request.getSession().setAttribute("error", "Lỗi khi cập nhật người dùng: " + e.getMessage());
-            response.sendRedirect("userManagement?error=" + e.getMessage());
+            response.sendRedirect("userManagement");
         }
     }
 }

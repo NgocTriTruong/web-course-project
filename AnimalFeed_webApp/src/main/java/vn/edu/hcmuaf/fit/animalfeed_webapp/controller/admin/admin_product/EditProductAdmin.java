@@ -38,24 +38,15 @@ public class EditProductAdmin extends HttpServlet {
         productService = new ProductService();
         categoryService = new CategoryService();
         discountService = new DiscountService();
-        userService = UserService.getInstance(); // Khởi tạo UserService
-    }
-
-    // Kiểm tra quyền PRODUCT_MANAGEMENT
-    private boolean hasProductManagementPermission(HttpSession session) {
-        Integer userId = (Integer) session.getAttribute("userId");
-        if (userId == null) {
-            return false;
-        }
-        return userService.hasPermission(userId, "PRODUCT_MANAGEMENT");
+        userService = UserService.getInstance();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
-        if (session == null || !hasProductManagementPermission(session)) {
-            session.setAttribute("error", "Bạn không có quyền truy cập trang này.");
-            response.sendRedirect("product-manager");
+        if (session == null || session.getAttribute("userId") == null) {
+            session.setAttribute("error", "Vui lòng đăng nhập để truy cập.");
+            response.sendRedirect("login");
             return;
         }
 
@@ -83,7 +74,6 @@ public class EditProductAdmin extends HttpServlet {
             request.getSession().setAttribute("error", e.getMessage());
             response.sendRedirect("product-manager");
         } catch (Exception e) {
-            log("Error in doGet: ", e);
             request.getSession().setAttribute("error", "Không thể tải trang chỉnh sửa sản phẩm.");
             response.sendRedirect("product-manager");
         }
@@ -99,14 +89,7 @@ public class EditProductAdmin extends HttpServlet {
             return;
         }
 
-        if (!hasProductManagementPermission(session)) {
-            session.setAttribute("error", "Bạn không có quyền thực hiện thao tác này.");
-            response.sendRedirect("product-manager");
-            return;
-        }
-
         try {
-            // Lấy thông tin từ form
             String productIdParam = getFormFieldValue(request.getPart("productId"));
             if (productIdParam == null || productIdParam.isEmpty()) {
                 throw new IllegalArgumentException("Product ID is required");
@@ -121,7 +104,6 @@ public class EditProductAdmin extends HttpServlet {
             String discountIdParam = getFormFieldValue(request.getPart("discount"));
             String statusParam = getFormFieldValue(request.getPart("status"));
 
-            // Kiểm tra và xử lý tham số
             if (categoryIdParam == null || categoryIdParam.trim().isEmpty()) {
                 throw new IllegalArgumentException("Category is required");
             }
@@ -147,26 +129,23 @@ public class EditProductAdmin extends HttpServlet {
             }
             int status = Integer.parseInt(statusParam);
 
-            // Xử lý file ảnh
             Part filePart = request.getPart("image");
             String imagePath = null;
             if (filePart != null && filePart.getSize() > 0) {
                 String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-                String uploadDir = getServletContext().getRealPath("") + "/uploads";
+                String uploadDir = getServletContext().getRealPath("") + "/Uploads";
                 File uploadDirFile = new File(uploadDir);
                 if (!uploadDirFile.exists()) {
                     uploadDirFile.mkdirs();
                 }
                 String filePath = uploadDir + File.separator + fileName;
                 filePart.write(filePath);
-                imagePath = "/uploads/" + fileName;
+                imagePath = "/Uploads/" + fileName;
             } else {
-                // Nếu không có ảnh mới, giữ nguyên ảnh cũ
                 Product existingProduct = productService.getProductByIdOfAdmin(productId);
                 imagePath = existingProduct.getImg();
             }
 
-            // Tạo đối tượng sản phẩm mới
             Product product = new Product();
             product.setId(productId);
             product.setCat_id(categoryId);
@@ -178,10 +157,8 @@ public class EditProductAdmin extends HttpServlet {
             product.setImg(imagePath);
             product.setDiscountId(discountId);
 
-            // Cập nhật sản phẩm
-            productService.updateProduct(productId,product, userId);
+            productService.updateProduct(productId, product, userId);
 
-            // Chuyển hướng thành công
             session.setAttribute("message", "Cập nhật sản phẩm thành công!");
             response.sendRedirect("product-manager");
 
@@ -189,13 +166,11 @@ public class EditProductAdmin extends HttpServlet {
             session.setAttribute("error", e.getMessage());
             response.sendRedirect("edit-product?productId=" + getFormFieldValue(request.getPart("productId")));
         } catch (Exception e) {
-            log("Error in doPost: ", e);
             session.setAttribute("error", "Có lỗi xảy ra khi cập nhật sản phẩm: " + e.getMessage());
             response.sendRedirect("edit-product?productId=" + getFormFieldValue(request.getPart("productId")));
         }
     }
 
-    // Hàm hỗ trợ lấy giá trị từ Part
     private String getFormFieldValue(Part part) throws IOException {
         if (part == null || part.getSize() == 0) {
             return null;

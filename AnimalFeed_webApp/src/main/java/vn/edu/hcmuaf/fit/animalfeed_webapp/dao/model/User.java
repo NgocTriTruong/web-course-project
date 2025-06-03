@@ -14,8 +14,9 @@ public class User implements Serializable {
     private Date updateDate;
     private int role; // 0: User, 1: Admin
     private int sub_role; // 0: Super Admin, 1: User Admin, 2: Product Admin, 3: Order Admin, 4: Shipper Admin, 5: News Admin
+    private boolean force_logout;
 
-    public User(int id, String fullName, String password, String phone, String email, int status, Date createDate, Date updateDate, int role, int sub_role) {
+    public User(int id, String fullName, String password, String phone, String email, int status, Date createDate, Date updateDate, int role, int sub_role, boolean force_logout) {
         this.id = id;
         this.fullName = fullName;
         this.password = password;
@@ -26,6 +27,7 @@ public class User implements Serializable {
         this.updateDate = updateDate;
         this.role = role;
         this.sub_role = sub_role;
+        this.force_logout = force_logout;
     }
 
     public User() {
@@ -111,6 +113,14 @@ public class User implements Serializable {
         this.sub_role = sub_role;
     }
 
+    public void setForce_logout(boolean force_logout) {
+        this.force_logout = force_logout;
+    }
+
+    public boolean getForce_logout() {
+        return force_logout;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -124,6 +134,7 @@ public class User implements Serializable {
                 ", updateDate=" + updateDate +
                 ", role=" + role +
                 ", sub_role=" + sub_role +
+                ", force_logout=" + force_logout +
                 '}';
     }
 }
