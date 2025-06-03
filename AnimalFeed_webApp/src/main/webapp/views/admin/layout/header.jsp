@@ -120,6 +120,10 @@
           </li>
         </ul>
       </li>
+      <li class="sidenav-item">
+        <a class="sidenav-link" href="${pageContext.request.contextPath}/activity-history">
+          <i class="fas fa-history fa-fw me-2 "></i><span class="h5 text">Lịch sử hoạt động</span></a>
+      </li>
     </ul>
   </nav>
   <!-- Sidenav -->
