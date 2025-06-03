@@ -139,6 +139,36 @@
 </footer>
 
 <script>
+    function deleteContact(id) {
+        if (confirm('Bạn có chắc chắn muốn xóa liên hệ này?')) {
+            fetch('${pageContext.request.contextPath}/contact-admin', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Accept': 'application/json'
+                },
+                body: 'action=deleteContact&id=' + id
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Lỗi server: ' + response.status);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.status === 'success') {
+                        sessionStorage.setItem('successMessage', data.message);
+                        location.reload();
+                    } else {
+                        alert('Lỗi: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    alert('Có lỗi xảy ra: ' + error.message);
+                });
+        }
+    }
+
     function prepareReply(email) {
         document.getElementById('email').value = email;
         document.getElementById('subject').value = '';
@@ -150,20 +180,33 @@
     function sendEmail(event) {
         event.preventDefault();
 
-        const submitBtn = event.target.querySelector('button[type="submit"]');
+        const form = document.getElementById('replyForm');
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const emailInput = document.getElementById('email').value;
+
+        // Validate email
+        if (!emailInput.includes('@')) {
+            alert('Vui lòng nhập địa chỉ email hợp lệ.');
+            return;
+        }
+
         submitBtn.disabled = true;
         submitBtn.innerHTML = 'Đang gửi...';
 
-        const form = document.getElementById('replyForm');
         const formData = new FormData(form);
-        formData.append('action', 'sendEmail'); // Đảm bảo action là sendEmail
+        // Ensure action is included
+        formData.append('action', 'sendEmail');
+
+        // Convert FormData to URL-encoded string
+        const urlEncodedData = new URLSearchParams(formData).toString();
 
         fetch('${pageContext.request.contextPath}/contact-admin', {
             method: 'POST',
-            body: formData,
             headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
                 'Accept': 'application/json'
-            }
+            },
+            body: urlEncodedData
         })
             .then(response => {
                 // Kiểm tra xem server có trả về mã lỗi không
@@ -190,6 +233,22 @@
             });
     }
 
+    // Display success message after page reload
+    window.onload = function() {
+        const successMessage = sessionStorage.getItem('successMessage');
+        if (successMessage) {
+            const successAlert = document.createElement('div');
+            successAlert.className = 'container px-4';
+            successAlert.innerHTML = `
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    ${successMessage}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            `;
+            document.querySelector('main').prepend(successAlert);
+            sessionStorage.removeItem('successMessage');
+        }
+    };
 </script>
 </body>
 </html>

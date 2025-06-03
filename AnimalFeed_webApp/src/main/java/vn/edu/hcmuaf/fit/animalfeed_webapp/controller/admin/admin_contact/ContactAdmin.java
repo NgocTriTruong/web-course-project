@@ -65,8 +65,19 @@ public class ContactAdmin extends HttpServlet {
                 e.printStackTrace();
                 sendJsonResponse(response, false, "Lỗi khi gửi email: " + e.getMessage());
             }
+        } else if ("deleteContact".equals(action)) {
+            try {
+                int id = Integer.parseInt(request.getParameter("id"));
+                contactService.deleteContact(id);
+                sendJsonResponse(response, true, "Xóa liên hệ thành công");
+            } catch (NumberFormatException e) {
+                sendJsonResponse(response, false, "ID không hợp lệ");
+            } catch (Exception e) {
+                e.printStackTrace();
+                sendJsonResponse(response, false, "Lỗi khi xóa liên hệ: " + e.getMessage());
+            }
         } else {
-            sendJsonResponse(response, false, "Action không hợp lệ");
+            sendJsonResponse(response, false, "Action không hợp lệ" + action);
         }
     }
 
