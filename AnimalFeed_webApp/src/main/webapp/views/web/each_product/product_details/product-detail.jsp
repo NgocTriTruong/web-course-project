@@ -120,7 +120,7 @@
                                 </form>
                                 <form action="${pageContext.request.contextPath}/order-confirm" method="GET" style="display: inline;">
                                     <input type="hidden" name="productId" value="${product.id}">
-                                    <input type="hidden" name="quantity" value="${param.quantity != null ? param.quantity : 1}">
+                                    <input type="hidden" id="quantity-input-buy-now" name="quantity" value="${param.quantity != null ? param.quantity : 1}">
                                     <button type="submit" class="btn_h call d-flex justify-content-center w-100" style="border: none;">
                                         <div class="h5 text_call">Mua ngay</div>
                                     </button>
@@ -321,7 +321,9 @@
             alert("Số lượng tối đa bạn có thể thêm là " + maxAllowable);
         }
 
-        document.getElementById('quantity-input-hidden').value = input.value;
+        // Cập nhật giá trị cho cả hai form
+        document.getElementById('quantity-input-hidden').value = input.value; // Form "Thêm vào giỏ hàng"
+        document.getElementById('quantity-input-buy-now').value = input.value; // Form "Mua ngay"
     }
 
     document.addEventListener('DOMContentLoaded', function() {
