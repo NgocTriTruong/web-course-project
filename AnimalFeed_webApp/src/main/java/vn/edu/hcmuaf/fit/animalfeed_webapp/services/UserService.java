@@ -290,6 +290,7 @@ public class UserService {
 
     public boolean isAdmin(int userId) {
         return PostDao.checkIfAdmin(userId); // Sử dụng phương thức từ PostDao
+    }
     //kiểm tra xem người dùng có phải là admin hay không
     public boolean checkIfAdmin(int userId) {
         return userDao.checkIfAdmin(userId);

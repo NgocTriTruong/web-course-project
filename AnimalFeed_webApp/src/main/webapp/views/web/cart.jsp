@@ -26,7 +26,6 @@
             agent-id="bcb3e6d9-3aac-4ea5-bfc7-87e324931264"
             language-code="vi"
     ></df-messenger>
-
 </head>
 <body>
 <%@ include file="layout/header.jsp" %>
@@ -37,6 +36,12 @@
             <div class="row">
                 <!-- Cart Items List -->
                 <div class="col-md-8 pb-4">
+                    <c:if test="${not empty sessionScope.cartError}">
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                ${sessionScope.cartError}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </c:if>
                     <h5 class="mb-3 bg-white cart-select-all p-3 justify-content-center">
                         <input type="checkbox" id="select-all" class="me-1"> Chọn tất cả (<span id="selected-count">0</span>)
                         <button onclick="removeSelectedItems()" class="btn btn-link text-secondary float-end">
@@ -66,12 +71,11 @@
                                     </div>
                                     <div class="quantity-controls mt-3">
                                         <div class="quantity-selector d-inline-flex align-items-center">
-                                            <button class=
-                                                            "btn btn-outline-secondary" type="button"
+                                            <button class="btn btn-outline-secondary" type="button"
                                                     onclick="updateCartQuantity('${item.productId}', -1)">-</button>
-                                            <input type="text" class="form-control text-center quantity-input mx-2"
-                                                   value="${item.quantity}" style="width: 60px"
-                                                   onchange="updateCartQuantity('${item.productId}', 0)">
+                                            <input type="number" class="form-control text-center quantity-input mx-2"
+                                                   value="${item.quantity}" min="1" style="width: 60px"
+                                                   onchange="updateCartQuantity('${item.productId}', this.value)">
                                             <button class="btn btn-outline-secondary" type="button"
                                                     onclick="updateCartQuantity('${item.productId}', 1)">+</button>
                                         </div>
@@ -103,7 +107,7 @@
                         </div>
                         <form action="${pageContext.request.contextPath}/order-confirm" method="get">
                             <button type="submit"
-                                    class="btn btn-primary w-100 ${empty sessionScope.cart.cartDetails ? '' : ''}">
+                                    class="btn btn-primary w-100 ${empty sessionScope.cart.cartDetails ? 'disabled' : ''}">
                                 Thanh toán
                             </button>
                         </form>
@@ -118,41 +122,26 @@
 <script>
     function removeFromCart(productId) {
         const contextPath = '${pageContext.request.contextPath}';
-        const url = contextPath + '/remove-cart?productId=' + productId;
-        console.log('Attempting to call:', url);
-
-        if (!confirm('Are you sure you want to remove this item?')) return;
-
-        fetch(url, {
-            method: 'GET'
-        }).then(response => {
-            if (response.ok) {
-                window.location.href = contextPath + '/cart';
-            } else if (response.status === 401) {
-                window.location.href = contextPath + '/login';
-            } else {
-                console.error('Response status:', response.status);
-                alert('Error removing item from cart');
-            }
-        }).catch(error => {
-            console.error('Error:', error);
-            alert('Error removing item from cart');
-        });
+        if (!confirm('Bạn muốn xóa sản phẩm này?')) return;
+        fetch(contextPath + '/remove-cart?productId=' + productId)
+            .then(response => {
+                if (response.ok) window.location.reload();
+                else if (response.status === 401) window.location.href = contextPath + '/login';
+                else throw new Error('Lỗi khi xóa sản phẩm');
+            })
+            .catch(error => {
+                console.error(error);
+                alert('Lỗi khi xóa sản phẩm');
+            });
     }
 
     function removeSelectedItems() {
         const selectedItems = document.querySelectorAll('.item-checkbox:checked');
-
-        console.log(selectedItems);
-
-        if (selectedItems.length === 0) {
-            alert('Please select items to remove');
+        if (!selectedItems.length) {
+            alert('Vui lòng chọn sản phẩm để xóa');
             return;
         }
-
-        if (!confirm('Are you sure you want to remove these items?')) {
-            return;
-        }
+        if (!confirm('Bạn muốn xóa các sản phẩm đã chọn?')) return;
 
         const contextPath = '${pageContext.request.contextPath}';
         const form = document.createElement('form');
@@ -175,64 +164,57 @@
     }
 
     function updateCartQuantity(productId, quantityChange) {
-        console.log('Product ID:', productId);
-        console.log('All cart items:', document.querySelectorAll('.cart-item'));
-
         const cartItem = document.querySelector('.cart-item[data-product-id="' + productId + '"]');
-        if (!cartItem) {
-            console.error('Cart item not found for product ID:', productId);
-            return;
-        }
-
         const input = cartItem.querySelector('.quantity-input');
-        if (!input) {
-            console.error('Quantity input not found for product ID:', productId);
+        let newQuantity = typeof quantityChange === 'string' ? parseInt(quantityChange) : parseInt(input.value) + quantityChange;
+
+        if (isNaN(newQuantity) || newQuantity < 1) {
+            input.value = 1;
+            alert('Số lượng tối thiểu là 1.');
             return;
         }
-
-        const newQuantity = parseInt(input.value) + quantityChange;
-        console.log('New quantity:', newQuantity);
-
-        if (newQuantity < 1) return;
 
         const contextPath = '${pageContext.request.contextPath}';
-        const url = contextPath + '/update-cart?productId=' + productId + '&quantity=' + newQuantity;
-        console.log(url);
-
-        fetch(url)
+        fetch(contextPath + '/update-cart?productId=' + productId + '&quantity=' + newQuantity, {
+            headers: { 'Accept': 'application/json' }
+        })
             .then(response => {
-                if (response.ok) {
-                    input.value = newQuantity;
-                    updateTotals(); // Update totals after successful quantity change
-                } else if (response.status === 401) {
-                    window.location.href = contextPath + '/login';
+                if (!response.ok) {
+                    if (response.status === 401) {
+                        window.location.href = contextPath + '/login';
+                        return;
+                    }
+                    throw new Error('Lỗi mạng');
+                }
+                return response.json();
+            })
+            .then(data => {
+                input.value = data.adjustedQuantity;
+                if (data.success) {
+                    updateTotals();
                 } else {
-                    alert('Error updating cart');
+                    alert(data.message || 'Lỗi khi cập nhật giỏ hàng');
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('Error updating cart');
+                alert('Lỗi khi cập nhật giỏ hàng');
             });
     }
 
     // Update checkbox status in database
-    function updateCheckboxStatus(productId, checked) {
+    function updateCheckboxStatus(productId) {
+        const checked = document.querySelector('.cart-item[data-product-id="' + productId + '"] .item-checkbox').checked;
         const contextPath = '${pageContext.request.contextPath}';
         const status = checked ? 1 : 0;
-        const url = contextPath + '/update-cart?productId='+ productId + '&status=' + status;
-        console.log(url);
-
-        fetch(url)
+        fetch(contextPath + '/update-cart?productId=' + productId + '&status=' + status)
             .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
+                if (!response.ok) throw new Error('Lỗi mạng');
                 updateTotals();
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('Error updating item status');
+                alert('Lỗi cập nhật trạng thái');
             });
     }
 
@@ -246,9 +228,7 @@
             const checkbox = item.querySelector('.item-checkbox');
             if (checkbox.checked) {
                 const quantity = parseInt(item.querySelector('.quantity-input').value);
-                // Use unitPrice from the price-section instead of recalculating
-                const unitPriceText = item.querySelector('.price').textContent.replace(/[^\d]/g, '');
-                const unitPrice = parseInt(unitPriceText) || 0; // Fallback to 0 if parsing fails
+                const unitPrice = parseInt(item.querySelector('.price').textContent.replace(/[^\d]/g, ''));
                 total += quantity * unitPrice;
                 totalQuantity += quantity;
                 selectedCount++;
@@ -260,15 +240,8 @@
         document.getElementById('selected-count').textContent = selectedCount;
     }
 
-    function formatPrice(number) {
-        // Convert to integer to remove any decimals
-        const intValue = Math.round(number);
-
-        // Add thousands separators
-        const formatted = intValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-
-        // Return formatted price with đ symbol
-        return formatted + " đ";
+    function formatPrice(price) {
+        return Math.round(price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " ₫";
     }
 
     // Handle "Select All" checkbox
@@ -277,7 +250,7 @@
         document.querySelectorAll('.item-checkbox').forEach(checkbox => {
             checkbox.checked = isChecked;
             const productId = checkbox.closest('.cart-item').dataset.productId;
-            updateCheckboxStatus(productId, isChecked);
+            updateCheckboxStatus(productId);
         });
         updateTotals();
     });
@@ -286,7 +259,7 @@
     document.querySelectorAll('.item-checkbox').forEach(checkbox => {
         checkbox.addEventListener('change', function() {
             const productId = this.closest('.cart-item').dataset.productId;
-            updateCheckboxStatus(productId, this.checked);
+            updateCheckboxStatus(productId);
 
             // Update "Select All" checkbox
             const allChecked = [...document.querySelectorAll('.item-checkbox')]
@@ -311,6 +284,7 @@
                 checkbox.checked = true;
             }
         });
+        updateTotals();
     });
 </script>
 </body>

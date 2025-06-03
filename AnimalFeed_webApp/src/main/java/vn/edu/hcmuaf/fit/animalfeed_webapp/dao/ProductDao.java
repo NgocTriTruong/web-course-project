@@ -549,7 +549,7 @@ public class ProductDao {
     public int getInventoryQuantity(int productId) {
         Jdbi jdbi = JdbiConnect.getJdbi();
         return jdbi.withHandle(handle ->
-                handle.createQuery("SELECT COALESCE(SUM(quantity), 0) FROM inventory_transactions WHERE product_id = :productId")
+                handle.createQuery("SELECT quantity from products WHERE id = :productId")
                         .bind("productId", productId)
                         .mapTo(Integer.class)
                         .findOne()
