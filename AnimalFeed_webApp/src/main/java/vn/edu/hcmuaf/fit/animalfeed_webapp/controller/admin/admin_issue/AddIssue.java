@@ -8,8 +8,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Issue;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.IssueService;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.ProductService;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.services.UserService;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -18,11 +20,13 @@ import java.time.LocalDateTime;
 public class AddIssue extends HttpServlet {
     private IssueService issueService;
     private ProductService productService;
+    private UserService userService;
 
     @Override
     public void init() throws ServletException {
         issueService = new IssueService();
         productService = new ProductService();
+        userService = UserService.getInstance();
     }
 
     @Override
@@ -61,6 +65,11 @@ public class AddIssue extends HttpServlet {
                 throw new Exception("Sản phẩm không tồn tại");
             }
 
+            User admin = userService.getUserById(userId);
+            if (admin == null) {
+                throw new Exception("Admin không tồn tại");
+            }
+
             Issue issue = new Issue();
             issue.setUserId(userId);
             issue.setProductId(productId);
@@ -68,6 +77,8 @@ public class AddIssue extends HttpServlet {
             issue.setQuantity(quantity);
             issue.setStatus(status);
             issue.setCreateDate(LocalDateTime.now());
+            issue.setAdminName(admin.getFullName());
+            issue.setProductName(product.getName());
 
             issueService.insertIssue(issue);
 

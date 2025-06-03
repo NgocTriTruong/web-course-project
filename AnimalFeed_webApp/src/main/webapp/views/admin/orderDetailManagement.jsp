@@ -21,7 +21,7 @@
     <script src="${pageContext.request.contextPath}/views/admin/assets/js/mdb.min.js"></script>
 
     <!-- js add header -->
-     <script src="${pageContext.request.contextPath}/views/admin/assets/js/add_header.js" defer></script>
+    <script src="${pageContext.request.contextPath}/views/admin/assets/js/add_header.js" defer></script>
 </head>
 
 <body>
@@ -40,21 +40,21 @@
                                 );">
         </div>
         <!-- Background gradient -->
-    
+
         <div class="container px-4">
-          <div class="card shadow-0" style="
+            <div class="card shadow-0" style="
                                             margin-top: -100px;
                                             ">
-            <div class="card-body py-5 px-5">
-              <div class="row gx-lg-4 align-items-center">
-                <div class="col-lg-6 mb-4 mb-lg-0 text-center text-lg-start">
-                  <h1 class="">Đơn hàng #${order.id}</h1>
+                <div class="card-body py-5 px-5">
+                    <div class="row gx-lg-4 align-items-center">
+                        <div class="col-lg-6 mb-4 mb-lg-0 text-center text-lg-start">
+                            <h1 class="">Đơn hàng #${order.id}</h1>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </section>
+    </section>
 
     <!-- Container for demo purpose -->
     <div class="container px-4">
@@ -75,13 +75,13 @@
                         <td class="text-center">
                             <div class="d-flex align-items-center justify-content-center">
                                 <div>
-                                    <p class="fw-bold mb-1">Product ID: ${od.productId}</p>
+                                    <p class="fw-bold mb-1">${od.product.name}</p>
                                 </div>
                             </div>
                         </td>
-                        <td class="text-center">${od.quantity}</td>
+                        <td class="text-center">${od.orderDetail.quantity}</td>
                         <td class="text-center">
-                            <fmt:formatNumber value="${od.totalPrice}" type="currency" currencySymbol="₫"/>
+                            <fmt:formatNumber value="${od.orderDetail.totalPrice}" type="currency" currencySymbol="₫"/>
                         </td>
                     </tr>
                 </c:forEach>

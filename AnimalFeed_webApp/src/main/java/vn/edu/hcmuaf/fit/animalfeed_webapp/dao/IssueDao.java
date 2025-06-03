@@ -1,11 +1,9 @@
 package vn.edu.hcmuaf.fit.animalfeed_webapp.dao;
 
-import com.sun.tools.javac.Main;
 import org.jdbi.v3.core.Jdbi;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.db.JdbiConnect;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Issue;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class IssueDao {
@@ -30,8 +28,25 @@ public class IssueDao {
     // Method to get all issues
     public static List<Issue> getAllIssues() {
         return jdbi.withHandle(handle ->
-                handle.createQuery("SELECT * FROM issues")
-                        .mapToBean(Issue.class)
+                handle.createQuery(
+                                "SELECT i.*, u.full_name AS admin_name, p.name AS product_name " +
+                                        "FROM issues i " +
+                                        "JOIN users u ON i.user_id = u.id " +
+                                        "JOIN products p ON i.product_id = p.id"
+                        )
+                        .map((rs, ctx) -> {
+                            Issue issue = new Issue();
+                            issue.setId(rs.getInt("id"));
+                            issue.setUserId(rs.getInt("user_id"));
+                            issue.setProductId(rs.getInt("product_id"));
+                            issue.setReason(rs.getString("reason"));
+                            issue.setQuantity(rs.getInt("quantity"));
+                            issue.setStatus(rs.getInt("status"));
+                            issue.setCreateDate(rs.getTimestamp("create_date").toLocalDateTime());
+                            issue.setAdminName(rs.getString("admin_name"));
+                            issue.setProductName(rs.getString("product_name"));
+                            return issue;
+                        })
                         .list()
         );
     }
@@ -39,9 +54,27 @@ public class IssueDao {
     // Method to get issue by ID
     public Issue getIssueById(int issueId) {
         return jdbi.withHandle(handle ->
-                handle.createQuery("SELECT * FROM issues WHERE id = :issueId")
+                handle.createQuery(
+                                "SELECT i.*, u.full_name AS admin_name, p.name AS product_name " +
+                                        "FROM issues i " +
+                                        "JOIN users u ON i.user_id = u.id " +
+                                        "JOIN products p ON i.product_id = p.id " +
+                                        "WHERE i.id = :issueId"
+                        )
                         .bind("issueId", issueId)
-                        .mapToBean(Issue.class)
+                        .map((rs, ctx) -> {
+                            Issue issue = new Issue();
+                            issue.setId(rs.getInt("id"));
+                            issue.setUserId(rs.getInt("user_id"));
+                            issue.setProductId(rs.getInt("product_id"));
+                            issue.setReason(rs.getString("reason"));
+                            issue.setQuantity(rs.getInt("quantity"));
+                            issue.setStatus(rs.getInt("status"));
+                            issue.setCreateDate(rs.getTimestamp("create_date").toLocalDateTime());
+                            issue.setAdminName(rs.getString("admin_name"));
+                            issue.setProductName(rs.getString("product_name"));
+                            return issue;
+                        })
                         .findFirst()
                         .orElse(null)
         );
@@ -75,10 +108,28 @@ public class IssueDao {
     // Method to search issues by term (reason or id)
     public List<Issue> searchIssues(String searchTerm) {
         return jdbi.withHandle(handle ->
-                handle.createQuery("SELECT * FROM issues WHERE reason LIKE :searchTerm OR id = :id")
+                handle.createQuery(
+                                "SELECT i.*, u.full_name AS admin_name, p.name AS product_name " +
+                                        "FROM issues i " +
+                                        "JOIN users u ON i.user_id = u.id " +
+                                        "JOIN products p ON i.product_id = p.id " +
+                                        "WHERE i.reason LIKE :searchTerm OR i.id = :id"
+                        )
                         .bind("searchTerm", "%" + searchTerm + "%")
                         .bind("id", searchTerm.matches("\\d+") ? Integer.parseInt(searchTerm) : -1)
-                        .mapToBean(Issue.class)
+                        .map((rs, ctx) -> {
+                            Issue issue = new Issue();
+                            issue.setId(rs.getInt("id"));
+                            issue.setUserId(rs.getInt("user_id"));
+                            issue.setProductId(rs.getInt("product_id"));
+                            issue.setReason(rs.getString("reason"));
+                            issue.setQuantity(rs.getInt("quantity"));
+                            issue.setStatus(rs.getInt("status"));
+                            issue.setCreateDate(rs.getTimestamp("create_date").toLocalDateTime());
+                            issue.setAdminName(rs.getString("admin_name"));
+                            issue.setProductName(rs.getString("product_name"));
+                            return issue;
+                        })
                         .list()
         );
     }
