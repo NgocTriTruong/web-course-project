@@ -6,8 +6,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.annotation.WebServlet;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Issue;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.IssueService;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.ProductService;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.services.UserService;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -16,11 +19,13 @@ import java.time.LocalDateTime;
 public class EditIssueController extends HttpServlet {
     private IssueService issueService;
     private ProductService productService;
+    private UserService userService;
 
     @Override
     public void init() throws ServletException {
         issueService = new IssueService();
         productService = new ProductService();
+        userService = UserService.getInstance();
     }
 
     @Override
@@ -40,6 +45,16 @@ public class EditIssueController extends HttpServlet {
                 request.getSession().setAttribute("error", "Sự cố không tồn tại hoặc đã được giải quyết.");
                 response.sendRedirect(request.getContextPath() + "/issueManagement");
                 return;
+            }
+
+            // Lấy thông tin admin và sản phẩm
+            User admin = userService.getUserById(issue.getUserId());
+            Product product = productService.getProductById(issue.getProductId());
+            if (admin != null) {
+                issue.setAdminName(admin.getFullName());
+            }
+            if (product != null) {
+                issue.setProductName(product.getName());
             }
 
             // Lấy tồn kho hiện tại
@@ -69,9 +84,7 @@ public class EditIssueController extends HttpServlet {
             int userId = Integer.parseInt(request.getSession().getAttribute("userId").toString());
 
             if (issueId == null || productId == null || reason == null || quantityStr == null) {
-                request.getSession().setAttribute("error", "Vui lòng điền đầy đủ thông tin.");
-                response.sendRedirect(request.getContextPath() + "/edit-issue?id=" + issueId);
-                return;
+                throw new Exception("Vui lòng điền đầy đủ thông tin.");
             }
 
             int id = Integer.parseInt(issueId);
@@ -81,9 +94,14 @@ public class EditIssueController extends HttpServlet {
             // Kiểm tra số lượng hợp lệ
             int inventoryQuantity = productService.getInventoryQuantity(productIdInt);
             if (quantity <= 0 || quantity > inventoryQuantity) {
-                request.getSession().setAttribute("error", "Số lượng không hợp lệ hoặc vượt quá tồn kho (" + inventoryQuantity + ").");
-                response.sendRedirect(request.getContextPath() + "/edit-issue?id=" + issueId);
-                return;
+                throw new Exception("Số lượng không hợp lệ hoặc vượt quá tồn kho (" + inventoryQuantity + ").");
+            }
+
+            // Lấy thông tin admin và sản phẩm
+            User admin = userService.getUserById(userId);
+            Product product = productService.getProductById(productIdInt);
+            if (admin == null || product == null) {
+                throw new Exception("Admin hoặc sản phẩm không tồn tại.");
             }
 
             // Cập nhật sự cố
@@ -94,7 +112,9 @@ public class EditIssueController extends HttpServlet {
             issue.setReason(reason);
             issue.setQuantity(quantity);
             issue.setStatus(0); // Giữ trạng thái Chưa giải quyết
-            issue.setCreateDate(LocalDateTime.now()); // Cập nhật ngày tạo
+            issue.setCreateDate(LocalDateTime.now());
+            issue.setAdminName(admin.getFullName());
+            issue.setProductName(product.getName());
 
             boolean updated = issueService.updateIssue(issue);
             if (updated) {
@@ -104,13 +124,10 @@ public class EditIssueController extends HttpServlet {
             }
             response.sendRedirect(request.getContextPath() + "/issueManagement");
 
-        } catch (NumberFormatException e) {
-            request.getSession().setAttribute("error", "Dữ liệu nhập vào không hợp lệ.");
-            response.sendRedirect(request.getContextPath() + "/issueManagement");
         } catch (Exception e) {
             e.printStackTrace();
-            request.getSession().setAttribute("error", "Đã có lỗi xảy ra khi cập nhật sự cố.");
-            response.sendRedirect(request.getContextPath() + "/issueManagement");
+            request.getSession().setAttribute("error", "Lỗi: " + e.getMessage());
+            response.sendRedirect(request.getContextPath() + "/edit-issue?id=" + request.getParameter("id"));
         }
     }
 }

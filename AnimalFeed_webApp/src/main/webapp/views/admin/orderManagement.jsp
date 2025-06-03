@@ -97,7 +97,7 @@
                 <c:forEach items="${orders}" var="order" varStatus="loop">
                     <tr>
                         <td><span class="ms-2 h6">${loop.index + 1}</span></td>
-                        <td><p class="h6 mb-1 ms-1">${order.userId}</p></td>
+                        <td><p class="h6 mb-1 ms-1">${order.customerName}</p></td>
                         <td><span class="h6 ms-1">${order.id}</span></td>
                         <td>
                             <fmt:parseDate value="${order.orderDate.toString()}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedOrderDate"/>
@@ -185,7 +185,7 @@
 
         function performSearch() {
             const searchTerm = searchInput.value.trim();
-            window.location.href = '${pageContext.request.contextPath}/admin/orders?action=search&searchTerm=' + encodeURIComponent(searchTerm);
+            window.location.href = '${pageContext.request.contextPath}/order-manager?action=search&searchTerm=' + encodeURIComponent(searchTerm);
         }
 
         searchButton.addEventListener('click', performSearch);

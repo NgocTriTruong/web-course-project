@@ -3,8 +3,8 @@ package vn.edu.hcmuaf.fit.animalfeed_webapp.controller.admin.admin_order;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.dto.OrderDetailsWithProduct;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Order;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.OrderDetail;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.OrderService;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.UserService;
 
@@ -133,13 +133,7 @@ public class OrderManagerAdmin extends HttpServlet {
             if (startIndex > countOrders) startIndex = Math.max(0, countOrders - ordersPerPage);
             if (endIndex < startIndex) endIndex = startIndex;
 
-            // Get orders for current page
-            List<Order> ordersForPage;
-            if (countOrders > 0) {
-                ordersForPage = allOrders.subList(startIndex, endIndex);
-            } else {
-                ordersForPage = new ArrayList<>();
-            }
+            List<Order> ordersForPage = countOrders > 0 ? allOrders.subList(startIndex, endIndex) : new ArrayList<>();
 
             // Set request attributes
             request.setAttribute("orders", ordersForPage);
@@ -147,21 +141,14 @@ public class OrderManagerAdmin extends HttpServlet {
             request.setAttribute("endPage", endPage);
             request.setAttribute("totalOrders", countOrders);
 
-            // Forward to the JSP
             request.getRequestDispatcher("/views/admin/orderManagement.jsp").forward(request, response);
-
         } catch (Exception e) {
-            // Log the error
             e.printStackTrace();
-
-            // Set error message and empty orders list
             request.setAttribute("errorMessage", "An error occurred while retrieving orders.");
             request.setAttribute("orders", new ArrayList<>());
             request.setAttribute("currentPage", 1);
             request.setAttribute("endPage", 1);
             request.setAttribute("totalOrders", 0);
-
-            // Forward to JSP with error message
             request.getRequestDispatcher("/views/admin/orderManagement.jsp").forward(request, response);
         }
     }
@@ -171,12 +158,16 @@ public class OrderManagerAdmin extends HttpServlet {
         try {
             String orderId = request.getParameter("id");
             if (orderId != null) {
-                Order order = orderService.getOrderById(Integer.parseInt(orderId));
-                List<OrderDetail> orderDetails = orderService.getOrderDetails(Integer.parseInt(orderId));
+                int parsedOrderId = Integer.parseInt(orderId);
+                Order order = orderService.getOrderById(parsedOrderId);
+                List<OrderDetailsWithProduct> orderDetails = orderService.getOrderDetailsWithProductByOrderId(parsedOrderId);
 
-                System.out.println(order);
+                if (orderDetails == null) {
+                    orderDetails = new ArrayList<>();
+                }
 
-                System.out.println(orderDetails);
+                System.out.println("Order: " + order);
+                System.out.println("OrderDetails: " + orderDetails);
 
                 if (order != null) {
                     request.setAttribute("order", order);
@@ -186,7 +177,8 @@ public class OrderManagerAdmin extends HttpServlet {
                 }
             }
             response.sendRedirect("order-manager");
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException | NumberFormatException e) {
+            e.printStackTrace();
             throw new ServletException("Lỗi khi lấy chi tiết đơn hàng", e);
         }
     }
@@ -196,7 +188,10 @@ public class OrderManagerAdmin extends HttpServlet {
         String searchTerm = request.getParameter("searchTerm");
         List<Order> searchResults = orderService.searchOrders(searchTerm);
 
-        // Handle pagination for search results
+        if (searchResults == null) {
+            searchResults = new ArrayList<>();
+        }
+
         String pageParam = request.getParameter("page");
         int page = (pageParam != null && !pageParam.isEmpty()) ? Integer.parseInt(pageParam) : 1;
 
@@ -206,7 +201,7 @@ public class OrderManagerAdmin extends HttpServlet {
 
         int startIndex = (page - 1) * ordersPerPage;
         int endIndex = Math.min(startIndex + ordersPerPage, countOrders);
-        List<Order> ordersForPage = searchResults.subList(startIndex, endIndex);
+        List<Order> ordersForPage = countOrders > 0 ? searchResults.subList(startIndex, endIndex) : new ArrayList<>();
 
         request.setAttribute("orders", ordersForPage);
         request.setAttribute("currentPage", page);

@@ -36,7 +36,8 @@ public class OrderDao {
 
     // Method to get orders by user ID
     public ArrayList<Order> getOrdersByUserId(int userId) throws SQLException, ClassNotFoundException {
-        return (ArrayList<Order>) jdbi.withHandle(handle -> handle.createQuery("select * from orders where user_id = :userId")
+        return (ArrayList<Order>) jdbi.withHandle(handle -> handle.createQuery(
+                        "SELECT o.*, u.full_name AS customerName FROM orders o JOIN users u ON o.user_id = u.id WHERE o.user_id = :userId")
                 .bind("userId", userId)
                 .mapToBean(Order.class)
                 .list()
@@ -56,22 +57,26 @@ public class OrderDao {
 
     // Method to delete an order by ID
     public void deleteOrder(int id) {
-        int rowsDeleted = jdbi.withHandle(handle ->
+        int rowsUpdated = jdbi.withHandle(handle ->
                 handle.createUpdate("DELETE FROM orders WHERE id = :id")
                         .bind("id", id)
                         .execute()
         );
-        System.out.println(rowsDeleted);
+        System.out.println(rowsUpdated);
     }
 
-    // Method to list all orders
+    // Method to list all orders with customer name
     public List<Order> getAllOrders() {
-        return jdbi.withHandle(handle -> handle.createQuery("select * from orders").mapToBean(Order.class).list());
+        return jdbi.withHandle(handle -> handle.createQuery(
+                        "SELECT o.*, u.full_name AS customerName FROM orders o JOIN users u ON o.user_id = u.id")
+                .mapToBean(Order.class)
+                .list());
     }
 
-    // Method to get an order by ID
+    // Method to get an order by ID with customer name
     public Order getOrderById(int orderId) {
-        return jdbi.withHandle(handle -> handle.createQuery("select * from orders where id = :orderId")
+        return jdbi.withHandle(handle -> handle.createQuery(
+                        "SELECT o.*, u.full_name AS customerName FROM orders o JOIN users u ON o.user_id = u.id WHERE o.id = :orderId")
                 .bind("orderId", orderId)
                 .mapToBean(Order.class)
                 .findFirst()
@@ -121,7 +126,7 @@ public class OrderDao {
         );
     }
 
-    // Thêm phương thức updateOrder
+    // Method to update order
     public void updateOrder(Order order) {
         int rowsUpdated = jdbi.withHandle(handle ->
                 handle.createUpdate("""
@@ -139,15 +144,19 @@ public class OrderDao {
         System.out.println("Rows updated: " + rowsUpdated);
     }
 
-    public static void main(String[] args) {
-        OrderDao orderDao = new OrderDao();
-        List<UserStats> userStats = orderDao.getUserStats();
-        for (UserStats userStat : userStats) {
-            System.out.println(userStat);
-        }
+    // Method to search orders with customer name
+    public List<Order> searchOrders(String searchTerm) {
+        String query = "SELECT o.*, u.full_name AS customerName FROM orders o JOIN users u ON o.user_id = u.id " +
+                "WHERE u.full_name LIKE :searchTerm OR o.id LIKE :searchTerm OR o.address LIKE :searchTerm";
+        return jdbi.withHandle(handle ->
+                handle.createQuery(query)
+                        .bind("searchTerm", "%" + searchTerm + "%")
+                        .mapToBean(Order.class)
+                        .list()
+        );
     }
 
-    // Lấy doanh thu theo tháng trong năm
+    // Get monthly revenue
     public List<Object[]> getMonthlyRevenue(int year){
         return jdbi.withHandle(handle ->
                 handle.createQuery("SELECT MONTH(order_date) AS month, SUM(total_price) AS total_revenue " +
@@ -159,7 +168,7 @@ public class OrderDao {
         );
     }
 
-    // Lấy doanh thu theo ngày trong tháng
+    // Get daily revenue in a month
     public List<Object[]> getMonthlyRevenueInYear(int year, int month){
         return jdbi.withHandle(handle ->
                 handle.createQuery("SELECT DAY(order_date) AS day, SUM(total_price) AS total_revenue " +
@@ -172,7 +181,7 @@ public class OrderDao {
         );
     }
 
-    //lấy thống kê trạng thái đơn hàng theo tháng
+    // Get order status stats by month and year
     public List<Object[]> getOrderStatusStatsInMonthYear(int month, int year) {
         return jdbi.withHandle(handle ->
                 handle.createQuery("SELECT status, COUNT(*) AS count " +
@@ -185,7 +194,7 @@ public class OrderDao {
         );
     }
 
-    //lấy thống kê trạng thái đơn hàng theo năm
+    // Get order status stats by year
     public List<Object[]> getOrderStatusStatsInYear(int year) {
         return jdbi.withHandle(handle ->
                 handle.createQuery("SELECT status, COUNT(*) AS count " +
@@ -195,5 +204,13 @@ public class OrderDao {
                         .map((rs, ctx) -> new Object[]{rs.getString("status"), rs.getInt("count")})
                         .list()
         );
+    }
+
+    public static void main(String[] args) {
+        OrderDao orderDao = new OrderDao();
+        List<UserStats> userStats = orderDao.getUserStats();
+        for (UserStats userStat : userStats) {
+            System.out.println(userStat);
+        }
     }
 }
