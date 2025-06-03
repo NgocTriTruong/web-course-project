@@ -61,14 +61,12 @@ public class PostDelete extends HttpServlet {
             }
 
             Post post = postOpt.get();
-            boolean isAdmin = userService.isAdmin(userId);
-            if (!isAdmin && post.getUserId() != userId) {
+            if (post.getUserId() != userId) {
                 request.getSession().setAttribute("error", "Bạn chỉ có thể xóa bài viết do chính bạn tạo.");
                 response.sendRedirect(request.getContextPath() + "/post-management");
                 return;
             }
 
-            // Gọi deletePost và dùng try-catch để kiểm tra thành công/thất bại
             try {
                 System.out.println("Deleting post with ID: " + postId + " by user: " + userId);
                 postService.deletePost(postId, userId);

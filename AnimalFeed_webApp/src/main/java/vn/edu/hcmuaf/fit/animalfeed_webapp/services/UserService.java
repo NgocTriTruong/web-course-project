@@ -256,9 +256,6 @@ public class UserService {
             case "NEWS_MANAGEMENT":
                 boolean hasNewsManagement = user.getSub_role() == 5;
                 System.out.println("Has NEWS_MANAGEMENT permission: " + hasNewsManagement);
-                return user.getSub_role() == 5;
-            case "JOB_MANAGEMENT":
-                return user.getSub_role() == 6;
             default:
                 return false;
         }
@@ -295,4 +292,5 @@ public class UserService {
     public boolean checkIfAdmin(int userId) {
         return userDao.checkIfAdmin(userId);
     }
+
 }

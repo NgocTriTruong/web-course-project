@@ -171,3 +171,35 @@
         font-size: 14px; /* Smaller font size */
     }
 }
+/* Định dạng cho phân trang */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.page-button {
+    padding: 8px 14px;
+    border: 1px solid #ddd;
+    background-color: #f8f9fa;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-radius: 4px;
+}
+
+.page-button:hover {
+    background-color: #e9ecef;
+}
+
+.page-button.active {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+
+.page-button.active:hover {
+    background-color: #0056b3;
+}
+
+

@@ -55,4 +55,12 @@ public class PostService {
     public List<Post> searchPosts(String keyword) {
         return postDao.searchPosts(keyword);
     }
+    //tổng post
+    public int getTotalPosts() {
+        return postDao.getTotalPosts();
+    }
+    //lấy post
+    public List<Post> getPostsWithPagination(int offset, int pageSize) {
+        return postDao.getPostsWithPagination(offset, pageSize);
+    }
 }
