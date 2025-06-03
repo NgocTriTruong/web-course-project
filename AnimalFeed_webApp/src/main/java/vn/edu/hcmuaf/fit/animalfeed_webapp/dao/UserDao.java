@@ -68,8 +68,8 @@ public class UserDao {
     public void addUser(User user, int adminUserId) {
         if (checkIfAdmin(adminUserId)) {
             jdbi.useTransaction(handle -> {
-                int userId = handle.createUpdate("INSERT INTO users (full_name, email, phone, password, role, sub_role, status, create_date, update_date) " +
-                                "VALUES (:fullName, :email, :phone, :password, :role, :sub_role, :status, :createDate, :updateDate)")
+                int userId = handle.createUpdate("INSERT INTO users (full_name, email, phone, password, role, sub_role, status, create_date, update_date, force_logout) " +
+                                "VALUES (:fullName, :email, :phone, :password, :role, :sub_role, :status, :createDate, :updateDate, FALSE)")
                         .bindBean(user)
                         .executeAndReturnGeneratedKeys("id")
                         .mapTo(Integer.class)
@@ -128,19 +128,29 @@ public class UserDao {
         }
 
         jdbi.useTransaction(handle -> {
-            int updatedRows = handle.createUpdate("UPDATE users SET full_name = :fullName, email = :email, phone = :phone, role = :role, sub_role = :sub_role, status = :status, update_date = NOW() WHERE id = :id")
+            // Kiểm tra role hiện tại của người dùng
+            Integer currentRole = handle.createQuery("SELECT role FROM users WHERE id = :id")
+                    .bind("id", user.getId())
+                    .mapTo(Integer.class)
+                    .findOne()
+                    .orElse(null);
+
+            boolean forceLogout = (currentRole != null && currentRole == 1 && user.getRole() == 0);
+
+            int updatedRows = handle.createUpdate("UPDATE users SET full_name = :fullName, email = :email, phone = :phone, role = :role, sub_role = :sub_role, status = :status, update_date = NOW(), force_logout = :forceLogout WHERE id = :id")
                     .bind("fullName", user.getFullName())
                     .bind("email", user.getEmail())
                     .bind("phone", user.getPhone())
                     .bind("status", user.getStatus())
                     .bind("role", user.getRole())
                     .bind("sub_role", user.getSub_role())
+                    .bind("forceLogout", forceLogout)
                     .bind("id", user.getId())
                     .execute();
 
             if (updatedRows > 0) {
                 handle.createUpdate("INSERT INTO action_log (user_id, action_type, entity_type, entity_id, created_at, description) " +
-                                "VALUES (:userId, :actionType, :entityType, :entityId, CURRENT_DATE, :description)")
+                                "VALUES (:userId, :actionType, :entityType, :entityId, CURRENT_TIMESTAMP, :description)")
                         .bind("userId", adminUserId)
                         .bind("actionType", "UPDATE")
                         .bind("entityType", "USER")
@@ -153,11 +163,32 @@ public class UserDao {
         });
     }
 
+    // Đánh dấu người dùng cần đăng xuất
+    public void markUserForLogout(int userId, boolean forceLogout) {
+        jdbi.useHandle(handle ->
+                handle.createUpdate("UPDATE users SET force_logout = :forceLogout WHERE id = :id")
+                        .bind("forceLogout", forceLogout)
+                        .bind("id", userId)
+                        .execute()
+        );
+    }
+
+    // Kiểm tra trạng thái force_logout
+    public boolean isForceLogout(int userId) {
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT force_logout FROM users WHERE id = :id")
+                        .bind("id", userId)
+                        .mapTo(Boolean.class)
+                        .findFirst()
+                        .orElse(false)
+        );
+    }
+
     // Chèn người dùng vào cơ sở dữ liệu
     public void insertUser(User user) {
         jdbi.useHandle(handle ->
-                handle.createUpdate("INSERT INTO users (full_name, email, phone, password, role, sub_role, status, create_date, update_date) " +
-                                "VALUES (:fullName, :email, :phone, :password, :role, :sub_role, :status, :createDate, :updateDate)")
+                handle.createUpdate("INSERT INTO users (full_name, email, phone, password, role, sub_role, status, create_date, update_date, force_logout) " +
+                                "VALUES (:fullName, :email, :phone, :password, :role, :sub_role, :status, :createDate, :updateDate, :force_logout)")
                         .bindBean(user)
                         .execute()
         );

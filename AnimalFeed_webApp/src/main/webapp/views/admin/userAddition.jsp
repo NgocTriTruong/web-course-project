@@ -48,114 +48,120 @@
             <c:remove var="error" scope="session"/>
         </c:if>
 
-        <!-- Form thêm người dùng hoặc xác minh OTP -->
-        <c:choose>
-            <c:when test="${param.step == 'verify'}">
-                <!-- Form xác minh OTP -->
-                <form action="addUser" method="POST" class="border p-5">
-                    <input type="hidden" name="step" value="verify">
+        <!-- Form nhập thông tin người dùng -->
+        <form action="addUser" method="POST" class="border p-5">
+            <!-- Dòng 1 -->
+            <div class="row">
+                <div class="col-md-3">
                     <div class="mb-3">
-                        <label for="otp" class="form-label style_18"><b>Mã OTP</b></label>
+                        <label for="phone" class="form-label style_18"><b>Số điện thoại</b></label>
+                        <i class="fas fa-phone ms-2"></i>
+                        <input type="text" class="form-control" id="phone" name="phone" placeholder="Nhập số điện thoại..." required>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="mb-3">
+                        <label for="password" class="form-label style_18"><b>Mật khẩu</b></label>
                         <i class="fas fa-key ms-2"></i>
-                        <input type="text" class="form-control" id="otp" name="otp" placeholder="Nhập mã OTP đã gửi đến email..." required>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu..." required>
                     </div>
-                    <button type="submit" class="btn text-white bg_green fw-bold">Xác minh</button>
-                </form>
-            </c:when>
-            <c:otherwise>
-                <!-- Form nhập thông tin người dùng -->
-                <form action="addUser" method="POST" class="border p-5">
-                    <input type="hidden" name="step" value="sendOtp">
-                    <!-- Dòng 1 -->
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="mb-3">
-                                <label for="phone" class="form-label style_18"><b>Số điện thoại</b></label>
-                                <i class="fas fa-phone ms-2"></i>
-                                <input type="text" class="form-control" id="phone" name="phone" placeholder="Nhập số điện thoại..." required>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="mb-3">
-                                <label for="password" class="form-label style_18"><b>Mật khẩu</b></label>
-                                <i class="fas fa-key ms-2"></i>
-                                <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu..." required>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="mb-3">
-                                <label for="fullname" class="form-label style_18"><b>Tên đầy đủ</b></label>
-                                <i class="fas fa-user ms-2"></i>
-                                <input type="text" class="form-control" id="fullname" name="fullName" placeholder="Nhập họ và tên..." required>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="mb-3">
-                                <label for="email" class="form-label style_18"><b>Email</b></label>
-                                <i class="fas fa-envelope ms-2"></i>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="Nhập email..." required>
-                            </div>
-                        </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="mb-3">
+                        <label for="fullname" class="form-label style_18"><b>Tên đầy đủ</b></label>
+                        <i class="fas fa-user ms-2"></i>
+                        <input type="text" class="form-control" id="fullname" name="fullName" placeholder="Nhập họ và tên..." required>
                     </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="mb-3">
+                        <label for="email" class="form-label style_18"><b>Email</b></label>
+                        <i class="fas fa-envelope ms-2"></i>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Nhập email..." required>
+                    </div>
+                </div>
+            </div>
 
-                    <!-- Dòng 2 -->
-                    <div class="row">
-                        <!-- Chỉ hiển thị trường "Vai trò" và "Sub Role" nếu người dùng là Super Admin (sub_role = 0) -->
-                        <c:if test="${userService.hasPermission(sessionScope.userId, 'USER_MANAGEMENT') && sessionScope.subRole == 0}">
-                            <div class="col-md-4">
-                                <label for="role" class="form-label style_18"><b>Vai trò</b></label>
-                                <i class="fas fa-user-tag ms-2"></i>
-                                <select class="form-select" id="role" name="role" required>
-                                    <option value="" disabled selected>Chọn vai trò</option>
-                                    <option value="1">Quản trị viên</option>
-                                    <option value="0">Người dùng</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="sub_role" class="form-label style_18"><b>Loại quản trị viên</b></label>
-                                <i class="fas fa-user-shield ms-2"></i>
-                                <select class="form-select" id="sub_role" name="sub_role" required>
-                                    <option value="0" selected>Super Admin</option>
-                                    <option value="1">User Admin</option>
-                                    <option value="2">Product Admin</option>
-                                    <option value="3">Order Admin</option>
-                                    <option value="4">Shipper Admin</option>
-                                    <option value="5">News Admin</option>
-                                </select>
-                            </div>
-                        </c:if>
-                        <!-- Chỉ hiển thị trường "Trạng thái" nếu người dùng là Super Admin (sub_role = 0) -->
-                        <c:if test="${userService.hasPermission(sessionScope.userId, 'USER_MANAGEMENT') && sessionScope.subRole == 1}">
-                            <div class="col-md-4 mt-3">
-                                <div class="mb-3">
-                                    <div>
-                                        <label class="form-label style_18"><b>Trạng thái</b></label>
-                                        <i class="fas fa-toggle-on ms-2"></i>
-                                    </div>
-                                    <div class="form-check-inline">
-                                        <input class="form-check-input" type="radio" name="status" id="active" value="1" checked>
-                                        <label class="form-check-label" for="active">Đang hoạt động</label>
-                                    </div>
-                                    <div class="form-check-inline">
-                                        <input class="form-check-input" type="radio" name="status" id="inactive" value="0">
-                                        <label class="form-check-label" for="inactive">Ngưng hoạt động</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </c:if>
+            <!-- Dòng 2 -->
+            <div class="row">
+                <!-- Chỉ hiển thị trường "Vai trò" và "Sub Role" nếu người dùng là Super Admin (sub_role = 0) -->
+                <c:if test="${userService.hasPermission(sessionScope.userId, 'USER_MANAGEMENT') && sessionScope.subRole == 0}">
+                    <div class="col-md-4">
+                        <label for="role" class="form-label style_18"><b>Vai trò</b></label>
+                        <i class="fas fa-user-tag ms-2"></i>
+                        <select class="form-select" id="role" name="role" required>
+                            <option value="" disabled selected>Chọn vai trò</option>
+                            <option value="1">Quản trị viên</option>
+                            <option value="0">Người dùng</option>
+                        </select>
                     </div>
+                    <div class="col-md-4" id="subRoleContainer">
+                        <label for="sub_role" class="form-label style_18"><b>Loại quản trị viên</b></label>
+                        <i class="fas fa-user-shield ms-2"></i>
+                        <select class="form-select" id="sub_role" name="sub_role">
+                            <option value="0" selected>Super Admin</option>
+                            <option value="1">User Admin</option>
+                            <option value="2">Product Admin</option>
+                            <option value="3">Order Admin</option>
+                            <option value="4">Shipper Admin</option>
+                            <option value="5">News Admin</option>
+                        </select>
+                    </div>
+                </c:if>
+                <!-- Chỉ hiển thị trường "Trạng thái" nếu người dùng là Super Admin (sub_role = 0) -->
+                <c:if test="${userService.hasPermission(sessionScope.userId, 'USER_MANAGEMENT') && sessionScope.subRole == 0}">
+                    <div class="col-md-4 mt-3">
+                        <div class="mb-3">
+                            <div>
+                                <label class="form-label style_18"><b>Trạng thái</b></label>
+                                <i class="fas fa-toggle-on ms-2"></i>
+                            </div>
+                            <div class="form-check-inline">
+                                <input class="form-check-input" type="radio" name="status" id="active" value="1" checked>
+                                <label class="form-check-label" for="active">Đang hoạt động</label>
+                            </div>
+                            <div class="form-check-inline">
+                                <input class="form-check-input" type="radio" name="status" id="inactive" value="0">
+                                <label class="form-check-label" for="inactive">Ngưng hoạt động</label>
+                            </div>
+                        </div>
+                    </div>
+                </c:if>
+            </div>
 
-                    <!-- Nút submit -->
-                    <button type="submit" class="btn text-white bg_green fw-bold">Gửi mã OTP</button>
-                </form>
-            </c:otherwise>
-        </c:choose>
+            <!-- Nút submit -->
+            <button type="submit" class="btn text-white bg_green fw-bold">Thêm</button>
+        </form>
     </div>
 </main>
 
 <footer class="position-fixed bottom-0 w-100 text-center py-2 bg-light">
     <p class="pt-3" style="color: rgba(0, 0, 0, 0.5); margin-left: 150px;">©2024 Group-11</p>
 </footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const roleSelect = document.getElementById('role');
+        const subRoleContainer = document.getElementById('subRoleContainer');
+
+        // Function to toggle sub_role visibility
+        function toggleSubRole() {
+            if (roleSelect.value === '1') { // Quản trị viên
+                subRoleContainer.style.display = 'block';
+                document.getElementById('sub_role').setAttribute('required', 'required');
+            } else { // Người dùng or no selection
+                subRoleContainer.style.display = 'none';
+                document.getElementById('sub_role').removeAttribute('required');
+            }
+        }
+
+        // Initial check
+        toggleSubRole();
+
+        // Add event listener for role changes
+        roleSelect.addEventListener('change', toggleSubRole);
+    });
+</script>
 
 </body>
 </html>
