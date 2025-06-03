@@ -8,28 +8,59 @@ import java.util.Optional;
 
 public class PostService {
     private final PostDao postDao;
+    private final UserService userService = UserService.getInstance(); // Thêm UserService để kiểm tra quyền
 
     public PostService() {
         this.postDao = new PostDao();
     }
 
+    //lay ra tat ca post
     public List<Post> getAllPosts() {
         return postDao.getAllPosts();
     }
 
+    //lay theo id post
     public Optional<Post> getPostById(int id) {
         return postDao.getPostById(id);
     }
-    public boolean addPost(Post post, int adminUserId) {
-        PostDao postDao = new PostDao();
-        try {
-            postDao.addPost(post, adminUserId);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+
+    //add post
+    public void addPost(Post post, int userId) {
+        // Kiểm tra quyền PRODUCT_MANAGEMENT
+        if (!userService.hasPermission(userId, "POST_MANAGEMENT")) {
+            throw new RuntimeException("Bạn không có quyền thực hiện thao tác này.");
         }
+        postDao.addPost(post, userId);
     }
 
+    //delete post
+    public void deletePost(int postId, int userId) {
+        // Kiểm tra quyền PRODUCT_MANAGEMENT
+        if (!userService.hasPermission(userId, "POST_MANAGEMENT")) {
+            throw new RuntimeException("Bạn không có quyền thực hiện thao tác này.");
+        }
+        postDao.deletePost(postId, userId);
+    }
 
+    //edit post
+    public void updatePost(Post post, int userId) {
+        // Kiểm tra quyền PRODUCT_MANAGEMENT
+        if (!userService.hasPermission(userId, "POST_MANAGEMENT")) {
+            throw new RuntimeException("Bạn không có quyền thực hiện thao tác này.");
+        }
+        postDao.updatePost(post, userId);
+    }
+
+    //search posst
+    public List<Post> searchPosts(String keyword) {
+        return postDao.searchPosts(keyword);
+    }
+    //tổng post
+    public int getTotalPosts() {
+        return postDao.getTotalPosts();
+    }
+    //lấy post
+    public List<Post> getPostsWithPagination(int offset, int pageSize) {
+        return postDao.getPostsWithPagination(offset, pageSize);
+    }
 }

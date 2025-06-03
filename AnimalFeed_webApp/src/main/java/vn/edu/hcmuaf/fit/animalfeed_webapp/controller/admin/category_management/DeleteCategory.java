@@ -20,14 +20,6 @@ public class DeleteCategory extends HttpServlet {
         userService = UserService.getInstance();
     }
 
-    private boolean hasCategoryManagementPermission(HttpSession session) {
-        Integer userId = (Integer) session.getAttribute("userId");
-        if (userId == null) {
-            return false;
-        }
-        return userService.hasPermission(userId, "CATEGORY_MANAGEMENT");
-    }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
@@ -36,12 +28,6 @@ public class DeleteCategory extends HttpServlet {
             session = request.getSession(true);
             session.setAttribute("error", "Vui lòng đăng nhập để truy cập.");
             response.sendRedirect(request.getContextPath() + "/login");
-            return;
-        }
-
-        if (!hasCategoryManagementPermission(session)) {
-            session.setAttribute("error", "Bạn không có quyền xóa danh mục (yêu cầu quyền CATEGORY_MANAGEMENT).");
-            response.sendRedirect(request.getContextPath() + "/category-management-admin");
             return;
         }
 

@@ -65,13 +65,15 @@
                     <input type="hidden" name="id" value="${issue.id}"/>
 
                     <div class="mb-4">
-                        <label for="userId" class="form-label">ID Admin</label>
-                        <input type="number" class="form-control" id="userId" name="userId" value="${issue.userId}" required/>
+                        <label for="adminName" class="form-label">Admin</label>
+                        <input type="text" class="form-control" id="adminName" value="${issue.adminName}" disabled/>
+                        <input type="hidden" name="userId" value="${issue.userId}"/>
                     </div>
 
                     <div class="mb-4">
-                        <label for="productId" class="form-label">ID Sản phẩm</label>
-                        <input type="number" class="form-control" id="productId" name="productId" value="${issue.productId}" required/>
+                        <label for="productName" class="form-label">Sản phẩm</label>
+                        <input type="text" class="form-control product-id" name="productIdOrName" value="${issue.productName}" required/>
+                        <input type="hidden" class="product-id-hidden" name="productId" value="${issue.productId}"/>
                     </div>
 
                     <div class="mb-4">
@@ -80,8 +82,8 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="quantity" class="form-label">Số lượng</label>
-                        <input type="number" class="form-control" id="quantity" name="quantity" value="${issue.quantity}" min="1" required/>
+                        <label for="quantity" class="form-label">Số lượng (Tồn kho: ${inventoryQuantity})</label>
+                        <input type="number" class="form-control" id="quantity" name="quantity" value="${issue.quantity}" min="1" max="${inventoryQuantity}" required/>
                     </div>
 
                     <div class="mb-4">
@@ -119,6 +121,34 @@
         form.addEventListener('submit', function(e) {
             if (!confirm('Bạn có chắc chắn muốn lưu thay đổi?')) {
                 e.preventDefault();
+            }
+        });
+
+        // Autocomplete cho sản phẩm
+        document.querySelector('.product-id').addEventListener('input', function(e) {
+            const productInput = e.target;
+            const productIdHidden = document.querySelector('.product-id-hidden');
+            const value = productInput.value.trim();
+
+            if (value.length > 0) {
+                fetch("${pageContext.request.contextPath}/api/product?search=" + encodeURIComponent(value))
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data && data.length > 0) {
+                            productInput.value = data[0].name;
+                            productIdHidden.value = data[0].id;
+                        } else {
+                            productInput.value = 'Không có sản phẩm';
+                            productIdHidden.value = '';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching product:', error);
+                        productInput.value = 'Không có sản phẩm';
+                        productIdHidden.value = '';
+                    });
+            } else {
+                productIdHidden.value = '';
             }
         });
     });

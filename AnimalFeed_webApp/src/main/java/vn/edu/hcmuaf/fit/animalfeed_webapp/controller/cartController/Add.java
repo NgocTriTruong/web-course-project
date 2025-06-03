@@ -4,6 +4,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.cart.Cart;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.dto.CartItem;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.CartDetail;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
@@ -47,33 +48,57 @@ public class Add extends HttpServlet {
                 cart = new Cart();
             }
 
-            session.setAttribute("cart", cart);
-
-            // Get quantity from request, default to 1 if not provided
-            int quantity = 1;
+            // Lấy số lượng người dùng chọn, mặc định là 1
+            int requestedQuantity = 1;
             if (request.getParameter("quantity") != null && !request.getParameter("quantity").isEmpty()) {
-                quantity = Integer.parseInt(request.getParameter("quantity"));
-                if (quantity < 1) quantity = 1; // Ensure quantity is not less than 1
-                if (quantity > 500) quantity = 500; // Limit to max 500 as per input
+                requestedQuantity = Integer.parseInt(request.getParameter("quantity"));
+                if (requestedQuantity < 1) requestedQuantity = 1;
+            }
+
+            // Lấy số lượng trong giỏ hàng
+            int currentQuantity = 0;
+            if (cartService.getCDById(productId, user.getId())) {
+                CartItem existingCartItem = cart.getCartDetails().stream()
+                        .filter(item -> item.getProductId() == productId)
+                        .findFirst()
+                        .orElse(null);
+                if (existingCartItem != null) {
+                    currentQuantity = existingCartItem.getQuantity();
+                }
+            }
+
+            int newQuantity = currentQuantity + requestedQuantity;
+
+            // Kiểm tra tồn kho
+            int availableQuantity = productService.getInventoryQuantity(productId);
+            if (newQuantity > availableQuantity) {
+                newQuantity = availableQuantity;
+                requestedQuantity = availableQuantity - currentQuantity;
+                if (requestedQuantity < 0) requestedQuantity = 0;
+                session.setAttribute("cartError", "Số lượng yêu cầu vượt quá tồn kho. Số lượng tối đa có thể thêm: " + requestedQuantity);
+                response.sendRedirect("product-detail?pid=" + productId + "&addCart=false&quantity=" + requestedQuantity);
+                return;
+            } else {
+                session.removeAttribute("cartError");
             }
 
             CartDetail cartDetail = new CartDetail();
             cartDetail.setUserId(user.getId());
             cartDetail.setProductId(product.getId());
-            cartDetail.setQuantity(quantity);
-            cartDetail.setTotal(cart.getDiscountedPrice(product) * quantity); // Calculate total with quantity
+            cartDetail.setQuantity(newQuantity);
+            cartDetail.setTotal(cart.getDiscountedPrice(product) * newQuantity);
             cartDetail.setStatus(0);
 
             if (cartService.getCDById(productId, user.getId())) {
-                cartService.updateQuantity(cartDetail.getProductId(), cartDetail.getUserId(), quantity);
+                cartService.updateQuantity(cartDetail.getProductId(), cartDetail.getUserId(), newQuantity);
             } else {
                 cartService.insertCD(cartDetail);
             }
-            cart.addProduct(product, user.getId(), quantity); // Pass quantity to Cart
+            cart.addProduct(product, user.getId(), newQuantity);
 
             session.setAttribute("cart", cart);
 
-            response.sendRedirect("product-detail?pid=" + productId + "&addCart=true");
+            response.sendRedirect("product-detail?pid=" + productId + "&addCart=true&quantity=" + requestedQuantity);
         } catch (Exception e) {
             e.printStackTrace();
             response.sendRedirect("list-product?addCart=false&error=" + e.getMessage());

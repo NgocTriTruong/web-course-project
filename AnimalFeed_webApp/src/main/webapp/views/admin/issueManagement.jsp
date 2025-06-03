@@ -62,93 +62,93 @@
 
         <!-- Hiển thị thông báo -->
         <c:if test="${not empty message}">
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            ${message}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    </c:if>
-    <c:if test="${not empty error}">
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                ${error}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    </c:if>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </c:if>
+        <c:if test="${not empty error}">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    ${error}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </c:if>
 
-    <!-- Bảng dữ liệu sự cố -->
-    <div class="datatable">
-        <table class="table align-middle mb-0 bg-white">
-            <thead class="bg-light">
-            <tr class="h6">
-                <th>STT</th>
-                <th>Mã sự cố</th>
-                <th>Admin</th>
-                <th>ID sản phẩm</th>
-                <th>Lý do</th>
-                <th>Số lượng</th>
-                <th>Trạng thái</th>
-                <th>Ngày tạo</th>
-                <th>Thao tác</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach items="${issues}" var="issue" varStatus="loop">
-                <tr>
-                    <td><span class="ms-2 h6">${loop.index + 1}</span></td>
-                    <td><span class="h6 ms-1">${issue.id}</span></td>
-                    <td><p class="h6 mb-1 ms-1">${issue.userId}</p></td>
-                    <td><span class="h6 ms-1">${issue.productId}</span></td>
-                    <td><span class="h6 ms-1">${issue.reason}</span></td>
-                    <td><span class="h6 ms-1">${issue.quantity}</span></td>
-                    <td>
+        <!-- Bảng dữ liệu sự cố -->
+        <div class="datatable">
+            <table class="table align-middle mb-0 bg-white">
+                <thead class="bg-light">
+                <tr class="h6">
+                    <th>STT</th>
+                    <th>Mã sự cố</th>
+                    <th>Admin</th>
+                    <th>Sản phẩm</th>
+                    <th>Lý do</th>
+                    <th>Số lượng</th>
+                    <th>Trạng thái</th>
+                    <th>Ngày tạo</th>
+                    <th>Thao tác</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach items="${issues}" var="issue" varStatus="loop">
+                    <tr>
+                        <td><span class="ms-2 h6">${loop.index + 1}</span></td>
+                        <td><span class="h6 ms-1">${issue.id}</span></td>
+                        <td><p class="h6 mb-1 ms-1">${issue.adminName}</p></td>
+                        <td><span class="h6 ms-1">${issue.productName}</span></td>
+                        <td><span class="h6 ms-1">${issue.reason}</span></td>
+                        <td><span class="h6 ms-1">${issue.quantity}</span></td>
+                        <td>
                             <span class="badge ${issue.status == 0 ? 'badge-warning' : 'badge-success'}"
                                   style="font-size: 13px;">
                                     ${issue.status == 0 ? 'Chưa giải quyết' : 'Đã giải quyết'}
                             </span>
-                    </td>
-                    <td>
-                        <fmt:parseDate value="${issue.createDate.toString()}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedCreateDate"/>
-                        <fmt:formatDate value="${parsedCreateDate}" pattern="dd/MM/yyyy"/>
-                    </td>
-                    <td>
-                        <a href="${pageContext.request.contextPath}/edit-issue?id=${issue.id}" class="btn bg_green btn-floating" style="font-size: 16px;" title="Chỉnh sửa">
-                            <i class="far fa-pen-to-square"></i>
+                        </td>
+                        <td>
+                            <fmt:parseDate value="${issue.createDate.toString()}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedCreateDate"/>
+                            <fmt:formatDate value="${parsedCreateDate}" pattern="dd/MM/yyyy"/>
+                        </td>
+                        <td>
+                            <a href="${pageContext.request.contextPath}/edit-issue?id=${issue.id}" class="btn bg_green btn-floating" style="font-size: 16px;" title="Chỉnh sửa">
+                                <i class="far fa-pen-to-square"></i>
+                            </a>
+                            <a href="#" onclick="solveIssue(${issue.id})" class="btn bg_yellow btn-floating" style="font-size: 16px;" title="Đã giải quyết">
+                                <i class="far fa-check-circle"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Phân trang -->
+        <nav aria-label="Pagination">
+            <ul class="pagination justify-content-end">
+                <c:if test="${currentPage > 1}">
+                    <li class="page-item">
+                        <a class="page-link" href="?page=${currentPage-1}${not empty searchTerm ? '&searchTerm='.concat(searchTerm) : ''}" aria-label="Previous">
+                            <span aria-hidden="true">«</span>
                         </a>
-                        <a href="#" onclick="solveIssue(${issue.id})" class="btn bg_yellow btn-floating" style="font-size: 16px;" title="Đã giải quyết">
-                            <i class="far fa-check-circle"></i>
+                    </li>
+                </c:if>
+
+                <c:forEach begin="1" end="${endPage}" var="i">
+                    <li class="page-item ${i == currentPage ? 'active' : ''}">
+                        <a class="page-link" href="?page=${i}${not empty searchTerm ? '&searchTerm='.concat(searchTerm) : ''}">${i}</a>
+                    </li>
+                </c:forEach>
+
+                <c:if test="${currentPage < endPage}">
+                    <li class="page-item">
+                        <a class="page-link" href="?page=${currentPage+1}${not empty searchTerm ? '&searchTerm='.concat(searchTerm) : ''}" aria-label="Next">
+                            <span aria-hidden="true">»</span>
                         </a>
-                    </td>
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
-    </div>
-
-    <!-- Phân trang -->
-    <nav aria-label="Pagination">
-        <ul class="pagination justify-content-end">
-            <c:if test="${currentPage > 1}">
-                <li class="page-item">
-                    <a class="page-link" href="?page=${currentPage-1}${not empty searchTerm ? '&searchTerm='.concat(searchTerm) : ''}" aria-label="Previous">
-                        <span aria-hidden="true">«</span>
-                    </a>
-                </li>
-            </c:if>
-
-            <c:forEach begin="1" end="${endPage}" var="i">
-                <li class="page-item ${i == currentPage ? 'active' : ''}">
-                    <a class="page-link" href="?page=${i}${not empty searchTerm ? '&searchTerm='.concat(searchTerm) : ''}">${i}</a>
-                </li>
-            </c:forEach>
-
-            <c:if test="${currentPage < endPage}">
-                <li class="page-item">
-                    <a class="page-link" href="?page=${currentPage+1}${not empty searchTerm ? '&searchTerm='.concat(searchTerm) : ''}" aria-label="Next">
-                        <span aria-hidden="true">»</span>
-                    </a>
-                </li>
-            </c:if>
-        </ul>
-    </nav>
+                    </li>
+                </c:if>
+            </ul>
+        </nav>
     </div>
 </main>
 

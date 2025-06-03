@@ -70,12 +70,15 @@ public class RegisterController extends HttpServlet {
         // Lấy người dùng từ email để đăng nhập
         User newUser = userService.getUserByEmail(email);
         session.setAttribute("user", newUser);
+        session.setAttribute("userId", newUser.getId()); // Lưu userId vào session
         session.removeAttribute("verificationCode");
         session.removeAttribute("codeExpiration");
         session.removeAttribute("verified");
         session.removeAttribute("wrongAttempts");
         session.removeAttribute("lockUntil");
-        resp.setStatus(HttpServletResponse.SC_OK);
+
+        // Chuyển hướng đến trang home
+        resp.sendRedirect(req.getContextPath() + "/home");
     }
 
     @Override

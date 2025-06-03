@@ -11,6 +11,8 @@ public class Issue implements Serializable {
     private int quantity;
     private int status;
     private LocalDateTime createDate;
+    private String adminName; // Thêm trường để lưu tên admin
+    private String productName; // Thêm trường để lưu tên sản phẩm
 
     public Issue() {}
 
@@ -80,12 +82,30 @@ public class Issue implements Serializable {
         this.createDate = createDate;
     }
 
+    public String getAdminName() {
+        return adminName;
+    }
+
+    public void setAdminName(String adminName) {
+        this.adminName = adminName;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
     @Override
     public String toString() {
         return "Issue{" +
                 "id=" + id +
                 ", userId=" + userId +
+                ", adminName='" + adminName + '\'' +
                 ", productId=" + productId +
+                ", productName='" + productName + '\'' +
                 ", reason='" + reason + '\'' +
                 ", quantity=" + quantity +
                 ", status=" + status +

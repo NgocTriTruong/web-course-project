@@ -4,124 +4,116 @@ import org.jdbi.v3.core.Jdbi;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.db.JdbiConnect;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.ActionLog;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Category;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Product;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.services.UserService;
 
-import java.util.Date;
 import java.util.List;
-
 
 public class CategoryDao {
     private static Jdbi jdbi = JdbiConnect.getJdbi();
     private ActionLogDao actionLogDao = new ActionLogDao();
+    private UserService userService = UserService.getInstance();
 
-    public Category getCategoryById(int id) {
-        return jdbi.withHandle(handle -> handle.createQuery("select * from categories where id = :id")
-                .bind("id", id).mapToBean(Category.class)
-                .findOne().orElse(null));
+    public Category getById(int id) {
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT * FROM categories WHERE id = :id")
+                        .bind("id", id)
+                        .mapToBean(Category.class)
+                        .findOne()
+                        .orElse(null));
     }
 
-    // Thêm danh mục
-    public void insertCategory(Category category, int userId) {
-        boolean isAdmin = UserDao.checkIfAdmin(userId);
-        if (isAdmin) {
-            Jdbi jdbi = JdbiConnect.getJdbi();
-            // Thực hiện thêm sản phẩm và ghi log
+    public void insert(Category category, int userId) {
+        if (userService.hasPermission(userId, "CATEGORY_MANAGEMENT")) {
             jdbi.useTransaction(handle -> {
                 int categoryId = handle.createUpdate("INSERT INTO categories (name, img, status) VALUES (:name, :img, :status)")
                         .bindBean(category)
                         .executeAndReturnGeneratedKeys("id")
-                        .mapTo(int.class)
+                        .mapTo(Integer.class)
                         .one();
 
-                ActionLog actionLog = new ActionLog(userId, "CREATE", "CATEGORY", categoryId, "User " + userId + " created product " + category, null, category.toString());
+                ActionLog actionLog = new ActionLog();
+                actionLog.setUser_id(userId);
+                actionLog.setAction_type("CREATE");
+                actionLog.setEntity_type("CATEGORY");
+                actionLog.setEntity_id(categoryId);
+                actionLog.setDescription("User " + userId + " created category " + category.getName());
+                actionLog.setBefore_data("null");
+                actionLog.setAfter_data(category.toString());
                 actionLogDao.logAction(actionLog);
             });
+        } else {
+            throw new RuntimeException("User does not have CATEGORY_MANAGEMENT permission");
         }
     }
 
-    // Sửa danh mục
-    public void updateCategoryStatus(Category category, int userId) {
-        jdbi.useTransaction(handle -> {
-            // Lấy dữ liệu trước khi chỉnh sửa
-            Category oldCategory = getCategoryById(category.getId());
-            if (oldCategory == null) {
-                throw new IllegalArgumentException("Danh mục không tồn tại.");
-            }
+    public void update(Category category, int userId) {
+        if (userService.hasPermission(userId, "CATEGORY_MANAGEMENT")) {
+            jdbi.useTransaction(handle -> {
+                Category oldCategory = getById(category.getId());
+                if (oldCategory == null) {
+                    throw new IllegalArgumentException("Danh mục không tồn tại.");
+                }
 
-            String beforeData = oldCategory.toString();
+                int updatedRows = handle.createUpdate("UPDATE categories SET name = :name, img = :img, status = :status WHERE id = :id")
+                        .bindBean(category)
+                        .execute();
 
-            // Cập nhật danh mục
-            handle.createUpdate("UPDATE categories SET name = :name, img = :img, status = :status WHERE id = :id")
-                    .bindBean(category)
-                    .execute();
-
-            // Ghi log
-            ActionLog actionLog = new ActionLog();
-            actionLog.setUser_id(userId);
-            actionLog.setAction_type("UPDATE");
-            actionLog.setEntity_type("CATEGORY");
-            actionLog.setEntity_id(category.getId());
-            actionLog.setCreated_at(new Date());
-            actionLog.setDescription("User " + userId + " updated category " + category.getName());
-            actionLog.setBefore_data(beforeData);
-            actionLog.setAfter_data(category.toString());
-            actionLogDao.logAction(actionLog);
-        });
+                if (updatedRows > 0) {
+                    ActionLog actionLog = new ActionLog();
+                    actionLog.setUser_id(userId);
+                    actionLog.setAction_type("UPDATE");
+                    actionLog.setEntity_type("CATEGORY");
+                    actionLog.setEntity_id(category.getId());
+                    actionLog.setDescription("User " + userId + " updated category " + category.getName());
+                    actionLog.setBefore_data(oldCategory.toString());
+                    actionLog.setAfter_data(category.toString());
+                    actionLogDao.logAction(actionLog);
+                } else {
+                    throw new RuntimeException("Failed to update category with ID: " + category.getId());
+                }
+            });
+        } else {
+            throw new RuntimeException("User does not have CATEGORY_MANAGEMENT permission");
+        }
     }
 
-    // Xóa danh mục
-    public void deleteCategory(int id, int userId) {
-        // Lấy thông tin danh mục trước khi xóa
-        Category deletedCategory = getCategoryById(id);
+    public void delete(int id, int userId) {
+        if (userService.hasPermission(userId, "CATEGORY_MANAGEMENT")) {
+            jdbi.useTransaction(handle -> {
+                Category deletedCategory = getById(id);
+                if (deletedCategory == null) {
+                    throw new IllegalArgumentException("Danh mục không tồn tại.");
+                }
 
-        // Kiểm tra quyền admin
-        boolean isAdmin = UserDao.checkIfAdmin(userId);
+                int updatedRows = handle.createUpdate("UPDATE categories SET status = :status WHERE id = :id")
+                        .bind("status", 0)
+                        .bind("id", id)
+                        .execute();
 
-        if (!isAdmin) {
-            throw new SecurityException("User " + userId + " không có quyền xóa danh mục");
+                if (updatedRows > 0) {
+                    ActionLog actionLog = new ActionLog();
+                    actionLog.setUser_id(userId);
+                    actionLog.setAction_type("DELETE");
+                    actionLog.setEntity_type("CATEGORY");
+                    actionLog.setEntity_id(id);
+                    actionLog.setDescription("User " + userId + " deleted category " + deletedCategory.getName());
+                    actionLog.setBefore_data(deletedCategory.toString());
+                    actionLog.setAfter_data("null");
+                    actionLogDao.logAction(actionLog);
+                } else {
+                    throw new RuntimeException("Không thể xóa danh mục với ID: " + id);
+                }
+            });
+        } else {
+            throw new RuntimeException("User does not have CATEGORY_MANAGEMENT permission");
         }
-
-        if (deletedCategory == null) {
-            throw new IllegalArgumentException("Danh mục không tồn tại.");
-        }
-
-        // Thực hiện xóa mềm danh mục và ghi log
-        Jdbi jdbi = JdbiConnect.getJdbi();
-        jdbi.useTransaction(handle -> {
-            // Cập nhật trạng thái danh mục thành 'deleted' (status = 0)
-            int updatedRows = handle.createUpdate("UPDATE categories SET status = :status WHERE id = :id")
-                    .bind("status", 0) // Trạng thái 'deleted'
-                    .bind("id", id)
-                    .execute();
-
-            // Ghi log hành động nếu xóa thành công
-            if (updatedRows > 0) {
-                ActionLog actionLog = new ActionLog(
-                        userId,
-                        "DELETE",
-                        "CATEGORY",
-                        id,
-                        "User " + userId + " deleted category " + deletedCategory.getName(),
-                        deletedCategory.toString(),
-                        null
-                );
-                actionLogDao.logAction(actionLog);
-            } else {
-                throw new RuntimeException("Không thể xóa danh mục với ID: " + id);
-            }
-        });
     }
 
     public List<Category> getAll() {
-        return jdbi.withHandle(handle -> handle.createQuery("select * from categories")
-                .mapToBean(Category.class).list());
-    }
-
-    public static void main(String[] args) {
-        CategoryDao categoryDao = new CategoryDao();
-        List<Category> categories = categoryDao.getAll();
-        for (Category category : categories) {
-            System.out.println(category);
-        }
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT * FROM categories WHERE status = :status")
+                        .bind("status", 1)
+                        .mapToBean(Category.class)
+                        .list());
     }
 }

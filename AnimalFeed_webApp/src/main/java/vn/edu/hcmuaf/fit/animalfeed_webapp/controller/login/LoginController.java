@@ -6,6 +6,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.ActionLogDao;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.ActionLog;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.UserService;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
 import org.json.JSONObject;
@@ -14,6 +16,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Date;
 import java.util.Scanner;
 
 @WebServlet(name = "LoginController", value = "/login")
@@ -56,6 +59,16 @@ public class LoginController extends HttpServlet {
             session.setAttribute("userId", user.getId());
             session.setAttribute("userFullName", user.getFullName()); // Lưu tên đầy đủ để hiển thị trên Dashboard
             session.setAttribute("subRole", user.getSub_role()); // Lưu sub_role để phân quyền trên JSP
+
+            // Ghi log đăng nhập
+            ActionLog actionLog = new ActionLog();
+            actionLog.setUser_id(user.getId());
+            actionLog.setAction_type("LOGIN");
+            actionLog.setEntity_type("USER");
+            actionLog.setEntity_id(user.getId());
+            actionLog.setCreated_at(new Date());
+            actionLog.setDescription("User " + user.getId() + " logged in");
+            ActionLogDao.logAction(actionLog);
 
             // Chuyển hướng theo vai trò
             if (user.getRole() == 1) {

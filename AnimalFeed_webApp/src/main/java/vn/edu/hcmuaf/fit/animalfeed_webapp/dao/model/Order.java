@@ -12,6 +12,7 @@ public class Order implements Serializable {
     private double totalPrice;
     private int totalQuantity;
     private int userId;
+    private String customerName; // Added field for customer name
     private double shippingPrice;
     private LocalDateTime orderDate;
     private Date shippingDate;
@@ -19,7 +20,7 @@ public class Order implements Serializable {
 
     public Order() {}
 
-    public Order(int id, int status, String address, int shipperId, double totalPrice, int totalQuantity, int userId, double shippingPrice, LocalDateTime orderDate, Date shippingDate) {
+    public Order(int id, int status, String address, int shipperId, double totalPrice, int totalQuantity, int userId, String customerName, double shippingPrice, LocalDateTime orderDate, Date shippingDate) {
         this.id = id;
         this.status = status;
         this.address = address;
@@ -27,6 +28,7 @@ public class Order implements Serializable {
         this.totalPrice = totalPrice;
         this.totalQuantity = totalQuantity;
         this.userId = userId;
+        this.customerName = customerName;
         this.shippingPrice = shippingPrice;
         this.orderDate = orderDate;
         this.shippingDate = shippingDate;
@@ -88,6 +90,14 @@ public class Order implements Serializable {
         this.userId = userId;
     }
 
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
     public double getShippingPrice() {
         return shippingPrice;
     }
@@ -130,6 +140,7 @@ public class Order implements Serializable {
                 ", totalPrice=" + totalPrice +
                 ", totalQuantity=" + totalQuantity +
                 ", userId=" + userId +
+                ", customerName='" + customerName + '\'' +
                 ", shippingPrice=" + shippingPrice +
                 ", orderDate=" + orderDate +
                 ", shippingDate=" + shippingDate +

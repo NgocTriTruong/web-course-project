@@ -76,7 +76,7 @@
         </ul>
       </li>
       <li class="sidenav-item">
-        <a class="sidenav-link" href="${pageContext.request.contextPath}/post-admin">
+        <a class="sidenav-link" href="${pageContext.request.contextPath}/post-management">
           <i class="fas fa-blog fa-fw me-2 "></i><span class="h5 text">Quản lý trang tin tức</span><i class="fas fa-chevron-down" style="margin-left: 10px;"></i></a>
         <ul class="sidenav-collapse ">
           <li class="sidenav-item">
@@ -113,12 +113,16 @@
       </li>
       <li class="sidenav-item">
         <a class="sidenav-link" href="${pageContext.request.contextPath}/issueManagement">
-          <i class="fas fa-handshake fa-fw me-2 "></i><span class="h5 text">Sự cố sản phẩm</span><i class="fas fa-chevron-down" style="margin-left: 30px;"></i></a>
+          <i class="fas fa-note-sticky fa-fw me-2 "></i><span class="h5 text">Sự cố sản phẩm</span><i class="fas fa-chevron-down" style="margin-left: 30px;"></i></a>
         <ul class="sidenav-collapse ">
           <li class="sidenav-item">
             <a class="sidenav-link" href="${pageContext.request.contextPath}/add-issue" style="font-size: 17px;">Thêm báo cáo sự cố</a>
           </li>
         </ul>
+      </li>
+      <li class="sidenav-item">
+        <a class="sidenav-link" href="${pageContext.request.contextPath}/activity-history">
+          <i class="fas fa-history fa-fw me-2 "></i><span class="h5 text">Lịch sử hoạt động</span></a>
       </li>
     </ul>
   </nav>

@@ -89,7 +89,7 @@ public class AddOrder extends HttpServlet {
                     customerName = existingUser.getFullName();
                 }
             } else {
-                userService.registerUser(customerName, email, "defaultPassword");
+                userService.registerUser(customerName, email, "Amind123..");
                 User newUser = userService.getUserByEmail(email);
                 orderUserId = newUser.getId();
                 System.out.println("New user created with ID: " + orderUserId);

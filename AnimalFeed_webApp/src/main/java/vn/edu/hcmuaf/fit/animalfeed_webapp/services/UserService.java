@@ -33,6 +33,8 @@ public class UserService {
         if (!BCrypt.checkpw(password, user.getPassword())) {
             throw new RuntimeException("Mật khẩu không đúng.");
         }
+        // Đặt lại force_logout khi đăng nhập thành công
+        resetForceLogout(user.getId());
         return user;
     }
 
@@ -42,7 +44,22 @@ public class UserService {
         if (!optionalUser.isPresent()) {
             throw new RuntimeException("Không tìm thấy tài khoản với email " + email);
         }
-        return optionalUser.get();
+        User user = optionalUser.get();
+        // Đặt lại force_logout khi đăng nhập thành công
+        resetForceLogout(user.getId());
+        return user;
+    }
+
+    // Đăng nhập bằng Facebook
+    public User loginWithFacebook(String email) {
+        Optional<User> optionalUser = userDao.getUserByEmail(email);
+        if (!optionalUser.isPresent()) {
+            throw new RuntimeException("Không tìm thấy tài khoản với email " + email);
+        }
+        User user = optionalUser.get();
+        // Đặt lại force_logout khi đăng nhập thành công
+        resetForceLogout(user.getId());
+        return user;
     }
 
     // Kiểm tra email đã tồn tại
@@ -73,12 +90,20 @@ public class UserService {
         newUser.setStatus(1); // Mặc định là active
         newUser.setCreateDate(new Date());
         newUser.setUpdateDate(new Date());
+        newUser.setForce_logout(false);
         userDao.insertUser(newUser);
     }
 
     // Đăng ký người dùng qua Google
     public void registerUserWithGoogle(User user) {
         user.setSub_role(0); // Mặc định sub_role = 0
+        user.setForce_logout(false);
+        userDao.insertUser(user);
+    }
+
+    // Đăng ký người dùng qua Facebook
+    public void registerUserWithFacebook(User user) {
+        user.setForce_logout(false);
         userDao.insertUser(user);
     }
 
@@ -97,14 +122,11 @@ public class UserService {
 
     // Thêm người dùng mới
     public void addUser(User user, int adminUserId) {
-        User adminUser = userDao.getUserById(adminUserId);
-        if (adminUser == null || adminUser.getRole() != 1 || !hasPermission(adminUserId, "USER_MANAGEMENT")) {
-            throw new RuntimeException("Chỉ super admin mới có quyền thêm người dùng.");
-        }
         if (user.getPassword() != null) {
             String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
             user.setPassword(hashedPassword);
         }
+        user.setForce_logout(false);
         userDao.addUser(user, adminUserId);
     }
 
@@ -115,11 +137,11 @@ public class UserService {
 
     // Cập nhật thông tin người dùng (với quyền admin)
     public boolean updateUser(User user, int adminUserId) {
-        User adminUser = userDao.getUserById(adminUserId);
-        if (adminUser == null || adminUser.getRole() != 1 || !hasPermission(adminUserId, "USER_MANAGEMENT")) {
-            return false;
-        }
         try {
+            User existingUser = userDao.getUserById(user.getId());
+            if (existingUser == null) {
+                return false;
+            }
             userDao.updateUser(user, adminUserId);
             return true;
         } catch (Exception e) {
@@ -129,10 +151,6 @@ public class UserService {
 
     // Xóa người dùng
     public boolean deleteUser(int userId, int adminUserId) {
-        User adminUser = userDao.getUserById(adminUserId);
-        if (adminUser == null || adminUser.getRole() != 1 || !hasPermission(adminUserId, "USER_MANAGEMENT")) {
-            return false;
-        }
         try {
             User userToDelete = userDao.getUserById(userId);
             if (userToDelete == null) {
@@ -223,6 +241,7 @@ public class UserService {
         return userDao.getUserById(userId);
     }
 
+    // Kiểm tra quyền
     public boolean hasPermission(int userId, String permission) {
         User user = getUserById(userId);
         System.out.println("Checking permission for userId: " + userId + ", permission: " + permission);
@@ -249,17 +268,38 @@ public class UserService {
                 System.out.println("Has CATEGORY_MANAGEMENT permission: " + hasCategoryManagement);
                 return hasCategoryManagement;
             case "ORDER_MANAGEMENT":
-                boolean hasOrderManagement = user.getSub_role() == 3;
+                boolean hasOrderManagement = user.getSub_role() == 4;
                 System.out.println("Has ORDER_MANAGEMENT permission: " + hasOrderManagement);
                 return hasOrderManagement;
             case "NEWS_MANAGEMENT":
-                return user.getSub_role() == 5;
+                boolean hasNewsManagement = user.getSub_role() == 5;
+                System.out.println("Has NEWS_MANAGEMENT permission: " + hasNewsManagement);
+                return hasNewsManagement;
             case "JOB_MANAGEMENT":
-                return user.getSub_role() == 6;
+                boolean hasJobManagement = user.getSub_role() == 6;
+                System.out.println("Has JOB_MANAGEMENT permission: " + hasJobManagement);
+                return hasJobManagement;
             default:
                 return false;
         }
     }
+
+    // Đánh dấu người dùng cần đăng xuất
+    public void markUserForLogout(int userId) {
+        userDao.markUserForLogout(userId, true);
+    }
+
+    // Đặt lại force_logout
+    private void resetForceLogout(int userId) {
+        userDao.markUserForLogout(userId, false);
+    }
+
+    // Kiểm tra trạng thái force_logout
+    public boolean isForceLogout(int userId) {
+        return userDao.isForceLogout(userId);
+    }
+
+    // Hash mật khẩu hiện có
     public void hashExistingPasswords() {
         List<User> users = getAllUsers();
         for (User user : users) {
@@ -269,24 +309,5 @@ public class UserService {
                 userDao.updatePassword1(user.getId(), hashedPassword);
             }
         }
-    }
-
-    //Đăng ký người dùng qua Facebook
-    public void registerUserWithFacebook(User user) {
-        userDao.insertUser(user);
-    }
-
-    //Đăng nhập bằng Facebook
-    public User loginWithFacebook(String email) {
-        Optional<User> optionalUser = userDao.getUserByEmail(email);
-        if (!optionalUser.isPresent()) {
-            throw new RuntimeException("Không tìm thấy tài khoản với email " + email);
-        }
-        return optionalUser.get();
-    }
-
-    //kiểm tra xem người dùng có phải là admin hay không
-    public boolean checkIfAdmin(int userId) {
-        return userDao.checkIfAdmin(userId);
     }
 }

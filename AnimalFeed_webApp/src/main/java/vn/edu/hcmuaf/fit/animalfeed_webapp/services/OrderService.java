@@ -1,10 +1,10 @@
 package vn.edu.hcmuaf.fit.animalfeed_webapp.services;
 
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.OrderDao;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.OrderDetailDao;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.dto.OrderDetailsWithProduct;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.dto.UserStats;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.Order;
-import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.OrderDetailDao;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.OrderDetail;
 
 import java.sql.SQLException;
@@ -74,7 +74,7 @@ public class OrderService {
     }
 
     public List<Order> searchOrders(String searchTerm) {
-        return null;
+        return orderDao.searchOrders(searchTerm);
     }
 
     public int getTotalOrder() {

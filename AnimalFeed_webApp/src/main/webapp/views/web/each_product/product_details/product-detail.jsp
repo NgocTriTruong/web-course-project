@@ -94,6 +94,12 @@
                         <div class="p fw-bold p_bold">Lượt mua (bao):</div>
                         <div class="p">2.341</div>
                     </div>
+                    <c:if test="${not empty sessionScope.cartError}">
+                        <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">
+                                ${sessionScope.cartError}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </c:if>
                     <div class="button d-flex mt-3">
                         <c:choose>
                             <c:when test="${product.quantity == 0}">
@@ -102,9 +108,9 @@
                             </c:when>
                             <c:otherwise>
                                 <!-- Hiển thị nút "Thêm vào giỏ hàng" và "Mua ngay" nếu còn hàng -->
-                                <form action="${pageContext.request.contextPath}/add-cart" method="GET" style="display: inline;">
+                                <form id="add-to-cart-form" action="${pageContext.request.contextPath}/add-cart" method="GET" style="display: inline;">
                                     <input type="hidden" name="productId" value="${product.id}">
-                                    <input type="hidden" name="quantity" value="${param.quantity != null ? param.quantity : 1}">
+                                    <input type="hidden" id="quantity-input-hidden" name="quantity" value="${param.quantity != null ? param.quantity : 1}">
                                     <button type="submit" class="btn_h order d-flex justify-content-center" style="border: none;">
                                         <div style="padding-top: 3px;">
                                             <i class="fa-solid fa-cart-plus"></i>
@@ -114,15 +120,14 @@
                                 </form>
                                 <form action="${pageContext.request.contextPath}/order-confirm" method="GET" style="display: inline;">
                                     <input type="hidden" name="productId" value="${product.id}">
-                                    <input type="hidden" name="quantity" value="${param.quantity != null ? param.quantity : 1}">
+                                    <input type="hidden" id="quantity-input-buy-now" name="quantity" value="${param.quantity != null ? param.quantity : 1}">
                                     <button type="submit" class="btn_h call d-flex justify-content-center w-100" style="border: none;">
                                         <div class="h5 text_call">Mua ngay</div>
                                     </button>
                                 </form>
                                 <div class="quantity-input ms-3">
-                                    <input type="number" name="quantity" value="1" min="1" max="${product.quantity}"
-                                           class="form-control h-100"
-                                           onchange="updateQuantity(this.value)">
+                                    <input type="number" id="quantity-input" value="1" min="1" class="form-control h-100"
+                                           onchange="validateQuantity(this, ${product.quantity}, ${sessionScope.cart != null ? sessionScope.cart.cartDetails.stream().filter(item -> item.productId == product.id).map(item -> item.quantity).findFirst().orElse(0) : 0})">
                                 </div>
                             </c:otherwise>
                         </c:choose>
@@ -140,7 +145,6 @@
             </div>
         </div>
     </div>
-
     <div class="container-fluid">
         <div class="container">
             <div class="content d-flex between mt-4">
@@ -304,6 +308,32 @@
             button.style.lineHeight = "40px";
         }
     }
+
+    function validateQuantity(input, maxInventory, existingCartQuantity) {
+        let value = parseInt(input.value);
+        const maxAllowable = maxInventory - existingCartQuantity;
+
+        if (isNaN(value) || value < 1) {
+            input.value = 1;
+            alert("Số lượng tối thiểu là 1.");
+        } else if (value > maxAllowable) {
+            input.value = maxAllowable > 0 ? maxAllowable : 1;
+            alert("Số lượng tối đa bạn có thể thêm là " + maxAllowable);
+        }
+
+        // Cập nhật giá trị cho cả hai form
+        document.getElementById('quantity-input-hidden').value = input.value; // Form "Thêm vào giỏ hàng"
+        document.getElementById('quantity-input-buy-now').value = input.value; // Form "Mua ngay"
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const quantityInput = document.getElementById('quantity-input');
+        if (quantityInput) {
+            quantityInput.addEventListener('input', function() {
+                validateQuantity(this, ${product.quantity}, ${sessionScope.cart != null ? sessionScope.cart.cartDetails.stream().filter(item -> item.productId == product.id).map(item -> item.quantity).findFirst().orElse(0) : 0});
+            });
+        }
+    });
 </script>
 
 <script>
@@ -347,28 +377,5 @@
         window.changeSlideProducts = changeSlide;
     });
 </script>
-
-<script>
-    function updateQuantity(value) {
-        const maxQuantity = ${product.quantity}; // Lấy số lượng tối đa từ product.quantity
-        let quantityInput = document.querySelector('input[name="quantity"]');
-
-        // Kiểm tra nếu giá trị vượt quá max
-        if (parseInt(value) > maxQuantity) {
-            quantityInput.value = maxQuantity; // Đặt lại giá trị thành max
-            alert("Số lượng tối đa có thể chọn là " + maxQuantity);
-        } else if (parseInt(value) < 1) {
-            quantityInput.value = 1; // Đảm bảo giá trị không nhỏ hơn 1
-        } else {
-            quantityInput.value = value; // Cập nhật giá trị nếu hợp lệ
-        }
-
-        // Cập nhật giá trị quantity trong các form
-        document.querySelector('form[action$="/add-cart"] input[name="quantity"]').value = quantityInput.value;
-        document.querySelector('form[action$="/order-confirm"] input[name="quantity"]').value = quantityInput.value;
-        console.log("Số lượng đã chọn: " + quantityInput.value);
-    }
-</script>
-
 </body>
 </html>
