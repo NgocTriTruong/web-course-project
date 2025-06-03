@@ -138,6 +138,12 @@ public class EmailService {
      * @param subject Tiêu đề email
      * @param content Nội dung HTML của email
      */
+    /**
+     * Gửi email với nội dung HTML
+     * @param toEmail Địa chỉ email người nhận
+     * @param subject Tiêu đề email
+     * @param content Nội dung HTML của email
+     */
     public void sendEmail(String toEmail, String subject, String content) {
         // Cấu hình Properties cho SMTP
         Properties props = new Properties();
@@ -160,7 +166,39 @@ public class EmailService {
             message.setFrom(new InternetAddress(EMAIL_USERNAME));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
             message.setSubject(subject);
-            message.setContent(content, "text/html; charset=utf-8");
+
+            // Định dạng nội dung email với HTML
+            String htmlContent = "<!DOCTYPE html>" +
+                    "<html>" +
+                    "<head>" +
+                    "<style>" +
+                    "body { font-family: Arial, sans-serif; color: #333; }" +
+                    ".container { max-width: 600px; margin: 0 auto; padding: 20px; }" +
+                    ".header { background-color: #4CAF50; color: white; padding: 10px; text-align: center; }" +
+                    ".content { padding: 20px; background-color: #f9f9f9; }" +
+                    ".footer { text-align: center; font-size: 12px; color: #777; margin-top: 20px; }" +
+                    "</style>" +
+                    "</head>" +
+                    "<body>" +
+                    "<div class='container'>" +
+                    "<div class='header'>" +
+                    "<h2>Phản Hồi Từ AnimalFeed</h2>" +
+                    "</div>" +
+                    "<div class='content'>" +
+                    "<p>Xin chào,</p>" +
+                    "<p>Chúng tôi đã nhận được liên hệ của bạn và đây là phản hồi từ đội ngũ AnimalFeed:</p>" +
+                    "<p>" + content.replace("\n", "<br>") + "</p>" +
+                    "<p>Cảm ơn bạn đã liên hệ với chúng tôi. Nếu bạn có thêm câu hỏi, vui lòng trả lời email này.</p>" +
+                    "<p>Trân trọng,<br>Đội ngũ AnimalFeed</p>" +
+                    "</div>" +
+                    "<div class='footer'>" +
+                    "© 2024 AnimalFeed. All rights reserved." +
+                    "</div>" +
+                    "</div>" +
+                    "</body>" +
+                    "</html>";
+
+            message.setContent(htmlContent, "text/html; charset=utf-8");
 
             // Gửi email
             Transport.send(message);

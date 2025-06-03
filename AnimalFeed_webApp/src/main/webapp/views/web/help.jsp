@@ -158,26 +158,26 @@
                         <div class="card shadow-sm">
                             <div class="card-body">
                                 <h2 class="text-center mb-4">Gửi tin nhắn</h2>
-                                <form id="demo-form" method="POST" action="contact">
+                                <form id="demo-form" method="POST" action="${pageContext.request.contextPath}/contact">
                                     <!-- Họ tên -->
                                     <div class="mb-3">
-                                        <input type="text" class="form-control" id="name" placeholder="Nhập họ tên *">
+                                        <input type="text" class="form-control" id="contact_user" name="contact_user" placeholder="Nhập họ tên *">
                                     </div>
                                     <!-- Điện thoại -->
                                     <div class="mb-3">
-                                        <input type="text" class="form-control" id="phone" placeholder="Nhập số điện thoại *">
+                                        <input type="text" class="form-control" id="phone" name="phone" placeholder="Nhập số điện thoại *">
                                     </div>
                                     <!-- Email -->
                                     <div class="mb-3">
-                                        <input type="email" class="form-control" id="email" placeholder="Nhập email">
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="Nhập email">
                                     </div>
                                     <!-- Địa chỉ -->
                                     <div class="mb-3">
-                                        <input type="text" class="form-control" id="address" placeholder="Nhập địa chỉ">
+                                        <input type="text" class="form-control" id="address" name="address" placeholder="Nhập địa chỉ">
                                     </div>
                                     <!-- Nội dung -->
                                     <div class="mb-3">
-                                        <textarea class="form-control" id="message" rows="4" placeholder="Nhập nội dung *"></textarea>
+                                        <textarea class="form-control" id="message" name="message" rows="4" placeholder="Nhập nội dung *"></textarea>
                                     </div>
 
                                     <!-- Google reCAPTCHA -->
@@ -201,27 +201,54 @@
 
   <script>
       document.addEventListener("DOMContentLoaded", function() {
-      const form = document.getElementById('loginForm');
-      const errorDiv = document.querySelector('.alert');
+          const form = document.getElementById('demo-form');
+          if (!form) {
+              console.error("Form with ID 'demo-form' not found.");
+              return;
+          }
 
-      form.addEventListener('submit', function(event) {
-      let isValid = true;
+          const errorDiv = document.createElement('div');
+          errorDiv.className = 'alert alert-danger';
+          errorDiv.style.display = 'none';
+          form.prepend(errorDiv);
 
-      errorDiv.style.display = 'none'; // Ẩn thông báo lỗi cũ
+          form.addEventListener('submit', function(event) {
+              let isValid = true;
+              errorDiv.style.display = 'none';
+              errorDiv.innerText = '';
 
-      // Kiểm tra reCAPTCHA
-      const recaptchaResponse = grecaptcha.getResponse();
-      if (recaptchaResponse.length === 0) {
-      errorDiv.innerText = 'Vui lòng xác minh reCAPTCHA';
-      errorDiv.style.display = 'block';
-      isValid = false;
-  }
-      // Nếu có lỗi, ngăn gửi form
-      if (!isValid) {
-      event.preventDefault();
-  }
-  });
-  });
+              // Check required fields
+              const contactUser = document.getElementById('contact_user').value.trim();
+              const phone = document.getElementById('phone').value.trim();
+              const content = document.getElementById('message').value.trim();
+
+              if (!contactUser) {
+                  errorDiv.innerText = 'Vui lòng nhập họ tên.';
+                  errorDiv.style.display = 'block';
+                  isValid = false;
+              } else if (!phone) {
+                  errorDiv.innerText = 'Vui lòng nhập số điện thoại.';
+                  errorDiv.style.display = 'block';
+                  isValid = false;
+              } else if (!content) {
+                  errorDiv.innerText = 'Vui lòng nhập nội dung.';
+                  errorDiv.style.display = 'block';
+                  isValid = false;
+              }
+
+              // Check reCAPTCHA
+              const recaptchaResponse = grecaptcha.getResponse();
+              if (recaptchaResponse.length === 0) {
+                  errorDiv.innerText = 'Vui lòng xác minh reCAPTCHA.';
+                  errorDiv.style.display = 'block';
+                  isValid = false;
+              }
+
+              if (!isValid) {
+                  event.preventDefault();
+              }
+          });
+      });
   </script>
 </body>
 </html>
