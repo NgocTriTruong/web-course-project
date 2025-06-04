@@ -20,14 +20,35 @@ public class DashBoarAdmin extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         System.out.println("DashBoarAdmin: Processing request for /dashboard");
         if (response.isCommitted()) {
             System.out.println("DashBoarAdmin: Response already committed, cannot forward");
             return;
         }
 
-        ProductService productService = new ProductService();
+
+        // Kiểm tra session
+        HttpSession session = request.getSession(false); // false để không tạo session mới nếu chưa có
+        if (session == null || session.getAttribute("userId") == null) {
+            // Nếu chưa đăng nhập, chuyển hướng đến trang login
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }
+        // Lấy userId từ session
+        int userId = (int) session.getAttribute("userId");
+
+        // Kiểm tra vai trò admin
         UserService userService = new UserService();
+        if (!userService.checkIfAdmin(userId)) {
+            // Nếu không phải admin, trả về mã lỗi 404
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return;
+        }
+
+        // Sử dụng getInstance() thay vì new
+
+        ProductService productService = new ProductService();
         OrderService orderService = new OrderService();
 
         int year, month;
