@@ -189,7 +189,16 @@ public class UserDao {
         jdbi.useHandle(handle ->
                 handle.createUpdate("INSERT INTO users (full_name, email, phone, password, role, sub_role, status, create_date, update_date, force_logout) " +
                                 "VALUES (:fullName, :email, :phone, :password, :role, :sub_role, :status, :createDate, :updateDate, :force_logout)")
-                        .bindBean(user)
+                        .bind("fullName", user.getFullName())
+                        .bind("email", user.getEmail())
+                        .bind("phone", user.getPhone())
+                        .bind("password", user.getPassword()) // Có thể null cho Google login
+                        .bind("role", user.getRole())
+                        .bind("sub_role", user.getSub_role())
+                        .bind("status", user.getStatus())
+                        .bind("createDate", user.getCreateDate())
+                        .bind("updateDate", user.getUpdateDate())
+                        .bind("force_logout", user.getForce_logout() != null ? user.getForce_logout() : false)
                         .execute()
         );
     }

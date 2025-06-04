@@ -79,24 +79,51 @@ public class GoogleLoginController extends HttpServlet {
                 if (!userService.isUserExistsEmail(email)) {
                     // Tạo tài khoản mới nếu email chưa tồn tại
                     user = new User();
-                    user.setEmail(email); // Gán email
-                    user.setFullName(fullName); // Gán tên
+                    user.setEmail(email);
+                    user.setFullName(fullName);
                     user.setRole(0); // Người dùng thường
+                    user.setSub_role(0); // Sub role mặc định
                     user.setStatus(1); // Trạng thái hoạt động
                     user.setCreateDate(new Date());
                     user.setUpdateDate(new Date());
+                    user.setForce_logout(false); // Đảm bảo force_logout là false
+
                     userService.registerUserWithGoogle(user);
+
+                    // Lấy lại user đã được insert để có ID
+                    user = userService.getUserByEmail(email);
+                    if (user == null) {
+                        LOGGER.severe("Không thể lấy thông tin user sau khi tạo tài khoản mới");
+                        req.setAttribute("error", "Lỗi hệ thống. Vui lòng thử lại.");
+                        req.getRequestDispatcher("/views/web/login.jsp").forward(req, resp);
+                        return;
+                    }
                 } else {
                     // Đăng nhập nếu email đã tồn tại
                     user = userService.loginWithGoogle(email);
                 }
 
+                // Kiểm tra trạng thái người dùng
+                if (user.getStatus() != 1) {
+                    req.setAttribute("error", "Tài khoản của bạn đã bị ngưng hoạt động. Vui lòng liên hệ quản trị viên.");
+                    req.getRequestDispatcher("/views/web/login.jsp").forward(req, resp);
+                    return;
+                }
+
+                // Tạo session mới và lưu thông tin user
                 session = req.getSession(true);
                 session.setAttribute("user", user);
                 session.setAttribute("userId", user.getId());
+                session.setAttribute("userFullName", user.getFullName());
+                session.setAttribute("subRole", user.getSub_role());
+                session.setAttribute("loginLogged", true); // Đánh dấu đã đăng nhập
+
+                LOGGER.info("User logged in successfully via Google: " + user.getId() + " - " + user.getEmail());
+
                 redirectByRole(resp, user);
             } catch (Exception e) {
                 LOGGER.severe("Lỗi khi xử lý đăng nhập Google: " + e.getMessage());
+                e.printStackTrace();
                 req.setAttribute("error", "Đăng nhập bằng Google thất bại: " + e.getMessage());
                 req.getRequestDispatcher("/views/web/login.jsp").forward(req, resp);
             }
