@@ -22,11 +22,20 @@ public class ActionLogDao {
     }
 
     // Method to get all action logs
-    public static List<ActionLog> getAllActionLogs() {
+    public List<ActionLog> getAllActionLogs() {
         return jdbi.withHandle(handle ->
                 handle.createQuery("SELECT * FROM action_log")
                         .mapToBean(ActionLog.class)
                         .list()
         );
     }
+
+    public static void main(String[] args) {
+        ActionLogDao actionLogDao = new ActionLogDao();
+        List<ActionLog> actionLogs = actionLogDao.getAllActionLogs();
+        for (ActionLog actionLog : actionLogs) {
+            System.out.println(actionLog);
+        }
+    }
+
 }
