@@ -12,6 +12,7 @@ import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.CartService;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.OrderService;
 import vn.edu.hcmuaf.fit.animalfeed_webapp.services.PaymentService;
+import vn.edu.hcmuaf.fit.animalfeed_webapp.services.ghn_service.GHNService;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -25,6 +26,7 @@ public class ajaxServlet extends HttpServlet {
     OrderService orderService = new OrderService();
     PaymentService paymentService = new PaymentService();
     CartService cartService = new CartService();
+    private GHNService ghnService = new GHNService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -44,13 +46,22 @@ public class ajaxServlet extends HttpServlet {
             return;
         }
 
+        // Get form data
         String fullName = request.getParameter("fullName");
         String phone = request.getParameter("phone");
         String email = request.getParameter("email");
         String deliveryMethod = request.getParameter("deliveryMethod");
-        String address = buildAddress(request);
+        String province = request.getParameter("province");
+        String district = request.getParameter("district");
+        String ward = request.getParameter("ward");
+        String wardCode = request.getParameter("wardCode");
+        String addressDetails = request.getParameter("addressDetails");
         String note = request.getParameter("note");
         String paymentMethod = request.getParameter("paymentMethod");
+        String shippingFeeStr = request.getParameter("shippingFee");
+
+        // Build full address
+        String address = buildAddress(addressDetails, ward, district, province);
 
         // Get cart data
         Cart cart = (Cart) session.getAttribute("cart");
@@ -83,6 +94,12 @@ public class ajaxServlet extends HttpServlet {
                 .mapToInt(CartItem::getQuantity)
                 .sum();
 
+        int provinceId = ghnService.getProvinceIdByName(province);
+        int districtId = ghnService.getDistrictIdByName(district, provinceId);
+        String ghnOrderCode = ghnService.createShippingOrder(
+                fullName, phone, address, wardCode, districtId, ward, district, province, provinceId, selectedItems, paymentMethod
+        );
+
         // Create order
         Order order = new Order();
         order.setUserId(user.getId());
@@ -92,20 +109,22 @@ public class ajaxServlet extends HttpServlet {
         order.setTotalQuantity(totalQuantity);
         order.setOrderDate(LocalDateTime.now());
 
-        double shippingFee = Double.parseDouble(request.getParameter("shippingFee"));
+        double shippingFee = Double.parseDouble(shippingFeeStr);
         order.setShippingPrice(shippingFee);
-        order.setTotalPrice(totalPrice + shippingFee);
+        order.setShippingCode(ghnOrderCode);
+
 
         int orderId = orderService.insertOrder(order);
         order.setId(orderId);
 
+        double finalPrice = totalPrice + shippingFee;
         // Create payment
         Payment payment = new Payment();
         payment.setPayDate(LocalDateTime.now());
         payment.setMethod(paymentMethod);
         payment.setOrderId(orderId);
         payment.setUserId(user.getId());
-        payment.setStatus(0);
+        payment.setStatus(1);
 
         paymentService.addPayment(payment);
 
@@ -150,7 +169,7 @@ public class ajaxServlet extends HttpServlet {
         String vnp_Version = "2.1.0";
         String vnp_Command = "pay";
         String orderType = "other";
-        long amount = (long) (totalPrice*100);
+        long amount = (long) (finalPrice*100);
         String bankCode = request.getParameter("bankCode");
 
         String vnp_TxnRef = String.valueOf(orderId);
@@ -222,14 +241,13 @@ public class ajaxServlet extends HttpServlet {
         response.sendRedirect(paymentUrl);
     }
 
-    private String buildAddress(HttpServletRequest request) {
-        String province = request.getParameter("province");
-        String district = request.getParameter("district");
-        String ward = request.getParameter("ward");
-        String addressDetails = request.getParameter("addressDetails");
-
+    private String buildAddress(String addressDetails, String ward, String district, String province) {
         return String.format("%s, %s, %s, %s",
-                addressDetails, ward, district, province);
+                addressDetails != null && !addressDetails.trim().isEmpty() ? addressDetails : "Không xác định",
+                ward != null && !ward.trim().isEmpty() ? ward : "Không xác định",
+                district != null && !district.trim().isEmpty() ? district : "Không xác định",
+                province != null && !province.trim().isEmpty() ? province : "Không xác định");
+
     }
 
 }
