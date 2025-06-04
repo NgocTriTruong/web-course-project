@@ -86,13 +86,15 @@ public class SuccessVnpay extends HttpServlet {
                                 // Here Code update PaymnentStatus = 2 into your Database
                                 order.setStatus(1);
                             }
-                            out.print ("{\"RspCode\":\"00\",\"Message\":\"Confirm Success\"}");
                             orderService.updateOrderStatus(Integer.parseInt(oderId), order.getStatus());
                             paymentService.updatePaymentStatus(Integer.parseInt(oderId), payment.getStatus());
                             request.setAttribute("transResult", transSuccess);
 
                             System.out.println(transSuccess);
-                            request.getRequestDispatcher("/views/web/order/order-success-vnpay.jsp").forward(request, response);
+                            response.setContentType("application/json");
+                            response.setCharacterEncoding("UTF-8");
+                            out.print("{\"RspCode\":\"00\",\"Message\":\"Confirm Success\"}");
+                            response.sendRedirect(request.getContextPath() + "/views/web/order/order-success-vnpay.jsp?transResult=" + transSuccess);
                         }
                         else
                         {
