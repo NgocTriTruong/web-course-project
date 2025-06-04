@@ -69,8 +69,8 @@ public class AuthorizationFilter implements Filter {
             return;
         }
 
-        // Allow access to /login
-        if (requestURI.endsWith("/login")) {
+        // Allow access to /login and /login-google
+        if (requestURI.endsWith("/login") || requestURI.endsWith("/login-google")) {
             chain.doFilter(request, response);
             return;
         }
@@ -84,8 +84,8 @@ public class AuthorizationFilter implements Filter {
             return;
         }
 
-        // Check if user is not logged in
-        if (user == null) {
+        // Check if user is not logged in or forced to logout
+        if (user == null || (user != null && userService.isForceLogout(user.getId()))) {
             if (requestURI.contains("/dashboard") ||
                     requestURI.contains("/userManagement") ||
                     requestURI.contains("/addUser") ||
@@ -111,7 +111,7 @@ public class AuthorizationFilter implements Filter {
                     requestURI.contains("/edit-job-admin") ||
                     requestURI.contains("/delete-job-admin")) {
                 resp.sendRedirect(contextPath + "/login?error=Please login to access admin dashboard");
-                System.out.println("AuthorizationFilter: Redirecting to /login (protected resource)");
+                System.out.println("AuthorizationFilter: Redirecting to /login (protected resource or force_logout)");
                 return;
             } else if (requestURI.contains("/home")) {
                 resp.sendRedirect(contextPath + "/login?error=Please login to access home page");
@@ -124,7 +124,7 @@ public class AuthorizationFilter implements Filter {
         }
 
         // Log login action
-        if (session.getAttribute("loginLogged") == null && requestURI.contains("/login")) {
+        if (session.getAttribute("loginLogged") == null) {
             logAction(user.getId(), "LOGIN", "USER", user.getId(), "User " + user.getId() + " logged in");
             session.setAttribute("loginLogged", true);
 
@@ -145,13 +145,17 @@ public class AuthorizationFilter implements Filter {
                 } else if (userService.hasPermission(user.getId(), "JOB_MANAGEMENT")) {
                     redirectPath = contextPath + "/job-managemet-admin";
                 }
-                resp.sendRedirect(redirectPath);
-                System.out.println("AuthorizationFilter: Redirecting to " + redirectPath + " after login");
-                return;
+                if (!requestURI.equals(redirectPath)) {
+                    resp.sendRedirect(redirectPath);
+                    System.out.println("AuthorizationFilter: Redirecting to " + redirectPath + " after login");
+                    return;
+                }
             } else {
-                resp.sendRedirect(contextPath + "/home");
-                System.out.println("AuthorizationFilter: Redirecting to /home after login");
-                return;
+                if (!requestURI.contains("/home")) {
+                    resp.sendRedirect(contextPath + "/home");
+                    System.out.println("AuthorizationFilter: Redirecting to /home after login");
+                    return;
+                }
             }
         }
 

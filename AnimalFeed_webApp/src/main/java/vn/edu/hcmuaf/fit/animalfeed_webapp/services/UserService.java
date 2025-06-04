@@ -7,11 +7,13 @@ import vn.edu.hcmuaf.fit.animalfeed_webapp.dao.model.User;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 public class UserService {
 
     private static final UserService instance = new UserService();
     private final UserDao userDao;
+    private static final Logger LOGGER = Logger.getLogger(UserService.class.getName());
 
     public UserService() {
         userDao = new UserDao();
@@ -19,6 +21,63 @@ public class UserService {
 
     public static UserService getInstance() {
         return instance;
+    }
+
+    // Đăng ký người dùng qua Google
+    public void registerUserWithGoogle(User user) {
+        // Validate required fields
+        if (user.getEmail() == null || user.getEmail().isEmpty()) {
+            throw new IllegalArgumentException("Email cannot be null or empty for Google registration.");
+        }
+        if (user.getFullName() == null || user.getFullName().isEmpty()) {
+            user.setFullName("Google User"); // Default name if not provided
+        }
+
+        // Set default values for Google login users
+        user.setRole(0); // Mặc định là user thường
+        user.setSub_role(0); // Mặc định sub_role = 0
+        user.setStatus(1); // Mặc định trạng thái hoạt động
+        user.setForce_logout(false); // Mặc định force_logout = false
+        user.setCreateDate(new Date()); // Set current date
+        user.setUpdateDate(new Date()); // Set current date
+
+        try {
+            userDao.insertUser(user);
+            LOGGER.info("Successfully registered Google user: " + user.getEmail());
+        } catch (Exception e) {
+            LOGGER.severe("Failed to register Google user: " + user.getEmail() + ". Error: " + e.getMessage());
+            throw new RuntimeException("Error registering Google user: " + e.getMessage(), e);
+        }
+    }
+
+    // Đăng nhập bằng Google
+    public User loginWithGoogle(String email) {
+        Optional<User> optionalUser = userDao.getUserByEmail(email);
+        if (!optionalUser.isPresent()) {
+            throw new RuntimeException("Không tìm thấy tài khoản với email " + email);
+        }
+        User user = optionalUser.get();
+
+        // Kiểm tra trạng thái user
+        if (user.getStatus() != 1) {
+            throw new RuntimeException("Tài khoản đã bị vô hiệu hóa");
+        }
+
+        // Đặt lại force_logout khi đăng nhập thành công
+        resetForceLogout(user.getId());
+        return user;
+    }
+
+    // Đăng nhập bằng Facebook
+    public User loginWithFacebook(String email) {
+        Optional<User> optionalUser = userDao.getUserByEmail(email);
+        if (!optionalUser.isPresent()) {
+            throw new RuntimeException("Không tìm thấy tài khoản với email " + email);
+        }
+        User user = optionalUser.get();
+        // Đặt lại force_logout khi đăng nhập thành công
+        resetForceLogout(user.getId());
+        return user;
     }
 
     // Phương thức login
@@ -33,30 +92,6 @@ public class UserService {
         if (!BCrypt.checkpw(password, user.getPassword())) {
             throw new RuntimeException("Mật khẩu không đúng.");
         }
-        // Đặt lại force_logout khi đăng nhập thành công
-        resetForceLogout(user.getId());
-        return user;
-    }
-
-    // Đăng nhập bằng Google
-    public User loginWithGoogle(String email) {
-        Optional<User> optionalUser = userDao.getUserByEmail(email);
-        if (!optionalUser.isPresent()) {
-            throw new RuntimeException("Không tìm thấy tài khoản với email " + email);
-        }
-        User user = optionalUser.get();
-        // Đặt lại force_logout khi đăng nhập thành công
-        resetForceLogout(user.getId());
-        return user;
-    }
-
-    // Đăng nhập bằng Facebook
-    public User loginWithFacebook(String email) {
-        Optional<User> optionalUser = userDao.getUserByEmail(email);
-        if (!optionalUser.isPresent()) {
-            throw new RuntimeException("Không tìm thấy tài khoản với email " + email);
-        }
-        User user = optionalUser.get();
         // Đặt lại force_logout khi đăng nhập thành công
         resetForceLogout(user.getId());
         return user;
@@ -92,13 +127,6 @@ public class UserService {
         newUser.setUpdateDate(new Date());
         newUser.setForce_logout(false);
         userDao.insertUser(newUser);
-    }
-
-    // Đăng ký người dùng qua Google
-    public void registerUserWithGoogle(User user) {
-        user.setSub_role(0); // Mặc định sub_role = 0
-        user.setForce_logout(false);
-        userDao.insertUser(user);
     }
 
     // Đăng ký người dùng qua Facebook
