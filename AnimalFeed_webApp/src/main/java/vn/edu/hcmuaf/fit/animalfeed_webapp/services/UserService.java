@@ -338,4 +338,8 @@ public class UserService {
             }
         }
     }
+    //kiểm tra xem người dùng có phải là admin hay không
+    public boolean checkIfAdmin(int userId) {
+        return userDao.checkIfAdmin(userId);
+    }
 }

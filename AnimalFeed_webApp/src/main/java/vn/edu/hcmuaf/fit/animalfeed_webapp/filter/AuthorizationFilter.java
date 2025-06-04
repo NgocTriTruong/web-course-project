@@ -86,40 +86,12 @@ public class AuthorizationFilter implements Filter {
 
         // Check if user is not logged in or forced to logout
         if (user == null || (user != null && userService.isForceLogout(user.getId()))) {
-            if (requestURI.contains("/dashboard") ||
-                    requestURI.contains("/userManagement") ||
-                    requestURI.contains("/addUser") ||
-                    requestURI.contains("/userEdit") ||
-                    requestURI.contains("/deleteUser") ||
-                    requestURI.contains("/product-manager") ||
-                    requestURI.contains("/add-product") ||
-                    requestURI.contains("/edit-product") ||
-                    requestURI.contains("/delete-product") ||
-                    requestURI.contains("/category-management-admin") ||
-                    requestURI.contains("/category-addition-admin") ||
-                    requestURI.contains("/edit-category") ||
-                    requestURI.contains("/delete-category") ||
-                    requestURI.contains("/order-manager") ||
-                    requestURI.contains("/orderEdit") ||
-                    requestURI.contains("/add-order-management") ||
-                    requestURI.contains("/post-management") ||
-                    requestURI.contains("/post-add") ||
-                    requestURI.contains("/post-edit") ||
-                    requestURI.contains("/post-delete") ||
-                    requestURI.contains("/job-managemet-admin") ||
-                    requestURI.contains("/job-addtion-admin") ||
-                    requestURI.contains("/edit-job-admin") ||
-                    requestURI.contains("/delete-job-admin")) {
-                resp.sendRedirect(contextPath + "/login?error=Please login to access admin dashboard");
-                System.out.println("AuthorizationFilter: Redirecting to /login (protected resource or force_logout)");
-                return;
-            } else if (requestURI.contains("/home")) {
-                resp.sendRedirect(contextPath + "/login?error=Please login to access home page");
-                System.out.println("AuthorizationFilter: Redirecting to /login (home)");
-                return;
+            // Invalidate session and redirect to login for all cases
+            if (session != null) {
+                session.invalidate();
             }
-            chain.doFilter(request, response);
-            System.out.println("AuthorizationFilter: Allowing request to proceed (no protected page)");
+            resp.sendRedirect(contextPath + "/login?error=Please login again due to role change or session timeout");
+            System.out.println("AuthorizationFilter: Redirecting to /login (user null or force_logout)");
             return;
         }
 
