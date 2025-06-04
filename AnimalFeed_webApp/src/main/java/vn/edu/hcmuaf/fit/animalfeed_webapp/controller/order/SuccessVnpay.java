@@ -27,8 +27,8 @@ public class SuccessVnpay extends HttpServlet {
         try
         {
             //Begin process return from VNPAY
-            Map fields = new HashMap();
-            for (Enumeration params = request.getParameterNames(); params.hasMoreElements();) {
+            Map<String, String> fields = new HashMap<>();
+            for (Enumeration<String> params = request.getParameterNames(); params.hasMoreElements();) {
                 String fieldName = URLEncoder.encode((String) params.nextElement(), StandardCharsets.US_ASCII.toString());
                 String fieldValue = URLEncoder.encode(request.getParameter(fieldName), StandardCharsets.US_ASCII.toString());
                 if ((fieldValue != null) && (fieldValue.length() > 0)) {
@@ -111,7 +111,13 @@ public class SuccessVnpay extends HttpServlet {
                 {
                     out.print("{\"RspCode\":\"01\",\"Message\":\"Order not Found\"}");
                 }
+
+                for (Map.Entry<String, String> entry : fields.entrySet()) {
+                    System.out.println(entry.getKey() + " = " + entry.getValue());
+                }
+
             }
+
             else
             {
                 out.print("{\"RspCode\":\"97\",\"Message\":\"Invalid Checksum\"}");
