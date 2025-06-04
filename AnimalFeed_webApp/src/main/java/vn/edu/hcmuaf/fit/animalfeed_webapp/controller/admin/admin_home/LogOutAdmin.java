@@ -27,9 +27,9 @@ public class LogOutAdmin extends HttpServlet {
             session.invalidate();
         }
 
-        // Tạo session mới để lưu thông báo
-        HttpSession newSession = request.getSession(true);
-        newSession.setAttribute("message", "Bạn đã đăng xuất thành công!");
+//        // Tạo session mới để lưu thông báo
+//        HttpSession newSession = request.getSession(true);
+//        newSession.setAttribute("message", "Bạn đã đăng xuất thành công!");
 
         // Chuyển hướng về trang login
         response.sendRedirect(request.getContextPath() + "/login");
