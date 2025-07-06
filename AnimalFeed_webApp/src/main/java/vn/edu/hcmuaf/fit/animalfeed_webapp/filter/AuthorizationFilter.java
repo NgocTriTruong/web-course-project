@@ -85,7 +85,7 @@ public class AuthorizationFilter implements Filter {
         }
 
         // Check if user is not logged in or forced to logout
-        if (user == null || (user != null && userService.isForceLogout(user.getId()))) {
+        if ((user == null || (user != null && userService.isForceLogout(user.getId()))) && !requestURI.contains("/home")) {
             // Invalidate session and redirect to login for all cases
             if (session != null) {
                 session.invalidate();
@@ -96,7 +96,7 @@ public class AuthorizationFilter implements Filter {
         }
 
         // Log login action
-        if (session.getAttribute("loginLogged") == null) {
+        if (session != null && user != null && session.getAttribute("loginLogged") == null) {
             logAction(user.getId(), "LOGIN", "USER", user.getId(), "User " + user.getId() + " logged in");
             session.setAttribute("loginLogged", true);
 
@@ -132,7 +132,7 @@ public class AuthorizationFilter implements Filter {
         }
 
         // Check access based on role and sub_role
-        if (user.getRole() == 1) { // Admin
+        if (user != null && user.getRole() == 1) { // Admin
             if (requestURI.contains("/dashboard")) {
                 if (user.getSub_role() != 0 && !hasAccessToAdminPage(user, requestURI)) {
                     String redirectPath = getRedirectPath(user, contextPath);
