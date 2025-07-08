@@ -85,15 +85,21 @@ public class AuthorizationFilter implements Filter {
         }
 
         // Check if user is not logged in or forced to logout
-        if (user == null || userService.isForceLogout(user.getId())) {
-            // Nếu đang ở trang login thì không redirect nữa
-            if (!requestURI.endsWith("/login") && !requestURI.endsWith("/login-google")) {
-                if (session != null) session.invalidate();
-                resp.sendRedirect(contextPath + "/login?error=Please login again due to role change or session timeout");
-                return;
-            }
+        // Cho phép truy cập /home mà không cần đăng nhập
+        if (requestURI.contains("/home")) {
+            chain.doFilter(request, response);
+            return;
         }
-
+        
+        // Check nếu không phải /home mà chưa login hoặc bị force logout
+        if ((user == null || (user != null && userService.isForceLogout(user.getId())))) {
+            if (session != null) {
+                session.invalidate();
+            }
+            resp.sendRedirect(contextPath + "/login?error=Please login again due to role change or session timeout");
+            System.out.println("AuthorizationFilter: Redirecting to /login (user null or force_logout)");
+            return;
+        }
 
         // Log login action
         if (session != null && user != null && session.getAttribute("loginLogged") == null) {
