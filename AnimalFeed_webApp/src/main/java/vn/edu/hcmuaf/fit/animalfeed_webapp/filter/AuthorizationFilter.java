@@ -68,6 +68,11 @@ public class AuthorizationFilter implements Filter {
             System.out.println("AuthorizationFilter: Response already committed, cannot proceed");
             return;
         }
+                    
+        if (requestURI.contains("/home")) {
+           chain.doFilter(request, response);
+           return;
+        }
 
         // Allow access to /login and /login-google
         if (requestURI.endsWith("/login") || requestURI.endsWith("/login-google")) {
