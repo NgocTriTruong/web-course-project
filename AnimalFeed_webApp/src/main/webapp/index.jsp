@@ -205,7 +205,7 @@
                 <div class="info">
                   <h2>VINA 48A</h2>
                   <p>Dùng cho heo con từ 05 ngày tuổi đến 35 ngày tuổi</p>
-                  <a href="${pageContext.request.contextPath}/views/template/assets/html/each_product/product_details/hy340.html"><button>XEM CHI TIẾT</button></a>
+                  <a href=""><button>XEM CHI TIẾT</button></a>
                 </div>
               </div>
             </div>
@@ -217,7 +217,7 @@
                 <div class="info">
                   <h2>VINA 200</h2>
                   <p>Dùng cho gà thịt từ 1 ngày tuổi đến khi xuất bán</p>
-                  <a href="${pageContext.request.contextPath}/views/template/assets/html/each_product/product_details/hy340.html"><button>XEM CHI TIẾT</button></a>
+                  <a href=""><button>XEM CHI TIẾT</button></a>
                 </div>
               </div>
             </div>
@@ -229,7 +229,7 @@
                 <div class="info">
                   <h2>VINA 320</h2>
                   <p>Dùng cho vịt siêu thịt từ 1 đến 21 ngày tuổi</p>
-                  <a href="${pageContext.request.contextPath}/views/template/assets/html/each_product/product_details/hy340.html"><button>XEM CHI TIẾT</button></a>
+                  <a href=""><button>XEM CHI TIẾT</button></a>
                 </div>
               </div>
             </div>
@@ -241,7 +241,7 @@
                 <div class="info">
                   <h2>HAPPY 222</h2>
                   <p>Dùng cho bò sữa</p>
-                  <a href="${pageContext.request.contextPath}/views/template/assets/html/each_product/product_details/hy340.html"><button>XEM CHI TIẾT</button></a>
+                  <a href=""><button>XEM CHI TIẾT</button></a>
                 </div>
               </div>
             </div>
@@ -253,7 +253,7 @@
                 <div class="info">
                   <h2>BEIKESU</h2>
                   <p>Dùng trong giai đoạn nuôi gièo</p>
-                  <a href="${pageContext.request.contextPath}/views/template/assets/html/each_product/product_details/hy340.html"><button>XEM CHI TIẾT</button></a>
+                  <a href=""><button>XEM CHI TIẾT</button></a>
                 </div>
               </div>
             </div>
@@ -265,7 +265,7 @@
                 <div class="info">
                   <h2>VINA 7030</h2>
                   <p>Dùng cho cá rô phi, điêu hồng từ 20gr đến 200gr</p>
-                  <a href="${pageContext.request.contextPath}/views/template/assets/html/each_product/product_details/hy340.html"><button>XEM CHI TIẾT</button></a>
+                  <a href=""><button>XEM CHI TIẾT</button></a>
                 </div>
               </div>
             </div>
@@ -277,7 +277,7 @@
                 <div class="info">
                   <h2>ANOVA 35S</h2>
                   <p>Dùng cho dê thịt, dê vỗ béo</p>
-                  <a href="${pageContext.request.contextPath}/views/template/assets/html/each_product/product_details/hy340.html"><button>XEM CHI TIẾT</button></a>
+                  <a href=""><button>XEM CHI TIẾT</button></a>
                 </div>
               </div>
             </div>
@@ -324,7 +324,7 @@
               </div>
               <div class="h4 mt-2 text-center ">Chuyên đề heo</div>
               <div class="h5 mt-4 text-center pt-4">Dưới đây là một số câu hỏi thường gặp và giải đáp. Nếu bạn vẫn chưa tìm được câu trả lời, hãy liên hệ với VINAFEED.</div>
-              <a href="${pageContext.request.contextPath}iews/template/assets/html/tu_van.html">
+              <a href="${pageContext.request.contextPath}/advise">
                 <button class="btn fw-bold rounded-pill px-5 py-2 mt-2" style="background-color: #fcae18; font-size: 17px; border-radius: 30px;">
                   Xem tất cả
                 </button>
@@ -439,7 +439,7 @@
           </button>
         </div>
       </div>
-      <a href="${pageContext.request.contextPath}iews/template/assets/html/tin_tuc/tin_tuc.html">
+      <a href="${pageContext.request.contextPath}/news">
         <button class="btn fw-bold rounded-pill px-5 py-2 mt-5" style="margin-left: 44%; background-color: #fcae18; font-size: 17px; border-radius: 30px;">
           Xem tất cả
         </button>
@@ -480,7 +480,7 @@
     }
   }
 </script>
-<script src="${pageContext.request.contextPath}/views/template/assets/bootstrap/bootstrap.bundle.min.js"></script>
+<%--<script src="${pageContext.request.contextPath}/views/template/assets/bootstrap/bootstrap.bundle.min.js"></script>--%>
 
 </body>
 </html>
