@@ -12,5 +12,7 @@
     <welcome-file-list>
         <welcome-file>home</welcome-file>
     </welcome-file-list>
-       
+    <listener>
+        <listener-class>vn.edu.hcmuaf.fit.animalfeed_webapp.controller.MyContextListener</listener-class>
+    </listener>
 </web-app>
