@@ -68,10 +68,6 @@ public class AuthorizationFilter implements Filter {
             System.out.println("AuthorizationFilter: Response already committed, cannot proceed");
             return;
         }
-        if (requestURI.contains("/home") || requestURI.equals(contextPath + "/")) {
-            chain.doFilter(request, response);
-            return;
-        }
 
         // Allow access to /login and /login-google
         if (requestURI.endsWith("/login") || requestURI.endsWith("/login-google")) {
@@ -94,10 +90,8 @@ public class AuthorizationFilter implements Filter {
             if (session != null) {
                 session.invalidate();
             }
-            if (!requestURI.endsWith("/login")) { // Avoid redirect loop
-                resp.sendRedirect(contextPath + "/login?error=Please login again due to role change or session timeout");
-                System.out.println("AuthorizationFilter: Redirecting to /login (user null or force_logout)");
-            }
+            resp.sendRedirect(contextPath + "/login?error=Please login again due to role change or session timeout");
+            System.out.println("AuthorizationFilter: Redirecting to /login (user null or force_logout)");
             return;
         }
 
@@ -264,10 +258,8 @@ public class AuthorizationFilter implements Filter {
                     requestURI.contains("/edit-job-admin") ||
                     requestURI.contains("/delete-job-admin")) {
                 session.setAttribute("error", "Bạn không có quyền truy cập trang quản trị.");
-                if (!requestURI.contains("/home")) { // Avoid redirect loop
-                    resp.sendRedirect(contextPath + "/home");
-                    System.out.println("AuthorizationFilter: Redirecting user to /home");
-                }
+                resp.sendRedirect(contextPath + "/home");
+                System.out.println("AuthorizationFilter: Redirecting user to /home");
                 return;
             } else if (requestURI.contains("/home")) {
                 chain.doFilter(request, response);
