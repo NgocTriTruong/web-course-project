@@ -2,7 +2,7 @@
 
 **VINAFEED** is a web-based platform designed to connect livestock farmers and animal feed distributors through a clean, user-friendly interface. This project was developed as part of the **"Web Programming"** course at school, showcasing a fully functional e-commerce system for animal feed sales.
 
-🌐 **Live Website:** [https://animalsfeeds.online](https://animalsfeeds.online/home)
+🌐 **Live Website:** [https://animalsfeeds.online](https://animalsfeeds.online/)
 
 ## ✨ Main Features
 📌 Note: Only key e-commerce features are listed below. Explore the live website for additional functionalities!
