@@ -7,7 +7,7 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet(name = "HealthCheckServlet", value = "/")
+@WebServlet(name = "HealthCheckServlet", value = "/health")
 public class HealthCheckServlet extends HttpServlet {
 
     @Override
