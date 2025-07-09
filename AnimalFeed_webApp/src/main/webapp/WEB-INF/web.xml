@@ -9,10 +9,5 @@
 <!--        <param-name>googleOAuthConfig</param-name>-->
 <!--        <param-value>/WEB-INF/google_oauth.properties</param-value>-->
 <!--    </context-param>-->
-    <welcome-file-list>
-        <welcome-file>home</welcome-file>
-    </welcome-file-list>
-    <listener>
-        <listener-class>vn.edu.hcmuaf.fit.animalfeed_webapp.controller.MyContextListener</listener-class>
-    </listener>
+
 </web-app>
