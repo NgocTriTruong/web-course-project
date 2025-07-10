@@ -15,8 +15,6 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/themify-icons/themify-icons.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/views/template/fonts/fontawesome-free-6.6.0-web/css/all.min.css">
   <script src="${pageContext.request.contextPath}/views/template/bootstrap/bootstrap.bundle.min.js" defer></script>
-  <script src="${pageContext.request.contextPath}/views/template/assets/scripts/add_layout/add_layout.js" defer></script>
-  <script src="${pageContext.request.contextPath}/views/template/assets/scripts/confirm_login.js"></script>
 
   <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
   <df-messenger
